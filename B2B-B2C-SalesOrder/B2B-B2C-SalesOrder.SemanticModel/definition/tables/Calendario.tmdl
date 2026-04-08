@@ -1,0 +1,398 @@
+table Calendario
+	lineageTag: 63fd87e0-d4cb-4383-b7ab-f4bfd538ee2b
+
+	column Date
+		formatString: General Date
+		lineageTag: 5c4972e2-4032-4157-b5fb-e1355a7ce162
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variación
+			isDefault
+			relationship: 77bcdf86-247a-4e9d-b848-c6261f464ea0
+			defaultHierarchy: LocalDateTable_e731f289-de22-4861-98a8-41216dbd2850.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaKey
+		lineageTag: 70f76314-c2f1-4a7c-b1d5-ff3ed0e6a395
+		summarizeBy: count
+		isNameInferred
+		sourceColumn: [FechaKey]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AñoMesKey
+		formatString: 0
+		lineageTag: 64e35f80-e0e8-4504-92cd-04c4a704c5a7
+		summarizeBy: count
+		isNameInferred
+		sourceColumn: [AñoMesKey]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AñoSemanaKey
+		formatString: 0
+		lineageTag: 8418baa7-6a92-47bd-950a-3d4ebcaf3d81
+		summarizeBy: count
+		isNameInferred
+		sourceColumn: [AñoSemanaKey]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Año
+		formatString: 0
+		lineageTag: 22b7fcd1-20eb-47ab-90ed-03cd32e429f2
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Año]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AñoTexto
+		lineageTag: 44eea126-d6d4-41c6-bbde-722951591ad7
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [AñoTexto]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mes
+		formatString: 0
+		lineageTag: 002512ea-90e8-4659-9db0-28a29e7a26c2
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Mes]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesTexto
+		lineageTag: 1aef5fcd-d5f9-42dc-b276-837f0f567669
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [MesTexto]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesTextoCorto
+		lineageTag: e52f46d2-6143-4664-84e8-f7cb45589582
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [MesTextoCorto]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesAño
+		lineageTag: 22f9822b-02c1-4d10-8754-efbf085b0e6b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [MesAño]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesAñoOrden
+		lineageTag: 3f247e0b-cc6c-4041-9105-2eeceb22c1f0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [MesAñoOrden]
+
+		annotation SummarizationSetBy = Automatic
+
+	column TrimestreNum
+		formatString: 0
+		lineageTag: c9b40121-249a-43d6-bc51-19bd911ada5c
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [TrimestreNum]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre
+		lineageTag: 4492a67f-b460-40b6-b320-8644c8713eb4
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Trimestre]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AñoTrimestre
+		lineageTag: d184122c-7101-45bf-8999-04d304f50a4a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [AñoTrimestre]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Semana
+		formatString: 0
+		lineageTag: a1f29b7a-42b0-4e65-a088-8ee0609273e4
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Semana]
+
+		annotation SummarizationSetBy = Automatic
+
+	column NombreSemana
+		lineageTag: 15d7d589-0b5d-4c6e-967d-9444ed4bc377
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [NombreSemana]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AñoSemana
+		lineageTag: f0713be5-b2a6-4110-8d2c-e0517f37a234
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [AñoSemana]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DíaMes
+		formatString: 0
+		lineageTag: 595c21a3-bd8b-4173-b395-76c811d3f12a
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [DíaMes]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DíaAño
+		formatString: 0
+		lineageTag: 506514a1-fcef-4577-a39e-78be272a1e11
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [DíaAño]
+
+		annotation SummarizationSetBy = Automatic
+
+	column NombreDía
+		lineageTag: df594984-461d-4df7-ba8e-a1dbac6d873e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [NombreDía]
+
+		annotation SummarizationSetBy = Automatic
+
+	column NombreDíaCorto
+		lineageTag: 5a92bbc0-691d-4746-8e23-4ebae540f431
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [NombreDíaCorto]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiaSemanaNum
+		formatString: 0
+		lineageTag: 1e5fb96a-deb9-4d6e-a448-93b2092b5664
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [DiaSemanaNum]
+
+		annotation SummarizationSetBy = Automatic
+
+	column EsFinDeSemana
+		formatString: 0
+		lineageTag: 5c0abf1f-73a7-4ccd-86c4-4f6661d8b174
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [EsFinDeSemana]
+
+		annotation SummarizationSetBy = Automatic
+
+	column InicioMes
+		formatString: General Date
+		lineageTag: c056d5b2-1330-44fc-b489-2da61cca5f1d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [InicioMes]
+
+		variation Variación
+			isDefault
+			relationship: a2b654f5-e50b-4741-bfda-5ec501fd4bd9
+			defaultHierarchy: LocalDateTable_8f2d1aba-43bc-4d38-8ad7-eea2c6c7b901.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column FinMes
+		formatString: General Date
+		lineageTag: 70b65acf-985e-494b-b994-ca6fe881c645
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [FinMes]
+
+		variation Variación
+			isDefault
+			relationship: c5790096-109d-48c9-b3b8-87c2814ec6f1
+			defaultHierarchy: LocalDateTable_e3e5c66b-5df6-4c05-96c1-a3281d82b532.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column InicioTrimestre
+		formatString: General Date
+		lineageTag: 442c90cf-8778-4e51-96db-04989013fce9
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [InicioTrimestre]
+
+		variation Variación
+			isDefault
+			relationship: 925f1e18-a911-4175-b725-c812a1f20e7f
+			defaultHierarchy: LocalDateTable_f07d1705-11d4-42cf-85d6-295950ca07e2.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column FinTrimestre
+		formatString: General Date
+		lineageTag: 3872c9c7-9e29-409c-b4c0-3da2ec5da46f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [FinTrimestre]
+
+		variation Variación
+			isDefault
+			relationship: 4a9abf26-fafb-4bd6-85bb-1cc197ebda38
+			defaultHierarchy: LocalDateTable_662cab93-ac05-45f9-8ca8-96a53f75603d.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column InicioAño
+		formatString: General Date
+		lineageTag: 67f37d72-5c9b-4ca9-b649-c0744487fef3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [InicioAño]
+
+		variation Variación
+			isDefault
+			relationship: 3b3cd082-474e-41cb-9850-fb0208ffd641
+			defaultHierarchy: LocalDateTable_3e8bf689-14b4-4ddb-8292-8561ea058d1e.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column FinAño
+		formatString: General Date
+		lineageTag: 6ba5ed09-8bc2-4697-b75c-8cc0dabc1173
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [FinAño]
+
+		variation Variación
+			isDefault
+			relationship: 8e8e8216-f820-4278-9e45-8ea8609d7c96
+			defaultHierarchy: LocalDateTable_50792624-d9fd-468c-8414-7078ce15be62.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column EsHoy
+		formatString: 0
+		lineageTag: 7915fafe-8427-4b2e-b587-bf675187f9a9
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [EsHoy]
+
+		annotation SummarizationSetBy = Automatic
+
+	column EsPasado
+		formatString: 0
+		lineageTag: 59a8c8fb-eb79-452d-8c3b-89a9b470c9c4
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [EsPasado]
+
+		annotation SummarizationSetBy = Automatic
+
+	column EsFuturo
+		formatString: 0
+		lineageTag: 640f9775-9a27-46d4-af5b-150fdd4c6d92
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [EsFuturo]
+
+		annotation SummarizationSetBy = Automatic
+
+	column EsMesActual
+		formatString: 0
+		lineageTag: 56bc2ac8-d1f7-4d76-8d18-1dceaf160f7d
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [EsMesActual]
+
+		annotation SummarizationSetBy = Automatic
+
+	column EsAñoActual
+		formatString: 0
+		lineageTag: 77d4a6a4-e4e7-4696-aa5c-c9e93d88f772
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [EsAñoActual]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calendario = calculated
+		mode: import
+		source =
+				
+				VAR FechaInicio = DATE(2023, 1, 1)
+				VAR FechaFin    = DATE(2027, 12, 31)
+				RETURN
+				ADDCOLUMNS(
+				    CALENDAR(FechaInicio, FechaFin),
+				
+				    /* Claves */
+				    "FechaKey", VALUE(FORMAT([Date], "YYYYMMDD")),
+				    "AñoMesKey", YEAR([Date]) * 100 + MONTH([Date]),
+				    "AñoSemanaKey", YEAR([Date]) * 100 + WEEKNUM([Date], 2),
+				
+				    /* Año */
+				    "Año", YEAR([Date]),
+				    "AñoTexto", FORMAT([Date], "0000"),
+				
+				    /* Mes */
+				    "Mes", MONTH([Date]),
+				    "MesTexto", FORMAT([Date], "MMMM"),
+				    "MesTextoCorto", FORMAT([Date], "MMM"),
+				    "MesAño", FORMAT([Date], "MMM YYYY"),
+				    "MesAñoOrden", FORMAT([Date], "YYYYMM"),
+				
+				    /* Trimestre */
+				    "TrimestreNum", QUARTER([Date]),
+				    "Trimestre", "T" & QUARTER([Date]),
+				    "AñoTrimestre", FORMAT([Date], "YYYY") & "-T" & QUARTER([Date]),
+				
+				    /* Semana */
+				    "Semana", WEEKNUM([Date], 2),
+				    "NombreSemana", "Semana " & FORMAT(WEEKNUM([Date], 2), "00"),
+				    "AñoSemana", FORMAT(YEAR([Date]), "0000") & "-" & FORMAT(WEEKNUM([Date], 2), "00"),
+				
+				    /* Día */
+				    "DíaMes", DAY([Date]),
+				    "DíaAño", DATEDIFF(DATE(YEAR([Date]), 1, 1), [Date], DAY) + 1,
+				    "NombreDía", FORMAT([Date], "dddd"),
+				    "NombreDíaCorto", FORMAT([Date], "ddd"),
+				
+				    /* Día de semana */
+				    "DiaSemanaNum", WEEKDAY([Date], 2),   -- lunes=1, domingo=7
+				    "EsFinDeSemana", IF(WEEKDAY([Date], 2) >= 6, 1, 0),
+				
+				    /* Períodos */
+				    "InicioMes", DATE(YEAR([Date]), MONTH([Date]), 1),
+				    "FinMes", EOMONTH([Date], 0),
+				    "InicioTrimestre", DATE(YEAR([Date]), (QUARTER([Date]) - 1) * 3 + 1, 1),
+				    "FinTrimestre", EOMONTH(DATE(YEAR([Date]), QUARTER([Date]) * 3, 1), 0),
+				    "InicioAño", DATE(YEAR([Date]), 1, 1),
+				    "FinAño", DATE(YEAR([Date]), 12, 31),
+				
+				    /* Flags útiles */
+				    "EsHoy", IF([Date] = TODAY(), 1, 0),
+				    "EsPasado", IF([Date] < TODAY(), 1, 0),
+				    "EsFuturo", IF([Date] > TODAY(), 1, 0),
+				    "EsMesActual", IF(YEAR([Date]) = YEAR(TODAY()) && MONTH([Date]) = MONTH(TODAY()), 1, 0),
+				    "EsAñoActual", IF(YEAR([Date]) = YEAR(TODAY()), 1, 0)
+				)
+
+	annotation PBI_Id = 33a128d61d5240768a56fb07cd0f2bdf
+
