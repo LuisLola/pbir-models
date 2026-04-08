@@ -1,8 +1,3 @@
-relationship e7bb759d-1cc1-463f-8cd8-5582d1fa3328
-	joinOnDateBehavior: datePartOnly
-	fromColumn: LOL_PBISGIRETAIL.TicketData
-	toColumn: LocalDateTable_167d99a6-9049-40a6-b339-dce5379ce1a6.Date
-
 relationship 22a44b83-d8e5-4f43-9e52-be68282bb742
 	joinOnDateBehavior: datePartOnly
 	fromColumn: LOL_PBITIENDAS.FechaApertura
@@ -76,4 +71,12 @@ relationship 8e8e8216-f820-4278-9e45-8ea8609d7c96
 	joinOnDateBehavior: datePartOnly
 	fromColumn: Calendario.FinAño
 	toColumn: LocalDateTable_50792624-d9fd-468c-8414-7078ce15be62.Date
+
+relationship a6d1f285-ba8c-d8f9-e232-0421fd0338e2
+	fromColumn: LOL_PBISGIRETAIL.TicketData
+	toColumn: Calendario.Date
+
+relationship e4eb8527-454d-949e-bb6c-fdcd1f8a6f15
+	fromColumn: LOL_PBISGIRETAIL.WhsCode
+	toColumn: LOL_PBITIENDAS.TiendaID
 
