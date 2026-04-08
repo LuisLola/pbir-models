@@ -1,0 +1,206 @@
+table LOL_PBISGIRETAIL
+	lineageTag: 35cdb4cb-c12f-4471-977c-6384074da068
+
+	column Cliente
+		dataType: string
+		lineageTag: 672fdbb8-860c-4b83-8c99-2ba236db2575
+		summarizeBy: none
+		sourceColumn: Cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column CodeBars
+		dataType: string
+		lineageTag: a40d58fa-3134-429c-be6c-e56b471116f6
+		summarizeBy: none
+		sourceColumn: CodeBars
+
+		annotation SummarizationSetBy = Automatic
+
+	column DocEntry
+		dataType: string
+		lineageTag: 774d6792-41df-402e-8db3-dbed708e5997
+		summarizeBy: none
+		sourceColumn: DocEntry
+
+		annotation SummarizationSetBy = Automatic
+
+	column DocNum
+		dataType: string
+		lineageTag: df4067f6-dd1e-46c2-bd69-156498f6e75e
+		summarizeBy: none
+		sourceColumn: DocNum
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaComunicacion
+		dataType: string
+		lineageTag: 7ead41b3-7cff-40d2-957a-82aaa947feb3
+		summarizeBy: none
+		sourceColumn: FechaComunicacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column ItemCode
+		dataType: string
+		lineageTag: 8ee30355-8af3-4238-bd48-b01c2c84febb
+		summarizeBy: none
+		sourceColumn: ItemCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column LineNum
+		dataType: string
+		lineageTag: cb427f3b-2e09-4038-bc6f-6945f5099753
+		summarizeBy: none
+		sourceColumn: LineNum
+
+		annotation SummarizationSetBy = Automatic
+
+	column LineTotal
+		dataType: double
+		lineageTag: b74f075d-1948-493a-b518-8fbf9ec85b72
+		summarizeBy: sum
+		sourceColumn: LineTotal
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LineTotalWithoutTax
+		dataType: double
+		lineageTag: 2fcfb96e-9744-4f6b-b0cd-955ba77e6ead
+		summarizeBy: sum
+		sourceColumn: LineTotalWithoutTax
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LineUID
+		dataType: string
+		lineageTag: 199db26b-c4f1-483b-9031-e6f277c87214
+		summarizeBy: none
+		sourceColumn: LineUID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Moneda
+		dataType: string
+		lineageTag: 53ace5e7-4fe2-4f20-a525-d390f9cc9068
+		summarizeBy: none
+		sourceColumn: Moneda
+
+		annotation SummarizationSetBy = Automatic
+
+	column ObjType
+		dataType: string
+		lineageTag: 270de5d8-85f2-47fc-ba04-a0ff43b98611
+		summarizeBy: none
+		sourceColumn: ObjType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Precio_PVPR
+		dataType: double
+		lineageTag: 8729f394-3ddc-4e9e-8b0c-2b20d1507162
+		summarizeBy: sum
+		sourceColumn: Precio_PVPR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PrecioTarifa
+		dataType: double
+		lineageTag: 2ca4ec7c-c18c-4a81-83f9-0d6a5df15400
+		summarizeBy: sum
+		sourceColumn: PrecioTarifa
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Quantity
+		dataType: double
+		lineageTag: 98d18cff-39cb-44d3-adfd-6715cbb6d9e2
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SalesPerson
+		dataType: string
+		lineageTag: da1a9c04-519b-4a6b-b1a2-12dcb8174418
+		summarizeBy: none
+		sourceColumn: SalesPerson
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ticket
+		dataType: string
+		lineageTag: b72f6b05-6584-47ed-bcfe-2fe2d6cf8658
+		summarizeBy: none
+		sourceColumn: Ticket
+
+		annotation SummarizationSetBy = Automatic
+
+	column TicketData
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 9a5babe3-f8df-4b5e-a10d-af9c377a5c43
+		summarizeBy: none
+		sourceColumn: TicketData
+
+		variation Variación
+			isDefault
+			relationship: e7bb759d-1cc1-463f-8cd8-5582d1fa3328
+			defaultHierarchy: LocalDateTable_167d99a6-9049-40a6-b339-dce5379ce1a6.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column TicketHora
+		dataType: string
+		lineageTag: 84106ac2-76c2-4c4d-82fe-66a669c2c4e4
+		summarizeBy: none
+		sourceColumn: TicketHora
+
+		annotation SummarizationSetBy = Automatic
+
+	column TipoDocumento
+		dataType: string
+		lineageTag: a78e6b8e-53ab-4b78-a4fb-4f98cb811da8
+		summarizeBy: none
+		sourceColumn: TipoDocumento
+
+		annotation SummarizationSetBy = Automatic
+
+	column WhsCode
+		dataType: string
+		lineageTag: 93ae5012-f668-44a2-b1a8-d811a5934ad2
+		summarizeBy: none
+		sourceColumn: WhsCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column WhsCode_Servicio
+		dataType: string
+		lineageTag: 9ce98acf-e43e-4320-b0e2-ab1672564819
+		summarizeBy: none
+		sourceColumn: WhsCode_Servicio
+
+		annotation SummarizationSetBy = Automatic
+
+	partition LOL_PBISGIRETAIL = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin"),
+				    dbo_LOL_PBISGIRETAIL = Origen{[Schema="dbo",Item="LOL_PBISGIRETAIL"]}[Data]
+				in
+				    dbo_LOL_PBISGIRETAIL
+

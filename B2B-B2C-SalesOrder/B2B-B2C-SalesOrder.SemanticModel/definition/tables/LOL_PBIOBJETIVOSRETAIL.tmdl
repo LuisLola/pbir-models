@@ -1,0 +1,46 @@
+table LOL_PBIOBJETIVOSRETAIL
+	lineageTag: afa5c6cb-6625-4def-a397-338c07e61c89
+
+	column Fecha
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5263d1ed-a583-4fa3-bceb-81daf89f5215
+		summarizeBy: none
+		sourceColumn: Fecha
+
+		variation Variación
+			isDefault
+			relationship: 1bf15c5e-5e4b-45ec-b859-b54a04c5a163
+			defaultHierarchy: LocalDateTable_e25711cc-688a-4119-ab7a-97a40af7f83a.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Importe
+		dataType: double
+		lineageTag: 6e03f9ed-e807-4c47-85e4-d94304a89401
+		summarizeBy: sum
+		sourceColumn: Importe
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TiendaID
+		dataType: string
+		lineageTag: 3c449a93-9295-4742-9e36-4d96d33212dd
+		summarizeBy: none
+		sourceColumn: TiendaID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition LOL_PBIOBJETIVOSRETAIL = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin"),
+				    dbo_LOL_PBIOBJETIVOSRETAIL = Origen{[Schema="dbo",Item="LOL_PBIOBJETIVOSRETAIL"]}[Data]
+				in
+				    dbo_LOL_PBIOBJETIVOSRETAIL
+

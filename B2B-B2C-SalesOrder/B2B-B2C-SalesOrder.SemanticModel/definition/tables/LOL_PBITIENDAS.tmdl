@@ -1,0 +1,142 @@
+table LOL_PBITIENDAS
+	lineageTag: ea447eed-694e-4627-9e05-0af4c169b249
+
+	column AreaManager
+		dataType: string
+		lineageTag: 80da11ad-c376-4b85-9585-15f2f51bb138
+		summarizeBy: none
+		sourceColumn: AreaManager
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaApertura
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6662f081-d021-4dbc-be2e-2ff6799ae011
+		summarizeBy: none
+		sourceColumn: FechaApertura
+
+		variation Variación
+			isDefault
+			relationship: 22a44b83-d8e5-4f43-9e52-be68282bb742
+			defaultHierarchy: LocalDateTable_c09b8fda-e316-4949-83d0-39c51d72ee12.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FechaCierre
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 116ef340-ddcb-47f1-b90e-3a0b85af4bf6
+		summarizeBy: none
+		sourceColumn: FechaCierre
+
+		variation Variación
+			isDefault
+			relationship: d457208b-6ec5-442e-a0bb-bad6d29d05fe
+			defaultHierarchy: LocalDateTable_d8f78174-10d6-4798-b70b-de86efbb2ded.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FechaComunicacion
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d7f9c11c-5ee7-4c9b-861a-82a6dd219443
+		summarizeBy: none
+		sourceColumn: FechaComunicacion
+
+		variation Variación
+			isDefault
+			relationship: b076edc0-6887-4df8-a11f-b28e3b644b25
+			defaultHierarchy: LocalDateTable_5e8c4207-86aa-4501-a175-6e2eea69c703.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Int
+		dataType: double
+		lineageTag: 725b936e-f265-49fb-a031-1fb59cfc65d8
+		summarizeBy: sum
+		sourceColumn: Int
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NombreTienda
+		dataType: string
+		lineageTag: e9099166-8e9e-42a6-9e0b-979ff26cfea9
+		summarizeBy: none
+		sourceColumn: NombreTienda
+
+		annotation SummarizationSetBy = Automatic
+
+	column ResponsableTienda
+		dataType: string
+		lineageTag: 5e2bbc3e-cf8a-430b-920e-b0873a4c1c58
+		summarizeBy: none
+		sourceColumn: ResponsableTienda
+
+		annotation SummarizationSetBy = Automatic
+
+	column Territorio
+		dataType: string
+		lineageTag: 69eca14e-f947-4097-920f-4c54199be334
+		summarizeBy: none
+		sourceColumn: Territorio
+
+		annotation SummarizationSetBy = Automatic
+
+	column TiendaID
+		dataType: string
+		lineageTag: e57e7b3c-2053-466a-8eb2-6c53c61e90f1
+		summarizeBy: none
+		sourceColumn: TiendaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TipoTienda
+		dataType: string
+		lineageTag: e1b4ec9a-b8c1-49d6-be8b-9ad383d84453
+		summarizeBy: none
+		sourceColumn: TipoTienda
+
+		annotation SummarizationSetBy = Automatic
+
+	column UltimaSincronizacionServer
+		dataType: string
+		lineageTag: 970d7514-67fa-4539-9642-3f0cc7cd9963
+		summarizeBy: none
+		sourceColumn: UltimaSincronizacionServer
+
+		annotation SummarizationSetBy = Automatic
+
+	column VersionBD
+		dataType: string
+		lineageTag: 54448d18-1511-452e-b748-9b9a27c7e0c9
+		summarizeBy: none
+		sourceColumn: VersionBD
+
+		annotation SummarizationSetBy = Automatic
+
+	column VersionTpv
+		dataType: string
+		lineageTag: e22129cf-c78f-422d-9258-af17d73d7f27
+		summarizeBy: none
+		sourceColumn: VersionTpv
+
+		annotation SummarizationSetBy = Automatic
+
+	partition LOL_PBITIENDAS = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin"),
+				    dbo_LOL_PBITIENDAS = Origen{[Schema="dbo",Item="LOL_PBITIENDAS"]}[Data]
+				in
+				    dbo_LOL_PBITIENDAS
+

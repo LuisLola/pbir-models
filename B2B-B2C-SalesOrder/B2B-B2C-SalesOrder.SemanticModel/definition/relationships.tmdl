@@ -1,0 +1,44 @@
+relationship e7bb759d-1cc1-463f-8cd8-5582d1fa3328
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISGIRETAIL.TicketData
+	toColumn: LocalDateTable_167d99a6-9049-40a6-b339-dce5379ce1a6.Date
+
+relationship 22a44b83-d8e5-4f43-9e52-be68282bb742
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBITIENDAS.FechaApertura
+	toColumn: LocalDateTable_c09b8fda-e316-4949-83d0-39c51d72ee12.Date
+
+relationship d457208b-6ec5-442e-a0bb-bad6d29d05fe
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBITIENDAS.FechaCierre
+	toColumn: LocalDateTable_d8f78174-10d6-4798-b70b-de86efbb2ded.Date
+
+relationship b076edc0-6887-4df8-a11f-b28e3b644b25
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBITIENDAS.FechaComunicacion
+	toColumn: LocalDateTable_5e8c4207-86aa-4501-a175-6e2eea69c703.Date
+
+relationship AutoDetected_830541ff-47b6-4398-9365-fe7f57a514ef
+	fromColumn: LOL_PBISGIRETAIL.ItemCode
+	toColumn: LOL_PBIMODELITEM.ItemCode
+
+relationship 1bf15c5e-5e4b-45ec-b859-b54a04c5a163
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBIOBJETIVOSRETAIL.Fecha
+	toColumn: LocalDateTable_e25711cc-688a-4119-ab7a-97a40af7f83a.Date
+
+relationship 719cf672-2237-417f-9811-b29958b3933b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISEASON.FechaInicioB2B
+	toColumn: LocalDateTable_d1c9393b-e166-4c48-a133-54c3f7a82ac7.Date
+
+relationship d6f3e03e-19d1-48bf-9da4-5b31cb798be5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISEASON.Fin
+	toColumn: LocalDateTable_6806e327-7095-455c-b45b-7670a8778eeb.Date
+
+relationship 43d0be90-d52d-4e41-a0af-1907e65cb032
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISEASON.Inicio
+	toColumn: LocalDateTable_4dfc2629-7a5b-4f71-9849-39e94bea46fa.Date
+
