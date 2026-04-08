@@ -1,0 +1,64 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "026d812877a34045772c",
+  "position": {
+    "x": 980.22304832713758,
+    "y": 22.602230483271377,
+    "z": 9,
+    "height": 149.88847583643124,
+    "width": 299.77695167286248,
+    "tabOrder": 9
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasB2C1"
+                    }
+                  },
+                  "Property": "MedidasB2C1"
+                }
+              },
+              "queryRef": "MedidasB2C1.MedidasB2C1",
+              "nativeQueryRef": "MedidasB2C1",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "general": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "66a87d306b548925862c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasB2C1"
+              }
+            },
+            "Property": "MedidasB2C1"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

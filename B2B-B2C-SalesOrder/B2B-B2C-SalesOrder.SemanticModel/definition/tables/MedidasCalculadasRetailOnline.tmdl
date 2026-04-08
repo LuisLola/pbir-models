@@ -1,0 +1,121 @@
+table MedidasCalculadasRetailOnline
+	lineageTag: 2d2f9f84-a97d-456d-a000-1349e9e388fd
+
+	measure ObjetivoRetail =
+			CALCULATE(
+				SUM(LOL_PBIOBJETIVOSRETAIL[Importe]),
+				USERELATIONSHIP(
+					Calendario[Date],
+					LOL_PBIOBJETIVOSRETAIL[Fecha]
+				)
+			)
+		lineageTag: ce2df04e-e856-40a3-bf09-84a4c5e77b5b
+
+	measure Ventas_YTD =
+			CALCULATE(
+				[Ventas],
+				DATESYTD(Calendario[Date])
+			)
+		lineageTag: 4c3f3215-d6c8-47d9-833c-d2c6e94da448
+
+	measure Ventas_YTD_LY =
+			CALCULATE(
+				[Ventas_YTD],
+				SAMEPERIODLASTYEAR(Calendario[Date])
+			)
+		lineageTag: d40df2eb-853f-45d8-aa6b-f8481968cb29
+
+	measure Ventas_YTD_Var = [Ventas_YTD] - [Ventas_YTD_LY]
+		lineageTag: 166845a7-8ea8-4c2b-b3a0-dfa9506672bb
+
+	measure Ventas_YTD_Var_% =
+			DIVIDE(
+				[Ventas_YTD] - [Ventas_YTD_LY],
+				[Ventas_YTD_LY]
+			)
+		lineageTag: 7faa5831-ab3b-4cb0-8546-6dab58452a7a
+
+	measure Ventas_YTD_SinIVA =
+			CALCULATE(
+				[Ventas_SinIVA],
+				DATESYTD(Calendario[Date])
+			)
+		lineageTag: 6d93d40d-bab1-4ce6-90a8-1a4091376f35
+
+	measure Ventas_YTD_SinIVA_LY =
+			CALCULATE(
+				[Ventas_YTD_SinIVA],
+				SAMEPERIODLASTYEAR(Calendario[Date])
+			)
+		lineageTag: 165eea4f-5145-42c5-b1d2-c85f6ccee89a
+
+	measure Ventas_YTD_SinIVA_Var = [Ventas_YTD_SinIVA] - [Ventas_YTD_SinIVA_LY]
+		lineageTag: 05409390-8e48-4608-b2dc-36f01cf8799c
+
+	measure Ventas_YTD_SinIVA_Var_% =
+			DIVIDE(
+				[Ventas_YTD_SinIVA] - [Ventas_YTD_SinIVA_LY],
+				[Ventas_YTD_SinIVA_LY]
+			)
+		lineageTag: db74c990-bf50-4fe5-a35e-000671e01b79
+
+	measure Ventas = SUM(LOL_PBISGIRETAIL[LineTotal])
+		lineageTag: 5a40a7f9-5cd4-4cef-acd7-1b88cd2a30d4
+
+	measure Ventas_SinIVA = SUM(LOL_PBISGIRETAIL[LineTotalWithoutTax])
+		lineageTag: adb82b7b-e87f-41bc-b18b-55ab50f401f8
+
+	measure ObjetivoRetail_YTD =
+			CALCULATE(
+				[ObjetivoRetail],
+				DATESYTD(Calendario[Date])
+			)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: b664a784-9600-4b33-a8c5-6b196a7b9acf
+
+	measure ObjetivoRetail_YTD_LY =
+			CALCULATE(
+				[ObjetivoRetail_YTD],
+				SAMEPERIODLASTYEAR(Calendario[Date])
+			)
+		lineageTag: ad7f7c54-2c28-4d3a-9199-cf1627163d14
+
+	measure ObjetivoRetail_YTD_Var = [ObjetivoRetail_YTD] - [ObjetivoRetail_YTD_LY]
+		lineageTag: 4e5bea73-c581-46ce-8d83-eea83699dd3c
+
+	measure ObjetivoRetail_YTD_Var_% =
+			DIVIDE(
+				[ObjetivoRetail_YTD] - [ObjetivoRetail_YTD_LY],
+				[ObjetivoRetail_YTD_LY]
+			)
+		lineageTag: 663dbdec-49d2-42b8-98b3-de42c4bd4f35
+
+	measure CumplimientoObjetivo_% =
+			DIVIDE(
+				[Ventas_YTD_SinIVA],
+				[ObjetivoRetail_YTD]
+			)
+		lineageTag: 23015b8f-3d87-4047-8911-70e826d872e6
+
+	measure DesviacionObjetivo = [Ventas_YTD_SinIVA] - [ObjetivoRetail_YTD]
+		lineageTag: 621fe649-8249-4928-99f8-4d6ad4461874
+
+	column Column
+		formatString: 0
+		lineageTag: 32f6e1b2-46e5-4fc5-9322-68559e9d8259
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MedidasCalculadasRetailOnline = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = d193e62faff24686b032f0bdf4de4fd3
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":null}
+
+	annotation 277cc1b9-af89-4597-8e15-cacc25c0886b = Para usar caracteres especiales en un nombre de tabla calculada, incluya el nombre completo entre corchetes ([]) y agregue un ] a cualquier corchete de cierre en el nombre.
+

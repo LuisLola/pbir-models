@@ -1,0 +1,50 @@
+table MedidasB2C1
+	lineageTag: d4df8a6e-92bc-45c9-84c8-462a4e7184c4
+
+	column MedidasB2C1
+		lineageTag: b5f65a4a-179f-47bc-80cd-b3fbb81ea27a
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'MedidasB2C1 Orden'
+
+		relatedColumnDetails
+			groupByColumn: 'MedidasB2C1 Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MedidasB2C1 Campos'
+		isHidden
+		lineageTag: cbd7cf9d-39c9-4b38-9604-a6a41dd47f0c
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'MedidasB2C1 Orden'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MedidasB2C1 Orden'
+		isHidden
+		formatString: 0
+		lineageTag: c5eee4b8-2278-48de-ae1f-7802ba16a2f1
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MedidasB2C1 = calculated
+		mode: import
+		source =
+				{
+				    ("Quantity", NAMEOF('LOL_PBISGIRETAIL'[Quantity]), 0),
+				    ("LineTotal", NAMEOF('LOL_PBISGIRETAIL'[LineTotal]), 1),
+				    ("LineTotalWithoutTax", NAMEOF('LOL_PBISGIRETAIL'[LineTotalWithoutTax]), 2),
+				    ("Importe", NAMEOF('LOL_PBIOBJETIVOSRETAIL'[Importe]), 3)
+				}
+
+	annotation PBI_Id = 523623e1ff5d4025981fafb7725ddf27
+

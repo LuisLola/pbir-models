@@ -8,11 +8,6 @@ table LOL_PBIOBJETIVOSRETAIL
 		summarizeBy: none
 		sourceColumn: Fecha
 
-		variation Variación
-			isDefault
-			relationship: 1bf15c5e-5e4b-45ec-b859-b54a04c5a163
-			defaultHierarchy: LocalDateTable_e25711cc-688a-4119-ab7a-97a40af7f83a.'Jerarquía de fechas'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
