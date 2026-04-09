@@ -74,11 +74,15 @@ relationship 927dd73b-1faf-d296-aed1-e7bdaac93e35
 	toColumn: LOL_PBIOBJETIVOSRETAIL.TiendaID
 
 relationship 696d5d44-eefc-4198-c309-794c866055e3
-	isActive: false
+	joinOnDateBehavior: datePartOnly
 	fromColumn: LOL_PBIOBJETIVOSRETAIL.Fecha
 	toColumn: Calendario.Date
+	isActive: false
+	fromCardinality: many
+	crossFilteringBehavior: oneDirection
 
 relationship 2e42d1e3-400b-aeac-fc03-99cb6cb03cc3
+	joinOnDateBehavior: datePartOnly
 	fromColumn: LOL_PBISGIRETAIL.TicketData
 	toColumn: Calendario.Date
 

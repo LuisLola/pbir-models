@@ -14,13 +14,12 @@ table LOL_PBIOBJETIVOSRETAIL
 
 	column Importe
 		dataType: double
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		lineageTag: 6e03f9ed-e807-4c47-85e4-d94304a89401
 		summarizeBy: sum
 		sourceColumn: Importe
 
 		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column TiendaID
 		dataType: string

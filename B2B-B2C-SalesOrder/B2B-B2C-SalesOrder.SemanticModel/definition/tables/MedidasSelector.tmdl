@@ -1,0 +1,70 @@
+table MedidasSelector
+	lineageTag: abc12345-6789-0123-4567-89abcdef0123
+
+	column MedidasSelector
+		lineageTag: def67890-1234-5678-9012-34567890abcd
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'MedidasSelector Orden'
+
+		relatedColumnDetails
+			groupByColumn: 'MedidasSelector Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MedidasSelector Campos'
+		isHidden
+		lineageTag: ghi90123-4567-8901-2345-678901234567
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'MedidasSelector Orden'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MedidasSelector Orden'
+		isHidden
+		formatString: 0
+		lineageTag: jkl34567-8901-2345-6789-012345678901
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MedidasSelector = calculated
+		mode: import
+		source =
+				{
+				    ("Ventas Totales", NAMEOF('MedidasCalculadasRetailOnline'[Ventas]), 1),
+				    ("Ventas Sin IVA", NAMEOF('MedidasCalculadasRetailOnline'[Ventas_SinIVA]), 2),
+				    ("Ventas YTD", NAMEOF('MedidasCalculadasRetailOnline'[Ventas_YTD]), 3),
+				    ("Ventas YTD Sin IVA", NAMEOF('MedidasCalculadasRetailOnline'[Ventas_YTD_SinIVA]), 4),
+				    ("Ventas YTD LY", NAMEOF('MedidasCalculadasRetailOnline'[Ventas_YTD_LY]), 5),
+				    ("Ventas YTD Sin IVA LY", NAMEOF('MedidasCalculadasRetailOnline'[Ventas_YTD_SinIVA_LY]), 6),
+				    ("Variación Ventas YTD", NAMEOF('MedidasCalculadasRetailOnline'[Ventas_YTD_Var]), 7),
+				    ("Variación % Ventas YTD", NAMEOF('MedidasCalculadasRetailOnline'[Ventas_YTD_Var_%]), 8),
+				    ("Variación Ventas YTD Sin IVA", NAMEOF('MedidasCalculadasRetailOnline'[Ventas_YTD_SinIVA_Var]), 9),
+				    ("Variación % Ventas YTD Sin IVA", NAMEOF('MedidasCalculadasRetailOnline'[Ventas_YTD_SinIVA_Var_%]), 10),
+				    ("Objetivo Retail", NAMEOF('MedidasCalculadasRetailOnline'[ObjetivoRetail]), 11),
+				    ("Objetivo Retail YTD", NAMEOF('MedidasCalculadasRetailOnline'[ObjetivoRetail_YTD]), 12),
+				    ("Objetivo Retail YTD LY", NAMEOF('MedidasCalculadasRetailOnline'[ObjetivoRetail_YTD_LY]), 13),
+				    ("Variación Objetivo YTD", NAMEOF('MedidasCalculadasRetailOnline'[ObjetivoRetail_YTD_Var]), 14),
+				    ("Variación % Objetivo YTD", NAMEOF('MedidasCalculadasRetailOnline'[ObjetivoRetail_YTD_Var_%]), 15),
+				    ("Cumplimiento Objetivo %", NAMEOF('MedidasCalculadasRetailOnline'[CumplimientoObjetivo_%]), 16),
+				    ("Desviación Objetivo", NAMEOF('MedidasCalculadasRetailOnline'[DesviacionObjetivo]), 17),
+				    ("Número de Transacciones", NAMEOF('MedidasCalculadasRetailOnline'[NumeroTransacciones]), 18),
+				    ("Promedio Venta por Transacción", NAMEOF('MedidasCalculadasRetailOnline'[PromedioVentaTransaccion]), 19),
+				    ("Número de Clientes Únicos", NAMEOF('MedidasCalculadasRetailOnline'[NumeroClientesUnicos]), 20),
+				    ("Ventas MTD", NAMEOF('MedidasCalculadasRetailOnline'[VentasMTD]), 21),
+				    ("Ventas QTD", NAMEOF('MedidasCalculadasRetailOnline'[VentasQTD]), 22),
+				    ("Crecimiento Mensual", NAMEOF('MedidasCalculadasRetailOnline'[CrecimientoMensual]), 23),
+				    ("Margen Bruto", NAMEOF('MedidasCalculadasRetailOnline'[MargenBruto]), 24)
+				}
+
+	annotation PBI_Id = 12345678-9abc-def0-1234-567890abcdef
+

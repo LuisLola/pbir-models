@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "14e4ce5ab0740cbc02a2",
   "position": {
-    "x": 9.5167286245353164,
-    "y": 343.79182156133828,
+    "x": 0,
+    "y": 134.1047693510555,
     "z": 1,
-    "height": 375.910780669145,
-    "width": 1084.907063197026,
+    "height": 585.45738858483185,
+    "width": 1280,
     "tabOrder": 1
   },
   "visual": {
@@ -23,13 +23,13 @@
                       "Entity": "LOL_PBITIENDAS"
                     }
                   },
-                  "Property": "NombreTienda"
+                  "Property": "TipoTienda"
                 }
               },
-              "queryRef": "LOL_PBITIENDAS.NombreTienda",
-              "nativeQueryRef": "NombreTienda",
+              "queryRef": "LOL_PBITIENDAS.TipoTienda",
+              "nativeQueryRef": "TipoTienda",
               "active": true,
-              "displayName": "NombreTienda"
+              "displayName": "TipoTienda"
             },
             {
               "field": {
@@ -44,7 +44,7 @@
               },
               "queryRef": "LOL_PBITIENDAS.NombreTienda",
               "nativeQueryRef": "NombreTienda",
-              "active": true,
+              "active": false,
               "displayName": "NombreTienda"
             },
             {
@@ -77,7 +77,8 @@
                 }
               },
               "index": 0,
-              "length": 1
+              "length": 1,
+              "sortDirection": "Ascending"
             },
             {
               "parameterExpr": {
@@ -123,7 +124,8 @@
                 }
               },
               "queryRef": "MedidasCalculadasRetailOnline.Ventas_YTD",
-              "nativeQueryRef": "Ventas_YTD"
+              "nativeQueryRef": "Ventas YTD",
+              "displayName": "Ventas YTD"
             },
             {
               "field": {
@@ -137,21 +139,8 @@
                 }
               },
               "queryRef": "MedidasCalculadasRetailOnline.Ventas_YTD_LY",
-              "nativeQueryRef": "Ventas_YTD_LY"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "MedidasCalculadasRetailOnline"
-                    }
-                  },
-                  "Property": "Ventas_YTD_Var_%"
-                }
-              },
-              "queryRef": "MedidasCalculadasRetailOnline.Ventas_YTD_Var_%",
-              "nativeQueryRef": "Ventas_YTD_Var_%"
+              "nativeQueryRef": "Ventas YTD LY",
+              "displayName": "Ventas YTD LY"
             },
             {
               "field": {
@@ -165,7 +154,8 @@
                 }
               },
               "queryRef": "MedidasCalculadasRetailOnline.ObjetivoRetail_YTD",
-              "nativeQueryRef": "ObjetivoRetail_YTD"
+              "nativeQueryRef": "Objetivo Retail YTD",
+              "displayName": "Objetivo Retail YTD"
             },
             {
               "field": {
@@ -179,10 +169,57 @@
                 }
               },
               "queryRef": "MedidasCalculadasRetailOnline.CumplimientoObjetivo_%",
-              "nativeQueryRef": "CumplimientoObjetivo_%"
+              "nativeQueryRef": "Cumplimiento Objetivo %",
+              "displayName": "Cumplimiento Objetivo %"
+            }
+          ],
+          "fieldParameters": [
+            {
+              "parameterExpr": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasSelector"
+                    }
+                  },
+                  "Property": "MedidasSelector"
+                }
+              },
+              "index": 0,
+              "length": 4
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PBITIENDAS"
+                  }
+                },
+                "Property": "NombreTienda"
+              }
+            },
+            "direction": "Ascending"
+          },
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PBITIENDAS"
+                  }
+                },
+                "Property": "TipoTienda"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
       }
     },
     "expansionStates": [
@@ -193,10 +230,16 @@
         "levels": [
           {
             "queryRefs": [
-              "LOL_PBITIENDAS.NombreTienda"
+              "LOL_PBITIENDAS.TipoTienda"
             ],
             "isCollapsed": true,
             "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "LOL_PBITIENDAS.NombreTienda"
+            ],
+            "isCollapsed": true
           },
           {
             "queryRefs": [
@@ -208,6 +251,809 @@
         "root": {}
       }
     ],
+    "objects": {
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "bandedRowHeaders": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Conditional": {
+                      "Cases": [
+                        {
+                          "Condition": {
+                            "Comparison": {
+                              "ComparisonKind": 3,
+                              "Left": {
+                                "Measure": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Entity": "LOL_SGIRETAIL"
+                                    }
+                                  },
+                                  "Property": "Ventas_YTD_LY"
+                                }
+                              },
+                              "Right": {
+                                "Literal": {
+                                  "Value": "0D"
+                                }
+                              }
+                            }
+                          },
+                          "Value": {
+                            "Literal": {
+                              "Value": "'#DEEFFF'"
+                            }
+                          }
+                        },
+                        {
+                          "Condition": {
+                            "Comparison": {
+                              "ComparisonKind": 4,
+                              "Left": {
+                                "Measure": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Entity": "LOL_SGIRETAIL"
+                                    }
+                                  },
+                                  "Property": "Ventas_YTD_LY"
+                                }
+                              },
+                              "Right": {
+                                "Literal": {
+                                  "Value": "100D"
+                                }
+                              }
+                            }
+                          },
+                          "Value": {
+                            "Literal": {
+                              "Value": "'#219609'"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "LOL_SGIRETAIL.Ventas_YTD_LY"
+          }
+        },
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Conditional": {
+                      "Cases": [
+                        {
+                          "Condition": {
+                            "And": {
+                              "Left": {
+                                "Comparison": {
+                                  "ComparisonKind": 2,
+                                  "Left": {
+                                    "Measure": {
+                                      "Expression": {
+                                        "SourceRef": {
+                                          "Entity": "LOL_SGIRETAIL"
+                                        }
+                                      },
+                                      "Property": "Evolucion_YTD_Porcentaje"
+                                    }
+                                  },
+                                  "Right": {
+                                    "Literal": {
+                                      "Value": "0D"
+                                    }
+                                  }
+                                }
+                              },
+                              "Right": {
+                                "Comparison": {
+                                  "ComparisonKind": 3,
+                                  "Left": {
+                                    "Measure": {
+                                      "Expression": {
+                                        "SourceRef": {
+                                          "Entity": "LOL_SGIRETAIL"
+                                        }
+                                      },
+                                      "Property": "Evolucion_YTD_Porcentaje"
+                                    }
+                                  },
+                                  "Right": {
+                                    "Literal": {
+                                      "Value": "1D"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "Value": {
+                            "Literal": {
+                              "Value": "'#C9E7C1'"
+                            }
+                          }
+                        },
+                        {
+                          "Condition": {
+                            "And": {
+                              "Left": {
+                                "Comparison": {
+                                  "ComparisonKind": 2,
+                                  "Left": {
+                                    "Measure": {
+                                      "Expression": {
+                                        "SourceRef": {
+                                          "Entity": "LOL_SGIRETAIL"
+                                        }
+                                      },
+                                      "Property": "Evolucion_YTD_Porcentaje"
+                                    }
+                                  },
+                                  "Right": {
+                                    "Literal": {
+                                      "Value": "-1D"
+                                    }
+                                  }
+                                }
+                              },
+                              "Right": {
+                                "Comparison": {
+                                  "ComparisonKind": 3,
+                                  "Left": {
+                                    "Measure": {
+                                      "Expression": {
+                                        "SourceRef": {
+                                          "Entity": "LOL_SGIRETAIL"
+                                        }
+                                      },
+                                      "Property": "Evolucion_YTD_Porcentaje"
+                                    }
+                                  },
+                                  "Right": {
+                                    "Literal": {
+                                      "Value": "0D"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "Value": {
+                            "Literal": {
+                              "Value": "'#f5d4dd'"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "LOL_SGIRETAIL.Evolucion_YTD_Porcentaje"
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "layout": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Compact'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "outlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 2,
+                      "Percent": 0.6
+                    }
+                  }
+                }
+              }
+            },
+            "imageHeight": {
+              "expr": {
+                "Literal": {
+                  "Value": "77D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0.2
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "rowHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0.2
+                    }
+                  }
+                }
+              }
+            },
+            "steppedLayoutIndentation": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "expandCollapseButtonsSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTotals": [
+        {
+          "properties": {
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "Row"
+          }
+        }
+      ],
+      "rowTotal": [
+        {
+          "properties": {
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0.2
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnTotal": [
+        {
+          "properties": {
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "55.1764083273045D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_SGIRETAIL.Ticket_Medio_YTD"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "239.89033728820266D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_ALMACENES.Tipo Tienda"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "41.161772008414644D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_SGIRETAIL.UPT_YTD"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "73.76324674914375D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_TRAFICO.Exterior_YTD"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "71.0850598254209D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_SGIRETAIL.Tasa_Devolucion_YTD_Porcentaje"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "45.257679271182084D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_SGIRETAIL.Evolucion_YTD_Porcentaje"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "85.16957096036303D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_SGIRETAIL.Ventas_YTD_LY"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "59.27355455733547D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_SGIRETAIL.Numero_Ventas_YTD"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "44.1642239241118D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_SGIRETAIL.Evolucion_Numero_Ventas_YTD_Porcentaje"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "44.97548537696604D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_SGIRETAIL.EvoluciónUnidades%"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "46.062067150358466D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_SGIRETAIL.Evol_UPT_YTD"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "46.06206573108794D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_SGIRETAIL.Evol_Ticket_Medio_YTD"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "45.09076797382117D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_TRAFICO.Evolucion_Exterior_YTD_Porcentaje"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "209.06395034299493D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_ALMACENES.TIPOTIENDA"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.6
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 3,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 7,
+                      "Percent": -0.1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Minimal'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "showVisualInformationButton": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "showVisualWarningButton": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "showVisualErrorButton": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "showDrillRoleSelector": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "showDrillUpButton": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "showDrillToggleButton": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "showDrillDownLevelButton": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "drillFilterOtherVisuals": true
   },
   "filterConfig": {
@@ -225,90 +1071,6 @@
           }
         },
         "type": "Categorical"
-      },
-      {
-        "name": "2b767dc0f95858faf120",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PBITIENDAS"
-              }
-            },
-            "Property": "NombreTienda"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "790f5a4378027108f288",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasCalculadasRetailOnline"
-              }
-            },
-            "Property": "Ventas_YTD"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "ef44d43aca3a3fa7ed20",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasCalculadasRetailOnline"
-              }
-            },
-            "Property": "Ventas_YTD_LY"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "6cf9726f6765c0e910bc",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasCalculadasRetailOnline"
-              }
-            },
-            "Property": "Ventas_YTD_Var_%"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "9fecaab5350202c2797b",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasCalculadasRetailOnline"
-              }
-            },
-            "Property": "ObjetivoRetail_YTD"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "5ea33244061354a8ce9e",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasCalculadasRetailOnline"
-              }
-            },
-            "Property": "CumplimientoObjetivo_%"
-          }
-        },
-        "type": "Advanced"
       }
     ]
   }

@@ -9,6 +9,7 @@ table MedidasCalculadasRetailOnline
 					LOL_PBIOBJETIVOSRETAIL[Fecha]
 				)
 			)
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		lineageTag: ce2df04e-e856-40a3-bf09-84a4c5e77b5b
 
 	measure Ventas_YTD =
@@ -70,7 +71,7 @@ table MedidasCalculadasRetailOnline
 				[ObjetivoRetail],
 				DATESYTD(Calendario[Date])
 			)
-		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		lineageTag: b664a784-9600-4b33-a8c5-6b196a7b9acf
 
 	measure ObjetivoRetail_YTD_LY =
@@ -115,13 +116,13 @@ table MedidasCalculadasRetailOnline
 	measure VentasQTD = CALCULATE([Ventas], DATESQTD(Calendario[Date]))
 		lineageTag: 456789ab-cdef-0123-4567-89abcdef0123
 
-	measure CrecimientoMensual = 
+	measure CrecimientoMensual =
 			VAR VentasActual = [VentasMTD]
 			VAR VentasAnterior = CALCULATE([VentasMTD], DATEADD(Calendario[Date], -1, MONTH))
 			RETURN DIVIDE(VentasActual - VentasAnterior, VentasAnterior)
 		lineageTag: 789abcde-f012-3456-7890-abcdef012345
 
-	measure MargenBruto = 
+	measure MargenBruto =
 			// Asumiendo que hay costo, pero si no, placeholder
 			// Si hay columna de costo, usar SUM(LineTotal - Costo)
 			// Por ahora, placeholder
