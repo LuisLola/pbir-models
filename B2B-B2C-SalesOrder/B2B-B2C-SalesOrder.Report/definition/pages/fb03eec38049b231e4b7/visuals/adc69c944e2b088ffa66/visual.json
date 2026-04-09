@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
-  "name": "207e39d27d458631a32d",
+  "name": "adc69c944e2b088ffa66",
   "position": {
     "x": 0,
-    "y": 0,
-    "z": 10,
-    "height": 69.850746268656721,
-    "width": 321.49253731343282,
-    "tabOrder": 10
+    "y": 80.597014925373131,
+    "z": 11,
+    "height": 96.71641791044776,
+    "width": 135.22388059701493,
+    "tabOrder": 11
   },
   "visual": {
     "visualType": "slicer",
@@ -56,31 +56,17 @@
       "data": [
         {
           "properties": {
+            "endDate": {
+              "expr": {
+                "Literal": {
+                  "Value": "datetime'2026-04-08T00:00:00'"
+                }
+              }
+            },
             "mode": {
               "expr": {
                 "Literal": {
-                  "Value": "'Relative'"
-                }
-              }
-            },
-            "relativeRange": {
-              "expr": {
-                "Literal": {
-                  "Value": "'This'"
-                }
-              }
-            },
-            "relativeDuration": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
-                }
-              }
-            },
-            "relativePeriod": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Months'"
+                  "Value": "'Before'"
                 }
               }
             }
@@ -104,7 +90,7 @@
                   {
                     "Condition": {
                       "Comparison": {
-                        "ComparisonKind": 0,
+                        "ComparisonKind": 3,
                         "Left": {
                           "Column": {
                             "Expression": {
@@ -116,11 +102,8 @@
                           }
                         },
                         "Right": {
-                          "DateSpan": {
-                            "Expression": {
-                              "Now": {}
-                            },
-                            "TimeUnit": 2
+                          "Literal": {
+                            "Value": "datetime'2026-04-09T00:00:00'"
                           }
                         }
                       }
@@ -265,23 +248,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "77234f898a0b350f7c09",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Calendario"
-              }
-            },
-            "Property": "Date"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

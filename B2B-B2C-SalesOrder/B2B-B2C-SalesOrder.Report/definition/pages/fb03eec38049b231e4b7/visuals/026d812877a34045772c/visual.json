@@ -85,6 +85,13 @@
                                 "Value": "'''MedidasCalculadasRetailOnline''[Ventas_YTD_Var]'"
                               }
                             }
+                          ],
+                          [
+                            {
+                              "Literal": {
+                                "Value": "'''MedidasCalculadasRetailOnline''[Ventas_YTD_Var_%]'"
+                              }
+                            }
                           ]
                         ]
                       }
@@ -137,6 +144,17 @@
                                   }
                                 ]
                               }
+                            ],
+                            [
+                              {
+                                "0": [
+                                  {
+                                    "Literal": {
+                                      "Value": "'''MedidasCalculadasRetailOnline''[Ventas_YTD_Var_%]'"
+                                    }
+                                  }
+                                ]
+                              }
                             ]
                           ],
                           "columns": [
@@ -163,6 +181,9 @@
                           },
                           {
                             "0": "Variación Ventas YTD"
+                          },
+                          {
+                            "0": "Variación % Ventas YTD"
                           }
                         ]
                       }

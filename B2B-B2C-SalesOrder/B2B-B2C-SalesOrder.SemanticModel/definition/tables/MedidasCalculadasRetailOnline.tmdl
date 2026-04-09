@@ -1,94 +1,22 @@
 table MedidasCalculadasRetailOnline
 	lineageTag: 2d2f9f84-a97d-456d-a000-1349e9e388fd
 
-	measure Cantidad =
-			CALCULATE(
-				SUM(LOL_PBISGIRETAIL[Quantity]),
-				TREATAS(VALUES(Calendario[Date]), LOL_PBISGIRETAIL[TicketData])
-			)
-		formatString: 0.00
-		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a101
-
-	measure Cantidad_YTD = [Cantidad]
-		formatString: 0.00
-		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a102
-
-	measure Cantidad_YTD_LY =
-			VAR FechasPrevias =
-				CALCULATETABLE(
-					VALUES(Calendario[Date]),
-					SAMEPERIODLASTYEAR(Calendario[Date])
-				)
-			RETURN
-				CALCULATE(
-					SUM(LOL_PBISGIRETAIL[Quantity]),
-					TREATAS(FechasPrevias, LOL_PBISGIRETAIL[TicketData])
-				)
-		formatString: 0.00
-		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a103
-
-	measure Cantidad_YTD_Var = [Cantidad_YTD] - [Cantidad_YTD_LY]
-		formatString: 0.00
-		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a104
-
-	measure Cantidad_YTD_Var_% =
-			DIVIDE(
-				[Cantidad_YTD] - [Cantidad_YTD_LY],
-				[Cantidad_YTD_LY]
-			)
-		formatString: 0.00%;-0.00%;0.00%
-		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a105
-
-	measure Cantidad_MTD =
-			CALCULATE(
-				[Cantidad],
-				DATESMTD(Calendario[Date])
-			)
-		formatString: 0.00
-		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a106
-
-	measure Cantidad_MTD_LY =
-			CALCULATE(
-				[Cantidad_YTD_LY],
-				DATESMTD(Calendario[Date])
-			)
-		formatString: 0.00
-		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a107
-
-	measure Cantidad_MTD_Var = [Cantidad_MTD] - [Cantidad_MTD_LY]
-		formatString: 0.00
-		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a108
-
-	measure Cantidad_MTD_Var_% =
-			DIVIDE(
-				[Cantidad_MTD] - [Cantidad_MTD_LY],
-				[Cantidad_MTD_LY]
-			)
-		formatString: 0.00%;-0.00%;0.00%
-		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a109
-
-	measure Ventas =
-			CALCULATE(
-				SUM(LOL_PBISGIRETAIL[LineTotal]),
-				TREATAS(VALUES(Calendario[Date]), LOL_PBISGIRETAIL[TicketData])
-			)
-		formatString: #,0.00;-#,0.00;#,0.00
-		lineageTag: 5a40a7f9-5cd4-4cef-acd7-1b88cd2a30d4
-
 	measure Ventas_YTD = [Ventas]
 		formatString: #,0.00;-#,0.00;#,0.00
 		lineageTag: 4c3f3215-d6c8-47d9-833c-d2c6e94da448
 
 	measure Ventas_YTD_LY =
-			VAR FechasPrevias =
-				CALCULATETABLE(
-					VALUES(Calendario[Date]),
-					SAMEPERIODLASTYEAR(Calendario[Date])
-				)
+			VAR FechaMin = MIN(Calendario[Date])
+			VAR FechaMax = MAX(Calendario[Date])
+			VAR FechaMinLY = DATE(YEAR(FechaMin) - 1, MONTH(FechaMin), DAY(FechaMin))
+			VAR FechaMaxLY = DATE(YEAR(FechaMax) - 1, MONTH(FechaMax), DAY(FechaMax))
 			RETURN
 				CALCULATE(
-					SUM(LOL_PBISGIRETAIL[LineTotal]),
-					TREATAS(FechasPrevias, LOL_PBISGIRETAIL[TicketData])
+					[Ventas],
+					FILTER(
+						ALL(Calendario[Date]),
+						Calendario[Date] >= FechaMinLY && Calendario[Date] <= FechaMaxLY
+					)
 				)
 		formatString: #,0.00;-#,0.00;#,0.00
 		lineageTag: d40df2eb-853f-45d8-aa6b-f8481968cb29
@@ -105,70 +33,22 @@ table MedidasCalculadasRetailOnline
 		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: 7faa5831-ab3b-4cb0-8546-6dab58452a7a
 
-	measure Ventas_MTD =
-			CALCULATE(
-				SUM(LOL_PBISGIRETAIL[LineTotal]),
-				DATESMTD(Calendario[Date])
-			)
-		formatString: #,0.00;-#,0.00;#,0.00
-		lineageTag: def12345-6789-0123-4567-89abcdef0123
-
-	measure Ventas_MTD_LY =
-			VAR FechasPreviasMTD =
-				CALCULATETABLE(
-					DATESMTD(Calendario[Date]),
-					SAMEPERIODLASTYEAR(Calendario[Date])
-				)
-			RETURN
-				CALCULATE(
-					SUM(LOL_PBISGIRETAIL[LineTotal]),
-					TREATAS(FechasPreviasMTD, LOL_PBISGIRETAIL[TicketData])
-				)
-		formatString: #,0.00;-#,0.00;#,0.00
-		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a110
-
-	measure Ventas_MTD_Var = [Ventas_MTD] - [Ventas_MTD_LY]
-		formatString: #,0.00;-#,0.00;#,0.00
-		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a111
-
-	measure Ventas_MTD_Var_% =
-			DIVIDE(
-				[Ventas_MTD] - [Ventas_MTD_LY],
-				[Ventas_MTD_LY]
-			)
-		formatString: 0.00%;-0.00%;0.00%
-		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a112
-
-	measure Ventas_QTD =
-			CALCULATE(
-				SUM(LOL_PBISGIRETAIL[LineTotal]),
-				DATESQTD(Calendario[Date])
-			)
-		formatString: #,0.00;-#,0.00;#,0.00
-		lineageTag: 456789ab-cdef-0123-4567-89abcdef0123
-
-	measure Ventas_SinIVA =
-			CALCULATE(
-				SUM(LOL_PBISGIRETAIL[LineTotalWithoutTax]),
-				TREATAS(VALUES(Calendario[Date]), LOL_PBISGIRETAIL[TicketData])
-			)
-		formatString: #,0.00;-#,0.00;#,0.00
-		lineageTag: adb82b7b-e87f-41bc-b18b-55ab50f401f8
-
 	measure Ventas_SinIVA_YTD = [Ventas_SinIVA]
 		formatString: #,0.00;-#,0.00;#,0.00
 		lineageTag: 6d93d40d-bab1-4ce6-90a8-1a4091376f35
 
 	measure Ventas_SinIVA_YTD_LY =
-			VAR FechasPrevias =
-				CALCULATETABLE(
-					VALUES(Calendario[Date]),
-					SAMEPERIODLASTYEAR(Calendario[Date])
-				)
+			VAR FechaMin = MIN(Calendario[Date])
+			VAR FechaMax = MAX(Calendario[Date])
+			VAR FechaMinLY = DATE(YEAR(FechaMin) - 1, MONTH(FechaMin), DAY(FechaMin))
+			VAR FechaMaxLY = DATE(YEAR(FechaMax) - 1, MONTH(FechaMax), DAY(FechaMax))
 			RETURN
 				CALCULATE(
-					SUM(LOL_PBISGIRETAIL[LineTotalWithoutTax]),
-					TREATAS(FechasPrevias, LOL_PBISGIRETAIL[TicketData])
+					[Ventas_SinIVA],
+					FILTER(
+						ALL(Calendario[Date]),
+						Calendario[Date] >= FechaMinLY && Calendario[Date] <= FechaMaxLY
+					)
 				)
 		formatString: #,0.00;-#,0.00;#,0.00
 		lineageTag: 165eea4f-5145-42c5-b1d2-c85f6ccee89a
@@ -185,60 +65,78 @@ table MedidasCalculadasRetailOnline
 		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: db74c990-bf50-4fe5-a35e-000671e01b79
 
-	measure Ventas_SinIVA_MTD =
-			CALCULATE(
-				SUM(LOL_PBISGIRETAIL[LineTotalWithoutTax]),
-				DATESMTD(Calendario[Date])
-			)
+	measure Ventas = SUM(LOL_PBISGIRETAIL[LineTotal])
 		formatString: #,0.00;-#,0.00;#,0.00
-		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a113
+		lineageTag: 5a40a7f9-5cd4-4cef-acd7-1b88cd2a30d4
 
-	measure Ventas_SinIVA_MTD_LY =
-			VAR FechasPreviasMTD =
-				CALCULATETABLE(
-					DATESMTD(Calendario[Date]),
-					SAMEPERIODLASTYEAR(Calendario[Date])
-				)
-			RETURN
-				CALCULATE(
-					SUM(LOL_PBISGIRETAIL[LineTotalWithoutTax]),
-					TREATAS(FechasPreviasMTD, LOL_PBISGIRETAIL[TicketData])
-				)
+	measure Ventas_SinIVA = SUM(LOL_PBISGIRETAIL[LineTotalWithoutTax])
 		formatString: #,0.00;-#,0.00;#,0.00
-		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a114
-
-	measure Ventas_SinIVA_MTD_Var = [Ventas_SinIVA_MTD] - [Ventas_SinIVA_MTD_LY]
-		formatString: #,0.00;-#,0.00;#,0.00
-		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a115
-
-	measure Ventas_SinIVA_MTD_Var_% =
-			DIVIDE(
-				[Ventas_SinIVA_MTD] - [Ventas_SinIVA_MTD_LY],
-				[Ventas_SinIVA_MTD_LY]
-			)
-		formatString: 0.00%;-0.00%;0.00%
-		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a116
+		lineageTag: adb82b7b-e87f-41bc-b18b-55ab50f401f8
 
 	measure NumeroTransacciones =
 			CALCULATE(
 				DISTINCTCOUNT(LOL_PBISGIRETAIL[Ticket]),
-				TREATAS(VALUES(Calendario[Date]), LOL_PBISGIRETAIL[TicketData]),
 				NOT LOL_PBISGIRETAIL[TipoDocumento] IN {"VTD", "VRMA"}
 			)
 		formatString: 0
 		lineageTag: 12345678-1234-1234-1234-123456789abc
 
-	measure NumeroTransacciones_LY =
-			VAR FechasPrevias =
-				CALCULATETABLE(
-					VALUES(Calendario[Date]),
-					SAMEPERIODLASTYEAR(Calendario[Date])
-				)
+	measure PromedioVentaTransaccion = DIVIDE([Ventas], [NumeroTransacciones])
+		formatString: #,0.00;-#,0.00;#,0.00
+		lineageTag: 87654321-4321-4321-4321-fedcba987654
+
+	measure NumeroClientesUnicos = DISTINCTCOUNT(LOL_PBISGIRETAIL[Cliente])
+		formatString: 0
+		lineageTag: abcdef12-3456-7890-abcd-ef1234567890
+
+	measure Cantidad = SUM(LOL_PBISGIRETAIL[Quantity])
+		formatString: 0.00
+		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a101
+
+	measure Cantidad_YTD = [Cantidad]
+		formatString: 0.00
+		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a102
+
+	measure Cantidad_YTD_LY =
+			VAR FechaMin = MIN(Calendario[Date])
+			VAR FechaMax = MAX(Calendario[Date])
+			VAR FechaMinLY = DATE(YEAR(FechaMin) - 1, MONTH(FechaMin), DAY(FechaMin))
+			VAR FechaMaxLY = DATE(YEAR(FechaMax) - 1, MONTH(FechaMax), DAY(FechaMax))
 			RETURN
 				CALCULATE(
-					DISTINCTCOUNT(LOL_PBISGIRETAIL[Ticket]),
-					TREATAS(FechasPrevias, LOL_PBISGIRETAIL[TicketData]),
-					NOT LOL_PBISGIRETAIL[TipoDocumento] IN {"VTD", "VRMA"}
+					[Cantidad],
+					FILTER(
+						ALL(Calendario[Date]),
+						Calendario[Date] >= FechaMinLY && Calendario[Date] <= FechaMaxLY
+					)
+				)
+		formatString: 0.00
+		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a103
+
+	measure Cantidad_YTD_Var = [Cantidad_YTD] - [Cantidad_YTD_LY]
+		formatString: 0.00
+		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a104
+
+	measure Cantidad_YTD_Var_% =
+			DIVIDE(
+				[Cantidad_YTD] - [Cantidad_YTD_LY],
+				[Cantidad_YTD_LY]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a105
+
+	measure NumeroTransacciones_LY =
+			VAR FechaMin = MIN(Calendario[Date])
+			VAR FechaMax = MAX(Calendario[Date])
+			VAR FechaMinLY = DATE(YEAR(FechaMin) - 1, MONTH(FechaMin), DAY(FechaMin))
+			VAR FechaMaxLY = DATE(YEAR(FechaMax) - 1, MONTH(FechaMax), DAY(FechaMax))
+			RETURN
+				CALCULATE(
+					[NumeroTransacciones],
+					FILTER(
+						ALL(Calendario[Date]),
+						Calendario[Date] >= FechaMinLY && Calendario[Date] <= FechaMaxLY
+					)
 				)
 		formatString: 0
 		lineageTag: 12345678-1234-1234-1234-123456789abd
@@ -251,29 +149,19 @@ table MedidasCalculadasRetailOnline
 		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: 12345678-1234-1234-1234-123456789abe
 
-	measure PromedioVentaTransaccion =
-			VAR VentasSinDev =
-				CALCULATE(
-					SUM(LOL_PBISGIRETAIL[LineTotal]),
-					TREATAS(VALUES(Calendario[Date]), LOL_PBISGIRETAIL[TicketData]),
-					NOT LOL_PBISGIRETAIL[TipoDocumento] IN {"VTD", "VRMA"}
-				)
-			VAR NumVentasSinDev = [NumeroTransacciones]
-			RETURN
-				DIVIDE(VentasSinDev, NumVentasSinDev)
-		formatString: #,0.00;-#,0.00;#,0.00
-		lineageTag: 87654321-4321-4321-4321-fedcba987654
-
 	measure PromedioVentaTransaccion_LY =
-			VAR VentasAnteriores =
-				CALCULATE(
-					SUM(LOL_PBISGIRETAIL[LineTotal]),
-					SAMEPERIODLASTYEAR(Calendario[Date]),
-					NOT LOL_PBISGIRETAIL[TipoDocumento] IN {"VTD", "VRMA"}
-				)
-			VAR NumVentasAnteriores = [NumeroTransacciones_LY]
+			VAR FechaMin = MIN(Calendario[Date])
+			VAR FechaMax = MAX(Calendario[Date])
+			VAR FechaMinLY = DATE(YEAR(FechaMin) - 1, MONTH(FechaMin), DAY(FechaMin))
+			VAR FechaMaxLY = DATE(YEAR(FechaMax) - 1, MONTH(FechaMax), DAY(FechaMax))
 			RETURN
-				DIVIDE(VentasAnteriores, NumVentasAnteriores)
+				CALCULATE(
+					[PromedioVentaTransaccion],
+					FILTER(
+						ALL(Calendario[Date]),
+						Calendario[Date] >= FechaMinLY && Calendario[Date] <= FechaMaxLY
+					)
+				)
 		formatString: #,0.00;-#,0.00;#,0.00
 		lineageTag: 87654321-4321-4321-4321-fedcba987655
 
@@ -285,19 +173,23 @@ table MedidasCalculadasRetailOnline
 		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: 87654321-4321-4321-4321-fedcba987656
 
-	measure NumeroClientesUnicos =
-			CALCULATE(
-				DISTINCTCOUNT(LOL_PBISGIRETAIL[Cliente]),
-				TREATAS(VALUES(Calendario[Date]), LOL_PBISGIRETAIL[TicketData])
-			)
-		formatString: 0
-		lineageTag: abcdef12-3456-7890-abcd-ef1234567890
-
 	measure UPT = DIVIDE([Cantidad], [NumeroTransacciones])
 		formatString: 0.0
 		lineageTag: abcdef12-3456-7890-abcd-ef1234567891
 
-	measure UPT_LY = DIVIDE([Cantidad_YTD_LY], [NumeroTransacciones_LY])
+	measure UPT_LY =
+			VAR FechaMin = MIN(Calendario[Date])
+			VAR FechaMax = MAX(Calendario[Date])
+			VAR FechaMinLY = DATE(YEAR(FechaMin) - 1, MONTH(FechaMin), DAY(FechaMin))
+			VAR FechaMaxLY = DATE(YEAR(FechaMax) - 1, MONTH(FechaMax), DAY(FechaMax))
+			RETURN
+				CALCULATE(
+					[UPT],
+					FILTER(
+						ALL(Calendario[Date]),
+						Calendario[Date] >= FechaMinLY && Calendario[Date] <= FechaMaxLY
+					)
+				)
 		formatString: 0.0
 		lineageTag: abcdef12-3456-7890-abcd-ef1234567892
 
@@ -308,14 +200,6 @@ table MedidasCalculadasRetailOnline
 			)
 		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: abcdef12-3456-7890-abcd-ef1234567893
-
-	measure CrecimientoMensual =
-			DIVIDE(
-				[Ventas_YTD] - [Ventas_YTD_LY],
-				[Ventas_YTD_LY]
-			)
-		formatString: 0.00%;-0.00%;0.00%
-		lineageTag: 789abcde-f012-3456-7890-abcdef012345
 
 	column Column
 		formatString: 0
@@ -335,3 +219,4 @@ table MedidasCalculadasRetailOnline
 	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":null}
 
 	annotation 277cc1b9-af89-4597-8e15-cacc25c0886b = Para usar caracteres especiales en un nombre de tabla calculada, incluya el nombre completo entre corchetes ([]) y agregue un ] a cualquier corchete de cierre en el nombre.
+

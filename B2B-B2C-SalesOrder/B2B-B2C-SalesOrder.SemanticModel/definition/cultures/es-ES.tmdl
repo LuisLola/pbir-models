@@ -8353,6 +8353,16 @@ cultureInfo es-ES
 			            },
 			            "Weight": 0.498
 			          }
+			        },
+			        {
+			          "Variación Ventas YTD": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -8388,16 +8398,6 @@ cultureInfo es-ES
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.727
-			          }
-			        },
-			        {
-			          "Variación % Ventas YTD": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -9286,19 +9286,7 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Ventas_SinIVA_YTD"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "Ventas Sin IVA YTD": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    }
 			  },
 			  "Relationships": {

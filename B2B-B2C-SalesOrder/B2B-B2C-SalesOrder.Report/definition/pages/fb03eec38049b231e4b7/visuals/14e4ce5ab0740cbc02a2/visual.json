@@ -3,9 +3,9 @@
   "name": "14e4ce5ab0740cbc02a2",
   "position": {
     "x": 0,
-    "y": 134.32835820895522,
+    "y": 208.65671641791045,
     "z": 1,
-    "height": 585.67164179104475,
+    "height": 511.34328358208955,
     "width": 1279.7014925373135,
     "tabOrder": 1
   },
@@ -156,6 +156,21 @@
               "queryRef": "MedidasCalculadasRetailOnline.Ventas_YTD_Var",
               "nativeQueryRef": "Variación Ventas YTD",
               "displayName": "Variación Ventas YTD"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasCalculadasRetailOnline"
+                    }
+                  },
+                  "Property": "Ventas_YTD_Var_%"
+                }
+              },
+              "queryRef": "MedidasCalculadasRetailOnline.Ventas_YTD_Var_%",
+              "nativeQueryRef": "Variación % Ventas YTD",
+              "displayName": "Variación % Ventas YTD"
             }
           ],
           "fieldParameters": [
@@ -171,7 +186,7 @@
                 }
               },
               "index": 0,
-              "length": 3
+              "length": 4
             }
           ]
         }
