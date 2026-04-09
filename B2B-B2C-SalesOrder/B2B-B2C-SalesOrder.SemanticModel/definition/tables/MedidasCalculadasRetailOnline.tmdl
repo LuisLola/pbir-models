@@ -1,22 +1,70 @@
-table MedidasCalculadasRetailOnline
+﻿table MedidasCalculadasRetailOnline
 	lineageTag: 2d2f9f84-a97d-456d-a000-1349e9e388fd
 
-	measure ObjetivoRetail =
+	measure Cantidad = SUM(LOL_PBISGIRETAIL[Quantity])
+		formatString: 0.00
+		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a101
+
+	measure Cantidad_YTD =
 			CALCULATE(
-				SUM(LOL_PBIOBJETIVOSRETAIL[Importe]),
-				USERELATIONSHIP(
-					Calendario[Date],
-					LOL_PBIOBJETIVOSRETAIL[Fecha]
-				)
+				[Cantidad],
+				DATESYTD(Calendario[Date])
 			)
-		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
-		lineageTag: ce2df04e-e856-40a3-bf09-84a4c5e77b5b
+		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a102
+
+	measure Cantidad_YTD_LY =
+			CALCULATE(
+				[Cantidad],
+				SAMEPERIODLASTYEAR(DATESYTD(Calendario[Date]))
+			)
+		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a103
+
+	measure Cantidad_YTD_Var = [Cantidad_YTD] - [Cantidad_YTD_LY]
+		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a104
+
+	measure Cantidad_YTD_Var_% =
+			DIVIDE(
+				[Cantidad_YTD] - [Cantidad_YTD_LY],
+				[Cantidad_YTD_LY]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a105
+
+	measure Cantidad_MTD =
+			CALCULATE(
+				[Cantidad],
+				DATESMTD(Calendario[Date])
+			)
+		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a106
+
+	measure Cantidad_MTD_LY =
+			CALCULATE(
+				[Cantidad],
+				SAMEPERIODLASTYEAR(DATESMTD(Calendario[Date]))
+			)
+		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a107
+
+	measure Cantidad_MTD_Var = [Cantidad_MTD] - [Cantidad_MTD_LY]
+		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a108
+
+	measure Cantidad_MTD_Var_% =
+			DIVIDE(
+				[Cantidad_MTD] - [Cantidad_MTD_LY],
+				[Cantidad_MTD_LY]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a109
+
+	measure Ventas = SUM(LOL_PBISGIRETAIL[LineTotal])
+		formatString: € #,0.00;-€ #,0.00;€ #,0.00
+		lineageTag: 5a40a7f9-5cd4-4cef-acd7-1b88cd2a30d4
 
 	measure Ventas_YTD =
 			CALCULATE(
 				[Ventas],
 				DATESYTD(Calendario[Date])
 			)
+		formatString: € #,0.00;-€ #,0.00;€ #,0.00
 		lineageTag: 4c3f3215-d6c8-47d9-833c-d2c6e94da448
 
 	measure Ventas_YTD_LY =
@@ -24,9 +72,11 @@ table MedidasCalculadasRetailOnline
 				[Ventas],
 				SAMEPERIODLASTYEAR(DATESYTD(Calendario[Date]))
 			)
+		formatString: € #,0.00;-€ #,0.00;€ #,0.00
 		lineageTag: d40df2eb-853f-45d8-aa6b-f8481968cb29
 
 	measure Ventas_YTD_Var = [Ventas_YTD] - [Ventas_YTD_LY]
+		formatString: € #,0.00;-€ #,0.00;€ #,0.00
 		lineageTag: 166845a7-8ea8-4c2b-b3a0-dfa9506672bb
 
 	measure Ventas_YTD_Var_% =
@@ -34,125 +84,123 @@ table MedidasCalculadasRetailOnline
 				[Ventas_YTD] - [Ventas_YTD_LY],
 				[Ventas_YTD_LY]
 			)
+		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: 7faa5831-ab3b-4cb0-8546-6dab58452a7a
 
-	measure Ventas_YTD_SinIVA =
+	measure Ventas_MTD =
 			CALCULATE(
-				[Ventas_SinIVA],
-				DATESYTD(Calendario[Date])
+				[Ventas],
+				DATESMTD(Calendario[Date])
 			)
-		lineageTag: 6d93d40d-bab1-4ce6-90a8-1a4091376f35
+		formatString: € #,0.00;-€ #,0.00;€ #,0.00
+		lineageTag: def12345-6789-0123-4567-89abcdef0123
 
-	measure Ventas_YTD_SinIVA_LY =
+	measure Ventas_MTD_LY =
 			CALCULATE(
-				[Ventas_SinIVA],
-				SAMEPERIODLASTYEAR(DATESYTD(Calendario[Date]))
+				[Ventas],
+				SAMEPERIODLASTYEAR(DATESMTD(Calendario[Date]))
 			)
-		lineageTag: 165eea4f-5145-42c5-b1d2-c85f6ccee89a
+		formatString: € #,0.00;-€ #,0.00;€ #,0.00
+		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a110
 
-	measure Ventas_YTD_SinIVA_Var = [Ventas_YTD_SinIVA] - [Ventas_YTD_SinIVA_LY]
-		lineageTag: 05409390-8e48-4608-b2dc-36f01cf8799c
+	measure Ventas_MTD_Var = [Ventas_MTD] - [Ventas_MTD_LY]
+		formatString: € #,0.00;-€ #,0.00;€ #,0.00
+		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a111
 
-	measure Ventas_YTD_SinIVA_Var_% =
+	measure Ventas_MTD_Var_% =
 			DIVIDE(
-				[Ventas_YTD_SinIVA] - [Ventas_YTD_SinIVA_LY],
-				[Ventas_YTD_SinIVA_LY]
+				[Ventas_MTD] - [Ventas_MTD_LY],
+				[Ventas_MTD_LY]
 			)
-		lineageTag: db74c990-bf50-4fe5-a35e-000671e01b79
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a112
 
-	measure Ventas = SUM(LOL_PBISGIRETAIL[LineTotal])
-		lineageTag: 5a40a7f9-5cd4-4cef-acd7-1b88cd2a30d4
+	measure Ventas_QTD =
+			CALCULATE(
+				[Ventas],
+				DATESQTD(Calendario[Date])
+			)
+		formatString: € #,0.00;-€ #,0.00;€ #,0.00
+		lineageTag: 456789ab-cdef-0123-4567-89abcdef0123
 
 	measure Ventas_SinIVA = SUM(LOL_PBISGIRETAIL[LineTotalWithoutTax])
+		formatString: € #,0.00;-€ #,0.00;€ #,0.00
 		lineageTag: adb82b7b-e87f-41bc-b18b-55ab50f401f8
 
-	measure ObjetivoRetail_YTD =
+	measure Ventas_SinIVA_YTD =
 			CALCULATE(
-				[ObjetivoRetail],
+				[Ventas_SinIVA],
 				DATESYTD(Calendario[Date])
 			)
-		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
-		lineageTag: b664a784-9600-4b33-a8c5-6b196a7b9acf
+		formatString: € #,0.00;-€ #,0.00;€ #,0.00
+		lineageTag: 6d93d40d-bab1-4ce6-90a8-1a4091376f35
 
-	measure ObjetivoRetail_YTD_LY =
+	measure Ventas_SinIVA_YTD_LY =
 			CALCULATE(
-				[ObjetivoRetail],
+				[Ventas_SinIVA],
 				SAMEPERIODLASTYEAR(DATESYTD(Calendario[Date]))
 			)
-		lineageTag: ad7f7c54-2c28-4d3a-9199-cf1627163d14
+		formatString: € #,0.00;-€ #,0.00;€ #,0.00
+		lineageTag: 165eea4f-5145-42c5-b1d2-c85f6ccee89a
 
-	measure ObjetivoRetail_MTD =
-		CALCULATE(
-			[ObjetivoRetail],
-			DATESMTD(Calendario[Date])
-		)
-	formatString: "€ #,0.00;-€ #,0.00;€ #,0.00"
-	lineageTag: 1f2e3d4c-5b6a-7c8d-9e0f-a1b2c3d4e5f6
+	measure Ventas_SinIVA_YTD_Var = [Ventas_SinIVA_YTD] - [Ventas_SinIVA_YTD_LY]
+		formatString: € #,0.00;-€ #,0.00;€ #,0.00
+		lineageTag: 05409390-8e48-4608-b2dc-36f01cf8799c
 
-	measure ObjetivoRetail_MTD_LY =
-		CALCULATE(
-			[ObjetivoRetail],
-			SAMEPERIODLASTYEAR(DATESMTD(Calendario[Date]))
-		)
-	lineageTag: 0f9e8d7c-6b5a-4c3d-2e1f-0a9b8c7d6e5f
-
-	measure ObjetivoRetail_MTD_Var = [ObjetivoRetail_MTD] - [ObjetivoRetail_MTD_LY]
-	lineageTag: 5a6b7c8d-9e0f-1a2b-3c4d-5e6f7a8b9c0d
-
-	measure ObjetivoRetail_MTD_Var_% =
-		DIVIDE(
-			[ObjetivoRetail_MTD] - [ObjetivoRetail_MTD_LY],
-			[ObjetivoRetail_MTD_LY]
-		)
-	lineageTag: 4d3c2b1a-0f9e-8d7c-6b5a-4c3d2e1f0a9b
-
-	measure CumplimientoObjetivo_MTD_% =
-		DIVIDE(
-			[VentasMTD],
-			[ObjetivoRetail_MTD]
-		)
-	lineageTag: a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d
-
-			)
-		lineageTag: 663dbdec-49d2-42b8-98b3-de42c4bd4f35
-
-	measure CumplimientoObjetivo_% =
+	measure Ventas_SinIVA_YTD_Var_% =
 			DIVIDE(
-				[Ventas_YTD_SinIVA],
-				[ObjetivoRetail_YTD]
+				[Ventas_SinIVA_YTD] - [Ventas_SinIVA_YTD_LY],
+				[Ventas_SinIVA_YTD_LY]
 			)
-		lineageTag: 23015b8f-3d87-4047-8911-70e826d872e6
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: db74c990-bf50-4fe5-a35e-000671e01b79
 
-	measure DesviacionObjetivo = [Ventas_YTD_SinIVA] - [ObjetivoRetail_YTD]
-		lineageTag: 621fe649-8249-4928-99f8-4d6ad4461874
+	measure Ventas_SinIVA_MTD =
+			CALCULATE(
+				[Ventas_SinIVA],
+				DATESMTD(Calendario[Date])
+			)
+		formatString: € #,0.00;-€ #,0.00;€ #,0.00
+		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a113
+
+	measure Ventas_SinIVA_MTD_LY =
+			CALCULATE(
+				[Ventas_SinIVA],
+				SAMEPERIODLASTYEAR(DATESMTD(Calendario[Date]))
+			)
+		formatString: € #,0.00;-€ #,0.00;€ #,0.00
+		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a114
+
+	measure Ventas_SinIVA_MTD_Var = [Ventas_SinIVA_MTD] - [Ventas_SinIVA_MTD_LY]
+		formatString: € #,0.00;-€ #,0.00;€ #,0.00
+		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a115
+
+	measure Ventas_SinIVA_MTD_Var_% =
+			DIVIDE(
+				[Ventas_SinIVA_MTD] - [Ventas_SinIVA_MTD_LY],
+				[Ventas_SinIVA_MTD_LY]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a116
 
 	measure NumeroTransacciones = DISTINCTCOUNT(LOL_PBISGIRETAIL[Ticket])
+		formatString: 0
 		lineageTag: 12345678-1234-1234-1234-123456789abc
 
 	measure PromedioVentaTransaccion = DIVIDE([Ventas], [NumeroTransacciones])
+		formatString: € #,0.00;-€ #,0.00;€ #,0.00
 		lineageTag: 87654321-4321-4321-4321-fedcba987654
 
 	measure NumeroClientesUnicos = DISTINCTCOUNT(LOL_PBISGIRETAIL[Cliente])
+		formatString: 0
 		lineageTag: abcdef12-3456-7890-abcd-ef1234567890
 
-	measure VentasMTD = CALCULATE([Ventas], DATESMTD(Calendario[Date]))
-		lineageTag: def12345-6789-0123-4567-89abcdef0123
-
-	measure VentasQTD = CALCULATE([Ventas], DATESQTD(Calendario[Date]))
-		lineageTag: 456789ab-cdef-0123-4567-89abcdef0123
-
 	measure CrecimientoMensual =
-			VAR VentasActual = [VentasMTD]
-			VAR VentasAnterior = CALCULATE([VentasMTD], DATEADD(Calendario[Date], -1, MONTH))
+			VAR VentasActual = [Ventas_MTD]
+			VAR VentasAnterior = CALCULATE([Ventas_MTD], DATEADD(Calendario[Date], -1, MONTH))
 			RETURN DIVIDE(VentasActual - VentasAnterior, VentasAnterior)
+		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: 789abcde-f012-3456-7890-abcdef012345
-
-	measure MargenBruto =
-			// Asumiendo que hay costo, pero si no, placeholder
-			// Si hay columna de costo, usar SUM(LineTotal - Costo)
-			// Por ahora, placeholder
-			BLANK()
-		lineageTag: cdef0123-4567-8901-2345-6789abcdef01
 
 	column Column
 		formatString: 0
@@ -172,4 +220,3 @@ table MedidasCalculadasRetailOnline
 	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":null}
 
 	annotation 277cc1b9-af89-4597-8e15-cacc25c0886b = Para usar caracteres especiales en un nombre de tabla calculada, incluya el nombre completo entre corchetes ([]) y agregue un ] a cualquier corchete de cierre en el nombre.
-
