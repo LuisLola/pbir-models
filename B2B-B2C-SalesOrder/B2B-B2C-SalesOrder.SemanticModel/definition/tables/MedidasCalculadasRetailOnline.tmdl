@@ -100,6 +100,34 @@ table MedidasCalculadasRetailOnline
 	measure DesviacionObjetivo = [Ventas_YTD_SinIVA] - [ObjetivoRetail_YTD]
 		lineageTag: 621fe649-8249-4928-99f8-4d6ad4461874
 
+	measure NumeroTransacciones = DISTINCTCOUNT(LOL_PBISGIRETAIL[Ticket])
+		lineageTag: 12345678-1234-1234-1234-123456789abc
+
+	measure PromedioVentaTransaccion = DIVIDE([Ventas], [NumeroTransacciones])
+		lineageTag: 87654321-4321-4321-4321-fedcba987654
+
+	measure NumeroClientesUnicos = DISTINCTCOUNT(LOL_PBISGIRETAIL[Cliente])
+		lineageTag: abcdef12-3456-7890-abcd-ef1234567890
+
+	measure VentasMTD = CALCULATE([Ventas], DATESMTD(Calendario[Date]))
+		lineageTag: def12345-6789-0123-4567-89abcdef0123
+
+	measure VentasQTD = CALCULATE([Ventas], DATESQTD(Calendario[Date]))
+		lineageTag: 456789ab-cdef-0123-4567-89abcdef0123
+
+	measure CrecimientoMensual = 
+			VAR VentasActual = [VentasMTD]
+			VAR VentasAnterior = CALCULATE([VentasMTD], DATEADD(Calendario[Date], -1, MONTH))
+			RETURN DIVIDE(VentasActual - VentasAnterior, VentasAnterior)
+		lineageTag: 789abcde-f012-3456-7890-abcdef012345
+
+	measure MargenBruto = 
+			// Asumiendo que hay costo, pero si no, placeholder
+			// Si hay columna de costo, usar SUM(LineTotal - Costo)
+			// Por ahora, placeholder
+			BLANK()
+		lineageTag: cdef0123-4567-8901-2345-6789abcdef01
+
 	column Column
 		formatString: 0
 		lineageTag: 32f6e1b2-46e5-4fc5-9322-68559e9d8259
