@@ -31,17 +31,8 @@ createOrReplace
 
 		measure ObjetivoRetail_YTD_LY =
 				CALCULATE(
-					[ObjetivoRetail_YTD],
-					SAMEPERIODLASTYEAR(Calendario[Date])
-				)
-			lineageTag: ad7f7c54-2c28-4d3a-9199-cf1627163d14
-
-		measure ObjetivoRetail_YTD_Var = [ObjetivoRetail_YTD] - [ObjetivoRetail_YTD_LY]
-			lineageTag: 4e5bea73-c581-46ce-8d83-eea83699dd3c
-
-		measure ObjetivoRetail_YTD_Var_% =
-				DIVIDE(
-					[ObjetivoRetail_YTD] - [ObjetivoRetail_YTD_LY],
+				[ObjetivoRetail],
+				SAMEPERIODLASTYEAR(DATESYTD(Calendario[Date]))
 					[ObjetivoRetail_YTD_LY]
 				)
 			lineageTag: 663dbdec-49d2-42b8-98b3-de42c4bd4f35
@@ -61,24 +52,24 @@ createOrReplace
 
 		measure Ventas_YTD_LY =
 				CALCULATE(
-					[Ventas_YTD],
-					SAMEPERIODLASTYEAR(Calendario[Date])
-				)
-			lineageTag: d40df2eb-853f-45d8-aa6b-f8481968cb29
+				[Ventas],
+				SAMEPERIODLASTYEAR(DATESYTD(Calendario[Date]))
+			)
+		lineageTag: d40df2eb-853f-45d8-aa6b-f8481968cb29
 
 		measure Ventas_YTD_SinIVA =
-				CALCULATE(
-					[Ventas_SinIVA],
-					DATESYTD(Calendario[Date])
-				)
-			lineageTag: 6d93d40d-bab1-4ce6-90a8-1a4091376f35
+			CALCULATE(
+				[Ventas_SinIVA],
+				DATESYTD(Calendario[Date])
+			)
+		lineageTag: 6d93d40d-bab1-4ce6-90a8-1a4091376f35
 
 		measure Ventas_YTD_SinIVA_LY =
-				CALCULATE(
-					[Ventas_YTD_SinIVA],
-					SAMEPERIODLASTYEAR(Calendario[Date])
-				)
-			lineageTag: 165eea4f-5145-42c5-b1d2-c85f6ccee89a
+			CALCULATE(
+				[Ventas_SinIVA],
+				SAMEPERIODLASTYEAR(DATESYTD(Calendario[Date]))
+			)
+		lineageTag: 165eea4f-5145-42c5-b1d2-c85f6ccee89a
 
 		measure Ventas_YTD_SinIVA_Var = [Ventas_YTD_SinIVA] - [Ventas_YTD_SinIVA_LY]
 			lineageTag: 05409390-8e48-4608-b2dc-36f01cf8799c

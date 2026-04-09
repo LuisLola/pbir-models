@@ -21,8 +21,8 @@ table MedidasCalculadasRetailOnline
 
 	measure Ventas_YTD_LY =
 			CALCULATE(
-				[Ventas_YTD],
-				SAMEPERIODLASTYEAR(Calendario[Date])
+				[Ventas],
+				SAMEPERIODLASTYEAR(DATESYTD(Calendario[Date]))
 			)
 		lineageTag: d40df2eb-853f-45d8-aa6b-f8481968cb29
 
@@ -45,8 +45,8 @@ table MedidasCalculadasRetailOnline
 
 	measure Ventas_YTD_SinIVA_LY =
 			CALCULATE(
-				[Ventas_YTD_SinIVA],
-				SAMEPERIODLASTYEAR(Calendario[Date])
+				[Ventas_SinIVA],
+				SAMEPERIODLASTYEAR(DATESYTD(Calendario[Date]))
 			)
 		lineageTag: 165eea4f-5145-42c5-b1d2-c85f6ccee89a
 
@@ -76,18 +76,43 @@ table MedidasCalculadasRetailOnline
 
 	measure ObjetivoRetail_YTD_LY =
 			CALCULATE(
-				[ObjetivoRetail_YTD],
-				SAMEPERIODLASTYEAR(Calendario[Date])
+				[ObjetivoRetail],
+				SAMEPERIODLASTYEAR(DATESYTD(Calendario[Date]))
 			)
 		lineageTag: ad7f7c54-2c28-4d3a-9199-cf1627163d14
 
-	measure ObjetivoRetail_YTD_Var = [ObjetivoRetail_YTD] - [ObjetivoRetail_YTD_LY]
-		lineageTag: 4e5bea73-c581-46ce-8d83-eea83699dd3c
+	measure ObjetivoRetail_MTD =
+		CALCULATE(
+			[ObjetivoRetail],
+			DATESMTD(Calendario[Date])
+		)
+	formatString: "€ #,0.00;-€ #,0.00;€ #,0.00"
+	lineageTag: 1f2e3d4c-5b6a-7c8d-9e0f-a1b2c3d4e5f6
 
-	measure ObjetivoRetail_YTD_Var_% =
-			DIVIDE(
-				[ObjetivoRetail_YTD] - [ObjetivoRetail_YTD_LY],
-				[ObjetivoRetail_YTD_LY]
+	measure ObjetivoRetail_MTD_LY =
+		CALCULATE(
+			[ObjetivoRetail],
+			SAMEPERIODLASTYEAR(DATESMTD(Calendario[Date]))
+		)
+	lineageTag: 0f9e8d7c-6b5a-4c3d-2e1f-0a9b8c7d6e5f
+
+	measure ObjetivoRetail_MTD_Var = [ObjetivoRetail_MTD] - [ObjetivoRetail_MTD_LY]
+	lineageTag: 5a6b7c8d-9e0f-1a2b-3c4d-5e6f7a8b9c0d
+
+	measure ObjetivoRetail_MTD_Var_% =
+		DIVIDE(
+			[ObjetivoRetail_MTD] - [ObjetivoRetail_MTD_LY],
+			[ObjetivoRetail_MTD_LY]
+		)
+	lineageTag: 4d3c2b1a-0f9e-8d7c-6b5a-4c3d2e1f0a9b
+
+	measure CumplimientoObjetivo_MTD_% =
+		DIVIDE(
+			[VentasMTD],
+			[ObjetivoRetail_MTD]
+		)
+	lineageTag: a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d
+
 			)
 		lineageTag: 663dbdec-49d2-42b8-98b3-de42c4bd4f35
 
