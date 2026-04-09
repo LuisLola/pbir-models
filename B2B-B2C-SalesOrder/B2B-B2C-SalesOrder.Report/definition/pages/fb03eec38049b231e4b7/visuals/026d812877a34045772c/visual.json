@@ -82,14 +82,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'''MedidasCalculadasRetailOnline''[ObjetivoRetail_YTD]'"
-                              }
-                            }
-                          ],
-                          [
-                            {
-                              "Literal": {
-                                "Value": "'''MedidasCalculadasRetailOnline''[CumplimientoObjetivo_%]'"
+                                "Value": "'''MedidasCalculadasRetailOnline''[Ventas_YTD_Var]'"
                               }
                             }
                           ]
@@ -139,18 +132,7 @@
                                 "0": [
                                   {
                                     "Literal": {
-                                      "Value": "'''MedidasCalculadasRetailOnline''[ObjetivoRetail_YTD]'"
-                                    }
-                                  }
-                                ]
-                              }
-                            ],
-                            [
-                              {
-                                "0": [
-                                  {
-                                    "Literal": {
-                                      "Value": "'''MedidasCalculadasRetailOnline''[CumplimientoObjetivo_%]'"
+                                      "Value": "'''MedidasCalculadasRetailOnline''[Ventas_YTD_Var]'"
                                     }
                                   }
                                 ]
@@ -180,10 +162,7 @@
                             "0": "Ventas YTD LY"
                           },
                           {
-                            "0": "Objetivo Retail YTD"
-                          },
-                          {
-                            "0": "Cumplimiento Objetivo %"
+                            "0": "Variación Ventas YTD"
                           }
                         ]
                       }
@@ -228,6 +207,19 @@
               "expr": {
                 "Literal": {
                   "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "selection": [
+        {
+          "properties": {
+            "selectAllCheckboxEnabled": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }

@@ -3,10 +3,10 @@
   "name": "14e4ce5ab0740cbc02a2",
   "position": {
     "x": 0,
-    "y": 134.1047693510555,
+    "y": 134.32835820895522,
     "z": 1,
-    "height": 585.45738858483185,
-    "width": 1280,
+    "height": 585.67164179104475,
+    "width": 1279.7014925373135,
     "tabOrder": 1
   },
   "visual": {
@@ -150,27 +150,12 @@
                       "Entity": "MedidasCalculadasRetailOnline"
                     }
                   },
-                  "Property": "ObjetivoRetail_YTD"
+                  "Property": "Ventas_YTD_Var"
                 }
               },
-              "queryRef": "MedidasCalculadasRetailOnline.ObjetivoRetail_YTD",
-              "nativeQueryRef": "Objetivo Retail YTD",
-              "displayName": "Objetivo Retail YTD"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "MedidasCalculadasRetailOnline"
-                    }
-                  },
-                  "Property": "CumplimientoObjetivo_%"
-                }
-              },
-              "queryRef": "MedidasCalculadasRetailOnline.CumplimientoObjetivo_%",
-              "nativeQueryRef": "Cumplimiento Objetivo %",
-              "displayName": "Cumplimiento Objetivo %"
+              "queryRef": "MedidasCalculadasRetailOnline.Ventas_YTD_Var",
+              "nativeQueryRef": "Variación Ventas YTD",
+              "displayName": "Variación Ventas YTD"
             }
           ],
           "fieldParameters": [
@@ -186,7 +171,7 @@
                 }
               },
               "index": 0,
-              "length": 4
+              "length": 3
             }
           ]
         }
@@ -800,7 +785,7 @@
             }
           },
           "selector": {
-            "metadata": "LOL_SGIRETAIL.EvoluciónUnidades%"
+            "metadata": "LOL_SGIRETAIL.EvoluciÃ³nUnidades%"
           }
         },
         {
