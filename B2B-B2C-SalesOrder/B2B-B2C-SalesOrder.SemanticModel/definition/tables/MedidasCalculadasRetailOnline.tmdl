@@ -201,6 +201,9 @@ table MedidasCalculadasRetailOnline
 		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: abcdef12-3456-7890-abcd-ef1234567893
 
+	measure TEstMedida
+		lineageTag: 60aba56f-0e6c-47f8-bdee-830be26f9fb6
+
 	column Column
 		formatString: 0
 		lineageTag: 32f6e1b2-46e5-4fc5-9322-68559e9d8259
@@ -215,8 +218,4 @@ table MedidasCalculadasRetailOnline
 		source = Row("Column", BLANK())
 
 	annotation PBI_Id = d193e62faff24686b032f0bdf4de4fd3
-
-	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":null}
-
-	annotation 277cc1b9-af89-4597-8e15-cacc25c0886b = Para usar caracteres especiales en un nombre de tabla calculada, incluya el nombre completo entre corchetes ([]) y agregue un ] a cualquier corchete de cierre en el nombre.
 

@@ -4,10 +4,10 @@
   "position": {
     "x": 920.71931196247067,
     "y": 0,
-    "z": 9,
+    "z": 4000,
     "height": 88.06880375293197,
     "width": 359.28068803752933,
-    "tabOrder": 9
+    "tabOrder": 4000
   },
   "visual": {
     "visualType": "slicer",
@@ -82,14 +82,28 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'''MedidasCalculadasRetailOnline''[Ventas_YTD_Var]'"
+                                "Value": "'''MedidasCalculadasRetailOnline''[Ventas_YTD_Var_%]'"
                               }
                             }
                           ],
                           [
                             {
                               "Literal": {
-                                "Value": "'''MedidasCalculadasRetailOnline''[Ventas_YTD_Var_%]'"
+                                "Value": "'''MedidasCalculadasRetailOnline''[Cantidad_YTD]'"
+                              }
+                            }
+                          ],
+                          [
+                            {
+                              "Literal": {
+                                "Value": "'''MedidasCalculadasRetailOnline''[Cantidad_YTD_LY]'"
+                              }
+                            }
+                          ],
+                          [
+                            {
+                              "Literal": {
+                                "Value": "'''MedidasCalculadasRetailOnline''[Cantidad_YTD_Var_%]'"
                               }
                             }
                           ]
@@ -139,7 +153,7 @@
                                 "0": [
                                   {
                                     "Literal": {
-                                      "Value": "'''MedidasCalculadasRetailOnline''[Ventas_YTD_Var]'"
+                                      "Value": "'''MedidasCalculadasRetailOnline''[Ventas_YTD_Var_%]'"
                                     }
                                   }
                                 ]
@@ -150,7 +164,29 @@
                                 "0": [
                                   {
                                     "Literal": {
-                                      "Value": "'''MedidasCalculadasRetailOnline''[Ventas_YTD_Var_%]'"
+                                      "Value": "'''MedidasCalculadasRetailOnline''[Cantidad_YTD]'"
+                                    }
+                                  }
+                                ]
+                              }
+                            ],
+                            [
+                              {
+                                "0": [
+                                  {
+                                    "Literal": {
+                                      "Value": "'''MedidasCalculadasRetailOnline''[Cantidad_YTD_LY]'"
+                                    }
+                                  }
+                                ]
+                              }
+                            ],
+                            [
+                              {
+                                "0": [
+                                  {
+                                    "Literal": {
+                                      "Value": "'''MedidasCalculadasRetailOnline''[Cantidad_YTD_Var_%]'"
                                     }
                                   }
                                 ]
@@ -180,10 +216,16 @@
                             "0": "Ventas YTD LY"
                           },
                           {
-                            "0": "Variación Ventas YTD"
+                            "0": "Variación % Ventas YTD"
                           },
                           {
-                            "0": "Variación % Ventas YTD"
+                            "0": "Cantidad YTD"
+                          },
+                          {
+                            "0": "Cantidad YTD LY"
+                          },
+                          {
+                            "0": "Variación % Cantidad YTD"
                           }
                         ]
                       }
@@ -367,23 +409,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "c884d9f70a97c421ef9a",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasSelector"
-              }
-            },
-            "Property": "MedidasSelector"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }
