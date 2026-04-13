@@ -8353,16 +8353,6 @@ cultureInfo es-ES
 			            },
 			            "Weight": 0.498
 			          }
-			        },
-			        {
-			          "Variación Ventas YTD": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ]
 			    },
@@ -8398,6 +8388,16 @@ cultureInfo es-ES
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "Variación % Ventas YTD": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -9287,6 +9287,69 @@ cultureInfo es-ES
 			        }
 			      },
 			      "State": "Generated"
+			    },
+			    "medidascalculadasretailonline.cantidad_ytd": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCalculadasRetailOnline",
+			          "ConceptualProperty": "Cantidad_YTD"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Cantidad YTD": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascalculadasretailonline.cantidad_ytd_ly": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCalculadasRetailOnline",
+			          "ConceptualProperty": "Cantidad_YTD_LY"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Cantidad YTD LY": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascalculadasretailonline.cantidad_ytd_var_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCalculadasRetailOnline",
+			          "ConceptualProperty": "Cantidad_YTD_Var_%"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Variación % Cantidad YTD": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {

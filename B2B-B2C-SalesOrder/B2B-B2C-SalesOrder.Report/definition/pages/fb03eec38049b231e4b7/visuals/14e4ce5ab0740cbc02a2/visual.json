@@ -120,12 +120,27 @@
                       "Entity": "MedidasCalculadasRetailOnline"
                     }
                   },
-                  "Property": "Ventas_YTD"
+                  "Property": "Ventas"
                 }
               },
-              "queryRef": "MedidasCalculadasRetailOnline.Ventas_YTD",
-              "nativeQueryRef": "Ventas YTD",
-              "displayName": "Ventas YTD"
+              "queryRef": "MedidasCalculadasRetailOnline.Ventas",
+              "nativeQueryRef": "Ventas",
+              "displayName": "Ventas"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasCalculadasRetailOnline"
+                    }
+                  },
+                  "Property": "Objetivos"
+                }
+              },
+              "queryRef": "MedidasCalculadasRetailOnline.Objetivos",
+              "nativeQueryRef": "Objetivos",
+              "displayName": "Objetivos"
             },
             {
               "field": {
@@ -141,66 +156,6 @@
               "queryRef": "MedidasCalculadasRetailOnline.Ventas_YTD_LY",
               "nativeQueryRef": "Ventas YTD LY",
               "displayName": "Ventas YTD LY"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "MedidasCalculadasRetailOnline"
-                    }
-                  },
-                  "Property": "Ventas_YTD_Var_%"
-                }
-              },
-              "queryRef": "MedidasCalculadasRetailOnline.Ventas_YTD_Var_%",
-              "nativeQueryRef": "Variación % Ventas YTD",
-              "displayName": "Variación % Ventas YTD"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "MedidasCalculadasRetailOnline"
-                    }
-                  },
-                  "Property": "Cantidad_YTD"
-                }
-              },
-              "queryRef": "MedidasCalculadasRetailOnline.Cantidad_YTD",
-              "nativeQueryRef": "Cantidad YTD",
-              "displayName": "Cantidad YTD"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "MedidasCalculadasRetailOnline"
-                    }
-                  },
-                  "Property": "Cantidad_YTD_LY"
-                }
-              },
-              "queryRef": "MedidasCalculadasRetailOnline.Cantidad_YTD_LY",
-              "nativeQueryRef": "Cantidad YTD LY",
-              "displayName": "Cantidad YTD LY"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "MedidasCalculadasRetailOnline"
-                    }
-                  },
-                  "Property": "Cantidad_YTD_Var_%"
-                }
-              },
-              "queryRef": "MedidasCalculadasRetailOnline.Cantidad_YTD_Var_%",
-              "nativeQueryRef": "Variación % Cantidad YTD",
-              "displayName": "Variación % Cantidad YTD"
             }
           ],
           "fieldParameters": [
@@ -216,7 +171,7 @@
                 }
               },
               "index": 0,
-              "length": 6
+              "length": 3
             }
           ]
         }
@@ -1223,5 +1178,93 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "d8a9dc7a5c6b3d575497",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBITIENDAS"
+              }
+            },
+            "Property": "TipoTienda"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "454b057b2b263a2edc02",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBITIENDAS"
+              }
+            },
+            "Property": "NombreTienda"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "ea22522f0c5491eabe8c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIMODELITEM"
+              }
+            },
+            "Property": "Nombre_familia"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "cd49d915a3aba5d67089",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasCalculadasRetailOnline"
+              }
+            },
+            "Property": "Ventas"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a7bbb820d6d3071b5300",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasCalculadasRetailOnline"
+              }
+            },
+            "Property": "Objetivos"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "49b3f379a4d16968e908",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasCalculadasRetailOnline"
+              }
+            },
+            "Property": "Ventas_YTD_LY"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

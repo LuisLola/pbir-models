@@ -68,7 +68,14 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'''MedidasCalculadasRetailOnline''[Ventas_YTD]'"
+                                "Value": "'''MedidasCalculadasRetailOnline''[Ventas]'"
+                              }
+                            }
+                          ],
+                          [
+                            {
+                              "Literal": {
+                                "Value": "'''MedidasCalculadasRetailOnline''[Objetivos]'"
                               }
                             }
                           ],
@@ -76,34 +83,6 @@
                             {
                               "Literal": {
                                 "Value": "'''MedidasCalculadasRetailOnline''[Ventas_YTD_LY]'"
-                              }
-                            }
-                          ],
-                          [
-                            {
-                              "Literal": {
-                                "Value": "'''MedidasCalculadasRetailOnline''[Ventas_YTD_Var_%]'"
-                              }
-                            }
-                          ],
-                          [
-                            {
-                              "Literal": {
-                                "Value": "'''MedidasCalculadasRetailOnline''[Cantidad_YTD]'"
-                              }
-                            }
-                          ],
-                          [
-                            {
-                              "Literal": {
-                                "Value": "'''MedidasCalculadasRetailOnline''[Cantidad_YTD_LY]'"
-                              }
-                            }
-                          ],
-                          [
-                            {
-                              "Literal": {
-                                "Value": "'''MedidasCalculadasRetailOnline''[Cantidad_YTD_Var_%]'"
                               }
                             }
                           ]
@@ -131,7 +110,18 @@
                                 "0": [
                                   {
                                     "Literal": {
-                                      "Value": "'''MedidasCalculadasRetailOnline''[Ventas_YTD]'"
+                                      "Value": "'''MedidasCalculadasRetailOnline''[Ventas]'"
+                                    }
+                                  }
+                                ]
+                              }
+                            ],
+                            [
+                              {
+                                "0": [
+                                  {
+                                    "Literal": {
+                                      "Value": "'''MedidasCalculadasRetailOnline''[Objetivos]'"
                                     }
                                   }
                                 ]
@@ -143,50 +133,6 @@
                                   {
                                     "Literal": {
                                       "Value": "'''MedidasCalculadasRetailOnline''[Ventas_YTD_LY]'"
-                                    }
-                                  }
-                                ]
-                              }
-                            ],
-                            [
-                              {
-                                "0": [
-                                  {
-                                    "Literal": {
-                                      "Value": "'''MedidasCalculadasRetailOnline''[Ventas_YTD_Var_%]'"
-                                    }
-                                  }
-                                ]
-                              }
-                            ],
-                            [
-                              {
-                                "0": [
-                                  {
-                                    "Literal": {
-                                      "Value": "'''MedidasCalculadasRetailOnline''[Cantidad_YTD]'"
-                                    }
-                                  }
-                                ]
-                              }
-                            ],
-                            [
-                              {
-                                "0": [
-                                  {
-                                    "Literal": {
-                                      "Value": "'''MedidasCalculadasRetailOnline''[Cantidad_YTD_LY]'"
-                                    }
-                                  }
-                                ]
-                              }
-                            ],
-                            [
-                              {
-                                "0": [
-                                  {
-                                    "Literal": {
-                                      "Value": "'''MedidasCalculadasRetailOnline''[Cantidad_YTD_Var_%]'"
                                     }
                                   }
                                 ]
@@ -210,22 +156,13 @@
                         },
                         "valueMap": [
                           {
-                            "0": "Ventas YTD"
+                            "0": "Ventas"
+                          },
+                          {
+                            "0": "Objetivos"
                           },
                           {
                             "0": "Ventas YTD LY"
-                          },
-                          {
-                            "0": "Variación % Ventas YTD"
-                          },
-                          {
-                            "0": "Cantidad YTD"
-                          },
-                          {
-                            "0": "Cantidad YTD LY"
-                          },
-                          {
-                            "0": "Variación % Cantidad YTD"
                           }
                         ]
                       }
@@ -409,5 +346,23 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "20b42c1033017c0a23be",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasSelector"
+              }
+            },
+            "Property": "MedidasSelector"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

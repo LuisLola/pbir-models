@@ -5,37 +5,58 @@ createOrReplace
 		measure CumplimientoObjetivo_% =
 				DIVIDE(
 					[Ventas_YTD_SinIVA],
-					[ObjetivoRetail_YTD]
-				)
-			lineageTag: 23015b8f-3d87-4047-8911-70e826d872e6
+				[Objetivos_YTD]
+			)
+		lineageTag: 23015b8f-3d87-4047-8911-70e826d872e6
 
-		measure DesviacionObjetivo = [Ventas_YTD_SinIVA] - [ObjetivoRetail_YTD]
+		measure DesviacionObjetivo = [Ventas_YTD_SinIVA] - [Objetivos_YTD]
+			formatString: #,0.00;-#,0.00;#,0.00
 			lineageTag: 621fe649-8249-4928-99f8-4d6ad4461874
 
-		measure ObjetivoRetail =
+		measure Objetivos = 
+			CALCULATE(
+				SUM(LOL_PBIOBJETIVOSRETAIL[Importe]),
+				USERELATIONSHIP(LOL_PBIOBJETIVOSRETAIL[TiendaID], LOL_PBITIENDAS[TiendaID]),
+				USERELATIONSHIP(LOL_PBIOBJETIVOSRETAIL[Fecha], Calendario[Date])
+			)
+			formatString: #,0.00;-#,0.00;#,0.00
+			lineageTag: 6a40a7f9-5cd4-4cef-acd7-1b88cd2a30d4
+
+		measure Objetivos_YTD =
+			CALCULATE(
+				[Objetivos],
+				DATESYTD(Calendario[Date])
+			)
+			formatString: #,0.00;-#,0.00;#,0.00
+			lineageTag: 5c3f3215-d6c8-47d9-833c-d2c6e94da448
+
+		measure Objetivos_YTD_LY =
+			VAR FechaMin = MIN(Calendario[Date])
+			VAR FechaMax = MAX(Calendario[Date])
+			VAR FechaMinLY = DATE(YEAR(FechaMin) - 1, MONTH(FechaMin), DAY(FechaMin))
+			VAR FechaMaxLY = DATE(YEAR(FechaMax) - 1, MONTH(FechaMax), DAY(FechaMax))
+			RETURN
 				CALCULATE(
-					SUM(LOL_PBIOBJETIVOSRETAIL[Importe]),
-					USERELATIONSHIP(
-						Calendario[Date],
-						LOL_PBIOBJETIVOSRETAIL[Fecha]
+					[Objetivos],
+					FILTER(
+						ALL(Calendario[Date]),
+						Calendario[Date] >= FechaMinLY && Calendario[Date] <= FechaMaxLY
 					)
 				)
-			lineageTag: ce2df04e-e856-40a3-bf09-84a4c5e77b5b
+			formatString: #,0.00;-#,0.00;#,0.00
+			lineageTag: e40df2eb-853f-45d8-aa6b-f8481968cb29
 
-		measure ObjetivoRetail_YTD =
-				CALCULATE(
-					[ObjetivoRetail],
-					DATESYTD(Calendario[Date])
-				)
-			lineageTag: b664a784-9600-4b33-a8c5-6b196a7b9acf
+		measure Objetivos_YTD_Var = [Objetivos_YTD] - [Objetivos_YTD_LY]
+			formatString: #,0.00;-#,0.00;#,0.00
+			lineageTag: 266845a7-8ea8-4c2b-b3a0-dfa9506672bb
 
-		measure ObjetivoRetail_YTD_LY =
-				CALCULATE(
-				[ObjetivoRetail],
-				SAMEPERIODLASTYEAR(DATESYTD(Calendario[Date]))
-					[ObjetivoRetail_YTD_LY]
-				)
-			lineageTag: 663dbdec-49d2-42b8-98b3-de42c4bd4f35
+		measure Objetivos_YTD_Var_% =
+			DIVIDE(
+				[Objetivos_YTD] - [Objetivos_YTD_LY],
+				[Objetivos_YTD_LY]
+			)
+			formatString: 0.00%;-0.00%;0.00%
+			lineageTag: 8faa5831-ab3b-4cb0-8546-6dab58452a7a
 
 		measure Ventas = SUM(LOL_PBISGIRETAIL[LineTotal])
 			lineageTag: 5a40a7f9-5cd4-4cef-acd7-1b88cd2a30d4

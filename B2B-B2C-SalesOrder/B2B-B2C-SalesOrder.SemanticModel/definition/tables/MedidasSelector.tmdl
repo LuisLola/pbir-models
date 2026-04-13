@@ -64,8 +64,11 @@ table MedidasSelector
 				    ("Número de Clientes Únicos", NAMEOF('MedidasCalculadasRetailOnline'[NumeroClientesUnicos]), 22),
 				    ("UPT", NAMEOF('MedidasCalculadasRetailOnline'[UPT]), 23),
 				    ("UPT LY", NAMEOF('MedidasCalculadasRetailOnline'[UPT_LY]), 24),
-				    ("Variación % UPT", NAMEOF('MedidasCalculadasRetailOnline'[UPT_Var_%]), 25)
+				("Variación % UPT", NAMEOF('MedidasCalculadasRetailOnline'[UPT_Var_%]), 25),
+				("Objetivos", NAMEOF('MedidasCalculadasRetailOnline'[Objetivos]), 26),
+				("Objetivos YTD", NAMEOF('MedidasCalculadasRetailOnline'[Objetivos_YTD]), 27),
+				("Objetivos YTD LY", NAMEOF('MedidasCalculadasRetailOnline'[Objetivos_YTD_LY]), 28),
+				("Variación Objetivos YTD", NAMEOF('MedidasCalculadasRetailOnline'[Objetivos_YTD_Var]), 29),
+				("Variación % Objetivos YTD", NAMEOF('MedidasCalculadasRetailOnline'[Objetivos_YTD_Var_%]), 30)
 				}
-
-	annotation PBI_Id = 12345678-9abc-def0-1234-567890abcdef
 

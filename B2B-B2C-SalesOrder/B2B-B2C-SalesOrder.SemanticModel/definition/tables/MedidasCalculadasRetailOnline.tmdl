@@ -201,8 +201,64 @@ table MedidasCalculadasRetailOnline
 		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: abcdef12-3456-7890-abcd-ef1234567893
 
-	measure TEstMedida
-		lineageTag: 60aba56f-0e6c-47f8-bdee-830be26f9fb6
+	measure CumplimientoObjetivo_% =
+			DIVIDE(
+				[Ventas_YTD_SinIVA],
+				[Objetivos_YTD]
+			)
+		lineageTag: 23015b8f-3d87-4047-8911-70e826d872e6
+
+	measure DesviacionObjetivo = [Ventas_YTD_SinIVA] - [Objetivos_YTD]
+		formatString: #,0.00;-#,0.00;#,0.00
+		lineageTag: 621fe649-8249-4928-99f8-4d6ad4461874
+
+	measure Objetivos = ```
+			CALCULATE(
+				SUM(LOL_PBIOBJETIVOSRETAIL[Importe]),
+				USERELATIONSHIP(LOL_PBIOBJETIVOSRETAIL[TiendaID], LOL_PBITIENDAS[TiendaID]),
+				USERELATIONSHIP(LOL_PBIOBJETIVOSRETAIL[Fecha], Calendario[Date])
+			)
+			
+			```
+		lineageTag: 9380df31-a25a-4a35-82cd-7b5566b24835
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Objetivos_YTD =
+			CALCULATE(
+				[Objetivos],
+				DATESYTD(Calendario[Date])
+			)
+		formatString: #,0.00;-#,0.00;#,0.00
+		lineageTag: 5c3f3215-d6c8-47d9-833c-d2c6e94da448
+
+	measure Objetivos_YTD_LY =
+			VAR FechaMin = MIN(Calendario[Date])
+			VAR FechaMax = MAX(Calendario[Date])
+			VAR FechaMinLY = DATE(YEAR(FechaMin) - 1, MONTH(FechaMin), DAY(FechaMin))
+			VAR FechaMaxLY = DATE(YEAR(FechaMax) - 1, MONTH(FechaMax), DAY(FechaMax))
+			RETURN
+				CALCULATE(
+					[Objetivos],
+					FILTER(
+						ALL(Calendario[Date]),
+						Calendario[Date] >= FechaMinLY && Calendario[Date] <= FechaMaxLY
+					)
+				)
+		formatString: #,0.00;-#,0.00;#,0.00
+		lineageTag: e40df2eb-853f-45d8-aa6b-f8481968cb29
+
+	measure Objetivos_YTD_Var = [Objetivos_YTD] - [Objetivos_YTD_LY]
+		formatString: #,0.00;-#,0.00;#,0.00
+		lineageTag: 266845a7-8ea8-4c2b-b3a0-dfa9506672bb
+
+	measure Objetivos_YTD_Var_% =
+			DIVIDE(
+				[Objetivos_YTD] - [Objetivos_YTD_LY],
+				[Objetivos_YTD_LY]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 8faa5831-ab3b-4cb0-8546-6dab58452a7a
 
 	column Column
 		formatString: 0
