@@ -3,10 +3,10 @@
   "name": "adc69c944e2b088ffa66",
   "position": {
     "x": 0,
-    "y": 80.712166172106819,
+    "y": 0,
     "z": 6000,
-    "height": 96.85459940652818,
-    "width": 321.89910979228483,
+    "height": 96.885007278020367,
+    "width": 322.32896652110622,
     "tabOrder": 6000
   },
   "visual": {
@@ -56,17 +56,24 @@
       "data": [
         {
           "properties": {
+            "startDate": {
+              "expr": {
+                "Literal": {
+                  "Value": "datetime'2026-04-01T00:00:00'"
+                }
+              }
+            },
             "endDate": {
               "expr": {
                 "Literal": {
-                  "Value": "datetime'2026-04-12T00:00:00'"
+                  "Value": "datetime'2026-04-13T00:00:00'"
                 }
               }
             },
             "mode": {
               "expr": {
                 "Literal": {
-                  "Value": "'Before'"
+                  "Value": "'Between'"
                 }
               }
             }
@@ -89,21 +96,45 @@
                 "Where": [
                   {
                     "Condition": {
-                      "Comparison": {
-                        "ComparisonKind": 3,
+                      "And": {
                         "Left": {
-                          "Column": {
-                            "Expression": {
-                              "SourceRef": {
-                                "Source": "c"
+                          "Comparison": {
+                            "ComparisonKind": 2,
+                            "Left": {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": "c"
+                                  }
+                                },
+                                "Property": "Date"
                               }
                             },
-                            "Property": "Date"
+                            "Right": {
+                              "Literal": {
+                                "Value": "datetime'2026-04-01T00:00:00'"
+                              }
+                            }
                           }
                         },
                         "Right": {
-                          "Literal": {
-                            "Value": "datetime'2026-04-13T00:00:00'"
+                          "Comparison": {
+                            "ComparisonKind": 3,
+                            "Left": {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": "c"
+                                  }
+                                },
+                                "Property": "Date"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "datetime'2026-04-14T00:00:00'"
+                              }
+                            }
                           }
                         }
                       }
@@ -248,23 +279,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "0725da6c8a0a107dd20c",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Calendario"
-              }
-            },
-            "Property": "Date"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

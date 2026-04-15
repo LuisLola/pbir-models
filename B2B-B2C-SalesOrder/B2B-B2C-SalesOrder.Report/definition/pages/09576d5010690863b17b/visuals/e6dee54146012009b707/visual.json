@@ -1,0 +1,52 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "e6dee54146012009b707",
+  "position": {
+    "x": 10.24745269286754,
+    "y": 0,
+    "z": 0,
+    "height": 280.40756914119356,
+    "width": 864.51237263464338,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "Descripcion_color"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.Descripcion_color",
+              "nativeQueryRef": "Descripcion_color"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "URL_imagen_producto"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.URL_imagen_producto",
+              "nativeQueryRef": "URL_imagen_producto"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

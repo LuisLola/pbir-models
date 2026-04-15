@@ -131,6 +131,14 @@ table LOL_PBITIENDAS
 
 		annotation SummarizationSetBy = Automatic
 
+	column IDCuentaPersona
+		dataType: string
+		lineageTag: 28439ba1-c013-4765-b926-cb5ffa47881c
+		summarizeBy: none
+		sourceColumn: IDCuentaPersona
+
+		annotation SummarizationSetBy = Automatic
+
 	partition LOL_PBITIENDAS = m
 		mode: import
 		source =

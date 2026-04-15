@@ -7,16 +7,28 @@ createOrReplace
 					[Ventas_YTD_SinIVA],
 				[Objetivos_YTD]
 			)
+			formatString: 0.00%;-0.00%;0.00%
 		lineageTag: 23015b8f-3d87-4047-8911-70e826d872e6
 
 		measure DesviacionObjetivo = [Ventas_YTD_SinIVA] - [Objetivos_YTD]
 			formatString: #,0.00;-#,0.00;#,0.00
 			lineageTag: 621fe649-8249-4928-99f8-4d6ad4461874
 
+		measure EvolucionObjetivo = [Ventas_YTD_SinIVA] - [Objetivos_YTD]
+			formatString: #,0.00;-#,0.00;#,0.00
+			lineageTag: 79f90b41-0b3f-477f-8f58-13e4b1cb4340
+
+		measure EvolucionObjetivo_% =
+			DIVIDE(
+				[Ventas_YTD_SinIVA] - [Objetivos_YTD],
+				[Objetivos_YTD]
+			)
+			formatString: 0.00%;-0.00%;0.00%
+			lineageTag: 665f8bbf-088f-4929-baa4-1b882a5b7e57
 		measure Objetivos = 
 			CALCULATE(
 				SUM(LOL_PBIOBJETIVOSRETAIL[Importe]),
-				USERELATIONSHIP(LOL_PBIOBJETIVOSRETAIL[TiendaID], LOL_PBITIENDAS[TiendaID]),
+				USERELATIONSHIP(LOL_PBIOBJETIVOSRETAIL[TiendaID], LOL_PBITIENDAS[IDCuentaPersona]),
 				USERELATIONSHIP(LOL_PBIOBJETIVOSRETAIL[Fecha], Calendario[Date])
 			)
 			formatString: #,0.00;-#,0.00;#,0.00

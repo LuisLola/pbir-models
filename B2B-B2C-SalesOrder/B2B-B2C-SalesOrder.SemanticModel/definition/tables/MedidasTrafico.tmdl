@@ -1,0 +1,104 @@
+table MedidasTrafico
+	lineageTag: d33f9bea-5fa0-48ce-b1c7-8130a8f2b506
+
+	measure Entradas =
+			SUMX(
+				LOL_PBITRAFICOTIENDAS,
+				IFERROR(VALUE(LOL_PBITRAFICOTIENDAS[Entradas]), BLANK())
+			)
+		formatString: #,0
+		lineageTag: 45003ec6-ee92-4684-bb01-18fe899f5c28
+
+	measure Entradas_YTD = [Entradas]
+		formatString: #,0
+		lineageTag: c1e8e6b1-44a2-4f58-8e77-0a1c4d2b3f7a
+
+	measure Entradas_YTD_LY =
+			VAR FechasLY =
+				SELECTCOLUMNS(
+					VALUES(Calendario[Date]),
+					"Date", Calendario[Date] - 364
+				)
+			RETURN
+				CALCULATE(
+					[Entradas],
+					REMOVEFILTERS(Calendario[Date]),
+					TREATAS(FechasLY, Calendario[Date])
+				)
+		formatString: #,0
+		lineageTag: b2f0d8c2-55b3-4f69-9f88-1b2d5e3c4a8b
+
+	measure Entradas_YTD_Var = [Entradas_YTD] - [Entradas_YTD_LY]
+		formatString: #,0
+		lineageTag: 30d4129d-c9ea-4449-b9ff-68fe758d7799
+
+	measure Evolucion_Entradas_YTD_Porcentaje =
+			DIVIDE(
+				[Entradas_YTD] - [Entradas_YTD_LY],
+				[Entradas_YTD_LY]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: d3f1e9d3-66c4-4070-af99-2c3e6f4d5b9c
+
+	measure Exterior =
+			SUMX(
+				LOL_PBITRAFICOTIENDAS,
+				IFERROR(VALUE(LOL_PBITRAFICOTIENDAS[Exterior]), BLANK())
+			)
+		formatString: #,0
+		lineageTag: a5a24c0e-b230-46f8-8f37-3b776f96a71f
+
+	measure Exterior_YTD = [Exterior]
+		formatString: #,0
+		lineageTag: 6e0cfa86-8f77-4b2d-bd5c-a7f8640be2df
+
+	measure Exterior_YTD_LY =
+			VAR FechasLY =
+				SELECTCOLUMNS(
+					VALUES(Calendario[Date]),
+					"Date", Calendario[Date] - 364
+				)
+			RETURN
+				CALCULATE(
+					[Exterior],
+					REMOVEFILTERS(Calendario[Date]),
+					TREATAS(FechasLY, Calendario[Date])
+				)
+		formatString: #,0
+		lineageTag: 06d4e6c6-99f7-4d03-d122-5f6a9b7c8d2e
+
+	measure Exterior_YTD_Var = [Exterior_YTD] - [Exterior_YTD_LY]
+		formatString: #,0
+		lineageTag: 5d527f8a-524a-4592-b52d-80213587fe2a
+
+	measure Evolucion_Exterior_YTD_Porcentaje =
+			DIVIDE(
+				[Exterior_YTD] - [Exterior_YTD_LY],
+				[Exterior_YTD_LY]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 083b2de0-6094-46f3-9fa9-c41650c27ad9
+
+	measure Tasa_Conversion_YTD = DIVIDE([NumeroTransacciones_YTD], [Entradas_YTD])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 9c2d8fdb-4e7f-4d3c-a34a-a546d251a73f
+
+	measure Tasa_Atraccion_YTD = DIVIDE([Entradas_YTD], [Exterior_YTD])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 5f935b67-f13a-4ec2-bd9f-b6f3c7f195ee
+
+	column Column
+		formatString: 0
+		lineageTag: f0f5f486-1f13-466d-9c31-52f19a0fbdf2
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MedidasTrafico = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 4cd7d0711a8f4f819f85566a5471d67a
+

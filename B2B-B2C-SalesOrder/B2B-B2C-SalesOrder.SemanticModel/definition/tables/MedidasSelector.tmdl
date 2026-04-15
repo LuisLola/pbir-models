@@ -1,10 +1,20 @@
 table MedidasSelector
+	isHidden
 	lineageTag: abc12345-6789-0123-4567-89abcdef0123
 
-	column MedidasSelector
-		lineageTag: def67890-1234-5678-9012-34567890abcd
+	column Grupo
+		isHidden
+		lineageTag: 6d3f7572-f6ed-4ff0-bfb7-528d2cb35b78
 		summarizeBy: none
 		sourceColumn: [Value1]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MedidasSelector
+		isHidden
+		lineageTag: def67890-1234-5678-9012-34567890abcd
+		summarizeBy: none
+		sourceColumn: [Value2]
 		sortByColumn: 'MedidasSelector Orden'
 
 		relatedColumnDetails
@@ -14,9 +24,9 @@ table MedidasSelector
 
 	column 'MedidasSelector Campos'
 		isHidden
-		lineageTag: ghi90123-4567-8901-2345-678901234567
+		lineageTag: 4a6d7089-6b0d-4475-88dd-776f29fd20f8
 		summarizeBy: none
-		sourceColumn: [Value2]
+		sourceColumn: [Value3]
 		sortByColumn: 'MedidasSelector Orden'
 
 		extendedProperty ParameterMetadata =
@@ -30,9 +40,9 @@ table MedidasSelector
 	column 'MedidasSelector Orden'
 		isHidden
 		formatString: 0
-		lineageTag: jkl34567-8901-2345-6789-012345678901
+		lineageTag: c6cd6ef8-9adc-48cf-b0a0-90fb0fd97ff5
 		summarizeBy: sum
-		sourceColumn: [Value3]
+		sourceColumn: [Value4]
 
 		annotation SummarizationSetBy = Automatic
 
@@ -40,35 +50,62 @@ table MedidasSelector
 		mode: import
 		source =
 				{
-				    ("Cantidad", NAMEOF('MedidasCalculadasRetailOnline'[Cantidad]), 1),
-				    ("Cantidad YTD", NAMEOF('MedidasCalculadasRetailOnline'[Cantidad_YTD]), 2),
-				    ("Cantidad YTD LY", NAMEOF('MedidasCalculadasRetailOnline'[Cantidad_YTD_LY]), 3),
-				    ("Variación Cantidad YTD", NAMEOF('MedidasCalculadasRetailOnline'[Cantidad_YTD_Var]), 4),
-				    ("Variación % Cantidad YTD", NAMEOF('MedidasCalculadasRetailOnline'[Cantidad_YTD_Var_%]), 5),
-				    ("Ventas", NAMEOF('MedidasCalculadasRetailOnline'[Ventas]), 6),
-				    ("Ventas YTD", NAMEOF('MedidasCalculadasRetailOnline'[Ventas_YTD]), 7),
-				    ("Ventas YTD LY", NAMEOF('MedidasCalculadasRetailOnline'[Ventas_YTD_LY]), 8),
-				    ("Variación Ventas YTD", NAMEOF('MedidasCalculadasRetailOnline'[Ventas_YTD_Var]), 9),
-				    ("Variación % Ventas YTD", NAMEOF('MedidasCalculadasRetailOnline'[Ventas_YTD_Var_%]), 10),
-				    ("Ventas Sin IVA", NAMEOF('MedidasCalculadasRetailOnline'[Ventas_SinIVA]), 11),
-				    ("Ventas Sin IVA YTD", NAMEOF('MedidasCalculadasRetailOnline'[Ventas_SinIVA_YTD]), 12),
-				    ("Ventas Sin IVA YTD LY", NAMEOF('MedidasCalculadasRetailOnline'[Ventas_SinIVA_YTD_LY]), 13),
-				    ("Variación Ventas Sin IVA YTD", NAMEOF('MedidasCalculadasRetailOnline'[Ventas_SinIVA_YTD_Var]), 14),
-				    ("Variación % Ventas Sin IVA YTD", NAMEOF('MedidasCalculadasRetailOnline'[Ventas_SinIVA_YTD_Var_%]), 15),
-				    ("Número de Transacciones", NAMEOF('MedidasCalculadasRetailOnline'[NumeroTransacciones]), 16),
-				    ("Número de Transacciones LY", NAMEOF('MedidasCalculadasRetailOnline'[NumeroTransacciones_LY]), 17),
-				    ("Variación % Transacciones", NAMEOF('MedidasCalculadasRetailOnline'[NumeroTransacciones_Var_%]), 18),
-				    ("Promedio Venta por Transacción", NAMEOF('MedidasCalculadasRetailOnline'[PromedioVentaTransaccion]), 19),
-				    ("Promedio Venta por Transacción LY", NAMEOF('MedidasCalculadasRetailOnline'[PromedioVentaTransaccion_LY]), 20),
-				    ("Variación % Ticket Medio", NAMEOF('MedidasCalculadasRetailOnline'[PromedioVentaTransaccion_Var_%]), 21),
-				    ("Número de Clientes Únicos", NAMEOF('MedidasCalculadasRetailOnline'[NumeroClientesUnicos]), 22),
-				    ("UPT", NAMEOF('MedidasCalculadasRetailOnline'[UPT]), 23),
-				    ("UPT LY", NAMEOF('MedidasCalculadasRetailOnline'[UPT_LY]), 24),
-				("Variación % UPT", NAMEOF('MedidasCalculadasRetailOnline'[UPT_Var_%]), 25),
-				("Objetivos", NAMEOF('MedidasCalculadasRetailOnline'[Objetivos]), 26),
-				("Objetivos YTD", NAMEOF('MedidasCalculadasRetailOnline'[Objetivos_YTD]), 27),
-				("Objetivos YTD LY", NAMEOF('MedidasCalculadasRetailOnline'[Objetivos_YTD_LY]), 28),
-				("Variación Objetivos YTD", NAMEOF('MedidasCalculadasRetailOnline'[Objetivos_YTD_Var]), 29),
-				("Variación % Objetivos YTD", NAMEOF('MedidasCalculadasRetailOnline'[Objetivos_YTD_Var_%]), 30)
+				    ("Retail", "Ventas", NAMEOF('MedidasRetail'[Ventas]), 1),
+				    ("Retail", "Ventas Periodo", NAMEOF('MedidasRetail'[Ventas_YTD]), 2),
+				    ("Retail", "Ventas Periodo LY", NAMEOF('MedidasRetail'[Ventas_YTD_LY]), 3),
+				    ("Retail", "Variacion Ventas Periodo", NAMEOF('MedidasRetail'[Ventas_YTD_Var]), 4),
+				    ("Retail", "Variacion % Ventas Periodo", NAMEOF('MedidasRetail'[Ventas_YTD_Var_%]), 5),
+				    ("Retail", "Ventas Sin IVA", NAMEOF('MedidasRetail'[Ventas_SinIVA]), 6),
+				    ("Retail", "Ventas Sin IVA Periodo", NAMEOF('MedidasRetail'[Ventas_SinIVA_YTD]), 7),
+				    ("Retail", "Ventas Sin IVA Periodo LY", NAMEOF('MedidasRetail'[Ventas_SinIVA_YTD_LY]), 8),
+				    ("Retail", "Variacion Ventas Sin IVA Periodo", NAMEOF('MedidasRetail'[Ventas_SinIVA_YTD_Var]), 9),
+				    ("Retail", "Variacion % Ventas Sin IVA Periodo", NAMEOF('MedidasRetail'[Ventas_SinIVA_YTD_Var_%]), 10),
+				    ("Retail", "Cantidad", NAMEOF('MedidasRetail'[Cantidad]), 11),
+				    ("Retail", "Cantidad Periodo", NAMEOF('MedidasRetail'[Cantidad_YTD]), 12),
+				    ("Retail", "Cantidad Periodo LY", NAMEOF('MedidasRetail'[Cantidad_YTD_LY]), 13),
+				    ("Retail", "Variacion Cantidad Periodo", NAMEOF('MedidasRetail'[Cantidad_YTD_Var]), 14),
+				    ("Retail", "Variacion % Cantidad Periodo", NAMEOF('MedidasRetail'[Cantidad_YTD_Var_%]), 15),
+				    ("Retail", "Numero de Transacciones", NAMEOF('MedidasRetail'[NumeroTransacciones]), 16),
+				    ("Retail", "Numero de Transacciones Periodo", NAMEOF('MedidasRetail'[NumeroTransacciones_YTD]), 17),
+				    ("Retail", "Numero de Transacciones Periodo LY", NAMEOF('MedidasRetail'[NumeroTransacciones_LY]), 18),
+				    ("Retail", "Variacion Transacciones Periodo", NAMEOF('MedidasRetail'[NumeroTransacciones_Var]), 19),
+				    ("Retail", "Variacion % Transacciones Periodo", NAMEOF('MedidasRetail'[NumeroTransacciones_Var_%]), 20),
+				    ("Retail", "Ticket Medio", NAMEOF('MedidasRetail'[PromedioVentaTransaccion]), 21),
+				    ("Retail", "Ticket Medio Periodo", NAMEOF('MedidasRetail'[PromedioVentaTransaccion_YTD]), 22),
+				    ("Retail", "Ticket Medio Periodo LY", NAMEOF('MedidasRetail'[PromedioVentaTransaccion_LY]), 23),
+				    ("Retail", "Variacion Ticket Medio Periodo", NAMEOF('MedidasRetail'[PromedioVentaTransaccion_Var]), 24),
+				    ("Retail", "Variacion % Ticket Medio Periodo", NAMEOF('MedidasRetail'[PromedioVentaTransaccion_Var_%]), 25),
+				    ("Retail", "Numero de Clientes Unicos", NAMEOF('MedidasRetail'[NumeroClientesUnicos]), 26),
+				    ("Retail", "Numero de Clientes Unicos Periodo", NAMEOF('MedidasRetail'[NumeroClientesUnicos_YTD]), 27),
+				    ("Retail", "Numero de Clientes Unicos Periodo LY", NAMEOF('MedidasRetail'[NumeroClientesUnicos_LY]), 28),
+				    ("Retail", "Variacion Clientes Unicos Periodo", NAMEOF('MedidasRetail'[NumeroClientesUnicos_Var]), 29),
+				    ("Retail", "Variacion % Clientes Unicos Periodo", NAMEOF('MedidasRetail'[NumeroClientesUnicos_Var_%]), 30),
+				    ("Retail", "UPT", NAMEOF('MedidasRetail'[UPT]), 31),
+				    ("Retail", "UPT Periodo", NAMEOF('MedidasRetail'[UPT_YTD]), 32),
+				    ("Retail", "UPT Periodo LY", NAMEOF('MedidasRetail'[UPT_LY]), 33),
+				    ("Retail", "Variacion UPT Periodo", NAMEOF('MedidasRetail'[UPT_Var]), 34),
+				    ("Retail", "Variacion % UPT Periodo", NAMEOF('MedidasRetail'[UPT_Var_%]), 35),
+				    ("Objetivos", "Objetivos", NAMEOF('MedidasObjetivosRetail'[Objetivos]), 101),
+				    ("Objetivos", "Objetivos Periodo", NAMEOF('MedidasObjetivosRetail'[Objetivos_YTD]), 102),
+				    ("Objetivos", "Objetivos Periodo LY", NAMEOF('MedidasObjetivosRetail'[Objetivos_YTD_LY]), 103),
+				    ("Objetivos", "Variacion Objetivos Periodo", NAMEOF('MedidasObjetivosRetail'[Objetivos_YTD_Var]), 104),
+				    ("Objetivos", "Variacion % Objetivos Periodo", NAMEOF('MedidasObjetivosRetail'[Objetivos_YTD_Var_%]), 105),
+				    ("Objetivos", "Cumplimiento Objetivo %", NAMEOF('MedidasObjetivosRetail'[CumplimientoObjetivo_%]), 106),
+				    ("Objetivos", "Evolucion Objetivo", NAMEOF('MedidasObjetivosRetail'[EvolucionObjetivo]), 107),
+				    ("Objetivos", "Evolucion % Objetivo", NAMEOF('MedidasObjetivosRetail'[EvolucionObjetivo_%]), 108),
+				    ("Trafico", "Entradas", NAMEOF('MedidasTrafico'[Entradas]), 201),
+				    ("Trafico", "Entradas Periodo", NAMEOF('MedidasTrafico'[Entradas_YTD]), 202),
+				    ("Trafico", "Entradas Periodo LY", NAMEOF('MedidasTrafico'[Entradas_YTD_LY]), 203),
+				    ("Trafico", "Variacion Entradas Periodo", NAMEOF('MedidasTrafico'[Entradas_YTD_Var]), 204),
+				    ("Trafico", "Variacion % Entradas Periodo", NAMEOF('MedidasTrafico'[Evolucion_Entradas_YTD_Porcentaje]), 205),
+				    ("Trafico", "Exterior", NAMEOF('MedidasTrafico'[Exterior]), 206),
+				    ("Trafico", "Exterior Periodo", NAMEOF('MedidasTrafico'[Exterior_YTD]), 207),
+				    ("Trafico", "Exterior Periodo LY", NAMEOF('MedidasTrafico'[Exterior_YTD_LY]), 208),
+				    ("Trafico", "Variacion Exterior Periodo", NAMEOF('MedidasTrafico'[Exterior_YTD_Var]), 209),
+				    ("Trafico", "Variacion % Exterior Periodo", NAMEOF('MedidasTrafico'[Evolucion_Exterior_YTD_Porcentaje]), 210),
+				    ("Trafico", "Tasa Conversion Periodo", NAMEOF('MedidasTrafico'[Tasa_Conversion_YTD]), 211),
+				    ("Trafico", "Tasa Atraccion Periodo", NAMEOF('MedidasTrafico'[Tasa_Atraccion_YTD]), 212)
 				}
+
+	annotation PBI_Id = 16d3663658e14b8fbf71a9cf566c9d3b
 

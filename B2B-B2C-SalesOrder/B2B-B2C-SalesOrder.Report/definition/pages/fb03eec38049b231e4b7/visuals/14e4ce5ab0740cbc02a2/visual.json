@@ -3,9 +3,9 @@
   "name": "14e4ce5ab0740cbc02a2",
   "position": {
     "x": 0,
-    "y": 192.41157556270096,
+    "y": 192.83842794759823,
     "z": 0,
-    "height": 527.84565916398708,
+    "height": 527.27802037845709,
     "width": 1280,
     "tabOrder": 0
   },
@@ -77,8 +77,7 @@
                 }
               },
               "index": 0,
-              "length": 1,
-              "sortDirection": "Ascending"
+              "length": 1
             },
             {
               "parameterExpr": {
@@ -117,61 +116,84 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "MedidasCalculadasRetailOnline"
+                      "Entity": "MedidasRetail"
                     }
                   },
-                  "Property": "Ventas"
+                  "Property": "Ventas_YTD"
                 }
               },
-              "queryRef": "MedidasCalculadasRetailOnline.Ventas",
-              "nativeQueryRef": "Ventas",
-              "displayName": "Ventas"
+              "queryRef": "MedidasRetail.Ventas_YTD",
+              "nativeQueryRef": "Ventas_YTD"
             },
             {
               "field": {
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "MedidasCalculadasRetailOnline"
-                    }
-                  },
-                  "Property": "Objetivos"
-                }
-              },
-              "queryRef": "MedidasCalculadasRetailOnline.Objetivos",
-              "nativeQueryRef": "Objetivos",
-              "displayName": "Objetivos"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "MedidasCalculadasRetailOnline"
+                      "Entity": "MedidasRetail"
                     }
                   },
                   "Property": "Ventas_YTD_LY"
                 }
               },
-              "queryRef": "MedidasCalculadasRetailOnline.Ventas_YTD_LY",
-              "nativeQueryRef": "Ventas YTD LY",
-              "displayName": "Ventas YTD LY"
-            }
-          ],
-          "fieldParameters": [
+              "queryRef": "MedidasRetail.Ventas_YTD_LY",
+              "nativeQueryRef": "Ventas_YTD_LY"
+            },
             {
-              "parameterExpr": {
-                "Column": {
+              "field": {
+                "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "MedidasSelector"
+                      "Entity": "MedidasTrafico"
                     }
                   },
-                  "Property": "MedidasSelector"
+                  "Property": "Exterior_YTD"
                 }
               },
-              "index": 0,
-              "length": 3
+              "queryRef": "MedidasTrafico.Exterior_YTD",
+              "nativeQueryRef": "Exterior_YTD"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasTrafico"
+                    }
+                  },
+                  "Property": "Exterior_YTD_LY"
+                }
+              },
+              "queryRef": "MedidasTrafico.Exterior_YTD_LY",
+              "nativeQueryRef": "Exterior_YTD_LY"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasTrafico"
+                    }
+                  },
+                  "Property": "Tasa_Atraccion_YTD"
+                }
+              },
+              "queryRef": "MedidasTrafico.Tasa_Atraccion_YTD",
+              "nativeQueryRef": "Tasa_Atraccion_YTD"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasTrafico"
+                    }
+                  },
+                  "Property": "Tasa_Conversion_YTD"
+                }
+              },
+              "queryRef": "MedidasTrafico.Tasa_Conversion_YTD",
+              "nativeQueryRef": "Tasa_Conversion_YTD"
             }
           ]
         }
@@ -180,29 +202,16 @@
         "sort": [
           {
             "field": {
-              "Column": {
+              "Measure": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "LOL_PBITIENDAS"
+                    "Entity": "MedidasRetail"
                   }
                 },
-                "Property": "NombreTienda"
+                "Property": "Ventas_YTD"
               }
             },
-            "direction": "Ascending"
-          },
-          {
-            "field": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "LOL_PBITIENDAS"
-                  }
-                },
-                "Property": "TipoTienda"
-              }
-            },
-            "direction": "Ascending"
+            "direction": "Descending"
           }
         ]
       }
@@ -283,74 +292,7 @@
           }
         },
         {
-          "properties": {
-            "backColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Conditional": {
-                      "Cases": [
-                        {
-                          "Condition": {
-                            "Comparison": {
-                              "ComparisonKind": 3,
-                              "Left": {
-                                "Measure": {
-                                  "Expression": {
-                                    "SourceRef": {
-                                      "Entity": "LOL_SGIRETAIL"
-                                    }
-                                  },
-                                  "Property": "Ventas_YTD_LY"
-                                }
-                              },
-                              "Right": {
-                                "Literal": {
-                                  "Value": "0D"
-                                }
-                              }
-                            }
-                          },
-                          "Value": {
-                            "Literal": {
-                              "Value": "'#DEEFFF'"
-                            }
-                          }
-                        },
-                        {
-                          "Condition": {
-                            "Comparison": {
-                              "ComparisonKind": 4,
-                              "Left": {
-                                "Measure": {
-                                  "Expression": {
-                                    "SourceRef": {
-                                      "Entity": "LOL_SGIRETAIL"
-                                    }
-                                  },
-                                  "Property": "Ventas_YTD_LY"
-                                }
-                              },
-                              "Right": {
-                                "Literal": {
-                                  "Value": "100D"
-                                }
-                              }
-                            }
-                          },
-                          "Value": {
-                            "Literal": {
-                              "Value": "'#219609'"
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
+          "properties": {},
           "selector": {
             "data": [
               {
@@ -1182,7 +1124,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "d8a9dc7a5c6b3d575497",
+        "name": "11f5b8a640a12e9e14d2",
         "field": {
           "Column": {
             "Expression": {
@@ -1196,7 +1138,7 @@
         "type": "Categorical"
       },
       {
-        "name": "454b057b2b263a2edc02",
+        "name": "a5b2f1496c9aeb13132d",
         "field": {
           "Column": {
             "Expression": {
@@ -1210,7 +1152,7 @@
         "type": "Categorical"
       },
       {
-        "name": "ea22522f0c5491eabe8c",
+        "name": "8f738fa9086a9587e77a",
         "field": {
           "Column": {
             "Expression": {
@@ -1222,48 +1164,6 @@
           }
         },
         "type": "Categorical"
-      },
-      {
-        "name": "cd49d915a3aba5d67089",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasCalculadasRetailOnline"
-              }
-            },
-            "Property": "Ventas"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "a7bbb820d6d3071b5300",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasCalculadasRetailOnline"
-              }
-            },
-            "Property": "Objetivos"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "49b3f379a4d16968e908",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasCalculadasRetailOnline"
-              }
-            },
-            "Property": "Ventas_YTD_LY"
-          }
-        },
-        "type": "Advanced"
       }
     ]
   }

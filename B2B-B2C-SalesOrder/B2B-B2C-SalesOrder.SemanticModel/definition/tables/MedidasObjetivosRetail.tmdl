@@ -1,0 +1,82 @@
+table MedidasObjetivosRetail
+	lineageTag: b4d49a62-f6cf-41dc-a624-1fa0347a6f02
+
+	measure Objetivos =
+			CALCULATE(
+				SUM(LOL_PBIOBJETIVOSRETAIL[Importe]),
+				USERELATIONSHIP(LOL_PBIOBJETIVOSRETAIL[TiendaID], LOL_PBITIENDAS[TiendaID]),
+				USERELATIONSHIP(LOL_PBIOBJETIVOSRETAIL[Fecha], Calendario[Date])
+			)
+		formatString: #,0.00;-#,0.00;#,0.00
+		lineageTag: 9380df31-a25a-4a35-82cd-7b5566b24835
+
+	measure Objetivos_YTD = [Objetivos]
+		formatString: #,0.00;-#,0.00;#,0.00
+		lineageTag: 5c3f3215-d6c8-47d9-833c-d2c6e94da448
+
+	measure Objetivos_YTD_LY =
+			VAR FechasLY =
+				SELECTCOLUMNS(
+					VALUES(Calendario[Date]),
+					"Date", Calendario[Date] - 364
+				)
+			RETURN
+				CALCULATE(
+					[Objetivos],
+					REMOVEFILTERS(Calendario[Date]),
+					TREATAS(FechasLY, Calendario[Date])
+				)
+		formatString: #,0.00;-#,0.00;#,0.00
+		lineageTag: e40df2eb-853f-45d8-aa6b-f8481968cb29
+
+	measure Objetivos_YTD_Var = [Objetivos_YTD] - [Objetivos_YTD_LY]
+		formatString: #,0.00;-#,0.00;#,0.00
+		lineageTag: 266845a7-8ea8-4c2b-b3a0-dfa9506672bb
+
+	measure Objetivos_YTD_Var_% =
+			DIVIDE(
+				[Objetivos_YTD] - [Objetivos_YTD_LY],
+				[Objetivos_YTD_LY]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 8faa5831-ab3b-4cb0-8546-6dab58452a7a
+
+	measure CumplimientoObjetivo_% =
+			DIVIDE(
+				[Ventas_YTD],
+				[Objetivos_YTD]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 23015b8f-3d87-4047-8911-70e826d872e6
+
+	measure DesviacionObjetivo = [Ventas_YTD] - [Objetivos_YTD]
+		formatString: #,0.00;-#,0.00;#,0.00
+		lineageTag: 621fe649-8249-4928-99f8-4d6ad4461874
+
+	measure EvolucionObjetivo = [Ventas_YTD] - [Objetivos_YTD]
+		formatString: #,0.00;-#,0.00;#,0.00
+		lineageTag: 79f90b41-0b3f-477f-8f58-13e4b1cb4340
+
+	measure EvolucionObjetivo_% =
+			DIVIDE(
+				[Ventas_YTD] - [Objetivos_YTD],
+				[Objetivos_YTD]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 665f8bbf-088f-4929-baa4-1b882a5b7e57
+
+	column Column
+		formatString: 0
+		lineageTag: 1dd777b1-1325-4d7f-b172-6a7d062e51cf
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MedidasObjetivosRetail = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 8c951c7d5c9242b2a52a5bfe1b553293
+

@@ -1,0 +1,58 @@
+createOrReplace
+
+	ref table MedidasCalculadasRetailOnline
+
+		measure Entradas_YTD =
+			CALCULATE(
+				SUMX(
+					'LOL_PBITRAFICOTIENDAS',
+					IFERROR(VALUE('LOL_PBITRAFICOTIENDAS'[Entradas]), BLANK())
+				),
+				TREATAS(VALUES('Calendario'[Date]), 'LOL_PBITRAFICOTIENDAS'[Fecha])
+			)
+			formatString: #,0
+			lineageTag: ef6da099-58cd-47be-b011-9a19131a6d5d
+
+		measure Entradas_YTD_LY =
+			CALCULATE(
+				[Entradas_YTD],
+				SAMEPERIODLASTYEAR('Calendario'[Date])
+			)
+			formatString: #,0
+			lineageTag: aee2e87d-bad6-400c-a874-379ea17e55b7
+
+		measure Evolucion_Entradas_YTD_Porcentaje =
+			DIVIDE(
+				[Entradas_YTD] - [Entradas_YTD_LY],
+				[Entradas_YTD_LY]
+			)
+			formatString: 0.00%;-0.00%;0.00%
+			lineageTag: 25dbb5a1-b5c4-4657-a42e-d4c3f313e39b
+
+		measure Exterior_YTD =
+			CALCULATE(
+				SUMX(
+					'LOL_PBITRAFICOTIENDAS',
+					IFERROR(VALUE('LOL_PBITRAFICOTIENDAS'[Exterior]), BLANK())
+				),
+				DATESYTD('Calendario'[Date]),
+				TREATAS(VALUES('Calendario'[Date]), 'LOL_PBITRAFICOTIENDAS'[Fecha])
+			)
+			formatString: #,0
+			lineageTag: 7dcf1e27-f569-4948-8345-bcecfb003b1e
+
+		measure Exterior_YTD_LY =
+			CALCULATE(
+				[Exterior_YTD],
+				SAMEPERIODLASTYEAR('Calendario'[Date])
+			)
+			formatString: #,0
+			lineageTag: 06d4e6c6-99f7-4d03-d122-5f6a9b7c8d2e
+
+		measure Evolucion_Exterior_YTD_Porcentaje =
+			DIVIDE(
+				[Exterior_YTD] - [Exterior_YTD_LY],
+				[Exterior_YTD_LY]
+			)
+			formatString: 0.00%;-0.00%;0.00%
+			lineageTag: a9bf64ff-12cf-491b-9951-db0ce001bb89

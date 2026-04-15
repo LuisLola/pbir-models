@@ -8389,16 +8389,6 @@ cultureInfo es-ES
 			            },
 			            "Weight": 0.727
 			          }
-			        },
-			        {
-			          "Variación % Ventas YTD": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ]
 			    },
@@ -9295,19 +9285,7 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Cantidad_YTD"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "Cantidad YTD": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "medidascalculadasretailonline.cantidad_ytd_ly": {
 			      "Definition": {
@@ -9316,19 +9294,7 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Cantidad_YTD_LY"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "Cantidad YTD LY": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "medidascalculadasretailonline.cantidad_ytd_var_": {
 			      "Definition": {
@@ -9337,19 +9303,511 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Cantidad_YTD_Var_%"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "Variación % Cantidad YTD": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
+			      "State": "Generated"
+			    },
+			    "medidascalculadasretailonline.objetivos": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCalculadasRetailOnline",
+			          "ConceptualProperty": "Objetivos"
 			        }
-			      ]
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.ventas": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "Ventas"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.ventas_ytd": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "Ventas_YTD"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.ventas_ytd_ly": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "Ventas_YTD_LY"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.ventas_ytd_var": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "Ventas_YTD_Var"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.ventas_ytd_var_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "Ventas_YTD_Var_%"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.ventas_siniva": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "Ventas_SinIVA"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.ventas_siniva_ytd": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "Ventas_SinIVA_YTD"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.ventas_siniva_ytd_ly": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "Ventas_SinIVA_YTD_LY"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.ventas_siniva_ytd_var": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "Ventas_SinIVA_YTD_Var"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.ventas_siniva_ytd_var_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "Ventas_SinIVA_YTD_Var_%"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.cantidad": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "Cantidad"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.cantidad_ytd": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "Cantidad_YTD"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.cantidad_ytd_ly": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "Cantidad_YTD_LY"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.cantidad_ytd_var": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "Cantidad_YTD_Var"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.cantidad_ytd_var_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "Cantidad_YTD_Var_%"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.numerotransacciones": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "NumeroTransacciones"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.numerotransacciones_ytd": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "NumeroTransacciones_YTD"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.numerotransacciones_ly": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "NumeroTransacciones_LY"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.numerotransacciones_var": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "NumeroTransacciones_Var"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.numerotransacciones_var_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "NumeroTransacciones_Var_%"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.promedioventatransaccion": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "PromedioVentaTransaccion"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.promedioventatransaccion_ytd": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "PromedioVentaTransaccion_YTD"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.promedioventatransaccion_ly": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "PromedioVentaTransaccion_LY"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.promedioventatransaccion_var": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "PromedioVentaTransaccion_Var"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.promedioventatransaccion_var_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "PromedioVentaTransaccion_Var_%"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.numeroclientesunicos": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "NumeroClientesUnicos"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.numeroclientesunicos_ytd": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "NumeroClientesUnicos_YTD"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.numeroclientesunicos_ly": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "NumeroClientesUnicos_LY"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.numeroclientesunicos_var": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "NumeroClientesUnicos_Var"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.numeroclientesunicos_var_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "NumeroClientesUnicos_Var_%"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.upt": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "UPT"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.upt_ytd": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "UPT_YTD"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.upt_ly": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "UPT_LY"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.upt_var": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "UPT_Var"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasretail.upt_var_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "UPT_Var_%"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasobjetivosretail.objetivos": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasObjetivosRetail",
+			          "ConceptualProperty": "Objetivos"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasobjetivosretail.objetivos_ytd": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasObjetivosRetail",
+			          "ConceptualProperty": "Objetivos_YTD"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasobjetivosretail.objetivos_ytd_ly": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasObjetivosRetail",
+			          "ConceptualProperty": "Objetivos_YTD_LY"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasobjetivosretail.objetivos_ytd_var": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasObjetivosRetail",
+			          "ConceptualProperty": "Objetivos_YTD_Var"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasobjetivosretail.objetivos_ytd_var_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasObjetivosRetail",
+			          "ConceptualProperty": "Objetivos_YTD_Var_%"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasobjetivosretail.cumplimientoobjetivo_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasObjetivosRetail",
+			          "ConceptualProperty": "CumplimientoObjetivo_%"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasobjetivosretail.evolucionobjetivo": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasObjetivosRetail",
+			          "ConceptualProperty": "EvolucionObjetivo"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasobjetivosretail.evolucionobjetivo_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasObjetivosRetail",
+			          "ConceptualProperty": "EvolucionObjetivo_%"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidastrafico.entradas": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasTrafico",
+			          "ConceptualProperty": "Entradas"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidastrafico.entradas_ytd": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasTrafico",
+			          "ConceptualProperty": "Entradas_YTD"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidastrafico.entradas_ytd_ly": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasTrafico",
+			          "ConceptualProperty": "Entradas_YTD_LY"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidastrafico.entradas_ytd_var": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasTrafico",
+			          "ConceptualProperty": "Entradas_YTD_Var"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidastrafico.evolucion_entradas_ytd_porcentaje": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasTrafico",
+			          "ConceptualProperty": "Evolucion_Entradas_YTD_Porcentaje"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidastrafico.exterior": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasTrafico",
+			          "ConceptualProperty": "Exterior"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidastrafico.exterior_ytd": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasTrafico",
+			          "ConceptualProperty": "Exterior_YTD"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidastrafico.exterior_ytd_ly": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasTrafico",
+			          "ConceptualProperty": "Exterior_YTD_LY"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidastrafico.exterior_ytd_var": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasTrafico",
+			          "ConceptualProperty": "Exterior_YTD_Var"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidastrafico.evolucion_exterior_ytd_porcentaje": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasTrafico",
+			          "ConceptualProperty": "Evolucion_Exterior_YTD_Porcentaje"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidastrafico.tasa_conversion_ytd": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasTrafico",
+			          "ConceptualProperty": "Tasa_Conversion_YTD"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidastrafico.tasa_atraccion_ytd": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasTrafico",
+			          "ConceptualProperty": "Tasa_Atraccion_YTD"
+			        }
+			      },
+			      "State": "Generated"
 			    }
 			  },
 			  "Relationships": {

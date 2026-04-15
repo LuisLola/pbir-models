@@ -28,50 +28,6 @@ relationship 43d0be90-d52d-4e41-a0af-1907e65cb032
 	fromColumn: LOL_PBISEASON.Inicio
 	toColumn: LocalDateTable_4dfc2629-7a5b-4f71-9849-39e94bea46fa.Date
 
-relationship 77bcdf86-247a-4e9d-b848-c6261f464ea0
-	joinOnDateBehavior: datePartOnly
-	fromColumn: Calendario.Date
-	toColumn: LocalDateTable_e731f289-de22-4861-98a8-41216dbd2850.Date
-
-relationship a2b654f5-e50b-4741-bfda-5ec501fd4bd9
-	joinOnDateBehavior: datePartOnly
-	fromColumn: Calendario.InicioMes
-	toColumn: LocalDateTable_8f2d1aba-43bc-4d38-8ad7-eea2c6c7b901.Date
-
-relationship c5790096-109d-48c9-b3b8-87c2814ec6f1
-	joinOnDateBehavior: datePartOnly
-	fromColumn: Calendario.FinMes
-	toColumn: LocalDateTable_e3e5c66b-5df6-4c05-96c1-a3281d82b532.Date
-
-relationship 925f1e18-a911-4175-b725-c812a1f20e7f
-	joinOnDateBehavior: datePartOnly
-	fromColumn: Calendario.InicioTrimestre
-	toColumn: LocalDateTable_f07d1705-11d4-42cf-85d6-295950ca07e2.Date
-
-relationship 4a9abf26-fafb-4bd6-85bb-1cc197ebda38
-	joinOnDateBehavior: datePartOnly
-	fromColumn: Calendario.FinTrimestre
-	toColumn: LocalDateTable_662cab93-ac05-45f9-8ca8-96a53f75603d.Date
-
-relationship 3b3cd082-474e-41cb-9850-fb0208ffd641
-	joinOnDateBehavior: datePartOnly
-	fromColumn: Calendario.InicioAño
-	toColumn: LocalDateTable_3e8bf689-14b4-4ddb-8292-8561ea058d1e.Date
-
-relationship 8e8e8216-f820-4278-9e45-8ea8609d7c96
-	joinOnDateBehavior: datePartOnly
-	fromColumn: Calendario.FinAño
-	toColumn: LocalDateTable_50792624-d9fd-468c-8414-7078ce15be62.Date
-
-relationship bcd84bd8-f1e2-e689-4b42-d1a11bb7adc0
-	fromColumn: LOL_PBISGIRETAIL.WhsCode
-	toColumn: LOL_PBITIENDAS.TiendaID
-
-relationship 927dd73b-1faf-d296-aed1-e7bdaac93e35
-	crossFilteringBehavior: bothDirections
-	fromColumn: LOL_PBIOBJETIVOSRETAIL.TiendaID
-	toColumn: LOL_PBITIENDAS.TiendaID
-
 relationship 696d5d44-eefc-4198-c309-794c866055e3
 	joinOnDateBehavior: datePartOnly
 	fromColumn: LOL_PBIOBJETIVOSRETAIL.Fecha
@@ -81,4 +37,21 @@ relationship 2e42d1e3-400b-aeac-fc03-99cb6cb03cc3
 	joinOnDateBehavior: datePartOnly
 	fromColumn: LOL_PBISGIRETAIL.TicketData
 	toColumn: Calendario.Date
+
+relationship 0a184c8b-7e3f-6723-ecd7-506f3c8ef143
+	fromColumn: LOL_PBISGIRETAIL.WhsCode
+	toColumn: LOL_PBITIENDAS.TiendaID
+
+relationship 0d56b0a1-4f97-d51f-2303-be1daa9ad29d
+	crossFilteringBehavior: bothDirections
+	fromColumn: LOL_PBIOBJETIVOSRETAIL.TiendaID
+	toColumn: LOL_PBITIENDAS.TiendaID
+
+relationship 09be11f7-363e-7322-e7b4-8f1ee31ff5c4
+	fromColumn: LOL_PBITRAFICOTIENDAS.Fecha
+	toColumn: Calendario.Date
+
+relationship 000e9ed8-a11d-5448-5f5d-424f76fe358f
+	fromColumn: LOL_PBITRAFICOTIENDAS.TiendaID
+	toColumn: LOL_PBITIENDAS.IDCuentaPersona
 
