@@ -1,6 +1,6 @@
 from pathlib import Path
 
-path = Path(r'C:\projects\pbir-models\B2B-B2C-SalesOrder\B2B-B2C-SalesOrder.SemanticModel\definition\tables\MedidasCalculadasRetailOnline.tmdl')
+path = Path(r'C:\projects\pbir-models\SgiRetail\SgiRetail.SemanticModel\definition\tables\MedidasCalculadasRetailOnline.tmdl')
 text = path.read_text(encoding='utf-8')
 start = text.index('measure Entradas_YTD =')
 new_tail = '''measure Entradas_YTD =
