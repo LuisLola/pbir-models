@@ -190,6 +190,14 @@ table LOL_PBISGIRETAIL
 
 		annotation SummarizationSetBy = Automatic
 
+	column DescripcionOferta
+		dataType: string
+		lineageTag: 3936ad1c-98aa-44c0-b5dc-8dd82b88f589
+		summarizeBy: none
+		sourceColumn: DescripcionOferta
+
+		annotation SummarizationSetBy = Automatic
+
 	partition LOL_PBISGIRETAIL = m
 		mode: import
 		source =
@@ -198,4 +206,8 @@ table LOL_PBISGIRETAIL
 				    dbo_LOL_PBISGIRETAIL = Origen{[Schema="dbo",Item="LOL_PBISGIRETAIL"]}[Data]
 				in
 				    dbo_LOL_PBISGIRETAIL
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
 

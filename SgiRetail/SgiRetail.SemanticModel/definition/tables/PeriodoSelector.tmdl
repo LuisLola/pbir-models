@@ -1,0 +1,32 @@
+table PeriodoSelector
+	lineageTag: 8ad2d54e-7c55-4b29-b6f4-7f65d10e1a01
+
+	column Periodo
+		lineageTag: 5e620f5f-c220-482a-a59a-5b5c8919d5c1
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: Orden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Orden
+		formatString: 0
+		lineageTag: db3d38a5-f75f-49e6-892c-4962fa40b6cc
+		summarizeBy: none
+		sourceColumn: [Value2]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition PeriodoSelector = calculated
+		mode: import
+		source =
+				{
+				    ("Anio", 1),
+				    ("Trimestre", 2),
+				    ("Mes", 3),
+				    ("Semana", 4),
+				    ("Dia", 5)
+				}
+
+	annotation PBI_Id = 8ad2d54e7c554b29b6f47f65d10e1a01
+

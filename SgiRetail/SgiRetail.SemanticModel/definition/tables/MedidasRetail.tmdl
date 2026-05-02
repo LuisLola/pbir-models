@@ -5,21 +5,21 @@ table MedidasRetail
 		formatString: #,0.00;-#,0.00;#,0.00
 		lineageTag: 5a40a7f9-5cd4-4cef-acd7-1b88cd2a30d4
 
-	measure Ventas_YTD = [Ventas]
-		formatString: "€"\ #,0.0;-"€"\ #,0.0;"€"\ #,0.0
+	measure Ventas_YTD =
+			CALCULATE(
+				[Ventas],
+				DATESBETWEEN(Calendario[Date], [FechaInicioPeriodoSeleccionado], [FechaHastaSeleccionada])
+			)
+		formatString: "???"\ #,0.0;-"???"\ #,0.0;"???"\ #,0.0
 		lineageTag: 4c3f3215-d6c8-47d9-833c-d2c6e94da448
 
 	measure Ventas_YTD_LY =
-			VAR FechasLY =
-				SELECTCOLUMNS(
-					VALUES(Calendario[Date]),
-					"Date", Calendario[Date] - 364
-				)
+			VAR FechaInicio = [FechaInicioPeriodoSeleccionado] - 364
+			VAR FechaHasta = [FechaHastaSeleccionada] - 364
 			RETURN
 				CALCULATE(
 					[Ventas],
-					REMOVEFILTERS(Calendario[Date]),
-					TREATAS(FechasLY, Calendario[Date])
+					DATESBETWEEN(Calendario[Date], FechaInicio, FechaHasta)
 				)
 		formatString: #,0.00;-#,0.00;#,0.00
 		lineageTag: d40df2eb-853f-45d8-aa6b-f8481968cb29
@@ -40,21 +40,21 @@ table MedidasRetail
 		formatString: #,0.00;-#,0.00;#,0.00
 		lineageTag: adb82b7b-e87f-41bc-b18b-55ab50f401f8
 
-	measure Ventas_SinIVA_YTD = [Ventas_SinIVA]
+	measure Ventas_SinIVA_YTD =
+			CALCULATE(
+				[Ventas_SinIVA],
+				DATESBETWEEN(Calendario[Date], [FechaInicioPeriodoSeleccionado], [FechaHastaSeleccionada])
+			)
 		formatString: #,0.00;-#,0.00;#,0.00
 		lineageTag: 6d93d40d-bab1-4ce6-90a8-1a4091376f35
 
 	measure Ventas_SinIVA_YTD_LY =
-			VAR FechasLY =
-				SELECTCOLUMNS(
-					VALUES(Calendario[Date]),
-					"Date", Calendario[Date] - 364
-				)
+			VAR FechaInicio = [FechaInicioPeriodoSeleccionado] - 364
+			VAR FechaHasta = [FechaHastaSeleccionada] - 364
 			RETURN
 				CALCULATE(
 					[Ventas_SinIVA],
-					REMOVEFILTERS(Calendario[Date]),
-					TREATAS(FechasLY, Calendario[Date])
+					DATESBETWEEN(Calendario[Date], FechaInicio, FechaHasta)
 				)
 		formatString: #,0.00;-#,0.00;#,0.00
 		lineageTag: 165eea4f-5145-42c5-b1d2-c85f6ccee89a
@@ -75,21 +75,21 @@ table MedidasRetail
 		formatString: 0.00
 		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a101
 
-	measure Cantidad_YTD = [Cantidad]
+	measure Cantidad_YTD =
+			CALCULATE(
+				[Cantidad],
+				DATESBETWEEN(Calendario[Date], [FechaInicioPeriodoSeleccionado], [FechaHastaSeleccionada])
+			)
 		formatString: 0.00
 		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a102
 
 	measure Cantidad_YTD_LY =
-			VAR FechasLY =
-				SELECTCOLUMNS(
-					VALUES(Calendario[Date]),
-					"Date", Calendario[Date] - 364
-				)
+			VAR FechaInicio = [FechaInicioPeriodoSeleccionado] - 364
+			VAR FechaHasta = [FechaHastaSeleccionada] - 364
 			RETURN
 				CALCULATE(
 					[Cantidad],
-					REMOVEFILTERS(Calendario[Date]),
-					TREATAS(FechasLY, Calendario[Date])
+					DATESBETWEEN(Calendario[Date], FechaInicio, FechaHasta)
 				)
 		formatString: 0.00
 		lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a103
@@ -114,21 +114,21 @@ table MedidasRetail
 		formatString: 0
 		lineageTag: 12345678-1234-1234-1234-123456789abc
 
-	measure NumeroTransacciones_YTD = [NumeroTransacciones]
+	measure NumeroTransacciones_YTD =
+			CALCULATE(
+				[NumeroTransacciones],
+				DATESBETWEEN(Calendario[Date], [FechaInicioPeriodoSeleccionado], [FechaHastaSeleccionada])
+			)
 		formatString: 0
 		lineageTag: 60e5bd21-b9ce-46d8-9650-b9a903e116f0
 
 	measure NumeroTransacciones_LY =
-			VAR FechasLY =
-				SELECTCOLUMNS(
-					VALUES(Calendario[Date]),
-					"Date", Calendario[Date] - 364
-				)
+			VAR FechaInicio = [FechaInicioPeriodoSeleccionado] - 364
+			VAR FechaHasta = [FechaHastaSeleccionada] - 364
 			RETURN
 				CALCULATE(
 					[NumeroTransacciones],
-					REMOVEFILTERS(Calendario[Date]),
-					TREATAS(FechasLY, Calendario[Date])
+					DATESBETWEEN(Calendario[Date], FechaInicio, FechaHasta)
 				)
 		formatString: 0
 		lineageTag: 12345678-1234-1234-1234-123456789abd
@@ -173,21 +173,21 @@ table MedidasRetail
 		formatString: 0
 		lineageTag: abcdef12-3456-7890-abcd-ef1234567890
 
-	measure NumeroClientesUnicos_YTD = [NumeroClientesUnicos]
+	measure NumeroClientesUnicos_YTD =
+			CALCULATE(
+				[NumeroClientesUnicos],
+				DATESBETWEEN(Calendario[Date], [FechaInicioPeriodoSeleccionado], [FechaHastaSeleccionada])
+			)
 		formatString: 0
 		lineageTag: a36c46db-510c-4f5b-a7f4-88f09af78434
 
 	measure NumeroClientesUnicos_LY =
-			VAR FechasLY =
-				SELECTCOLUMNS(
-					VALUES(Calendario[Date]),
-					"Date", Calendario[Date] - 364
-				)
+			VAR FechaInicio = [FechaInicioPeriodoSeleccionado] - 364
+			VAR FechaHasta = [FechaHastaSeleccionada] - 364
 			RETURN
 				CALCULATE(
 					[NumeroClientesUnicos],
-					REMOVEFILTERS(Calendario[Date]),
-					TREATAS(FechasLY, Calendario[Date])
+					DATESBETWEEN(Calendario[Date], FechaInicio, FechaHasta)
 				)
 		formatString: 0
 		lineageTag: 1093eec0-9198-4924-88ee-b04597d0f2ec

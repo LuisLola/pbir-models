@@ -1,6 +1,90 @@
 table MedidasCalculadasRetailOnline
 	lineageTag: 2d2f9f84-a97d-456d-a000-1349e9e388fd
 
+	measure PeriodoSeleccionado = SELECTEDVALUE(PeriodoSelector[Periodo], "Mes")
+		formatString: @
+		lineageTag: 47f52fcb-98d6-4d67-b3f5-3dff87be4fd1
+
+	measure FechaHastaSeleccionada = COALESCE(SELECTEDVALUE(FechaHastaSelector[Date]), TODAY())
+		formatString: Long Date
+		lineageTag: 2f28bf6e-9c71-43f4-bb13-ff8f8f0a5421
+
+	measure FechaInicioPeriodoSeleccionado =
+			VAR FechaHasta = [FechaHastaSeleccionada]
+			VAR Periodo = [PeriodoSeleccionado]
+			RETURN
+				SWITCH(
+					Periodo,
+					"Dia", FechaHasta,
+					"Semana", FechaHasta - WEEKDAY(FechaHasta, 2) + 1,
+					"Mes", DATE(YEAR(FechaHasta), MONTH(FechaHasta), 1),
+					"Trimestre", DATE(YEAR(FechaHasta), (QUARTER(FechaHasta) - 1) * 3 + 1, 1),
+					"Anio", DATE(YEAR(FechaHasta), 1, 1),
+					DATE(YEAR(FechaHasta), MONTH(FechaHasta), 1)
+				)
+		formatString: Long Date
+		lineageTag: 2ed80468-8b08-46d8-b89c-8a16b5f8bc20
+
+	measure RangoPeriodoSeleccionado =
+			VAR FechaInicio = [FechaInicioPeriodoSeleccionado]
+			VAR FechaHasta = [FechaHastaSeleccionada]
+			RETURN
+				FORMAT(FechaInicio, "dd mmm yyyy") & " a " & FORMAT(FechaHasta, "dd mmm yyyy")
+		formatString: @
+		lineageTag: b4359f57-9303-4d08-b50b-56b9f93a3cc0
+
+	measure EsFechaEnPeriodoSeleccionado =
+			VAR FechaInicio = [FechaInicioPeriodoSeleccionado]
+			VAR FechaHasta = [FechaHastaSeleccionada]
+			VAR FechaActual = MAX(Calendario[Date])
+			RETURN
+				IF(FechaActual >= FechaInicio && FechaActual <= FechaHasta, 1, 0)
+		formatString: 0
+		lineageTag: 6bd9a6f6-5c73-41cc-8bf7-1f9c9574e440
+
+	measure Ventas_PeriodoSeleccionado =
+			CALCULATE(
+				[Ventas],
+				DATESBETWEEN(Calendario[Date], [FechaInicioPeriodoSeleccionado], [FechaHastaSeleccionada])
+			)
+		formatString: "EUR"\ #,0.0;-"EUR"\ #,0.0;"EUR"\ #,0.0
+		lineageTag: 7cc43e5e-c424-45cb-83e8-4e8fe790cb66
+
+	measure Ventas_PeriodoSeleccionado_LY =
+			VAR FechaInicio = [FechaInicioPeriodoSeleccionado] - 364
+			VAR FechaHasta = [FechaHastaSeleccionada] - 364
+			RETURN
+				CALCULATE(
+					[Ventas],
+					DATESBETWEEN(Calendario[Date], FechaInicio, FechaHasta)
+				)
+		formatString: "EUR"\ #,0.0;-"EUR"\ #,0.0;"EUR"\ #,0.0
+		lineageTag: f32f7c2f-f8a4-4f7d-a78b-889bce8f3ec5
+
+	measure Cantidad_PeriodoSeleccionado =
+			CALCULATE(
+				[Cantidad],
+				DATESBETWEEN(Calendario[Date], [FechaInicioPeriodoSeleccionado], [FechaHastaSeleccionada])
+			)
+		formatString: 0.00
+		lineageTag: b384cc75-a5f3-45ce-b956-7710c551984d
+
+	measure Entradas_PeriodoSeleccionado =
+			CALCULATE(
+				[Entradas],
+				DATESBETWEEN(Calendario[Date], [FechaInicioPeriodoSeleccionado], [FechaHastaSeleccionada])
+			)
+		formatString: #,0
+		lineageTag: e390a2c0-9b17-40d0-95c4-34af00d925ff
+
+	measure Exterior_PeriodoSeleccionado =
+			CALCULATE(
+				[Exterior],
+				DATESBETWEEN(Calendario[Date], [FechaInicioPeriodoSeleccionado], [FechaHastaSeleccionada])
+			)
+		formatString: #,0
+		lineageTag: 0d8c77cd-78a3-4914-b71e-872f390cb79b
+
 	column Column
 		formatString: 0
 		lineageTag: 32f6e1b2-46e5-4fc5-9322-68559e9d8259

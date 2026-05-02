@@ -9,21 +9,21 @@ table MedidasTrafico
 		formatString: #,0
 		lineageTag: 45003ec6-ee92-4684-bb01-18fe899f5c28
 
-	measure Entradas_YTD = [Entradas]
+	measure Entradas_YTD =
+			CALCULATE(
+				[Entradas],
+				DATESBETWEEN(Calendario[Date], [FechaInicioPeriodoSeleccionado], [FechaHastaSeleccionada])
+			)
 		formatString: #,0
 		lineageTag: c1e8e6b1-44a2-4f58-8e77-0a1c4d2b3f7a
 
 	measure Entradas_YTD_LY =
-			VAR FechasLY =
-				SELECTCOLUMNS(
-					VALUES(Calendario[Date]),
-					"Date", Calendario[Date] - 364
-				)
+			VAR FechaInicio = [FechaInicioPeriodoSeleccionado] - 364
+			VAR FechaHasta = [FechaHastaSeleccionada] - 364
 			RETURN
 				CALCULATE(
 					[Entradas],
-					REMOVEFILTERS(Calendario[Date]),
-					TREATAS(FechasLY, Calendario[Date])
+					DATESBETWEEN(Calendario[Date], FechaInicio, FechaHasta)
 				)
 		formatString: #,0
 		lineageTag: b2f0d8c2-55b3-4f69-9f88-1b2d5e3c4a8b
@@ -48,21 +48,21 @@ table MedidasTrafico
 		formatString: #,0
 		lineageTag: a5a24c0e-b230-46f8-8f37-3b776f96a71f
 
-	measure Exterior_YTD = [Exterior]
+	measure Exterior_YTD =
+			CALCULATE(
+				[Exterior],
+				DATESBETWEEN(Calendario[Date], [FechaInicioPeriodoSeleccionado], [FechaHastaSeleccionada])
+			)
 		formatString: #,0
 		lineageTag: 6e0cfa86-8f77-4b2d-bd5c-a7f8640be2df
 
 	measure Exterior_YTD_LY =
-			VAR FechasLY =
-				SELECTCOLUMNS(
-					VALUES(Calendario[Date]),
-					"Date", Calendario[Date] - 364
-				)
+			VAR FechaInicio = [FechaInicioPeriodoSeleccionado] - 364
+			VAR FechaHasta = [FechaHastaSeleccionada] - 364
 			RETURN
 				CALCULATE(
 					[Exterior],
-					REMOVEFILTERS(Calendario[Date]),
-					TREATAS(FechasLY, Calendario[Date])
+					DATESBETWEEN(Calendario[Date], FechaInicio, FechaHasta)
 				)
 		formatString: #,0
 		lineageTag: 06d4e6c6-99f7-4d03-d122-5f6a9b7c8d2e

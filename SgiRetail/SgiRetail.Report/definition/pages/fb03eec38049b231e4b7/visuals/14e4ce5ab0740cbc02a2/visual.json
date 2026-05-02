@@ -1120,51 +1120,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "11f5b8a640a12e9e14d2",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PBITIENDAS"
-              }
-            },
-            "Property": "TipoTienda"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "a5b2f1496c9aeb13132d",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PBITIENDAS"
-              }
-            },
-            "Property": "NombreTienda"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "8f738fa9086a9587e77a",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PBIMODELITEM"
-              }
-            },
-            "Property": "Nombre_familia"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

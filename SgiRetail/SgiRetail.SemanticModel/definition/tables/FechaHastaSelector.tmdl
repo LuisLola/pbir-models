@@ -1,0 +1,40 @@
+table FechaHastaSelector
+	lineageTag: f5abf5da-e1c2-4f5a-82b8-e1bd8ed4aaf7
+
+	column Date
+		isKey
+		formatString: General Date
+		lineageTag: 0560dac4-1c61-4ac9-b0e6-273a27a7199b
+		summarizeBy: none
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaKey
+		formatString: 0
+		lineageTag: a1fcbfb0-d2dd-42b8-9f98-d42d98e8327c
+		summarizeBy: none
+		sourceColumn: [FechaKey]
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaTexto
+		lineageTag: 2c6b89b8-5c9d-4ab9-b9c6-b50896af5a77
+		summarizeBy: none
+		sourceColumn: [FechaTexto]
+		sortByColumn: FechaKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FechaHastaSelector = calculated
+		mode: import
+		source =
+				SELECTCOLUMNS(
+				    Calendario,
+				    "Date", Calendario[Date],
+				    "FechaKey", Calendario[FechaKey],
+				    "FechaTexto", FORMAT(Calendario[Date], "dd mmmm yyyy")
+				)
+
+	annotation PBI_Id = f5abf5dae1c24f5a82b8e1bd8ed4aaf7
+
