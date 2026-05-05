@@ -593,4 +593,202 @@ table LOL_PBISALESORDER
 
 			VAR _val =
 			    CALCULATE (
-			     
+			        MAX ( 'LOL_PBISEASON'[CompareSeason] ),
+			        KEEPFILTERS ( 'LOL_PBISEASON'[Code] = SELECTEDVALUE ( 'LOL_PBISEASON'[Code] ) )
+			    )
+			RETURN
+			    IF (
+			        HASONEVALUE ( 'LOL_PBISEASON'[Code] ),
+			        _val & " Total",
+			        "Total"
+			    )
+			```
+		displayFolder: Temporadas
+
+	measure TemporadaPasada = ```
+
+			CALCULATE (
+			    MAX ( 'LOL_PBISEASON'[TemporadaAnterior] ),
+			    'LOL_PBISEASON'[Code] = SELECTEDVALUE ( 'LOL_PBISEASON'[Code] )
+			)
+			```
+		displayFolder: Temporadas
+
+	measure VentasTemporadaSeleccionada = ```
+
+			VAR TemporadaSel = SELECTEDVALUE ( 'LOL_PBISEASON'[Code] )
+			VAR FechaIniT =
+			    CALCULATE (
+			        MIN ( 'LOL_PBISEASON'[Inicio] ),
+			        KEEPFILTERS ( 'LOL_PBISEASON'[Code] = TemporadaSel )
+			    )
+			VAR FechaFinT =
+			    CALCULATE (
+			        MAX ( 'LOL_PBISEASON'[Fin] ),
+			        KEEPFILTERS ( 'LOL_PBISEASON'[Code] = TemporadaSel )
+			    )
+			VAR FechaCorte = [FechaLimiteSeleccionada]
+			VAR LimSup = MIN ( FechaFinT, FechaCorte )
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel ) || ISBLANK ( FechaIniT ) || ISBLANK ( FechaFinT ) || FechaCorte < FechaIniT,
+			        0,
+			        CALCULATE (
+			            SUM ( 'LOL_PBISALESORDER'[ImporteNetoLineaML] ),
+			            KEEPFILTERS ( 'LOL_PBISALESORDER'[TemporadaLinea] = TemporadaSel ),
+			            TREATAS (
+			                DATESBETWEEN ( 'Calendario'[Date], FechaIniT, LimSup ),
+			                'LOL_PBISALESORDER'[FechaDocumento]
+			            )
+			        )
+			    )
+			```
+		formatString: \€#,##0
+		displayFolder: Ventas Temporada
+
+	measure VentasTemporadaAnterior = ```
+
+			VAR TemporadaSel = SELECTEDVALUE ( 'LOL_PBISEASON'[Code] )
+			VAR FechaLimite = [FechaLimiteSeleccionada]
+			VAR FechaInicioActual =
+			    CALCULATE (
+			        MAX ( 'LOL_PBISEASON'[Inicio] ),
+			        'LOL_PBISEASON'[Code] = TemporadaSel
+			    )
+			VAR DiasDuracion = DATEDIFF ( FechaInicioActual, FechaLimite, DAY )
+			VAR TemporadaAnt =
+			    CALCULATE (
+			        MAX ( 'LOL_PBISEASON'[CompareSeason] ),
+			        'LOL_PBISEASON'[Code] = TemporadaSel
+			    )
+			VAR FechaInicioAnt =
+			    LOOKUPVALUE (
+			        'LOL_PBISEASON'[Inicio],
+			        'LOL_PBISEASON'[Code], TemporadaAnt
+			    )
+			VAR FechaFinAnt = FechaInicioAnt + DiasDuracion
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaAnt ) || ISBLANK ( FechaInicioAnt ),
+			        BLANK (),
+			        CALCULATE (
+			            SUM ( 'LOL_PBISALESORDER'[ImporteNetoLineaML] ),
+			            FILTER (
+			                ALL ( 'LOL_PBISALESORDER' ),
+			                'LOL_PBISALESORDER'[TemporadaLinea] = TemporadaAnt
+			                    && 'LOL_PBISALESORDER'[FechaDocumento] >= FechaInicioAnt
+			                    && 'LOL_PBISALESORDER'[FechaDocumento] <= FechaFinAnt
+			            )
+			        )
+			    )
+			```
+		formatString: \€#,##0
+		displayFolder: Ventas Temporada
+
+	measure VentasTemporadaAnterior_SoloInicio = ```
+
+			VAR TemporadaSel = SELECTEDVALUE ( 'LOL_PBISEASON'[Code] )
+			VAR TemporadaAnt =
+			    CALCULATE (
+			        MAX ( 'LOL_PBISEASON'[CompareSeason] ),
+			        'LOL_PBISEASON'[Code] = TemporadaSel
+			    )
+			VAR FechaInicioAnt =
+			    LOOKUPVALUE (
+			        'LOL_PBISEASON'[Inicio],
+			        'LOL_PBISEASON'[Code], TemporadaAnt
+			    )
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaAnt ) || ISBLANK ( FechaInicioAnt ),
+			        BLANK (),
+			        CALCULATE (
+			            SUM ( 'LOL_PBISALESORDER'[ImporteNetoLineaML] ),
+			            FILTER (
+			                ALL ( 'LOL_PBISALESORDER' ),
+			                'LOL_PBISALESORDER'[TemporadaLinea] = TemporadaAnt
+			                    && 'LOL_PBISALESORDER'[FechaDocumento] >= FechaInicioAnt
+			            )
+			        )
+			    )
+			```
+		formatString: \€#,##0
+		displayFolder: Ventas Temporada
+
+	measure VentasTemporadaPasada_SoloInicio = ```
+
+			VAR TemporadaSel = SELECTEDVALUE ( 'LOL_PBISEASON'[Code] )
+			VAR TemporadaPas =
+			    CALCULATE (
+			        MAX ( 'LOL_PBISEASON'[TemporadaAnterior] ),
+			        'LOL_PBISEASON'[Code] = TemporadaSel
+			    )
+			VAR FechaInicioPas =
+			    LOOKUPVALUE (
+			        'LOL_PBISEASON'[Inicio],
+			        'LOL_PBISEASON'[Code], TemporadaPas
+			    )
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaPas ) || ISBLANK ( FechaInicioPas ),
+			        BLANK (),
+			        CALCULATE (
+			            SUM ( 'LOL_PBISALESORDER'[ImporteNetoLineaML] ),
+			            FILTER (
+			                ALL ( 'LOL_PBISALESORDER' ),
+			                'LOL_PBISALESORDER'[TemporadaLinea] = TemporadaPas
+			                    && 'LOL_PBISALESORDER'[FechaDocumento] >= FechaInicioPas
+			            )
+			        )
+			    )
+			```
+		formatString: \€#,##0
+		displayFolder: Ventas Temporada
+
+	measure EvolTemporadaSeleccionada = [VentasTemporadaSeleccionada] - [VentasTemporadaAnterior]
+		formatString: \€#,##0
+		displayFolder: Evolución
+
+	measure 'EvolTemporadaSeleccionada_%' = ```
+
+			VAR Actual = [VentasTemporadaSeleccionada]
+			VAR Anterior = [VentasTemporadaAnterior]
+			RETURN
+			    IF (
+			        NOT ISBLANK ( Anterior ) && Anterior <> 0,
+			        DIVIDE ( Actual - Anterior, Anterior, 0 ),
+			        BLANK ()
+			    )
+			```
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Evolución
+
+	measure EvolTemporadaSeleccionada_Completa = [VentasTemporadaSeleccionada] - [VentasTemporadaAnterior_SoloInicio]
+		formatString: \€#,##0
+		displayFolder: Evolución
+
+	measure 'EvolTemporadaSeleccionada_%Completa' = ```
+
+			VAR Actual = [VentasTemporadaSeleccionada]
+			VAR Anterior = [VentasTemporadaAnterior_SoloInicio]
+			RETURN
+			    IF (
+			        NOT ISBLANK ( Anterior ) && Anterior <> 0,
+			        DIVIDE ( Actual - Anterior, Anterior, 0 ),
+			        BLANK ()
+			    )
+			```
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Evolución
+
+	partition LOL_PBISALESORDER = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin"),
+				    dbo_LOL_PBISALESORDER = Origen{[Schema="dbo",Item="LOL_PBISALESORDER"]}[Data]
+				in
+				    dbo_LOL_PBISALESORDER
+
+	annotation PBI_ResultType = Table
+
