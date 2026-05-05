@@ -1,0 +1,81 @@
+relationship 6111a91a-8c77-40ac-97c2-d7b4333f6fd9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISALESORDER.FechaDocumento
+	toColumn: LocalDateTable_c53112aa-d80a-47e4-ae28-099473414fda.Date
+
+relationship b4343ffe-fa6f-47e6-96ef-e3641378e5e0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISALESORDER.FechaEntregaLinea
+	toColumn: LocalDateTable_ff01fe98-d6e3-4c00-b31f-cb4bbc5edd8b.Date
+
+relationship 8ed1e5c8-2e66-4f66-b2e5-76f529226630
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISALESORDER.FechaVencimiento
+	toColumn: LocalDateTable_8fc8258c-c868-48c9-8170-5db89db06a9b.Date
+
+relationship 088fb568-2836-46a1-a044-7cfbf841b73c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISEASON.FechaInicioB2B
+	toColumn: LocalDateTable_048becd8-8335-4dc6-aabc-59f4c5e11ef3.Date
+
+relationship 127408f5-c903-4f5f-a2b0-3538b4f3f13e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISEASON.Fin
+	toColumn: LocalDateTable_7667dd95-6c6f-440f-899d-fcb30845d83e.Date
+
+relationship acd7b812-570f-4eec-a3a8-9dbd065b2f3b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISEASON.Inicio
+	toColumn: LocalDateTable_02678677-7458-489b-9da0-d95fbe2ba371.Date
+
+relationship 44197b0f-eaba-d6fc-59aa-6611ae5b06dc
+	fromColumn: LOL_PBISALESORDER.CodigoArticulo
+	toColumn: LOL_PBIMODELITEM.ItemCode
+
+relationship fb922c9b-4d85-025a-4944-0b741d423563
+	fromColumn: LOL_PBISALESORDER.CodigoVendedor
+	toColumn: LOL_PBIAGENTES.SlpCode
+
+relationship c8a06b41-be34-426f-6c87-678cc97e578d
+	fromColumn: LOL_PBISALESORDER.TemporadaLinea
+	toColumn: LOL_PBISEASON.Code
+
+relationship 6114cf87-0b61-47de-8e26-6769f8bd5f91
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendario.Date
+	toColumn: LocalDateTable_c773259d-43ef-4693-a523-5730f25d6d99.Date
+
+relationship 782af3af-eecf-4e48-9c97-ab092eb8abd3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendario.InicioMes
+	toColumn: LocalDateTable_12b970ad-dadd-4882-af8a-df3827e5a86d.Date
+
+relationship 97283c1a-ec85-455c-b16b-e427318d2097
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendario.FinMes
+	toColumn: LocalDateTable_614253a8-de01-4772-8f94-8d266b90ffbe.Date
+
+relationship 057db4d9-88be-4d4a-9fde-6e1b1d0a8d73
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendario.InicioTrimestre
+	toColumn: LocalDateTable_016ce252-2af6-4d14-8ad3-fcd50993f0f8.Date
+
+relationship 1b5e5452-749c-4a50-9a5f-79a627ee5841
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendario.FinTrimestre
+	toColumn: LocalDateTable_80f7c7e9-c9f2-4d45-9a3f-2136fc9bbad8.Date
+
+relationship 0f3cc794-5950-4587-a2b4-5cebefeee05f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendario.InicioAño
+	toColumn: LocalDateTable_e74963ca-901b-4c08-a971-51b1f6525abe.Date
+
+relationship 7b7fd304-92e5-4820-8af2-46aaa163c80f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendario.FinAño
+	toColumn: LocalDateTable_91198f72-5da9-403e-b12a-539925af6a19.Date
+
+relationship 99c8780c-0a82-35d9-6cf4-c4f0013c81aa
+	fromColumn: LOL_PBISALESORDER.FechaContabilizacion
+	toColumn: Calendario.Date
+

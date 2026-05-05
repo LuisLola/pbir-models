@@ -1,0 +1,596 @@
+table LOL_PBISALESORDER
+	lineageTag: 428c7162-308b-40a5-8040-bee5491a90de
+
+	column BaseEntry
+		dataType: string
+		lineageTag: a9c3b196-80ee-4e54-b4e4-6a92e46964eb
+		summarizeBy: none
+		sourceColumn: BaseEntry
+
+		annotation SummarizationSetBy = Automatic
+
+	column BaseLine
+		dataType: string
+		lineageTag: 488a65bb-7a3c-40d3-aca2-53964b5ba6ea
+		summarizeBy: none
+		sourceColumn: BaseLine
+
+		annotation SummarizationSetBy = Automatic
+
+	column BaseType
+		dataType: string
+		lineageTag: a9c553ca-8e91-40be-bc09-6e63df6de13b
+		summarizeBy: none
+		sourceColumn: BaseType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cantidad
+		dataType: double
+		lineageTag: 73b80f48-d54a-4510-8c9a-b34c9debc025
+		summarizeBy: sum
+		sourceColumn: Cantidad
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CantidadEntregada
+		dataType: double
+		lineageTag: f5361546-e30f-40f0-b2a7-8667ee87e981
+		summarizeBy: sum
+		sourceColumn: CantidadEntregada
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CantidadPendienteInventario
+		dataType: double
+		lineageTag: bc6c6990-0b08-46a4-b926-69492a440cc3
+		summarizeBy: sum
+		sourceColumn: CantidadPendienteInventario
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CodigoAlmacen
+		dataType: string
+		lineageTag: ffd4b7e4-b8e0-4634-9da0-bf2f27033f16
+		summarizeBy: none
+		sourceColumn: CodigoAlmacen
+
+		annotation SummarizationSetBy = Automatic
+
+	column CodigoArticulo
+		dataType: string
+		lineageTag: b89907e2-ce85-4430-8504-f74e2d8b3895
+		summarizeBy: none
+		sourceColumn: CodigoArticulo
+
+		annotation SummarizationSetBy = Automatic
+
+	column CodigoCliente
+		dataType: string
+		lineageTag: 4d00b6ed-533b-46b0-90ba-5d6302507ace
+		summarizeBy: none
+		sourceColumn: CodigoCliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column CodigoProyecto
+		dataType: string
+		lineageTag: 8bbf82b1-44ab-45dd-95b7-bfae7cb76ca5
+		summarizeBy: none
+		sourceColumn: CodigoProyecto
+
+		annotation SummarizationSetBy = Automatic
+
+	column CodigoUnidadMedida
+		dataType: string
+		lineageTag: f2b277ee-e521-4e3f-a9c8-64d59e76e34e
+		summarizeBy: none
+		sourceColumn: CodigoUnidadMedida
+
+		annotation SummarizationSetBy = Automatic
+
+	column CodigoVendedor
+		dataType: string
+		lineageTag: df57b1c7-7b41-47dd-8133-dd844c5e4cfe
+		summarizeBy: none
+		sourceColumn: CodigoVendedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column CosteLineaML
+		dataType: double
+		lineageTag: a0202c14-8d2b-4192-b567-acd60b0f0113
+		summarizeBy: sum
+		sourceColumn: CosteLineaML
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DescuentoComercialMD
+		dataType: double
+		lineageTag: 76b53e34-4b4c-4bb8-ae25-eeaa7aa64607
+		summarizeBy: sum
+		sourceColumn: DescuentoComercialMD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DescuentoComercialML
+		dataType: double
+		lineageTag: e2742e17-c5f0-4c0b-a29a-1531a8483350
+		summarizeBy: sum
+		sourceColumn: DescuentoComercialML
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DescuentoFinancieroCabeceraMD
+		dataType: double
+		lineageTag: 9046980c-3f6c-425d-9394-3b74d0b56b4e
+		summarizeBy: sum
+		sourceColumn: DescuentoFinancieroCabeceraMD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DescuentoFinancieroCabeceraML
+		dataType: double
+		lineageTag: 891da513-22d6-477a-b80e-4a7a86608cbd
+		summarizeBy: sum
+		sourceColumn: DescuentoFinancieroCabeceraML
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DescuentoFinancieroML
+		dataType: double
+		lineageTag: 75a13b44-6587-40e6-9f57-5b586796f8f3
+		summarizeBy: sum
+		sourceColumn: DescuentoFinancieroML
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DescuentoFinancieroRepartidoMD
+		dataType: double
+		lineageTag: 6480d309-18f0-4d6c-aa1b-686f3c2d820b
+		summarizeBy: sum
+		sourceColumn: DescuentoFinancieroRepartidoMD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DescuentoFinancieroRepartidoML
+		dataType: double
+		lineageTag: f1b3cb3f-be35-4712-a3b3-569da71a782b
+		summarizeBy: sum
+		sourceColumn: DescuentoFinancieroRepartidoML
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DispositivoInacatalogo
+		dataType: string
+		lineageTag: f479b956-cf4b-4bbb-87b0-1bd49ea31e68
+		summarizeBy: none
+		sourceColumn: DispositivoInacatalogo
+
+		annotation SummarizationSetBy = Automatic
+
+	column DocEntry
+		dataType: string
+		lineageTag: 051d1578-11a8-4a55-93a6-99a4338cadb6
+		summarizeBy: none
+		sourceColumn: DocEntry
+
+		annotation SummarizationSetBy = Automatic
+
+	column DocNum
+		dataType: string
+		lineageTag: 9d00f327-8ca7-45a5-8c93-0e601413a682
+		summarizeBy: none
+		sourceColumn: DocNum
+
+		annotation SummarizationSetBy = Automatic
+
+	column EstadoDocumento
+		dataType: string
+		lineageTag: a18b26d5-3f3b-42dc-aa7e-3bcb5218c301
+		summarizeBy: none
+		sourceColumn: EstadoDocumento
+
+		annotation SummarizationSetBy = Automatic
+
+	column EstadoLinea
+		dataType: string
+		lineageTag: 15a64f3c-bc0e-48ef-b14e-ccab6b52ae64
+		summarizeBy: none
+		sourceColumn: EstadoLinea
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaComunicacion
+		dataType: string
+		lineageTag: 5f480e53-7f6e-4b71-8c5d-cd78f5a1be8e
+		summarizeBy: none
+		sourceColumn: FechaComunicacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaContabilizacion
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4bf0430c-3421-49fb-9ea4-76b4210db33a
+		summarizeBy: none
+		sourceColumn: FechaContabilizacion
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FechaDocumento
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a02d6a38-2e58-409c-af52-c46badbcf5b3
+		summarizeBy: none
+		sourceColumn: FechaDocumento
+
+		variation Variación
+			isDefault
+			relationship: 6111a91a-8c77-40ac-97c2-d7b4333f6fd9
+			defaultHierarchy: LocalDateTable_c53112aa-d80a-47e4-ae28-099473414fda.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FechaEntregaLinea
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: bbffc2eb-83c1-412f-b530-34027a366eea
+		summarizeBy: none
+		sourceColumn: FechaEntregaLinea
+
+		variation Variación
+			isDefault
+			relationship: b4343ffe-fa6f-47e6-96ef-e3641378e5e0
+			defaultHierarchy: LocalDateTable_ff01fe98-d6e3-4c00-b31f-cb4bbc5edd8b.'Jerarquía de fechas'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FechaVencimiento
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 07014ed6-46c2-4d9d-916a-a2399a50c152
+		summarizeBy: none
+		sourceColumn: FechaVencimiento
+
+		variation Variación
+			isDefault
+			relationship: 8ed1e5c8-2e66-4f66-b2e5-76f529226630
+			defaultHierarchy: LocalDateTable_8fc8258c-c868-48c9-8170-5db89db06a9b.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ImporteNetoLineaMD
+		dataType: double
+		lineageTag: c17bfb49-03f8-4cb2-87c3-9e8d5b8efdc0
+		summarizeBy: sum
+		sourceColumn: ImporteNetoLineaMD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ImporteNetoLineaML
+		dataType: double
+		lineageTag: 7242785a-5df1-40d2-a7d7-01f821009034
+		summarizeBy: sum
+		sourceColumn: ImporteNetoLineaML
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ImpuestoLineaML
+		dataType: double
+		lineageTag: 6a0fe536-08a9-4c47-b45a-a8b17e816bb5
+		summarizeBy: sum
+		sourceColumn: ImpuestoLineaML
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ItemsPorUnidad
+		dataType: double
+		lineageTag: 69b6ee88-5ae5-42c2-9c15-f4c902cc3280
+		summarizeBy: sum
+		sourceColumn: ItemsPorUnidad
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LineaInternaDocumento
+		dataType: string
+		lineageTag: e84d0254-9bc3-47c6-aeed-7b80befc9e83
+		summarizeBy: none
+		sourceColumn: LineaInternaDocumento
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonedaDocumento
+		dataType: string
+		lineageTag: a4a11781-ca82-4c32-911f-abcdd0f2bb62
+		summarizeBy: none
+		sourceColumn: MonedaDocumento
+
+		annotation SummarizationSetBy = Automatic
+
+	column MotivoRmaLinea
+		dataType: string
+		lineageTag: c4f9c0ce-e60e-45f6-b4e2-58aa2ba7d9a7
+		summarizeBy: none
+		sourceColumn: MotivoRmaLinea
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumeroLineaVisual
+		dataType: string
+		lineageTag: 6e7ca90a-1509-4925-ac59-318d3b23f91f
+		summarizeBy: none
+		sourceColumn: NumeroLineaVisual
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumeroPedidoInacatalogo
+		dataType: string
+		lineageTag: 9a65cde4-f095-4639-bb48-151ca57efae2
+		summarizeBy: none
+		sourceColumn: NumeroPedidoInacatalogo
+
+		annotation SummarizationSetBy = Automatic
+
+	column PctDescuentoComercial
+		dataType: double
+		lineageTag: 9dfd7d22-439c-4953-a343-d830e0022bbd
+		summarizeBy: sum
+		sourceColumn: PctDescuentoComercial
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PedidoRegistrado
+		dataType: string
+		lineageTag: b9915046-995c-403d-a2e8-898bca4a9a8d
+		summarizeBy: none
+		sourceColumn: PedidoRegistrado
+
+		annotation SummarizationSetBy = Automatic
+
+	column PedidoReposicionLinea
+		dataType: string
+		lineageTag: bce44111-7480-4462-93b9-86029716b94d
+		summarizeBy: none
+		sourceColumn: PedidoReposicionLinea
+
+		annotation SummarizationSetBy = Automatic
+
+	column PickIdNo
+		dataType: string
+		lineageTag: a6d2c10a-0ec8-4d98-99e4-879b3b3e9984
+		summarizeBy: none
+		sourceColumn: PickIdNo
+
+		annotation SummarizationSetBy = Automatic
+
+	column PortesDocumentoMD
+		dataType: double
+		lineageTag: 931d8b1b-a9fd-4b32-8506-824bcd23aeef
+		summarizeBy: sum
+		sourceColumn: PortesDocumentoMD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PortesDocumentoML
+		dataType: double
+		lineageTag: bdda67e8-0b2f-411a-91ca-cc7b8b12230a
+		summarizeBy: sum
+		sourceColumn: PortesDocumentoML
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PortesRepartidosMD
+		dataType: double
+		lineageTag: 53d344bd-a69b-4c41-a33a-742e8cdbecdc
+		summarizeBy: sum
+		sourceColumn: PortesRepartidosMD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PortesRepartidosML
+		dataType: double
+		lineageTag: 5727bebe-7082-4d49-ae01-b349d8d665fc
+		summarizeBy: sum
+		sourceColumn: PortesRepartidosML
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PrecioUnitarioMD
+		dataType: double
+		lineageTag: 6862b812-b726-467c-af67-233f6e3aab42
+		summarizeBy: sum
+		sourceColumn: PrecioUnitarioMD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PrecioUnitarioML
+		dataType: double
+		lineageTag: f8bc4367-3b0b-47a2-84d7-0a2041a0c491
+		summarizeBy: sum
+		sourceColumn: PrecioUnitarioML
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RefTPV
+		dataType: string
+		lineageTag: 854e9c24-c149-49c7-872e-3e7f2119ce36
+		summarizeBy: none
+		sourceColumn: RefTPV
+
+		annotation SummarizationSetBy = Automatic
+
+	column SoloImpuesto
+		dataType: string
+		lineageTag: b3f508c2-cf28-4f7a-bdf1-36634625e538
+		summarizeBy: none
+		sourceColumn: SoloImpuesto
+
+		annotation SummarizationSetBy = Automatic
+
+	column SucursalCab
+		dataType: string
+		lineageTag: 4c78f6cb-9403-4286-b55f-47c4f8a4ddc8
+		summarizeBy: none
+		sourceColumn: SucursalCab
+
+		annotation SummarizationSetBy = Automatic
+
+	column TargetType
+		dataType: string
+		lineageTag: 5d10e4be-2d00-48c3-8633-5a9bf30d42bc
+		summarizeBy: none
+		sourceColumn: TargetType
+
+		annotation SummarizationSetBy = Automatic
+
+	column TemporadaCabecera
+		dataType: string
+		lineageTag: e540da89-c606-4071-8b69-c3765fb606ff
+		summarizeBy: none
+		sourceColumn: TemporadaCabecera
+
+		annotation SummarizationSetBy = Automatic
+
+	column TemporadaLinea
+		dataType: string
+		lineageTag: 91d631cd-6059-4abe-a532-54e9d4fa940e
+		summarizeBy: none
+		sourceColumn: TemporadaLinea
+
+		annotation SummarizationSetBy = Automatic
+
+	column TipoCambioLinea
+		dataType: double
+		lineageTag: 674b0586-8bb5-4b80-8d1e-e29c7c224647
+		summarizeBy: sum
+		sourceColumn: TipoCambioLinea
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TipoDocumento
+		dataType: string
+		lineageTag: 70dc143e-346a-48e9-aafe-1dfdc8aec5cf
+		summarizeBy: none
+		sourceColumn: TipoDocumento
+
+		annotation SummarizationSetBy = Automatic
+
+	column TipoEnvio
+		dataType: string
+		lineageTag: 4e583adf-d631-44ef-bfdf-06a697552e17
+		summarizeBy: none
+		sourceColumn: TipoEnvio
+
+		annotation SummarizationSetBy = Automatic
+
+	column TipoMovimientoLogistico
+		dataType: string
+		lineageTag: eb802fb9-6a00-435d-850b-ec7a0b625c66
+		summarizeBy: none
+		sourceColumn: TipoMovimientoLogistico
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalDocumentoML
+		dataType: double
+		lineageTag: a9286b73-47fc-46a2-b36e-0148e2e95771
+		summarizeBy: sum
+		sourceColumn: TotalDocumentoML
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TrgetEntry
+		dataType: string
+		lineageTag: a421f58b-c3dd-47a2-bbd6-2924b73d02a1
+		summarizeBy: none
+		sourceColumn: TrgetEntry
+
+		annotation SummarizationSetBy = Automatic
+
+	column UrlInacatalogoDocumento
+		dataType: string
+		lineageTag: 3b47c824-a681-4fce-84db-f29d808cd7c0
+		summarizeBy: none
+		sourceColumn: UrlInacatalogoDocumento
+
+		annotation SummarizationSetBy = Automatic
+
+	column UsuarioCreacion
+		dataType: string
+		lineageTag: 9a3a5fcd-878f-4596-9d28-a31cad231877
+		summarizeBy: none
+		sourceColumn: UsuarioCreacion
+
+		annotation SummarizationSetBy = Automatic
+
+	measure FechaLimiteSeleccionada = MAX('Calendario'[Date])
+		formatString: Long Date
+		displayFolder: Temporadas
+
+	measure TemporadaSeleccionada = SELECTEDVALUE('LOL_PBISEASON'[Code])
+		displayFolder: Temporadas
+
+	measure TemporadaAnteriorTotal = ```
+
+			VAR _val =
+			    CALCULATE (
+			     

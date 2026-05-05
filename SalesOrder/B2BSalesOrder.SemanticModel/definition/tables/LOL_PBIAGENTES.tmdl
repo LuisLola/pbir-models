@@ -1,0 +1,72 @@
+table LOL_PBIAGENTES
+	lineageTag: 6c83c99d-9d64-4fcb-ba4d-e5d971aadf20
+
+	column Agente_Cajero
+		dataType: string
+		lineageTag: 44aa0dfc-1572-4453-a524-133d40b0f8c1
+		summarizeBy: none
+		sourceColumn: Agente_Cajero
+
+		annotation SummarizationSetBy = Automatic
+
+	column Bloqueado
+		dataType: string
+		lineageTag: 2ced876a-db08-46a4-a945-afeca7faa342
+		summarizeBy: none
+		sourceColumn: Bloqueado
+
+		annotation SummarizationSetBy = Automatic
+
+	column Commission
+		dataType: double
+		lineageTag: 26eadcdc-98e8-4b41-affb-ce71320fce20
+		summarizeBy: none
+		sourceColumn: Commission
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Email
+		dataType: string
+		lineageTag: 2e9c0f0c-d98e-42af-af06-ff6748e2f914
+		summarizeBy: none
+		sourceColumn: Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaComunicacion
+		dataType: string
+		lineageTag: 2eef6c5c-370b-4891-9e51-9517807abe88
+		summarizeBy: none
+		sourceColumn: FechaComunicacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column Memo
+		dataType: string
+		lineageTag: 5eee4e03-b3d6-4912-b561-035386719bda
+		summarizeBy: none
+		sourceColumn: Memo
+
+		annotation SummarizationSetBy = Automatic
+
+	column SlpCode
+		dataType: string
+		lineageTag: be56abf4-b0af-435e-917c-b2fa8a7376f3
+		summarizeBy: none
+		sourceColumn: SlpCode
+
+		annotation SummarizationSetBy = Automatic
+
+	partition LOL_PBIAGENTES = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin"),
+				    dbo_LOL_PBIAGENTES = Origen{[Schema="dbo",Item="LOL_PBIAGENTES"]}[Data]
+				in
+				    dbo_LOL_PBIAGENTES
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,36 @@
+model Model
+	culture: es-ES
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-ES
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["LOL_PBISALESORDER","LOL_PBIAGENTES","LOL_PBIMODELITEM","LOL_PBISEASON"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table LOL_PBISALESORDER
+ref table DateTableTemplate_4e09d981-c84f-4422-ae4e-a9a18270d9dd
+ref table LocalDateTable_c53112aa-d80a-47e4-ae28-099473414fda
+ref table LocalDateTable_ff01fe98-d6e3-4c00-b31f-cb4bbc5edd8b
+ref table LocalDateTable_8fc8258c-c868-48c9-8170-5db89db06a9b
+ref table LOL_PBIAGENTES
+ref table LOL_PBIMODELITEM
+ref table LOL_PBISEASON
+ref table LocalDateTable_048becd8-8335-4dc6-aabc-59f4c5e11ef3
+ref table LocalDateTable_7667dd95-6c6f-440f-899d-fcb30845d83e
+ref table LocalDateTable_02678677-7458-489b-9da0-d95fbe2ba371
+ref table Calendario
+ref table LocalDateTable_c773259d-43ef-4693-a523-5730f25d6d99
+ref table LocalDateTable_12b970ad-dadd-4882-af8a-df3827e5a86d
+ref table LocalDateTable_614253a8-de01-4772-8f94-8d266b90ffbe
+ref table LocalDateTable_016ce252-2af6-4d14-8ad3-fcd50993f0f8
+ref table LocalDateTable_80f7c7e9-c9f2-4d45-9a3f-2136fc9bbad8
+ref table LocalDateTable_e74963ca-901b-4c08-a971-51b1f6525abe
+ref table LocalDateTable_91198f72-5da9-403e-b12a-539925af6a19
+
+ref cultureInfo es-ES
+

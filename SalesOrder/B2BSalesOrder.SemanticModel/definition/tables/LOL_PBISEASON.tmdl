@@ -1,0 +1,110 @@
+table LOL_PBISEASON
+	lineageTag: 429a3728-b9a2-40ae-89ed-4320508afdb1
+
+	column AlmacenB2B
+		dataType: string
+		lineageTag: 295613e0-5cc3-4997-adbe-42c52790f979
+		summarizeBy: none
+		sourceColumn: AlmacenB2B
+
+		annotation SummarizationSetBy = Automatic
+
+	column Code
+		dataType: string
+		lineageTag: ab97046c-eec7-416d-9de3-7dc27a665e67
+		summarizeBy: none
+		sourceColumn: Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column CompareSeason
+		dataType: string
+		lineageTag: 271ba14a-956d-4225-81bb-16024ad88c5b
+		summarizeBy: none
+		sourceColumn: CompareSeason
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaInicioB2B
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 33a0b44d-514b-4dcb-85b1-8690aba7dd9b
+		summarizeBy: none
+		sourceColumn: FechaInicioB2B
+
+		variation Variación
+			isDefault
+			relationship: 088fb568-2836-46a1-a044-7cfbf841b73c
+			defaultHierarchy: LocalDateTable_048becd8-8335-4dc6-aabc-59f4c5e11ef3.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Fin
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5c8e49df-9cd2-41d0-8d9f-8c8c1e62bd31
+		summarizeBy: none
+		sourceColumn: Fin
+
+		variation Variación
+			isDefault
+			relationship: 127408f5-c903-4f5f-a2b0-3538b4f3f13e
+			defaultHierarchy: LocalDateTable_7667dd95-6c6f-440f-899d-fcb30845d83e.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Inicio
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d86c8906-6b3a-4d5c-ba60-5af102c3ca04
+		summarizeBy: none
+		sourceColumn: Inicio
+
+		variation Variación
+			isDefault
+			relationship: acd7b812-570f-4eec-a3a8-9dbd065b2f3b
+			defaultHierarchy: LocalDateTable_02678677-7458-489b-9da0-d95fbe2ba371.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Name
+		dataType: string
+		lineageTag: 450f4ad0-328e-49f1-8098-7d1d8376eddb
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column PptoB2B
+		dataType: string
+		lineageTag: b6bce386-065c-4121-84d8-3439c7b46278
+		summarizeBy: none
+		sourceColumn: PptoB2B
+
+		annotation SummarizationSetBy = Automatic
+
+	column TemporadaAnterior
+		dataType: string
+		lineageTag: 5765d650-cac8-400c-92c7-25373ad47ffb
+		summarizeBy: none
+		sourceColumn: TemporadaAnterior
+
+		annotation SummarizationSetBy = Automatic
+
+	partition LOL_PBISEASON = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin"),
+				    dbo_LOL_PBISEASON = Origen{[Schema="dbo",Item="LOL_PBISEASON"]}[Data]
+				in
+				    dbo_LOL_PBISEASON
+
+	annotation PBI_ResultType = Table
+
