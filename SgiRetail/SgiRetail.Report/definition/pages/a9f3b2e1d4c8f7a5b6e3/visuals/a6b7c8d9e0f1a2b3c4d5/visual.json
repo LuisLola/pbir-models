@@ -1,0 +1,579 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "name": "a6b7c8d9e0f1a2b3c4d5",
+  "position": {
+    "x": 0,
+    "y": 301.47783251231527,
+    "z": 9000,
+    "height": 418.52216748768473,
+    "width": 1280.3940886699509,
+    "tabOrder": 9000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBITIENDAS"
+                    }
+                  },
+                  "Property": "TipoTienda"
+                }
+              },
+              "queryRef": "LOL_PBITIENDAS.TipoTienda",
+              "nativeQueryRef": "TipoTienda",
+              "active": true,
+              "displayName": "TipoTienda"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBITIENDAS"
+                    }
+                  },
+                  "Property": "NombreTienda"
+                }
+              },
+              "queryRef": "LOL_PBITIENDAS.NombreTienda",
+              "nativeQueryRef": "NombreTienda",
+              "active": false,
+              "displayName": "NombreTienda"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "Nombre_familia"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.Nombre_familia",
+              "nativeQueryRef": "Nombre_familia",
+              "active": false,
+              "displayName": "Nombre_familia"
+            }
+          ],
+          "fieldParameters": [
+            {
+              "parameterExpr": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimensionesB2C1"
+                    }
+                  },
+                  "Property": "DimensionesB2C1"
+                }
+              },
+              "index": 0,
+              "length": 1
+            },
+            {
+              "parameterExpr": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimensionesB2C2"
+                    }
+                  },
+                  "Property": "DimensionesB2C2"
+                }
+              },
+              "index": 1,
+              "length": 1
+            },
+            {
+              "parameterExpr": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimensionesB2C3"
+                    }
+                  },
+                  "Property": "DimensionesB2C3"
+                }
+              },
+              "index": 2,
+              "length": 1
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasRetail"
+                    }
+                  },
+                  "Property": "Ventas_YTD"
+                }
+              },
+              "queryRef": "MedidasRetail.Ventas_YTD",
+              "nativeQueryRef": "Ventas_YTD",
+              "displayName": "Venta neta"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasObjetivosRetail"
+                    }
+                  },
+                  "Property": "Objetivos_YTD"
+                }
+              },
+              "queryRef": "MedidasObjetivosRetail.Objetivos_YTD",
+              "nativeQueryRef": "Objetivos_YTD",
+              "displayName": "Objetivo"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasObjetivosRetail"
+                    }
+                  },
+                  "Property": "EvolucionObjetivo_%"
+                }
+              },
+              "queryRef": "MedidasObjetivosRetail.EvolucionObjetivo_%",
+              "nativeQueryRef": "EvolucionObjetivo_%",
+              "displayName": "vs Obj %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasRetail"
+                    }
+                  },
+                  "Property": "Ventas_YTD_LY"
+                }
+              },
+              "queryRef": "MedidasRetail.Ventas_YTD_LY",
+              "nativeQueryRef": "Ventas_YTD_LY",
+              "displayName": "Venta AA"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasRetail"
+                    }
+                  },
+                  "Property": "Ventas_YTD_Var_%"
+                }
+              },
+              "queryRef": "MedidasRetail.Ventas_YTD_Var_%",
+              "nativeQueryRef": "Ventas_YTD_Var_%",
+              "displayName": "Evol %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasRetail"
+                    }
+                  },
+                  "Property": "Tasa_Devolucion_YTD"
+                }
+              },
+              "queryRef": "MedidasRetail.Tasa_Devolucion_YTD",
+              "nativeQueryRef": "Tasa_Devolucion_YTD",
+              "displayName": "% Dev"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasRetail"
+                    }
+                  },
+                  "Property": "Tasa_Devolucion_YTD_Var"
+                }
+              },
+              "queryRef": "MedidasRetail.Tasa_Devolucion_YTD_Var",
+              "nativeQueryRef": "Tasa_Devolucion_YTD_Var",
+              "displayName": "Dev vs AA"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasRetail"
+                    }
+                  },
+                  "Property": "NumeroTransacciones_YTD"
+                }
+              },
+              "queryRef": "MedidasRetail.NumeroTransacciones_YTD",
+              "nativeQueryRef": "NumeroTransacciones_YTD",
+              "displayName": "Tickets"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasRetail"
+                    }
+                  },
+                  "Property": "NumeroTransacciones_Var_%"
+                }
+              },
+              "queryRef": "MedidasRetail.NumeroTransacciones_Var_%",
+              "nativeQueryRef": "NumeroTransacciones_Var_%",
+              "displayName": "Tickets Evol %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasRetail"
+                    }
+                  },
+                  "Property": "PromedioVentaTransaccion_YTD"
+                }
+              },
+              "queryRef": "MedidasRetail.PromedioVentaTransaccion_YTD",
+              "nativeQueryRef": "PromedioVentaTransaccion_YTD",
+              "displayName": "Ticket medio"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasRetail"
+                    }
+                  },
+                  "Property": "PromedioVentaTransaccion_Var_%"
+                }
+              },
+              "queryRef": "MedidasRetail.PromedioVentaTransaccion_Var_%",
+              "nativeQueryRef": "PromedioVentaTransaccion_Var_%",
+              "displayName": "TM Evol %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasRetail"
+                    }
+                  },
+                  "Property": "UPT_YTD"
+                }
+              },
+              "queryRef": "MedidasRetail.UPT_YTD",
+              "nativeQueryRef": "UPT_YTD",
+              "displayName": "UPT"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasRetail"
+                    }
+                  },
+                  "Property": "UPT_Var_%"
+                }
+              },
+              "queryRef": "MedidasRetail.UPT_Var_%",
+              "nativeQueryRef": "UPT_Var_%",
+              "displayName": "UPT Evol %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasTrafico"
+                    }
+                  },
+                  "Property": "Exterior_YTD"
+                }
+              },
+              "queryRef": "MedidasTrafico.Exterior_YTD",
+              "nativeQueryRef": "Exterior_YTD",
+              "displayName": "Pasantes"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasTrafico"
+                    }
+                  },
+                  "Property": "Evolucion_Exterior_YTD_Porcentaje"
+                }
+              },
+              "queryRef": "MedidasTrafico.Evolucion_Exterior_YTD_Porcentaje",
+              "nativeQueryRef": "Evolucion_Exterior_YTD_Porcentaje",
+              "displayName": "Pasantes Evol %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasTrafico"
+                    }
+                  },
+                  "Property": "Tasa_Atraccion_YTD"
+                }
+              },
+              "queryRef": "MedidasTrafico.Tasa_Atraccion_YTD",
+              "nativeQueryRef": "Tasa_Atraccion_YTD",
+              "displayName": "% Atracción"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasTrafico"
+                    }
+                  },
+                  "Property": "Tasa_Atraccion_YTD_Var"
+                }
+              },
+              "queryRef": "MedidasTrafico.Tasa_Atraccion_YTD_Var",
+              "nativeQueryRef": "Tasa_Atraccion_YTD_Var",
+              "displayName": "Atrac vs AA"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasTrafico"
+                    }
+                  },
+                  "Property": "Entradas_YTD"
+                }
+              },
+              "queryRef": "MedidasTrafico.Entradas_YTD",
+              "nativeQueryRef": "Entradas_YTD",
+              "displayName": "Entradas"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasTrafico"
+                    }
+                  },
+                  "Property": "Evolucion_Entradas_YTD_Porcentaje"
+                }
+              },
+              "queryRef": "MedidasTrafico.Evolucion_Entradas_YTD_Porcentaje",
+              "nativeQueryRef": "Evolucion_Entradas_YTD_Porcentaje",
+              "displayName": "Entradas Evol %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasTrafico"
+                    }
+                  },
+                  "Property": "Tasa_Conversion_YTD"
+                }
+              },
+              "queryRef": "MedidasTrafico.Tasa_Conversion_YTD",
+              "nativeQueryRef": "Tasa_Conversion_YTD",
+              "displayName": "% Conversión"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasTrafico"
+                    }
+                  },
+                  "Property": "Tasa_Conversion_YTD_Var"
+                }
+              },
+              "queryRef": "MedidasTrafico.Tasa_Conversion_YTD_Var",
+              "nativeQueryRef": "Tasa_Conversion_YTD_Var",
+              "displayName": "Conv vs AA"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MedidasRetail"
+                  }
+                },
+                "Property": "Ventas_YTD"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "LOL_PBITIENDAS.TipoTienda"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBITIENDAS"
+                    }
+                  },
+                  "Property": "TipoTienda"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "LOL_PBITIENDAS.NombreTienda"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBITIENDAS"
+                    }
+                  },
+                  "Property": "NombreTienda"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "LOL_PBIMODELITEM.Nombre_familia"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          }
+        ],
+        "root": {}
+      }
+    ],
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "layout": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Compact'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "gridVertical": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "gridHorizontal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "rowPadding": {
+              "expr": {
+                "Literal": {
+                  "Value": "4D"
+                }
+              }
+            },
+            "outlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#F1EFE8'"
+                    }
+                  }
+                }
+              }
+            },
+            "outlineWeight": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

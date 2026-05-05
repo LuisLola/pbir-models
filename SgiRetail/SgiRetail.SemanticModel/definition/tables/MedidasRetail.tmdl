@@ -10,7 +10,7 @@ table MedidasRetail
 				[Ventas],
 				DATESBETWEEN(Calendario[Date], [FechaInicioPeriodoSeleccionado], [FechaHastaSeleccionada])
 			)
-		formatString: "???"\ #,0.0;-"???"\ #,0.0;"???"\ #,0.0
+		formatString: \$#,0;(\$#,0);\$#,0
 		lineageTag: 4c3f3215-d6c8-47d9-833c-d2c6e94da448
 
 	measure Ventas_YTD_LY =
@@ -21,7 +21,7 @@ table MedidasRetail
 					[Ventas],
 					DATESBETWEEN(Calendario[Date], FechaInicio, FechaHasta)
 				)
-		formatString: #,0.00;-#,0.00;#,0.00
+		formatString: \$#,0;(\$#,0);\$#,0
 		lineageTag: d40df2eb-853f-45d8-aa6b-f8481968cb29
 
 	measure Ventas_YTD_Var = [Ventas_YTD] - [Ventas_YTD_LY]
@@ -227,6 +227,55 @@ table MedidasRetail
 			)
 		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: abcdef12-3456-7890-abcd-ef1234567893
+
+	measure NumeroDevoluciones_YTD =
+			CALCULATE(
+				DISTINCTCOUNT(LOL_PBISGIRETAIL[Ticket]),
+				LOL_PBISGIRETAIL[TipoDocumento] IN {"VTD", "VRMA"},
+				DATESBETWEEN(Calendario[Date], [FechaInicioPeriodoSeleccionado], [FechaHastaSeleccionada])
+			)
+		formatString: 0
+		lineageTag: 12345678-1234-1234-1234-423456789abc
+
+	measure NumeroDevoluciones_YTD_LY =
+			VAR FechaInicio = [FechaInicioPeriodoSeleccionado] - 364
+			VAR FechaHasta = [FechaHastaSeleccionada] - 364
+			RETURN
+				CALCULATE(
+					DISTINCTCOUNT(LOL_PBISGIRETAIL[Ticket]),
+					LOL_PBISGIRETAIL[TipoDocumento] IN {"VTD", "VRMA"},
+					DATESBETWEEN(Calendario[Date], FechaInicio, FechaHasta)
+				)
+		formatString: 0
+		lineageTag: 12345678-1234-1234-1234-523456789abc
+
+	measure Tasa_Devolucion_YTD =
+			VAR TotalTickets =
+				CALCULATE(
+					DISTINCTCOUNT(LOL_PBISGIRETAIL[Ticket]),
+					DATESBETWEEN(Calendario[Date], [FechaInicioPeriodoSeleccionado], [FechaHastaSeleccionada])
+				)
+			RETURN
+				DIVIDE([NumeroDevoluciones_YTD], TotalTickets)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 12345678-1234-1234-1234-623456789abc
+
+	measure Tasa_Devolucion_YTD_LY =
+			VAR FechaInicio = [FechaInicioPeriodoSeleccionado] - 364
+			VAR FechaHasta = [FechaHastaSeleccionada] - 364
+			VAR TotalTicketsLY =
+				CALCULATE(
+					DISTINCTCOUNT(LOL_PBISGIRETAIL[Ticket]),
+					DATESBETWEEN(Calendario[Date], FechaInicio, FechaHasta)
+				)
+			RETURN
+				DIVIDE([NumeroDevoluciones_YTD_LY], TotalTicketsLY)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 12345678-1234-1234-1234-723456789abc
+
+	measure Tasa_Devolucion_YTD_Var = ([Tasa_Devolucion_YTD] - [Tasa_Devolucion_YTD_LY]) * 100
+		formatString: +0.0\p;-0.0\p;0.0\p
+		lineageTag: 12345678-1234-1234-1234-823456789abc
 
 	column Column
 		formatString: 0

@@ -80,12 +80,42 @@ table MedidasTrafico
 		lineageTag: 083b2de0-6094-46f3-9fa9-c41650c27ad9
 
 	measure Tasa_Conversion_YTD = DIVIDE([NumeroTransacciones_YTD], [Entradas_YTD])
-		formatString: 0.00%;-0.00%;0.00%
+		formatString: 0.0%;-0.0%;0.0%
 		lineageTag: 9c2d8fdb-4e7f-4d3c-a34a-a546d251a73f
 
 	measure Tasa_Atraccion_YTD = DIVIDE([Entradas_YTD], [Exterior_YTD])
-		formatString: 0.00%;-0.00%;0.00%
+		formatString: 0.0%;-0.0%;0.0%
 		lineageTag: 5f935b67-f13a-4ec2-bd9f-b6f3c7f195ee
+
+	measure Tasa_Conversion_YTD_LY =
+			VAR FechaInicio = [FechaInicioPeriodoSeleccionado] - 364
+			VAR FechaHasta = [FechaHastaSeleccionada] - 364
+			RETURN
+				DIVIDE(
+					CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FechaInicio, FechaHasta)),
+					CALCULATE([Entradas], DATESBETWEEN(Calendario[Date], FechaInicio, FechaHasta))
+				)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 9c2d8fdb-4e7f-4d3c-a34a-b546d251a73f
+
+	measure Tasa_Conversion_YTD_Var = ([Tasa_Conversion_YTD] - [Tasa_Conversion_YTD_LY]) * 100
+		formatString: +0.0\p;-0.0\p;0.0\p
+		lineageTag: 9c2d8fdb-4e7f-4d3c-a34a-c546d251a73f
+
+	measure Tasa_Atraccion_YTD_LY =
+			VAR FechaInicio = [FechaInicioPeriodoSeleccionado] - 364
+			VAR FechaHasta = [FechaHastaSeleccionada] - 364
+			RETURN
+				DIVIDE(
+					CALCULATE([Entradas], DATESBETWEEN(Calendario[Date], FechaInicio, FechaHasta)),
+					CALCULATE([Exterior], DATESBETWEEN(Calendario[Date], FechaInicio, FechaHasta))
+				)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 5f935b67-f13a-4ec2-bd9f-c6f3c7f195ee
+
+	measure Tasa_Atraccion_YTD_Var = ([Tasa_Atraccion_YTD] - [Tasa_Atraccion_YTD_LY]) * 100
+		formatString: +0.0\p;-0.0\p;0.0\p
+		lineageTag: 5f935b67-f13a-4ec2-bd9f-d6f3c7f195ee
 
 	column Column
 		formatString: 0

@@ -10,21 +10,25 @@ table MedidasObjetivosRetail
 		formatString: #,0.00;-#,0.00;#,0.00
 		lineageTag: 9380df31-a25a-4a35-82cd-7b5566b24835
 
-	measure Objetivos_YTD = [Objetivos]
-		formatString: #,0.00;-#,0.00;#,0.00
+	measure Objetivos_YTD =
+			CALCULATE(
+				SUM(LOL_PBIOBJETIVOSRETAIL[Importe]),
+				USERELATIONSHIP(LOL_PBIOBJETIVOSRETAIL[TiendaID], LOL_PBITIENDAS[TiendaID]),
+				USERELATIONSHIP(LOL_PBIOBJETIVOSRETAIL[Fecha], Calendario[Date]),
+				DATESBETWEEN(Calendario[Date], [FechaInicioPeriodoSeleccionado], [FechaHastaSeleccionada])
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
 		lineageTag: 5c3f3215-d6c8-47d9-833c-d2c6e94da448
 
 	measure Objetivos_YTD_LY =
-			VAR FechasLY =
-				SELECTCOLUMNS(
-					VALUES(Calendario[Date]),
-					"Date", Calendario[Date] - 364
-				)
+			VAR FechaInicio = [FechaInicioPeriodoSeleccionado] - 364
+			VAR FechaHasta = [FechaHastaSeleccionada] - 364
 			RETURN
 				CALCULATE(
-					[Objetivos],
-					REMOVEFILTERS(Calendario[Date]),
-					TREATAS(FechasLY, Calendario[Date])
+					SUM(LOL_PBIOBJETIVOSRETAIL[Importe]),
+					USERELATIONSHIP(LOL_PBIOBJETIVOSRETAIL[TiendaID], LOL_PBITIENDAS[TiendaID]),
+					USERELATIONSHIP(LOL_PBIOBJETIVOSRETAIL[Fecha], Calendario[Date]),
+					DATESBETWEEN(Calendario[Date], FechaInicio, FechaHasta)
 				)
 		formatString: #,0.00;-#,0.00;#,0.00
 		lineageTag: e40df2eb-853f-45d8-aa6b-f8481968cb29

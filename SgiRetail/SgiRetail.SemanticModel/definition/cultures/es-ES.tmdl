@@ -9330,7 +9330,19 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Ventas_YTD"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Venta neta": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    },
 			    "medidasretail.ventas_ytd_ly": {
 			      "Definition": {
@@ -9339,7 +9351,19 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Ventas_YTD_LY"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Venta AA": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    },
 			    "medidasretail.ventas_ytd_var": {
 			      "Definition": {
@@ -9357,7 +9381,29 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Ventas_YTD_Var_%"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Evol %": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "vs año anterior": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    },
 			    "medidasretail.ventas_siniva": {
 			      "Definition": {
@@ -9465,7 +9511,19 @@ cultureInfo es-ES
 			          "ConceptualProperty": "NumeroTransacciones_YTD"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Tickets": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    },
 			    "medidasretail.numerotransacciones_ly": {
 			      "Definition": {
@@ -9492,7 +9550,19 @@ cultureInfo es-ES
 			          "ConceptualProperty": "NumeroTransacciones_Var_%"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Tickets Evol %": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    },
 			    "medidasretail.promedioventatransaccion": {
 			      "Definition": {
@@ -9510,7 +9580,19 @@ cultureInfo es-ES
 			          "ConceptualProperty": "PromedioVentaTransaccion_YTD"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Ticket medio": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    },
 			    "medidasretail.promedioventatransaccion_ly": {
 			      "Definition": {
@@ -9537,7 +9619,29 @@ cultureInfo es-ES
 			          "ConceptualProperty": "PromedioVentaTransaccion_Var_%"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "TM Evol %": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "vs año anterior": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    },
 			    "medidasretail.numeroclientesunicos": {
 			      "Definition": {
@@ -9600,7 +9704,19 @@ cultureInfo es-ES
 			          "ConceptualProperty": "UPT_YTD"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "UPT": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    },
 			    "medidasretail.upt_ly": {
 			      "Definition": {
@@ -9627,7 +9743,29 @@ cultureInfo es-ES
 			          "ConceptualProperty": "UPT_Var_%"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "UPT Evol %": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "vs año anterior": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    },
 			    "medidasobjetivosretail.objetivos": {
 			      "Definition": {
@@ -9645,7 +9783,19 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Objetivos_YTD"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Objetivo": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    },
 			    "medidasobjetivosretail.objetivos_ytd_ly": {
 			      "Definition": {
@@ -9699,7 +9849,19 @@ cultureInfo es-ES
 			          "ConceptualProperty": "EvolucionObjetivo_%"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "vs Obj %": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    },
 			    "medidastrafico.entradas": {
 			      "Definition": {
@@ -9717,7 +9879,19 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Entradas_YTD"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Entradas": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    },
 			    "medidastrafico.entradas_ytd_ly": {
 			      "Definition": {
@@ -9744,7 +9918,19 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Evolucion_Entradas_YTD_Porcentaje"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Entradas Evol %": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    },
 			    "medidastrafico.exterior": {
 			      "Definition": {
@@ -9762,7 +9948,19 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Exterior_YTD"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Pasantes": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    },
 			    "medidastrafico.exterior_ytd_ly": {
 			      "Definition": {
@@ -9789,7 +9987,19 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Evolucion_Exterior_YTD_Porcentaje"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Pasantes Evol %": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    },
 			    "medidastrafico.tasa_conversion_ytd": {
 			      "Definition": {
@@ -9798,7 +10008,19 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Tasa_Conversion_YTD"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "% Conversión": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    },
 			    "medidastrafico.tasa_atraccion_ytd": {
 			      "Definition": {
@@ -9807,7 +10029,103 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Tasa_Atraccion_YTD"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "% Atracción": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasretail.tasa_devolucion_ytd": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "Tasa_Devolucion_YTD"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "% Dev": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasretail.tasa_devolucion_ytd_var": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasRetail",
+			          "ConceptualProperty": "Tasa_Devolucion_YTD_Var"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Dev vs AA": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidastrafico.tasa_atraccion_ytd_var": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasTrafico",
+			          "ConceptualProperty": "Tasa_Atraccion_YTD_Var"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Atrac vs AA": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidastrafico.tasa_conversion_ytd_var": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasTrafico",
+			          "ConceptualProperty": "Tasa_Conversion_YTD_Var"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Conv vs AA": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {
