@@ -1,0 +1,522 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "name": "364e9dd0a12587d69a26",
+  "position": {
+    "x": 0,
+    "y": 159.58441558441558,
+    "z": 0,
+    "height": 560.76190476190482,
+    "width": 1280,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBICLIENTES"
+                    }
+                  },
+                  "Property": "RazonSocial"
+                }
+              },
+              "queryRef": "LOL_PBICLIENTES.RazonSocial",
+              "nativeQueryRef": "RazonSocial",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIAGENTES"
+                    }
+                  },
+                  "Property": "Agente_Cajero"
+                }
+              },
+              "queryRef": "LOL_PBIAGENTES.Agente_Cajero",
+              "nativeQueryRef": "Agente_Cajero",
+              "active": false
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBISALESORDER"
+                    }
+                  },
+                  "Property": "VentasTemporadaSeleccionada"
+                }
+              },
+              "queryRef": "LOL_PBISALESORDER.VentasTemporadaSeleccionada",
+              "nativeQueryRef": "F26+"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBISALESORDER"
+                    }
+                  },
+                  "Property": "VentasTemporadaAnterior"
+                }
+              },
+              "queryRef": "LOL_PBISALESORDER.VentasTemporadaAnterior",
+              "nativeQueryRef": "F25"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBISALESORDER"
+                    }
+                  },
+                  "Property": "EvolTemporadaSeleccionada"
+                }
+              },
+              "queryRef": "LOL_PBISALESORDER.EvolTemporadaSeleccionada",
+              "nativeQueryRef": "Evol."
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBISALESORDER"
+                    }
+                  },
+                  "Property": "EvolTemporadaSeleccionada_%"
+                }
+              },
+              "queryRef": "LOL_PBISALESORDER.EvolTemporadaSeleccionada_%",
+              "nativeQueryRef": "Evol. % F26 vs F25"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBISALESORDER"
+                    }
+                  },
+                  "Property": "VentasTemporadaAnterior_SoloInicio"
+                }
+              },
+              "queryRef": "LOL_PBISALESORDER.VentasTemporadaAnterior_SoloInicio",
+              "nativeQueryRef": "T. iniciales F25"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBISALESORDER"
+                    }
+                  },
+                  "Property": "EvolTemporadaSeleccionada_%Completa"
+                }
+              },
+              "queryRef": "LOL_PBISALESORDER.EvolTemporadaSeleccionada_%Completa",
+              "nativeQueryRef": "Evol. % T. iniciales"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBISALESORDER"
+                    }
+                  },
+                  "Property": "VentasTemporadaAnterior_Total"
+                }
+              },
+              "queryRef": "LOL_PBISALESORDER.VentasTemporadaAnterior_Total",
+              "nativeQueryRef": "Total F25"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBISALESORDER"
+                    }
+                  },
+                  "Property": "RealizadoTemporadaAnterior_%"
+                }
+              },
+              "queryRef": "LOL_PBISALESORDER.RealizadoTemporadaAnterior_%",
+              "nativeQueryRef": "Realizado"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBISALESORDER"
+                    }
+                  },
+                  "Property": "VentasTemporadaPasada_SoloInicio"
+                }
+              },
+              "queryRef": "LOL_PBISALESORDER.VentasTemporadaPasada_SoloInicio",
+              "nativeQueryRef": "S26"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PBISALESORDER"
+                  }
+                },
+                "Property": "VentasTemporadaSeleccionada"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "LOL_PBICLIENTES.RazonSocial"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBICLIENTES"
+                    }
+                  },
+                  "Property": "RazonSocial"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "LOL_PBIAGENTES.Agente_Cajero"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          }
+        ],
+        "root": {}
+      }
+    ],
+    "objects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBISALESORDER"
+                    }
+                  },
+                  "Property": "TituloComparativa"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "325.4670367364438D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_PBIAGENTES.Agente_Cajero"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "119.05168075463436D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_PBISALESORDER.VentasTemporadaSeleccionada"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "116.34042208150667D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_PBISALESORDER.VentasTemporadaAnterior"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "102.1337537832993D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_PBISALESORDER.EvolTemporadaSeleccionada"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "105.48935628513927D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_PBISALESORDER.EvolTemporadaSeleccionada_%"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "121.95441828352646D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_PBISALESORDER.VentasTemporadaAnterior_SoloInicio"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "178.05165792976612D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_PBISALESORDER.EvolTemporadaSeleccionada_%Completa"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "817dca8676b99eaea680",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIAGENTES"
+              }
+            },
+            "Property": "Agente_Cajero"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "9bcce282dee7eee40dc4",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBISALESORDER"
+              }
+            },
+            "Property": "VentasTemporadaSeleccionada"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "fb53d3ae608c42cb0e38",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBISALESORDER"
+              }
+            },
+            "Property": "VentasTemporadaAnterior"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "5c2213b41c1d96340044",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBISALESORDER"
+              }
+            },
+            "Property": "VentasTemporadaAnterior_SoloInicio"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "9ebfde8c07303102b6e9",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBISALESORDER"
+              }
+            },
+            "Property": "VentasTemporadaPasada_SoloInicio"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "94f7c53a5848a00915c0",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBISALESORDER"
+              }
+            },
+            "Property": "EvolTemporadaSeleccionada"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "c41af72a1d185a1cac38",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBISALESORDER"
+              }
+            },
+            "Property": "EvolTemporadaSeleccionada_%"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "fd6335704d9bd81950ab",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBISALESORDER"
+              }
+            },
+            "Property": "EvolTemporadaSeleccionada_%Completa"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "48849669ea36d85ce8d0",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBISALESORDER"
+              }
+            },
+            "Property": "VentasTemporadaAnterior_Total"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "8adf96c993bddc6d6285",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBISALESORDER"
+              }
+            },
+            "Property": "RealizadoTemporadaAnterior_%"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "fb52784c11a5bac67026",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBICLIENTES"
+              }
+            },
+            "Property": "RazonSocial"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

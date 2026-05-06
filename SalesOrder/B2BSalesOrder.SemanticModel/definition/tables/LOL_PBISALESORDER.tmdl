@@ -43,6 +43,42 @@ table LOL_PBISALESORDER
 		displayFolder: Temporadas
 		lineageTag: 5055189e-b34c-4dc9-8060-c2e75a822fef
 
+	measure TituloComparativa =
+			
+			VAR T = [TemporadaSeleccionada]
+			VAR F = FORMAT ( MAX ( 'Calendario'[Date] ), "D MMM YYYY", "es-ES" )
+			RETURN
+			    IF ( ISBLANK ( T ), "Selecciona temporada", T & " a " & F )
+		displayFolder: Temporadas
+		lineageTag: f1a2b3c4-d5e6-7f8a-9b0c-1d2e3f4a5b6c
+
+	measure CabeceraTemporadaActual =
+			
+			VAR T = [TemporadaSeleccionada]
+			RETURN IF ( ISBLANK ( T ), "Temporada", T & "+" )
+		displayFolder: Temporadas
+		lineageTag: a2b3c4d5-e6f7-8a9b-0c1d-2e3f4a5b6c7d
+
+	measure CabeceraTemporadaAnterior = LOOKUPVALUE ( 'LOL_PBISEASON'[CompareSeason], 'LOL_PBISEASON'[Code], [TemporadaSeleccionada] )
+		displayFolder: Temporadas
+		lineageTag: b3c4d5e6-f7a8-9b0c-1d2e-3f4a5b6c7d8e
+
+	measure CabeceraTemporadaAnteriorIniciales =
+			
+			VAR Ant = LOOKUPVALUE ( 'LOL_PBISEASON'[CompareSeason], 'LOL_PBISEASON'[Code], [TemporadaSeleccionada] )
+			RETURN IF ( ISBLANK ( Ant ), "T. iniciales", "T. iniciales " & Ant )
+		displayFolder: Temporadas
+		lineageTag: c4d5e6f7-a8b9-0c1d-2e3f-4a5b6c7d8e9f
+
+	measure CabeceraEvolPct =
+			
+			VAR T = [TemporadaSeleccionada]
+			VAR Ant = LOOKUPVALUE ( 'LOL_PBISEASON'[CompareSeason], 'LOL_PBISEASON'[Code], T )
+			RETURN
+			    IF ( ISBLANK ( T ) || ISBLANK ( Ant ), "Evol. %", "Evol. % " & T & " vs " & Ant )
+		displayFolder: Temporadas
+		lineageTag: d5e6f7a8-b9c0-1d2e-3f4a-5b6c7d8e9f0a
+
 	measure VentasTemporadaSeleccionada =
 			VAR TemporadaSel = [TemporadaSeleccionada]
 			VAR FechaCorte = MAX ( 'Calendario'[Date] )
@@ -176,9 +212,9 @@ table LOL_PBISALESORDER
 			
 			VAR TemporadaSel = [TemporadaSeleccionada]
 			VAR TemporadaAnt =
-			    CALCULATE (
-			        MAX ( 'LOL_PBISEASON'[CompareSeason] ),
-			        'LOL_PBISEASON'[Code] = TemporadaSel
+			    LOOKUPVALUE (
+			        'LOL_PBISEASON'[CompareSeason],
+			        'LOL_PBISEASON'[Code], TemporadaSel
 			    )
 			VAR FechaInicioAnt =
 			    LOOKUPVALUE (
@@ -195,12 +231,9 @@ table LOL_PBISALESORDER
 			        ISBLANK ( TemporadaAnt ) || ISBLANK ( FechaInicioAnt ) || ISBLANK ( FechaFinAnt ),
 			        BLANK (),
 			        CALCULATE (
-			            [VentaBruta],
-			            CROSSFILTER ( 'LOL_PBISALESORDER'[TemporadaLinea], 'LOL_PBISEASON'[Code], None ),
-			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
-			            REMOVEFILTERS ( 'LOL_PBISALESORDER'[TemporadaLinea] ),
-			            TREATAS ( { TemporadaAnt }, 'LOL_PBISALESORDER'[TemporadaLinea] ),
+			            SUMX ( 'LOL_PBISALESORDER', 'LOL_PBISALESORDER'[Cantidad] * 'LOL_PBISALESORDER'[PrecioUnitarioML] ),
 			            REMOVEFILTERS ( 'Calendario' ),
+			            'LOL_PBISALESORDER'[TemporadaLinea] = TemporadaAnt,
 			            'LOL_PBISALESORDER'[FechaDocumento] >= FechaInicioAnt,
 			            'LOL_PBISALESORDER'[FechaDocumento] <= FechaFinAnt
 			        )
