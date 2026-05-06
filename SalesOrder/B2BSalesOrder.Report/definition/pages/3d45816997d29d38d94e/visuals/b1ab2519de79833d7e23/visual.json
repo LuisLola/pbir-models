@@ -1,0 +1,66 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "name": "b1ab2519de79833d7e23",
+  "position": {
+    "x": 0,
+    "y": 0,
+    "z": 3000,
+    "height": 102.98507462686567,
+    "width": 762.08955223880594,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "TemporadaSeleccionada"
+                }
+              },
+              "queryRef": "_Medidas.TemporadaSeleccionada",
+              "nativeQueryRef": "Temporada actual"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "TemporadaAnterior"
+                }
+              },
+              "queryRef": "_Medidas.TemporadaAnterior",
+              "nativeQueryRef": "Temporada anterior"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "TemporadaPasada"
+                }
+              },
+              "queryRef": "_Medidas.TemporadaPasada",
+              "nativeQueryRef": "Hace 2 temporadas"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

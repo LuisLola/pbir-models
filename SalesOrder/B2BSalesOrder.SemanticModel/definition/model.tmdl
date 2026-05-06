@@ -8,7 +8,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["LOL_PBISALESORDER","LOL_PBIAGENTES","LOL_PBIMODELITEM","LOL_PBISEASON"]
+annotation PBI_QueryOrder = ["_Medidas","LOL_PBISALESORDER","LOL_PBIAGENTES","LOL_PBIMODELITEM","LOL_PBISEASON","LOL_PBICLIENTES"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
@@ -31,6 +31,9 @@ ref table LocalDateTable_016ce252-2af6-4d14-8ad3-fcd50993f0f8
 ref table LocalDateTable_80f7c7e9-c9f2-4d45-9a3f-2136fc9bbad8
 ref table LocalDateTable_e74963ca-901b-4c08-a971-51b1f6525abe
 ref table LocalDateTable_91198f72-5da9-403e-b12a-539925af6a19
+ref table LOL_PBICLIENTES
+ref table TemporadasUsadas
+ref table _Medidas
 
 ref cultureInfo es-ES
 

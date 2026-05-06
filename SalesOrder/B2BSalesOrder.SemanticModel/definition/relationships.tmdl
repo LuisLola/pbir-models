@@ -76,6 +76,11 @@ relationship 7b7fd304-92e5-4820-8af2-46aaa163c80f
 	toColumn: LocalDateTable_91198f72-5da9-403e-b12a-539925af6a19.Date
 
 relationship 99c8780c-0a82-35d9-6cf4-c4f0013c81aa
-	fromColumn: LOL_PBISALESORDER.FechaContabilizacion
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISALESORDER.FechaDocumento
 	toColumn: Calendario.Date
+
+relationship 59aac338-2125-23a4-1d58-5b7cc355638a
+	fromColumn: LOL_PBISALESORDER.CodigoCliente
+	toColumn: LOL_PBICLIENTES.CodeCliente
 
