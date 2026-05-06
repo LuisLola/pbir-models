@@ -63,33 +63,21 @@ table LOL_PBISALESORDER
 			
 			VAR TemporadaSel = [TemporadaSeleccionada]
 			VAR FechaCorte = MAX ( 'Calendario'[Date] )
-			VAR FechaInicioActual =
-			    LOOKUPVALUE (
-			        'LOL_PBISEASON'[FechaInicioB2B],
-			        'LOL_PBISEASON'[Code], TemporadaSel
-			    )
-			VAR DiasDuracion = MAX ( DATEDIFF ( FechaInicioActual, FechaCorte, DAY ), 0 )
 			VAR TemporadaAnt =
 			    LOOKUPVALUE (
 			        'LOL_PBISEASON'[CompareSeason],
 			        'LOL_PBISEASON'[Code], TemporadaSel
 			    )
-			VAR FechaInicioAnt =
-			    LOOKUPVALUE (
-			        'LOL_PBISEASON'[FechaInicioB2B],
-			        'LOL_PBISEASON'[Code], TemporadaAnt
-			    )
-			VAR FechaFinAnt = FechaInicioAnt + DiasDuracion
+			VAR FechaCorteAnt = DATE ( YEAR ( FechaCorte ) - 1, MONTH ( FechaCorte ), DAY ( FechaCorte ) )
 			RETURN
 			    IF (
-			        ISBLANK ( TemporadaAnt ) || ISBLANK ( FechaInicioAnt ),
+			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaAnt ),
 			        BLANK (),
 			        CALCULATE (
 			            SUMX ( 'LOL_PBISALESORDER', 'LOL_PBISALESORDER'[Cantidad] * 'LOL_PBISALESORDER'[PrecioUnitarioML] ),
 			            REMOVEFILTERS ( 'Calendario' ),
 			            'LOL_PBISALESORDER'[TemporadaLinea] = TemporadaAnt,
-			            'LOL_PBISALESORDER'[FechaDocumento] >= FechaInicioAnt,
-			            'LOL_PBISALESORDER'[FechaDocumento] <= FechaFinAnt
+			            'LOL_PBISALESORDER'[FechaDocumento] <= FechaCorteAnt
 			        )
 			    )
 		formatString: \€#,##0
@@ -104,27 +92,15 @@ table LOL_PBISALESORDER
 			        'LOL_PBISEASON'[CompareSeason],
 			        'LOL_PBISEASON'[Code], TemporadaSel
 			    )
-			VAR FechaInicioAnt =
-			    LOOKUPVALUE (
-			        'LOL_PBISEASON'[FechaInicioB2B],
-			        'LOL_PBISEASON'[Code], TemporadaAnt
-			    )
-			VAR FechaFinAnt =
-			    LOOKUPVALUE (
-			        'LOL_PBISEASON'[Fin],
-			        'LOL_PBISEASON'[Code], TemporadaAnt
-			    )
 			RETURN
 			    IF (
-			        ISBLANK ( TemporadaAnt ) || ISBLANK ( FechaInicioAnt ) || ISBLANK ( FechaFinAnt ),
+			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaAnt ),
 			        BLANK (),
 			        CALCULATE (
 			            SUMX ( 'LOL_PBISALESORDER', 'LOL_PBISALESORDER'[Cantidad] * 'LOL_PBISALESORDER'[PrecioUnitarioML] ),
 			            REMOVEFILTERS ( 'Calendario' ),
 			            'LOL_PBISALESORDER'[TemporadaLinea] = TemporadaAnt,
-			            'LOL_PBISALESORDER'[PedidoReposicionLinea] <> "Y",
-			            'LOL_PBISALESORDER'[FechaDocumento] >= FechaInicioAnt,
-			            'LOL_PBISALESORDER'[FechaDocumento] <= FechaFinAnt
+			            'LOL_PBISALESORDER'[PedidoReposicionLinea] <> "Y"
 			        )
 			    )
 		formatString: \€#,##0
@@ -139,26 +115,14 @@ table LOL_PBISALESORDER
 			        'LOL_PBISEASON'[TemporadaAnterior],
 			        'LOL_PBISEASON'[Code], TemporadaSel
 			    )
-			VAR FechaInicioPas =
-			    LOOKUPVALUE (
-			        'LOL_PBISEASON'[FechaInicioB2B],
-			        'LOL_PBISEASON'[Code], TemporadaPas
-			    )
-			VAR FechaFinPas =
-			    LOOKUPVALUE (
-			        'LOL_PBISEASON'[Fin],
-			        'LOL_PBISEASON'[Code], TemporadaPas
-			    )
 			RETURN
 			    IF (
-			        ISBLANK ( TemporadaPas ) || ISBLANK ( FechaInicioPas ) || ISBLANK ( FechaFinPas ),
+			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaPas ),
 			        BLANK (),
 			        CALCULATE (
 			            SUMX ( 'LOL_PBISALESORDER', 'LOL_PBISALESORDER'[Cantidad] * 'LOL_PBISALESORDER'[PrecioUnitarioML] ),
 			            REMOVEFILTERS ( 'Calendario' ),
-			            'LOL_PBISALESORDER'[TemporadaLinea] = TemporadaPas,
-			            'LOL_PBISALESORDER'[FechaDocumento] >= FechaInicioPas,
-			            'LOL_PBISALESORDER'[FechaDocumento] <= FechaFinPas
+			            'LOL_PBISALESORDER'[TemporadaLinea] = TemporadaPas
 			        )
 			    )
 		formatString: \€#,##0
