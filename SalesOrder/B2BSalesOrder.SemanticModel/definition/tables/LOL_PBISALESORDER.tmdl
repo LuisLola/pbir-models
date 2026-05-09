@@ -325,10 +325,10 @@ table LOL_PBISALESORDER
 	column ItemsPorUnidad
 		dataType: double
 		lineageTag: 69b6ee88-5ae5-42c2-9c15-f4c902cc3280
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: ItemsPorUnidad
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
@@ -375,10 +375,10 @@ table LOL_PBISALESORDER
 	column PctDescuentoComercial
 		dataType: double
 		lineageTag: 9dfd7d22-439c-4953-a343-d830e0022bbd
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: PctDescuentoComercial
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
@@ -449,20 +449,20 @@ table LOL_PBISALESORDER
 	column PrecioUnitarioMD
 		dataType: double
 		lineageTag: 6862b812-b726-467c-af67-233f6e3aab42
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: PrecioUnitarioMD
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column PrecioUnitarioML
 		dataType: double
 		lineageTag: f8bc4367-3b0b-47a2-84d7-0a2041a0c491
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: PrecioUnitarioML
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
@@ -517,10 +517,10 @@ table LOL_PBISALESORDER
 	column TipoCambioLinea
 		dataType: double
 		lineageTag: 674b0586-8bb5-4b80-8d1e-e29c7c224647
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: TipoCambioLinea
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 

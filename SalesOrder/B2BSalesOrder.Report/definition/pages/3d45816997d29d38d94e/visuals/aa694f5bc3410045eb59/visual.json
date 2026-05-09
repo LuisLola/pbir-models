@@ -2,8 +2,8 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
   "name": "aa694f5bc3410045eb59",
   "position": {
-    "x": 1061.1940298507463,
-    "y": 58.208955223880594,
+    "x": 762.08955223880594,
+    "y": 23.283582089552237,
     "z": 2000,
     "height": 44.776119402985074,
     "width": 209.55223880597015,
@@ -59,7 +59,14 @@
             "startDate": {
               "expr": {
                 "Literal": {
-                  "Value": "datetime'2026-05-05T00:00:00'"
+                  "Value": "datetime'2026-05-06T00:00:00'"
+                }
+              }
+            },
+            "endDate": {
+              "expr": {
+                "Literal": {
+                  "Value": "datetime'2026-05-08T00:00:00'"
                 }
               }
             },
@@ -89,21 +96,45 @@
                 "Where": [
                   {
                     "Condition": {
-                      "Comparison": {
-                        "ComparisonKind": 2,
+                      "And": {
                         "Left": {
-                          "Column": {
-                            "Expression": {
-                              "SourceRef": {
-                                "Source": "c"
+                          "Comparison": {
+                            "ComparisonKind": 2,
+                            "Left": {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": "c"
+                                  }
+                                },
+                                "Property": "Date"
                               }
                             },
-                            "Property": "Date"
+                            "Right": {
+                              "Literal": {
+                                "Value": "datetime'2026-05-06T00:00:00'"
+                              }
+                            }
                           }
                         },
                         "Right": {
-                          "Literal": {
-                            "Value": "datetime'2026-05-05T00:00:00'"
+                          "Comparison": {
+                            "ComparisonKind": 3,
+                            "Left": {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": "c"
+                                  }
+                                },
+                                "Property": "Date"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "datetime'2026-05-09T00:00:00'"
+                              }
+                            }
                           }
                         }
                       }

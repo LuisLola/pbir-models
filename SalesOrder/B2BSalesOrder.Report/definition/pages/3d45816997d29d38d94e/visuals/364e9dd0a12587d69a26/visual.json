@@ -3,10 +3,10 @@
   "name": "364e9dd0a12587d69a26",
   "position": {
     "x": 0,
-    "y": 159.58441558441558,
+    "y": 159.40298507462686,
     "z": 0,
-    "height": 560.76190476190482,
-    "width": 1280,
+    "height": 560.59701492537317,
+    "width": 1279.7014925373135,
     "tabOrder": 0
   },
   "visual": {
@@ -267,58 +267,121 @@
           }
         },
         {
-          "properties": {},
-          "selector": {
-            "metadata": "_Medidas.VentasTemporadaSeleccionada"
-          }
+          "properties": {
+            "titleExpression": {
+              "expr": {
+                "Measure": {
+                  "Expression": { "SourceRef": { "Entity": "_Medidas" } },
+                  "Property": "CabeceraTemporadaActual"
+                }
+              }
+            }
+          },
+          "selector": { "metadata": "_Medidas.VentasTemporadaSeleccionada" }
         },
         {
-          "properties": {},
-          "selector": {
-            "metadata": "_Medidas.VentasTemporadaAnterior"
-          }
+          "properties": {
+            "titleExpression": {
+              "expr": {
+                "Measure": {
+                  "Expression": { "SourceRef": { "Entity": "_Medidas" } },
+                  "Property": "CabeceraTemporadaAnterior"
+                }
+              }
+            }
+          },
+          "selector": { "metadata": "_Medidas.VentasTemporadaAnterior" }
         },
         {
-          "properties": {},
-          "selector": {
-            "metadata": "_Medidas.EvolTemporadaSeleccionada"
-          }
+          "properties": {
+            "titleExpression": {
+              "expr": {
+                "Measure": {
+                  "Expression": { "SourceRef": { "Entity": "_Medidas" } },
+                  "Property": "CabeceraEvol"
+                }
+              }
+            }
+          },
+          "selector": { "metadata": "_Medidas.EvolTemporadaSeleccionada" }
         },
         {
-          "properties": {},
-          "selector": {
-            "metadata": "_Medidas.EvolTemporadaSeleccionada_%"
-          }
+          "properties": {
+            "titleExpression": {
+              "expr": {
+                "Measure": {
+                  "Expression": { "SourceRef": { "Entity": "_Medidas" } },
+                  "Property": "CabeceraEvolPct"
+                }
+              }
+            }
+          },
+          "selector": { "metadata": "_Medidas.EvolTemporadaSeleccionada_%" }
         },
         {
-          "properties": {},
-          "selector": {
-            "metadata": "_Medidas.VentasTemporadaAnterior_SoloInicio"
-          }
+          "properties": {
+            "titleExpression": {
+              "expr": {
+                "Measure": {
+                  "Expression": { "SourceRef": { "Entity": "_Medidas" } },
+                  "Property": "CabeceraTemporadaAnteriorIniciales"
+                }
+              }
+            }
+          },
+          "selector": { "metadata": "_Medidas.VentasTemporadaAnterior_SoloInicio" }
         },
         {
-          "properties": {},
-          "selector": {
-            "metadata": "_Medidas.EvolTemporadaSeleccionada_%Completa"
-          }
+          "properties": {
+            "titleExpression": {
+              "expr": {
+                "Measure": {
+                  "Expression": { "SourceRef": { "Entity": "_Medidas" } },
+                  "Property": "CabeceraEvolIniciales"
+                }
+              }
+            }
+          },
+          "selector": { "metadata": "_Medidas.EvolTemporadaSeleccionada_%Completa" }
         },
         {
-          "properties": {},
-          "selector": {
-            "metadata": "_Medidas.VentasTemporadaAnterior_Total"
-          }
+          "properties": {
+            "titleExpression": {
+              "expr": {
+                "Measure": {
+                  "Expression": { "SourceRef": { "Entity": "_Medidas" } },
+                  "Property": "TemporadaAnteriorTotal"
+                }
+              }
+            }
+          },
+          "selector": { "metadata": "_Medidas.VentasTemporadaAnterior_Total" }
         },
         {
-          "properties": {},
-          "selector": {
-            "metadata": "_Medidas.RealizadoTemporadaAnterior_%"
-          }
+          "properties": {
+            "titleExpression": {
+              "expr": {
+                "Measure": {
+                  "Expression": { "SourceRef": { "Entity": "_Medidas" } },
+                  "Property": "CabeceraRealizado"
+                }
+              }
+            }
+          },
+          "selector": { "metadata": "_Medidas.RealizadoTemporadaAnterior_%" }
         },
         {
-          "properties": {},
-          "selector": {
-            "metadata": "_Medidas.VentasTemporadaPasada_SoloInicio"
-          }
+          "properties": {
+            "titleExpression": {
+              "expr": {
+                "Measure": {
+                  "Expression": { "SourceRef": { "Entity": "_Medidas" } },
+                  "Property": "CabeceraTemporadaPasada"
+                }
+              }
+            }
+          },
+          "selector": { "metadata": "_Medidas.VentasTemporadaPasada_SoloInicio" }
         }
       ],
       "values": [

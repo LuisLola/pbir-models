@@ -56,6 +56,20 @@
               },
               "queryRef": "_Medidas.TemporadaPasada",
               "nativeQueryRef": "Hace 2 temporadas"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "FechaLimiteSeleccionada"
+                }
+              },
+              "queryRef": "_Medidas.FechaLimiteSeleccionada",
+              "nativeQueryRef": "Fecha de corte"
             }
           ]
         }

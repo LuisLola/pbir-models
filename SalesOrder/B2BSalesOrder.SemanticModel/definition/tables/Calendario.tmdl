@@ -336,8 +336,8 @@ table Calendario
 		mode: import
 		source =
 				
-				VAR FechaInicio = DATE(2023, 1, 1)
-				VAR FechaFin    = DATE(2027, 12, 31)
+				VAR FechaInicio = DATE(2022, 1, 1)
+				VAR FechaFin    = DATE(YEAR(TODAY()) + 2, 12, 31)
 				RETURN
 				ADDCOLUMNS(
 				    CALENDAR(FechaInicio, FechaFin),
