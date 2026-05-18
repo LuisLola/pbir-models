@@ -54,13 +54,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "_Medidas"
+                      "Entity": "MedidasVentas"
                     }
                   },
                   "Property": "VentasTemporadaSeleccionada"
                 }
               },
-              "queryRef": "_Medidas.VentasTemporadaSeleccionada",
+              "queryRef": "MedidasVentas.VentasTemporadaSeleccionada",
               "nativeQueryRef": "F26+"
             },
             {
@@ -68,13 +68,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "_Medidas"
+                      "Entity": "MedidasVentas"
                     }
                   },
                   "Property": "VentasTemporadaAnterior"
                 }
               },
-              "queryRef": "_Medidas.VentasTemporadaAnterior",
+              "queryRef": "MedidasVentas.VentasTemporadaAnterior",
               "nativeQueryRef": "F25"
             },
             {
@@ -82,13 +82,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "_Medidas"
+                      "Entity": "MedidasVentas"
                     }
                   },
                   "Property": "EvolTemporadaSeleccionada"
                 }
               },
-              "queryRef": "_Medidas.EvolTemporadaSeleccionada",
+              "queryRef": "MedidasVentas.EvolTemporadaSeleccionada",
               "nativeQueryRef": "Evol."
             },
             {
@@ -96,13 +96,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "_Medidas"
+                      "Entity": "MedidasVentas"
                     }
                   },
                   "Property": "EvolTemporadaSeleccionada_%"
                 }
               },
-              "queryRef": "_Medidas.EvolTemporadaSeleccionada_%",
+              "queryRef": "MedidasVentas.EvolTemporadaSeleccionada_%",
               "nativeQueryRef": "Evol. % F26 vs F25"
             },
             {
@@ -110,13 +110,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "_Medidas"
+                      "Entity": "MedidasVentas"
                     }
                   },
                   "Property": "VentasTemporadaAnterior_SoloInicio"
                 }
               },
-              "queryRef": "_Medidas.VentasTemporadaAnterior_SoloInicio",
+              "queryRef": "MedidasVentas.VentasTemporadaAnterior_SoloInicio",
               "nativeQueryRef": "T. iniciales F25"
             },
             {
@@ -124,13 +124,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "_Medidas"
+                      "Entity": "MedidasVentas"
                     }
                   },
                   "Property": "EvolTemporadaSeleccionada_%Completa"
                 }
               },
-              "queryRef": "_Medidas.EvolTemporadaSeleccionada_%Completa",
+              "queryRef": "MedidasVentas.EvolTemporadaSeleccionada_%Completa",
               "nativeQueryRef": "Evol. % T. iniciales"
             },
             {
@@ -138,13 +138,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "_Medidas"
+                      "Entity": "MedidasVentas"
                     }
                   },
                   "Property": "VentasTemporadaAnterior_Total"
                 }
               },
-              "queryRef": "_Medidas.VentasTemporadaAnterior_Total",
+              "queryRef": "MedidasVentas.VentasTemporadaAnterior_Total",
               "nativeQueryRef": "Total F25"
             },
             {
@@ -152,13 +152,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "_Medidas"
+                      "Entity": "MedidasVentas"
                     }
                   },
                   "Property": "RealizadoTemporadaAnterior_%"
                 }
               },
-              "queryRef": "_Medidas.RealizadoTemporadaAnterior_%",
+              "queryRef": "MedidasVentas.RealizadoTemporadaAnterior_%",
               "nativeQueryRef": "Realizado"
             },
             {
@@ -166,13 +166,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "_Medidas"
+                      "Entity": "MedidasVentas"
                     }
                   },
                   "Property": "VentasTemporadaPasada_SoloInicio"
                 }
               },
-              "queryRef": "_Medidas.VentasTemporadaPasada_SoloInicio",
+              "queryRef": "MedidasVentas.VentasTemporadaPasada_SoloInicio",
               "nativeQueryRef": "S26"
             }
           ]
@@ -185,10 +185,10 @@
               "Measure": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "_Medidas"
+                    "Entity": "MedidasVentas"
                   }
                 },
-                "Property": "VentasTemporadaPasada_SoloInicio"
+                "Property": "VentasTemporadaSeleccionada"
               }
             },
             "direction": "Descending"
@@ -269,55 +269,55 @@
         {
           "properties": {},
           "selector": {
-            "metadata": "_Medidas.VentasTemporadaSeleccionada"
+            "metadata": "MedidasVentas.VentasTemporadaSeleccionada"
           }
         },
         {
           "properties": {},
           "selector": {
-            "metadata": "_Medidas.VentasTemporadaAnterior"
+            "metadata": "MedidasVentas.VentasTemporadaAnterior"
           }
         },
         {
           "properties": {},
           "selector": {
-            "metadata": "_Medidas.EvolTemporadaSeleccionada"
+            "metadata": "MedidasVentas.EvolTemporadaSeleccionada"
           }
         },
         {
           "properties": {},
           "selector": {
-            "metadata": "_Medidas.EvolTemporadaSeleccionada_%"
+            "metadata": "MedidasVentas.EvolTemporadaSeleccionada_%"
           }
         },
         {
           "properties": {},
           "selector": {
-            "metadata": "_Medidas.VentasTemporadaAnterior_SoloInicio"
+            "metadata": "MedidasVentas.VentasTemporadaAnterior_SoloInicio"
           }
         },
         {
           "properties": {},
           "selector": {
-            "metadata": "_Medidas.EvolTemporadaSeleccionada_%Completa"
+            "metadata": "MedidasVentas.EvolTemporadaSeleccionada_%Completa"
           }
         },
         {
           "properties": {},
           "selector": {
-            "metadata": "_Medidas.VentasTemporadaAnterior_Total"
+            "metadata": "MedidasVentas.VentasTemporadaAnterior_Total"
           }
         },
         {
           "properties": {},
           "selector": {
-            "metadata": "_Medidas.RealizadoTemporadaAnterior_%"
+            "metadata": "MedidasVentas.RealizadoTemporadaAnterior_%"
           }
         },
         {
           "properties": {},
           "selector": {
-            "metadata": "_Medidas.VentasTemporadaPasada_SoloInicio"
+            "metadata": "MedidasVentas.VentasTemporadaPasada_SoloInicio"
           }
         }
       ],
@@ -325,19 +325,19 @@
         {
           "properties": {},
           "selector": {
-            "metadata": "_Medidas.EvolTemporadaSeleccionada"
+            "metadata": "MedidasVentas.EvolTemporadaSeleccionada"
           }
         },
         {
           "properties": {},
           "selector": {
-            "metadata": "_Medidas.EvolTemporadaSeleccionada_%"
+            "metadata": "MedidasVentas.EvolTemporadaSeleccionada_%"
           }
         },
         {
           "properties": {},
           "selector": {
-            "metadata": "_Medidas.EvolTemporadaSeleccionada_%Completa"
+            "metadata": "MedidasVentas.EvolTemporadaSeleccionada_%Completa"
           }
         }
       ],
@@ -353,7 +353,7 @@
             }
           },
           "selector": {
-            "metadata": "_Medidas.VentasTemporadaSeleccionada"
+            "metadata": "MedidasVentas.VentasTemporadaSeleccionada"
           }
         },
         {
@@ -367,7 +367,7 @@
             }
           },
           "selector": {
-            "metadata": "_Medidas.VentasTemporadaAnterior"
+            "metadata": "MedidasVentas.VentasTemporadaAnterior"
           }
         },
         {
@@ -381,7 +381,7 @@
             }
           },
           "selector": {
-            "metadata": "_Medidas.EvolTemporadaSeleccionada"
+            "metadata": "MedidasVentas.EvolTemporadaSeleccionada"
           }
         },
         {
@@ -395,7 +395,7 @@
             }
           },
           "selector": {
-            "metadata": "_Medidas.EvolTemporadaSeleccionada_%"
+            "metadata": "MedidasVentas.EvolTemporadaSeleccionada_%"
           }
         },
         {
@@ -409,7 +409,7 @@
             }
           },
           "selector": {
-            "metadata": "_Medidas.VentasTemporadaAnterior_SoloInicio"
+            "metadata": "MedidasVentas.VentasTemporadaAnterior_SoloInicio"
           }
         },
         {
@@ -423,7 +423,7 @@
             }
           },
           "selector": {
-            "metadata": "_Medidas.EvolTemporadaSeleccionada_%Completa"
+            "metadata": "MedidasVentas.EvolTemporadaSeleccionada_%Completa"
           }
         },
         {
@@ -437,7 +437,7 @@
             }
           },
           "selector": {
-            "metadata": "_Medidas.VentasTemporadaAnterior_Total"
+            "metadata": "MedidasVentas.VentasTemporadaAnterior_Total"
           }
         },
         {
@@ -451,7 +451,7 @@
             }
           },
           "selector": {
-            "metadata": "_Medidas.RealizadoTemporadaAnterior_%"
+            "metadata": "MedidasVentas.RealizadoTemporadaAnterior_%"
           }
         },
         {
@@ -465,11 +465,183 @@
             }
           },
           "selector": {
-            "metadata": "_Medidas.VentasTemporadaPasada_SoloInicio"
+            "metadata": "MedidasVentas.VentasTemporadaPasada_SoloInicio"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "267.53731343283584D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_PBIAGENTES.Agente_Cajero"
           }
         }
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "25f069d8290aa6913cd4",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIAGENTES"
+              }
+            },
+            "Property": "Agente_Cajero"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2f822f5f89172b0d24c8",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBICLIENTES"
+              }
+            },
+            "Property": "RazonSocial"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "0a907332a0521e37c53a",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "VentasTemporadaSeleccionada"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "c5180a73d6071543b5dd",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "VentasTemporadaAnterior"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "475b5114c87586b5df43",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "EvolTemporadaSeleccionada"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "19c3b669f7b67e059ae7",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "EvolTemporadaSeleccionada_%"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "9f0999164a44dfa4f844",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "VentasTemporadaAnterior_SoloInicio"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a9ddf61eeb07050e3121",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "EvolTemporadaSeleccionada_%Completa"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "784f4a5b927907886e37",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "VentasTemporadaAnterior_Total"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "c5afa89db5dd4b6b43b8",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "RealizadoTemporadaAnterior_%"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a370fb718219c37a51c7",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "VentasTemporadaPasada_SoloInicio"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

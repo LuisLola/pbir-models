@@ -1,0 +1,304 @@
+table MedidasVentas
+	lineageTag: 3564cda3-cb0b-4567-bef9-3a61432e2a68
+
+	measure VentaBruta =
+			SUMX (
+			    FILTER (
+			        'LOL_PBISALESORDER',
+			        'LOL_PBISALESORDER'[CANCELED] = "N"
+			    ),
+			    'LOL_PBISALESORDER'[Cantidad] * 'LOL_PBISALESORDER'[PrecioUnitarioML]
+			)
+		formatString: \€#,##0
+		displayFolder: Base
+		lineageTag: 84f988b9-facf-47eb-9611-cb7edaf5b479
+
+	measure VentaBrutaSalesOrder =
+			VAR LineasConIncidencia =
+			    DISTINCT (
+			        SELECTCOLUMNS (
+			            'LOL_PBIINCIDENCIASB2B',
+			            "LineID", 'LOL_PBIINCIDENCIASB2B'[DocEntry] & "-" & 'LOL_PBIINCIDENCIASB2B'[ItemCode]
+			        )
+			    )
+			RETURN
+			    SUMX (
+			        FILTER (
+			            'LOL_PBISALESORDER',
+			            'LOL_PBISALESORDER'[CANCELED] = "N"
+			                && NOT CONTAINS (
+			                    LineasConIncidencia,
+			                    [LineID], 'LOL_PBISALESORDER'[DocEntry] & "-" & 'LOL_PBISALESORDER'[CodigoArticulo]
+			                )
+			        ),
+			        'LOL_PBISALESORDER'[Cantidad] * 'LOL_PBISALESORDER'[PrecioUnitarioML]
+			    )
+		formatString: \€#,##0
+		displayFolder: Base
+		lineageTag: b2bd2c09-7a47-4897-9df1-9870fb8f7c20
+
+	measure VentasTemporadaSeleccionada =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR FechaCorte = [FechaLimiteSeleccionada]
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel ),
+			        0,
+			        CALCULATE (
+			            [VentaBrutaSalesOrder],
+			            REMOVEFILTERS ( 'Calendario' ),
+			            'LOL_PBISALESORDER'[TemporadaCabecera] = TemporadaSel,
+			            'LOL_PBISALESORDER'[FechaDocumento] <= FechaCorte
+			        )
+			    )
+		formatString: \€#,##0
+		displayFolder: Temporada
+		lineageTag: 575ddabb-57d2-4566-b24d-3ca210296c61
+
+	measure VentasTemporadaSeleccionadaSalesOrder =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR FechaCorte = [FechaLimiteSeleccionada]
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel ),
+			        0,
+			        CALCULATE (
+			            [VentaBrutaSalesOrder],
+			            REMOVEFILTERS ( 'Calendario' ),
+			            'LOL_PBISALESORDER'[TemporadaLinea] = TemporadaSel,
+			            'LOL_PBISALESORDER'[FechaDocumento] <= FechaCorte
+			        )
+			    )
+		formatString: \€#,##0
+		displayFolder: Temporada
+		lineageTag: a9f5dd08-af46-4578-8013-43f88fe0a57d
+
+	measure VentasTemporadaAnterior =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR FechaCorte = [FechaLimiteSeleccionada]
+			VAR TemporadaAnt =
+			    LOOKUPVALUE (
+			        'LOL_PBISEASON'[CompareSeason],
+			        'LOL_PBISEASON'[Code], TemporadaSel
+			    )
+			VAR FechaCorteAnt = EDATE ( FechaCorte, -12 )
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaAnt ),
+			        BLANK (),
+			        CALCULATE (
+			            [VentaBrutaSalesOrder],
+			            REMOVEFILTERS ( 'Calendario' ),
+			            'LOL_PBISALESORDER'[TemporadaCabecera] = TemporadaAnt,
+			            'LOL_PBISALESORDER'[FechaDocumento] <= FechaCorteAnt
+			        )
+			    )
+		formatString: \€#,##0
+		displayFolder: Temporada
+		lineageTag: c8aff2a2-21ce-4d21-acf8-ddc30061aecf
+
+	measure VentasTemporadaAnterior_SoloInicio =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR TemporadaAnt =
+			    LOOKUPVALUE (
+			        'LOL_PBISEASON'[CompareSeason],
+			        'LOL_PBISEASON'[Code], TemporadaSel
+			    )
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaAnt ),
+			        BLANK (),
+			        CALCULATE (
+			            [VentaBrutaSalesOrder],
+			            REMOVEFILTERS ( 'Calendario' ),
+			            'LOL_PBISALESORDER'[TemporadaCabecera] = TemporadaAnt,
+			            'LOL_PBISALESORDER'[PedidoReposicionLinea] <> "Y"
+			        )
+			    )
+		formatString: \€#,##0
+		displayFolder: Temporada
+		lineageTag: 83a86a16-8687-46ba-a7a5-9c779f85bd7d
+
+	measure VentasTemporadaAnterior_Total =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR TemporadaAnt =
+			    LOOKUPVALUE (
+			        'LOL_PBISEASON'[CompareSeason],
+			        'LOL_PBISEASON'[Code], TemporadaSel
+			    )
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaAnt ),
+			        BLANK (),
+			        CALCULATE (
+			            [VentaBrutaSalesOrder],
+			            REMOVEFILTERS ( 'Calendario' ),
+			            'LOL_PBISALESORDER'[TemporadaCabecera] = TemporadaAnt
+			        )
+			    )
+		formatString: \€#,##0
+		displayFolder: Temporada
+		lineageTag: 92c03322-4d13-4600-a8de-a16aa5f6f68d
+
+	measure VentasTemporadaPasada_SoloInicio =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR TemporadaPas =
+			    LOOKUPVALUE (
+			        'LOL_PBISEASON'[TemporadaAnterior],
+			        'LOL_PBISEASON'[Code], TemporadaSel
+			    )
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaPas ),
+			        BLANK (),
+			        CALCULATE (
+			            [VentaBrutaSalesOrder],
+			            REMOVEFILTERS ( 'Calendario' ),
+			            'LOL_PBISALESORDER'[TemporadaCabecera] = TemporadaPas,
+			            'LOL_PBISALESORDER'[PedidoReposicionLinea] <> "Y"
+			        )
+			    )
+		formatString: \€#,##0
+		displayFolder: Temporada
+		lineageTag: 52968285-2aa0-4fd6-a787-78c0b263a7d8
+
+	measure RealizadoTemporadaAnterior_% = DIVIDE ( [VentasTemporadaSeleccionada], [VentasTemporadaAnterior_Total] )
+		formatString: 0%;-0%;0%
+		displayFolder: Temporada
+		lineageTag: 86bf6539-8182-49a1-bb08-4fb3e7da22eb
+
+	measure EvolTemporadaSeleccionada = [VentasTemporadaSeleccionada] - [VentasTemporadaAnterior]
+		formatString: \€#,##0
+		displayFolder: Evolucion
+		lineageTag: 2ad9f123-45d6-4447-b84a-d2ee36d3d81a
+
+	measure EvolTemporadaSeleccionada_% =
+			VAR Actual = [VentasTemporadaSeleccionada]
+			VAR Anterior = [VentasTemporadaAnterior]
+			RETURN
+			    IF (
+			        NOT ISBLANK ( Anterior ) && Anterior <> 0,
+			        DIVIDE ( Actual - Anterior, Anterior, 0 ),
+			        BLANK ()
+			    )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Evolucion
+		lineageTag: cc516872-04dd-48ea-b470-32a6b18344da
+
+	measure EvolTemporadaSeleccionada_Completa = [VentasTemporadaSeleccionada] - [VentasTemporadaAnterior_SoloInicio]
+		formatString: \€#,##0
+		displayFolder: Evolucion
+		lineageTag: 47f4718a-bda6-4cc4-9f5c-c2ced149d0ff
+
+	measure EvolTemporadaSeleccionada_%Completa =
+			VAR Actual = [VentasTemporadaSeleccionada]
+			VAR Anterior = [VentasTemporadaAnterior_SoloInicio]
+			RETURN
+			    IF (
+			        NOT ISBLANK ( Anterior ) && Anterior <> 0,
+			        DIVIDE ( Actual - Anterior, Anterior, 0 ),
+			        BLANK ()
+			    )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Evolucion
+		lineageTag: 3729a0ba-d24b-45d6-a989-f9d085acf9e5
+
+	measure VentasYTD =
+			CALCULATE (
+			    [VentaBruta],
+			    DATESYTD ( 'Calendario'[Date] )
+			)
+		formatString: \€#,##0
+		displayFolder: YTD
+		lineageTag: 3a2bd0de-9b59-42df-8817-6a01869b0d58
+
+	measure VentasYTD_SalesOrder =
+			CALCULATE (
+			    [VentaBrutaSalesOrder],
+			    DATESYTD ( 'Calendario'[Date] )
+			)
+		formatString: \€#,##0
+		displayFolder: YTD
+		lineageTag: d55caeb7-641d-4e3c-94b9-0b733e4e5aef
+
+	measure VentasYTD_LY =
+			CALCULATE (
+			    [VentasYTD],
+			    SAMEPERIODLASTYEAR ( 'Calendario'[Date] )
+			)
+		formatString: \€#,##0
+		displayFolder: YTD
+		lineageTag: 7f00b46b-31b7-4926-867c-6a0831948e52
+
+	measure EvolVentasYTD = [VentasYTD] - [VentasYTD_LY]
+		formatString: \€#,##0
+		displayFolder: YTD
+		lineageTag: d9220f8e-e937-4a5c-a849-b4c7b4a00d6b
+
+	measure EvolVentasYTD_% =
+			VAR Actual = [VentasYTD]
+			VAR Anterior = [VentasYTD_LY]
+			RETURN
+			    IF (
+			        NOT ISBLANK ( Anterior ) && Anterior <> 0,
+			        DIVIDE ( Actual - Anterior, Anterior, 0 ),
+			        BLANK ()
+			    )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: YTD
+		lineageTag: af2f617f-f8af-4ae0-8a64-8701adff5d4c
+
+	measure VentaBrutaTotal = [VentaBrutaSalesOrder] + [VentaBrutaIncidencias]
+		formatString: \€#,##0
+		displayFolder: Total
+		lineageTag: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+
+	measure VentasTemporadaSeleccionadaTotal = [VentasTemporadaSeleccionada] + [VentasTemporadaSeleccionadaIncidencias]
+		formatString: \€#,##0
+		displayFolder: Total
+		lineageTag: b2c3d4e5-f6a7-8901-bcde-f12345678901
+
+	measure VentasTemporadaAnteriorTotal = [VentasTemporadaAnterior] + [VentasTemporadaAnteriorIncidencias]
+		formatString: \€#,##0
+		displayFolder: Total
+		lineageTag: c3d4e5f6-a7b8-9012-cdef-123456789012
+
+	measure VentasTemporadaAnterior_SoloInicioTotal = [VentasTemporadaAnterior_SoloInicio] + [VentasTemporadaAnteriorSoloInicioIncidencias]
+		formatString: \€#,##0
+		displayFolder: Total
+		lineageTag: d4e5f6a7-b8c9-0123-defa-234567890123
+
+	measure VentasTemporadaAnterior_TotalTotal = [VentasTemporadaAnterior_Total] + [VentasTemporadaAnteriorTotalIncidencias]
+		formatString: \€#,##0
+		displayFolder: Total
+		lineageTag: e5f6a7b8-c9d0-1234-efab-345678901234
+
+	measure EvolTemporadaSeleccionadaTotal = [VentasTemporadaSeleccionadaTotal] - [VentasTemporadaAnteriorTotal]
+		formatString: \€#,##0
+		displayFolder: Total
+		lineageTag: f6a7b8c9-d0e1-2345-fabc-456789012345
+
+	measure EvolTemporadaSeleccionadaTotal_% =
+			VAR Actual = [VentasTemporadaSeleccionadaTotal]
+			VAR Anterior = [VentasTemporadaAnteriorTotal]
+			RETURN
+			    IF (
+			        NOT ISBLANK ( Anterior ) && Anterior <> 0,
+			        DIVIDE ( Actual - Anterior, Anterior, 0 ),
+			        BLANK ()
+			    )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Total
+		lineageTag: a7b8c9d0-e1f2-3456-abcd-567890123456
+
+	column Value
+		lineageTag: 2ddc9eb7-b8c8-4537-91e0-8de67fa58299
+		isNameInferred
+		sourceColumn: [Value]
+
+	partition MedidasVentas = calculated
+		mode: import
+		source = {BLANK()}
+
+	annotation PBI_ResultType = Table
+

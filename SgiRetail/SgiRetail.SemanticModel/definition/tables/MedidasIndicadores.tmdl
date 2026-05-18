@@ -1,0 +1,198 @@
+table MedidasIndicadores
+	lineageTag: aabbccdd-aa02-bb02-bb02-aabbccdd0002
+
+	measure Texto_Objetivo =
+			VAR Pct = [CumplimientoObjetivo_%]
+			VAR OBJ = [Objetivos_YTD]
+			VAR Icono = IF(Pct >= 1, "🟢 ✅", IF(Pct >= 0.8, "🟡 ⚠️", "🔴 ❌"))
+			VAR PctFmt = FORMAT(Pct, "0%")
+			VAR OBJFmt = FORMAT(OBJ, "#,0")
+			RETURN
+				IF(
+					ISBLANK(OBJ),
+					BLANK(),
+					Icono & " " & PctFmt & "| OBJ. " & OBJFmt
+				)
+		formatString: @
+		lineageTag: aabbccdd-aa02-bb02-bb02-aabbccdd0021
+
+	measure Texto_LY =
+			VAR Pct = [Ventas_YTD_Var_%]
+			VAR LY = [Ventas_YTD_LY]
+			VAR Icono = IF(Pct > 0, "🟢 📈", "🔴 📉")
+			VAR PctSign = IF(Pct > 0, "+" & FORMAT(Pct, "0%"), FORMAT(Pct, "0%"))
+			VAR LYFmt = FORMAT(LY, "#,0")
+			RETURN
+				IF(
+					ISBLANK(LY),
+					BLANK(),
+					Icono & " " & PctSign & " vs PY " & LYFmt
+				)
+		formatString: @
+		lineageTag: aabbccdd-aa02-bb02-bb02-aabbccdd0022
+
+	measure Texto_Objetivo_ECI =
+			VAR Pct = [CumplimientoObjetivo_%_ECI]
+			VAR OBJ = [Objetivos_YTD_ECI]
+			VAR Icono = IF(Pct >= 1, "🟢 ✅", IF(Pct >= 0.8, "🟡 ⚠️", "🔴 ❌"))
+			VAR PctFmt = FORMAT(Pct, "0%")
+			VAR OBJFmt = FORMAT(OBJ, "#,0")
+			RETURN
+				IF(
+					ISBLANK(OBJ),
+					BLANK(),
+					Icono & " " & PctFmt & "| OBJ. " & OBJFmt
+				)
+		formatString: @
+		lineageTag: aabbccdd-aa02-bb02-bb02-aabbccdd0031
+
+	measure Texto_LY_ECI =
+			VAR Pct = [Ventas_YTD_Var_%_ECI]
+			VAR LY = [Ventas_YTD_LY_ECI]
+			VAR Icono = IF(Pct > 0, "🟢 📈", "🔴 📉")
+			VAR PctSign = IF(Pct > 0, "+" & FORMAT(Pct, "0%"), FORMAT(Pct, "0%"))
+			VAR LYFmt = FORMAT(LY, "#,0")
+			RETURN
+				IF(
+					ISBLANK(LY),
+					BLANK(),
+					Icono & " " & PctSign & " vs PY " & LYFmt
+				)
+		formatString: @
+		lineageTag: aabbccdd-aa02-bb02-bb02-aabbccdd0032
+
+	measure Texto_Objetivo_Online =
+			VAR Pct = [CumplimientoObjetivo_%_Online]
+			VAR OBJ = [Objetivos_YTD_Online]
+			VAR Icono = IF(Pct >= 1, "🟢 ✅", IF(Pct >= 0.8, "🟡 ⚠️", "🔴 ❌"))
+			VAR PctFmt = FORMAT(Pct, "0%")
+			VAR OBJFmt = FORMAT(OBJ, "#,0")
+			RETURN
+				IF(
+					ISBLANK(OBJ),
+					BLANK(),
+					Icono & " " & PctFmt & "| OBJ. " & OBJFmt
+				)
+		formatString: @
+		lineageTag: aabbccdd-aa02-bb02-bb02-aabbccdd0041
+
+	measure Texto_LY_Online =
+			VAR Pct = [Ventas_YTD_Var_%_Online]
+			VAR LY = [Ventas_YTD_LY_Online]
+			VAR Icono = IF(Pct > 0, "🟢 📈", "🔴 📉")
+			VAR PctSign = IF(Pct > 0, "+" & FORMAT(Pct, "0%"), FORMAT(Pct, "0%"))
+			VAR LYFmt = FORMAT(LY, "#,0")
+			RETURN
+				IF(
+					ISBLANK(LY),
+					BLANK(),
+					Icono & " " & PctSign & " vs PY " & LYFmt
+				)
+		formatString: @
+		lineageTag: aabbccdd-aa02-bb02-bb02-aabbccdd0042
+
+	measure Texto_Objetivo_Marketplace =
+			VAR Pct = [CumplimientoObjetivo_%_Marketplace]
+			VAR OBJ = [Objetivos_YTD_Marketplace]
+			VAR Icono = IF(Pct >= 1, "🟢 ✅", IF(Pct >= 0.8, "🟡 ⚠️", "🔴 ❌"))
+			VAR PctFmt = FORMAT(Pct, "0%")
+			VAR OBJFmt = FORMAT(OBJ, "#,0")
+			RETURN
+				IF(
+					ISBLANK(OBJ),
+					BLANK(),
+					Icono & " " & PctFmt & "| OBJ. " & OBJFmt
+				)
+		formatString: @
+		lineageTag: aabbccdd-aa02-bb02-bb02-aabbccdd0051
+
+	measure Texto_LY_Marketplace =
+			VAR Pct = [Ventas_YTD_Var_%_Marketplace]
+			VAR LY = [Ventas_YTD_LY_Marketplace]
+			VAR Icono = IF(Pct > 0, "🟢 📈", "🔴 📉")
+			VAR PctSign = IF(Pct > 0, "+" & FORMAT(Pct, "0%"), FORMAT(Pct, "0%"))
+			VAR LYFmt = FORMAT(LY, "#,0")
+			RETURN
+				IF(
+					ISBLANK(LY),
+					BLANK(),
+					Icono & " " & PctSign & " vs PY " & LYFmt
+				)
+		formatString: @
+		lineageTag: aabbccdd-aa02-bb02-bb02-aabbccdd0052
+
+	measure Texto_Objetivo_Outlet =
+			VAR Pct = [CumplimientoObjetivo_%_Outlet]
+			VAR OBJ = [Objetivos_YTD_Outlet]
+			VAR Icono = IF(Pct >= 1, "🟢 ✅", IF(Pct >= 0.8, "🟡 ⚠️", "🔴 ❌"))
+			VAR PctFmt = FORMAT(Pct, "0%")
+			VAR OBJFmt = FORMAT(OBJ, "#,0")
+			RETURN
+				IF(
+					ISBLANK(OBJ),
+					BLANK(),
+					Icono & " " & PctFmt & "| OBJ. " & OBJFmt
+				)
+		formatString: @
+		lineageTag: aabbccdd-aa02-bb02-bb02-aabbccdd0061
+
+	measure Texto_LY_Outlet =
+			VAR Pct = [Ventas_YTD_Var_%_Outlet]
+			VAR LY = [Ventas_YTD_LY_Outlet]
+			VAR Icono = IF(Pct > 0, "🟢 📈", "🔴 📉")
+			VAR PctSign = IF(Pct > 0, "+" & FORMAT(Pct, "0%"), FORMAT(Pct, "0%"))
+			VAR LYFmt = FORMAT(LY, "#,0")
+			RETURN
+				IF(
+					ISBLANK(LY),
+					BLANK(),
+					Icono & " " & PctSign & " vs PY " & LYFmt
+				)
+		formatString: @
+		lineageTag: aabbccdd-aa02-bb02-bb02-aabbccdd0062
+
+	measure Texto_Objetivo_Tienda =
+			VAR Pct = [CumplimientoObjetivo_%_Tienda]
+			VAR OBJ = [Objetivos_YTD_Tienda]
+			VAR Icono = IF(Pct >= 1, "🟢 ✅", IF(Pct >= 0.8, "🟡 ⚠️", "🔴 ❌"))
+			VAR PctFmt = FORMAT(Pct, "0%")
+			VAR OBJFmt = FORMAT(OBJ, "#,0")
+			RETURN
+				IF(
+					ISBLANK(OBJ),
+					BLANK(),
+					Icono & " " & PctFmt & "| OBJ. " & OBJFmt
+				)
+		formatString: @
+		lineageTag: aabbccdd-aa02-bb02-bb02-aabbccdd0071
+
+	measure Texto_LY_Tienda =
+			VAR Pct = [Ventas_YTD_Var_%_Tienda]
+			VAR LY = [Ventas_YTD_LY_Tienda]
+			VAR Icono = IF(Pct > 0, "🟢 📈", "🔴 📉")
+			VAR PctSign = IF(Pct > 0, "+" & FORMAT(Pct, "0%"), FORMAT(Pct, "0%"))
+			VAR LYFmt = FORMAT(LY, "#,0")
+			RETURN
+				IF(
+					ISBLANK(LY),
+					BLANK(),
+					Icono & " " & PctSign & " vs PY " & LYFmt
+				)
+		formatString: @
+		lineageTag: aabbccdd-aa02-bb02-bb02-aabbccdd0072
+
+	column Column
+		formatString: 0
+		lineageTag: aabbccdd-aa02-ccol-ccol-aabbccddcol2
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MedidasIndicadores = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = aabbccddaa02bb02bb02aabbccdd0002
+

@@ -1,0 +1,218 @@
+table MedidasCanales
+	lineageTag: aabbccdd-aa01-aa01-aa01-aabbccdd0001
+
+	measure Ventas_YTD_ECI =
+			CALCULATE(
+				[Ventas_YTD],
+				LOL_PBITIENDAS[TipoTienda] = "ECI"
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: aabbccdd-aa01-aa01-aa01-aabbccdd0011
+
+	measure Ventas_YTD_LY_ECI =
+			CALCULATE(
+				[Ventas_YTD_LY],
+				LOL_PBITIENDAS[TipoTienda] = "ECI"
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: aabbccdd-aa01-aa01-aa01-aabbccdd0012
+
+	measure Ventas_YTD_Var_%_ECI =
+			DIVIDE(
+				[Ventas_YTD_ECI] - [Ventas_YTD_LY_ECI],
+				[Ventas_YTD_LY_ECI]
+			)
+		formatString: 0%;-0%;0%
+		lineageTag: aabbccdd-aa01-aa01-aa01-aabbccdd0013
+
+	measure Objetivos_YTD_ECI =
+			CALCULATE(
+				[Objetivos_YTD],
+				LOL_PBITIENDAS[TipoTienda] = "ECI"
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: aabbccdd-aa01-aa01-aa01-aabbccdd0014
+
+	measure CumplimientoObjetivo_%_ECI =
+			DIVIDE(
+				[Ventas_YTD_ECI],
+				[Objetivos_YTD_ECI]
+			)
+		formatString: 0%;-0%;0%
+		lineageTag: aabbccdd-aa01-aa01-aa01-aabbccdd0015
+
+	measure Ventas_YTD_Online =
+			CALCULATE(
+				[Ventas_YTD],
+				LOL_PBITIENDAS[TipoTienda] = "ONLINE"
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: aabbccdd-aa02-aa02-aa02-aabbccdd0021
+
+	measure Ventas_YTD_LY_Online =
+			CALCULATE(
+				[Ventas_YTD_LY],
+				LOL_PBITIENDAS[TipoTienda] = "ONLINE"
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: aabbccdd-aa02-aa02-aa02-aabbccdd0022
+
+	measure Ventas_YTD_Var_%_Online =
+			DIVIDE(
+				[Ventas_YTD_Online] - [Ventas_YTD_LY_Online],
+				[Ventas_YTD_LY_Online]
+			)
+		formatString: 0%;-0%;0%
+		lineageTag: aabbccdd-aa02-aa02-aa02-aabbccdd0023
+
+	measure Objetivos_YTD_Online =
+			CALCULATE(
+				[Objetivos_YTD],
+				LOL_PBITIENDAS[TipoTienda] = "ONLINE"
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: aabbccdd-aa02-aa02-aa02-aabbccdd0024
+
+	measure CumplimientoObjetivo_%_Online =
+			DIVIDE(
+				[Ventas_YTD_Online],
+				[Objetivos_YTD_Online]
+			)
+		formatString: 0%;-0%;0%
+		lineageTag: aabbccdd-aa02-aa02-aa02-aabbccdd0025
+
+	measure Ventas_YTD_Marketplace =
+			CALCULATE(
+				[Ventas_YTD],
+				LOL_PBITIENDAS[TipoTienda] = "MARKETPLACE"
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: aabbccdd-aa03-aa03-aa03-aabbccdd0031
+
+	measure Ventas_YTD_LY_Marketplace =
+			CALCULATE(
+				[Ventas_YTD_LY],
+				LOL_PBITIENDAS[TipoTienda] = "MARKETPLACE"
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: aabbccdd-aa03-aa03-aa03-aabbccdd0032
+
+	measure Ventas_YTD_Var_%_Marketplace =
+			DIVIDE(
+				[Ventas_YTD_Marketplace] - [Ventas_YTD_LY_Marketplace],
+				[Ventas_YTD_LY_Marketplace]
+			)
+		formatString: 0%;-0%;0%
+		lineageTag: aabbccdd-aa03-aa03-aa03-aabbccdd0033
+
+	measure Objetivos_YTD_Marketplace =
+			CALCULATE(
+				[Objetivos_YTD],
+				LOL_PBITIENDAS[TipoTienda] = "MARKETPLACE"
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: aabbccdd-aa03-aa03-aa03-aabbccdd0034
+
+	measure CumplimientoObjetivo_%_Marketplace =
+			DIVIDE(
+				[Ventas_YTD_Marketplace],
+				[Objetivos_YTD_Marketplace]
+			)
+		formatString: 0%;-0%;0%
+		lineageTag: aabbccdd-aa03-aa03-aa03-aabbccdd0035
+
+	measure Ventas_YTD_Outlet =
+			CALCULATE(
+				[Ventas_YTD],
+				LOL_PBITIENDAS[TipoTienda] = "OUTLET"
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: aabbccdd-aa04-aa04-aa04-aabbccdd0041
+
+	measure Ventas_YTD_LY_Outlet =
+			CALCULATE(
+				[Ventas_YTD_LY],
+				LOL_PBITIENDAS[TipoTienda] = "OUTLET"
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: aabbccdd-aa04-aa04-aa04-aabbccdd0042
+
+	measure Ventas_YTD_Var_%_Outlet =
+			DIVIDE(
+				[Ventas_YTD_Outlet] - [Ventas_YTD_LY_Outlet],
+				[Ventas_YTD_LY_Outlet]
+			)
+		formatString: 0%;-0%;0%
+		lineageTag: aabbccdd-aa04-aa04-aa04-aabbccdd0043
+
+	measure Objetivos_YTD_Outlet =
+			CALCULATE(
+				[Objetivos_YTD],
+				LOL_PBITIENDAS[TipoTienda] = "OUTLET"
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: aabbccdd-aa04-aa04-aa04-aabbccdd0044
+
+	measure CumplimientoObjetivo_%_Outlet =
+			DIVIDE(
+				[Ventas_YTD_Outlet],
+				[Objetivos_YTD_Outlet]
+			)
+		formatString: 0%;-0%;0%
+		lineageTag: aabbccdd-aa04-aa04-aa04-aabbccdd0045
+
+	measure Ventas_YTD_Tienda =
+			CALCULATE(
+				[Ventas_YTD],
+				LOL_PBITIENDAS[TipoTienda] = "TIENDA"
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: aabbccdd-aa05-aa05-aa05-aabbccdd0051
+
+	measure Ventas_YTD_LY_Tienda =
+			CALCULATE(
+				[Ventas_YTD_LY],
+				LOL_PBITIENDAS[TipoTienda] = "TIENDA"
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: aabbccdd-aa05-aa05-aa05-aabbccdd0052
+
+	measure Ventas_YTD_Var_%_Tienda =
+			DIVIDE(
+				[Ventas_YTD_Tienda] - [Ventas_YTD_LY_Tienda],
+				[Ventas_YTD_LY_Tienda]
+			)
+		formatString: 0%;-0%;0%
+		lineageTag: aabbccdd-aa05-aa05-aa05-aabbccdd0053
+
+	measure Objetivos_YTD_Tienda =
+			CALCULATE(
+				[Objetivos_YTD],
+				LOL_PBITIENDAS[TipoTienda] = "TIENDA"
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: aabbccdd-aa05-aa05-aa05-aabbccdd0054
+
+	measure CumplimientoObjetivo_%_Tienda =
+			DIVIDE(
+				[Ventas_YTD_Tienda],
+				[Objetivos_YTD_Tienda]
+			)
+		formatString: 0%;-0%;0%
+		lineageTag: aabbccdd-aa05-aa05-aa05-aabbccdd0055
+
+	column Column
+		formatString: 0
+		lineageTag: aabbccdd-aa01-ccol-ccol-aabbccddcol1
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MedidasCanales = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = aabbccddaa01aa01aa01aabbccdd0001
+

@@ -29,6 +29,14 @@ table LOL_PBIOBJETIVOSRETAIL
 
 		annotation SummarizationSetBy = Automatic
 
+	column RowGuid
+		dataType: string
+		lineageTag: 434540c3-a59e-4563-97fd-4a0f59bc482a
+		summarizeBy: none
+		sourceColumn: RowGuid
+
+		annotation SummarizationSetBy = Automatic
+
 	partition LOL_PBIOBJETIVOSRETAIL = m
 		mode: import
 		source =

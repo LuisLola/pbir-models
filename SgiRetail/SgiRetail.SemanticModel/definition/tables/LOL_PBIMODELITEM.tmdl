@@ -450,6 +450,14 @@ table LOL_PBIMODELITEM
 
 		annotation SummarizationSetBy = Automatic
 
+	column RowGuid
+		dataType: string
+		lineageTag: 798328a7-ea60-4775-9e26-85a567dc7080
+		summarizeBy: none
+		sourceColumn: RowGuid
+
+		annotation SummarizationSetBy = Automatic
+
 	partition LOL_PBIMODELITEM = m
 		mode: import
 		source =

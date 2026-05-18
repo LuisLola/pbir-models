@@ -238,6 +238,11 @@ table LOL_PBISALESORDER
 		summarizeBy: none
 		sourceColumn: FechaContabilizacion
 
+		variation Variación
+			isDefault
+			relationship: a3e5817a-185f-48cd-aa15-fd7dc435ddf1
+			defaultHierarchy: LocalDateTable_01917e91-8867-44c1-95ec-318308b66427.'Jerarquía de fechas'
+
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
@@ -248,11 +253,6 @@ table LOL_PBISALESORDER
 		lineageTag: a02d6a38-2e58-409c-af52-c46badbcf5b3
 		summarizeBy: none
 		sourceColumn: FechaDocumento
-
-		variation Variación
-			isDefault
-			relationship: 6111a91a-8c77-40ac-97c2-d7b4333f6fd9
-			defaultHierarchy: LocalDateTable_c53112aa-d80a-47e4-ae28-099473414fda.'Jerarquía de fechas'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -579,6 +579,14 @@ table LOL_PBISALESORDER
 		lineageTag: 9a3a5fcd-878f-4596-9d28-a31cad231877
 		summarizeBy: none
 		sourceColumn: UsuarioCreacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column CANCELED
+		dataType: string
+		lineageTag: e872ab5c-8749-4d8f-8dea-a8a4ef0c4f93
+		summarizeBy: none
+		sourceColumn: CANCELED
 
 		annotation SummarizationSetBy = Automatic
 

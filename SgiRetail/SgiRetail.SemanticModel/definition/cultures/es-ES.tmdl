@@ -9341,6 +9341,16 @@ cultureInfo es-ES
 			            },
 			            "Weight": 0.9
 			          }
+			        },
+			        {
+			          "Ventas": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -9515,6 +9525,16 @@ cultureInfo es-ES
 			      "Terms": [
 			        {
 			          "Tickets": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Ventas": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -10040,6 +10060,16 @@ cultureInfo es-ES
 			            },
 			            "Weight": 0.9
 			          }
+			        },
+			        {
+			          "Atracción": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -10117,6 +10147,384 @@ cultureInfo es-ES
 			      "Terms": [
 			        {
 			          "Conv vs AA": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascalculadasretailonline.rangoperiodoseleccionado": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCalculadasRetailOnline",
+			          "ConceptualProperty": "RangoPeriodoSeleccionado"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Período": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasindicadores.texto_objetivo": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIndicadores",
+			          "ConceptualProperty": "Texto_Objetivo"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Objetivo": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasindicadores.texto_ly": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIndicadores",
+			          "ConceptualProperty": "Texto_LY"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "LastYear": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasindicadores.texto_objetivo_eci": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIndicadores",
+			          "ConceptualProperty": "Texto_Objetivo_ECI"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Objetivo": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasindicadores.texto_ly_eci": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIndicadores",
+			          "ConceptualProperty": "Texto_LY_ECI"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "LastYear": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasindicadores.texto_objetivo_online": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIndicadores",
+			          "ConceptualProperty": "Texto_Objetivo_Online"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Objetivo": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasindicadores.texto_ly_online": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIndicadores",
+			          "ConceptualProperty": "Texto_LY_Online"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "LastYear": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasindicadores.texto_objetivo_marketplace": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIndicadores",
+			          "ConceptualProperty": "Texto_Objetivo_Marketplace"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Objetivo": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasindicadores.texto_ly_marketplace": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIndicadores",
+			          "ConceptualProperty": "Texto_LY_Marketplace"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "LastYear": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasindicadores.texto_objetivo_outlet": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIndicadores",
+			          "ConceptualProperty": "Texto_Objetivo_Outlet"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Objetivo": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasindicadores.texto_ly_outlet": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIndicadores",
+			          "ConceptualProperty": "Texto_LY_Outlet"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "LastYear": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasindicadores.texto_objetivo_tienda": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIndicadores",
+			          "ConceptualProperty": "Texto_Objetivo_Tienda"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Objetivo": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasindicadores.texto_ly_tienda": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIndicadores",
+			          "ConceptualProperty": "Texto_LY_Tienda"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "LastYear": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.ventas_ytd_eci": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "Ventas_YTD_ECI"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Ventas": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.ventas_ytd_online": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "Ventas_YTD_Online"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Ventas": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.ventas_ytd_marketplace": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "Ventas_YTD_Marketplace"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Ventas": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.ventas_ytd_outlet": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "Ventas_YTD_Outlet"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Ventas": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.ventas_ytd_tienda": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "Ventas_YTD_Tienda"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Ventas": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",

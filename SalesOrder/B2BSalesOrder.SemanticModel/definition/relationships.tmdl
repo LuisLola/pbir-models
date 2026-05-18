@@ -1,8 +1,3 @@
-relationship 6111a91a-8c77-40ac-97c2-d7b4333f6fd9
-	joinOnDateBehavior: datePartOnly
-	fromColumn: LOL_PBISALESORDER.FechaDocumento
-	toColumn: LocalDateTable_c53112aa-d80a-47e4-ae28-099473414fda.Date
-
 relationship b4343ffe-fa6f-47e6-96ef-e3641378e5e0
 	joinOnDateBehavior: datePartOnly
 	fromColumn: LOL_PBISALESORDER.FechaEntregaLinea
@@ -83,4 +78,39 @@ relationship 99c8780c-0a82-35d9-6cf4-c4f0013c81aa
 relationship 59aac338-2125-23a4-1d58-5b7cc355638a
 	fromColumn: LOL_PBISALESORDER.CodigoCliente
 	toColumn: LOL_PBICLIENTES.CodeCliente
+
+relationship a3e5817a-185f-48cd-aa15-fd7dc435ddf1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISALESORDER.FechaContabilizacion
+	toColumn: LocalDateTable_01917e91-8867-44c1-95ec-318308b66427.Date
+
+relationship 9d3f3fb0-803f-438a-afa0-c7c7e2087782
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBIINCIDENCIASB2B.FechaComunicacion
+	toColumn: LocalDateTable_626597c6-7808-480a-bb09-6a5905bc614a.Date
+
+relationship AutoDetected_23953946-f6fc-46bd-ab2e-de2d67f7445b
+	fromColumn: LOL_PBIINCIDENCIASB2B.ItemCode
+	toColumn: LOL_PBIMODELITEM.ItemCode
+
+relationship 4aa9b10d-3e06-4a2c-90d6-b58f54da89b1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: VentasIncidencias.FechaDocumento
+	toColumn: Calendario.Date
+
+relationship b0497b45-89f5-446a-b839-87fb3d40d012
+	fromColumn: VentasIncidencias.CodigoCliente
+	toColumn: LOL_PBICLIENTES.CodeCliente
+
+relationship 99f93ac6-29e0-49de-98b8-4b6db4d3b7f6
+	fromColumn: VentasIncidencias.CodigoVendedor
+	toColumn: LOL_PBIAGENTES.SlpCode
+
+relationship 6ec446ec-9f61-4d31-9643-8f137c26b9b8
+	fromColumn: VentasIncidencias.CodigoArticulo
+	toColumn: LOL_PBIMODELITEM.ItemCode
+
+relationship 25ad6f70-89dc-48ff-97be-f80a598d1d17
+	fromColumn: VentasIncidencias.TemporadaLinea
+	toColumn: LOL_PBISEASON.Code
 

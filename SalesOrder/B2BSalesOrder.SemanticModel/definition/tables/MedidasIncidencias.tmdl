@@ -1,0 +1,167 @@
+table MedidasIncidencias
+	lineageTag: 8506f255-f927-401d-a176-f9500136dd58
+
+	measure VentaBrutaIncidencias = SUM ( 'VentasIncidencias'[VentaBrutaML] )
+		formatString: \€#,##0
+		displayFolder: Base
+		lineageTag: f11d0a1a-d7f3-4a3e-9bfa-5d28a0980b13
+
+	measure ImporteNetoIncidencias = SUM ( 'VentasIncidencias'[ImporteNetoML] )
+		formatString: \€#,##0
+		displayFolder: Base
+		lineageTag: 98165ee0-fad0-4242-b93d-30998da610db
+
+	measure CantidadIncidencias = SUM ( 'VentasIncidencias'[Cantidad] )
+		formatString: #,##0
+		displayFolder: Base
+		lineageTag: ee4f34cb-4f2a-4e2b-b6d0-b7d77c3f5984
+
+	measure LineasSalesOrderExcluidasPorIncidencia =
+			VAR LineasIncidencia =
+			    DISTINCT (
+			        SELECTCOLUMNS (
+			            'LOL_PBIINCIDENCIASB2B',
+			            "LineID", 'LOL_PBIINCIDENCIASB2B'[DocEntry] & "-" & 'LOL_PBIINCIDENCIASB2B'[ItemCode]
+			        )
+			    )
+			RETURN
+			    COUNTROWS (
+			        FILTER (
+			            'LOL_PBISALESORDER',
+			            'LOL_PBISALESORDER'[CANCELED] = "N"
+			                && CONTAINS (
+			                    LineasIncidencia,
+			                    [LineID], 'LOL_PBISALESORDER'[DocEntry] & "-" & 'LOL_PBISALESORDER'[CodigoArticulo]
+			                )
+			        )
+			    )
+		formatString: #,##0
+		displayFolder: Control
+		lineageTag: 4c9747d5-3d44-4ef3-89a1-b78f91962637
+
+	measure VentasTemporadaSeleccionadaIncidencias =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR FechaCorte = [FechaLimiteSeleccionada]
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel ),
+			        0,
+			        CALCULATE (
+			            SUM ( 'VentasIncidencias'[VentaBrutaML] ),
+			            REMOVEFILTERS ( 'Calendario' ),
+			            'VentasIncidencias'[TemporadaLinea] = TemporadaSel,
+			            'VentasIncidencias'[FechaDocumento] <= FechaCorte
+			        )
+			    )
+		formatString: \€#,##0
+		displayFolder: Temporada
+		lineageTag: c447b4fe-37e6-4a3c-9ef2-8e97b02ddc41
+
+	measure VentasTemporadaAnteriorIncidencias =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR FechaCorte = [FechaLimiteSeleccionada]
+			VAR TemporadaAnt =
+			    LOOKUPVALUE (
+			        'LOL_PBISEASON'[CompareSeason],
+			        'LOL_PBISEASON'[Code], TemporadaSel
+			    )
+			VAR FechaCorteAnt = EDATE ( FechaCorte, -12 )
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaAnt ),
+			        BLANK (),
+			        CALCULATE (
+			            SUM ( 'VentasIncidencias'[VentaBrutaML] ),
+			            REMOVEFILTERS ( 'Calendario' ),
+			            'VentasIncidencias'[TemporadaLinea] = TemporadaAnt,
+			            'VentasIncidencias'[FechaDocumento] <= FechaCorteAnt
+			        )
+			    )
+		formatString: \€#,##0
+		displayFolder: Temporada
+		lineageTag: f0b60d4e-41d8-423b-9810-477f4010b4d8
+
+	measure VentasTemporadaAnteriorSoloInicioIncidencias =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR TemporadaAnt =
+			    LOOKUPVALUE (
+			        'LOL_PBISEASON'[CompareSeason],
+			        'LOL_PBISEASON'[Code], TemporadaSel
+			    )
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaAnt ),
+			        BLANK (),
+			        CALCULATE (
+			            SUM ( 'VentasIncidencias'[VentaBrutaML] ),
+			            REMOVEFILTERS ( 'Calendario' ),
+			            'VentasIncidencias'[TemporadaLinea] = TemporadaAnt,
+			            'VentasIncidencias'[PedidoReposicionLinea] <> "Y"
+			        )
+			    )
+		formatString: \€#,##0
+		displayFolder: Temporada
+		lineageTag: f078b7c4-21b7-4cb7-a911-06c0c957337f
+
+	measure VentasTemporadaAnteriorTotalIncidencias =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR TemporadaAnt =
+			    LOOKUPVALUE (
+			        'LOL_PBISEASON'[CompareSeason],
+			        'LOL_PBISEASON'[Code], TemporadaSel
+			    )
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaAnt ),
+			        BLANK (),
+			        CALCULATE (
+			            SUM ( 'VentasIncidencias'[VentaBrutaML] ),
+			            REMOVEFILTERS ( 'Calendario' ),
+			            'VentasIncidencias'[TemporadaLinea] = TemporadaAnt
+			        )
+			    )
+		formatString: \€#,##0
+		displayFolder: Temporada
+		lineageTag: dc27879f-88fd-494b-90a7-2d7a5bc9985a
+
+	measure VentasTemporadaPasadaSoloInicioIncidencias =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR TemporadaPas =
+			    LOOKUPVALUE (
+			        'LOL_PBISEASON'[TemporadaAnterior],
+			        'LOL_PBISEASON'[Code], TemporadaSel
+			    )
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaPas ),
+			        BLANK (),
+			        CALCULATE (
+			            SUM ( 'VentasIncidencias'[VentaBrutaML] ),
+			            REMOVEFILTERS ( 'Calendario' ),
+			            'VentasIncidencias'[TemporadaLinea] = TemporadaPas
+			        )
+			    )
+		formatString: \€#,##0
+		displayFolder: Temporada
+		lineageTag: a64f6e69-a122-4ec1-9f93-2a03782463c7
+
+	measure VentasYTD_Incidencias =
+			CALCULATE (
+			    SUM ( 'VentasIncidencias'[VentaBrutaML] ),
+			    DATESYTD ( 'Calendario'[Date] )
+			)
+		formatString: \€#,##0
+		displayFolder: YTD
+		lineageTag: 95cf9f15-061b-45c1-8e67-ad0c1524744d
+
+	column Value
+		lineageTag: 07f7e59a-a986-41c2-b13c-7f6849f2b453
+		isNameInferred
+		sourceColumn: [Value]
+
+	partition MedidasIncidencias = calculated
+		mode: import
+		source = {BLANK()}
+
+	annotation PBI_ResultType = Table
+

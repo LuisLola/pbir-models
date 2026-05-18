@@ -1,0 +1,32 @@
+table MedidasFormato
+	lineageTag: 4d6ae369-5fa0-47b0-a421-05cdd6e43f1b
+
+	measure ColorEvol =
+			IF (
+			    ISBLANK ( [EvolTemporadaSeleccionada] ),
+			    "#595959",
+			    IF ( [EvolTemporadaSeleccionada] >= 0, "#00703C", "#C00000" )
+			)
+		displayFolder: Colores
+		lineageTag: a1b1c1d1-e1f1-4a1b-c1d1-e1f1a1b1c1d1
+
+	measure ColorEvolPct =
+			IF (
+			    ISBLANK ( [EvolTemporadaSeleccionada_%] ),
+			    "#595959",
+			    IF ( [EvolTemporadaSeleccionada_%] >= 0, "#00703C", "#C00000" )
+			)
+		displayFolder: Colores
+		lineageTag: b2c2d2e2-f2a2-4b2c-d2e2-f2a2b2c2d2e2
+
+	column Value
+		lineageTag: 90c5bc7b-2055-4d93-8f0b-dad542b550f7
+		isNameInferred
+		sourceColumn: [Value]
+
+	partition MedidasFormato = calculated
+		mode: import
+		source = {BLANK()}
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,124 @@
+table MedidasTemporadas
+	lineageTag: 472b4f79-e0c6-42a5-84e4-25f99f732601
+
+	measure FechaLimiteSeleccionada =
+			
+			VAR FechaFiltro = MAX ( 'Calendario'[Date] )
+			VAR FechaCarga = TODAY ()
+			RETURN
+			    MIN ( FechaFiltro, FechaCarga )
+		formatString: D MMM YYYY
+		displayFolder: Seleccion
+		lineageTag: eab42fb2-0424-423d-876d-9aea6b9d07e3
+
+	measure TemporadaSeleccionada = SELECTEDVALUE ( 'TemporadasUsadas'[Code] )
+		displayFolder: Seleccion
+		lineageTag: 61c26fa2-437d-4fd1-b31b-ae4d40032b87
+
+	measure TemporadaAnterior =
+			
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			RETURN
+			    CALCULATE (
+			        MAX ( 'LOL_PBISEASON'[CompareSeason] ),
+			        'LOL_PBISEASON'[Code] = TemporadaSel
+			    )
+		displayFolder: Seleccion
+		lineageTag: 4c4136fc-3711-4904-bdf6-b685b731fdcc
+
+	measure TemporadaAnteriorTotal =
+			
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR _val =
+			    CALCULATE (
+			        MAX ( 'LOL_PBISEASON'[CompareSeason] ),
+			        KEEPFILTERS ( 'LOL_PBISEASON'[Code] = TemporadaSel )
+			    )
+			RETURN
+			    IF (
+			        NOT ISBLANK ( TemporadaSel ),
+			        _val & " Total",
+			        "Total"
+			    )
+		displayFolder: Seleccion
+		lineageTag: ed219fef-99a4-4776-b0f3-b55cf48e5314
+
+	measure TemporadaPasada =
+			
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			RETURN
+			    CALCULATE (
+			        MAX ( 'LOL_PBISEASON'[TemporadaAnterior] ),
+			        'LOL_PBISEASON'[Code] = TemporadaSel
+			    )
+		displayFolder: Seleccion
+		lineageTag: 5055189e-b34c-4dc9-8060-c2e75a822fef
+
+	measure TituloComparativa =
+			
+			VAR T = [TemporadaSeleccionada]
+			VAR F = FORMAT ( MAX ( 'Calendario'[Date] ), "D MMM YYYY", "es-ES" )
+			RETURN
+			    IF ( ISBLANK ( T ), "Selecciona temporada", T & " a " & F )
+		displayFolder: Cabeceras
+		lineageTag: f1a2b3c4-d5e6-7f8a-9b0c-1d2e3f4a5b6c
+
+	measure CabeceraTemporadaActual =
+			
+			VAR T = [TemporadaSeleccionada]
+			RETURN
+			    IF ( ISBLANK ( T ), "Temporada", T & "+" )
+		displayFolder: Cabeceras
+		lineageTag: a2b3c4d5-e6f7-8a9b-0c1d-2e3f4a5b6c7d
+
+	measure CabeceraTemporadaAnterior = [TemporadaAnterior]
+		displayFolder: Cabeceras
+		lineageTag: b3c4d5e6-f7a8-9b0c-1d2e-3f4a5b6c7d8e
+
+	measure CabeceraTemporadaAnteriorIniciales =
+			
+			VAR Ant = [TemporadaAnterior]
+			RETURN
+			    IF ( ISBLANK ( Ant ), "T. iniciales", "T. iniciales " & Ant )
+		displayFolder: Cabeceras
+		lineageTag: c4d5e6f7-a8b9-0c1d-2e3f-4a5b6c7d8e9f
+
+	measure CabeceraEvolPct =
+			
+			VAR T = [TemporadaSeleccionada]
+			VAR Ant = [TemporadaAnterior]
+			RETURN
+			    IF ( ISBLANK ( T ) || ISBLANK ( Ant ), "Evol. %", "Evol. % " & T & " vs " & Ant )
+		displayFolder: Cabeceras
+		lineageTag: d5e6f7a8-b9c0-1d2e-3f4a-5b6c7d8e9f0a
+
+	measure CabeceraEvol = "Evol."
+		displayFolder: Cabeceras
+		lineageTag: e6f7a8b9-c0d1-2e3f-4a5b-6c7d8e9f0a1b
+
+	measure CabeceraEvolIniciales = "Evol. % T. iniciales"
+		displayFolder: Cabeceras
+		lineageTag: f7a8b9c0-d1e2-3f4a-5b6c-7d8e9f0a1b2c
+
+	measure CabeceraRealizado = "Realizado"
+		displayFolder: Cabeceras
+		lineageTag: a8b9c0d1-e2f3-4a5b-6c7d-8e9f0a1b2c3d
+
+	measure CabeceraTemporadaPasada =
+			VAR Pas = [TemporadaPasada]
+			RETURN
+			    IF ( ISBLANK ( Pas ), "T. pasada", Pas )
+		displayFolder: Cabeceras
+		lineageTag: b9c0d1e2-f3a4-5b6c-7d8e-9f0a1b2c3d4e
+
+	column Value
+		lineageTag: 3915f981-843f-41fe-b265-cfed01e0e2ac
+		isNameInferred
+		sourceColumn: [Value]
+
+	partition MedidasTemporadas = calculated
+		mode: import
+		source = {BLANK()}
+
+	annotation PBI_ResultType = Table
+
