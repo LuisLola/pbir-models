@@ -181,6 +181,40 @@ table MedidasIndicadores
 		formatString: @
 		lineageTag: aabbccdd-aa02-bb02-bb02-aabbccdd0072
 
+	measure Pilla_VsOBJ_Total =
+			VAR Pct = [EvolucionObjetivo_%]
+			VAR OBJ = [Objetivos_YTD]
+			VAR Sign = IF(Pct >= 0, "+", "")
+			RETURN
+				IF(ISBLANK(OBJ), BLANK(), Sign & FORMAT(Pct, "0%") & " vs OBJ")
+		formatString: @
+		lineageTag: aabbccdd-aa09-aa09-aa09-aabbccdd0091
+
+	measure Pilla_VsPY_Total =
+			VAR Pct = [Ventas_YTD_Var_%]
+			VAR LY = [Ventas_YTD_LY]
+			VAR Sign = IF(Pct >= 0, "+", "")
+			RETURN
+				IF(ISBLANK(LY), BLANK(), Sign & FORMAT(Pct, "0%") & " vs PY")
+		formatString: @
+		lineageTag: aabbccdd-aa09-aa09-aa09-aabbccdd0092
+
+	measure Texto_Progreso_Total =
+			VAR Pct = [CumplimientoObjetivo_%]
+			VAR OBJ = [Objetivos_YTD]
+			RETURN
+				IF(
+					ISBLANK(OBJ),
+					BLANK(),
+					FORMAT(Pct, "0%") & " del objetivo  ·  OBJ " & FORMAT(OBJ, "#,0")
+				)
+		formatString: @
+		lineageTag: aabbccdd-aa09-aa09-aa09-aabbccdd0093
+
+	measure NombreTienda_Selected = SELECTEDVALUE(LOL_PBITIENDAS[NombreTienda], "— Selecciona tienda —")
+		formatString: @
+		lineageTag: aabbccdd-aa09-aa09-aa09-aabbccdd0094
+
 	column Column
 		formatString: 0
 		lineageTag: aabbccdd-aa02-ccol-ccol-aabbccddcol2

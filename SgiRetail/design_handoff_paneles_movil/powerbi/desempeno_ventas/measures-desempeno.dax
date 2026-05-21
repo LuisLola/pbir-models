@@ -1,0 +1,161 @@
+// ============================================================================
+// Medidas DAX adicionales · Página "Desempeño de Ventas" (escritorio)
+// ============================================================================
+// Ya tienes en tu modelo las medidas base (Venta Neta, Objetivo, Ticket Medio,
+// etc.) — estas son las ADICIONALES que necesita esta página para los
+// time-buckets del KPI hero (Año / Mes / Semana / Día) y los semáforos.
+//
+// Si alguna ya existe con otro nombre, ÚSALA en lugar de crear duplicado.
+// ============================================================================
+
+
+// ─────────────────────────────────────────────────────────────────────────
+// 1 · TIME-BUCKET EVOLUTIONS (Año / Mes / Semana / Día)
+// ─────────────────────────────────────────────────────────────────────────
+// Cada KPI del strip muestra 4 evoluciones: comparativa con el mismo periodo
+// del año anterior agrupado por bucket de tiempo distinto.
+//
+// Asume:
+//   - Hay una "fecha fin" seleccionada (la del slicer de fin).
+//   - Comparamos contra el mismo periodo del año anterior.
+// ─────────────────────────────────────────────────────────────────────────
+
+% Evol Año =
+VAR ActualYTD =
+    CALCULATE (
+        [Venta Neta],
+        DATESYTD ( DimFecha[Fecha] )
+    )
+VAR PYTD =
+    CALCULATE (
+        [Venta Neta],
+        DATESYTD ( SAMEPERIODLASTYEAR ( DimFecha[Fecha] ) )
+    )
+RETURN
+    DIVIDE ( ActualYTD - PYTD, PYTD )
+
+% Evol Mes =
+VAR ActualMTD =
+    CALCULATE (
+        [Venta Neta],
+        DATESMTD ( DimFecha[Fecha] )
+    )
+VAR PYMTD =
+    CALCULATE (
+        [Venta Neta],
+        DATESMTD ( SAMEPERIODLASTYEAR ( DimFecha[Fecha] ) )
+    )
+RETURN
+    DIVIDE ( ActualMTD - PYMTD, PYMTD )
+
+% Evol Semana =
+VAR FechaFin = MAX ( DimFecha[Fecha] )
+VAR InicioSem = FechaFin - WEEKDAY ( FechaFin, 2 ) + 1
+VAR Actual =
+    CALCULATE (
+        [Venta Neta],
+        DATESBETWEEN ( DimFecha[Fecha], InicioSem, FechaFin )
+    )
+VAR PY =
+    CALCULATE (
+        [Venta Neta],
+        DATESBETWEEN ( DimFecha[Fecha], EDATE ( InicioSem, -12 ), EDATE ( FechaFin, -12 ) )
+    )
+RETURN
+    DIVIDE ( Actual - PY, PY )
+
+% Evol Día =
+VAR FechaFin = MAX ( DimFecha[Fecha] )
+VAR Actual =
+    CALCULATE (
+        [Venta Neta],
+        DimFecha[Fecha] = FechaFin
+    )
+VAR PY =
+    CALCULATE (
+        [Venta Neta],
+        DimFecha[Fecha] = EDATE ( FechaFin, -12 )
+    )
+RETURN
+    DIVIDE ( Actual - PY, PY )
+
+// Repite el mismo patrón para Ticket Medio, UPT y % Conversión
+// reemplazando [Venta Neta] por la medida correspondiente.
+
+
+// ─────────────────────────────────────────────────────────────────────────
+// 2 · SHARE % SOBRE EL TOTAL (para la columna Share)
+// ─────────────────────────────────────────────────────────────────────────
+% Share Total =
+VAR TotalGlobal =
+    CALCULATE (
+        [Venta Neta],
+        ALLSELECTED ( DimCanal[Canal] ),
+        ALLSELECTED ( DimTienda[Tienda] ),
+        ALLSELECTED ( DimCategoria[Categoria] ),
+        ALLSELECTED ( DimFamilia[Familia] )
+    )
+RETURN
+    DIVIDE ( [Venta Neta], TotalGlobal )
+
+
+// ─────────────────────────────────────────────────────────────────────────
+// 3 · COLORES DE PÍLDORA (semáforo) para cada % de evolución
+// ─────────────────────────────────────────────────────────────────────────
+// Reglas:
+//   pct >= 0        → verde   (#1F8A5B sobre #E3F4EB)
+//   -10% <= pct < 0 → amarillo (#B57A0E sobre #FAF1DD)
+//   pct < -10%      → rojo    (#C73838 sobre #FBE6E6)
+// ─────────────────────────────────────────────────────────────────────────
+
+Color Evol Año = SWITCH ( TRUE (), ISBLANK ( [% Evol Año] ), "#8089A2", [% Evol Año] >= 0, "#1F8A5B", [% Evol Año] >= -0.10, "#B57A0E", "#C73838" )
+Bg Evol Año    = SWITCH ( TRUE (), ISBLANK ( [% Evol Año] ), "#F7F6F2", [% Evol Año] >= 0, "#E3F4EB", [% Evol Año] >= -0.10, "#FAF1DD", "#FBE6E6" )
+
+Color Evol Mes = SWITCH ( TRUE (), ISBLANK ( [% Evol Mes] ), "#8089A2", [% Evol Mes] >= 0, "#1F8A5B", [% Evol Mes] >= -0.10, "#B57A0E", "#C73838" )
+Bg Evol Mes    = SWITCH ( TRUE (), ISBLANK ( [% Evol Mes] ), "#F7F6F2", [% Evol Mes] >= 0, "#E3F4EB", [% Evol Mes] >= -0.10, "#FAF1DD", "#FBE6E6" )
+
+Color Evol Sem = SWITCH ( TRUE (), ISBLANK ( [% Evol Semana] ), "#8089A2", [% Evol Semana] >= 0, "#1F8A5B", [% Evol Semana] >= -0.10, "#B57A0E", "#C73838" )
+Bg Evol Sem    = SWITCH ( TRUE (), ISBLANK ( [% Evol Semana] ), "#F7F6F2", [% Evol Semana] >= 0, "#E3F4EB", [% Evol Semana] >= -0.10, "#FAF1DD", "#FBE6E6" )
+
+Color Evol Día = SWITCH ( TRUE (), ISBLANK ( [% Evol Día] ), "#8089A2", [% Evol Día] >= 0, "#1F8A5B", [% Evol Día] >= -0.10, "#B57A0E", "#C73838" )
+Bg Evol Día    = SWITCH ( TRUE (), ISBLANK ( [% Evol Día] ), "#F7F6F2", [% Evol Día] >= 0, "#E3F4EB", [% Evol Día] >= -0.10, "#FAF1DD", "#FBE6E6" )
+
+
+// ─────────────────────────────────────────────────────────────────────────
+// 4 · TEXTOS FORMATEADOS (lo que se muestra dentro de la píldora)
+// ─────────────────────────────────────────────────────────────────────────
+
+Txt Evol Año    = IF ( ISBLANK ( [% Evol Año] ),    "—", FORMAT ( [% Evol Año],    "+0%;-0%;0%" ) )
+Txt Evol Mes    = IF ( ISBLANK ( [% Evol Mes] ),    "—", FORMAT ( [% Evol Mes],    "+0%;-0%;0%" ) )
+Txt Evol Semana = IF ( ISBLANK ( [% Evol Semana] ), "—", FORMAT ( [% Evol Semana], "+0%;-0%;0%" ) )
+Txt Evol Día    = IF ( ISBLANK ( [% Evol Día] ),    "—", FORMAT ( [% Evol Día],    "+0%;-0%;0%" ) )
+
+
+// ─────────────────────────────────────────────────────────────────────────
+// 5 · LABEL DEL BUCKET (lo que aparece arriba de cada píldora)
+// ─────────────────────────────────────────────────────────────────────────
+
+Lbl Año    = "Año "    & FORMAT ( YEAR ( MAX ( DimFecha[Fecha] ) ), "0000" )
+Lbl Mes    = FORMAT ( MAX ( DimFecha[Fecha] ), "MMM." )
+Lbl Semana = "S " & FORMAT ( WEEKNUM ( MAX ( DimFecha[Fecha] ), 2 ), "00" )
+Lbl Día    = FORMAT ( MAX ( DimFecha[Fecha] ), "dd/MM" )
+
+
+// ─────────────────────────────────────────────────────────────────────────
+// 6 · % DE COMPLETADO PARA LA BARRA DE PROGRESO (en columna Share)
+// ─────────────────────────────────────────────────────────────────────────
+
+% Share Bar = MIN ( 1, [% Share Total] )
+
+
+// ─────────────────────────────────────────────────────────────────────────
+// 7 · MEDIDAS PARA SPARKLINES (si usas el visual Sparkline nativo de PBI)
+// ─────────────────────────────────────────────────────────────────────────
+// Power BI tiene un sparkline nativo desde 2023 — se configura en cada
+// columna de Matrix con: Format → Cell elements → Sparkline.
+// Activa la opción y selecciona como eje X la dimensión de fecha.
+// No necesitas medidas adicionales si tu fact table tiene granularidad
+// diaria.
+
+// Si necesitas un sparkline en Card visual (no Matrix), tendrás que usar
+// un visual custom como "Vega Lite Vis" o "SVG Reporting".

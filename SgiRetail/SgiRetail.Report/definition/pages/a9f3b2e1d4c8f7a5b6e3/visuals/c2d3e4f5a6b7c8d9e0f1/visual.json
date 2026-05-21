@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "c2d3e4f5a6b7c8d9e0f1",
   "position": {
-    "x": 862.75862068965523,
-    "y": 7.9802955665024635,
-    "z": 5000,
-    "height": 93.103448275862064,
-    "width": 417.63546798029557,
-    "tabOrder": 5000
+    "x": 790,
+    "y": 16,
+    "z": 10000,
+    "height": 34,
+    "width": 168,
+    "tabOrder": 10000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -69,7 +69,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "11D"
                 }
               }
             }
@@ -80,5 +80,23 @@
         }
       ]
     }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "56d9a6b9d43e2c687c23",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasCalculadasRetailOnline"
+              }
+            },
+            "Property": "RangoPeriodoSeleccionado"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

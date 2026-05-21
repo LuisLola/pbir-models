@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "s3a4b5c6d7e8f9a0b1c2",
   "position": {
-    "x": 641.08374384236458,
-    "y": 226.99507389162562,
-    "z": 12000,
-    "height": 74.482758620689651,
-    "width": 295.27093596059115,
-    "tabOrder": 12000
+    "x": 654.34044882320745,
+    "y": 273.88888888888886,
+    "z": 41000,
+    "height": 64.285714285714278,
+    "width": 240.51724137931035,
+    "tabOrder": 41000
   },
   "visual": {
     "visualType": "slicer",
@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "DimensionesB2C3"
+                      "Entity": "LOL_PBIMODELITEM"
                     }
                   },
-                  "Property": "DimensionesB2C3"
+                  "Property": "Categoria"
                 }
               },
-              "queryRef": "DimensionesB2C3.DimensionesB2C3",
-              "nativeQueryRef": "DimensionesB2C3",
+              "queryRef": "LOL_PBIMODELITEM.Categoria",
+              "nativeQueryRef": "Categoria",
               "active": true
             }
           ]
@@ -48,104 +48,56 @@
           }
         }
       ],
-      "general": [
+      "header": [
         {
           "properties": {
-            "filter": {
-              "filter": {
-                "Version": 2,
-                "From": [
-                  {
-                    "Name": "d",
-                    "Entity": "DimensionesB2C3",
-                    "Type": 0
-                  }
-                ],
-                "Where": [
-                  {
-                    "Condition": {
-                      "In": {
-                        "Expressions": [
-                          {
-                            "Column": {
-                              "Expression": {
-                                "SourceRef": {
-                                  "Source": "d"
-                                }
-                              },
-                              "Property": "DimensionesB2C3 Campos"
-                            }
-                          }
-                        ],
-                        "Values": [
-                          [
-                            {
-                              "Literal": {
-                                "Value": "'''LOL_PBIMODELITEM''[Nombre_familia]'"
-                              }
-                            }
-                          ]
-                        ]
-                      }
-                    },
-                    "Annotations": {
-                      "filterExpressionMetadata": {
-                        "expressions": [
-                          {
-                            "Column": {
-                              "Expression": {
-                                "SourceRef": {
-                                  "Entity": "DimensionesB2C3"
-                                }
-                              },
-                              "Property": "DimensionesB2C3"
-                            }
-                          }
-                        ],
-                        "decomposedIdentities": {
-                          "values": [
-                            [
-                              {
-                                "0": [
-                                  {
-                                    "Literal": {
-                                      "Value": "'''LOL_PBIMODELITEM''[Nombre_familia]'"
-                                    }
-                                  }
-                                ]
-                              }
-                            ]
-                          ],
-                          "columns": [
-                            {
-                              "value": {
-                                "Column": {
-                                  "Expression": {
-                                    "SourceRef": {
-                                      "Entity": "DimensionesB2C3"
-                                    }
-                                  },
-                                  "Property": "DimensionesB2C3 Campos"
-                                }
-                              }
-                            }
-                          ]
-                        },
-                        "valueMap": [
-                          {
-                            "0": "Nombre_familia"
-                          }
-                        ]
-                      }
-                    }
-                  }
-                ]
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Selector 1'"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "textSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
               }
             }
           }
         }
       ],
-      "header": [
+      "background": [
         {
           "properties": {
             "show": {
@@ -155,34 +107,54 @@
                 }
               }
             },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Dimensión producto'"
-                }
-              }
-            },
-            "fontColor": {
+            "color": {
               "solid": {
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3A2329'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }
           }
         }
       ],
-      "items": [
+      "border": [
         {
           "properties": {
-            "textSize": {
+            "show": {
               "expr": {
                 "Literal": {
-                  "Value": "10D"
+                  "Value": "false"
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }

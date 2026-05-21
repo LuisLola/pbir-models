@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "crd001daterange",
   "position": {
-    "x": 224,
-    "y": 5,
-    "z": 4000,
-    "height": 48,
-    "width": 132,
-    "tabOrder": 4000
+    "x": 14,
+    "y": 44,
+    "z": 11000,
+    "height": 36,
+    "width": 332,
+    "tabOrder": 11000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -28,7 +28,7 @@
               },
               "queryRef": "MedidasCalculadasRetailOnline.RangoPeriodoSeleccionado",
               "nativeQueryRef": "RangoPeriodoSeleccionado",
-              "displayName": "Período"
+              "displayName": "Periodo"
             }
           ]
         }
@@ -42,6 +42,31 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Periodo'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#8089A2'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
                 }
               }
             }

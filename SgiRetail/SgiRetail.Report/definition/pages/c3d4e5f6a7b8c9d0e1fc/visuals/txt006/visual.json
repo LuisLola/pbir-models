@@ -1,0 +1,50 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "txt006",
+  "position": {
+    "x": 14,
+    "y": 318,
+    "z": 16000,
+    "height": 120,
+    "width": 332,
+    "tabOrder": 16000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "SIN DESGLOSE",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#8089A2",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "center"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Este canal no tiene desglose por marketplaces en este periodo.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#3A4055"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "center"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

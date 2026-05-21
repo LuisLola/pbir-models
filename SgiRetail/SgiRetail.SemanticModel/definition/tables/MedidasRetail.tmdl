@@ -10,7 +10,7 @@ table MedidasRetail
 				[Ventas],
 				DATESBETWEEN(Calendario[Date], [FechaInicioPeriodoSeleccionado], [FechaHastaSeleccionada])
 			)
-		formatString: \$#,0;(\$#,0);\$#,0
+		formatString: € #,##0;(€ #,##0);€ #,##0
 		lineageTag: 4c3f3215-d6c8-47d9-833c-d2c6e94da448
 
 	measure Ventas_YTD_LY =
@@ -150,7 +150,7 @@ table MedidasRetail
 		lineageTag: 87654321-4321-4321-4321-fedcba987654
 
 	measure PromedioVentaTransaccion_YTD = DIVIDE([Ventas_YTD], [NumeroTransacciones_YTD])
-		formatString: #,0.00;-#,0.00;#,0.00
+		formatString: € #,##0.00;-€ #,##0.00;€ #,##0.00
 		lineageTag: a3b9e760-d783-4e04-9ed9-e7223a97433b
 
 	measure PromedioVentaTransaccion_LY = DIVIDE([Ventas_YTD_LY], [NumeroTransacciones_LY])

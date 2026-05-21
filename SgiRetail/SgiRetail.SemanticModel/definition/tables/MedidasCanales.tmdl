@@ -201,6 +201,214 @@ table MedidasCanales
 		formatString: 0%;-0%;0%
 		lineageTag: aabbccdd-aa05-aa05-aa05-aabbccdd0055
 
+	measure Share_%_Tienda = DIVIDE([Ventas_YTD_Tienda], [Ventas_YTD])
+		formatString: 0%
+		lineageTag: aabbccdd-aa06-aa06-aa06-aabbccdd0061
+
+	measure Share_%_ECI = DIVIDE([Ventas_YTD_ECI], [Ventas_YTD])
+		formatString: 0%
+		lineageTag: aabbccdd-aa06-aa06-aa06-aabbccdd0062
+
+	measure Share_%_Online = DIVIDE([Ventas_YTD_Online], [Ventas_YTD])
+		formatString: 0%
+		lineageTag: aabbccdd-aa06-aa06-aa06-aabbccdd0063
+
+	measure Share_%_Marketplace = DIVIDE([Ventas_YTD_Marketplace], [Ventas_YTD])
+		formatString: 0%
+		lineageTag: aabbccdd-aa06-aa06-aa06-aabbccdd0064
+
+	measure ChannelHeader_Tienda =
+			IF(
+				ISBLANK([Ventas_YTD_Tienda]),
+				"Tienda",
+				"Tienda  " & FORMAT([Share_%_Tienda], "0%") & " del total"
+			)
+		formatString: @
+		lineageTag: aabbccdd-aa07-aa07-aa07-aabbccdd0071
+
+	measure ChannelHeader_ECI =
+			IF(
+				ISBLANK([Ventas_YTD_ECI]),
+				"Corner ECI",
+				"Corner ECI  " & FORMAT([Share_%_ECI], "0%") & " del total"
+			)
+		formatString: @
+		lineageTag: aabbccdd-aa07-aa07-aa07-aabbccdd0072
+
+	measure ChannelHeader_Online =
+			IF(
+				ISBLANK([Ventas_YTD_Online]),
+				"Online",
+				"Online  " & FORMAT([Share_%_Online], "0%") & " del total"
+			)
+		formatString: @
+		lineageTag: aabbccdd-aa07-aa07-aa07-aabbccdd0073
+
+	measure ChannelHeader_Marketplace =
+			IF(
+				ISBLANK([Ventas_YTD_Marketplace]),
+				"Marketplaces",
+				"Marketplaces  " & FORMAT([Share_%_Marketplace], "0%") & " del total"
+			)
+		formatString: @
+		lineageTag: aabbccdd-aa07-aa07-aa07-aabbccdd0074
+
+	measure Pilla_VsOBJ_ECI =
+			VAR Pct = [CumplimientoObjetivo_%_ECI] - 1
+			VAR OBJ = [Objetivos_YTD_ECI]
+			VAR Sign = IF(Pct >= 0, "+", "")
+			RETURN
+				IF(ISBLANK(OBJ), BLANK(), Sign & FORMAT(Pct, "0%") & " vs OBJ")
+		formatString: @
+		lineageTag: aabbccdd-aa08-aa08-aa08-aabbccdd0081
+
+	measure Pilla_VsPY_ECI =
+			VAR Pct = [Ventas_YTD_Var_%_ECI]
+			VAR LY = [Ventas_YTD_LY_ECI]
+			VAR Sign = IF(Pct >= 0, "+", "")
+			RETURN
+				IF(ISBLANK(LY), BLANK(), Sign & FORMAT(Pct, "0%") & " vs PY")
+		formatString: @
+		lineageTag: aabbccdd-aa08-aa08-aa08-aabbccdd0082
+
+	measure Pilla_VsOBJ_Online =
+			VAR Pct = [CumplimientoObjetivo_%_Online] - 1
+			VAR OBJ = [Objetivos_YTD_Online]
+			VAR Sign = IF(Pct >= 0, "+", "")
+			RETURN
+				IF(ISBLANK(OBJ), BLANK(), Sign & FORMAT(Pct, "0%") & " vs OBJ")
+		formatString: @
+		lineageTag: aabbccdd-aa08-aa08-aa08-aabbccdd0083
+
+	measure Pilla_VsPY_Online =
+			VAR Pct = [Ventas_YTD_Var_%_Online]
+			VAR LY = [Ventas_YTD_LY_Online]
+			VAR Sign = IF(Pct >= 0, "+", "")
+			RETURN
+				IF(ISBLANK(LY), BLANK(), Sign & FORMAT(Pct, "0%") & " vs PY")
+		formatString: @
+		lineageTag: aabbccdd-aa08-aa08-aa08-aabbccdd0084
+
+	measure Pilla_VsOBJ_Marketplace =
+			VAR Pct = [CumplimientoObjetivo_%_Marketplace] - 1
+			VAR OBJ = [Objetivos_YTD_Marketplace]
+			VAR Sign = IF(Pct >= 0, "+", "")
+			RETURN
+				IF(ISBLANK(OBJ), BLANK(), Sign & FORMAT(Pct, "0%") & " vs OBJ")
+		formatString: @
+		lineageTag: aabbccdd-aa08-aa08-aa08-aabbccdd0085
+
+	measure Pilla_VsPY_Marketplace =
+			VAR Pct = [Ventas_YTD_Var_%_Marketplace]
+			VAR LY = [Ventas_YTD_LY_Marketplace]
+			VAR Sign = IF(Pct >= 0, "+", "")
+			RETURN
+				IF(ISBLANK(LY), BLANK(), Sign & FORMAT(Pct, "0%") & " vs PY")
+		formatString: @
+		lineageTag: aabbccdd-aa08-aa08-aa08-aabbccdd0086
+
+	measure Pilla_VsOBJ_Tienda =
+			VAR Pct = [CumplimientoObjetivo_%_Tienda] - 1
+			VAR OBJ = [Objetivos_YTD_Tienda]
+			VAR Sign = IF(Pct >= 0, "+", "")
+			RETURN
+				IF(ISBLANK(OBJ), BLANK(), Sign & FORMAT(Pct, "0%") & " vs OBJ")
+		formatString: @
+		lineageTag: aabbccdd-aa08-aa08-aa08-aabbccdd0087
+
+	measure Pilla_VsPY_Tienda =
+			VAR Pct = [Ventas_YTD_Var_%_Tienda]
+			VAR LY = [Ventas_YTD_LY_Tienda]
+			VAR Sign = IF(Pct >= 0, "+", "")
+			RETURN
+				IF(ISBLANK(LY), BLANK(), Sign & FORMAT(Pct, "0%") & " vs PY")
+		formatString: @
+		lineageTag: aabbccdd-aa08-aa08-aa08-aabbccdd0088
+
+	measure PromedioVentaTransaccion_YTD_Tienda = CALCULATE([PromedioVentaTransaccion_YTD], LOL_PBITIENDAS[TipoTienda] = "TIENDA")
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: aabbccdd-aa10-aa10-aa10-aabbccdd0101
+
+	measure PromedioVentaTransaccion_YTD_ECI = CALCULATE([PromedioVentaTransaccion_YTD], LOL_PBITIENDAS[TipoTienda] = "ECI")
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: aabbccdd-aa10-aa10-aa10-aabbccdd0102
+
+	measure PromedioVentaTransaccion_YTD_Online = CALCULATE([PromedioVentaTransaccion_YTD], LOL_PBITIENDAS[TipoTienda] = "ONLINE")
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: aabbccdd-aa10-aa10-aa10-aabbccdd0103
+
+	measure PromedioVentaTransaccion_YTD_Marketplace = CALCULATE([PromedioVentaTransaccion_YTD], LOL_PBITIENDAS[TipoTienda] = "MARKETPLACE")
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: aabbccdd-aa10-aa10-aa10-aabbccdd0104
+
+	measure UPT_YTD_Tienda = CALCULATE([UPT_YTD], LOL_PBITIENDAS[TipoTienda] = "TIENDA")
+		formatString: 0.00
+		lineageTag: aabbccdd-aa10-aa10-aa10-aabbccdd0111
+
+	measure UPT_YTD_ECI = CALCULATE([UPT_YTD], LOL_PBITIENDAS[TipoTienda] = "ECI")
+		formatString: 0.00
+		lineageTag: aabbccdd-aa10-aa10-aa10-aabbccdd0112
+
+	measure UPT_YTD_Online = CALCULATE([UPT_YTD], LOL_PBITIENDAS[TipoTienda] = "ONLINE")
+		formatString: 0.00
+		lineageTag: aabbccdd-aa10-aa10-aa10-aabbccdd0113
+
+	measure UPT_YTD_Marketplace = CALCULATE([UPT_YTD], LOL_PBITIENDAS[TipoTienda] = "MARKETPLACE")
+		formatString: 0.00
+		lineageTag: aabbccdd-aa10-aa10-aa10-aabbccdd0114
+
+	measure Conversion_YTD_Tienda = CALCULATE([Tasa_Conversion_YTD], LOL_PBITIENDAS[TipoTienda] = "TIENDA")
+		formatString: 0.0%
+		lineageTag: aabbccdd-aa10-aa10-aa10-aabbccdd0121
+
+	measure Conversion_YTD_ECI = CALCULATE([Tasa_Conversion_YTD], LOL_PBITIENDAS[TipoTienda] = "ECI")
+		formatString: 0.0%
+		lineageTag: aabbccdd-aa10-aa10-aa10-aabbccdd0122
+
+	measure Conversion_YTD_Online = CALCULATE([Tasa_Conversion_YTD], LOL_PBITIENDAS[TipoTienda] = "ONLINE")
+		formatString: 0.0%
+		lineageTag: aabbccdd-aa10-aa10-aa10-aabbccdd0123
+
+	measure Conversion_YTD_Marketplace = CALCULATE([Tasa_Conversion_YTD], LOL_PBITIENDAS[TipoTienda] = "MARKETPLACE")
+		formatString: 0.0%
+		lineageTag: aabbccdd-aa10-aa10-aa10-aabbccdd0124
+
+	measure Atraccion_YTD_Tienda = CALCULATE([Tasa_Atraccion_YTD], LOL_PBITIENDAS[TipoTienda] = "TIENDA")
+		formatString: 0.0%
+		lineageTag: aabbccdd-aa10-aa10-aa10-aabbccdd0131
+
+	measure Texto_Progreso_Tienda =
+			VAR Pct = [CumplimientoObjetivo_%_Tienda]
+			VAR OBJ = [Objetivos_YTD_Tienda]
+			RETURN
+				IF(ISBLANK(OBJ), BLANK(), FORMAT(Pct, "0%") & " del objetivo  ·  OBJ " & FORMAT(OBJ, "#,0"))
+		formatString: @
+		lineageTag: aabbccdd-aa10-aa10-aa10-aabbccdd0141
+
+	measure Texto_Progreso_ECI =
+			VAR Pct = [CumplimientoObjetivo_%_ECI]
+			VAR OBJ = [Objetivos_YTD_ECI]
+			RETURN
+				IF(ISBLANK(OBJ), BLANK(), FORMAT(Pct, "0%") & " del objetivo  ·  OBJ " & FORMAT(OBJ, "#,0"))
+		formatString: @
+		lineageTag: aabbccdd-aa10-aa10-aa10-aabbccdd0142
+
+	measure Texto_Progreso_Online =
+			VAR Pct = [CumplimientoObjetivo_%_Online]
+			VAR OBJ = [Objetivos_YTD_Online]
+			RETURN
+				IF(ISBLANK(OBJ), BLANK(), FORMAT(Pct, "0%") & " del objetivo  ·  OBJ " & FORMAT(OBJ, "#,0"))
+		formatString: @
+		lineageTag: aabbccdd-aa10-aa10-aa10-aabbccdd0143
+
+	measure Texto_Progreso_Marketplace =
+			VAR Pct = [CumplimientoObjetivo_%_Marketplace]
+			VAR OBJ = [Objetivos_YTD_Marketplace]
+			RETURN
+				IF(ISBLANK(OBJ), BLANK(), FORMAT(Pct, "0%") & " del objetivo  ·  OBJ " & FORMAT(OBJ, "#,0"))
+		formatString: @
+		lineageTag: aabbccdd-aa10-aa10-aa10-aabbccdd0144
+
 	column Column
 		formatString: 0
 		lineageTag: aabbccdd-aa01-ccol-ccol-aabbccddcol1

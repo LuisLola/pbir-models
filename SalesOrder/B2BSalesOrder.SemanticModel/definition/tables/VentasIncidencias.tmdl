@@ -134,106 +134,22 @@ table VentasIncidencias
 		mode: import
 		source =
 				SELECTCOLUMNS (
-				    'LOL_PBIINCIDENCIASB2B',
+				    FILTER ( 'LOL_PBIB2BSALESORDER', 'LOL_PBIB2BSALESORDER'[IsIncidence] = "Y" ),
 				    "TipoRegistro", "Incidencia",
-				    "LineID", 'LOL_PBIINCIDENCIASB2B'[DocEntry] & "-" & 'LOL_PBIINCIDENCIASB2B'[ItemCode],
-				    "DocEntry", 'LOL_PBIINCIDENCIASB2B'[DocEntry],
-				    "LineNum", 'LOL_PBIINCIDENCIASB2B'[LineNum],
-				    "IncidenciaCode", 'LOL_PBIINCIDENCIASB2B'[IncidenciaCode],
-				    "IncidenciaDesc", 'LOL_PBIINCIDENCIASB2B'[IncidenciaDesc],
-				    "FechaDocumento", COALESCE (
-				        IFERROR (
-				            LOOKUPVALUE (
-				                'LOL_PBISALESORDER'[FechaDocumento],
-				                'LOL_PBISALESORDER'[DocEntry], 'LOL_PBIINCIDENCIASB2B'[DocEntry],
-				                'LOL_PBISALESORDER'[CodigoArticulo], 'LOL_PBIINCIDENCIASB2B'[ItemCode]
-				            ),
-				            BLANK ()
-				        ),
-				        'LOL_PBIINCIDENCIASB2B'[FechaComunicacion]
-				    ),
-				    "CodigoCliente", IFERROR (
-				        LOOKUPVALUE (
-				            'LOL_PBISALESORDER'[CodigoCliente],
-				            'LOL_PBISALESORDER'[DocEntry], 'LOL_PBIINCIDENCIASB2B'[DocEntry],
-				            'LOL_PBISALESORDER'[CodigoArticulo], 'LOL_PBIINCIDENCIASB2B'[ItemCode]
-				        ),
-				        BLANK ()
-				    ),
-				    "CodigoVendedor", IFERROR (
-				        LOOKUPVALUE (
-				            'LOL_PBISALESORDER'[CodigoVendedor],
-				            'LOL_PBISALESORDER'[DocEntry], 'LOL_PBIINCIDENCIASB2B'[DocEntry],
-				            'LOL_PBISALESORDER'[CodigoArticulo], 'LOL_PBIINCIDENCIASB2B'[ItemCode]
-				        ),
-				        BLANK ()
-				    ),
-				    "CodigoArticulo", 'LOL_PBIINCIDENCIASB2B'[ItemCode],
-				    "TemporadaLinea", IFERROR (
-				        LOOKUPVALUE (
-				            'LOL_PBISALESORDER'[TemporadaLinea],
-				            'LOL_PBISALESORDER'[DocEntry], 'LOL_PBIINCIDENCIASB2B'[DocEntry],
-				            'LOL_PBISALESORDER'[CodigoArticulo], 'LOL_PBIINCIDENCIASB2B'[ItemCode]
-				        ),
-				        BLANK ()
-				    ),
-				    "PedidoReposicionLinea", IFERROR (
-				        LOOKUPVALUE (
-				            'LOL_PBISALESORDER'[PedidoReposicionLinea],
-				            'LOL_PBISALESORDER'[DocEntry], 'LOL_PBIINCIDENCIASB2B'[DocEntry],
-				            'LOL_PBISALESORDER'[CodigoArticulo], 'LOL_PBIINCIDENCIASB2B'[ItemCode]
-				        ),
-				        BLANK ()
-				    ),
-				    "Cantidad", 'LOL_PBIINCIDENCIASB2B'[Quantity],
-				    "VentaBrutaML",
-				        VAR TextoPrecio =
-				            SUBSTITUTE ( SUBSTITUTE ( SUBSTITUTE ( TRIM ( 'LOL_PBIINCIDENCIASB2B'[PrecioNetoDoc] ), "EUR", "" ), "€", "" ), " ", "" )
-				        VAR TieneComa = CONTAINSSTRING ( TextoPrecio, "," )
-				        VAR TienePunto = CONTAINSSTRING ( TextoPrecio, "." )
-				        VAR TextoPrecioNormalizado =
-				            IF (
-				                TieneComa && TienePunto,
-				                IF (
-				                    FIND ( ",", TextoPrecio, 1, 0 ) > FIND ( ".", TextoPrecio, 1, 0 ),
-				                    SUBSTITUTE ( SUBSTITUTE ( TextoPrecio, ".", "" ), ",", "." ),
-				                    SUBSTITUTE ( TextoPrecio, ",", "" )
-				                ),
-				                IF ( TieneComa, SUBSTITUTE ( TextoPrecio, ",", "." ), TextoPrecio )
-				            )
-				        VAR PrecioDoc = IFERROR ( VALUE ( TextoPrecioNormalizado ), 0 )
-				        VAR TipoCambio = COALESCE ( 'LOL_PBIINCIDENCIASB2B'[TipoCambioLinea], 1 )
-				        VAR PrecioML =
-				            IF (
-				                UPPER ( 'LOL_PBIINCIDENCIASB2B'[MonedaDocumento] ) <> "EUR",
-				                DIVIDE ( PrecioDoc, TipoCambio, 0 ),
-				                PrecioDoc
-				            )
-				        RETURN
-				            'LOL_PBIINCIDENCIASB2B'[Quantity] * PrecioML,
-				    "ImporteNetoML",
-				        VAR TextoImporte =
-				            SUBSTITUTE ( SUBSTITUTE ( SUBSTITUTE ( TRIM ( 'LOL_PBIINCIDENCIASB2B'[ImporteNetoDoc] ), "EUR", "" ), "€", "" ), " ", "" )
-				        VAR TieneComa = CONTAINSSTRING ( TextoImporte, "," )
-				        VAR TienePunto = CONTAINSSTRING ( TextoImporte, "." )
-				        VAR TextoImporteNormalizado =
-				            IF (
-				                TieneComa && TienePunto,
-				                IF (
-				                    FIND ( ",", TextoImporte, 1, 0 ) > FIND ( ".", TextoImporte, 1, 0 ),
-				                    SUBSTITUTE ( SUBSTITUTE ( TextoImporte, ".", "" ), ",", "." ),
-				                    SUBSTITUTE ( TextoImporte, ",", "" )
-				                ),
-				                IF ( TieneComa, SUBSTITUTE ( TextoImporte, ",", "." ), TextoImporte )
-				            )
-				        VAR ImporteDoc = IFERROR ( VALUE ( TextoImporteNormalizado ), 0 )
-				        VAR TipoCambio = COALESCE ( 'LOL_PBIINCIDENCIASB2B'[TipoCambioLinea], 1 )
-				        RETURN
-				            IF (
-				                UPPER ( 'LOL_PBIINCIDENCIASB2B'[MonedaDocumento] ) <> "EUR",
-				                DIVIDE ( ImporteDoc, TipoCambio, 0 ),
-				                ImporteDoc
-				            )
+				    "LineID", 'LOL_PBIB2BSALESORDER'[DocEntry] & "-" & 'LOL_PBIB2BSALESORDER'[ItemCode],
+				    "DocEntry", 'LOL_PBIB2BSALESORDER'[DocEntry],
+				    "LineNum", 'LOL_PBIB2BSALESORDER'[LineNum],
+				    "IncidenciaCode", 'LOL_PBIB2BSALESORDER'[RMAMotiveCod],
+				    "IncidenciaDesc", 'LOL_PBIB2BSALESORDER'[IncidenceType],
+				    "FechaDocumento", 'LOL_PBIB2BSALESORDER'[DocDate],
+				    "CodigoCliente", 'LOL_PBIB2BSALESORDER'[CardCode],
+				    "CodigoVendedor", 'LOL_PBIB2BSALESORDER'[SlpCode],
+				    "CodigoArticulo", 'LOL_PBIB2BSALESORDER'[ItemCode],
+				    "TemporadaLinea", 'LOL_PBIB2BSALESORDER'[Season],
+				    "PedidoReposicionLinea", 'LOL_PBIB2BSALESORDER'[Reposicion],
+				    "Cantidad", IFERROR ( INT ( 'LOL_PBIB2BSALESORDER'[Qty] ), 0 ),
+				    "VentaBrutaML", 'LOL_PBIB2BSALESORDER'[ImporteBruto],
+				    "ImporteNetoML", 'LOL_PBIB2BSALESORDER'[LineTotal_Num]
 				)
 
 	annotation PBI_ResultType = Table

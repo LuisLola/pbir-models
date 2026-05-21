@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "crd007ventastot",
   "position": {
-    "x": 0,
-    "y": 179,
-    "z": 9000,
-    "height": 68,
-    "width": 180,
-    "tabOrder": 9000
+    "x": 16,
+    "y": 93,
+    "z": 18000,
+    "height": 70,
+    "width": 280,
+    "tabOrder": 18000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -41,7 +41,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -57,7 +57,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#8B3A4A'"
+                      "Value": "'#B0B7CC'"
                     }
                   }
                 }
@@ -66,7 +66,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "11D"
+                  "Value": "9D"
                 }
               }
             }
@@ -79,7 +79,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             }
@@ -105,31 +105,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "color": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#D40055'"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      ],
-      "callout": [
-        {
-          "properties": {
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "13D"
+                  "Value": "false"
                 }
               }
             }

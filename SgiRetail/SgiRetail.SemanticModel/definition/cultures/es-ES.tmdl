@@ -25,6 +25,16 @@ cultureInfo es-ES
 			          "nombre tienda": {
 			            "State": "Generated"
 			          }
+			        },
+			        {
+			          "Tienda": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -1549,6 +1559,16 @@ cultureInfo es-ES
 			          "categoria": {
 			            "State": "Generated"
 			          }
+			        },
+			        {
+			          "Categoría": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -2052,6 +2072,16 @@ cultureInfo es-ES
 			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "Familia": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -3810,6 +3840,16 @@ cultureInfo es-ES
 			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "Canal": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -9343,7 +9383,37 @@ cultureInfo es-ES
 			          }
 			        },
 			        {
+			          "VENTA NETA CON IVA": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
 			          "Ventas": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Ventas YTD": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Periodo actual": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -9365,6 +9435,16 @@ cultureInfo es-ES
 			      "Terms": [
 			        {
 			          "Venta AA": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Mismo periodo 2024": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -9394,17 +9474,7 @@ cultureInfo es-ES
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "Evol %": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        },
-			        {
-			          "vs año anterior": {
+			          "Evol % AA": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -9650,16 +9720,6 @@ cultureInfo es-ES
 			            },
 			            "Weight": 0.9
 			          }
-			        },
-			        {
-			          "vs año anterior": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ]
 			    },
@@ -9735,6 +9795,16 @@ cultureInfo es-ES
 			            },
 			            "Weight": 0.9
 			          }
+			        },
+			        {
+			          "UPT (unidades / ticket)": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -9767,16 +9837,6 @@ cultureInfo es-ES
 			      "Terms": [
 			        {
 			          "UPT Evol %": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        },
-			        {
-			          "vs año anterior": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -9938,19 +9998,7 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Evolucion_Entradas_YTD_Porcentaje"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "Entradas Evol %": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "medidastrafico.exterior": {
 			      "Definition": {
@@ -9968,19 +10016,7 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Exterior_YTD"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "Pasantes": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "medidastrafico.exterior_ytd_ly": {
 			      "Definition": {
@@ -10007,19 +10043,7 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Evolucion_Exterior_YTD_Porcentaje"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "Pasantes Evol %": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "medidastrafico.tasa_conversion_ytd": {
 			      "Definition": {
@@ -10032,6 +10056,16 @@ cultureInfo es-ES
 			      "Terms": [
 			        {
 			          "% Conversión": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "% Conversion": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -10062,7 +10096,7 @@ cultureInfo es-ES
 			          }
 			        },
 			        {
-			          "Atracción": {
+			          "% Atraccion": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -10122,19 +10156,7 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Tasa_Atraccion_YTD_Var"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "Atrac vs AA": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "medidastrafico.tasa_conversion_ytd_var": {
 			      "Definition": {
@@ -10167,7 +10189,7 @@ cultureInfo es-ES
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "Período": {
+			          "Periodo": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -10448,6 +10470,16 @@ cultureInfo es-ES
 			            },
 			            "Weight": 0.9
 			          }
+			        },
+			        {
+			          "Ventas Canal": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -10469,6 +10501,16 @@ cultureInfo es-ES
 			            },
 			            "Weight": 0.9
 			          }
+			        },
+			        {
+			          "Ventas Canal": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -10483,6 +10525,16 @@ cultureInfo es-ES
 			      "Terms": [
 			        {
 			          "Ventas": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Ventas Canal": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -10525,6 +10577,1108 @@ cultureInfo es-ES
 			      "Terms": [
 			        {
 			          "Ventas": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Ventas Canal": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasindicadores.pilla_vsobj_total": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIndicadores",
+			          "ConceptualProperty": "Pilla_VsOBJ_Total"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "vs OBJ": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasindicadores.pilla_vspy_total": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIndicadores",
+			          "ConceptualProperty": "Pilla_VsPY_Total"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "vs PY": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasindicadores.texto_progreso_total": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIndicadores",
+			          "ConceptualProperty": "Texto_Progreso_Total"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Progreso": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasindicadores.nombretienda_selected": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIndicadores",
+			          "ConceptualProperty": "NombreTienda_Selected"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Tienda": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.pilla_vsobj_tienda": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "Pilla_VsOBJ_Tienda"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "vs OBJ": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.pilla_vspy_tienda": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "Pilla_VsPY_Tienda"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "vs PY": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.pilla_vsobj_eci": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "Pilla_VsOBJ_ECI"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "vs OBJ": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.pilla_vspy_eci": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "Pilla_VsPY_ECI"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "vs PY": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.pilla_vsobj_online": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "Pilla_VsOBJ_Online"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "vs OBJ": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.pilla_vspy_online": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "Pilla_VsPY_Online"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "vs PY": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.pilla_vsobj_marketplace": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "Pilla_VsOBJ_Marketplace"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "vs OBJ": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.pilla_vspy_marketplace": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "Pilla_VsPY_Marketplace"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "vs PY": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.channelheader_eci": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "ChannelHeader_ECI"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Corner ECI": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.channelheader_online": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "ChannelHeader_Online"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Online": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.channelheader_marketplace": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "ChannelHeader_Marketplace"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Marketplaces": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.channelheader_tienda": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "ChannelHeader_Tienda"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Tienda": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.promedioventatransaccion_ytd_tienda": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "PromedioVentaTransaccion_YTD_Tienda"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Ticket M.": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.upt_ytd_tienda": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "UPT_YTD_Tienda"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "UPT": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.conversion_ytd_tienda": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "Conversion_YTD_Tienda"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Conv.": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.atraccion_ytd_tienda": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "Atraccion_YTD_Tienda"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Atrac.": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.cumplimientoobjetivo__tienda": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "CumplimientoObjetivo_%_Tienda"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "% Obj": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.ventas_ytd_var__tienda": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "Ventas_YTD_Var_%_Tienda"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "vs PY": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.texto_progreso_tienda": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "Texto_Progreso_Tienda"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Progreso": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.promedioventatransaccion_ytd_eci": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "PromedioVentaTransaccion_YTD_ECI"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Ticket M.": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.upt_ytd_eci": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "UPT_YTD_ECI"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "UPT": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.conversion_ytd_eci": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "Conversion_YTD_ECI"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Conv.": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.texto_progreso_eci": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "Texto_Progreso_ECI"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Progreso": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.promedioventatransaccion_ytd_online": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "PromedioVentaTransaccion_YTD_Online"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Ticket M.": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.upt_ytd_online": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "UPT_YTD_Online"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "UPT": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.conversion_ytd_online": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "Conversion_YTD_Online"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Conv.": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.texto_progreso_online": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "Texto_Progreso_Online"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Progreso": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.promedioventatransaccion_ytd_marketplace": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "PromedioVentaTransaccion_YTD_Marketplace"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Ticket M.": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.upt_ytd_marketplace": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "UPT_YTD_Marketplace"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "UPT": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.conversion_ytd_marketplace": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "Conversion_YTD_Marketplace"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Conv.": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidascanales.texto_progreso_marketplace": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasCanales",
+			          "ConceptualProperty": "Texto_Progreso_Marketplace"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Progreso": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasdesempeño.share_pct": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasDesempeño",
+			          "ConceptualProperty": "Share_Pct"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Share %": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasdesempeño.txt_vn_anio": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasDesempeño",
+			          "ConceptualProperty": "Txt_VN_Anio"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Año": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasdesempeño.txt_vn_dia": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasDesempeño",
+			          "ConceptualProperty": "Txt_VN_Dia"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Día": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasdesempeño.txt_vn_mes": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasDesempeño",
+			          "ConceptualProperty": "Txt_VN_Mes"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Mes": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasdesempeño.txt_vn_sem": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasDesempeño",
+			          "ConceptualProperty": "Txt_VN_Sem"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Sem": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasdesempeño.txt_tm_anio": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasDesempeño",
+			          "ConceptualProperty": "Txt_TM_Anio"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Año": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasdesempeño.txt_tm_dia": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasDesempeño",
+			          "ConceptualProperty": "Txt_TM_Dia"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Día": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasdesempeño.txt_tm_mes": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasDesempeño",
+			          "ConceptualProperty": "Txt_TM_Mes"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Mes": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasdesempeño.txt_tm_sem": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasDesempeño",
+			          "ConceptualProperty": "Txt_TM_Sem"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Sem": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasdesempeño.txt_upt_anio": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasDesempeño",
+			          "ConceptualProperty": "Txt_UPT_Anio"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Año": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasdesempeño.txt_upt_dia": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasDesempeño",
+			          "ConceptualProperty": "Txt_UPT_Dia"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Día": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasdesempeño.txt_upt_mes": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasDesempeño",
+			          "ConceptualProperty": "Txt_UPT_Mes"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Mes": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasdesempeño.txt_upt_sem": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasDesempeño",
+			          "ConceptualProperty": "Txt_UPT_Sem"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Sem": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasdesempeño.txt_conv_anio": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasDesempeño",
+			          "ConceptualProperty": "Txt_Conv_Anio"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Año": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasdesempeño.txt_conv_dia": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasDesempeño",
+			          "ConceptualProperty": "Txt_Conv_Dia"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Día": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasdesempeño.txt_conv_mes": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasDesempeño",
+			          "ConceptualProperty": "Txt_Conv_Mes"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Mes": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasdesempeño.txt_conv_sem": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasDesempeño",
+			          "ConceptualProperty": "Txt_Conv_Sem"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Sem": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",

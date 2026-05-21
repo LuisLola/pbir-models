@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "a6b7c8d9e0f1a2b3c4d5",
   "position": {
-    "x": 0,
-    "y": 301.47783251231527,
-    "z": 9000,
-    "height": 418.52216748768473,
-    "width": 1280.3940886699509,
-    "tabOrder": 9000
+    "x": 36,
+    "y": 356,
+    "z": 43000,
+    "height": 472,
+    "width": 1368,
+    "tabOrder": 43000
   },
   "visual": {
     "visualType": "pivotTable",
@@ -52,6 +52,86 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
+                      "Entity": "LOL_PBITIENDAS"
+                    }
+                  },
+                  "Property": "ResponsableTienda"
+                }
+              },
+              "queryRef": "LOL_PBITIENDAS.ResponsableTienda",
+              "nativeQueryRef": "ResponsableTienda",
+              "active": false,
+              "displayName": "ResponsableTienda"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBITIENDAS"
+                    }
+                  },
+                  "Property": "Territorio"
+                }
+              },
+              "queryRef": "LOL_PBITIENDAS.Territorio",
+              "nativeQueryRef": "Territorio",
+              "active": false,
+              "displayName": "Territorio"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBITIENDAS"
+                    }
+                  },
+                  "Property": "AreaManager"
+                }
+              },
+              "queryRef": "LOL_PBITIENDAS.AreaManager",
+              "nativeQueryRef": "AreaManager",
+              "active": false,
+              "displayName": "AreaManager"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "Categoria"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.Categoria",
+              "nativeQueryRef": "Categoria",
+              "active": false,
+              "displayName": "Categoria"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "Descripcion_familia_agregada"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.Descripcion_familia_agregada",
+              "nativeQueryRef": "Descripcion_familia_agregada",
+              "active": false,
+              "displayName": "Descripcion_familia_agregada"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
                       "Entity": "LOL_PBIMODELITEM"
                     }
                   },
@@ -62,6 +142,502 @@
               "nativeQueryRef": "Nombre_familia",
               "active": false,
               "displayName": "Nombre_familia"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "Subfamilia"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.Subfamilia",
+              "nativeQueryRef": "Subfamilia",
+              "active": false,
+              "displayName": "Subfamilia"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calendario"
+                    }
+                  },
+                  "Property": "Año"
+                }
+              },
+              "queryRef": "Calendario.Año",
+              "nativeQueryRef": "Año",
+              "active": false,
+              "displayName": "Año"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calendario"
+                    }
+                  },
+                  "Property": "MesTexto"
+                }
+              },
+              "queryRef": "Calendario.MesTexto",
+              "nativeQueryRef": "MesTexto",
+              "active": false,
+              "displayName": "MesTexto"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calendario"
+                    }
+                  },
+                  "Property": "NombreSemana"
+                }
+              },
+              "queryRef": "Calendario.NombreSemana",
+              "nativeQueryRef": "NombreSemana",
+              "active": false,
+              "displayName": "NombreSemana"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calendario"
+                    }
+                  },
+                  "Property": "NombreDíaCorto"
+                }
+              },
+              "queryRef": "Calendario.NombreDíaCorto",
+              "nativeQueryRef": "NombreDíaCorto",
+              "active": false,
+              "displayName": "NombreDíaCorto"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBITIENDAS"
+                    }
+                  },
+                  "Property": "TipoTienda"
+                }
+              },
+              "queryRef": "LOL_PBITIENDAS.TipoTienda",
+              "nativeQueryRef": "TipoTienda",
+              "active": true,
+              "displayName": "TipoTienda"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBITIENDAS"
+                    }
+                  },
+                  "Property": "NombreTienda"
+                }
+              },
+              "queryRef": "LOL_PBITIENDAS.NombreTienda",
+              "nativeQueryRef": "NombreTienda",
+              "active": false,
+              "displayName": "NombreTienda"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBITIENDAS"
+                    }
+                  },
+                  "Property": "ResponsableTienda"
+                }
+              },
+              "queryRef": "LOL_PBITIENDAS.ResponsableTienda",
+              "nativeQueryRef": "ResponsableTienda",
+              "active": false,
+              "displayName": "ResponsableTienda"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBITIENDAS"
+                    }
+                  },
+                  "Property": "Territorio"
+                }
+              },
+              "queryRef": "LOL_PBITIENDAS.Territorio",
+              "nativeQueryRef": "Territorio",
+              "active": false,
+              "displayName": "Territorio"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBITIENDAS"
+                    }
+                  },
+                  "Property": "AreaManager"
+                }
+              },
+              "queryRef": "LOL_PBITIENDAS.AreaManager",
+              "nativeQueryRef": "AreaManager",
+              "active": false,
+              "displayName": "AreaManager"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "Categoria"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.Categoria",
+              "nativeQueryRef": "Categoria",
+              "active": false,
+              "displayName": "Categoria"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "Descripcion_familia_agregada"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.Descripcion_familia_agregada",
+              "nativeQueryRef": "Descripcion_familia_agregada",
+              "active": false,
+              "displayName": "Descripcion_familia_agregada"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "Nombre_familia"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.Nombre_familia",
+              "nativeQueryRef": "Nombre_familia",
+              "active": false,
+              "displayName": "Nombre_familia"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "Subfamilia"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.Subfamilia",
+              "nativeQueryRef": "Subfamilia",
+              "active": false,
+              "displayName": "Subfamilia"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calendario"
+                    }
+                  },
+                  "Property": "Año"
+                }
+              },
+              "queryRef": "Calendario.Año",
+              "nativeQueryRef": "Año",
+              "active": false,
+              "displayName": "Año"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calendario"
+                    }
+                  },
+                  "Property": "MesTexto"
+                }
+              },
+              "queryRef": "Calendario.MesTexto",
+              "nativeQueryRef": "MesTexto",
+              "active": false,
+              "displayName": "MesTexto"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calendario"
+                    }
+                  },
+                  "Property": "NombreSemana"
+                }
+              },
+              "queryRef": "Calendario.NombreSemana",
+              "nativeQueryRef": "NombreSemana",
+              "active": false,
+              "displayName": "NombreSemana"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calendario"
+                    }
+                  },
+                  "Property": "NombreDíaCorto"
+                }
+              },
+              "queryRef": "Calendario.NombreDíaCorto",
+              "nativeQueryRef": "NombreDíaCorto",
+              "active": false,
+              "displayName": "NombreDíaCorto"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBITIENDAS"
+                    }
+                  },
+                  "Property": "TipoTienda"
+                }
+              },
+              "queryRef": "LOL_PBITIENDAS.TipoTienda",
+              "nativeQueryRef": "TipoTienda",
+              "active": true,
+              "displayName": "TipoTienda"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBITIENDAS"
+                    }
+                  },
+                  "Property": "NombreTienda"
+                }
+              },
+              "queryRef": "LOL_PBITIENDAS.NombreTienda",
+              "nativeQueryRef": "NombreTienda",
+              "active": false,
+              "displayName": "NombreTienda"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBITIENDAS"
+                    }
+                  },
+                  "Property": "ResponsableTienda"
+                }
+              },
+              "queryRef": "LOL_PBITIENDAS.ResponsableTienda",
+              "nativeQueryRef": "ResponsableTienda",
+              "active": false,
+              "displayName": "ResponsableTienda"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBITIENDAS"
+                    }
+                  },
+                  "Property": "Territorio"
+                }
+              },
+              "queryRef": "LOL_PBITIENDAS.Territorio",
+              "nativeQueryRef": "Territorio",
+              "active": false,
+              "displayName": "Territorio"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBITIENDAS"
+                    }
+                  },
+                  "Property": "AreaManager"
+                }
+              },
+              "queryRef": "LOL_PBITIENDAS.AreaManager",
+              "nativeQueryRef": "AreaManager",
+              "active": false,
+              "displayName": "AreaManager"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "Categoria"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.Categoria",
+              "nativeQueryRef": "Categoria",
+              "active": false,
+              "displayName": "Categoria"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "Descripcion_familia_agregada"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.Descripcion_familia_agregada",
+              "nativeQueryRef": "Descripcion_familia_agregada",
+              "active": false,
+              "displayName": "Descripcion_familia_agregada"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "Nombre_familia"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.Nombre_familia",
+              "nativeQueryRef": "Nombre_familia",
+              "active": false,
+              "displayName": "Nombre_familia"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "Subfamilia"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.Subfamilia",
+              "nativeQueryRef": "Subfamilia",
+              "active": false,
+              "displayName": "Subfamilia"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calendario"
+                    }
+                  },
+                  "Property": "Año"
+                }
+              },
+              "queryRef": "Calendario.Año",
+              "nativeQueryRef": "Año",
+              "active": false,
+              "displayName": "Año"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calendario"
+                    }
+                  },
+                  "Property": "MesTexto"
+                }
+              },
+              "queryRef": "Calendario.MesTexto",
+              "nativeQueryRef": "MesTexto",
+              "active": false,
+              "displayName": "MesTexto"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calendario"
+                    }
+                  },
+                  "Property": "NombreSemana"
+                }
+              },
+              "queryRef": "Calendario.NombreSemana",
+              "nativeQueryRef": "NombreSemana",
+              "active": false,
+              "displayName": "NombreSemana"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calendario"
+                    }
+                  },
+                  "Property": "NombreDíaCorto"
+                }
+              },
+              "queryRef": "Calendario.NombreDíaCorto",
+              "nativeQueryRef": "NombreDíaCorto",
+              "active": false,
+              "displayName": "NombreDíaCorto"
             }
           ],
           "fieldParameters": [
@@ -77,7 +653,7 @@
                 }
               },
               "index": 0,
-              "length": 1
+              "length": 13
             },
             {
               "parameterExpr": {
@@ -91,7 +667,7 @@
                 }
               },
               "index": 1,
-              "length": 1
+              "length": 13
             },
             {
               "parameterExpr": {
@@ -105,12 +681,27 @@
                 }
               },
               "index": 2,
-              "length": 1
+              "length": 13
             }
           ]
         },
         "Values": {
           "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasDesempeño"
+                    }
+                  },
+                  "Property": "Share_Pct"
+                }
+              },
+              "queryRef": "MedidasDesempeño.Share_Pct",
+              "nativeQueryRef": "Share_Pct",
+              "displayName": "Share %"
+            },
             {
               "field": {
                 "Measure": {
@@ -184,7 +775,7 @@
               },
               "queryRef": "MedidasRetail.Ventas_YTD_Var_%",
               "nativeQueryRef": "Ventas_YTD_Var_%",
-              "displayName": "Evol %"
+              "displayName": "Evol % AA"
             },
             {
               "field": {
@@ -314,87 +905,12 @@
                       "Entity": "MedidasTrafico"
                     }
                   },
-                  "Property": "Exterior_YTD"
-                }
-              },
-              "queryRef": "MedidasTrafico.Exterior_YTD",
-              "nativeQueryRef": "Exterior_YTD",
-              "displayName": "Pasantes"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "MedidasTrafico"
-                    }
-                  },
-                  "Property": "Evolucion_Exterior_YTD_Porcentaje"
-                }
-              },
-              "queryRef": "MedidasTrafico.Evolucion_Exterior_YTD_Porcentaje",
-              "nativeQueryRef": "Evolucion_Exterior_YTD_Porcentaje",
-              "displayName": "Pasantes Evol %"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "MedidasTrafico"
-                    }
-                  },
-                  "Property": "Tasa_Atraccion_YTD"
-                }
-              },
-              "queryRef": "MedidasTrafico.Tasa_Atraccion_YTD",
-              "nativeQueryRef": "Tasa_Atraccion_YTD",
-              "displayName": "% Atracción"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "MedidasTrafico"
-                    }
-                  },
-                  "Property": "Tasa_Atraccion_YTD_Var"
-                }
-              },
-              "queryRef": "MedidasTrafico.Tasa_Atraccion_YTD_Var",
-              "nativeQueryRef": "Tasa_Atraccion_YTD_Var",
-              "displayName": "Atrac vs AA"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "MedidasTrafico"
-                    }
-                  },
                   "Property": "Entradas_YTD"
                 }
               },
               "queryRef": "MedidasTrafico.Entradas_YTD",
               "nativeQueryRef": "Entradas_YTD",
               "displayName": "Entradas"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "MedidasTrafico"
-                    }
-                  },
-                  "Property": "Evolucion_Entradas_YTD_Porcentaje"
-                }
-              },
-              "queryRef": "MedidasTrafico.Evolucion_Entradas_YTD_Porcentaje",
-              "nativeQueryRef": "Evolucion_Entradas_YTD_Porcentaje",
-              "displayName": "Entradas Evol %"
             },
             {
               "field": {
@@ -447,61 +963,6 @@
         ]
       }
     },
-    "expansionStates": [
-      {
-        "roles": [
-          "Rows"
-        ],
-        "levels": [
-          {
-            "queryRefs": [
-              "LOL_PBITIENDAS.TipoTienda"
-            ],
-            "isCollapsed": true,
-            "identityKeys": [
-              {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "LOL_PBITIENDAS"
-                    }
-                  },
-                  "Property": "TipoTienda"
-                }
-              }
-            ],
-            "isPinned": true
-          },
-          {
-            "queryRefs": [
-              "LOL_PBITIENDAS.NombreTienda"
-            ],
-            "isCollapsed": true,
-            "identityKeys": [
-              {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "LOL_PBITIENDAS"
-                    }
-                  },
-                  "Property": "NombreTienda"
-                }
-              }
-            ],
-            "isPinned": true
-          },
-          {
-            "queryRefs": [
-              "LOL_PBIMODELITEM.Nombre_familia"
-            ],
-            "isCollapsed": true,
-            "isPinned": true
-          }
-        ],
-        "root": {}
-      }
-    ],
     "objects": {
       "general": [
         {
@@ -545,7 +1006,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#F1EFE8'"
+                      "Value": "'#E4E7F0'"
                     }
                   }
                 }
@@ -570,10 +1031,445 @@
                   "Value": "9D"
                 }
               }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#F7F6F2'"
+                    }
+                  }
+                }
+              }
             }
           }
         }
       ]
     }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "0cd2b56cbc8659284e4b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasDesempeño"
+              }
+            },
+            "Property": "Share_Pct"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "2ecc9a1e69d6bbe71731",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasRetail"
+              }
+            },
+            "Property": "Ventas_YTD"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "2d0ca2317258b50b3e18",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasObjetivosRetail"
+              }
+            },
+            "Property": "Objetivos_YTD"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "8c30ea20cbef4a775e1b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasObjetivosRetail"
+              }
+            },
+            "Property": "EvolucionObjetivo_%"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "22d3e59cf5f5c3749162",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasRetail"
+              }
+            },
+            "Property": "Ventas_YTD_LY"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "0de6bbab361fbd7bcad5",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasRetail"
+              }
+            },
+            "Property": "Ventas_YTD_Var_%"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "256fb504824fdf724081",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasRetail"
+              }
+            },
+            "Property": "Tasa_Devolucion_YTD"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "06156f0c8ca240657487",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasRetail"
+              }
+            },
+            "Property": "Tasa_Devolucion_YTD_Var"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "d1600c9ef7e8bf354fb0",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasRetail"
+              }
+            },
+            "Property": "NumeroTransacciones_YTD"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "66715b314b920803cfeb",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasRetail"
+              }
+            },
+            "Property": "NumeroTransacciones_Var_%"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a6d997bfd6ac0b182342",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasRetail"
+              }
+            },
+            "Property": "PromedioVentaTransaccion_YTD"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "7bce7793ac029fa889f1",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasRetail"
+              }
+            },
+            "Property": "PromedioVentaTransaccion_Var_%"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "b05bafe364dcd5be1b73",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasRetail"
+              }
+            },
+            "Property": "UPT_YTD"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a2750963d2eb405966d0",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasRetail"
+              }
+            },
+            "Property": "UPT_Var_%"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "30f3cc681eaad53d50a7",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasTrafico"
+              }
+            },
+            "Property": "Entradas_YTD"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "0dc9f18dd1dc49ae5e24",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasTrafico"
+              }
+            },
+            "Property": "Tasa_Conversion_YTD"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "0a26654b482e14b61a1a",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasTrafico"
+              }
+            },
+            "Property": "Tasa_Conversion_YTD_Var"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "46d19f379dc9edd00050",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBITIENDAS"
+              }
+            },
+            "Property": "TipoTienda"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "cf5c34513cc7d70903e1",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBITIENDAS"
+              }
+            },
+            "Property": "NombreTienda"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "4b6de412891ba9a8bca4",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBITIENDAS"
+              }
+            },
+            "Property": "ResponsableTienda"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "27a7ac142fa29a463485",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBITIENDAS"
+              }
+            },
+            "Property": "Territorio"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "8178ed933b5b16efc480",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBITIENDAS"
+              }
+            },
+            "Property": "AreaManager"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "55534431b2af766cc7b3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIMODELITEM"
+              }
+            },
+            "Property": "Categoria"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "6f83c2e046cced410cef",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIMODELITEM"
+              }
+            },
+            "Property": "Descripcion_familia_agregada"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "090fb38e8ff8f96629c0",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIMODELITEM"
+              }
+            },
+            "Property": "Nombre_familia"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "07b7d5bac56951f801af",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIMODELITEM"
+              }
+            },
+            "Property": "Subfamilia"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "7ca2a364cc18705a67a1",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Calendario"
+              }
+            },
+            "Property": "Año"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "e88ee4e92e98c02fd84d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Calendario"
+              }
+            },
+            "Property": "MesTexto"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "74aaa692d3751739c382",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Calendario"
+              }
+            },
+            "Property": "NombreSemana"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "0757726c622d2d6d422c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Calendario"
+              }
+            },
+            "Property": "NombreDíaCorto"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

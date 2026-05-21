@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "s5a6b7c8d9e0f1a2b3c4",
   "position": {
-    "x": 673.00492610837443,
-    "y": 7.9802955665024635,
-    "z": 14000,
-    "height": 93.103448275862064,
-    "width": 155.17241379310346,
-    "tabOrder": 14000
+    "x": 775,
+    "y": 11,
+    "z": 11000,
+    "height": 42,
+    "width": 445,
+    "tabOrder": 11000
   },
   "visual": {
     "visualType": "slicer",
@@ -41,7 +41,7 @@
             "mode": {
               "expr": {
                 "Literal": {
-                  "Value": "'Dropdown'"
+                  "Value": "'Basic'"
                 }
               }
             }
@@ -51,6 +51,13 @@
       "general": [
         {
           "properties": {
+            "orientation": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            },
             "filter": {
               "filter": {
                 "Version": 2,
@@ -81,7 +88,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'Anio'"
+                                "Value": "'Semana'"
                               }
                             }
                           ]
@@ -90,6 +97,19 @@
                     }
                   }
                 ]
+              }
+            }
+          }
+        }
+      ],
+      "header": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
               }
             }
           }

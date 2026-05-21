@@ -2,37 +2,16 @@ table MedidasVentas
 	lineageTag: 3564cda3-cb0b-4567-bef9-3a61432e2a68
 
 	measure VentaBruta =
-			SUMX (
-			    FILTER (
-			        'LOL_PBISALESORDER',
-			        'LOL_PBISALESORDER'[CANCELED] = "N"
-			    ),
-			    'LOL_PBISALESORDER'[Cantidad] * 'LOL_PBISALESORDER'[PrecioUnitarioML]
+			CALCULATE (
+			    SUM ( 'LOL_PBIB2BSALESORDER'[ImporteBruto] ),
+			    'LOL_PBIB2BSALESORDER'[Canceled] = "N",
+			    'LOL_PBIB2BSALESORDER'[IsIncidence] <> "Y"
 			)
 		formatString: \€#,##0
 		displayFolder: Base
 		lineageTag: 84f988b9-facf-47eb-9611-cb7edaf5b479
 
-	measure VentaBrutaSalesOrder =
-			VAR LineasConIncidencia =
-			    DISTINCT (
-			        SELECTCOLUMNS (
-			            'LOL_PBIINCIDENCIASB2B',
-			            "LineID", 'LOL_PBIINCIDENCIASB2B'[DocEntry] & "-" & 'LOL_PBIINCIDENCIASB2B'[ItemCode]
-			        )
-			    )
-			RETURN
-			    SUMX (
-			        FILTER (
-			            'LOL_PBISALESORDER',
-			            'LOL_PBISALESORDER'[CANCELED] = "N"
-			                && NOT CONTAINS (
-			                    LineasConIncidencia,
-			                    [LineID], 'LOL_PBISALESORDER'[DocEntry] & "-" & 'LOL_PBISALESORDER'[CodigoArticulo]
-			                )
-			        ),
-			        'LOL_PBISALESORDER'[Cantidad] * 'LOL_PBISALESORDER'[PrecioUnitarioML]
-			    )
+	measure VentaBrutaSalesOrder = [VentaBruta]
 		formatString: \€#,##0
 		displayFolder: Base
 		lineageTag: b2bd2c09-7a47-4897-9df1-9870fb8f7c20
@@ -45,30 +24,17 @@ table MedidasVentas
 			        ISBLANK ( TemporadaSel ),
 			        0,
 			        CALCULATE (
-			            [VentaBrutaSalesOrder],
+			            [VentaBruta],
 			            REMOVEFILTERS ( 'Calendario' ),
-			            'LOL_PBISALESORDER'[TemporadaCabecera] = TemporadaSel,
-			            'LOL_PBISALESORDER'[FechaDocumento] <= FechaCorte
+			            'LOL_PBIB2BSALESORDER'[Season] = TemporadaSel,
+			            'LOL_PBIB2BSALESORDER'[DocDate] <= FechaCorte
 			        )
 			    )
 		formatString: \€#,##0
 		displayFolder: Temporada
 		lineageTag: 575ddabb-57d2-4566-b24d-3ca210296c61
 
-	measure VentasTemporadaSeleccionadaSalesOrder =
-			VAR TemporadaSel = [TemporadaSeleccionada]
-			VAR FechaCorte = [FechaLimiteSeleccionada]
-			RETURN
-			    IF (
-			        ISBLANK ( TemporadaSel ),
-			        0,
-			        CALCULATE (
-			            [VentaBrutaSalesOrder],
-			            REMOVEFILTERS ( 'Calendario' ),
-			            'LOL_PBISALESORDER'[TemporadaLinea] = TemporadaSel,
-			            'LOL_PBISALESORDER'[FechaDocumento] <= FechaCorte
-			        )
-			    )
+	measure VentasTemporadaSeleccionadaSalesOrder = [VentasTemporadaSeleccionada]
 		formatString: \€#,##0
 		displayFolder: Temporada
 		lineageTag: a9f5dd08-af46-4578-8013-43f88fe0a57d
@@ -87,10 +53,10 @@ table MedidasVentas
 			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaAnt ),
 			        BLANK (),
 			        CALCULATE (
-			            [VentaBrutaSalesOrder],
+			            [VentaBruta],
 			            REMOVEFILTERS ( 'Calendario' ),
-			            'LOL_PBISALESORDER'[TemporadaCabecera] = TemporadaAnt,
-			            'LOL_PBISALESORDER'[FechaDocumento] <= FechaCorteAnt
+			            'LOL_PBIB2BSALESORDER'[Season] = TemporadaAnt,
+			            'LOL_PBIB2BSALESORDER'[DocDate] <= FechaCorteAnt
 			        )
 			    )
 		formatString: \€#,##0
@@ -109,10 +75,10 @@ table MedidasVentas
 			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaAnt ),
 			        BLANK (),
 			        CALCULATE (
-			            [VentaBrutaSalesOrder],
+			            [VentaBruta],
 			            REMOVEFILTERS ( 'Calendario' ),
-			            'LOL_PBISALESORDER'[TemporadaCabecera] = TemporadaAnt,
-			            'LOL_PBISALESORDER'[PedidoReposicionLinea] <> "Y"
+			            'LOL_PBIB2BSALESORDER'[Season] = TemporadaAnt,
+			            'LOL_PBIB2BSALESORDER'[Reposicion] <> "Y"
 			        )
 			    )
 		formatString: \€#,##0
@@ -131,9 +97,9 @@ table MedidasVentas
 			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaAnt ),
 			        BLANK (),
 			        CALCULATE (
-			            [VentaBrutaSalesOrder],
+			            [VentaBruta],
 			            REMOVEFILTERS ( 'Calendario' ),
-			            'LOL_PBISALESORDER'[TemporadaCabecera] = TemporadaAnt
+			            'LOL_PBIB2BSALESORDER'[Season] = TemporadaAnt
 			        )
 			    )
 		formatString: \€#,##0
@@ -152,10 +118,10 @@ table MedidasVentas
 			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaPas ),
 			        BLANK (),
 			        CALCULATE (
-			            [VentaBrutaSalesOrder],
+			            [VentaBruta],
 			            REMOVEFILTERS ( 'Calendario' ),
-			            'LOL_PBISALESORDER'[TemporadaCabecera] = TemporadaPas,
-			            'LOL_PBISALESORDER'[PedidoReposicionLinea] <> "Y"
+			            'LOL_PBIB2BSALESORDER'[Season] = TemporadaPas,
+			            'LOL_PBIB2BSALESORDER'[Reposicion] <> "Y"
 			        )
 			    )
 		formatString: \€#,##0
@@ -205,18 +171,14 @@ table MedidasVentas
 
 	measure VentasYTD =
 			CALCULATE (
-			    [VentaBruta],
+			    [VentaNeta],
 			    DATESYTD ( 'Calendario'[Date] )
 			)
 		formatString: \€#,##0
 		displayFolder: YTD
 		lineageTag: 3a2bd0de-9b59-42df-8817-6a01869b0d58
 
-	measure VentasYTD_SalesOrder =
-			CALCULATE (
-			    [VentaBrutaSalesOrder],
-			    DATESYTD ( 'Calendario'[Date] )
-			)
+	measure VentasYTD_SalesOrder = [VentasYTD]
 		formatString: \€#,##0
 		displayFolder: YTD
 		lineageTag: d55caeb7-641d-4e3c-94b9-0b733e4e5aef
@@ -248,7 +210,7 @@ table MedidasVentas
 		displayFolder: YTD
 		lineageTag: af2f617f-f8af-4ae0-8a64-8701adff5d4c
 
-	measure VentaBrutaTotal = [VentaBrutaSalesOrder] + [VentaBrutaIncidencias]
+	measure VentaBrutaTotal = [VentaBruta] + [VentaBrutaIncidencias]
 		formatString: \€#,##0
 		displayFolder: Total
 		lineageTag: a1b2c3d4-e5f6-7890-abcd-ef1234567890
@@ -290,6 +252,39 @@ table MedidasVentas
 		formatString: 0.0%;-0.0%;0.0%
 		displayFolder: Total
 		lineageTag: a7b8c9d0-e1f2-3456-abcd-567890123456
+
+	measure VentaNeta =
+			CALCULATE (
+			    SUM ( 'LOL_PBIB2BSALESORDER'[LineTotal_Num] ),
+			    'LOL_PBIB2BSALESORDER'[Canceled] = "N",
+			    'LOL_PBIB2BSALESORDER'[IsIncidence] <> "Y"
+			)
+		formatString: \€#,##0
+		displayFolder: Base
+		lineageTag: e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b
+
+	measure VentasTemporadaSeleccionada_Bruta =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR FechaCorte = [FechaLimiteSeleccionada]
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel ),
+			        0,
+			        CALCULATE (
+			            [VentaBruta],
+			            REMOVEFILTERS ( 'Calendario' ),
+			            'LOL_PBIB2BSALESORDER'[Season] = TemporadaSel,
+			            'LOL_PBIB2BSALESORDER'[DocDate] <= FechaCorte
+			        )
+			    )
+		formatString: \€#,##0
+		displayFolder: Temporada
+		lineageTag: f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c
+
+	measure VentaNetaTotal = [VentaNeta] + [ImporteNetoIncidencias]
+		formatString: \€#,##0
+		displayFolder: Total
+		lineageTag: b2c3d4e5-f6a7-8901-bcde-f12345678902
 
 	column Value
 		lineageTag: 2ddc9eb7-b8c8-4537-91e0-8de67fa58299

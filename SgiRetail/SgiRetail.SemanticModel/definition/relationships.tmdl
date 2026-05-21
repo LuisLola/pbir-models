@@ -48,6 +48,7 @@ relationship 0d56b0a1-4f97-d51f-2303-be1daa9ad29d
 	toColumn: LOL_PBITIENDAS.TiendaID
 
 relationship 09be11f7-363e-7322-e7b4-8f1ee31ff5c4
+	joinOnDateBehavior: datePartOnly
 	fromColumn: LOL_PBITRAFICOTIENDAS.Fecha
 	toColumn: Calendario.Date
 
