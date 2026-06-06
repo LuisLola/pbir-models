@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "8894976eb6097c229cc5",
+  "position": {
+    "x": 480.00000000000006,
+    "y": 0,
+    "z": 67000,
+    "height": 150,
+    "width": 728.57142857142867,
+    "tabOrder": 67000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBITIENDAS"
+                    }
+                  },
+                  "Property": "NombreTienda"
+                }
+              },
+              "queryRef": "LOL_PBITIENDAS.NombreTienda",
+              "nativeQueryRef": "NombreTienda"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

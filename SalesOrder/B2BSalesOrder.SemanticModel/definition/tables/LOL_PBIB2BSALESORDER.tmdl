@@ -395,14 +395,26 @@ table LOL_PBIB2BSALESORDER
 
 		annotation SummarizationSetBy = User
 
+	column ImporteBruto_LC
+		dataType: string
+		lineageTag: 391269ac-a329-4237-8c2a-a266d1ba473a
+		summarizeBy: none
+		sourceColumn: ImporteBruto_LC
+
+		annotation SummarizationSetBy = Automatic
+
 	partition LOL_PBIB2BSALESORDER = m
 		mode: import
 		source =
 				let
 				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin"),
 				    dbo_LOL_PBIB2BSALESORDER = Origen{[Schema="dbo",Item="LOL_PBIB2BSALESORDER"]}[Data],
-				    #"ImporteBruto" = Table.AddColumn(dbo_LOL_PBIB2BSALESORDER, "ImporteBruto", each (try Number.From([PriceBefDi_EUR], "en-US") otherwise 0) * (try Number.From([Qty], "en-US") otherwise 0), type number),
-				    #"LineTotal_Num" = Table.AddColumn(#"ImporteBruto", "LineTotal_Num", each try Number.From([LineTotal_LC], "en-US") otherwise 0, type number)
+				    #"LineTotal_Num" = Table.AddColumn(dbo_LOL_PBIB2BSALESORDER, "LineTotal_Num", each try Number.From([LineTotal_LC], "en-US") otherwise 0, type number),
+				    #"ImporteBruto" = Table.AddColumn(#"LineTotal_Num", "ImporteBruto", each try Number.From([ImporteBruto_LC], "en-US") otherwise 0, type number)
 				in
-				    #"LineTotal_Num"
+				    #"ImporteBruto"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
 

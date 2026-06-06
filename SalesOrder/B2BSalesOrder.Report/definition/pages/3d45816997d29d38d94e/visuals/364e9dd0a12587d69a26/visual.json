@@ -3,10 +3,10 @@
   "name": "364e9dd0a12587d69a26",
   "position": {
     "x": 0,
-    "y": 159.40298507462686,
+    "y": 155,
     "z": 0,
-    "height": 560.59701492537317,
-    "width": 1279.7014925373135,
+    "height": 565,
+    "width": 1280,
     "tabOrder": 0
   },
   "visual": {
@@ -27,7 +27,7 @@
                 }
               },
               "queryRef": "LOL_PBIAGENTES.Agente_Cajero",
-              "nativeQueryRef": "Agente_Cajero",
+              "nativeQueryRef": "Agente",
               "active": true
             },
             {
@@ -42,7 +42,22 @@
                 }
               },
               "queryRef": "LOL_PBICLIENTES.RazonSocial",
-              "nativeQueryRef": "RazonSocial",
+              "nativeQueryRef": "Cliente",
+              "active": false
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIB2BSALESORDER"
+                    }
+                  },
+                  "Property": "DocNum"
+                }
+              },
+              "queryRef": "LOL_PBIB2BSALESORDER.DocNum",
+              "nativeQueryRef": "Pedido",
               "active": false
             }
           ]
@@ -57,10 +72,10 @@
                       "Entity": "MedidasVentas"
                     }
                   },
-                  "Property": "VentasTemporadaSeleccionada"
+                  "Property": "VentasTemporadaSeleccionadaTotal"
                 }
               },
-              "queryRef": "MedidasVentas.VentasTemporadaSeleccionada",
+              "queryRef": "MedidasVentas.VentasTemporadaSeleccionadaTotal",
               "nativeQueryRef": "F26+"
             },
             {
@@ -103,7 +118,7 @@
                 }
               },
               "queryRef": "MedidasVentas.EvolTemporadaSeleccionada_%",
-              "nativeQueryRef": "Evol. % F26 vs F25"
+              "nativeQueryRef": "Evol. %"
             },
             {
               "field": {
@@ -131,7 +146,7 @@
                 }
               },
               "queryRef": "MedidasVentas.EvolTemporadaSeleccionada_%Completa",
-              "nativeQueryRef": "Evol. % T. iniciales"
+              "nativeQueryRef": "Evol. % Iniciales"
             },
             {
               "field": {
@@ -173,7 +188,7 @@
                 }
               },
               "queryRef": "MedidasVentas.VentasTemporadaPasada_SoloInicio",
-              "nativeQueryRef": "S26"
+              "nativeQueryRef": "S26 Iniciales"
             }
           ]
         }
@@ -188,7 +203,7 @@
                     "Entity": "MedidasVentas"
                   }
                 },
-                "Property": "VentasTemporadaSeleccionada"
+                "Property": "VentasTemporadaSeleccionadaTotal"
               }
             },
             "direction": "Descending"
@@ -214,18 +229,13 @@
               "LOL_PBICLIENTES.RazonSocial"
             ],
             "isCollapsed": true,
-            "identityKeys": [
-              {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "LOL_PBICLIENTES"
-                    }
-                  },
-                  "Property": "RazonSocial"
-                }
-              }
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "LOL_PBIB2BSALESORDER.DocNum"
             ],
+            "isCollapsed": true,
             "isPinned": true
           }
         ],
@@ -265,79 +275,61 @@
               }
             }
           }
-        },
-        {
-          "properties": {},
-          "selector": {
-            "metadata": "MedidasVentas.VentasTemporadaSeleccionada"
-          }
-        },
-        {
-          "properties": {},
-          "selector": {
-            "metadata": "MedidasVentas.VentasTemporadaAnterior"
-          }
-        },
-        {
-          "properties": {},
-          "selector": {
-            "metadata": "MedidasVentas.EvolTemporadaSeleccionada"
-          }
-        },
-        {
-          "properties": {},
-          "selector": {
-            "metadata": "MedidasVentas.EvolTemporadaSeleccionada_%"
-          }
-        },
-        {
-          "properties": {},
-          "selector": {
-            "metadata": "MedidasVentas.VentasTemporadaAnterior_SoloInicio"
-          }
-        },
-        {
-          "properties": {},
-          "selector": {
-            "metadata": "MedidasVentas.EvolTemporadaSeleccionada_%Completa"
-          }
-        },
-        {
-          "properties": {},
-          "selector": {
-            "metadata": "MedidasVentas.VentasTemporadaAnterior_Total"
-          }
-        },
-        {
-          "properties": {},
-          "selector": {
-            "metadata": "MedidasVentas.RealizadoTemporadaAnterior_%"
-          }
-        },
-        {
-          "properties": {},
-          "selector": {
-            "metadata": "MedidasVentas.VentasTemporadaPasada_SoloInicio"
-          }
         }
       ],
       "values": [
         {
-          "properties": {},
-          "selector": {
-            "metadata": "MedidasVentas.EvolTemporadaSeleccionada"
-          }
-        },
-        {
-          "properties": {},
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#107C10'"
+                    }
+                  }
+                }
+              }
+            }
+          },
           "selector": {
             "metadata": "MedidasVentas.EvolTemporadaSeleccionada_%"
           }
         },
         {
-          "properties": {},
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#107C10'"
+                    }
+                  }
+                }
+              }
+            }
+          },
           "selector": {
             "metadata": "MedidasVentas.EvolTemporadaSeleccionada_%Completa"
+          }
+        },
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#107C10'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasVentas.RealizadoTemporadaAnterior_%"
           }
         }
       ],
@@ -347,13 +339,13 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "237.4027696129653D"
+                  "Value": "200D"
                 }
               }
             }
           },
           "selector": {
-            "metadata": "MedidasVentas.VentasTemporadaSeleccionada"
+            "metadata": "LOL_PBIAGENTES.Agente_Cajero"
           }
         },
         {
@@ -361,7 +353,21 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "119.19117880423596D"
+                  "Value": "110D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasVentas.VentasTemporadaSeleccionadaTotal"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "167.38600275186008D"
                 }
               }
             }
@@ -375,7 +381,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "96.55381089625352D"
+                  "Value": "90D"
                 }
               }
             }
@@ -389,7 +395,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "104.26335709306255D"
+                  "Value": "75D"
                 }
               }
             }
@@ -403,7 +409,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "90.56421840582509D"
+                  "Value": "110D"
                 }
               }
             }
@@ -417,7 +423,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "103.46010251941584D"
+                  "Value": "80D"
                 }
               }
             }
@@ -431,7 +437,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "117D"
+                  "Value": "110D"
                 }
               }
             }
@@ -445,7 +451,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "109D"
+                  "Value": "75D"
                 }
               }
             }
@@ -459,27 +465,13 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "122D"
+                  "Value": "144.04255319148936D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "MedidasVentas.VentasTemporadaPasada_SoloInicio"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "267.53731343283584D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "LOL_PBIAGENTES.Agente_Cajero"
           }
         }
       ]
@@ -488,20 +480,6 @@
   },
   "filterConfig": {
     "filters": [
-      {
-        "name": "25f069d8290aa6913cd4",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PBIAGENTES"
-              }
-            },
-            "Property": "Agente_Cajero"
-          }
-        },
-        "type": "Categorical"
-      },
       {
         "name": "2f822f5f89172b0d24c8",
         "field": {
@@ -515,20 +493,6 @@
           }
         },
         "type": "Categorical"
-      },
-      {
-        "name": "0a907332a0521e37c53a",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasVentas"
-              }
-            },
-            "Property": "VentasTemporadaSeleccionada"
-          }
-        },
-        "type": "Advanced"
       },
       {
         "name": "c5180a73d6071543b5dd",
@@ -545,7 +509,49 @@
         "type": "Advanced"
       },
       {
-        "name": "475b5114c87586b5df43",
+        "name": "49a6e346a73ad2797262",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIAGENTES"
+              }
+            },
+            "Property": "Agente_Cajero"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "66b97371a08cc5cb72dc",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIB2BSALESORDER"
+              }
+            },
+            "Property": "DocNum"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "474f1d90ab3d944cb404",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "VentasTemporadaSeleccionadaTotal"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "5e534214d30eeb190104",
         "field": {
           "Measure": {
             "Expression": {
@@ -559,7 +565,7 @@
         "type": "Advanced"
       },
       {
-        "name": "19c3b669f7b67e059ae7",
+        "name": "26ff717bd0cba9950810",
         "field": {
           "Measure": {
             "Expression": {
@@ -573,7 +579,7 @@
         "type": "Advanced"
       },
       {
-        "name": "9f0999164a44dfa4f844",
+        "name": "806e44420cc68ea4080b",
         "field": {
           "Measure": {
             "Expression": {
@@ -587,7 +593,7 @@
         "type": "Advanced"
       },
       {
-        "name": "a9ddf61eeb07050e3121",
+        "name": "fab524a480ae14a1d5b1",
         "field": {
           "Measure": {
             "Expression": {
@@ -601,7 +607,7 @@
         "type": "Advanced"
       },
       {
-        "name": "784f4a5b927907886e37",
+        "name": "a29f9f77de601d228bc3",
         "field": {
           "Measure": {
             "Expression": {
@@ -615,7 +621,7 @@
         "type": "Advanced"
       },
       {
-        "name": "c5afa89db5dd4b6b43b8",
+        "name": "87df5ceb571416c6ac55",
         "field": {
           "Measure": {
             "Expression": {
@@ -629,7 +635,7 @@
         "type": "Advanced"
       },
       {
-        "name": "a370fb718219c37a51c7",
+        "name": "53b79bbc782373de5464",
         "field": {
           "Measure": {
             "Expression": {

@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "crd022tiendavent",
   "position": {
-    "x": 14,
-    "y": 375,
+    "x": 17.647058823529413,
+    "y": 422.35294117647061,
     "z": 31000,
     "height": 40,
-    "width": 180,
+    "width": 324.11764705882354,
     "tabOrder": 31000
   },
   "visual": {
@@ -28,7 +28,8 @@
               },
               "queryRef": "MedidasCanales.Ventas_YTD_Tienda",
               "nativeQueryRef": "Ventas_YTD_Tienda",
-              "displayName": "Ventas"
+              "displayName": "Ventas",
+              "format": "#,0.00 \"€\";-#,0.00 \"€\";#,0.00 \"€\""
             }
           ]
         }

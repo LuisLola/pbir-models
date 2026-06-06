@@ -1,0 +1,81 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainerMobileState/2.4.0/schema.json",
+  "position": {
+    "x": 1,
+    "y": 66,
+    "z": 5000,
+    "height": 124,
+    "width": 323,
+    "tabOrder": 5000
+  },
+  "objects": {
+    "fill": [
+      {
+        "properties": {
+          "fillColor": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "ThemeDataColor": {
+                    "ColorId": 2,
+                    "Percent": 0.6
+                  }
+                }
+              }
+            }
+          }
+        },
+        "selector": {
+          "id": "default"
+        }
+      }
+    ],
+    "shape": [
+      {
+        "properties": {
+          "tileShape": {
+            "expr": {
+              "Literal": {
+                "Value": "'rectangleRounded'"
+              }
+            }
+          },
+          "rectangleRoundedCurve": {
+            "expr": {
+              "Literal": {
+                "Value": "7L"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "shadow": [
+      {
+        "properties": {
+          "show": {
+            "expr": {
+              "Literal": {
+                "Value": "true"
+              }
+            }
+          }
+        }
+      },
+      {
+        "properties": {
+          "shadowBlur": {
+            "expr": {
+              "Literal": {
+                "Value": "5D"
+              }
+            }
+          }
+        },
+        "selector": {
+          "id": "default"
+        }
+      }
+    ]
+  }
+}

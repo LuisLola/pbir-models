@@ -4,7 +4,7 @@ table MedidasCanales
 	measure Ventas_YTD_ECI =
 			CALCULATE(
 				[Ventas_YTD],
-				LOL_PBITIENDAS[TipoTienda] = "ECI"
+				LOL_PBITIENDAS[TipoTienda] = "CORNER"
 			)
 		formatString: \$#,0;(\$#,0);\$#,0
 		lineageTag: aabbccdd-aa01-aa01-aa01-aabbccdd0011
@@ -12,7 +12,7 @@ table MedidasCanales
 	measure Ventas_YTD_LY_ECI =
 			CALCULATE(
 				[Ventas_YTD_LY],
-				LOL_PBITIENDAS[TipoTienda] = "ECI"
+				LOL_PBITIENDAS[TipoTienda] = "CORNER"
 			)
 		formatString: \$#,0;(\$#,0);\$#,0
 		lineageTag: aabbccdd-aa01-aa01-aa01-aabbccdd0012
@@ -28,7 +28,7 @@ table MedidasCanales
 	measure Objetivos_YTD_ECI =
 			CALCULATE(
 				[Objetivos_YTD],
-				LOL_PBITIENDAS[TipoTienda] = "ECI"
+				LOL_PBITIENDAS[TipoTienda] = "CORNER"
 			)
 		formatString: \$#,0;(\$#,0);\$#,0
 		lineageTag: aabbccdd-aa01-aa01-aa01-aabbccdd0014
@@ -221,7 +221,7 @@ table MedidasCanales
 			IF(
 				ISBLANK([Ventas_YTD_Tienda]),
 				"Tienda",
-				"Tienda  " & FORMAT([Share_%_Tienda], "0%") & " del total"
+				"Tienda 🏬 " & FORMAT([Share_%_Tienda], "0%") & " del total"
 			)
 		formatString: @
 		lineageTag: aabbccdd-aa07-aa07-aa07-aabbccdd0071
@@ -229,8 +229,8 @@ table MedidasCanales
 	measure ChannelHeader_ECI =
 			IF(
 				ISBLANK([Ventas_YTD_ECI]),
-				"Corner ECI",
-				"Corner ECI  " & FORMAT([Share_%_ECI], "0%") & " del total"
+				"Corner",
+				"Corner ECI 🏢 " & FORMAT([Share_%_ECI], "0%") & " del total"
 			)
 		formatString: @
 		lineageTag: aabbccdd-aa07-aa07-aa07-aabbccdd0072
@@ -239,7 +239,7 @@ table MedidasCanales
 			IF(
 				ISBLANK([Ventas_YTD_Online]),
 				"Online",
-				"Online  " & FORMAT([Share_%_Online], "0%") & " del total"
+				"Online 🌐 " & FORMAT([Share_%_Online], "0%") & " del total"
 			)
 		formatString: @
 		lineageTag: aabbccdd-aa07-aa07-aa07-aabbccdd0073
@@ -248,7 +248,7 @@ table MedidasCanales
 			IF(
 				ISBLANK([Ventas_YTD_Marketplace]),
 				"Marketplaces",
-				"Marketplaces  " & FORMAT([Share_%_Marketplace], "0%") & " del total"
+				"Marketplaces 📦 " & FORMAT([Share_%_Marketplace], "0%") & " del total"
 			)
 		formatString: @
 		lineageTag: aabbccdd-aa07-aa07-aa07-aabbccdd0074
@@ -408,6 +408,19 @@ table MedidasCanales
 				IF(ISBLANK(OBJ), BLANK(), FORMAT(Pct, "0%") & " del objetivo  ·  OBJ " & FORMAT(OBJ, "#,0"))
 		formatString: @
 		lineageTag: aabbccdd-aa10-aa10-aa10-aabbccdd0144
+
+	measure ChannelHeader_Outlet =
+			IF(
+				ISBLANK([Ventas_YTD_Outlet]),
+				"Outlet ",
+				"Outlet 🏷️ " & FORMAT([Share_%_Outlet], "0%") & " del total"
+			)
+		lineageTag: b1e6116e-b7e5-4cf2-9acb-06d906e68881
+
+	measure Share_%_Outlet = DIVIDE([Ventas_YTD_Outlet], [Ventas_YTD])
+		lineageTag: 81c538d2-ee14-446b-ab50-b6adb6b333e7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column Column
 		formatString: 0
