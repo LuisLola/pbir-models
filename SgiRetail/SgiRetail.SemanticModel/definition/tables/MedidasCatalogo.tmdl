@@ -1,0 +1,231 @@
+table MedidasCatalogo
+	lineageTag: 0a1b2c3d-0000-4f00-8a00-000000000000
+
+	/// Top N de productos por Tipo de Tienda. Conectado al segmentador ParamTopN[Top N]; si no hay selección usa 10 por defecto. Lo consumen Catálogo HTML Productos y Catálogo HTML Tabla.
+	measure 'Catálogo Top N' = SELECTEDVALUE( ParamTopN[Top N], 10 )
+		displayFolder: Catálogo Fotos\1. Configuración
+		lineageTag: 0a1b2c3d-0001-4f01-8a01-000000000001
+
+	/// Catálogo visual de productos con foto, agrupado por Tipo de Tienda (TIENDA, CORNER ECI, ONLINE) y ordenado por importe. Devuelve HTML: usar en el visual "HTML Content". Respeta todos los filtros del informe.
+	measure 'Catálogo HTML Productos' =
+			VAR _TopN = [Catálogo Top N]
+			// --- Grupos: código real en el modelo, etiqueta visible y orden ---
+			//     OJO: el código real de "Corner ECI" en el modelo es "CORNER".
+			VAR _Grupos =
+				DATATABLE(
+					"Cod", STRING, "Etiqueta", STRING, "Orden", INTEGER,
+					{
+						{ "TIENDA", "TIENDA", 1 },
+						{ "CORNER", "CORNER ECI", 2 },
+						{ "ONLINE", "ONLINE", 3 }
+					}
+				)
+			// ----------------------------- CSS -----------------------------
+			VAR _Css =
+				"<style>" &
+				"*{box-sizing:border-box}" &
+				".cat{font-family:'Segoe UI',Arial,sans-serif;background:#fff;color:#222;padding:6px}" &
+				".cat-grp{margin:0 0 16px}" &
+				".cat-h{font-size:13px;font-weight:700;color:#1F4E79;letter-spacing:.5px;border-bottom:2px solid #1F4E79;padding-bottom:3px;margin:4px 0 8px}" &
+				".cat-h span{font-weight:400;color:#9aa;font-size:11px}" &
+				".cat-row{display:flex;flex-wrap:wrap;gap:8px}" &
+				".cat-c{width:118px;border:1px solid #e6e6e6;border-radius:6px;background:#fff;padding:6px;box-shadow:0 1px 2px rgba(0,0,0,.06)}" &
+				".cat-c img{width:100%;height:120px;object-fit:cover;border:1px solid #1F4E79;border-radius:4px;background:#f7f7f7;display:block}" &
+				".cat-ni{width:100%;height:120px;border:1px solid #1F4E79;border-radius:4px;background:#f2f2f2;color:#bbb;font-size:9px;display:flex;align-items:center;justify-content:center}" &
+				".cat-sku{font-size:11px;font-weight:700;margin-top:5px;line-height:1.2}" &
+				".cat-br{font-size:10px;font-weight:600;color:#1F4E79}" &
+				".cat-mt{font-size:9px;color:#777;line-height:1.25;margin:2px 0}" &
+				".cat-pvp{font-size:10px;color:#444}" &
+				".cat-imp{font-size:12px;font-weight:700;color:#1B5E20}" &
+				".cat-u{font-size:9px;color:#999}" &
+				"</style>"
+			// ------------------- Construcción de grupos --------------------
+			VAR _Html =
+				CONCATENATEX(
+					_Grupos,
+					VAR _cod = [Cod]
+					VAR _et = [Etiqueta]
+					// 1) Top N modelos del grupo por Ventas (cálculo ligero)
+					VAR _TopBase =
+						CALCULATETABLE(
+							TOPN(
+								_TopN,
+								ADDCOLUMNS( VALUES( LOL_PBIMODELITEM[Referencia_modelo] ), "@Imp", [Ventas] ),
+								[@Imp], DESC
+							),
+							KEEPFILTERS( LOL_PBITIENDAS[TipoTienda] = _cod )
+						)
+					// 2) Solo a los supervivientes les añadimos atributos (eficiente)
+					VAR _Prod =
+						ADDCOLUMNS(
+							_TopBase,
+							"@Uni", CALCULATE( [Cantidad], KEEPFILTERS( LOL_PBITIENDAS[TipoTienda] = _cod ) ),
+							"@Img", CALCULATE( MAX( LOL_PBIMODELITEM[URL_imagen_producto] ) ),
+							"@Marca", CALCULATE( MAX( LOL_PBIMODELITEM[GrupodeArt] ) ),
+							"@Fam", CALCULATE( MAX( LOL_PBIMODELITEM[Nombre_familia] ) ),
+							"@Cat", CALCULATE( MAX( LOL_PBIMODELITEM[Categoria] ) ),
+							"@Pvp", CALCULATE( MAX( LOL_PBIMODELITEM[PVP_ESPANA_Y_PORTUGAL] ) ),
+							"@Tienda",
+								CALCULATE(
+									MAXX( TOPN( 1, VALUES( LOL_PBITIENDAS[NombreTienda] ), [Ventas], DESC ), LOL_PBITIENDAS[NombreTienda] ),
+									KEEPFILTERS( LOL_PBITIENDAS[TipoTienda] = _cod )
+								)
+						)
+					// 3) Tarjetas (ordenadas por Importe desc)
+					VAR _Cards =
+						CONCATENATEX(
+							FILTER( _Prod, [@Imp] > 0 ),
+							VAR _img = [@Img]
+							VAR _imgHtml =
+								IF(
+									NOT ISBLANK( _img ) && LEN( _img ) > 5,
+									"<img src='" & _img & "' onerror=""this.outerHTML='<div class=&quot;cat-ni&quot;>sin imagen</div>'"" />",
+									"<div class='cat-ni'>sin imagen</div>"
+								)
+							RETURN
+								"<div class='cat-c'>" &
+								_imgHtml &
+								"<div class='cat-sku'>" & [Referencia_modelo] & "</div>" &
+								"<div class='cat-br'>" & COALESCE( [@Marca], "" ) & "</div>" &
+								"<div class='cat-mt'>" & COALESCE( [@Cat], "" ) & " · " & COALESCE( [@Fam], "" ) & "<br>" & COALESCE( [@Tienda], "" ) & "</div>" &
+								"<div class='cat-pvp'>PVP " & COALESCE( [@Pvp], "" ) & "</div>" &
+								"<div class='cat-imp'>" & FORMAT( [@Imp], "#,##0", "es-ES" ) & " €</div>" &
+								"<div class='cat-u'>" & FORMAT( [@Uni], "#,##0", "es-ES" ) & " uds</div>" &
+								"</div>",
+							"",
+							[@Imp], DESC
+						)
+					RETURN
+						"<div class='cat-grp'>" &
+						"<div class='cat-h'>" & _et & " <span>(Top " & _TopN & ")</span></div>" &
+						"<div class='cat-row'>" &
+						IF( LEN( _Cards ) = 0, "<div class='cat-mt'>Sin ventas en el periodo.</div>", _Cards ) &
+						"</div></div>",
+					"",
+					[Orden], ASC
+				)
+			RETURN
+				_Css & "<div class='cat'>" & _Html & "</div>"
+		displayFolder: Catálogo Fotos
+		lineageTag: 0a1b2c3d-0002-4f02-8a02-000000000002
+
+	/// Auxiliar reutilizable: devuelve el <img> HTML (con borde azul y respaldo "sin imagen") del producto en el contexto actual. Útil dentro de una matriz con "HTML Content" o para tooltips.
+	measure 'Catálogo Imagen HTML' =
+			VAR _img = MAX( LOL_PBIMODELITEM[URL_imagen_producto] )
+			RETURN
+				IF(
+					NOT ISBLANK( _img ) && LEN( _img ) > 5,
+					"<img src='" & _img & "' style='width:100%;height:120px;object-fit:cover;border:1px solid #1F4E79;border-radius:4px' onerror=""this.outerHTML='<div style=&quot;color:#bbb;font-size:9px;padding:40px 0;text-align:center&quot;>sin imagen</div>'"" />",
+					"<div style='color:#bbb;font-size:9px;padding:40px 0;text-align:center'>sin imagen</div>"
+				)
+		displayFolder: Catálogo Fotos\2. Auxiliares
+		lineageTag: 0a1b2c3d-0003-4f03-8a03-000000000003
+
+	/// Versión "matriz" del catálogo: tabla HTML compacta por Tipo de Tienda (miniatura + modelo, marca, categoría/familia, tienda, PVP, uds, importe), ordenada por importe. Usar en el visual "HTML Content".
+	measure 'Catálogo HTML Tabla' =
+			VAR _TopN = [Catálogo Top N]
+			VAR _Grupos =
+				DATATABLE(
+					"Cod", STRING, "Etiqueta", STRING, "Orden", INTEGER,
+					{
+						{ "TIENDA", "TIENDA", 1 },
+						{ "CORNER", "CORNER ECI", 2 },
+						{ "ONLINE", "ONLINE", 3 }
+					}
+				)
+			VAR _Css =
+				"<style>" &
+				".ct{font-family:'Segoe UI',Arial,sans-serif;color:#222;padding:6px}" &
+				".ct h4{font-size:13px;color:#1F4E79;margin:10px 0 4px;border-bottom:2px solid #1F4E79;padding-bottom:2px}" &
+				".ct table{border-collapse:collapse;width:100%;font-size:11px}" &
+				".ct th{background:#1F4E79;color:#fff;font-weight:600;text-align:left;padding:4px 6px}" &
+				".ct td{border-bottom:1px solid #eee;padding:3px 6px;vertical-align:middle}" &
+				".ct tr:nth-child(even) td{background:#fafafa}" &
+				".ct .r{text-align:right}" &
+				".ct .imp{font-weight:700;color:#1B5E20}" &
+				".ct img{width:38px;height:38px;object-fit:cover;border:1px solid #1F4E79;border-radius:3px;display:block}" &
+				".ct .ni{width:38px;height:38px;border:1px solid #1F4E79;border-radius:3px;background:#f2f2f2}" &
+				"</style>"
+			VAR _Html =
+				CONCATENATEX(
+					_Grupos,
+					VAR _cod = [Cod]
+					VAR _et = [Etiqueta]
+					VAR _TopBase =
+						CALCULATETABLE(
+							TOPN(
+								_TopN,
+								ADDCOLUMNS( VALUES( LOL_PBIMODELITEM[Referencia_modelo] ), "@Imp", [Ventas] ),
+								[@Imp], DESC
+							),
+							KEEPFILTERS( LOL_PBITIENDAS[TipoTienda] = _cod )
+						)
+					VAR _Prod =
+						ADDCOLUMNS(
+							_TopBase,
+							"@Uni", CALCULATE( [Cantidad], KEEPFILTERS( LOL_PBITIENDAS[TipoTienda] = _cod ) ),
+							"@Img", CALCULATE( MAX( LOL_PBIMODELITEM[URL_imagen_producto] ) ),
+							"@Marca", CALCULATE( MAX( LOL_PBIMODELITEM[GrupodeArt] ) ),
+							"@Fam", CALCULATE( MAX( LOL_PBIMODELITEM[Nombre_familia] ) ),
+							"@Cat", CALCULATE( MAX( LOL_PBIMODELITEM[Categoria] ) ),
+							"@Pvp", CALCULATE( MAX( LOL_PBIMODELITEM[PVP_ESPANA_Y_PORTUGAL] ) ),
+							"@Tienda",
+								CALCULATE(
+									MAXX( TOPN( 1, VALUES( LOL_PBITIENDAS[NombreTienda] ), [Ventas], DESC ), LOL_PBITIENDAS[NombreTienda] ),
+									KEEPFILTERS( LOL_PBITIENDAS[TipoTienda] = _cod )
+								)
+						)
+					VAR _Rows =
+						CONCATENATEX(
+							FILTER( _Prod, [@Imp] > 0 ),
+							VAR _img = [@Img]
+							VAR _imgHtml =
+								IF(
+									NOT ISBLANK( _img ) && LEN( _img ) > 5,
+									"<img src='" & _img & "' onerror=""this.outerHTML='<div class=&quot;ni&quot;></div>'"" />",
+									"<div class='ni'></div>"
+								)
+							RETURN
+								"<tr>" &
+								"<td>" & _imgHtml & "</td>" &
+								"<td>" & [Referencia_modelo] & "</td>" &
+								"<td>" & COALESCE( [@Marca], "" ) & "</td>" &
+								"<td>" & COALESCE( [@Cat], "" ) & " · " & COALESCE( [@Fam], "" ) & "</td>" &
+								"<td>" & COALESCE( [@Tienda], "" ) & "</td>" &
+								"<td class='r'>" & COALESCE( [@Pvp], "" ) & "</td>" &
+								"<td class='r'>" & FORMAT( [@Uni], "#,##0", "es-ES" ) & "</td>" &
+								"<td class='r imp'>" & FORMAT( [@Imp], "#,##0", "es-ES" ) & " €</td>" &
+								"</tr>",
+							"",
+							[@Imp], DESC
+						)
+					RETURN
+						"<h4>" & _et & " (Top " & _TopN & ")</h4>" &
+						IF(
+							LEN( _Rows ) = 0,
+							"<div style='font-size:10px;color:#999'>Sin ventas en el periodo.</div>",
+							"<table><thead><tr><th></th><th>Modelo</th><th>Marca</th><th>Categoría / Familia</th><th>Tienda</th><th class='r'>PVP</th><th class='r'>Uds</th><th class='r'>Importe</th></tr></thead><tbody>" & _Rows & "</tbody></table>"
+						),
+					"",
+					[Orden], ASC
+				)
+			RETURN
+				_Css & "<div class='ct'>" & _Html & "</div>"
+		displayFolder: Catálogo Fotos
+		lineageTag: 0a1b2c3d-0005-4f05-8a05-000000000005
+
+	column Column
+		formatString: 0
+		lineageTag: 0a1b2c3d-0004-4f04-8a04-000000000004
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MedidasCatalogo = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 0a1b2c3d000040f08a04000000000009
+

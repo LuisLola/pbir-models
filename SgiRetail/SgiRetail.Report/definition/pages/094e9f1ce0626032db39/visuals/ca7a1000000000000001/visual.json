@@ -1,0 +1,218 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "ca7a1000000000000001",
+  "position": {
+    "x": 24,
+    "y": 56,
+    "z": 0,
+    "height": 640,
+    "width": 1232,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "URL_imagen_producto"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.URL_imagen_producto",
+              "nativeQueryRef": "URL_imagen_producto",
+              "displayName": "Foto"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBITIENDAS"
+                    }
+                  },
+                  "Property": "TipoTienda"
+                }
+              },
+              "queryRef": "LOL_PBITIENDAS.TipoTienda",
+              "nativeQueryRef": "TipoTienda",
+              "displayName": "Tipo Tienda"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "Referencia_modelo"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.Referencia_modelo",
+              "nativeQueryRef": "Referencia_modelo",
+              "displayName": "Modelo / Color"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "GrupodeArt"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.GrupodeArt",
+              "nativeQueryRef": "GrupodeArt",
+              "displayName": "Marca"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "Categoria"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.Categoria",
+              "nativeQueryRef": "Categoria",
+              "displayName": "Categoría"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "Nombre_familia"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.Nombre_familia",
+              "nativeQueryRef": "Nombre_familia",
+              "displayName": "Familia"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "PVP_ESPANA_Y_PORTUGAL"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.PVP_ESPANA_Y_PORTUGAL",
+              "nativeQueryRef": "PVP_ESPANA_Y_PORTUGAL",
+              "displayName": "PVP"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasRetail"
+                    }
+                  },
+                  "Property": "Ventas"
+                }
+              },
+              "queryRef": "MedidasRetail.Ventas",
+              "nativeQueryRef": "Ventas",
+              "displayName": "Importe"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasRetail"
+                    }
+                  },
+                  "Property": "Cantidad"
+                }
+              },
+              "queryRef": "MedidasRetail.Cantidad",
+              "nativeQueryRef": "Cantidad",
+              "displayName": "Uds"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PBITIENDAS"
+                  }
+                },
+                "Property": "TipoTienda"
+              }
+            },
+            "direction": "Ascending"
+          },
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MedidasRetail"
+                  }
+                },
+                "Property": "Ventas"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "values": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Catálogo de productos por tipo de tienda'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

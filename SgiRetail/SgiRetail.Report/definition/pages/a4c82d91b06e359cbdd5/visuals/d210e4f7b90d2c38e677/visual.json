@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "d210e4f7b90d2c38e677",
+  "position": {
+    "x": 9.72644376899696,
+    "y": 0,
+    "z": 0,
+    "height": 719.75683890577511,
+    "width": 1270.2735562310031,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6865",
+    "query": {
+      "queryState": {
+        "content": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasCatalogo"
+                    }
+                  },
+                  "Property": "Catálogo HTML Productos"
+                }
+              },
+              "queryRef": "MedidasCatalogo.Catálogo HTML Productos",
+              "nativeQueryRef": "Catálogo HTML Productos"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "b2ad3ab1ac25466e897c",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasCatalogo"
+              }
+            },
+            "Property": "Catálogo HTML Productos"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

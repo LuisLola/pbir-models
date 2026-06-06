@@ -1,0 +1,18 @@
+table ParamTopN
+	lineageTag: 0a1b2c3d-1000-4f10-8a10-000000000010
+
+	/// Parámetro numérico del catálogo: arrastra ParamTopN[Top N] a un segmentador (selección única) para controlar cuántos productos se muestran por Tipo de Tienda. Sin selección = 10.
+	column 'Top N'
+		dataType: int64
+		lineageTag: 0a1b2c3d-1001-4f11-8a11-000000000011
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ParamTopN = calculated
+		mode: import
+		source = GENERATESERIES(1, 50, 1)
+
+	annotation PBI_Id = 0a1b2c3d100040f08a10000000000012
+
