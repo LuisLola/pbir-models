@@ -2,9 +2,9 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainerMobileState/2.4.0/schema.json",
   "position": {
     "x": 0,
-    "y": 61,
+    "y": 74,
     "z": 5000,
-    "height": 133,
+    "height": 120,
     "width": 324,
     "tabOrder": 5000
   },
@@ -36,7 +36,7 @@
           "tileShape": {
             "expr": {
               "Literal": {
-                "Value": "'rectangleRounded'"
+                "Value": "'rectangle'"
               }
             }
           },
@@ -69,6 +69,17 @@
         "selector": {
           "id": "default"
         }
+      },
+      {
+        "properties": {
+          "show": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
       }
     ],
     "shadow": [
@@ -77,10 +88,24 @@
           "show": {
             "expr": {
               "Literal": {
-                "Value": "true"
+                "Value": "false"
               }
             }
           }
+        }
+      },
+      {
+        "properties": {
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "10D"
+              }
+            }
+          }
+        },
+        "selector": {
+          "id": "default"
         }
       }
     ]

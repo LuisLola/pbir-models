@@ -299,6 +299,14 @@ table Calendario
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Temporada (LOL_PBISEASON[Name]) a la que pertenece cada fecha según el rango Inicio–Fin. Úsala como segmentador de temporada: filtra ventas vía la relación Calendario→ventas.
+	column Temporada = VAR d = Calendario[Date] RETURN CALCULATE(MAX(LOL_PBISEASON[Name]), FILTER(LOL_PBISEASON, LOL_PBISEASON[Inicio] <= d && LOL_PBISEASON[Fin] >= d))
+		dataType: string
+		lineageTag: 0a1b2c3d-4000-4f40-8a40-000000000040
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Calendario = calculated
 		mode: import
 		source =

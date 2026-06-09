@@ -1,11 +1,11 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainerMobileState/2.4.0/schema.json",
   "position": {
-    "x": 194,
-    "y": 36,
-    "z": 30001,
-    "height": 32,
-    "width": 130
+    "x": 0,
+    "y": 30,
+    "z": 30021,
+    "height": 37,
+    "width": 108
   },
   "objects": {
     "data": [
@@ -56,6 +56,18 @@
             "expr": {
               "Literal": {
                 "Value": "true"
+              }
+            }
+          },
+          "background": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "ThemeDataColor": {
+                    "ColorId": 0,
+                    "Percent": 0
+                  }
+                }
               }
             }
           }

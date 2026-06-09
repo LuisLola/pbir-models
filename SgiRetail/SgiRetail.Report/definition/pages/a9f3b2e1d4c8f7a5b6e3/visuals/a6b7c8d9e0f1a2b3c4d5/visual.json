@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "a6b7c8d9e0f1a2b3c4d5",
   "position": {
-    "x": 35.4679802955665,
-    "y": 355.78817733990144,
-    "z": 43000,
-    "height": 500.98522167487681,
-    "width": 1368.8423645320197,
-    "tabOrder": 43000
+    "x": 35.935828877005349,
+    "y": 355.50802139037432,
+    "z": 42000,
+    "height": 544.17112299465236,
+    "width": 1368.1283422459892,
+    "tabOrder": 42000
   },
   "visual": {
     "visualType": "pivotTable",
@@ -609,6 +609,18 @@
               "LOL_PBITIENDAS.NombreTienda"
             ],
             "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBITIENDAS"
+                    }
+                  },
+                  "Property": "NombreTienda"
+                }
+              }
+            ],
             "isPinned": true
           },
           {

@@ -12,7 +12,7 @@ table PeriodoSelector
 	column Orden
 		formatString: 0
 		lineageTag: db3d38a5-f75f-49e6-892c-4962fa40b6cc
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: [Value2]
 
 		annotation SummarizationSetBy = Automatic
@@ -21,7 +21,7 @@ table PeriodoSelector
 		mode: import
 		source =
 				{
-				    ("Anio", 1),
+				    ("Año", 1),
 				    ("Trimestre", 2),
 				    ("Mes", 3),
 				    ("Semana", 4),

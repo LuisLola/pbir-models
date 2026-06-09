@@ -4,7 +4,7 @@
     "x": 0,
     "y": 0,
     "z": 1000,
-    "height": 40,
+    "height": 29,
     "width": 324,
     "tabOrder": 1000
   },
@@ -18,7 +18,7 @@
                 "expr": {
                   "ThemeDataColor": {
                     "ColorId": 2,
-                    "Percent": 0
+                    "Percent": 0.6
                   }
                 }
               }
@@ -70,7 +70,7 @@
               "color": {
                 "expr": {
                   "ThemeDataColor": {
-                    "ColorId": 0,
+                    "ColorId": 1,
                     "Percent": 0
                   }
                 }
@@ -80,6 +80,19 @@
         },
         "selector": {
           "id": "default"
+        }
+      }
+    ],
+    "outline": [
+      {
+        "properties": {
+          "show": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
         }
       }
     ]

@@ -1,8 +1,8 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainerMobileState/2.4.0/schema.json",
   "position": {
-    "x": 4,
-    "y": 80,
+    "x": 0,
+    "y": 92,
     "z": 9000,
     "height": 48,
     "width": 200,
@@ -62,10 +62,17 @@
               "color": {
                 "expr": {
                   "ThemeDataColor": {
-                    "ColorId": 0,
-                    "Percent": -0.1
+                    "ColorId": 1,
+                    "Percent": 0
                   }
                 }
+              }
+            }
+          },
+          "bold": {
+            "expr": {
+              "Literal": {
+                "Value": "true"
               }
             }
           }

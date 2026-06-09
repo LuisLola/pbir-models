@@ -5,7 +5,15 @@ table MedidasCalculadasRetailOnline
 		formatString: @
 		lineageTag: 47f52fcb-98d6-4d67-b3f5-3dff87be4fd1
 
-	measure FechaHastaSeleccionada = COALESCE(SELECTEDVALUE(FechaHastaSelector[Date]), TODAY())
+	measure FechaHastaSeleccionada = ```
+			
+			IF(
+			    ISFILTERED( FechaHastaSelector[Date] ),
+			    MAX( FechaHastaSelector[Date] ),
+			    TODAY()
+			)
+			
+			```
 		formatString: Long Date
 		lineageTag: 2f28bf6e-9c71-43f4-bb13-ff8f8f0a5421
 

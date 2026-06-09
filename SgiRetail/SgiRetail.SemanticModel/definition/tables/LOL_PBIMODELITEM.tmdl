@@ -458,6 +458,17 @@ table LOL_PBIMODELITEM
 
 		annotation SummarizationSetBy = Automatic
 
+	column Modelo-Color =
+			
+			CONCATENATE(
+			    LOL_PBIMODELITEM[Referencia_modelo],
+			    "." & LOL_PBIMODELITEM[Codigo_de_color]
+			)
+		lineageTag: ef73d067-2c28-4d95-bedf-3288bbc9138b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition LOL_PBIMODELITEM = m
 		mode: import
 		source =

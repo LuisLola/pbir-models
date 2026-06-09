@@ -23,10 +23,24 @@
               "color": {
                 "expr": {
                   "ThemeDataColor": {
-                    "ColorId": 0,
-                    "Percent": 0
+                    "ColorId": 1,
+                    "Percent": 0.4
                   }
                 }
+              }
+            }
+          },
+          "bold": {
+            "expr": {
+              "Literal": {
+                "Value": "true"
+              }
+            }
+          },
+          "position": {
+            "expr": {
+              "Literal": {
+                "Value": "'aboveValue'"
               }
             }
           }
