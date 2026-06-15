@@ -1,0 +1,49 @@
+createOrReplace
+
+	table Parámetro
+		lineageTag: a31fd206-6659-4b0a-a1eb-41cb4cce04ce
+
+		column Parámetro
+			lineageTag: ad699d9d-7bba-4cd6-9e5e-097a3cb44cb8
+			summarizeBy: none
+			sourceColumn: [Value1]
+			sortByColumn: 'Parámetro Orden'
+
+			relatedColumnDetails
+				groupByColumn: 'Parámetro Campos'
+
+			annotation SummarizationSetBy = Automatic
+
+		column 'Parámetro Campos'
+			isHidden
+			lineageTag: 14a2faf3-332f-4a18-905a-89a5e579ec81
+			summarizeBy: none
+			sourceColumn: [Value2]
+			sortByColumn: 'Parámetro Orden'
+
+			extendedProperty ParameterMetadata = {"version":3,"kind":2}
+
+			annotation SummarizationSetBy = Automatic
+
+		column 'Parámetro Orden'
+			isHidden
+			formatString: 0
+			lineageTag: c3b67677-9c64-40dd-b2a3-9cf7a6f09f2a
+			summarizeBy: sum
+			sourceColumn: [Value3]
+
+			annotation SummarizationSetBy = Automatic
+
+		partition Parámetro = calculated
+			mode: import
+			source =
+					{
+					    ("Nombre_familia", NAMEOF('LOL_PBIMODELITEM'[Nombre_familia]), 0),
+					    ("Categoria", NAMEOF('LOL_PBIMODELITEM'[Categoria]), 1),
+					    ("Material", NAMEOF('LOL_PBIMODELITEM'[Material]), 2),
+					    ("Paisdeorigen", NAMEOF('LOL_PBIMODELITEM'[Paisdeorigen]), 3),
+					    ("Subfamilia", NAMEOF('LOL_PBIMODELITEM'[Subfamilia]), 4)
+					}
+
+		annotation PBI_Id = 8a786701ebaf4e2f98d563a01fb47fb1
+

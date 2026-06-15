@@ -1,0 +1,126 @@
+createOrReplace
+
+	ref table MedidasCalculadasRetailOnline
+
+		measure CumplimientoObjetivo_% =
+				DIVIDE(
+					[Ventas_YTD_SinIVA],
+				[Objetivos_YTD]
+			)
+			formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 23015b8f-3d87-4047-8911-70e826d872e6
+
+		measure DesviacionObjetivo = [Ventas_YTD_SinIVA] - [Objetivos_YTD]
+			formatString: #,0.00;-#,0.00;#,0.00
+			lineageTag: 621fe649-8249-4928-99f8-4d6ad4461874
+
+		measure EvolucionObjetivo = [Ventas_YTD_SinIVA] - [Objetivos_YTD]
+			formatString: #,0.00;-#,0.00;#,0.00
+			lineageTag: 79f90b41-0b3f-477f-8f58-13e4b1cb4340
+
+		measure EvolucionObjetivo_% =
+			DIVIDE(
+				[Ventas_YTD_SinIVA] - [Objetivos_YTD],
+				[Objetivos_YTD]
+			)
+			formatString: 0.00%;-0.00%;0.00%
+			lineageTag: 665f8bbf-088f-4929-baa4-1b882a5b7e57
+		measure Objetivos = 
+			CALCULATE(
+				SUM(LOL_PBIOBJETIVOSRETAIL[Importe]),
+				USERELATIONSHIP(LOL_PBIOBJETIVOSRETAIL[TiendaID], LOL_PBITIENDAS[IDCuentaPersona]),
+				USERELATIONSHIP(LOL_PBIOBJETIVOSRETAIL[Fecha], Calendario[Date])
+			)
+			formatString: #,0.00;-#,0.00;#,0.00
+			lineageTag: 6a40a7f9-5cd4-4cef-acd7-1b88cd2a30d4
+
+		measure Objetivos_YTD =
+			CALCULATE(
+				[Objetivos],
+				DATESYTD(Calendario[Date])
+			)
+			formatString: #,0.00;-#,0.00;#,0.00
+			lineageTag: 5c3f3215-d6c8-47d9-833c-d2c6e94da448
+
+		measure Objetivos_YTD_LY =
+			VAR FechaMin = MIN(Calendario[Date])
+			VAR FechaMax = MAX(Calendario[Date])
+			VAR FechaMinLY = DATE(YEAR(FechaMin) - 1, MONTH(FechaMin), DAY(FechaMin))
+			VAR FechaMaxLY = DATE(YEAR(FechaMax) - 1, MONTH(FechaMax), DAY(FechaMax))
+			RETURN
+				CALCULATE(
+					[Objetivos],
+					FILTER(
+						ALL(Calendario[Date]),
+						Calendario[Date] >= FechaMinLY && Calendario[Date] <= FechaMaxLY
+					)
+				)
+			formatString: #,0.00;-#,0.00;#,0.00
+			lineageTag: e40df2eb-853f-45d8-aa6b-f8481968cb29
+
+		measure Objetivos_YTD_Var = [Objetivos_YTD] - [Objetivos_YTD_LY]
+			formatString: #,0.00;-#,0.00;#,0.00
+			lineageTag: 266845a7-8ea8-4c2b-b3a0-dfa9506672bb
+
+		measure Objetivos_YTD_Var_% =
+			DIVIDE(
+				[Objetivos_YTD] - [Objetivos_YTD_LY],
+				[Objetivos_YTD_LY]
+			)
+			formatString: 0.00%;-0.00%;0.00%
+			lineageTag: 8faa5831-ab3b-4cb0-8546-6dab58452a7a
+
+		measure Ventas = SUM(LOL_PBISGIRETAIL[LineTotal])
+			lineageTag: 5a40a7f9-5cd4-4cef-acd7-1b88cd2a30d4
+
+		measure Ventas_SinIVA = SUM(LOL_PBISGIRETAIL[LineTotalWithoutTax])
+			lineageTag: adb82b7b-e87f-41bc-b18b-55ab50f401f8
+
+		measure Ventas_YTD =
+				CALCULATE(
+					[Ventas],
+					DATESYTD(Calendario[Date])
+				)
+			lineageTag: 4c3f3215-d6c8-47d9-833c-d2c6e94da448
+
+		measure Ventas_YTD_LY =
+				CALCULATE(
+				[Ventas],
+				SAMEPERIODLASTYEAR(DATESYTD(Calendario[Date]))
+			)
+		lineageTag: d40df2eb-853f-45d8-aa6b-f8481968cb29
+
+		measure Ventas_YTD_SinIVA =
+			CALCULATE(
+				[Ventas_SinIVA],
+				DATESYTD(Calendario[Date])
+			)
+		lineageTag: 6d93d40d-bab1-4ce6-90a8-1a4091376f35
+
+		measure Ventas_YTD_SinIVA_LY =
+			CALCULATE(
+				[Ventas_SinIVA],
+				SAMEPERIODLASTYEAR(DATESYTD(Calendario[Date]))
+			)
+		lineageTag: 165eea4f-5145-42c5-b1d2-c85f6ccee89a
+
+		measure Ventas_YTD_SinIVA_Var = [Ventas_YTD_SinIVA] - [Ventas_YTD_SinIVA_LY]
+			lineageTag: 05409390-8e48-4608-b2dc-36f01cf8799c
+
+		measure Ventas_YTD_SinIVA_Var_% =
+				DIVIDE(
+					[Ventas_YTD_SinIVA] - [Ventas_YTD_SinIVA_LY],
+					[Ventas_YTD_SinIVA_LY]
+				)
+			lineageTag: db74c990-bf50-4fe5-a35e-000671e01b79
+
+		measure Ventas_YTD_Var = [Ventas_YTD] - [Ventas_YTD_LY]
+			lineageTag: 166845a7-8ea8-4c2b-b3a0-dfa9506672bb
+
+		measure Ventas_YTD_Var_% =
+				DIVIDE(
+					[Ventas_YTD] - [Ventas_YTD_LY],
+					[Ventas_YTD_LY]
+				)
+			lineageTag: 7faa5831-ab3b-4cb0-8546-6dab58452a7a
+

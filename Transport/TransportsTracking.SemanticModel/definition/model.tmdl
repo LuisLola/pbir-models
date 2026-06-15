@@ -1,0 +1,32 @@
+model Model
+	culture: es-ES
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-ES
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["LOL_TRANSPORT_TRACKING"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table LOL_TRANSPORT_TRACKING
+ref table DateTableTemplate_c7d0d147-c558-4cf6-93f7-efb321b41b3f
+ref table LocalDateTable_1d679787-5f05-4e9d-8734-921f96a68a6c
+ref table LocalDateTable_003d2bde-0a00-4d35-8b31-f2e0b25388c4
+ref table LocalDateTable_a8599a9a-a06c-4370-b0e7-bf3176f1a796
+ref table LocalDateTable_9b9b394b-7423-41a2-8b5d-22959530578b
+ref table LocalDateTable_412a3fe9-f6ac-46b3-a094-d637513e2879
+ref table LocalDateTable_baee2494-cb20-4925-a553-c51ff665412e
+ref table LocalDateTable_3948a5f2-0cf3-485c-b6bf-4dee3c297ef1
+ref table LocalDateTable_e60ce81a-f888-4821-869d-d08c789e451f
+ref table LocalDateTable_3378e162-14f0-4f92-a1ef-a8408152fdbe
+ref table LocalDateTable_d25146c2-e15b-4b8d-8538-260459284525
+ref table LocalDateTable_28c0f053-da3f-49bd-8fae-65fa9f84c195
+ref table LocalDateTable_5b7aa76b-4927-48e7-8c2f-7d79fc2c7ba4
+ref table LocalDateTable_28a3eb52-281b-43d9-8a69-4bab0e291cf6
+
+ref cultureInfo es-ES
+

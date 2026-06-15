@@ -396,10 +396,13 @@ table LOL_PBIB2BSALESORDER
 		annotation SummarizationSetBy = User
 
 	column ImporteBruto_LC
-		dataType: string
+		dataType: double
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
 		lineageTag: 391269ac-a329-4237-8c2a-a266d1ba473a
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: ImporteBruto_LC
+
+		changedProperty = DataType
 
 		annotation SummarizationSetBy = Automatic
 

@@ -1,0 +1,284 @@
+table LOL_TRANSPORT_TRACKING
+	lineageTag: 9049c9d5-6de7-4fe4-9b85-8df0412d585c
+
+	column albaran
+		dataType: string
+		lineageTag: 21f2363e-b444-459f-a94d-1384e7cfd98b
+		summarizeBy: none
+		sourceColumn: albaran
+
+		annotation SummarizationSetBy = Automatic
+
+	column transportista
+		dataType: string
+		lineageTag: b4827b0d-4db2-49b6-b3b0-d3dfe7527ae8
+		summarizeBy: none
+		sourceColumn: transportista
+
+		annotation SummarizationSetBy = Automatic
+
+	column picking
+		dataType: string
+		lineageTag: 18fbe3b8-d9e4-4daf-9733-54b77579f501
+		summarizeBy: none
+		sourceColumn: picking
+
+		annotation SummarizationSetBy = Automatic
+
+	column tracking
+		dataType: string
+		lineageTag: a7edf36b-45e1-4921-9991-108b49714982
+		summarizeBy: none
+		sourceColumn: tracking
+
+		annotation SummarizationSetBy = Automatic
+
+	column codigo_cliente
+		dataType: string
+		lineageTag: c4c51fdd-5ede-48c3-bc53-b27de370f345
+		summarizeBy: none
+		sourceColumn: codigo_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column cliente
+		dataType: string
+		lineageTag: 02fe7b73-ef95-4026-92cb-34541b4842d4
+		summarizeBy: none
+		sourceColumn: cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column segmento
+		dataType: string
+		lineageTag: e8ffb5a4-05ce-4c2b-b063-99e39e2ed0a8
+		summarizeBy: none
+		sourceColumn: segmento
+
+		annotation SummarizationSetBy = Automatic
+
+	column ciudad_destino
+		dataType: string
+		lineageTag: 7cc20f99-6792-4470-b9d6-3c1f8838c0af
+		summarizeBy: none
+		sourceColumn: ciudad_destino
+
+		annotation SummarizationSetBy = Automatic
+
+	column pais_destino
+		dataType: string
+		lineageTag: 0955aaa4-95a7-4330-a87a-56d37584e631
+		summarizeBy: none
+		sourceColumn: pais_destino
+
+		annotation SummarizationSetBy = Automatic
+
+	column estado
+		dataType: string
+		lineageTag: ff826518-9487-4d46-a760-7d68e7fc4936
+		summarizeBy: none
+		sourceColumn: estado
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_lanzamiento
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 58b53fa4-1ef7-413c-a8cc-046dd6d2f89a
+		summarizeBy: none
+		sourceColumn: fecha_lanzamiento
+
+		variation Variación
+			isDefault
+			relationship: ac5b1dbe-97ef-4438-abed-3e7281a87385
+			defaultHierarchy: LocalDateTable_1d679787-5f05-4e9d-8734-921f96a68a6c.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_etiqueta
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 90d06556-4b45-4867-8e89-11f779bd0b2d
+		summarizeBy: none
+		sourceColumn: fecha_etiqueta
+
+		variation Variación
+			isDefault
+			relationship: d9894bf0-3515-4c2b-8b87-f939e29d14f2
+			defaultHierarchy: LocalDateTable_003d2bde-0a00-4d35-8b31-f2e0b25388c4.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_recogido
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 70795a37-bfd2-4237-a505-854bfac8cb1a
+		summarizeBy: none
+		sourceColumn: fecha_recogido
+
+		variation Variación
+			isDefault
+			relationship: 9631db83-74e5-4cbb-85db-293cfd0b7885
+			defaultHierarchy: LocalDateTable_a8599a9a-a06c-4370-b0e7-bf3176f1a796.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_en_transito
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4f3e110f-8979-4d43-a368-93dd3aaf79fc
+		summarizeBy: none
+		sourceColumn: fecha_en_transito
+
+		variation Variación
+			isDefault
+			relationship: a899fb0e-cecc-4e76-ae65-b21c29337844
+			defaultHierarchy: LocalDateTable_9b9b394b-7423-41a2-8b5d-22959530578b.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_pendiente_llegada
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1903df82-2367-4506-babd-87fa8bbac8b0
+		summarizeBy: none
+		sourceColumn: fecha_pendiente_llegada
+
+		variation Variación
+			isDefault
+			relationship: a3a4d1ad-9ffb-4f80-af07-daf19298e4b7
+			defaultHierarchy: LocalDateTable_412a3fe9-f6ac-46b3-a094-d637513e2879.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_agencia_destino
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 11dd45f7-443a-457c-acb6-9ace3589e553
+		summarizeBy: none
+		sourceColumn: fecha_agencia_destino
+
+		variation Variación
+			isDefault
+			relationship: f60af607-505b-4589-b319-9604fbad9554
+			defaultHierarchy: LocalDateTable_baee2494-cb20-4925-a553-c51ff665412e.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_en_reparto
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f5e32797-abbd-494e-b808-1e4133bed0a1
+		summarizeBy: none
+		sourceColumn: fecha_en_reparto
+
+		variation Variación
+			isDefault
+			relationship: ebe3b185-5a41-4f7a-ade6-89010694f8b8
+			defaultHierarchy: LocalDateTable_3948a5f2-0cf3-485c-b6bf-4dee3c297ef1.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_incidencia
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: aef83ba1-3813-4084-a0cf-e56217d403db
+		summarizeBy: none
+		sourceColumn: fecha_incidencia
+
+		variation Variación
+			isDefault
+			relationship: 407c1cc7-051d-4b83-9015-b8fd0fb8aa2b
+			defaultHierarchy: LocalDateTable_e60ce81a-f888-4821-869d-d08c789e451f.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_falta_definitiva
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 23073af3-bcbb-4038-a6e4-21a6491c29f4
+		summarizeBy: none
+		sourceColumn: fecha_falta_definitiva
+
+		variation Variación
+			isDefault
+			relationship: fd3b1e13-04fa-4de7-8918-6b4e3d142204
+			defaultHierarchy: LocalDateTable_3378e162-14f0-4f92-a1ef-a8408152fdbe.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_devuelto
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b2db41ce-45d7-440f-a603-04776801e037
+		summarizeBy: none
+		sourceColumn: fecha_devuelto
+
+		variation Variación
+			isDefault
+			relationship: a5c2ae86-0e67-4e3b-a302-e4b757c85c5f
+			defaultHierarchy: LocalDateTable_d25146c2-e15b-4b8d-8538-260459284525.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_entregado
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 83f5e3df-a495-4835-8561-d10e45add28e
+		summarizeBy: none
+		sourceColumn: fecha_entregado
+
+		variation Variación
+			isDefault
+			relationship: 6bbf3095-4007-435a-b111-0cdebab589f1
+			defaultHierarchy: LocalDateTable_28c0f053-da3f-49bd-8fae-65fa9f84c195.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_entrega_prevista
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a2925693-dde7-4927-87fd-a788f896c552
+		summarizeBy: none
+		sourceColumn: fecha_entrega_prevista
+
+		variation Variación
+			isDefault
+			relationship: 72729d51-da01-4545-90dd-a291efefdd22
+			defaultHierarchy: LocalDateTable_5b7aa76b-4927-48e7-8c2f-7d79fc2c7ba4.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_actualizacion
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f0786e4f-0094-4cbc-853b-1bc84981cc89
+		summarizeBy: none
+		sourceColumn: fecha_actualizacion
+
+		variation Variación
+			isDefault
+			relationship: dc9df330-b815-456a-8494-931f4eb84ccf
+			defaultHierarchy: LocalDateTable_28a3eb52-281b-43d9-8a69-4bab0e291cf6.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column api_error
+		dataType: string
+		lineageTag: bd88d156-764b-4f2a-9dc7-c0b8f1db351d
+		summarizeBy: none
+		sourceColumn: api_error
+
+		annotation SummarizationSetBy = Automatic
+
+	partition LOL_TRANSPORT_TRACKING = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin"),
+				    dbo_LOL_TRANSPORT_TRACKING = Origen{[Schema="dbo",Item="LOL_TRANSPORT_TRACKING"]}[Data]
+				in
+				    dbo_LOL_TRANSPORT_TRACKING
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,75 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "e28de4c70001ebe40ba4",
+  "position": {
+    "x": 480.00000000000006,
+    "y": 72.857142857142861,
+    "z": 63000,
+    "height": 300,
+    "width": 728.57142857142867,
+    "tabOrder": 63000
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "Descripcion_familia_agregada"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.Descripcion_familia_agregada",
+              "nativeQueryRef": "Descripcion_familia_agregada",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasRetail"
+                    }
+                  },
+                  "Property": "Ventas_YTD"
+                }
+              },
+              "queryRef": "MedidasRetail.Ventas_YTD",
+              "nativeQueryRef": "Ventas_YTD"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MedidasRetail"
+                  }
+                },
+                "Property": "Ventas_YTD"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

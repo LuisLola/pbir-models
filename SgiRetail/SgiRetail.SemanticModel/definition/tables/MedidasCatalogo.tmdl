@@ -1,0 +1,474 @@
+table MedidasCatalogo
+	lineageTag: 0a1b2c3d-0000-4f00-8a00-000000000000
+
+	/// Top N de productos por Tipo de Tienda. Conectado al segmentador ParamTopN[Top N]; si no hay selección usa 10 por defecto. Lo consumen Catálogo HTML Productos y Catálogo HTML Tabla.
+	measure 'Catálogo Top N' = SELECTEDVALUE( ParamTopN[Top N], 10 )
+		displayFolder: Catálogo Fotos\1. Configuración
+		lineageTag: 0a1b2c3d-0001-4f01-8a01-000000000001
+
+	/// Catálogo visual de productos con foto, agrupado por Tipo de Tienda (TIENDA, CORNER ECI, ONLINE) y ordenado por importe. Devuelve HTML: usar en el visual "HTML Content". Respeta todos los filtros del informe.
+	measure 'Catálogo HTML Productos' =
+			VAR _TopN = [Catálogo Top N]
+			// --- Grupos: código real en el modelo, etiqueta visible y orden ---
+			//     OJO: el código real de "Corner ECI" en el modelo es "CORNER".
+			VAR _Grupos =
+				DATATABLE(
+					"Cod", STRING, "Etiqueta", STRING, "Orden", INTEGER,
+					{
+						{ "TIENDA", "TIENDA", 1 },
+						{ "CORNER", "CORNER ECI", 2 },
+						{ "ONLINE", "ONLINE", 3 }
+					}
+				)
+			// ----------------------------- CSS -----------------------------
+			VAR _Css =
+				"<style>" &
+				"*{box-sizing:border-box}" &
+				".cat{font-family:'Segoe UI',Arial,sans-serif;background:#fff;color:#222;padding:6px}" &
+				".cat-grp{margin:0 0 16px}" &
+				".cat-h{font-size:13px;font-weight:700;color:#1F4E79;letter-spacing:.5px;border-bottom:2px solid #1F4E79;padding-bottom:3px;margin:4px 0 8px}" &
+				".cat-h span{font-weight:400;color:#9aa;font-size:11px}" &
+				".cat-row{display:flex;flex-wrap:wrap;gap:8px}" &
+				".cat-c{width:118px;border:1px solid #e6e6e6;border-radius:6px;background:#fff;padding:6px;box-shadow:0 1px 2px rgba(0,0,0,.06)}" &
+				".cat-c img{width:100%;height:120px;object-fit:cover;border:1px solid #1F4E79;border-radius:4px;background:#f7f7f7;display:block}" &
+				".cat-ni{width:100%;height:120px;border:1px solid #1F4E79;border-radius:4px;background:#f2f2f2;color:#bbb;font-size:9px;display:flex;align-items:center;justify-content:center}" &
+				".cat-sku{font-size:11px;font-weight:700;margin-top:5px;line-height:1.2}" &
+				".cat-br{font-size:10px;font-weight:600;color:#1F4E79}" &
+				".cat-mt{font-size:9px;color:#777;line-height:1.25;margin:2px 0}" &
+				".cat-pvp{font-size:10px;color:#444}" &
+				".cat-imp{font-size:12px;font-weight:700;color:#1B5E20}" &
+				".cat-u{font-size:9px;color:#999}" &
+				"</style>"
+			// ------------------- Construcción de grupos --------------------
+			VAR _Html =
+				CONCATENATEX(
+					_Grupos,
+					VAR _cod = [Cod]
+					VAR _et = [Etiqueta]
+					// 1) Top N modelos del grupo por Ventas (cálculo ligero)
+					VAR _TopBase =
+						CALCULATETABLE(
+							TOPN(
+								_TopN,
+								ADDCOLUMNS( VALUES( LOL_PBIMODELITEM[Referencia_modelo] ), "@Imp", [Ventas] ),
+								[@Imp], DESC
+							),
+							KEEPFILTERS( LOL_PBITIENDAS[TipoTienda] = _cod )
+						)
+					// 2) Solo a los supervivientes les añadimos atributos (eficiente)
+					VAR _Prod =
+						ADDCOLUMNS(
+							_TopBase,
+							"@Uni", CALCULATE( [Cantidad], KEEPFILTERS( LOL_PBITIENDAS[TipoTienda] = _cod ) ),
+							"@Img", CALCULATE( MAX( LOL_PBIMODELITEM[URL_imagen_producto] ) ),
+							"@Marca", CALCULATE( MAX( LOL_PBIMODELITEM[GrupodeArt] ) ),
+							"@Fam", CALCULATE( MAX( LOL_PBIMODELITEM[Nombre_familia] ) ),
+							"@Cat", CALCULATE( MAX( LOL_PBIMODELITEM[Categoria] ) ),
+							"@Pvp", CALCULATE( MAX( LOL_PBIMODELITEM[PVP_ESPANA_Y_PORTUGAL] ) ),
+							"@Tienda",
+								CALCULATE(
+									MAXX( TOPN( 1, VALUES( LOL_PBITIENDAS[NombreTienda] ), [Ventas], DESC ), LOL_PBITIENDAS[NombreTienda] ),
+									KEEPFILTERS( LOL_PBITIENDAS[TipoTienda] = _cod )
+								)
+						)
+					// 3) Tarjetas (ordenadas por Importe desc)
+					VAR _Cards =
+						CONCATENATEX(
+							FILTER( _Prod, [@Imp] > 0 ),
+							VAR _img = [@Img]
+							VAR _imgHtml =
+								IF(
+									NOT ISBLANK( _img ) && LEN( _img ) > 5,
+									"<img src='" & _img & "' onerror=""this.outerHTML='<div class=&quot;cat-ni&quot;>sin imagen</div>'"" />",
+									"<div class='cat-ni'>sin imagen</div>"
+								)
+							RETURN
+								"<div class='cat-c'>" &
+								_imgHtml &
+								"<div class='cat-sku'>" & [Referencia_modelo] & "</div>" &
+								"<div class='cat-br'>" & COALESCE( [@Marca], "" ) & "</div>" &
+								"<div class='cat-mt'>" & COALESCE( [@Cat], "" ) & " · " & COALESCE( [@Fam], "" ) & "<br>" & COALESCE( [@Tienda], "" ) & "</div>" &
+								"<div class='cat-pvp'>PVP " & COALESCE( [@Pvp], "" ) & "</div>" &
+								"<div class='cat-imp'>" & FORMAT( [@Imp], "#,##0", "es-ES" ) & " €</div>" &
+								"<div class='cat-u'>" & FORMAT( [@Uni], "#,##0", "es-ES" ) & " uds</div>" &
+								"</div>",
+							"",
+							[@Imp], DESC
+						)
+					RETURN
+						"<div class='cat-grp'>" &
+						"<div class='cat-h'>" & _et & " <span>(Top " & _TopN & ")</span></div>" &
+						"<div class='cat-row'>" &
+						IF( LEN( _Cards ) = 0, "<div class='cat-mt'>Sin ventas en el periodo.</div>", _Cards ) &
+						"</div></div>",
+					"",
+					[Orden], ASC
+				)
+			RETURN
+				_Css & "<div class='cat'>" & _Html & "</div>"
+		displayFolder: Catálogo Fotos
+		lineageTag: 0a1b2c3d-0002-4f02-8a02-000000000002
+
+	/// Auxiliar reutilizable: devuelve el <img> HTML (con borde azul y respaldo "sin imagen") del producto en el contexto actual. Útil dentro de una matriz con "HTML Content" o para tooltips.
+	measure 'Catálogo Imagen HTML' =
+			VAR _img = MAX( LOL_PBIMODELITEM[URL_imagen_producto] )
+			RETURN
+				IF(
+					NOT ISBLANK( _img ) && LEN( _img ) > 5,
+					"<img src='" & _img & "' style='width:100%;height:120px;object-fit:cover;border:1px solid #1F4E79;border-radius:4px' onerror=""this.outerHTML='<div style=&quot;color:#bbb;font-size:9px;padding:40px 0;text-align:center&quot;>sin imagen</div>'"" />",
+					"<div style='color:#bbb;font-size:9px;padding:40px 0;text-align:center'>sin imagen</div>"
+				)
+		displayFolder: Catálogo Fotos\2. Auxiliares
+		lineageTag: 0a1b2c3d-0003-4f03-8a03-000000000003
+
+	/// Versión "matriz" del catálogo: tabla HTML compacta por Tipo de Tienda (miniatura + modelo, marca, categoría/familia, tienda, PVP, uds, importe), ordenada por importe. Usar en el visual "HTML Content".
+	measure 'Catálogo HTML Tabla' =
+			VAR _TopN = [Catálogo Top N]
+			VAR _Grupos =
+				DATATABLE(
+					"Cod", STRING, "Etiqueta", STRING, "Orden", INTEGER,
+					{
+						{ "TIENDA", "TIENDA", 1 },
+						{ "CORNER", "CORNER ECI", 2 },
+						{ "ONLINE", "ONLINE", 3 }
+					}
+				)
+			VAR _Css =
+				"<style>" &
+				".ct{font-family:'Segoe UI',Arial,sans-serif;color:#222;padding:6px}" &
+				".ct h4{font-size:13px;color:#1F4E79;margin:10px 0 4px;border-bottom:2px solid #1F4E79;padding-bottom:2px}" &
+				".ct table{border-collapse:collapse;width:100%;font-size:11px}" &
+				".ct th{background:#1F4E79;color:#fff;font-weight:600;text-align:left;padding:4px 6px}" &
+				".ct td{border-bottom:1px solid #eee;padding:3px 6px;vertical-align:middle}" &
+				".ct tr:nth-child(even) td{background:#fafafa}" &
+				".ct .r{text-align:right}" &
+				".ct .imp{font-weight:700;color:#1B5E20}" &
+				".ct img{width:38px;height:38px;object-fit:cover;border:1px solid #1F4E79;border-radius:3px;display:block}" &
+				".ct .ni{width:38px;height:38px;border:1px solid #1F4E79;border-radius:3px;background:#f2f2f2}" &
+				"</style>"
+			VAR _Html =
+				CONCATENATEX(
+					_Grupos,
+					VAR _cod = [Cod]
+					VAR _et = [Etiqueta]
+					VAR _TopBase =
+						CALCULATETABLE(
+							TOPN(
+								_TopN,
+								ADDCOLUMNS( VALUES( LOL_PBIMODELITEM[Referencia_modelo] ), "@Imp", [Ventas] ),
+								[@Imp], DESC
+							),
+							KEEPFILTERS( LOL_PBITIENDAS[TipoTienda] = _cod )
+						)
+					VAR _Prod =
+						ADDCOLUMNS(
+							_TopBase,
+							"@Uni", CALCULATE( [Cantidad], KEEPFILTERS( LOL_PBITIENDAS[TipoTienda] = _cod ) ),
+							"@Img", CALCULATE( MAX( LOL_PBIMODELITEM[URL_imagen_producto] ) ),
+							"@Marca", CALCULATE( MAX( LOL_PBIMODELITEM[GrupodeArt] ) ),
+							"@Fam", CALCULATE( MAX( LOL_PBIMODELITEM[Nombre_familia] ) ),
+							"@Cat", CALCULATE( MAX( LOL_PBIMODELITEM[Categoria] ) ),
+							"@Pvp", CALCULATE( MAX( LOL_PBIMODELITEM[PVP_ESPANA_Y_PORTUGAL] ) ),
+							"@Tienda",
+								CALCULATE(
+									MAXX( TOPN( 1, VALUES( LOL_PBITIENDAS[NombreTienda] ), [Ventas], DESC ), LOL_PBITIENDAS[NombreTienda] ),
+									KEEPFILTERS( LOL_PBITIENDAS[TipoTienda] = _cod )
+								)
+						)
+					VAR _Rows =
+						CONCATENATEX(
+							FILTER( _Prod, [@Imp] > 0 ),
+							VAR _img = [@Img]
+							VAR _imgHtml =
+								IF(
+									NOT ISBLANK( _img ) && LEN( _img ) > 5,
+									"<img src='" & _img & "' onerror=""this.outerHTML='<div class=&quot;ni&quot;></div>'"" />",
+									"<div class='ni'></div>"
+								)
+							RETURN
+								"<tr>" &
+								"<td>" & _imgHtml & "</td>" &
+								"<td>" & [Referencia_modelo] & "</td>" &
+								"<td>" & COALESCE( [@Marca], "" ) & "</td>" &
+								"<td>" & COALESCE( [@Cat], "" ) & " · " & COALESCE( [@Fam], "" ) & "</td>" &
+								"<td>" & COALESCE( [@Tienda], "" ) & "</td>" &
+								"<td class='r'>" & COALESCE( [@Pvp], "" ) & "</td>" &
+								"<td class='r'>" & FORMAT( [@Uni], "#,##0", "es-ES" ) & "</td>" &
+								"<td class='r imp'>" & FORMAT( [@Imp], "#,##0", "es-ES" ) & " €</td>" &
+								"</tr>",
+							"",
+							[@Imp], DESC
+						)
+					RETURN
+						"<h4>" & _et & " (Top " & _TopN & ")</h4>" &
+						IF(
+							LEN( _Rows ) = 0,
+							"<div style='font-size:10px;color:#999'>Sin ventas en el periodo.</div>",
+							"<table><thead><tr><th></th><th>Modelo</th><th>Marca</th><th>Categoría / Familia</th><th>Tienda</th><th class='r'>PVP</th><th class='r'>Uds</th><th class='r'>Importe</th></tr></thead><tbody>" & _Rows & "</tbody></table>"
+						),
+					"",
+					[Orden], ASC
+				)
+			RETURN
+				_Css & "<div class='ct'>" & _Html & "</div>"
+		displayFolder: Catálogo Fotos
+		lineageTag: 0a1b2c3d-0005-4f05-8a05-000000000005
+
+	measure 'HTML Catálogo' = ```
+			
+			VAR _TopN = [Catálogo Top N]
+			VAR _ix = SELECTEDVALUE( DimensionesB2C1[DimensionesB2C1 Orden], 0 )
+			VAR _ord = SELECTEDVALUE( OrdenSelector[Orden], "Ventas (€)" )
+			VAR _ini = [FechaInicioPeriodoSeleccionado]
+			VAR _hasta = [FechaHastaSeleccionada]
+			VAR _Css =
+			    "<style>" &
+			    ".wrap{font-family:Manrope,'Segoe UI',Arial,sans-serif;background:transparent;color:#0A0F1E;padding:8px}" &
+			    ".sec{margin:0 0 16px}" &
+			    ".sh{display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid #E11A6F;padding-bottom:4px;margin:4px 0 9px}" &
+			    ".sh .t{font-size:13px;font-weight:800;color:#10182F;text-transform:uppercase;letter-spacing:.6px}" &
+			    ".sh .n{font-size:9px;color:#8089A2;margin-left:7px;font-weight:600}" &
+			    ".sh .e{font-size:13px;font-weight:800;color:#E11A6F}" &
+			    ".grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:8px}" &
+			    ".card{position:relative;background:#fff;border:1px solid #E7E2DC;border-radius:11px;padding:7px;box-shadow:0 1px 2px rgba(16,24,47,.06)}" &
+			    ".rank{position:absolute;top:11px;left:11px;width:21px;height:21px;border-radius:6px;color:#fff;font-weight:800;font-size:10px;display:flex;align-items:center;justify-content:center;z-index:2}" &
+			    ".brand{position:absolute;top:11px;right:11px;color:#fff;font-size:8px;font-weight:700;padding:2px 6px;border-radius:9px;z-index:2}" &
+			    ".ib{position:relative;aspect-ratio:3/4;border-radius:8px;border:1px solid #EFEAE2;background:#F7F4EE;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:6px}" &
+			    ".ib img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}" &
+			    ".sil{width:38px;height:38px}" &
+			    ".cap{position:absolute;bottom:5px;left:0;right:0;text-align:center;font-size:7px;letter-spacing:.8px;color:#B7AE9F;text-transform:uppercase}" &
+			    ".sku{font-family:Consolas,monospace;font-size:10px;color:#8089A2}" &
+			    ".nm{font-size:11px;font-weight:700;line-height:1.15;margin:2px 0 1px}" &
+			    ".al{font-size:8px;color:#8089A2;font-style:italic;margin:0 0 2px;min-height:10px}" &
+			    ".mt{font-size:9px;color:#8089A2;margin-bottom:5px}" &
+			    ".sl{font-size:15px;font-weight:800;color:#10182F}" &
+			    ".bt{height:5px;background:#EBE6DD;border-radius:3px;margin:5px 0;overflow:hidden}" &
+			    ".bf{height:5px;background:#E11A6F;border-radius:3px}" &
+			    ".kp{display:flex;justify-content:space-between;font-size:9px}" &
+			    "</style>"
+			VAR _silP = "<svg class='sil' viewBox='0 0 48 48' fill='none' stroke='#C9BFB0' stroke-width='2' stroke-linejoin='round'><path d='M19 7 L11 13 L14 20 L19 17 L19 41 L29 41 L29 17 L34 20 L37 13 L29 7 Q24 11 19 7 Z'/></svg>"
+			VAR _silA = "<svg class='sil' viewBox='0 0 48 48' fill='none' stroke='#C9BFB0' stroke-width='2' stroke-linejoin='round'><path d='M14 19 L34 19 L36 41 L12 41 Z'/><path d='M20 19 Q20 11 24 11 Q28 11 28 19'/></svg>"
+			VAR _pairs0 =
+			    CALCULATETABLE(
+			        UNION(
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, LOL_PBITIENDAS[TipoTienda], LOL_PBIMODELITEM[Modelo-Color] ), "ven", [Ventas], "u", [Cantidad] ), "@g", LOL_PBITIENDAS[TipoTienda] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 0 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, LOL_PBITIENDAS[NombreTienda], LOL_PBIMODELITEM[Modelo-Color] ), "ven", [Ventas], "u", [Cantidad] ), "@g", LOL_PBITIENDAS[NombreTienda] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 1 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, LOL_PBITIENDAS[ResponsableTienda], LOL_PBIMODELITEM[Modelo-Color] ), "ven", [Ventas], "u", [Cantidad] ), "@g", LOL_PBITIENDAS[ResponsableTienda] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 2 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, LOL_PBITIENDAS[Territorio], LOL_PBIMODELITEM[Modelo-Color] ), "ven", [Ventas], "u", [Cantidad] ), "@g", LOL_PBITIENDAS[Territorio] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 3 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, LOL_PBITIENDAS[AreaManager], LOL_PBIMODELITEM[Modelo-Color] ), "ven", [Ventas], "u", [Cantidad] ), "@g", LOL_PBITIENDAS[AreaManager] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 4 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, LOL_PBIMODELITEM[Categoria], LOL_PBIMODELITEM[Modelo-Color] ), "ven", [Ventas], "u", [Cantidad] ), "@g", LOL_PBIMODELITEM[Categoria] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 5 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, LOL_PBIMODELITEM[Descripcion_familia_agregada], LOL_PBIMODELITEM[Modelo-Color] ), "ven", [Ventas], "u", [Cantidad] ), "@g", LOL_PBIMODELITEM[Descripcion_familia_agregada] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 6 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, LOL_PBIMODELITEM[Nombre_familia], LOL_PBIMODELITEM[Modelo-Color] ), "ven", [Ventas], "u", [Cantidad] ), "@g", LOL_PBIMODELITEM[Nombre_familia] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 7 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, LOL_PBIMODELITEM[Subfamilia], LOL_PBIMODELITEM[Modelo-Color] ), "ven", [Ventas], "u", [Cantidad] ), "@g", LOL_PBIMODELITEM[Subfamilia] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 8 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, Calendario[Año], LOL_PBIMODELITEM[Modelo-Color] ), "ven", [Ventas], "u", [Cantidad] ), "@g", Calendario[Año] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 9 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, Calendario[MesTexto], LOL_PBIMODELITEM[Modelo-Color] ), "ven", [Ventas], "u", [Cantidad] ), "@g", Calendario[MesTexto] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 10 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, Calendario[NombreSemana], LOL_PBIMODELITEM[Modelo-Color] ), "ven", [Ventas], "u", [Cantidad] ), "@g", Calendario[NombreSemana] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 11 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, Calendario[NombreDíaCorto], LOL_PBIMODELITEM[Modelo-Color] ), "ven", [Ventas], "u", [Cantidad] ), "@g", Calendario[NombreDíaCorto] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 12 )
+			        ),
+			        DATESBETWEEN( Calendario[Date], _ini, _hasta )
+			    )
+			VAR _pairs =
+			    ADDCOLUMNS( _pairs0, "@v",
+			        SWITCH( _ord,
+			            "Unidades", [@u],
+			            "PVP", VAR _mm = [@m]  VAR _t = CALCULATE( MAX( LOL_PBIMODELITEM[PVP_ESPANA_Y_PORTUGAL] ), LOL_PBIMODELITEM[Modelo-Color] = _mm )  RETURN IF( NOT ISBLANK( _t ) && LEN( _t ) > 0, DIVIDE( VALUE( SUBSTITUTE( _t, ".", "" ) ), 1000000 ), 0 ),
+			            [@ven]
+			        )
+			    )
+			VAR _groups = ADDCOLUMNS( DISTINCT( SELECTCOLUMNS( _pairs, "@g", [@g] ) ), "@gt", VAR g = [@g] RETURN SUMX( FILTER( _pairs, [@g] = g ), [@ven] ) )
+			VAR _groupsTop = TOPN( 12, FILTER( _groups, [@gt] > 0 ), [@gt], DESC )
+			VAR _Body =
+			    CONCATENATEX(
+			        _groupsTop,
+			        VAR _gv = [@g]
+			        VAR _gt = [@gt]
+			        VAR _inGroup = FILTER( _pairs, [@g] = _gv && [@ven] > 0 )
+			        VAR _max = MAXX( _inGroup, [@v] )
+			        VAR _top = TOPN( _TopN, _inGroup, [@v], DESC )
+			        VAR _cards =
+			            CONCATENATEX(
+			                _top,
+			                VAR _m = [@m]
+			                VAR _v = [@v]
+			                VAR _ven = [@ven]
+			                VAR _u = [@u]
+			                VAR _rank = RANKX( _inGroup, [@v], , DESC, DENSE )
+			                VAR _img = CALCULATE( MAX( LOL_PBIMODELITEM[URL_imagen_producto] ), LOL_PBIMODELITEM[Modelo-Color] = _m )
+			                VAR _nom = CALCULATE( MAX( LOL_PBIMODELITEM[Descripcion_modelo] ), LOL_PBIMODELITEM[Modelo-Color] = _m )
+			                VAR _alias = CALCULATE( MAX( LOL_PBIMODELITEM[Alias] ), LOL_PBIMODELITEM[Modelo-Color] = _m )
+			                VAR _cat = CALCULATE( MAX( LOL_PBIMODELITEM[Categoria] ), LOL_PBIMODELITEM[Modelo-Color] = _m )
+			                VAR _fam = CALCULATE( MAX( LOL_PBIMODELITEM[Nombre_familia] ), LOL_PBIMODELITEM[Modelo-Color] = _m )
+			                VAR _marca = CALCULATE( MAX( LOL_PBIMODELITEM[GrupodeArt] ), LOL_PBIMODELITEM[Modelo-Color] = _m )
+			                VAR _pvptxt = CALCULATE( MAX( LOL_PBIMODELITEM[PVP_ESPANA_Y_PORTUGAL] ), LOL_PBIMODELITEM[Modelo-Color] = _m )
+			                VAR _medal = SWITCH( _rank, 1, "#C8962B", 2, "#8A93A6", 3, "#B06B3A", "#10182F" )
+			                VAR _bu = UPPER( COALESCE( _marca, "" ) )
+			                VAR _bcol = SWITCH( TRUE(), _bu = "MAITE", "#E11A6F", _bu = "LOLA", "#10182F", "#8089A2" )
+			                VAR _sil = IF( _cat = "Accesorio", _silA, _silP )
+			                VAR _pvp = IF( NOT ISBLANK( _pvptxt ) && LEN( _pvptxt ) > 0, DIVIDE( VALUE( SUBSTITUTE( _pvptxt, ".", "" ) ), 1000000 ) )
+			                VAR _bp = INT( DIVIDE( _v, _max ) * 100 )
+			                VAR _imgT = IF( NOT ISBLANK( _img ) && LEN( _img ) > 5, "<img src='" & _img & "' onerror=""this.style.display='none'"" />", "" )
+			                RETURN
+			                    "<div class='card'>" &
+			                    "<div class='rank' style='background:" & _medal & "'>" & _rank & "</div>" &
+			                    "<div class='brand' style='background:" & _bcol & "'>" & COALESCE( _marca, "" ) & "</div>" &
+			                    "<div class='ib'>" & _sil & "<div class='cap'>Foto por SKU</div>" & _imgT & "</div>" &
+			                    "<div class='sku'>" & _m & "</div>" &
+			                    "<div class='nm'>" & COALESCE( _nom, "" ) & "</div>" &
+			                    "<div class='al'>" & COALESCE( _alias, "" ) & "</div>" &
+			                    "<div class='mt'>" & COALESCE( _cat, "" ) & " · " & COALESCE( _fam, "" ) & "</div>" &
+			                    "<div class='sl'>" & FORMAT( _ven, "#,##0", "es-ES" ) & " €</div>" &
+			                    "<div class='bt'><div class='bf' style='width:" & _bp & "%'></div></div>" &
+			                    "<div class='kp'><span>" & FORMAT( _u, "#,##0", "es-ES" ) & " uds</span><span>PVP " & IF( ISBLANK( _pvp ), "–", FORMAT( _pvp, "#,##0.00", "es-ES" ) & " €" ) & "</span></div>" &
+			                    "</div>",
+			                "", [@v], DESC
+			            )
+			        RETURN
+			            "<div class='sec'><div class='sh'><div><span class='t'>" & _gv & "</span><span class='n'>" & COUNTROWS( _inGroup ) & " ref.</span></div><span class='e'>" & FORMAT( _gt, "#,##0", "es-ES" ) & " €</span></div><div class='grid'>" & _cards & "</div></div>",
+			        "", [@gt], DESC
+			    )
+			RETURN
+			    _Css & "<div class='wrap'>" & _Body & "</div>"
+			
+			```
+		displayFolder: Catálogo Fotos\2. Auxiliares
+		lineageTag: 384d978b-a978-49b6-9d8b-dbcd8aac8174
+
+	measure 'TEST FOTO PUBLICA' =
+			
+			"<img src='https://upload.wikimedia.org/wikipedia/commons/3/3f/JPEG_example_flower.jpg'
+			style='width:200px;height:260px;object-fit:cover;border-radius:12px;' />"
+		displayFolder: Catálogo Fotos\2. Auxiliares
+		lineageTag: a08cbcf2-fdb2-460a-a7a0-3e6050ae2e12
+
+	measure 'HTML Comparador Temporadas' = ```
+			
+			VAR _TopN = [Catálogo Top N]
+			VAR _ix = SELECTEDVALUE( DimensionesB2C1[DimensionesB2C1 Orden], 0 )
+			VAR _ord = SELECTEDVALUE( OrdenSelector[Orden], "Ventas (€)" )
+			VAR _A = SELECTEDVALUE( LOL_PBISEASON[Code] )
+			VAR _B = SELECTEDVALUE( LOL_PBISEASON[CompareSeason] )
+			VAR _Css =
+			    "<style>" &
+			    ".wrap{font-family:Manrope,'Segoe UI',Arial,sans-serif;background:transparent;color:#0A0F1E;padding:8px}" &
+			    ".cmp{display:flex;gap:16px;align-items:flex-start}" &
+			    ".col{flex:1;min-width:0}" &
+			    ".ch{display:flex;align-items:baseline;justify-content:space-between;border-bottom:3px solid #E11A6F;padding-bottom:5px;margin:0 0 12px}" &
+			    ".ch .t{font-size:16px;font-weight:800;color:#10182F;text-transform:uppercase;letter-spacing:.6px}" &
+			    ".ch .e{font-size:13px;font-weight:800;color:#E11A6F}" &
+			    ".sec{margin:0 0 12px}" &
+			    ".sh{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid #E7E2DC;padding-bottom:3px;margin:0 0 7px}" &
+			    ".sh .t{font-size:11px;font-weight:700;color:#10182F;text-transform:uppercase;letter-spacing:.4px}" &
+			    ".sh .e{font-size:11px;font-weight:700;color:#8089A2}" &
+			    ".grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:7px}" &
+			    ".card{position:relative;background:#fff;border:1px solid #E7E2DC;border-radius:9px;padding:6px;box-shadow:0 1px 2px rgba(16,24,47,.06)}" &
+			    ".rank{position:absolute;top:8px;left:8px;width:18px;height:18px;border-radius:5px;color:#fff;font-weight:800;font-size:9px;display:flex;align-items:center;justify-content:center;z-index:2}" &
+			    ".brand{position:absolute;top:8px;right:8px;color:#fff;font-size:7px;font-weight:700;padding:1px 4px;border-radius:7px;z-index:2}" &
+			    ".ib{position:relative;aspect-ratio:3/4;border-radius:6px;border:1px solid #EFEAE2;background:#F7F4EE;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:4px}" &
+			    ".ib img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}" &
+			    ".sil{width:28px;height:28px}" &
+			    ".sku{font-family:Consolas,monospace;font-size:8px;color:#8089A2}" &
+			    ".sl{font-size:12px;font-weight:800;color:#10182F}" &
+			    ".bt{height:4px;background:#EBE6DD;border-radius:3px;margin:3px 0;overflow:hidden}" &
+			    ".bf{height:4px;background:#E11A6F;border-radius:3px}" &
+			    ".kp{font-size:8px;color:#8089A2}" &
+			    ".empty{font-size:11px;color:#8089A2;padding:8px}" &
+			    "</style>"
+			VAR _silP = "<svg class='sil' viewBox='0 0 48 48' fill='none' stroke='#C9BFB0' stroke-width='2' stroke-linejoin='round'><path d='M19 7 L11 13 L14 20 L19 17 L19 41 L29 41 L29 17 L34 20 L37 13 L29 7 Q24 11 19 7 Z'/></svg>"
+			VAR _silA = "<svg class='sil' viewBox='0 0 48 48' fill='none' stroke='#C9BFB0' stroke-width='2' stroke-linejoin='round'><path d='M14 19 L34 19 L36 41 L12 41 Z'/><path d='M20 19 Q20 11 24 11 Q28 11 28 19'/></svg>"
+			VAR _pairs0 =
+			    CALCULATETABLE(
+			        UNION(
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, LOL_PBITIENDAS[TipoTienda], LOL_PBIMODELITEM[Modelo-Color], LOL_PBISGIRETAIL[Temporada] ), "v", [Ventas], "u", [Cantidad] ), "@g", LOL_PBITIENDAS[TipoTienda] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@t", LOL_PBISGIRETAIL[Temporada], "@ven", [v], "@u", [u] ), _ix = 0 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, LOL_PBITIENDAS[NombreTienda], LOL_PBIMODELITEM[Modelo-Color], LOL_PBISGIRETAIL[Temporada] ), "v", [Ventas], "u", [Cantidad] ), "@g", LOL_PBITIENDAS[NombreTienda] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@t", LOL_PBISGIRETAIL[Temporada], "@ven", [v], "@u", [u] ), _ix = 1 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, LOL_PBITIENDAS[ResponsableTienda], LOL_PBIMODELITEM[Modelo-Color], LOL_PBISGIRETAIL[Temporada] ), "v", [Ventas], "u", [Cantidad] ), "@g", LOL_PBITIENDAS[ResponsableTienda] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@t", LOL_PBISGIRETAIL[Temporada], "@ven", [v], "@u", [u] ), _ix = 2 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, LOL_PBITIENDAS[Territorio], LOL_PBIMODELITEM[Modelo-Color], LOL_PBISGIRETAIL[Temporada] ), "v", [Ventas], "u", [Cantidad] ), "@g", LOL_PBITIENDAS[Territorio] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@t", LOL_PBISGIRETAIL[Temporada], "@ven", [v], "@u", [u] ), _ix = 3 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, LOL_PBITIENDAS[AreaManager], LOL_PBIMODELITEM[Modelo-Color], LOL_PBISGIRETAIL[Temporada] ), "v", [Ventas], "u", [Cantidad] ), "@g", LOL_PBITIENDAS[AreaManager] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@t", LOL_PBISGIRETAIL[Temporada], "@ven", [v], "@u", [u] ), _ix = 4 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, LOL_PBIMODELITEM[Categoria], LOL_PBIMODELITEM[Modelo-Color], LOL_PBISGIRETAIL[Temporada] ), "v", [Ventas], "u", [Cantidad] ), "@g", LOL_PBIMODELITEM[Categoria] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@t", LOL_PBISGIRETAIL[Temporada], "@ven", [v], "@u", [u] ), _ix = 5 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, LOL_PBIMODELITEM[Descripcion_familia_agregada], LOL_PBIMODELITEM[Modelo-Color], LOL_PBISGIRETAIL[Temporada] ), "v", [Ventas], "u", [Cantidad] ), "@g", LOL_PBIMODELITEM[Descripcion_familia_agregada] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@t", LOL_PBISGIRETAIL[Temporada], "@ven", [v], "@u", [u] ), _ix = 6 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, LOL_PBIMODELITEM[Nombre_familia], LOL_PBIMODELITEM[Modelo-Color], LOL_PBISGIRETAIL[Temporada] ), "v", [Ventas], "u", [Cantidad] ), "@g", LOL_PBIMODELITEM[Nombre_familia] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@t", LOL_PBISGIRETAIL[Temporada], "@ven", [v], "@u", [u] ), _ix = 7 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, LOL_PBIMODELITEM[Subfamilia], LOL_PBIMODELITEM[Modelo-Color], LOL_PBISGIRETAIL[Temporada] ), "v", [Ventas], "u", [Cantidad] ), "@g", LOL_PBIMODELITEM[Subfamilia] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@t", LOL_PBISGIRETAIL[Temporada], "@ven", [v], "@u", [u] ), _ix = 8 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, Calendario[Año], LOL_PBIMODELITEM[Modelo-Color], LOL_PBISGIRETAIL[Temporada] ), "v", [Ventas], "u", [Cantidad] ), "@g", Calendario[Año] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@t", LOL_PBISGIRETAIL[Temporada], "@ven", [v], "@u", [u] ), _ix = 9 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, Calendario[MesTexto], LOL_PBIMODELITEM[Modelo-Color], LOL_PBISGIRETAIL[Temporada] ), "v", [Ventas], "u", [Cantidad] ), "@g", Calendario[MesTexto] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@t", LOL_PBISGIRETAIL[Temporada], "@ven", [v], "@u", [u] ), _ix = 10 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, Calendario[NombreSemana], LOL_PBIMODELITEM[Modelo-Color], LOL_PBISGIRETAIL[Temporada] ), "v", [Ventas], "u", [Cantidad] ), "@g", Calendario[NombreSemana] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@t", LOL_PBISGIRETAIL[Temporada], "@ven", [v], "@u", [u] ), _ix = 11 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBISGIRETAIL, Calendario[NombreDíaCorto], LOL_PBIMODELITEM[Modelo-Color], LOL_PBISGIRETAIL[Temporada] ), "v", [Ventas], "u", [Cantidad] ), "@g", Calendario[NombreDíaCorto] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@t", LOL_PBISGIRETAIL[Temporada], "@ven", [v], "@u", [u] ), _ix = 12 )
+			        ),
+			        REMOVEFILTERS( LOL_PBISEASON ),
+			        LOL_PBISGIRETAIL[Temporada] IN { _A, _B }
+			    )
+			VAR _pairs =
+			    ADDCOLUMNS( _pairs0, "@v",
+			        SWITCH( _ord,
+			            "Unidades", [@u],
+			            "PVP", VAR _mm = [@m]  VAR _t = CALCULATE( MAX( LOL_PBIMODELITEM[PVP_ESPANA_Y_PORTUGAL] ), LOL_PBIMODELITEM[Modelo-Color] = _mm )  RETURN IF( NOT ISBLANK( _t ) && LEN( _t ) > 0, DIVIDE( VALUE( SUBSTITUTE( _t, ".", "" ) ), 1000000 ), 0 ),
+			            [@ven]
+			        )
+			    )
+			VAR _cols =
+			    CONCATENATEX(
+			        { ( _A, 1 ), ( _B, 2 ) },
+			        VAR _s = [Value1]
+			        VAR _pS = FILTER( _pairs, [@t] = _s )
+			        VAR _totS = SUMX( _pS, [@ven] )
+			        VAR _groupsS = TOPN( 6, ADDCOLUMNS( DISTINCT( SELECTCOLUMNS( _pS, "@g", [@g] ) ), "@gt", VAR g = [@g] RETURN SUMX( FILTER( _pS, [@g] = g ), [@ven] ) ), [@gt], DESC )
+			        VAR _bodyS =
+			            CONCATENATEX(
+			                FILTER( _groupsS, [@gt] > 0 ),
+			                VAR _gv = [@g]
+			                VAR _gt = [@gt]
+			                VAR _inG = FILTER( _pS, [@g] = _gv && [@ven] > 0 )
+			                VAR _max = MAXX( _inG, [@v] )
+			                VAR _top = TOPN( _TopN, _inG, [@v], DESC )
+			                VAR _cards =
+			                    CONCATENATEX(
+			                        _top,
+			                        VAR _m = [@m]  VAR _ven = [@ven]  VAR _u = [@u]  VAR _v = [@v]
+			                        VAR _r = RANKX( _inG, [@v], , DESC, DENSE )
+			                        VAR _medal = SWITCH( _r, 1, "#C8962B", 2, "#8A93A6", 3, "#B06B3A", "#10182F" )
+			                        VAR _marca = CALCULATE( MAX( LOL_PBIMODELITEM[GrupodeArt] ), LOL_PBIMODELITEM[Modelo-Color] = _m )
+			                        VAR _bu = UPPER( COALESCE( _marca, "" ) )
+			                        VAR _bcol = SWITCH( TRUE(), _bu = "MAITE", "#E11A6F", _bu = "LOLA", "#10182F", "#8089A2" )
+			                        VAR _cat = CALCULATE( MAX( LOL_PBIMODELITEM[Categoria] ), LOL_PBIMODELITEM[Modelo-Color] = _m )
+			                        VAR _sil = IF( _cat = "Accesorio", _silA, _silP )
+			                        VAR _img = CALCULATE( MAX( LOL_PBIMODELITEM[URL_imagen_producto] ), LOL_PBIMODELITEM[Modelo-Color] = _m )
+			                        VAR _imgT = IF( NOT ISBLANK( _img ) && LEN( _img ) > 5, "<img src='" & _img & "' onerror=""this.style.display='none'"" />", "" )
+			                        VAR _bp = INT( DIVIDE( _v, _max ) * 100 )
+			                        RETURN
+			                            "<div class='card'>" &
+			                            "<div class='rank' style='background:" & _medal & "'>" & _r & "</div>" &
+			                            "<div class='brand' style='background:" & _bcol & "'>" & COALESCE( _marca, "" ) & "</div>" &
+			                            "<div class='ib'>" & _sil & _imgT & "</div>" &
+			                            "<div class='sku'>" & _m & "</div>" &
+			                            "<div class='sl'>" & FORMAT( _ven, "#,##0", "es-ES" ) & " €</div>" &
+			                            "<div class='bt'><div class='bf' style='width:" & _bp & "%'></div></div>" &
+			                            "<div class='kp'>" & FORMAT( _u, "#,##0", "es-ES" ) & " uds</div>" &
+			                            "</div>",
+			                        "", [@v], DESC
+			                    )
+			                RETURN "<div class='sec'><div class='sh'><span class='t'>" & _gv & "</span><span class='e'>" & FORMAT( _gt, "#,##0", "es-ES" ) & " €</span></div><div class='grid'>" & _cards & "</div></div>",
+			                "", [@gt], DESC
+			            )
+			        RETURN "<div class='col'><div class='ch'><span class='t'>" & COALESCE( _s, "—" ) & "</span><span class='e'>" & FORMAT( _totS, "#,##0", "es-ES" ) & " €</span></div>" & IF( LEN( _bodyS ) = 0, "<div class='empty'>Sin ventas.</div>", _bodyS ) & "</div>",
+			        "", [Value2], ASC
+			    )
+			RETURN
+			    _Css & IF( ISBLANK( _A ), "<div class='wrap'><div class='empty'>Elige UNA temporada en el segmentador.</div></div>", "<div class='wrap'><div class='cmp'>" & _cols & "</div></div>" )
+			
+			```
+		displayFolder: Catálogo Fotos\2. Auxiliares
+		lineageTag: de455c80-ae26-4324-9a77-04f88cefa4ec
+
+	column Column
+		formatString: 0
+		lineageTag: 0a1b2c3d-0004-4f04-8a04-000000000004
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MedidasCatalogo = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 0a1b2c3d000040f08a04000000000009
+

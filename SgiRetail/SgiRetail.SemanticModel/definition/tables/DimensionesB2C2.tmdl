@@ -1,0 +1,59 @@
+table DimensionesB2C2
+	lineageTag: 6716849f-fb20-4d43-bb8e-cab3e0a0d80d
+
+	column DimensionesB2C2
+		lineageTag: d1d343e2-5985-4728-a138-5b8e7e0b4c6d
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'DimensionesB2C2 Orden'
+
+		relatedColumnDetails
+			groupByColumn: 'DimensionesB2C2 Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DimensionesB2C2 Campos'
+		isHidden
+		lineageTag: 93908157-b2be-4cb4-939d-b0d337036a74
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'DimensionesB2C2 Orden'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DimensionesB2C2 Orden'
+		isHidden
+		formatString: 0
+		lineageTag: 5c6cc2d4-7831-430e-a96f-a9a73d88dc0a
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimensionesB2C2 = calculated
+		mode: import
+		source =
+				{
+				    ("TipoTienda", NAMEOF('LOL_PBITIENDAS'[TipoTienda]), 0),
+				    ("NombreTienda", NAMEOF('LOL_PBITIENDAS'[NombreTienda]), 1),
+				    ("ResponsableTienda", NAMEOF('LOL_PBITIENDAS'[ResponsableTienda]), 2),
+				    ("Territorio", NAMEOF('LOL_PBITIENDAS'[Territorio]), 3),
+				    ("AreaManager", NAMEOF('LOL_PBITIENDAS'[AreaManager]), 4),
+				    ("Categoria", NAMEOF('LOL_PBIMODELITEM'[Categoria]), 5),
+				    ("Descripcion_familia_agregada", NAMEOF('LOL_PBIMODELITEM'[Descripcion_familia_agregada]), 6),
+				    ("Nombre_familia", NAMEOF('LOL_PBIMODELITEM'[Nombre_familia]), 7),
+				    ("Subfamilia", NAMEOF('LOL_PBIMODELITEM'[Subfamilia]), 8),
+				    ("Año", NAMEOF('Calendario'[Año]), 9),
+				    ("MesTexto", NAMEOF('Calendario'[MesTexto]), 10),
+				    ("NombreSemana", NAMEOF('Calendario'[NombreSemana]), 11),
+				    ("NombreDíaCorto", NAMEOF('Calendario'[NombreDíaCorto]), 12)
+				}
+
+	annotation PBI_Id = b29e34d79e5941b2bc7a517e4782fcdb
+

@@ -1,0 +1,103 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "0a02dac8918ba17da28e",
+  "position": {
+    "x": 245.87486322490787,
+    "y": 217.4762341678655,
+    "z": 6011,
+    "height": 64.285714285714278,
+    "width": 223.89162561576353,
+    "tabOrder": 3016
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimensionB2B"
+                    }
+                  },
+                  "Property": "Dimension"
+                }
+              },
+              "queryRef": "DimensionB2B.Dimension",
+              "nativeQueryRef": "Dimension",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Dropdown'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "header": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Selector 1'"
+                }
+              }
+            },
+            "textSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {}
+        }
+      ]
+    }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "e30f085f1b3b00a01aa3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimensionB2B"
+              }
+            },
+            "Property": "Dimension"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

@@ -32,6 +32,7 @@ table MedidasVentas
 			            SUM ( 'LOL_PBIB2BSALESORDER'[ImporteBruto] ),
 			            REMOVEFILTERS ( 'Calendario' ),
 			            REMOVEFILTERS ( 'LOL_PBIB2BSALESORDER'[DocDate] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
 			            'LOL_PBIB2BSALESORDER'[Canceled] <> "Y",
 			            'LOL_PBIB2BSALESORDER'[IsIncidence] <> "Y",
 			            'LOL_PBIB2BSALESORDER'[Season] = TemporadaSel,
@@ -49,23 +50,38 @@ table MedidasVentas
 
 	measure VentasTemporadaAnterior =
 			VAR TemporadaSel = [TemporadaSeleccionada]
-			VAR FechaCorte = [FechaLimiteSeleccionada]
-			VAR TemporadaAnt =
-			    LOOKUPVALUE (
-			        'LOL_PBISEASON'[CompareSeason],
-			        'LOL_PBISEASON'[Code], TemporadaSel
+			VAR TemporadaAnt = [TemporadaAnterior]
+			VAR FechaInicioSel =
+			    CALCULATE (
+			        MAX ( 'LOL_PBISEASON'[Fin] ),
+			        REMOVEFILTERS ( 'LOL_PBISEASON' ),
+			        'LOL_PBISEASON'[Code] = TemporadaSel
 			    )
-			VAR FechaCorteAnt = EDATE ( FechaCorte, -12 )
+			VAR FechaCorte = [FechaLimiteSeleccionada]
+			VAR DiasTemporada = DATEDIFF ( FechaInicioSel, FechaCorte, DAY ) + 1
+			VAR FechaInicioAnt =
+			    CALCULATE (
+			        MAX ( 'LOL_PBISEASON'[Fin] ),
+			        REMOVEFILTERS ( 'LOL_PBISEASON' ),
+			        'LOL_PBISEASON'[Code] = TemporadaAnt
+			    )
+			VAR FechaFinAnt = FechaInicioAnt + DiasTemporada - 1
 			RETURN
 			    IF (
-			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaAnt ),
+			        ISBLANK ( TemporadaSel )
+			            || ISBLANK ( TemporadaAnt )
+			            || ISBLANK ( FechaInicioSel )
+			            || ISBLANK ( FechaInicioAnt )
+			            || FechaCorte < FechaInicioSel,
 			        BLANK (),
 			        CALCULATE (
 			            SUM ( 'LOL_PBIB2BSALESORDER'[ImporteBruto] ),
 			            REMOVEFILTERS ( 'Calendario' ),
 			            REMOVEFILTERS ( 'LOL_PBIB2BSALESORDER'[DocDate] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
 			            'LOL_PBIB2BSALESORDER'[Season] = TemporadaAnt,
-			            'LOL_PBIB2BSALESORDER'[DocDate] <= FechaCorteAnt
+			            'LOL_PBIB2BSALESORDER'[DocDate] >= FechaInicioAnt,
+			            'LOL_PBIB2BSALESORDER'[DocDate] <= FechaFinAnt
 			        )
 			    )
 		formatString: \€#,##0
@@ -74,11 +90,7 @@ table MedidasVentas
 
 	measure VentasTemporadaAnterior_SoloInicio =
 			VAR TemporadaSel = [TemporadaSeleccionada]
-			VAR TemporadaAnt =
-			    LOOKUPVALUE (
-			        'LOL_PBISEASON'[CompareSeason],
-			        'LOL_PBISEASON'[Code], TemporadaSel
-			    )
+			VAR TemporadaAnt = [TemporadaAnterior]
 			RETURN
 			    IF (
 			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaAnt ),
@@ -87,6 +99,7 @@ table MedidasVentas
 			            SUM ( 'LOL_PBIB2BSALESORDER'[ImporteBruto] ),
 			            REMOVEFILTERS ( 'Calendario' ),
 			            REMOVEFILTERS ( 'LOL_PBIB2BSALESORDER'[DocDate] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
 			            'LOL_PBIB2BSALESORDER'[Season] = TemporadaAnt,
 			            'LOL_PBIB2BSALESORDER'[Reposicion] <> "Y"
 			        )
@@ -97,11 +110,7 @@ table MedidasVentas
 
 	measure VentasTemporadaAnterior_Total =
 			VAR TemporadaSel = [TemporadaSeleccionada]
-			VAR TemporadaAnt =
-			    LOOKUPVALUE (
-			        'LOL_PBISEASON'[CompareSeason],
-			        'LOL_PBISEASON'[Code], TemporadaSel
-			    )
+			VAR TemporadaAnt = [TemporadaAnterior]
 			RETURN
 			    IF (
 			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaAnt ),
@@ -110,6 +119,7 @@ table MedidasVentas
 			            SUM ( 'LOL_PBIB2BSALESORDER'[ImporteBruto] ),
 			            REMOVEFILTERS ( 'Calendario' ),
 			            REMOVEFILTERS ( 'LOL_PBIB2BSALESORDER'[DocDate] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
 			            'LOL_PBIB2BSALESORDER'[Season] = TemporadaAnt
 			        )
 			    )
@@ -119,11 +129,7 @@ table MedidasVentas
 
 	measure VentasTemporadaPasada_SoloInicio =
 			VAR TemporadaSel = [TemporadaSeleccionada]
-			VAR TemporadaPas =
-			    LOOKUPVALUE (
-			        'LOL_PBISEASON'[TemporadaAnterior],
-			        'LOL_PBISEASON'[Code], TemporadaSel
-			    )
+			VAR TemporadaPas = [TemporadaPasada]
 			RETURN
 			    IF (
 			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaPas ),
@@ -132,6 +138,7 @@ table MedidasVentas
 			            SUM ( 'LOL_PBIB2BSALESORDER'[ImporteBruto] ),
 			            REMOVEFILTERS ( 'Calendario' ),
 			            REMOVEFILTERS ( 'LOL_PBIB2BSALESORDER'[DocDate] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
 			            'LOL_PBIB2BSALESORDER'[Season] = TemporadaPas
 			        )
 			    )
@@ -249,6 +256,7 @@ table MedidasVentas
 			            SUM ( 'LOL_PBIB2BSALESORDER'[ImporteBruto] ),
 			            REMOVEFILTERS ( 'Calendario' ),
 			            REMOVEFILTERS ( 'LOL_PBIB2BSALESORDER'[DocDate] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
 			            'LOL_PBIB2BSALESORDER'[Season] = TemporadaSel,
 			            'LOL_PBIB2BSALESORDER'[DocDate] <= FechaCorte
 			        )
@@ -259,23 +267,38 @@ table MedidasVentas
 
 	measure VentasTemporadaAnteriorTotal =
 			VAR TemporadaSel = [TemporadaSeleccionada]
-			VAR FechaCorte = [FechaLimiteSeleccionada]
-			VAR TemporadaAnt =
-			    LOOKUPVALUE (
-			        'LOL_PBISEASON'[CompareSeason],
-			        'LOL_PBISEASON'[Code], TemporadaSel
+			VAR TemporadaAnt = [TemporadaAnterior]
+			VAR FechaInicioSel =
+			    CALCULATE (
+			        MAX ( 'LOL_PBISEASON'[Fin] ),
+			        REMOVEFILTERS ( 'LOL_PBISEASON' ),
+			        'LOL_PBISEASON'[Code] = TemporadaSel
 			    )
-			VAR FechaCorteAnt = EDATE ( FechaCorte, -12 )
+			VAR FechaCorte = [FechaLimiteSeleccionada]
+			VAR DiasTemporada = DATEDIFF ( FechaInicioSel, FechaCorte, DAY ) + 1
+			VAR FechaInicioAnt =
+			    CALCULATE (
+			        MAX ( 'LOL_PBISEASON'[Fin] ),
+			        REMOVEFILTERS ( 'LOL_PBISEASON' ),
+			        'LOL_PBISEASON'[Code] = TemporadaAnt
+			    )
+			VAR FechaFinAnt = FechaInicioAnt + DiasTemporada - 1
 			RETURN
 			    IF (
-			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaAnt ),
+			        ISBLANK ( TemporadaSel )
+			            || ISBLANK ( TemporadaAnt )
+			            || ISBLANK ( FechaInicioSel )
+			            || ISBLANK ( FechaInicioAnt )
+			            || FechaCorte < FechaInicioSel,
 			        BLANK (),
 			        CALCULATE (
 			            SUM ( 'LOL_PBIB2BSALESORDER'[ImporteBruto] ),
 			            REMOVEFILTERS ( 'Calendario' ),
 			            REMOVEFILTERS ( 'LOL_PBIB2BSALESORDER'[DocDate] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
 			            'LOL_PBIB2BSALESORDER'[Season] = TemporadaAnt,
-			            'LOL_PBIB2BSALESORDER'[DocDate] <= FechaCorteAnt
+			            'LOL_PBIB2BSALESORDER'[DocDate] >= FechaInicioAnt,
+			            'LOL_PBIB2BSALESORDER'[DocDate] <= FechaFinAnt
 			        )
 			    )
 		formatString: \€#,##0
@@ -284,11 +307,7 @@ table MedidasVentas
 
 	measure VentasTemporadaAnterior_SoloInicioTotal =
 			VAR TemporadaSel = [TemporadaSeleccionada]
-			VAR TemporadaAnt =
-			    LOOKUPVALUE (
-			        'LOL_PBISEASON'[CompareSeason],
-			        'LOL_PBISEASON'[Code], TemporadaSel
-			    )
+			VAR TemporadaAnt = [TemporadaAnterior]
 			RETURN
 			    IF (
 			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaAnt ),
@@ -297,6 +316,7 @@ table MedidasVentas
 			            SUM ( 'LOL_PBIB2BSALESORDER'[ImporteBruto] ),
 			            REMOVEFILTERS ( 'Calendario' ),
 			            REMOVEFILTERS ( 'LOL_PBIB2BSALESORDER'[DocDate] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
 			            'LOL_PBIB2BSALESORDER'[Season] = TemporadaAnt,
 			            'LOL_PBIB2BSALESORDER'[Reposicion] <> "Y"
 			        )
@@ -307,11 +327,7 @@ table MedidasVentas
 
 	measure VentasTemporadaAnterior_TotalTotal =
 			VAR TemporadaSel = [TemporadaSeleccionada]
-			VAR TemporadaAnt =
-			    LOOKUPVALUE (
-			        'LOL_PBISEASON'[CompareSeason],
-			        'LOL_PBISEASON'[Code], TemporadaSel
-			    )
+			VAR TemporadaAnt = [TemporadaAnterior]
 			RETURN
 			    IF (
 			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaAnt ),
@@ -320,6 +336,7 @@ table MedidasVentas
 			            SUM ( 'LOL_PBIB2BSALESORDER'[ImporteBruto] ),
 			            REMOVEFILTERS ( 'Calendario' ),
 			            REMOVEFILTERS ( 'LOL_PBIB2BSALESORDER'[DocDate] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
 			            'LOL_PBIB2BSALESORDER'[Season] = TemporadaAnt
 			        )
 			    )
@@ -371,6 +388,7 @@ table MedidasVentas
 			            SUM ( 'LOL_PBIB2BSALESORDER'[ImporteBruto] ),
 			            REMOVEFILTERS ( 'Calendario' ),
 			            REMOVEFILTERS ( 'LOL_PBIB2BSALESORDER'[DocDate] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
 			            'LOL_PBIB2BSALESORDER'[Canceled] <> "Y",
 			            'LOL_PBIB2BSALESORDER'[IsIncidence] <> "Y",
 			            'LOL_PBIB2BSALESORDER'[Season] = TemporadaSel,
@@ -393,6 +411,128 @@ table MedidasVentas
 		formatString: \€#,##0
 		displayFolder: Total
 		lineageTag: b2c3d4e5-f6a7-8901-bcde-f12345678902
+
+	measure ValidacionVentasAnt_Corte12M = [VentasTemporadaAnterior]
+		formatString: #,##0
+		displayFolder: Validacion
+		lineageTag: 282658b3-45fb-486f-9ff3-df1914fa2735
+
+	measure ValidacionVentasAnt_DiasEq =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR TemporadaAnt = [TemporadaAnterior]
+			VAR FechaInicioAnt = [ValidacionFechaInicioTemporadaAnt]
+			VAR FechaFinAnt = [ValidacionFechaFinAntDiasEq]
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel )
+			            || ISBLANK ( TemporadaAnt )
+			            || ISBLANK ( FechaInicioAnt )
+			            || ISBLANK ( FechaFinAnt ),
+			        BLANK (),
+			        CALCULATE (
+			            SUM ( 'LOL_PBIB2BSALESORDER'[ImporteBruto] ),
+			            REMOVEFILTERS ( 'Calendario' ),
+			            REMOVEFILTERS ( 'LOL_PBIB2BSALESORDER'[DocDate] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
+			            'LOL_PBIB2BSALESORDER'[Season] = TemporadaAnt,
+			            'LOL_PBIB2BSALESORDER'[DocDate] >= FechaInicioAnt,
+			            'LOL_PBIB2BSALESORDER'[DocDate] <= FechaFinAnt
+			        )
+			    )
+		formatString: #,##0
+		displayFolder: Validacion
+		lineageTag: a2cc6b61-fc63-463c-ba94-73090de09618
+
+	measure ValidacionVentasAnt_DiasEq_Limpia =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR TemporadaAnt = [TemporadaAnterior]
+			VAR FechaInicioAnt = [ValidacionFechaInicioTemporadaAnt]
+			VAR FechaFinAnt = [ValidacionFechaFinAntDiasEq]
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel )
+			            || ISBLANK ( TemporadaAnt )
+			            || ISBLANK ( FechaInicioAnt )
+			            || ISBLANK ( FechaFinAnt ),
+			        BLANK (),
+			        CALCULATE (
+			            SUM ( 'LOL_PBIB2BSALESORDER'[ImporteBruto] ),
+			            REMOVEFILTERS ( 'Calendario' ),
+			            REMOVEFILTERS ( 'LOL_PBIB2BSALESORDER'[DocDate] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
+			            'LOL_PBIB2BSALESORDER'[Canceled] <> "Y",
+			            'LOL_PBIB2BSALESORDER'[IsIncidence] <> "Y",
+			            'LOL_PBIB2BSALESORDER'[Season] = TemporadaAnt,
+			            'LOL_PBIB2BSALESORDER'[DocDate] >= FechaInicioAnt,
+			            'LOL_PBIB2BSALESORDER'[DocDate] <= FechaFinAnt
+			        )
+			    )
+		formatString: #,##0
+		displayFolder: Validacion
+		lineageTag: b8d1aede-6afc-4d57-89de-af3bd072ca3f
+
+	measure ValidacionVentasAnt_DiasEq_AllFact =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR TemporadaAnt = [TemporadaAnterior]
+			VAR FechaInicioAnt = [ValidacionFechaInicioTemporadaAnt]
+			VAR FechaFinAnt = [ValidacionFechaFinAntDiasEq]
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel )
+			            || ISBLANK ( TemporadaAnt )
+			            || ISBLANK ( FechaInicioAnt )
+			            || ISBLANK ( FechaFinAnt ),
+			        BLANK (),
+			        CALCULATE (
+			            SUM ( 'LOL_PBIB2BSALESORDER'[ImporteBruto] ),
+			            FILTER (
+			                ALL ( 'LOL_PBIB2BSALESORDER' ),
+			                'LOL_PBIB2BSALESORDER'[Season] = TemporadaAnt
+			                    && 'LOL_PBIB2BSALESORDER'[DocDate] >= FechaInicioAnt
+			                    && 'LOL_PBIB2BSALESORDER'[DocDate] <= FechaFinAnt
+			            ),
+			            REMOVEFILTERS ( 'Calendario' ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
+			            TREATAS (
+			                VALUES ( 'LOL_PBICLIENTES'[CodeCliente] ),
+			                'LOL_PBIB2BSALESORDER'[CardCode]
+			            )
+			        )
+			    )
+		formatString: #,##0
+		displayFolder: Validacion
+		lineageTag: 2f4a12a7-4cf0-435d-a37c-5622132bab50
+
+	measure ValidacionDifAnt_DiasEq_vs_Corte12M = [ValidacionVentasAnt_DiasEq] - [ValidacionVentasAnt_Corte12M]
+		formatString: #,##0
+		displayFolder: Validacion
+		lineageTag: eb140b10-9d97-4da4-9a41-0694cb3b17e3
+
+	measure ValidacionLineasAnt_DiasEq =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR TemporadaAnt = [TemporadaAnterior]
+			VAR FechaInicioAnt = [ValidacionFechaInicioTemporadaAnt]
+			VAR FechaFinAnt = [ValidacionFechaFinAntDiasEq]
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel )
+			            || ISBLANK ( TemporadaAnt )
+			            || ISBLANK ( FechaInicioAnt )
+			            || ISBLANK ( FechaFinAnt ),
+			        BLANK (),
+			        CALCULATE (
+			            COUNTROWS ( 'LOL_PBIB2BSALESORDER' ),
+			            REMOVEFILTERS ( 'Calendario' ),
+			            REMOVEFILTERS ( 'LOL_PBIB2BSALESORDER'[DocDate] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
+			            'LOL_PBIB2BSALESORDER'[Season] = TemporadaAnt,
+			            'LOL_PBIB2BSALESORDER'[DocDate] >= FechaInicioAnt,
+			            'LOL_PBIB2BSALESORDER'[DocDate] <= FechaFinAnt
+			        )
+			    )
+		formatString: #,##0
+		displayFolder: Validacion
+		lineageTag: 7b1721dd-e52e-4e97-96e1-0282b82fc443
 
 	column Value
 		lineageTag: 2ddc9eb7-b8c8-4537-91e0-8de67fa58299

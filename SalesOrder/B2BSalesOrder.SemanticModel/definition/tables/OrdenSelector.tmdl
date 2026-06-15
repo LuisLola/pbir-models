@@ -1,0 +1,37 @@
+table OrdenSelector
+	lineageTag: b1a2c3d4-0200-4200-8200-000000000200
+
+	column Orden
+		dataType: string
+		lineageTag: b1a2c3d4-0201-4201-8201-000000000201
+		summarizeBy: none
+		sourceColumn: [Orden]
+		sortByColumn: Indice
+
+		annotation SummarizationSetBy = Automatic
+
+	column Indice
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b1a2c3d4-0202-4202-8202-000000000202
+		summarizeBy: none
+		sourceColumn: [Indice]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition OrdenSelector = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Orden", STRING,
+				    "Indice", INTEGER,
+				    {
+				        { "Ventas (€)", 1 },
+				        { "Unidades", 2 },
+				        { "PVP", 3 }
+				    }
+				)
+
+	annotation PBI_Id = b1a2c3d402004200820000000200
+

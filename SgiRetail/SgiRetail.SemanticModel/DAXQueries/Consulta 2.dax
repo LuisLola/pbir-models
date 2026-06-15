@@ -1,0 +1,17 @@
+		measure ObjetivoRetail_YTD =
+				
+				CALCULATE(
+				    [ObjetivoRetail],
+				    DATESYTD(Calendario[Date])
+				)
+
+		measure CumplimientoObjetivo_% =
+				
+				DIVIDE(
+				    [Ventas_YTD_SinIVA],
+				    [ObjetivoRetail_YTD]
+				)
+
+		measure DesviacionObjetivo =
+				
+				[Ventas_YTD_SinIVA] - [ObjetivoRetail_YTD]

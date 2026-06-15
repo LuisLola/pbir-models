@@ -36,6 +36,7 @@ table MedidasIncidencias
 			            SUM ( 'VentasIncidencias'[VentaBrutaML] ),
 			            REMOVEFILTERS ( 'Calendario' ),
 			            REMOVEFILTERS ( 'VentasIncidencias'[FechaDocumento] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
 			            'VentasIncidencias'[TemporadaLinea] = TemporadaSel,
 			            'VentasIncidencias'[FechaDocumento] <= FechaCorte
 			        )
@@ -47,11 +48,7 @@ table MedidasIncidencias
 	measure VentasTemporadaAnteriorIncidencias =
 			VAR TemporadaSel = [TemporadaSeleccionada]
 			VAR FechaCorte = [FechaLimiteSeleccionada]
-			VAR TemporadaAnt =
-			    LOOKUPVALUE (
-			        'LOL_PBISEASON'[CompareSeason],
-			        'LOL_PBISEASON'[Code], TemporadaSel
-			    )
+			VAR TemporadaAnt = [TemporadaAnterior]
 			VAR FechaCorteAnt = EDATE ( FechaCorte, -12 )
 			RETURN
 			    IF (
@@ -61,6 +58,7 @@ table MedidasIncidencias
 			            SUM ( 'VentasIncidencias'[VentaBrutaML] ),
 			            REMOVEFILTERS ( 'Calendario' ),
 			            REMOVEFILTERS ( 'VentasIncidencias'[FechaDocumento] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
 			            'VentasIncidencias'[TemporadaLinea] = TemporadaAnt,
 			            'VentasIncidencias'[FechaDocumento] <= FechaCorteAnt
 			        )
@@ -71,11 +69,7 @@ table MedidasIncidencias
 
 	measure VentasTemporadaAnteriorSoloInicioIncidencias =
 			VAR TemporadaSel = [TemporadaSeleccionada]
-			VAR TemporadaAnt =
-			    LOOKUPVALUE (
-			        'LOL_PBISEASON'[CompareSeason],
-			        'LOL_PBISEASON'[Code], TemporadaSel
-			    )
+			VAR TemporadaAnt = [TemporadaAnterior]
 			RETURN
 			    IF (
 			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaAnt ),
@@ -84,6 +78,7 @@ table MedidasIncidencias
 			            SUM ( 'VentasIncidencias'[VentaBrutaML] ),
 			            REMOVEFILTERS ( 'Calendario' ),
 			            REMOVEFILTERS ( 'VentasIncidencias'[FechaDocumento] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
 			            'VentasIncidencias'[TemporadaLinea] = TemporadaAnt,
 			            'VentasIncidencias'[PedidoReposicionLinea] <> "Y"
 			        )
@@ -94,11 +89,7 @@ table MedidasIncidencias
 
 	measure VentasTemporadaAnteriorTotalIncidencias =
 			VAR TemporadaSel = [TemporadaSeleccionada]
-			VAR TemporadaAnt =
-			    LOOKUPVALUE (
-			        'LOL_PBISEASON'[CompareSeason],
-			        'LOL_PBISEASON'[Code], TemporadaSel
-			    )
+			VAR TemporadaAnt = [TemporadaAnterior]
 			RETURN
 			    IF (
 			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaAnt ),
@@ -107,6 +98,7 @@ table MedidasIncidencias
 			            SUM ( 'VentasIncidencias'[VentaBrutaML] ),
 			            REMOVEFILTERS ( 'Calendario' ),
 			            REMOVEFILTERS ( 'VentasIncidencias'[FechaDocumento] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
 			            'VentasIncidencias'[TemporadaLinea] = TemporadaAnt
 			        )
 			    )
@@ -116,11 +108,7 @@ table MedidasIncidencias
 
 	measure VentasTemporadaPasadaSoloInicioIncidencias =
 			VAR TemporadaSel = [TemporadaSeleccionada]
-			VAR TemporadaPas =
-			    LOOKUPVALUE (
-			        'LOL_PBISEASON'[TemporadaAnterior],
-			        'LOL_PBISEASON'[Code], TemporadaSel
-			    )
+			VAR TemporadaPas = [TemporadaPasada]
 			RETURN
 			    IF (
 			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaPas ),
@@ -128,6 +116,8 @@ table MedidasIncidencias
 			        CALCULATE (
 			            SUM ( 'VentasIncidencias'[VentaBrutaML] ),
 			            REMOVEFILTERS ( 'Calendario' ),
+			            REMOVEFILTERS ( 'VentasIncidencias'[FechaDocumento] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
 			            'VentasIncidencias'[TemporadaLinea] = TemporadaPas
 			        )
 			    )
@@ -143,6 +133,68 @@ table MedidasIncidencias
 		formatString: \€#,##0
 		displayFolder: YTD
 		lineageTag: 95cf9f15-061b-45c1-8e67-ad0c1524744d
+
+	measure ValidacionIncidenciasAnt_Corte12M = [VentasTemporadaAnteriorIncidencias]
+		formatString: #,##0
+		displayFolder: Validacion
+		lineageTag: fe4bbd39-79fe-4fd7-9782-4b63048ccf3f
+
+	measure ValidacionIncidenciasAnt_DiasEq =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR TemporadaAnt = [TemporadaAnterior]
+			VAR FechaInicioAnt = [ValidacionFechaInicioTemporadaAnt]
+			VAR FechaFinAnt = [ValidacionFechaFinAntDiasEq]
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel )
+			            || ISBLANK ( TemporadaAnt )
+			            || ISBLANK ( FechaInicioAnt )
+			            || ISBLANK ( FechaFinAnt ),
+			        BLANK (),
+			        CALCULATE (
+			            SUM ( 'VentasIncidencias'[VentaBrutaML] ),
+			            REMOVEFILTERS ( 'Calendario' ),
+			            REMOVEFILTERS ( 'VentasIncidencias'[FechaDocumento] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
+			            'VentasIncidencias'[TemporadaLinea] = TemporadaAnt,
+			            'VentasIncidencias'[FechaDocumento] >= FechaInicioAnt,
+			            'VentasIncidencias'[FechaDocumento] <= FechaFinAnt
+			        )
+			    )
+		formatString: #,##0
+		displayFolder: Validacion
+		lineageTag: f15f2a7f-a331-4c4f-af14-2d643ea782f9
+
+	measure ValidacionDifIncidenciasAnt_DiasEq_vs_Corte12M = [ValidacionIncidenciasAnt_DiasEq] - [ValidacionIncidenciasAnt_Corte12M]
+		formatString: #,##0
+		displayFolder: Validacion
+		lineageTag: 75c5dacd-58be-43fb-aa95-fdda128fc9d3
+
+	measure ValidacionLineasIncidenciasAnt_DiasEq =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR TemporadaAnt = [TemporadaAnterior]
+			VAR FechaInicioAnt = [ValidacionFechaInicioTemporadaAnt]
+			VAR FechaFinAnt = [ValidacionFechaFinAntDiasEq]
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel )
+			            || ISBLANK ( TemporadaAnt )
+			            || ISBLANK ( FechaInicioAnt )
+			            || ISBLANK ( FechaFinAnt ),
+			        BLANK (),
+			        CALCULATE (
+			            COUNTROWS ( 'VentasIncidencias' ),
+			            REMOVEFILTERS ( 'Calendario' ),
+			            REMOVEFILTERS ( 'VentasIncidencias'[FechaDocumento] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
+			            'VentasIncidencias'[TemporadaLinea] = TemporadaAnt,
+			            'VentasIncidencias'[FechaDocumento] >= FechaInicioAnt,
+			            'VentasIncidencias'[FechaDocumento] <= FechaFinAnt
+			        )
+			    )
+		formatString: #,##0
+		displayFolder: Validacion
+		lineageTag: a244e33f-f09c-4939-9f4d-0fbf75632a9d
 
 	column Value
 		lineageTag: 07f7e59a-a986-41c2-b13c-7f6849f2b453

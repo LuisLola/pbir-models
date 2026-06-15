@@ -1,0 +1,204 @@
+createOrReplace
+
+	ref table MedidasCalculadasRetailOnline
+
+		measure Cantidad = SUM(LOL_PBISGIRETAIL[Quantity])
+			formatString: 0.00
+			lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a101
+
+		measure Cantidad_YTD = [Cantidad]
+			formatString: 0.00
+			lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a102
+
+		measure Cantidad_YTD_LY =
+				VAR FechaMin = MIN(Calendario[Date])
+				VAR FechaMax = MAX(Calendario[Date])
+				VAR FechaMinLY = DATE(YEAR(FechaMin) - 1, MONTH(FechaMin), DAY(FechaMin))
+				VAR FechaMaxLY = DATE(YEAR(FechaMax) - 1, MONTH(FechaMax), DAY(FechaMax))
+				RETURN
+					CALCULATE(
+						[Cantidad],
+						FILTER(
+							ALL(Calendario[Date]),
+							Calendario[Date] >= FechaMinLY && Calendario[Date] <= FechaMaxLY
+						)
+					)
+			formatString: 0.00
+			lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a103
+
+		measure Cantidad_YTD_Var = [Cantidad_YTD] - [Cantidad_YTD_LY]
+			formatString: 0.00
+			lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a104
+
+		measure Cantidad_YTD_Var_% =
+				DIVIDE(
+					[Cantidad_YTD] - [Cantidad_YTD_LY],
+					[Cantidad_YTD_LY]
+				)
+			formatString: 0.00%;-0.00%;0.00%
+			lineageTag: 0d9ef0ef-1a29-4c13-8f46-5f55e7a8a105
+
+		measure NumeroClientesUnicos = DISTINCTCOUNT(LOL_PBISGIRETAIL[Cliente])
+			formatString: 0
+			lineageTag: abcdef12-3456-7890-abcd-ef1234567890
+
+		measure NumeroTransacciones =
+				CALCULATE(
+					DISTINCTCOUNT(LOL_PBISGIRETAIL[Ticket]),
+					NOT LOL_PBISGIRETAIL[TipoDocumento] IN {"VTD", "VRMA"}
+				)
+			formatString: 0
+			lineageTag: 12345678-1234-1234-1234-123456789abc
+
+		measure NumeroTransacciones_LY =
+				VAR FechaMin = MIN(Calendario[Date])
+				VAR FechaMax = MAX(Calendario[Date])
+				VAR FechaMinLY = DATE(YEAR(FechaMin) - 1, MONTH(FechaMin), DAY(FechaMin))
+				VAR FechaMaxLY = DATE(YEAR(FechaMax) - 1, MONTH(FechaMax), DAY(FechaMax))
+				RETURN
+					CALCULATE(
+						[NumeroTransacciones],
+						FILTER(
+							ALL(Calendario[Date]),
+							Calendario[Date] >= FechaMinLY && Calendario[Date] <= FechaMaxLY
+						)
+					)
+			formatString: 0
+			lineageTag: 12345678-1234-1234-1234-123456789abd
+
+		measure NumeroTransacciones_Var_% =
+				DIVIDE(
+					[NumeroTransacciones] - [NumeroTransacciones_LY],
+					[NumeroTransacciones_LY]
+				)
+			formatString: 0.00%;-0.00%;0.00%
+			lineageTag: 12345678-1234-1234-1234-123456789abe
+
+		measure PromedioVentaTransaccion = DIVIDE([Ventas], [NumeroTransacciones])
+			formatString: #,0.00;-#,0.00;#,0.00
+			lineageTag: 87654321-4321-4321-4321-fedcba987654
+
+		measure PromedioVentaTransaccion_LY =
+				VAR FechaMin = MIN(Calendario[Date])
+				VAR FechaMax = MAX(Calendario[Date])
+				VAR FechaMinLY = DATE(YEAR(FechaMin) - 1, MONTH(FechaMin), DAY(FechaMin))
+				VAR FechaMaxLY = DATE(YEAR(FechaMax) - 1, MONTH(FechaMax), DAY(FechaMax))
+				RETURN
+					CALCULATE(
+						[PromedioVentaTransaccion],
+						FILTER(
+							ALL(Calendario[Date]),
+							Calendario[Date] >= FechaMinLY && Calendario[Date] <= FechaMaxLY
+						)
+					)
+			formatString: #,0.00;-#,0.00;#,0.00
+			lineageTag: 87654321-4321-4321-4321-fedcba987655
+
+		measure PromedioVentaTransaccion_Var_% =
+				DIVIDE(
+					[PromedioVentaTransaccion] - [PromedioVentaTransaccion_LY],
+					[PromedioVentaTransaccion_LY]
+				)
+			formatString: 0.00%;-0.00%;0.00%
+			lineageTag: 87654321-4321-4321-4321-fedcba987656
+
+		measure UPT = DIVIDE([Cantidad], [NumeroTransacciones])
+			formatString: 0.0
+			lineageTag: abcdef12-3456-7890-abcd-ef1234567891
+
+		measure UPT_LY =
+				VAR FechaMin = MIN(Calendario[Date])
+				VAR FechaMax = MAX(Calendario[Date])
+				VAR FechaMinLY = DATE(YEAR(FechaMin) - 1, MONTH(FechaMin), DAY(FechaMin))
+				VAR FechaMaxLY = DATE(YEAR(FechaMax) - 1, MONTH(FechaMax), DAY(FechaMax))
+				RETURN
+					CALCULATE(
+						[UPT],
+						FILTER(
+							ALL(Calendario[Date]),
+							Calendario[Date] >= FechaMinLY && Calendario[Date] <= FechaMaxLY
+						)
+					)
+			formatString: 0.0
+			lineageTag: abcdef12-3456-7890-abcd-ef1234567892
+
+		measure UPT_Var_% =
+				DIVIDE(
+					[UPT] - [UPT_LY],
+					[UPT_LY]
+				)
+			formatString: 0.00%;-0.00%;0.00%
+			lineageTag: abcdef12-3456-7890-abcd-ef1234567893
+
+		measure Ventas = SUM(LOL_PBISGIRETAIL[LineTotal])
+			formatString: #,0.00;-#,0.00;#,0.00
+			lineageTag: 5a40a7f9-5cd4-4cef-acd7-1b88cd2a30d4
+
+		measure Ventas_SinIVA = SUM(LOL_PBISGIRETAIL[LineTotalWithoutTax])
+			formatString: #,0.00;-#,0.00;#,0.00
+			lineageTag: adb82b7b-e87f-41bc-b18b-55ab50f401f8
+
+		measure Ventas_SinIVA_YTD = [Ventas_SinIVA]
+			formatString: #,0.00;-#,0.00;#,0.00
+			lineageTag: 6d93d40d-bab1-4ce6-90a8-1a4091376f35
+
+		measure Ventas_SinIVA_YTD_LY =
+				VAR FechaMin = MIN(Calendario[Date])
+				VAR FechaMax = MAX(Calendario[Date])
+				VAR FechaMinLY = DATE(YEAR(FechaMin) - 1, MONTH(FechaMin), DAY(FechaMin))
+				VAR FechaMaxLY = DATE(YEAR(FechaMax) - 1, MONTH(FechaMax), DAY(FechaMax))
+				RETURN
+					CALCULATE(
+						[Ventas_SinIVA],
+						FILTER(
+							ALL(Calendario[Date]),
+							Calendario[Date] >= FechaMinLY && Calendario[Date] <= FechaMaxLY
+						)
+					)
+			formatString: #,0.00;-#,0.00;#,0.00
+			lineageTag: 165eea4f-5145-42c5-b1d2-c85f6ccee89a
+
+		measure Ventas_SinIVA_YTD_Var = [Ventas_SinIVA_YTD] - [Ventas_SinIVA_YTD_LY]
+			formatString: #,0.00;-#,0.00;#,0.00
+			lineageTag: 05409390-8e48-4608-b2dc-36f01cf8799c
+
+		measure Ventas_SinIVA_YTD_Var_% =
+				DIVIDE(
+					[Ventas_SinIVA_YTD] - [Ventas_SinIVA_YTD_LY],
+					[Ventas_SinIVA_YTD_LY]
+				)
+			formatString: 0.00%;-0.00%;0.00%
+			lineageTag: db74c990-bf50-4fe5-a35e-000671e01b79
+
+		measure Ventas_YTD = [Ventas]
+			formatString: #,0.00;-#,0.00;#,0.00
+			lineageTag: 4c3f3215-d6c8-47d9-833c-d2c6e94da448
+
+		measure Ventas_YTD_LY =
+				VAR FechaMin = MIN(Calendario[Date])
+				VAR FechaMax = MAX(Calendario[Date])
+				VAR FechaMinLY = DATE(YEAR(FechaMin) - 1, MONTH(FechaMin), DAY(FechaMin))
+				VAR FechaMaxLY = DATE(YEAR(FechaMax) - 1, MONTH(FechaMax), DAY(FechaMax))
+				RETURN
+					CALCULATE(
+						[Ventas],
+						FILTER(
+							ALL(Calendario[Date]),
+							Calendario[Date] >= FechaMinLY && Calendario[Date] <= FechaMaxLY
+						)
+					)
+			formatString: #,0.00;-#,0.00;#,0.00
+			lineageTag: d40df2eb-853f-45d8-aa6b-f8481968cb29
+
+		measure Ventas_YTD_Var = [Ventas_YTD] - [Ventas_YTD_LY]
+			formatString: #,0.00;-#,0.00;#,0.00
+			lineageTag: 166845a7-8ea8-4c2b-b3a0-dfa9506672bb
+
+		measure Ventas_YTD_Var_% =
+				DIVIDE(
+					[Ventas_YTD] - [Ventas_YTD_LY],
+					[Ventas_YTD_LY]
+				)
+			formatString: 0.00%;-0.00%;0.00%
+			lineageTag: 7faa5831-ab3b-4cb0-8546-6dab58452a7a
+

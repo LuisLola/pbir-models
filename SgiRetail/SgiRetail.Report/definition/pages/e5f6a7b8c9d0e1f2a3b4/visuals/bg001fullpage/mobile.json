@@ -1,0 +1,121 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainerMobileState/2.4.0/schema.json",
+  "position": {
+    "x": 0,
+    "y": 480,
+    "z": 30014,
+    "height": 160,
+    "width": 324
+  },
+  "objects": {
+    "fill": [
+      {
+        "properties": {
+          "show": {
+            "expr": {
+              "Literal": {
+                "Value": "true"
+              }
+            }
+          }
+        }
+      },
+      {
+        "properties": {
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "100D"
+              }
+            }
+          }
+        },
+        "selector": {
+          "id": "default"
+        }
+      }
+    ],
+    "shape": [
+      {
+        "properties": {
+          "tileShape": {
+            "expr": {
+              "Literal": {
+                "Value": "'rectangleRounded'"
+              }
+            }
+          },
+          "rectangleRoundedCurve": {
+            "expr": {
+              "Literal": {
+                "Value": "7L"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outline": [
+      {
+        "properties": {
+          "lineColor": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#E9A5CA'"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "selector": {
+          "id": "default"
+        }
+      }
+    ]
+  },
+  "visualContainerObjects": {
+    "background": [
+      {
+        "properties": {
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "100D"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "visualLink": [
+      {
+        "properties": {
+          "show": {
+            "expr": {
+              "Literal": {
+                "Value": "true"
+              }
+            }
+          },
+          "type": {
+            "expr": {
+              "Literal": {
+                "Value": "'PageNavigation'"
+              }
+            }
+          },
+          "navigationSection": {
+            "expr": {
+              "Literal": {
+                "Value": "'86b98da80ac72213e5ed'"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,95 @@
+table LOL_PBITRAFICOTIENDAS
+	lineageTag: f19da2f4-c84d-420c-a262-8e84b0253e7e
+
+	column Aforo
+		dataType: string
+		lineageTag: e70240ff-696f-43dd-b937-35c4bce0537a
+		summarizeBy: none
+		sourceColumn: Aforo
+
+		annotation SummarizationSetBy = Automatic
+
+	column count
+		dataType: string
+		lineageTag: 5e57e0e2-9269-48fd-a8b0-db1fa7a1f408
+		summarizeBy: none
+		sourceColumn: count
+
+		annotation SummarizationSetBy = Automatic
+
+	column Entradas
+		dataType: string
+		lineageTag: 87cf5eea-33d1-4e97-944a-5b9d866a27e0
+		summarizeBy: none
+		sourceColumn: Entradas
+
+		annotation SummarizationSetBy = Automatic
+
+	column Exterior
+		dataType: string
+		lineageTag: a91858dd-2fb6-49cd-bbec-edf8e3b40983
+		summarizeBy: none
+		sourceColumn: Exterior
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fecha
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ad6ba9b4-3ea4-4290-9355-1ebb13daee95
+		summarizeBy: none
+		sourceColumn: Fecha
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Hora
+		dataType: string
+		lineageTag: 6414ee7c-372e-446d-b946-9229c91adf25
+		summarizeBy: none
+		sourceColumn: Hora
+
+		annotation SummarizationSetBy = Automatic
+
+	column RatioConversion
+		dataType: string
+		lineageTag: 14514af2-73f2-4c58-b693-ef3f1da8543a
+		summarizeBy: none
+		sourceColumn: RatioConversion
+
+		annotation SummarizationSetBy = Automatic
+
+	column Salidas
+		dataType: string
+		lineageTag: ca6bee4c-ceed-432b-a760-2fafdfa08553
+		summarizeBy: none
+		sourceColumn: Salidas
+
+		annotation SummarizationSetBy = Automatic
+
+	column TiempoMedio
+		dataType: string
+		lineageTag: c6e5cbb7-3f8d-450e-9878-8d9d0a6f291b
+		summarizeBy: none
+		sourceColumn: TiempoMedio
+
+		annotation SummarizationSetBy = Automatic
+
+	column TiendaID
+		dataType: string
+		lineageTag: 73f66e4b-45e4-4053-9632-2a23f6aae748
+		summarizeBy: none
+		sourceColumn: TiendaID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition LOL_PBITRAFICOTIENDAS = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin"),
+				    dbo_LOL_PBITRAFICOTIENDAS = Origen{[Schema="dbo",Item="LOL_PBITRAFICOTIENDAS"]}[Data]
+				in
+				    dbo_LOL_PBITRAFICOTIENDAS
+

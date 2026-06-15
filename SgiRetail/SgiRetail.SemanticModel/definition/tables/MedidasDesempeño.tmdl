@@ -1,0 +1,413 @@
+table MedidasDesempeño
+	lineageTag: c1d2e3f4-a5b6-7890-cdef-012345678901
+
+	measure Share_Pct =
+			VAR TotalGlobal =
+				CALCULATE(
+					[Ventas_YTD],
+					ALLSELECTED(LOL_PBITIENDAS[TipoTienda]),
+					ALLSELECTED(LOL_PBITIENDAS[NombreTienda]),
+					ALLSELECTED(LOL_PBIMODELITEM[Categoria]),
+					ALLSELECTED(LOL_PBIMODELITEM[Descripcion_familia_agregada])
+				)
+			RETURN DIVIDE([Ventas_YTD], TotalGlobal)
+		formatString: 0%;-0%;0%
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000001
+
+	measure Share_Bar = MIN(1, [Share_Pct])
+		formatString: 0%;-0%;0%
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000002
+
+	measure VN_Evol_Anio =
+			VAR FH = [FechaHastaSeleccionada]
+			VAR FI = DATE(YEAR(FH), 1, 1)
+			VAR FHLY = FH - 364
+			VAR FILY = DATE(YEAR(FHLY), 1, 1)
+			VAR A = CALCULATE([Ventas], DATESBETWEEN(Calendario[Date], FI, FH))
+			VAR L = CALCULATE([Ventas], DATESBETWEEN(Calendario[Date], FILY, FHLY))
+			RETURN DIVIDE(A - L, L)
+		formatString: +0%;-0%;0%
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000003
+
+	measure VN_Evol_Mes =
+			VAR FH = [FechaHastaSeleccionada]
+			VAR FI = DATE(YEAR(FH), MONTH(FH), 1)
+			VAR FHLY = FH - 364
+			VAR FILY = DATE(YEAR(FHLY), MONTH(FHLY), 1)
+			VAR A = CALCULATE([Ventas], DATESBETWEEN(Calendario[Date], FI, FH))
+			VAR L = CALCULATE([Ventas], DATESBETWEEN(Calendario[Date], FILY, FHLY))
+			RETURN DIVIDE(A - L, L)
+		formatString: +0%;-0%;0%
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000004
+
+	measure VN_Evol_Sem =
+			VAR FH = [FechaHastaSeleccionada]
+			VAR FI = FH - WEEKDAY(FH, 2) + 1
+			VAR FHLY = FH - 364
+			VAR FILY = FHLY - WEEKDAY(FHLY, 2) + 1
+			VAR A = CALCULATE([Ventas], DATESBETWEEN(Calendario[Date], FI, FH))
+			VAR L = CALCULATE([Ventas], DATESBETWEEN(Calendario[Date], FILY, FHLY))
+			RETURN DIVIDE(A - L, L)
+		formatString: +0%;-0%;0%
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000005
+
+	measure VN_Evol_Dia =
+			VAR FH = [FechaHastaSeleccionada]
+			VAR FHLY = FH - 364
+			VAR A = CALCULATE([Ventas], DATESBETWEEN(Calendario[Date], FH, FH))
+			VAR L = CALCULATE([Ventas], DATESBETWEEN(Calendario[Date], FHLY, FHLY))
+			RETURN DIVIDE(A - L, L)
+		formatString: +0%;-0%;0%
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000006
+
+	measure TM_Evol_Anio =
+			VAR FH = [FechaHastaSeleccionada]
+			VAR FI = DATE(YEAR(FH), 1, 1)
+			VAR FHLY = FH - 364
+			VAR FILY = DATE(YEAR(FHLY), 1, 1)
+			VAR VA = CALCULATE([Ventas], DATESBETWEEN(Calendario[Date], FI, FH))
+			VAR TA = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FI, FH))
+			VAR VL = CALCULATE([Ventas], DATESBETWEEN(Calendario[Date], FILY, FHLY))
+			VAR TL = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FILY, FHLY))
+			RETURN DIVIDE(DIVIDE(VA, TA) - DIVIDE(VL, TL), DIVIDE(VL, TL))
+		formatString: +0%;-0%;0%
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000007
+
+	measure TM_Evol_Mes =
+			VAR FH = [FechaHastaSeleccionada]
+			VAR FI = DATE(YEAR(FH), MONTH(FH), 1)
+			VAR FHLY = FH - 364
+			VAR FILY = DATE(YEAR(FHLY), MONTH(FHLY), 1)
+			VAR VA = CALCULATE([Ventas], DATESBETWEEN(Calendario[Date], FI, FH))
+			VAR TA = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FI, FH))
+			VAR VL = CALCULATE([Ventas], DATESBETWEEN(Calendario[Date], FILY, FHLY))
+			VAR TL = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FILY, FHLY))
+			RETURN DIVIDE(DIVIDE(VA, TA) - DIVIDE(VL, TL), DIVIDE(VL, TL))
+		formatString: +0%;-0%;0%
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000008
+
+	measure TM_Evol_Sem =
+			VAR FH = [FechaHastaSeleccionada]
+			VAR FI = FH - WEEKDAY(FH, 2) + 1
+			VAR FHLY = FH - 364
+			VAR FILY = FHLY - WEEKDAY(FHLY, 2) + 1
+			VAR VA = CALCULATE([Ventas], DATESBETWEEN(Calendario[Date], FI, FH))
+			VAR TA = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FI, FH))
+			VAR VL = CALCULATE([Ventas], DATESBETWEEN(Calendario[Date], FILY, FHLY))
+			VAR TL = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FILY, FHLY))
+			RETURN DIVIDE(DIVIDE(VA, TA) - DIVIDE(VL, TL), DIVIDE(VL, TL))
+		formatString: +0%;-0%;0%
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000009
+
+	measure TM_Evol_Dia =
+			VAR FH = [FechaHastaSeleccionada]
+			VAR FHLY = FH - 364
+			VAR VA = CALCULATE([Ventas], DATESBETWEEN(Calendario[Date], FH, FH))
+			VAR TA = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FH, FH))
+			VAR VL = CALCULATE([Ventas], DATESBETWEEN(Calendario[Date], FHLY, FHLY))
+			VAR TL = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FHLY, FHLY))
+			RETURN DIVIDE(DIVIDE(VA, TA) - DIVIDE(VL, TL), DIVIDE(VL, TL))
+		formatString: +0%;-0%;0%
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000010
+
+	measure UPT_Evol_Anio =
+			VAR FH = [FechaHastaSeleccionada]
+			VAR FI = DATE(YEAR(FH), 1, 1)
+			VAR FHLY = FH - 364
+			VAR FILY = DATE(YEAR(FHLY), 1, 1)
+			VAR CA = CALCULATE([Cantidad], DATESBETWEEN(Calendario[Date], FI, FH))
+			VAR TA = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FI, FH))
+			VAR CL = CALCULATE([Cantidad], DATESBETWEEN(Calendario[Date], FILY, FHLY))
+			VAR TL = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FILY, FHLY))
+			RETURN DIVIDE(DIVIDE(CA, TA) - DIVIDE(CL, TL), DIVIDE(CL, TL))
+		formatString: +0%;-0%;0%
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000011
+
+	measure UPT_Evol_Mes =
+			VAR FH = [FechaHastaSeleccionada]
+			VAR FI = DATE(YEAR(FH), MONTH(FH), 1)
+			VAR FHLY = FH - 364
+			VAR FILY = DATE(YEAR(FHLY), MONTH(FHLY), 1)
+			VAR CA = CALCULATE([Cantidad], DATESBETWEEN(Calendario[Date], FI, FH))
+			VAR TA = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FI, FH))
+			VAR CL = CALCULATE([Cantidad], DATESBETWEEN(Calendario[Date], FILY, FHLY))
+			VAR TL = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FILY, FHLY))
+			RETURN DIVIDE(DIVIDE(CA, TA) - DIVIDE(CL, TL), DIVIDE(CL, TL))
+		formatString: +0%;-0%;0%
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000012
+
+	measure UPT_Evol_Sem =
+			VAR FH = [FechaHastaSeleccionada]
+			VAR FI = FH - WEEKDAY(FH, 2) + 1
+			VAR FHLY = FH - 364
+			VAR FILY = FHLY - WEEKDAY(FHLY, 2) + 1
+			VAR CA = CALCULATE([Cantidad], DATESBETWEEN(Calendario[Date], FI, FH))
+			VAR TA = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FI, FH))
+			VAR CL = CALCULATE([Cantidad], DATESBETWEEN(Calendario[Date], FILY, FHLY))
+			VAR TL = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FILY, FHLY))
+			RETURN DIVIDE(DIVIDE(CA, TA) - DIVIDE(CL, TL), DIVIDE(CL, TL))
+		formatString: +0%;-0%;0%
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000013
+
+	measure UPT_Evol_Dia =
+			VAR FH = [FechaHastaSeleccionada]
+			VAR FHLY = FH - 364
+			VAR CA = CALCULATE([Cantidad], DATESBETWEEN(Calendario[Date], FH, FH))
+			VAR TA = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FH, FH))
+			VAR CL = CALCULATE([Cantidad], DATESBETWEEN(Calendario[Date], FHLY, FHLY))
+			VAR TL = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FHLY, FHLY))
+			RETURN DIVIDE(DIVIDE(CA, TA) - DIVIDE(CL, TL), DIVIDE(CL, TL))
+		formatString: +0%;-0%;0%
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000014
+
+	measure Conv_Evol_Anio =
+			VAR FH = [FechaHastaSeleccionada]
+			VAR FI = DATE(YEAR(FH), 1, 1)
+			VAR FHLY = FH - 364
+			VAR FILY = DATE(YEAR(FHLY), 1, 1)
+			VAR TA = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FI, FH))
+			VAR EA = CALCULATE([Entradas], DATESBETWEEN(Calendario[Date], FI, FH))
+			VAR TL = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FILY, FHLY))
+			VAR EL = CALCULATE([Entradas], DATESBETWEEN(Calendario[Date], FILY, FHLY))
+			RETURN DIVIDE(DIVIDE(TA, EA) - DIVIDE(TL, EL), DIVIDE(TL, EL))
+		formatString: +0%;-0%;0%
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000015
+
+	measure Conv_Evol_Mes =
+			VAR FH = [FechaHastaSeleccionada]
+			VAR FI = DATE(YEAR(FH), MONTH(FH), 1)
+			VAR FHLY = FH - 364
+			VAR FILY = DATE(YEAR(FHLY), MONTH(FHLY), 1)
+			VAR TA = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FI, FH))
+			VAR EA = CALCULATE([Entradas], DATESBETWEEN(Calendario[Date], FI, FH))
+			VAR TL = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FILY, FHLY))
+			VAR EL = CALCULATE([Entradas], DATESBETWEEN(Calendario[Date], FILY, FHLY))
+			RETURN DIVIDE(DIVIDE(TA, EA) - DIVIDE(TL, EL), DIVIDE(TL, EL))
+		formatString: +0%;-0%;0%
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000016
+
+	measure Conv_Evol_Sem =
+			VAR FH = [FechaHastaSeleccionada]
+			VAR FI = FH - WEEKDAY(FH, 2) + 1
+			VAR FHLY = FH - 364
+			VAR FILY = FHLY - WEEKDAY(FHLY, 2) + 1
+			VAR TA = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FI, FH))
+			VAR EA = CALCULATE([Entradas], DATESBETWEEN(Calendario[Date], FI, FH))
+			VAR TL = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FILY, FHLY))
+			VAR EL = CALCULATE([Entradas], DATESBETWEEN(Calendario[Date], FILY, FHLY))
+			RETURN DIVIDE(DIVIDE(TA, EA) - DIVIDE(TL, EL), DIVIDE(TL, EL))
+		formatString: +0%;-0%;0%
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000017
+
+	measure Conv_Evol_Dia =
+			VAR FH = [FechaHastaSeleccionada]
+			VAR FHLY = FH - 364
+			VAR TA = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FH, FH))
+			VAR EA = CALCULATE([Entradas], DATESBETWEEN(Calendario[Date], FH, FH))
+			VAR TL = CALCULATE([NumeroTransacciones], DATESBETWEEN(Calendario[Date], FHLY, FHLY))
+			VAR EL = CALCULATE([Entradas], DATESBETWEEN(Calendario[Date], FHLY, FHLY))
+			RETURN DIVIDE(DIVIDE(TA, EA) - DIVIDE(TL, EL), DIVIDE(TL, EL))
+		formatString: +0%;-0%;0%
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000018
+
+	measure Color_VN_Anio = SWITCH(TRUE(), ISBLANK([VN_Evol_Anio]), "#8089A2", [VN_Evol_Anio] >= 0, "#1F8A5B", [VN_Evol_Anio] >= -0.10, "#B57A0E", "#C73838")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000019
+
+	measure Color_VN_Mes = SWITCH(TRUE(), ISBLANK([VN_Evol_Mes]), "#8089A2", [VN_Evol_Mes] >= 0, "#1F8A5B", [VN_Evol_Mes] >= -0.10, "#B57A0E", "#C73838")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000020
+
+	measure Color_VN_Sem = SWITCH(TRUE(), ISBLANK([VN_Evol_Sem]), "#8089A2", [VN_Evol_Sem] >= 0, "#1F8A5B", [VN_Evol_Sem] >= -0.10, "#B57A0E", "#C73838")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000021
+
+	measure Color_VN_Dia = SWITCH(TRUE(), ISBLANK([VN_Evol_Dia]), "#8089A2", [VN_Evol_Dia] >= 0, "#1F8A5B", [VN_Evol_Dia] >= -0.10, "#B57A0E", "#C73838")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000022
+
+	measure Color_TM_Anio = SWITCH(TRUE(), ISBLANK([TM_Evol_Anio]), "#8089A2", [TM_Evol_Anio] >= 0, "#1F8A5B", [TM_Evol_Anio] >= -0.10, "#B57A0E", "#C73838")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000023
+
+	measure Color_TM_Mes = SWITCH(TRUE(), ISBLANK([TM_Evol_Mes]), "#8089A2", [TM_Evol_Mes] >= 0, "#1F8A5B", [TM_Evol_Mes] >= -0.10, "#B57A0E", "#C73838")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000024
+
+	measure Color_TM_Sem = SWITCH(TRUE(), ISBLANK([TM_Evol_Sem]), "#8089A2", [TM_Evol_Sem] >= 0, "#1F8A5B", [TM_Evol_Sem] >= -0.10, "#B57A0E", "#C73838")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000025
+
+	measure Color_TM_Dia = SWITCH(TRUE(), ISBLANK([TM_Evol_Dia]), "#8089A2", [TM_Evol_Dia] >= 0, "#1F8A5B", [TM_Evol_Dia] >= -0.10, "#B57A0E", "#C73838")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000026
+
+	measure Color_UPT_Anio = SWITCH(TRUE(), ISBLANK([UPT_Evol_Anio]), "#8089A2", [UPT_Evol_Anio] >= 0, "#1F8A5B", [UPT_Evol_Anio] >= -0.10, "#B57A0E", "#C73838")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000027
+
+	measure Color_UPT_Mes = SWITCH(TRUE(), ISBLANK([UPT_Evol_Mes]), "#8089A2", [UPT_Evol_Mes] >= 0, "#1F8A5B", [UPT_Evol_Mes] >= -0.10, "#B57A0E", "#C73838")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000028
+
+	measure Color_UPT_Sem = SWITCH(TRUE(), ISBLANK([UPT_Evol_Sem]), "#8089A2", [UPT_Evol_Sem] >= 0, "#1F8A5B", [UPT_Evol_Sem] >= -0.10, "#B57A0E", "#C73838")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000029
+
+	measure Color_UPT_Dia = SWITCH(TRUE(), ISBLANK([UPT_Evol_Dia]), "#8089A2", [UPT_Evol_Dia] >= 0, "#1F8A5B", [UPT_Evol_Dia] >= -0.10, "#B57A0E", "#C73838")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000030
+
+	measure Color_Conv_Anio = SWITCH(TRUE(), ISBLANK([Conv_Evol_Anio]), "#8089A2", [Conv_Evol_Anio] >= 0, "#1F8A5B", [Conv_Evol_Anio] >= -0.10, "#B57A0E", "#C73838")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000031
+
+	measure Color_Conv_Mes = SWITCH(TRUE(), ISBLANK([Conv_Evol_Mes]), "#8089A2", [Conv_Evol_Mes] >= 0, "#1F8A5B", [Conv_Evol_Mes] >= -0.10, "#B57A0E", "#C73838")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000032
+
+	measure Color_Conv_Sem = SWITCH(TRUE(), ISBLANK([Conv_Evol_Sem]), "#8089A2", [Conv_Evol_Sem] >= 0, "#1F8A5B", [Conv_Evol_Sem] >= -0.10, "#B57A0E", "#C73838")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000033
+
+	measure Color_Conv_Dia = SWITCH(TRUE(), ISBLANK([Conv_Evol_Dia]), "#8089A2", [Conv_Evol_Dia] >= 0, "#1F8A5B", [Conv_Evol_Dia] >= -0.10, "#B57A0E", "#C73838")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000034
+
+	measure Color_Evol_VN = SWITCH(TRUE(), ISBLANK([Ventas_YTD_Var_%]), "#8089A2", [Ventas_YTD_Var_%] >= 0, "#1F8A5B", [Ventas_YTD_Var_%] >= -0.10, "#B57A0E", "#C73838")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000035
+
+	measure Color_Evol_OBJ = SWITCH(TRUE(), ISBLANK([EvolucionObjetivo_%]), "#8089A2", [EvolucionObjetivo_%] >= 0, "#1F8A5B", [EvolucionObjetivo_%] >= -0.10, "#B57A0E", "#C73838")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000036
+
+	measure Txt_VN_Anio = IF(ISBLANK([VN_Evol_Anio]), "—", FORMAT([VN_Evol_Anio], "+0%;-0%;0%"))
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000037
+
+	measure Txt_VN_Mes = IF(ISBLANK([VN_Evol_Mes]), "—", FORMAT([VN_Evol_Mes], "+0%;-0%;0%"))
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000038
+
+	measure Txt_VN_Sem = IF(ISBLANK([VN_Evol_Sem]), "—", FORMAT([VN_Evol_Sem], "+0%;-0%;0%"))
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000039
+
+	measure Txt_VN_Dia = IF(ISBLANK([VN_Evol_Dia]), "—", FORMAT([VN_Evol_Dia], "+0%;-0%;0%"))
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000040
+
+	measure Txt_TM_Anio = IF(ISBLANK([TM_Evol_Anio]), "—", FORMAT([TM_Evol_Anio], "+0%;-0%;0%"))
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000041
+
+	measure Txt_TM_Mes = IF(ISBLANK([TM_Evol_Mes]), "—", FORMAT([TM_Evol_Mes], "+0%;-0%;0%"))
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000042
+
+	measure Txt_TM_Sem = IF(ISBLANK([TM_Evol_Sem]), "—", FORMAT([TM_Evol_Sem], "+0%;-0%;0%"))
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000043
+
+	measure Txt_TM_Dia = IF(ISBLANK([TM_Evol_Dia]), "—", FORMAT([TM_Evol_Dia], "+0%;-0%;0%"))
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000044
+
+	measure Txt_UPT_Anio = IF(ISBLANK([UPT_Evol_Anio]), "—", FORMAT([UPT_Evol_Anio], "+0%;-0%;0%"))
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000045
+
+	measure Txt_UPT_Mes = IF(ISBLANK([UPT_Evol_Mes]), "—", FORMAT([UPT_Evol_Mes], "+0%;-0%;0%"))
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000046
+
+	measure Txt_UPT_Sem = IF(ISBLANK([UPT_Evol_Sem]), "—", FORMAT([UPT_Evol_Sem], "+0%;-0%;0%"))
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000047
+
+	measure Txt_UPT_Dia = IF(ISBLANK([UPT_Evol_Dia]), "—", FORMAT([UPT_Evol_Dia], "+0%;-0%;0%"))
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000048
+
+	measure Txt_Conv_Anio = IF(ISBLANK([Conv_Evol_Anio]), "—", FORMAT([Conv_Evol_Anio], "+0%;-0%;0%"))
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000049
+
+	measure Txt_Conv_Mes = IF(ISBLANK([Conv_Evol_Mes]), "—", FORMAT([Conv_Evol_Mes], "+0%;-0%;0%"))
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000050
+
+	measure Txt_Conv_Sem = IF(ISBLANK([Conv_Evol_Sem]), "—", FORMAT([Conv_Evol_Sem], "+0%;-0%;0%"))
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000051
+
+	measure Txt_Conv_Dia = IF(ISBLANK([Conv_Evol_Dia]), "—", FORMAT([Conv_Evol_Dia], "+0%;-0%;0%"))
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000052
+
+	measure Lbl_Anio = "Año " & FORMAT(YEAR([FechaHastaSeleccionada]), "0000")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000053
+
+	measure Lbl_Mes = FORMAT([FechaHastaSeleccionada], "MMM.")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000054
+
+	measure Lbl_Sem = "S " & FORMAT(WEEKNUM([FechaHastaSeleccionada], 2), "00")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000055
+
+	measure Lbl_Dia = FORMAT([FechaHastaSeleccionada], "dd/MM")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000056
+
+	measure Bg_VN_Anio = SWITCH(TRUE(), ISBLANK([VN_Evol_Anio]), "#F0F2F8", [VN_Evol_Anio] >= 0, "#EBF5EE", [VN_Evol_Anio] >= -0.10, "#FDF4CF", "#FCEAEA")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000001
+
+	measure Bg_VN_Mes = SWITCH(TRUE(), ISBLANK([VN_Evol_Mes]), "#F0F2F8", [VN_Evol_Mes] >= 0, "#EBF5EE", [VN_Evol_Mes] >= -0.10, "#FDF4CF", "#FCEAEA")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000002
+
+	measure Bg_VN_Sem = SWITCH(TRUE(), ISBLANK([VN_Evol_Sem]), "#F0F2F8", [VN_Evol_Sem] >= 0, "#EBF5EE", [VN_Evol_Sem] >= -0.10, "#FDF4CF", "#FCEAEA")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000003
+
+	measure Bg_VN_Dia = SWITCH(TRUE(), ISBLANK([VN_Evol_Dia]), "#F0F2F8", [VN_Evol_Dia] >= 0, "#EBF5EE", [VN_Evol_Dia] >= -0.10, "#FDF4CF", "#FCEAEA")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000004
+
+	measure Bg_TM_Anio = SWITCH(TRUE(), ISBLANK([TM_Evol_Anio]), "#F0F2F8", [TM_Evol_Anio] >= 0, "#EBF5EE", [TM_Evol_Anio] >= -0.10, "#FDF4CF", "#FCEAEA")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000005
+
+	measure Bg_TM_Mes = SWITCH(TRUE(), ISBLANK([TM_Evol_Mes]), "#F0F2F8", [TM_Evol_Mes] >= 0, "#EBF5EE", [TM_Evol_Mes] >= -0.10, "#FDF4CF", "#FCEAEA")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000006
+
+	measure Bg_TM_Sem = SWITCH(TRUE(), ISBLANK([TM_Evol_Sem]), "#F0F2F8", [TM_Evol_Sem] >= 0, "#EBF5EE", [TM_Evol_Sem] >= -0.10, "#FDF4CF", "#FCEAEA")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000007
+
+	measure Bg_TM_Dia = SWITCH(TRUE(), ISBLANK([TM_Evol_Dia]), "#F0F2F8", [TM_Evol_Dia] >= 0, "#EBF5EE", [TM_Evol_Dia] >= -0.10, "#FDF4CF", "#FCEAEA")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000008
+
+	measure Bg_UPT_Anio = SWITCH(TRUE(), ISBLANK([UPT_Evol_Anio]), "#F0F2F8", [UPT_Evol_Anio] >= 0, "#EBF5EE", [UPT_Evol_Anio] >= -0.10, "#FDF4CF", "#FCEAEA")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000009
+
+	measure Bg_UPT_Mes = SWITCH(TRUE(), ISBLANK([UPT_Evol_Mes]), "#F0F2F8", [UPT_Evol_Mes] >= 0, "#EBF5EE", [UPT_Evol_Mes] >= -0.10, "#FDF4CF", "#FCEAEA")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000010
+
+	measure Bg_UPT_Sem = SWITCH(TRUE(), ISBLANK([UPT_Evol_Sem]), "#F0F2F8", [UPT_Evol_Sem] >= 0, "#EBF5EE", [UPT_Evol_Sem] >= -0.10, "#FDF4CF", "#FCEAEA")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000011
+
+	measure Bg_UPT_Dia = SWITCH(TRUE(), ISBLANK([UPT_Evol_Dia]), "#F0F2F8", [UPT_Evol_Dia] >= 0, "#EBF5EE", [UPT_Evol_Dia] >= -0.10, "#FDF4CF", "#FCEAEA")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000012
+
+	measure Bg_Conv_Anio = SWITCH(TRUE(), ISBLANK([Conv_Evol_Anio]), "#F0F2F8", [Conv_Evol_Anio] >= 0, "#EBF5EE", [Conv_Evol_Anio] >= -0.10, "#FDF4CF", "#FCEAEA")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000013
+
+	measure Bg_Conv_Mes = SWITCH(TRUE(), ISBLANK([Conv_Evol_Mes]), "#F0F2F8", [Conv_Evol_Mes] >= 0, "#EBF5EE", [Conv_Evol_Mes] >= -0.10, "#FDF4CF", "#FCEAEA")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000014
+
+	measure Bg_Conv_Sem = SWITCH(TRUE(), ISBLANK([Conv_Evol_Sem]), "#F0F2F8", [Conv_Evol_Sem] >= 0, "#EBF5EE", [Conv_Evol_Sem] >= -0.10, "#FDF4CF", "#FCEAEA")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000015
+
+	measure Bg_Conv_Dia = SWITCH(TRUE(), ISBLANK([Conv_Evol_Dia]), "#F0F2F8", [Conv_Evol_Dia] >= 0, "#EBF5EE", [Conv_Evol_Dia] >= -0.10, "#FDF4CF", "#FCEAEA")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000016
+
+	measure Color_Evol_TM = SWITCH(TRUE(), ISBLANK([PromedioVentaTransaccion_Var_%]), "#8089A2", [PromedioVentaTransaccion_Var_%] >= 0, "#1F8A5B", [PromedioVentaTransaccion_Var_%] >= -0.10, "#B57A0E", "#C73838")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000017
+
+	measure Bg_Evol_TM = SWITCH(TRUE(), ISBLANK([PromedioVentaTransaccion_Var_%]), "#F0F2F8", [PromedioVentaTransaccion_Var_%] >= 0, "#EBF5EE", [PromedioVentaTransaccion_Var_%] >= -0.10, "#FDF4CF", "#FCEAEA")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000018
+
+	measure Color_Evol_UPT = SWITCH(TRUE(), ISBLANK([UPT_Var_%]), "#8089A2", [UPT_Var_%] >= 0, "#1F8A5B", [UPT_Var_%] >= -0.10, "#B57A0E", "#C73838")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000019
+
+	measure Bg_Evol_UPT = SWITCH(TRUE(), ISBLANK([UPT_Var_%]), "#F0F2F8", [UPT_Var_%] >= 0, "#EBF5EE", [UPT_Var_%] >= -0.10, "#FDF4CF", "#FCEAEA")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000020
+
+	measure Color_Evol_Conv = SWITCH(TRUE(), ISBLANK([Tasa_Conversion_YTD_Var]), "#8089A2", [Tasa_Conversion_YTD_Var] >= 0, "#1F8A5B", [Tasa_Conversion_YTD_Var] >= -3, "#B57A0E", "#C73838")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000021
+
+	measure Bg_Evol_Conv = SWITCH(TRUE(), ISBLANK([Tasa_Conversion_YTD_Var]), "#F0F2F8", [Tasa_Conversion_YTD_Var] >= 0, "#EBF5EE", [Tasa_Conversion_YTD_Var] >= -3, "#FDF4CF", "#FCEAEA")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000022
+
+	measure Bg_Evol_VN = SWITCH(TRUE(), ISBLANK([Ventas_YTD_Var_%]), "#F0F2F8", [Ventas_YTD_Var_%] >= 0, "#EBF5EE", [Ventas_YTD_Var_%] >= -0.10, "#FDF4CF", "#FCEAEA")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000023
+
+	measure Bg_Evol_OBJ = SWITCH(TRUE(), ISBLANK([EvolucionObjetivo_%]), "#F0F2F8", [EvolucionObjetivo_%] >= 0, "#EBF5EE", [EvolucionObjetivo_%] >= -0.10, "#FDF4CF", "#FCEAEA")
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000024
+
+	column Column
+		formatString: 0
+		lineageTag: c1d2e3f4-a5b6-7890-cdef-012345678902
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MedidasDesempeño = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = c1d2e3f4a5b678901234567890abcdef
+
