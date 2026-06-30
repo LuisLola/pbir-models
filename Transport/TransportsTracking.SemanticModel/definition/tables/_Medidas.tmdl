@@ -245,6 +245,26 @@ table _Medidas
 			VAR p5 = NOT ISBLANK ( d5 )
 			VAR dInc = MAX ( LOL_TRANSPORT_TRACKING[fecha_incidencia] )
 			VAR pInc = NOT ISBLANK ( dInc )
+			VAR dRec = MAX ( LOL_TRANSPORT_TRACKING[fecha_recogido] )
+			VAR pRecv = NOT ISBLANK ( dRec )
+			VAR dAge = MAX ( LOL_TRANSPORT_TRACKING[fecha_agencia_destino] )
+			VAR pAgev = NOT ISBLANK ( dAge )
+			VAR dPen = MAX ( LOL_TRANSPORT_TRACKING[fecha_pendiente_llegada] )
+			VAR pPenv = NOT ISBLANK ( dPen )
+			VAR dDev = MAX ( LOL_TRANSPORT_TRACKING[fecha_devuelto] )
+			VAR pDev = NOT ISBLANK ( dDev )
+			VAR dFal = MAX ( LOL_TRANSPORT_TRACKING[fecha_falta_definitiva] )
+			VAR pFal = NOT ISBLANK ( dFal )
+			VAR vSeg = SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[segmento] )
+			VAR vCodCli = SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[codigo_cliente] )
+			VAR vPrev = MAX ( LOL_TRANSPORT_TRACKING[fecha_entrega_prevista] )
+			VAR vSla = MAX ( LOL_TRANSPORT_TRACKING[sla_objetivo] )
+			VAR _aTiempo = IF ( NOT ISBLANK ( vDias ) && NOT ISBLANK ( vSla ), IF ( vDias <= vSla, "A tiempo", "Fuera de SLA" ) )
+			VAR gRec = VAR pv = COALESCE ( d2, d1 ) RETURN IF ( pRecv && NOT ISBLANK ( pv ), DATEDIFF ( pv, dRec, MINUTE ) / 1440.0 )
+			VAR gAge = VAR pv = COALESCE ( d3, dRec, d2, d1 ) RETURN IF ( pAgev && NOT ISBLANK ( pv ), DATEDIFF ( pv, dAge, MINUTE ) / 1440.0 )
+			VAR gPen = VAR pv = COALESCE ( dAge, d3, dRec, d2, d1 ) RETURN IF ( pPenv && NOT ISBLANK ( pv ), DATEDIFF ( pv, dPen, MINUTE ) / 1440.0 )
+			VAR gDev = VAR pv = COALESCE ( d5, d4, d3, d2, d1 ) RETURN IF ( pDev && NOT ISBLANK ( pv ), DATEDIFF ( pv, dDev, MINUTE ) / 1440.0 )
+			VAR gFal = VAR pv = COALESCE ( d5, d4, d3, d2, d1 ) RETURN IF ( pFal && NOT ISBLANK ( pv ), DATEDIFF ( pv, dFal, MINUTE ) / 1440.0 )
 			VAR lastIdx = IF ( p5, 5, IF ( p4, 4, IF ( p3, 3, IF ( p2, 2, IF ( p1, 1, 0 ) ) ) ) )
 			VAR g2 = IF ( p2 && p1, DATEDIFF ( d1, d2, MINUTE ) / 1440.0 )
 			VAR g3 = VAR pv = COALESCE ( d2, d1 ) RETURN IF ( p3 && NOT ISBLANK ( pv ), DATEDIFF ( pv, d3, MINUTE ) / 1440.0 )
@@ -260,7 +280,11 @@ table _Medidas
 				"<div style='width:50%;box-sizing:border-box;padding:0 8px 5px 0;'><div style='font-size:8px;text-transform:uppercase;letter-spacing:.03em;color:#9A93A0;font-weight:700;'>Destino</div><div style='font-size:11px;color:#1B141F;font-weight:600;margin-top:1px;'>" & _destino & "</div></div>" &
 				"<div style='width:50%;box-sizing:border-box;padding:0 8px 5px 0;'><div style='font-size:8px;text-transform:uppercase;letter-spacing:.03em;color:#9A93A0;font-weight:700;'>Tracking</div><div style='font-size:10px;color:#1B141F;font-weight:600;margin-top:1px;word-break:break-all;" & _mono & "'>" & COALESCE ( vTrack, "&mdash;" ) & "</div></div>" &
 				"<div style='width:50%;box-sizing:border-box;padding:0 10px 0 0;'><div style='font-size:8px;text-transform:uppercase;letter-spacing:.03em;color:#9A93A0;font-weight:700;'>Estado</div><div style='margin-top:4px;'><span style='display:inline-block;font-size:9.5px;font-weight:600;background:#F5EEF4;color:#1B141F;padding:2px 8px;border-radius:6px;'>" & COALESCE ( vEstado, "&mdash;" ) & "</span></div></div>" &
-				"<div style='width:50%;box-sizing:border-box;padding:0 10px 0 0;'><div style='font-size:8px;text-transform:uppercase;letter-spacing:.03em;color:#9A93A0;font-weight:700;'>Tiempo total</div><div style='font-size:11px;color:#1B141F;font-weight:600;margin-top:1px;" & _mono & "'>" & IF ( ISBLANK ( vDias ), "&mdash;", FORMAT ( vDias, "0.0", "es-ES" ) & " d&iacute;as h&aacute;b." ) & "</div></div>" &
+				"<div style='width:50%;box-sizing:border-box;padding:0 10px 0 0;'><div style='font-size:8px;text-transform:uppercase;letter-spacing:.03em;color:#9A93A0;font-weight:700;'>Tiempo total</div><div style='font-size:11px;color:#1B141F;font-weight:600;margin-top:1px;" & _mono & "'>" & IF ( ISBLANK ( vDias ), "&mdash;", FORMAT ( vDias, "0", "es-ES" ) & " d&iacute;a" & IF ( vDias = 1, "", "s" ) & " h&aacute;b." ) & "</div></div>" &
+				"<div style='width:50%;box-sizing:border-box;padding:0 8px 5px 0;'><div style='font-size:8px;text-transform:uppercase;letter-spacing:.03em;color:#9A93A0;font-weight:700;'>Segmento</div><div style='font-size:11px;color:#1B141F;font-weight:600;margin-top:1px;'>" & COALESCE ( vSeg, "&mdash;" ) & "</div></div>" &
+				"<div style='width:50%;box-sizing:border-box;padding:0 8px 5px 0;'><div style='font-size:8px;text-transform:uppercase;letter-spacing:.03em;color:#9A93A0;font-weight:700;'>C&oacute;digo cliente</div><div style='font-size:11px;color:#1B141F;font-weight:600;margin-top:1px;" & _mono & "'>" & COALESCE ( vCodCli, "&mdash;" ) & "</div></div>" &
+				"<div style='width:50%;box-sizing:border-box;padding:0 8px 5px 0;'><div style='font-size:8px;text-transform:uppercase;letter-spacing:.03em;color:#9A93A0;font-weight:700;'>Entrega prevista</div><div style='font-size:11px;color:#1B141F;font-weight:600;margin-top:1px;" & _mono & "'>" & IF ( ISBLANK ( vPrev ), "&mdash;", FORMAT ( vPrev, "d mmm yyyy", "es-ES" ) ) & "</div></div>" &
+				"<div style='width:50%;box-sizing:border-box;padding:0 8px 5px 0;'><div style='font-size:8px;text-transform:uppercase;letter-spacing:.03em;color:#9A93A0;font-weight:700;'>SLA</div><div style='font-size:11px;font-weight:600;margin-top:1px;'>" & IF ( ISBLANK ( _aTiempo ), "<span style='color:#9A93A0;'>objetivo " & FORMAT ( vSla, "0" ) & "d</span>", "<span style='color:" & IF ( _aTiempo = "A tiempo", "#1B141F", "#B5638F" ) & ";'>" & _aTiempo & " &middot; objetivo " & FORMAT ( vSla, "0" ) & "d</span>" ) & "</div></div>" &
 				"</div>"
 			VAR _hdr =
 				"<div style='background:#FFFFFF;border:1px solid #E7DCE6;border-radius:12px;padding:10px 12px;box-shadow:0 6px 20px -14px rgba(27,20,31,.25);'>" &
@@ -310,10 +334,50 @@ table _Medidas
 					"<div style='font-size:11.5px;font-weight:700;color:#B5638F;'>&#9888; Incidencia</div>" &
 					"<div style='font-size:10px;color:#6B6470;margin-top:0;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( dInc, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( dInc, "HH:mm" ) & "</div></li>",
 					"" )
+			VAR _rowRec =
+				IF ( pRecv,
+					"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
+					"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;background:#FFFFFF;border:2px solid #DFA0C9;'></span>" &
+					"<div style='font-size:11.5px;font-weight:600;color:#1B141F;'>Recogido</div>" &
+					"<div style='font-size:10px;color:#6B6470;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( dRec, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( dRec, "HH:mm" ) & "</div>" &
+					IF ( NOT ISBLANK ( gRec ) && gRec >= 0, "<div style='display:inline-block;margin-left:7px;vertical-align:middle;font-size:8.5px;font-weight:600;color:#9A93A0;background:#F5EEF4;padding:1px 6px;border-radius:4px;" & _mono & "'>+" & FORMAT ( gRec, "0.0", "es-ES" ) & "d</div>", "" ) & "</li>",
+					"" )
+			VAR _rowAge =
+				IF ( pAgev,
+					"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
+					"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;background:#FFFFFF;border:2px solid #DFA0C9;'></span>" &
+					"<div style='font-size:11.5px;font-weight:600;color:#1B141F;'>En agencia destino</div>" &
+					"<div style='font-size:10px;color:#6B6470;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( dAge, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( dAge, "HH:mm" ) & "</div>" &
+					IF ( NOT ISBLANK ( gAge ) && gAge >= 0, "<div style='display:inline-block;margin-left:7px;vertical-align:middle;font-size:8.5px;font-weight:600;color:#9A93A0;background:#F5EEF4;padding:1px 6px;border-radius:4px;" & _mono & "'>+" & FORMAT ( gAge, "0.0", "es-ES" ) & "d</div>", "" ) & "</li>",
+					"" )
+			VAR _rowPen =
+				IF ( pPenv,
+					"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
+					"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;background:#FFFFFF;border:2px solid #DFA0C9;'></span>" &
+					"<div style='font-size:11.5px;font-weight:600;color:#1B141F;'>Pendiente de llegada</div>" &
+					"<div style='font-size:10px;color:#6B6470;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( dPen, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( dPen, "HH:mm" ) & "</div>" &
+					IF ( NOT ISBLANK ( gPen ) && gPen >= 0, "<div style='display:inline-block;margin-left:7px;vertical-align:middle;font-size:8.5px;font-weight:600;color:#9A93A0;background:#F5EEF4;padding:1px 6px;border-radius:4px;" & _mono & "'>+" & FORMAT ( gPen, "0.0", "es-ES" ) & "d</div>", "" ) & "</li>",
+					"" )
+			VAR _rowDev =
+				IF ( pDev,
+					"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
+					"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;background:#B5638F;border:2px solid #B5638F;'></span>" &
+					"<div style='font-size:11.5px;font-weight:700;color:#B5638F;'>Devuelto</div>" &
+					"<div style='font-size:10px;color:#6B6470;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( dDev, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( dDev, "HH:mm" ) & "</div>" &
+					IF ( NOT ISBLANK ( gDev ) && gDev >= 0, "<div style='display:inline-block;margin-left:7px;vertical-align:middle;font-size:8.5px;font-weight:600;color:#9A93A0;background:#F5EEF4;padding:1px 6px;border-radius:4px;" & _mono & "'>+" & FORMAT ( gDev, "0.0", "es-ES" ) & "d</div>", "" ) & "</li>",
+					"" )
+			VAR _rowFal =
+				IF ( pFal,
+					"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
+					"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;background:#B5638F;border:2px solid #B5638F;'></span>" &
+					"<div style='font-size:11.5px;font-weight:700;color:#B5638F;'>Falta definitiva</div>" &
+					"<div style='font-size:10px;color:#6B6470;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( dFal, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( dFal, "HH:mm" ) & "</div>" &
+					IF ( NOT ISBLANK ( gFal ) && gFal >= 0, "<div style='display:inline-block;margin-left:7px;vertical-align:middle;font-size:8.5px;font-weight:600;color:#9A93A0;background:#F5EEF4;padding:1px 6px;border-radius:4px;" & _mono & "'>+" & FORMAT ( gFal, "0.0", "es-ES" ) & "d</div>", "" ) & "</li>",
+					"" )
 			VAR _tl =
 				"<div style='margin-top:7px;'>" &
 				"<div style='font-size:8.5px;text-transform:uppercase;letter-spacing:.06em;color:#6B6470;font-weight:700;margin:0 0 6px 2px;'>L&iacute;nea de tiempo</div>" &
-				"<ul style='list-style:none;margin:0;padding:0 0 0 6px;'>" & _row1 & _row2 & _row3 & _row4 & _rowInc & _row5 & "</ul></div>"
+				"<ul style='list-style:none;margin:0;padding:0 0 0 6px;'>" & _row1 & _row2 & _rowRec & _row3 & _rowAge & _rowPen & _row4 & _rowInc & _row5 & _rowDev & _rowFal & "</ul></div>"
 			RETURN
 				IF ( ISBLANK ( vAlb ) && ISBLANK ( vTrack ),
 					"<div style='" & _font & "color:#9A93A0;font-size:12px;padding:16px;'>Pasa el rat&oacute;n por un env&iacute;o para ver su detalle.</div>",

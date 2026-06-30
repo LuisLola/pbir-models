@@ -406,7 +406,7 @@ table LOL_TRANSPORT_TRACKING
 			VAR s = LOL_TRANSPORT_TRACKING[f_inicio]
 			VAR e = LOL_TRANSPORT_TRACKING[fecha_entregado]
 			VAR eD = IF ( ISBLANK ( e ), BLANK (), DATE ( YEAR ( e ), MONTH ( e ), DAY ( e ) ) )
-			RETURN IF ( NOT ISBLANK ( eD ) && NOT ISBLANK ( s ) && eD >= s && DATEDIFF ( s, eD, DAY ) < 60, DATEDIFF ( s, eD, DAY ) )
+			RETURN IF ( NOT ISBLANK ( eD ) && NOT ISBLANK ( s ) && eD >= s && DATEDIFF ( s, eD, DAY ) < 60, MAX ( DATEDIFF ( s, eD, DAY ), 1 ) )
 		dataType: int64
 		formatString: 0
 		lineageTag: d1c00000-0000-4000-8000-000000000006
@@ -421,14 +421,17 @@ table LOL_TRANSPORT_TRACKING
 			RETURN
 			    IF (
 			        NOT ISBLANK ( eD ) && NOT ISBLANK ( s ) && eD >= s && DATEDIFF ( s, eD, DAY ) < 60,
-			        COALESCE (
-			            CALCULATE (
-			                COUNTROWS ( Calendario ),
-			                DATESBETWEEN ( Calendario[Date], s, eD - 1 ),
-			                Calendario[EsLaborable] = 1,
-			                Calendario[EsFestivo] = 0
+			        MAX (
+			            COALESCE (
+			                CALCULATE (
+			                    COUNTROWS ( Calendario ),
+			                    DATESBETWEEN ( Calendario[Date], s, eD - 1 ),
+			                    Calendario[EsLaborable] = 1,
+			                    Calendario[EsFestivo] = 0
+			                ),
+			                0
 			            ),
-			            0
+			            1
 			        )
 			    )
 		dataType: int64
