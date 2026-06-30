@@ -19,11 +19,13 @@ El repo está organizado por **modelo/área**, y dividido en **ramas git** (camb
 |---|---|---:|---|
 | **TransportsTracking** | [Transport/](../Transport/) | 32 | [Transport-TransportsTracking.md](Transport-TransportsTracking.md) |
 | **B2BSalesOrder** | [SalesOrder/](../SalesOrder/) | 76 | [SalesOrder-B2BSalesOrder.md](SalesOrder-B2BSalesOrder.md) |
+| **SgiRetail** | [SgiRetail/](../SgiRetail/) | 238 | `docs/SgiRetail-SgiRetail.md` — **en la rama `sgiretail`** (junto a su modelo) |
+
+> **SgiRetail** se documenta en su propia rama (`sgiretail`), donde reside la definición del modelo y los enlaces resuelven. Para verla: `git checkout sgiretail` y abrir `docs/SgiRetail-SgiRetail.md`.
 
 ## Pendiente de documentar
 
-- **SgiRetail** — su definición de modelo vive en la rama `sgiretail` (en otras ramas solo quedan `.pbi/` y caché). Para documentarlo hay que hacer checkout de esa rama.
-- **Compras**, **Finanzas** — carpetas presentes pero sin definición de modelo en la rama `transport`.
+- **Compras**, **Finanzas** — carpetas presentes pero sin definición de modelo en ninguna rama analizada.
 
 ## Convenciones
 
