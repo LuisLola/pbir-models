@@ -8,7 +8,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["LOL_TRANSPORT_TRACKING"]
+annotation PBI_QueryOrder = ["LOL_TRANSPORT_TRACKING","Festivos"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
@@ -27,6 +27,11 @@ ref table LocalDateTable_d25146c2-e15b-4b8d-8538-260459284525
 ref table LocalDateTable_28c0f053-da3f-49bd-8fae-65fa9f84c195
 ref table LocalDateTable_5b7aa76b-4927-48e7-8c2f-7d79fc2c7ba4
 ref table LocalDateTable_28a3eb52-281b-43d9-8a69-4bab0e291cf6
+ref table Calendario
+ref table Festivos
+ref table 'SLA Días'
+ref table _Medidas
+ref table LocalDateTable_7185ac49-e3c7-4dd9-8fde-444fceb76651
 
 ref cultureInfo es-ES
 

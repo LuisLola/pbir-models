@@ -1,0 +1,318 @@
+table _Medidas
+	lineageTag: d1ed0000-0000-4000-8000-0000000000e1
+
+	measure 'Envios Totales' = COUNTROWS ( LOL_TRANSPORT_TRACKING )
+		formatString: #,0
+		displayFolder: 1 Volumen
+		lineageTag: d1ed0000-0000-4000-8000-0000000000e2
+
+	/// Envíos con seguimiento válido = total excluyendo "Error de tracking" y "Lanzado/Sin estado".
+	/// Denominador de las tasas operativas para que no las diluyan los envíos sin datos.
+	measure 'Envios Operativos' = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), LOL_TRANSPORT_TRACKING[es_operativo] = 1 )
+		formatString: #,0
+		displayFolder: 1 Volumen
+		lineageTag: d1ed0000-0000-4000-8000-000000000201
+
+	measure Entregados = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), LOL_TRANSPORT_TRACKING[es_entregado] = 1 )
+		formatString: #,0
+		displayFolder: 2 Entrega
+		lineageTag: d1ed0000-0000-4000-8000-0000000000e3
+
+	measure '% Entregados' = DIVIDE ( [Entregados], [Envios Operativos] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 2 Entrega
+		lineageTag: d1ed0000-0000-4000-8000-0000000000e4
+
+	measure 'En Reparto' = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), LOL_TRANSPORT_TRACKING[estado_norm] = "En reparto" )
+		formatString: #,0
+		displayFolder: 1 Volumen
+		lineageTag: d1ed0000-0000-4000-8000-0000000000e5
+
+	measure 'En Transito' = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), LOL_TRANSPORT_TRACKING[estado_norm] = "En tránsito" )
+		formatString: #,0
+		displayFolder: 1 Volumen
+		lineageTag: d1ed0000-0000-4000-8000-0000000000e6
+
+	/// Envíos activos en la red (en tránsito + reparto + agencia destino + recogido + etiqueta).
+	measure 'En Curso' = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), LOL_TRANSPORT_TRACKING[es_en_curso] = 1 )
+		formatString: #,0
+		displayFolder: 1 Volumen
+		lineageTag: d1ed0000-0000-4000-8000-000000000202
+
+	measure 'En Agencia Destino' = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), LOL_TRANSPORT_TRACKING[estado_norm] = "En agencia destino" )
+		formatString: #,0
+		displayFolder: 1 Volumen
+		lineageTag: d1ed0000-0000-4000-8000-000000000203
+
+	/// Envíos cuyo seguimiento falló (estado "Error"): existen pero sin datos de ciclo de vida.
+	measure 'Errores Tracking' = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), LOL_TRANSPORT_TRACKING[es_error_tracking] = 1 )
+		formatString: #,0
+		displayFolder: 1 Volumen
+		lineageTag: d1ed0000-0000-4000-8000-000000000204
+
+	/// % de envíos con seguimiento válido sobre el total (KPI de calidad del dato).
+	measure '% Cobertura Seguimiento' = DIVIDE ( [Envios Operativos], [Envios Totales] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 1 Volumen
+		lineageTag: d1ed0000-0000-4000-8000-000000000205
+
+	measure 'SLA Valor' = SELECTEDVALUE ( 'SLA Días'[SLA Días], 3 )
+		formatString: 0
+		displayFolder: 3 Tiempo
+		lineageTag: d1ed0000-0000-4000-8000-0000000000e7
+
+	measure 'Envios Con Tiempo Lab' = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), NOT ISBLANK ( LOL_TRANSPORT_TRACKING[dias_entrega_laborables] ) )
+		formatString: #,0
+		displayFolder: 3 Tiempo
+		lineageTag: d1ed0000-0000-4000-8000-0000000000e8
+
+	measure 'Tiempo Entrega Mediana (Lab)' = MEDIANX ( FILTER ( LOL_TRANSPORT_TRACKING, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[dias_entrega_laborables] ) ), LOL_TRANSPORT_TRACKING[dias_entrega_laborables] )
+		formatString: 0.0
+		displayFolder: 3 Tiempo
+		lineageTag: d1ed0000-0000-4000-8000-0000000000e9
+
+	measure 'Tiempo Entrega Media (Lab)' = AVERAGEX ( FILTER ( LOL_TRANSPORT_TRACKING, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[dias_entrega_laborables] ) ), LOL_TRANSPORT_TRACKING[dias_entrega_laborables] )
+		formatString: 0.0
+		displayFolder: 3 Tiempo
+		lineageTag: d1ed0000-0000-4000-8000-0000000000ea
+
+	measure 'Tiempo Entrega P90 (Lab)' = PERCENTILEX.INC ( FILTER ( LOL_TRANSPORT_TRACKING, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[dias_entrega_laborables] ) ), LOL_TRANSPORT_TRACKING[dias_entrega_laborables], 0.9 )
+		formatString: 0.0
+		displayFolder: 3 Tiempo
+		lineageTag: d1ed0000-0000-4000-8000-0000000000eb
+
+	measure 'Tiempo Entrega Mediana (Nat)' = MEDIANX ( FILTER ( LOL_TRANSPORT_TRACKING, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[dias_entrega_natural] ) ), LOL_TRANSPORT_TRACKING[dias_entrega_natural] )
+		formatString: 0.0
+		displayFolder: 3 Tiempo
+		lineageTag: d1ed0000-0000-4000-8000-0000000000ec
+
+	measure 'A Tiempo' =
+			CALCULATE (
+			    COUNTROWS ( LOL_TRANSPORT_TRACKING ),
+			    FILTER (
+			        LOL_TRANSPORT_TRACKING,
+			        NOT ISBLANK ( LOL_TRANSPORT_TRACKING[dias_entrega_laborables] )
+			            && LOL_TRANSPORT_TRACKING[dias_entrega_laborables] <= LOL_TRANSPORT_TRACKING[sla_objetivo]
+			    )
+			)
+		formatString: #,0
+		displayFolder: 3 Tiempo
+		lineageTag: d1ed0000-0000-4000-8000-0000000000ed
+
+	measure '% A Tiempo' = DIVIDE ( [A Tiempo], [Envios Con Tiempo Lab] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 3 Tiempo
+		lineageTag: d1ed0000-0000-4000-8000-0000000000ee
+
+	measure 'Incidencias Bloqueantes' = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), LOL_TRANSPORT_TRACKING[es_incidencia_bloqueante] = 1 )
+		formatString: #,0
+		displayFolder: 4 Incidencias
+		lineageTag: d1ed0000-0000-4000-8000-0000000000ef
+
+	measure 'Tasa Incidencias' = DIVIDE ( [Incidencias Bloqueantes], [Envios Operativos] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 4 Incidencias
+		lineageTag: d1ed0000-0000-4000-8000-0000000000f0
+
+	measure Devueltos = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), LOL_TRANSPORT_TRACKING[es_devuelto] = 1 )
+		formatString: #,0
+		displayFolder: 4 Incidencias
+		lineageTag: d1ed0000-0000-4000-8000-0000000000f1
+
+	measure 'Tasa Devoluciones' = DIVIDE ( [Devueltos], [Envios Operativos] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 4 Incidencias
+		lineageTag: d1ed0000-0000-4000-8000-0000000000f2
+
+	measure 'Clientes Unicos' = DISTINCTCOUNT ( LOL_TRANSPORT_TRACKING[codigo_cliente] )
+		formatString: #,0
+		displayFolder: 5 Cliente
+		lineageTag: d1ed0000-0000-4000-8000-0000000000f3
+
+	measure 'Fase Lanz-Transito' = MEDIANX ( FILTER ( LOL_TRANSPORT_TRACKING, LOL_TRANSPORT_TRACKING[es_entregado] = 1 && LOL_TRANSPORT_TRACKING[dur_lanz_transito] >= 0 ), LOL_TRANSPORT_TRACKING[dur_lanz_transito] )
+		formatString: 0.0
+		displayFolder: 6 Fases
+		lineageTag: d1ed0000-0000-4000-8000-0000000000f4
+
+	measure 'Fase Transito-Reparto' = MEDIANX ( FILTER ( LOL_TRANSPORT_TRACKING, LOL_TRANSPORT_TRACKING[es_entregado] = 1 && LOL_TRANSPORT_TRACKING[dur_transito_reparto] >= 0 ), LOL_TRANSPORT_TRACKING[dur_transito_reparto] )
+		formatString: 0.0
+		displayFolder: 6 Fases
+		lineageTag: d1ed0000-0000-4000-8000-0000000000f5
+
+	measure 'Fase Reparto-Entrega' = MEDIANX ( FILTER ( LOL_TRANSPORT_TRACKING, LOL_TRANSPORT_TRACKING[es_entregado] = 1 && LOL_TRANSPORT_TRACKING[dur_reparto_entrega] >= 0 ), LOL_TRANSPORT_TRACKING[dur_reparto_entrega] )
+		formatString: 0.0
+		displayFolder: 6 Fases
+		lineageTag: d1ed0000-0000-4000-8000-0000000000f6
+
+	measure 'HTML Fila KPIs' =
+			VAR vEnv = [Envios Totales]
+			VAR vEnt = [Entregados]
+			VAR vEntPct = [% Entregados]
+			VAR vMed = [Tiempo Entrega Mediana (Lab)]
+			VAR vMean = [Tiempo Entrega Media (Lab)]
+			VAR vP90 = [Tiempo Entrega P90 (Lab)]
+			VAR vOT = [% A Tiempo]
+			VAR vSLA = [SLA Valor]
+			VAR vInc = [Tasa Incidencias]
+			VAR vIncN = [Incidencias Bloqueantes]
+			VAR vDevN = [Devueltos]
+			VAR vDevPct = [Tasa Devoluciones]
+			VAR _c1 = "<div style='flex:1 1 150px;min-width:140px;background:#FFFFFF;border:1px solid #E7DCE6;border-left:3px solid #DFA0C9;border-radius:14px;padding:12px 14px;box-shadow:0 6px 20px -14px rgba(27,20,31,.25);'><div style='font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#6B6470;'>Env&iacute;os totales</div><div style='font-size:24px;font-weight:700;color:#1B141F;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;margin-top:4px;'>" & FORMAT ( vEnv, "#,0", "es-ES" ) & "</div><div style='font-size:11px;color:#9A93A0;margin-top:2px;'>en el periodo seleccionado</div></div>"
+			VAR _c2 = "<div style='flex:1 1 150px;min-width:140px;background:#FFFFFF;border:1px solid #E7DCE6;border-left:3px solid #DFA0C9;border-radius:14px;padding:12px 14px;box-shadow:0 6px 20px -14px rgba(27,20,31,.25);'><div style='font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#6B6470;'>% Entregados</div><div style='font-size:24px;font-weight:700;color:#1B141F;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;margin-top:4px;'>" & FORMAT ( vEntPct, "0.0%", "es-ES" ) & "</div><div style='font-size:11px;color:#9A93A0;margin-top:2px;'>" & FORMAT ( vEnt, "#,0", "es-ES" ) & " entregados</div></div>"
+			VAR _c3 = "<div style='flex:1 1 150px;min-width:140px;background:#FFFFFF;border:1px solid #E7DCE6;border-left:3px solid #DFA0C9;border-radius:14px;padding:12px 14px;box-shadow:0 6px 20px -14px rgba(27,20,31,.25);'><div style='font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#6B6470;'>Tiempo entrega</div><div style='font-size:24px;font-weight:700;color:#1B141F;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;margin-top:4px;'>" & FORMAT ( vMed, "0.0", "es-ES" ) & "<span style='font-size:12px;font-weight:600;color:#6B6470;'> d&iacute;as h&aacute;b.</span></div><div style='font-size:11px;color:#9A93A0;margin-top:2px;'>media " & FORMAT ( vMean, "0.0", "es-ES" ) & " &middot; P90 " & FORMAT ( vP90, "0.0", "es-ES" ) & "</div></div>"
+			VAR _c4 = "<div style='flex:1 1 150px;min-width:140px;background:#FFFFFF;border:1px solid #E7DCE6;border-left:3px solid #DFA0C9;border-radius:14px;padding:12px 14px;box-shadow:0 6px 20px -14px rgba(27,20,31,.25);'><div style='font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#6B6470;'>% A tiempo</div><div style='font-size:24px;font-weight:700;color:#1B141F;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;margin-top:4px;'>" & FORMAT ( vOT, "0.0%", "es-ES" ) & "</div><div style='font-size:11px;color:#9A93A0;margin-top:2px;'>&le; " & FORMAT ( vSLA, "0", "es-ES" ) & " d&iacute;as h&aacute;b.</div></div>"
+			VAR _c5 = "<div style='flex:1 1 150px;min-width:140px;background:#FFFFFF;border:1px solid #E7DCE6;border-left:3px solid #B5638F;border-radius:14px;padding:12px 14px;box-shadow:0 6px 20px -14px rgba(27,20,31,.25);'><div style='font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#6B6470;'>Tasa incidencias</div><div style='font-size:24px;font-weight:700;color:#B5638F;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;margin-top:4px;'>" & FORMAT ( vInc, "0.0%", "es-ES" ) & "</div><div style='font-size:11px;color:#9A93A0;margin-top:2px;'>" & FORMAT ( vIncN, "#,0", "es-ES" ) & " bloqueantes</div></div>"
+			VAR _c6 = "<div style='flex:1 1 150px;min-width:140px;background:#FFFFFF;border:1px solid #E7DCE6;border-left:3px solid #DFA0C9;border-radius:14px;padding:12px 14px;box-shadow:0 6px 20px -14px rgba(27,20,31,.25);'><div style='font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#6B6470;'>Devoluciones</div><div style='font-size:24px;font-weight:700;color:#1B141F;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;margin-top:4px;'>" & FORMAT ( vDevN, "#,0", "es-ES" ) & "</div><div style='font-size:11px;color:#9A93A0;margin-top:2px;'>" & FORMAT ( vDevPct, "0.0%", "es-ES" ) & " del total</div></div>"
+			RETURN "<div style='font-family:Segoe UI,system-ui,sans-serif;display:flex;flex-wrap:wrap;gap:10px;'>" & _c1 & _c2 & _c3 & _c4 & _c5 & _c6 & "</div>"
+		displayFolder: 9 HTML
+		lineageTag: d1ed0000-0000-4000-8000-000000000101
+
+	measure 'HTML Tabla Transportistas' =
+			VAR t = ADDCOLUMNS ( SUMMARIZE ( LOL_TRANSPORT_TRACKING, LOL_TRANSPORT_TRACKING[transportista_norm] ), "@vol", [Envios Totales], "@med", [Tiempo Entrega Mediana (Lab)], "@ot", [% A Tiempo], "@inc", [Tasa Incidencias] )
+			VAR maxVol = MAXX ( t, [@vol] )
+			VAR filas = CONCATENATEX ( TOPN ( 8, t, [@vol] ), "<tr><td style='padding:8px 10px;font-weight:600;color:#1B141F;'>" & LOL_TRANSPORT_TRACKING[transportista_norm] & "</td><td style='padding:8px 10px;'><div style='background:#F0E3EE;height:8px;border-radius:5px;'><div style='background:#DFA0C9;height:8px;border-radius:5px;width:" & FORMAT ( DIVIDE ( [@vol], maxVol ) * 100, "0", "es-ES" ) & "%;'></div></div></td><td style='padding:8px 10px;text-align:right;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;'>" & FORMAT ( [@vol], "#,0", "es-ES" ) & "</td><td style='padding:8px 10px;text-align:right;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;'>" & IF ( ISBLANK ( [@med] ), "&mdash;", FORMAT ( [@med], "0.0", "es-ES" ) & "d" ) & "</td><td style='padding:8px 10px;text-align:right;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;'>" & FORMAT ( [@ot], "0.0%", "es-ES" ) & "</td><td style='padding:8px 10px;text-align:right;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;color:" & IF ( [@inc] > 0.05, "#B5638F", "#1B141F" ) & ";'>" & FORMAT ( [@inc], "0.0%", "es-ES" ) & "</td></tr>", "", [@vol], DESC )
+			RETURN "<div style='font-family:Segoe UI,system-ui,sans-serif;color:#1B141F;background:#FFFFFF;border:1px solid #E7DCE6;border-radius:14px;padding:14px 16px;box-shadow:0 6px 20px -14px rgba(27,20,31,.25);'><div style='font-size:14px;font-weight:700;margin-bottom:8px;'>Transportistas <span style='color:#9A93A0;font-weight:400;'>&middot; Top 8 por volumen</span></div><table style='width:100%;border-collapse:collapse;font-size:13px;'><thead><tr style='color:#6B6470;font-size:11px;text-transform:uppercase;text-align:left;'><th style='padding:8px 10px;'>Transportista</th><th style='padding:8px 10px;'>Volumen</th><th style='padding:8px 10px;text-align:right;'>Mediana</th><th style='padding:8px 10px;text-align:right;'>A tiempo</th><th style='padding:8px 10px;text-align:right;'>Incid.</th></tr></thead><tbody>" & filas & "</tbody></table></div>"
+		displayFolder: 9 HTML
+		lineageTag: d1ed0000-0000-4000-8000-000000000102
+
+	measure 'HTML Comparativa Segmento' =
+			VAR seg0 = ADDCOLUMNS ( SUMMARIZE ( LOL_TRANSPORT_TRACKING, LOL_TRANSPORT_TRACKING[segmento] ), "@vol", [Envios Totales], "@cli", [Clientes Unicos], "@entpct", [% Entregados], "@med", [Tiempo Entrega Mediana (Lab)], "@ot", [% A Tiempo], "@inc", [Tasa Incidencias], "@dev", [Tasa Devoluciones] )
+			VAR seg = ADDCOLUMNS ( seg0, "@rk", RANKX ( seg0, [@vol],, DESC ) )
+			VAR tot = SUMX ( seg, [@vol] )
+			VAR barra = CONCATENATEX ( seg, "<div style='width:" & FORMAT ( DIVIDE ( [@vol], tot ) * 100, "0", "es-ES" ) & "%;background:" & SWITCH ( [@rk], 1, "#DFA0C9", 2, "#C77FA8", "#9A93A0" ) & ";'></div>", "", [@vol], DESC )
+			VAR ley = CONCATENATEX ( seg, "<span style='display:inline-flex;align-items:center;margin-right:14px;font-size:11px;color:#6B6470;'><span style='width:10px;height:10px;border-radius:3px;margin-right:5px;background:" & SWITCH ( [@rk], 1, "#DFA0C9", 2, "#C77FA8", "#9A93A0" ) & ";'></span>" & LOL_TRANSPORT_TRACKING[segmento] & " &middot; " & FORMAT ( DIVIDE ( [@vol], tot ), "0.0%", "es-ES" ) & "</span>", "", [@vol], DESC )
+			VAR filas = CONCATENATEX ( seg, "<tr><td style='padding:7px 10px;font-weight:600;'>" & LOL_TRANSPORT_TRACKING[segmento] & "</td><td style='padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;'>" & FORMAT ( [@vol], "#,0", "es-ES" ) & "</td><td style='padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;'>" & FORMAT ( [@cli], "#,0", "es-ES" ) & "</td><td style='padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;'>" & FORMAT ( [@entpct], "0.0%", "es-ES" ) & "</td><td style='padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;'>" & IF ( ISBLANK ( [@med] ), "&mdash;", FORMAT ( [@med], "0.0", "es-ES" ) & "d" ) & "</td><td style='padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;'>" & FORMAT ( [@ot], "0.0%", "es-ES" ) & "</td><td style='padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;color:" & IF ( [@inc] > 0.05, "#B5638F", "#1B141F" ) & ";'>" & FORMAT ( [@inc], "0.0%", "es-ES" ) & "</td><td style='padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;'>" & FORMAT ( [@dev], "0.0%", "es-ES" ) & "</td></tr>", "", [@vol], DESC )
+			RETURN "<div style='font-family:Segoe UI,system-ui,sans-serif;color:#1B141F;background:#FFFFFF;border:1px solid #E7DCE6;border-radius:14px;padding:14px 16px;box-shadow:0 6px 20px -14px rgba(27,20,31,.25);'><div style='font-size:14px;font-weight:700;margin-bottom:10px;'>Segmento de cliente <span style='color:#9A93A0;font-weight:400;'>&middot; B2C vs B2B</span></div><div style='display:flex;height:14px;border-radius:8px;overflow:hidden;border:1px solid #E7DCE6;'>" & barra & "</div><div style='margin:8px 0 12px;'>" & ley & "</div><table style='width:100%;border-collapse:collapse;font-size:13px;'><thead><tr style='color:#6B6470;font-size:11px;text-transform:uppercase;text-align:right;'><th style='padding:7px 10px;text-align:left;'>Segmento</th><th style='padding:7px 10px;'>Env&iacute;os</th><th style='padding:7px 10px;'>Clientes</th><th style='padding:7px 10px;'>% Entreg.</th><th style='padding:7px 10px;'>Mediana</th><th style='padding:7px 10px;'>A tiempo</th><th style='padding:7px 10px;'>Incid.</th><th style='padding:7px 10px;'>Devol.</th></tr></thead><tbody>" & filas & "</tbody></table></div>"
+		displayFolder: 9 HTML
+		lineageTag: d1ed0000-0000-4000-8000-000000000103
+
+	measure 'HTML Embudo Fases' =
+			VAR nLanz = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), LOL_TRANSPORT_TRACKING[es_entregado] = 1, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_lanzamiento] ) )
+			VAR nTran = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), LOL_TRANSPORT_TRACKING[es_entregado] = 1, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_en_transito] ) )
+			VAR nRep = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), LOL_TRANSPORT_TRACKING[es_entregado] = 1, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_en_reparto] ) )
+			VAR nEnt = [Entregados]
+			VAR maxN = MAX ( MAX ( nLanz, nTran ), MAX ( nRep, nEnt ) )
+			VAR m1 = [Fase Lanz-Transito]
+			VAR m2 = [Fase Transito-Reparto]
+			VAR m3 = [Fase Reparto-Entrega]
+			VAR _h1 = "<div style='display:flex;flex-direction:column;align-items:center;width:84px;'><div style='font-size:18px;font-weight:700;color:#1B141F;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;'>" & FORMAT ( nLanz, "#,0", "es-ES" ) & "</div><div style='width:48px;height:" & FORMAT ( ROUND ( DIVIDE ( nLanz, maxN ) * 120, 0 ) + 2, "0", "es-ES" ) & "px;background:#DFA0C9;border-radius:8px 8px 0 0;margin-top:4px;'></div><div style='font-size:11px;color:#6B6470;margin-top:6px;'>Lanzamiento</div></div>"
+			VAR _h2 = "<div style='display:flex;flex-direction:column;align-items:center;width:84px;'><div style='font-size:18px;font-weight:700;color:#1B141F;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;'>" & FORMAT ( nTran, "#,0", "es-ES" ) & "</div><div style='width:48px;height:" & FORMAT ( ROUND ( DIVIDE ( nTran, maxN ) * 120, 0 ) + 2, "0", "es-ES" ) & "px;background:#DFA0C9;border-radius:8px 8px 0 0;margin-top:4px;'></div><div style='font-size:11px;color:#6B6470;margin-top:6px;'>Tr&aacute;nsito</div></div>"
+			VAR _h3 = "<div style='display:flex;flex-direction:column;align-items:center;width:84px;'><div style='font-size:18px;font-weight:700;color:#1B141F;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;'>" & FORMAT ( nRep, "#,0", "es-ES" ) & "</div><div style='width:48px;height:" & FORMAT ( ROUND ( DIVIDE ( nRep, maxN ) * 120, 0 ) + 2, "0", "es-ES" ) & "px;background:#DFA0C9;border-radius:8px 8px 0 0;margin-top:4px;'></div><div style='font-size:11px;color:#6B6470;margin-top:6px;'>Reparto</div></div>"
+			VAR _h4 = "<div style='display:flex;flex-direction:column;align-items:center;width:84px;'><div style='font-size:18px;font-weight:700;color:#1B141F;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;'>" & FORMAT ( nEnt, "#,0", "es-ES" ) & "</div><div style='width:48px;height:" & FORMAT ( ROUND ( DIVIDE ( nEnt, maxN ) * 120, 0 ) + 2, "0", "es-ES" ) & "px;background:#C77FA8;border-radius:8px 8px 0 0;margin-top:4px;'></div><div style='font-size:11px;color:#6B6470;margin-top:6px;'>Entrega</div></div>"
+			VAR _x1 = "<div style='display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:0 4px 26px;'><div style='font-size:14px;color:#C77FA8;line-height:1;'>&rarr;</div><div style='font-size:11px;color:#9A93A0;margin-top:3px;white-space:nowrap;'>" & IF ( ISBLANK ( m1 ), "&mdash;", FORMAT ( m1, "0.0", "es-ES" ) & "d" ) & "</div></div>"
+			VAR _x2 = "<div style='display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:0 4px 26px;'><div style='font-size:14px;color:#C77FA8;line-height:1;'>&rarr;</div><div style='font-size:11px;color:#9A93A0;margin-top:3px;white-space:nowrap;'>" & IF ( ISBLANK ( m2 ), "&mdash;", FORMAT ( m2, "0.0", "es-ES" ) & "d" ) & "</div></div>"
+			VAR _x3 = "<div style='display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:0 4px 26px;'><div style='font-size:14px;color:#C77FA8;line-height:1;'>&rarr;</div><div style='font-size:11px;color:#9A93A0;margin-top:3px;white-space:nowrap;'>" & IF ( ISBLANK ( m3 ), "&mdash;", FORMAT ( m3, "0.0", "es-ES" ) & "d" ) & "</div></div>"
+			RETURN "<div style='font-family:Segoe UI,system-ui,sans-serif;color:#1B141F;background:#FFFFFF;border:1px solid #E7DCE6;border-radius:14px;padding:16px;box-shadow:0 6px 20px -14px rgba(27,20,31,.25);'><div style='font-size:14px;font-weight:700;margin-bottom:12px;'>Embudo de fases <span style='color:#9A93A0;font-weight:400;'>&middot; recuento y mediana entre hitos</span></div><div style='display:flex;align-items:flex-end;justify-content:center;gap:2px;'>" & _h1 & _x1 & _h2 & _x2 & _h3 & _x3 & _h4 & "</div></div>"
+		displayFolder: 9 HTML
+		lineageTag: d1ed0000-0000-4000-8000-000000000104
+
+	measure 'HTML Ranking Geografico' =
+			VAR pais = ADDCOLUMNS ( SUMMARIZE ( LOL_TRANSPORT_TRACKING, LOL_TRANSPORT_TRACKING[pais_destino] ), "@vol", [Envios Totales], "@med", [Tiempo Entrega Mediana (Lab)], "@inc", [Tasa Incidencias] )
+			VAR maxP = MAXX ( pais, [@vol] )
+			VAR filasP = CONCATENATEX ( TOPN ( 6, pais, [@vol] ), "<tr><td style='padding:6px 8px;font-weight:600;'>" & COALESCE ( LOL_TRANSPORT_TRACKING[pais_destino], "(sin dato)" ) & "</td><td style='padding:6px 8px;'><div style='background:#F0E3EE;height:7px;border-radius:5px;'><div style='background:#DFA0C9;height:7px;border-radius:5px;width:" & FORMAT ( DIVIDE ( [@vol], maxP ) * 100, "0", "es-ES" ) & "%;'></div></div></td><td style='padding:6px 8px;text-align:right;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;'>" & FORMAT ( [@vol], "#,0", "es-ES" ) & "</td><td style='padding:6px 8px;text-align:right;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;'>" & IF ( ISBLANK ( [@med] ), "&mdash;", FORMAT ( [@med], "0.0", "es-ES" ) & "d" ) & "</td><td style='padding:6px 8px;text-align:right;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;color:" & IF ( [@inc] > 0.05, "#B5638F", "#1B141F" ) & ";'>" & FORMAT ( [@inc], "0.0%", "es-ES" ) & "</td></tr>", "", [@vol], DESC )
+			VAR ciu = ADDCOLUMNS ( SUMMARIZE ( LOL_TRANSPORT_TRACKING, LOL_TRANSPORT_TRACKING[ciudad_destino] ), "@vol", [Envios Totales], "@med", [Tiempo Entrega Mediana (Lab)], "@inc", [Tasa Incidencias] )
+			VAR maxC = MAXX ( ciu, [@vol] )
+			VAR filasC = CONCATENATEX ( TOPN ( 8, ciu, [@vol] ), VAR raw = LOL_TRANSPORT_TRACKING[ciudad_destino] VAR pBreak = FIND ( UNICHAR ( 10 ), raw, 1, 0 ) VAR nb = IF ( pBreak > 0, LEFT ( raw, pBreak - 1 ), raw ) VAR pAL = FIND ( " - AL ", nb, 1, 0 ) VAR clean = TRIM ( IF ( pAL > 0, MID ( nb, pAL + 6, LEN ( nb ) ), nb ) ) RETURN "<tr><td style='padding:6px 8px;font-weight:600;'>" & COALESCE ( clean, "(sin dato)" ) & "</td><td style='padding:6px 8px;'><div style='background:#F0E3EE;height:7px;border-radius:5px;'><div style='background:#DFA0C9;height:7px;border-radius:5px;width:" & FORMAT ( DIVIDE ( [@vol], maxC ) * 100, "0", "es-ES" ) & "%;'></div></div></td><td style='padding:6px 8px;text-align:right;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;'>" & FORMAT ( [@vol], "#,0", "es-ES" ) & "</td><td style='padding:6px 8px;text-align:right;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;'>" & IF ( ISBLANK ( [@med] ), "&mdash;", FORMAT ( [@med], "0.0", "es-ES" ) & "d" ) & "</td><td style='padding:6px 8px;text-align:right;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace;color:" & IF ( [@inc] > 0.05, "#B5638F", "#1B141F" ) & ";'>" & FORMAT ( [@inc], "0.0%", "es-ES" ) & "</td></tr>", "", [@vol], DESC )
+			VAR _thead = "<thead><tr style='color:#6B6470;font-size:10px;text-transform:uppercase;text-align:right;'><th style='padding:6px 8px;text-align:left;'>Destino</th><th style='padding:6px 8px;'>Vol.</th><th style='padding:6px 8px;'>Env&iacute;os</th><th style='padding:6px 8px;'>Mediana</th><th style='padding:6px 8px;'>Incid.</th></tr></thead>"
+			VAR _cardP = "<div style='flex:1 1 300px;min-width:280px;background:#FFFFFF;border:1px solid #E7DCE6;border-radius:14px;padding:14px 16px;box-shadow:0 6px 20px -14px rgba(27,20,31,.25);'><div style='font-size:14px;font-weight:700;margin-bottom:8px;'>Pa&iacute;ses <span style='color:#9A93A0;font-weight:400;'>&middot; Top 6 por volumen</span></div><table style='width:100%;border-collapse:collapse;font-size:12px;'>" & _thead & "<tbody>" & filasP & "</tbody></table></div>"
+			VAR _cardC = "<div style='flex:1 1 300px;min-width:280px;background:#FFFFFF;border:1px solid #E7DCE6;border-radius:14px;padding:14px 16px;box-shadow:0 6px 20px -14px rgba(27,20,31,.25);'><div style='font-size:14px;font-weight:700;margin-bottom:8px;'>Ciudades <span style='color:#9A93A0;font-weight:400;'>&middot; Top 8 por volumen</span></div><table style='width:100%;border-collapse:collapse;font-size:12px;'>" & _thead & "<tbody>" & filasC & "</tbody></table></div>"
+			RETURN "<div style='font-family:Segoe UI,system-ui,sans-serif;color:#1B141F;display:flex;flex-wrap:wrap;gap:12px;'>" & _cardP & _cardC & "</div>"
+		displayFolder: 9 HTML
+		lineageTag: d1ed0000-0000-4000-8000-000000000105
+
+	measure 'HTML Detalle Envio' =
+			VAR vAlb = SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[albaran] )
+			VAR vTrack = SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[tracking] )
+			VAR vCli = SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[cliente] )
+			VAR vTra = SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[transportista_norm] )
+			VAR vPais = SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[pais_destino] )
+			VAR vEstado = SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[estado] )
+			VAR vDias = MAX ( LOL_TRANSPORT_TRACKING[dias_entrega_laborables] )
+			VAR _ciuRaw = SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[ciudad_destino] )
+			VAR _pBreak = IF ( ISBLANK ( _ciuRaw ), 0, FIND ( UNICHAR ( 10 ), _ciuRaw, 1, 0 ) )
+			VAR _nb = IF ( _pBreak > 0, LEFT ( _ciuRaw, _pBreak - 1 ), _ciuRaw )
+			VAR _pAL = IF ( ISBLANK ( _nb ), 0, FIND ( " - AL ", _nb, 1, 0 ) )
+			VAR vCiu = TRIM ( IF ( _pAL > 0, MID ( _nb, _pAL + 6, LEN ( _nb ) ), _nb ) )
+			VAR d1 = MAX ( LOL_TRANSPORT_TRACKING[fecha_lanzamiento] )
+			VAR d2 = MAX ( LOL_TRANSPORT_TRACKING[fecha_etiqueta] )
+			VAR d3 = MAX ( LOL_TRANSPORT_TRACKING[fecha_en_transito] )
+			VAR d4 = MAX ( LOL_TRANSPORT_TRACKING[fecha_en_reparto] )
+			VAR d5 = MAX ( LOL_TRANSPORT_TRACKING[fecha_entregado] )
+			VAR p1 = NOT ISBLANK ( d1 )
+			VAR p2 = NOT ISBLANK ( d2 )
+			VAR p3 = NOT ISBLANK ( d3 )
+			VAR p4 = NOT ISBLANK ( d4 )
+			VAR p5 = NOT ISBLANK ( d5 )
+			VAR lastIdx = IF ( p5, 5, IF ( p4, 4, IF ( p3, 3, IF ( p2, 2, IF ( p1, 1, 0 ) ) ) ) )
+			VAR g2 = IF ( p2 && p1, DATEDIFF ( d1, d2, MINUTE ) / 1440.0 )
+			VAR g3 = VAR pv = COALESCE ( d2, d1 ) RETURN IF ( p3 && NOT ISBLANK ( pv ), DATEDIFF ( pv, d3, MINUTE ) / 1440.0 )
+			VAR g4 = VAR pv = COALESCE ( d3, d2, d1 ) RETURN IF ( p4 && NOT ISBLANK ( pv ), DATEDIFF ( pv, d4, MINUTE ) / 1440.0 )
+			VAR g5 = VAR pv = COALESCE ( d4, d3, d2, d1 ) RETURN IF ( p5 && NOT ISBLANK ( pv ), DATEDIFF ( pv, d5, MINUTE ) / 1440.0 )
+			VAR _font = "font-family:Montserrat,Segoe UI,system-ui,sans-serif;"
+			VAR _mono = "font-family:ui-monospace,Consolas,monospace;"
+			VAR _destino = COALESCE ( vCiu, "&mdash;" ) & IF ( ISBLANK ( vPais ), "", "<br><span style='color:#6B6470;font-weight:500;'>" & vPais & "</span>" )
+			VAR _meta =
+				"<div style='display:flex;flex-wrap:wrap;margin-top:4px;'>" &
+				"<div style='width:50%;box-sizing:border-box;padding:0 8px 5px 0;'><div style='font-size:8px;text-transform:uppercase;letter-spacing:.03em;color:#9A93A0;font-weight:700;'>Cliente</div><div style='font-size:11px;color:#1B141F;font-weight:600;margin-top:1px;'>" & COALESCE ( vCli, "&mdash;" ) & "</div></div>" &
+				"<div style='width:50%;box-sizing:border-box;padding:0 8px 5px 0;'><div style='font-size:8px;text-transform:uppercase;letter-spacing:.03em;color:#9A93A0;font-weight:700;'>Transportista</div><div style='font-size:11px;color:#1B141F;font-weight:600;margin-top:1px;'>" & COALESCE ( vTra, "&mdash;" ) & "</div></div>" &
+				"<div style='width:50%;box-sizing:border-box;padding:0 8px 5px 0;'><div style='font-size:8px;text-transform:uppercase;letter-spacing:.03em;color:#9A93A0;font-weight:700;'>Destino</div><div style='font-size:11px;color:#1B141F;font-weight:600;margin-top:1px;'>" & _destino & "</div></div>" &
+				"<div style='width:50%;box-sizing:border-box;padding:0 8px 5px 0;'><div style='font-size:8px;text-transform:uppercase;letter-spacing:.03em;color:#9A93A0;font-weight:700;'>Tracking</div><div style='font-size:10px;color:#1B141F;font-weight:600;margin-top:1px;word-break:break-all;" & _mono & "'>" & COALESCE ( vTrack, "&mdash;" ) & "</div></div>" &
+				"<div style='width:50%;box-sizing:border-box;padding:0 10px 0 0;'><div style='font-size:8px;text-transform:uppercase;letter-spacing:.03em;color:#9A93A0;font-weight:700;'>Estado</div><div style='margin-top:4px;'><span style='display:inline-block;font-size:9.5px;font-weight:600;background:#F5EEF4;color:#1B141F;padding:2px 8px;border-radius:6px;'>" & COALESCE ( vEstado, "&mdash;" ) & "</span></div></div>" &
+				"<div style='width:50%;box-sizing:border-box;padding:0 10px 0 0;'><div style='font-size:8px;text-transform:uppercase;letter-spacing:.03em;color:#9A93A0;font-weight:700;'>Tiempo total</div><div style='font-size:11px;color:#1B141F;font-weight:600;margin-top:1px;" & _mono & "'>" & IF ( ISBLANK ( vDias ), "&mdash;", FORMAT ( vDias, "0.0", "es-ES" ) & " d&iacute;as h&aacute;b." ) & "</div></div>" &
+				"</div>"
+			VAR _hdr =
+				"<div style='background:#FFFFFF;border:1px solid #E7DCE6;border-radius:12px;padding:10px 12px;box-shadow:0 6px 20px -14px rgba(27,20,31,.25);'>" &
+				"<div style='font-size:8.5px;text-transform:uppercase;letter-spacing:.08em;color:#C77FA8;font-weight:700;'>Detalle del env&iacute;o</div>" &
+				"<div style='font-size:15px;font-weight:700;color:#1B141F;margin:0 0 6px;" & _mono & "'>" & COALESCE ( vAlb, vTrack, "&mdash;" ) & "</div>" &
+				_meta & "</div>"
+			VAR _row1 =
+				"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
+				"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;" & IF ( lastIdx = 1, "background:#1B141F;border:2px solid #1B141F;", IF ( p1, "background:#FFFFFF;border:2px solid #DFA0C9;", "background:#FFFFFF;border:2px solid #E0D7E4;" ) ) & "'></span>" &
+				"<div style='font-size:11.5px;font-weight:600;color:" & IF ( p1, "#1B141F", "#9A93A0" ) & ";'>Lanzamiento</div>" &
+				IF ( p1, "<div style='font-size:10px;color:#6B6470;margin-top:0;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( d1, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( d1, "HH:mm" ) & "</div>", "<div style='font-size:10px;color:#9A93A0;margin-top:0;display:inline-block;vertical-align:middle;'>Pendiente</div>" ) & "</li>"
+			VAR _row2 =
+				"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
+				"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;" & IF ( lastIdx = 2, "background:#1B141F;border:2px solid #1B141F;", IF ( p2, "background:#FFFFFF;border:2px solid #DFA0C9;", "background:#FFFFFF;border:2px solid #E0D7E4;" ) ) & "'></span>" &
+				"<div style='font-size:11.5px;font-weight:600;color:" & IF ( p2, "#1B141F", "#9A93A0" ) & ";'>Etiqueta creada</div>" &
+				IF ( p2, "<div style='font-size:10px;color:#6B6470;margin-top:0;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( d2, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( d2, "HH:mm" ) & "</div>", "<div style='font-size:10px;color:#9A93A0;margin-top:0;display:inline-block;vertical-align:middle;'>Pendiente</div>" ) &
+				IF ( NOT ISBLANK ( g2 ) && g2 >= 0, "<div style='display:inline-block;margin-left:7px;vertical-align:middle;font-size:8.5px;font-weight:600;color:#9A93A0;background:#F5EEF4;padding:1px 6px;border-radius:4px;" & _mono & "'>+" & FORMAT ( g2, "0.0", "es-ES" ) & "d</div>", "" ) & "</li>"
+			VAR _row3 =
+				"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
+				"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;" & IF ( lastIdx = 3, "background:#1B141F;border:2px solid #1B141F;", IF ( p3, "background:#FFFFFF;border:2px solid #DFA0C9;", "background:#FFFFFF;border:2px solid #E0D7E4;" ) ) & "'></span>" &
+				"<div style='font-size:11.5px;font-weight:600;color:" & IF ( p3, "#1B141F", "#9A93A0" ) & ";'>En tr&aacute;nsito</div>" &
+				IF ( p3, "<div style='font-size:10px;color:#6B6470;margin-top:0;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( d3, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( d3, "HH:mm" ) & "</div>", "<div style='font-size:10px;color:#9A93A0;margin-top:0;display:inline-block;vertical-align:middle;'>Pendiente</div>" ) &
+				IF ( NOT ISBLANK ( g3 ) && g3 >= 0, "<div style='display:inline-block;margin-left:7px;vertical-align:middle;font-size:8.5px;font-weight:600;color:#9A93A0;background:#F5EEF4;padding:1px 6px;border-radius:4px;" & _mono & "'>+" & FORMAT ( g3, "0.0", "es-ES" ) & "d</div>", "" ) & "</li>"
+			VAR _row4 =
+				"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
+				"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;" & IF ( lastIdx = 4, "background:#1B141F;border:2px solid #1B141F;", IF ( p4, "background:#FFFFFF;border:2px solid #DFA0C9;", "background:#FFFFFF;border:2px solid #E0D7E4;" ) ) & "'></span>" &
+				"<div style='font-size:11.5px;font-weight:600;color:" & IF ( p4, "#1B141F", "#9A93A0" ) & ";'>En reparto</div>" &
+				IF ( p4, "<div style='font-size:10px;color:#6B6470;margin-top:0;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( d4, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( d4, "HH:mm" ) & "</div>", "<div style='font-size:10px;color:#9A93A0;margin-top:0;display:inline-block;vertical-align:middle;'>Pendiente</div>" ) &
+				IF ( NOT ISBLANK ( g4 ) && g4 >= 0, "<div style='display:inline-block;margin-left:7px;vertical-align:middle;font-size:8.5px;font-weight:600;color:#9A93A0;background:#F5EEF4;padding:1px 6px;border-radius:4px;" & _mono & "'>+" & FORMAT ( g4, "0.0", "es-ES" ) & "d</div>", "" ) & "</li>"
+			VAR _row5 =
+				"<li style='position:relative;padding:0 0 2px 18px;border-left:2px solid transparent;'>" &
+				"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;" & IF ( lastIdx = 5, "background:#1B141F;border:2px solid #1B141F;", IF ( p5, "background:#FFFFFF;border:2px solid #DFA0C9;", "background:#FFFFFF;border:2px solid #E0D7E4;" ) ) & "'></span>" &
+				"<div style='font-size:11.5px;font-weight:600;color:" & IF ( p5, "#1B141F", "#9A93A0" ) & ";'>Entregado</div>" &
+				IF ( p5, "<div style='font-size:10px;color:#6B6470;margin-top:0;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( d5, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( d5, "HH:mm" ) & "</div>", "<div style='font-size:10px;color:#9A93A0;margin-top:0;display:inline-block;vertical-align:middle;'>Pendiente</div>" ) &
+				IF ( NOT ISBLANK ( g5 ) && g5 >= 0, "<div style='display:inline-block;margin-left:7px;vertical-align:middle;font-size:8.5px;font-weight:600;color:#9A93A0;background:#F5EEF4;padding:1px 6px;border-radius:4px;" & _mono & "'>+" & FORMAT ( g5, "0.0", "es-ES" ) & "d</div>", "" ) & "</li>"
+			VAR _tl =
+				"<div style='margin-top:7px;'>" &
+				"<div style='font-size:8.5px;text-transform:uppercase;letter-spacing:.06em;color:#6B6470;font-weight:700;margin:0 0 6px 2px;'>L&iacute;nea de tiempo</div>" &
+				"<ul style='list-style:none;margin:0;padding:0 0 0 6px;'>" & _row1 & _row2 & _row3 & _row4 & _row5 & "</ul></div>"
+			RETURN
+				IF ( ISBLANK ( vAlb ) && ISBLANK ( vTrack ),
+					"<div style='" & _font & "color:#9A93A0;font-size:12px;padding:16px;'>Pasa el rat&oacute;n por un env&iacute;o para ver su detalle.</div>",
+					"<div style='" & _font & "color:#1B141F;'>" & _hdr & _tl & "</div>" )
+		displayFolder: 9 HTML
+		lineageTag: d1ed0000-0000-4000-8000-000000000106
+
+	column Value
+		lineageTag: d1ed0000-0000-4000-8000-0000000000ff
+		isNameInferred
+		sourceColumn: [Value]
+
+	partition _Medidas = calculated
+		mode: import
+		source = {BLANK()}
+
+	annotation PBI_ResultType = Table
+

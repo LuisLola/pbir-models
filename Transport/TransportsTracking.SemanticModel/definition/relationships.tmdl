@@ -63,3 +63,19 @@ relationship dc9df330-b815-456a-8494-931f4eb84ccf
 	fromColumn: LOL_TRANSPORT_TRACKING.fecha_actualizacion
 	toColumn: LocalDateTable_28a3eb52-281b-43d9-8a69-4bab0e291cf6.Date
 
+relationship d1ca0000-0000-4000-8000-0000000000d1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_TRANSPORT_TRACKING.fecha_lanzamiento
+	toColumn: Calendario.Date
+
+relationship d1ca0000-0000-4000-8000-0000000000d2
+	isActive: false
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_TRANSPORT_TRACKING.fecha_entregado
+	toColumn: Calendario.Date
+
+relationship 3d64c71c-db1f-4e52-a5b3-0eb1c362eeb2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Festivos.Fecha
+	toColumn: LocalDateTable_7185ac49-e3c7-4dd9-8fde-444fceb76651.Date
+

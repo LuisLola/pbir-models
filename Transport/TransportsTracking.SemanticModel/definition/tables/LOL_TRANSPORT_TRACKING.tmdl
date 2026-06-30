@@ -271,6 +271,247 @@ table LOL_TRANSPORT_TRACKING
 
 		annotation SummarizationSetBy = Automatic
 
+	column transportista_norm = IF ( LEFT ( UPPER ( LOL_TRANSPORT_TRACKING[transportista] ), 5 ) = "TIPSA", "TIPSA", LOL_TRANSPORT_TRACKING[transportista] )
+		dataType: string
+		lineageTag: d1c00000-0000-4000-8000-000000000001
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Estado canónico del envío, derivado por prioridad del hito MÁS AVANZADO alcanzado
+	/// (según las fechas reales, no el texto de [estado] que suele venir obsoleto/desincronizado).
+	/// Prioridad: Entregado > Devuelto > Incidencia > En reparto > En agencia destino >
+	/// En tránsito > Recogido > Etiqueta creada > Error de tracking > Lanzado > Sin estado.
+	column estado_norm =
+			VAR _entregado = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_entregado] ) || LOL_TRANSPORT_TRACKING[estado] = "Entregado"
+			VAR _devuelto = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_devuelto] ) || LOL_TRANSPORT_TRACKING[estado] = "Devuelto"
+			VAR _incid = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_incidencia] ) || LOL_TRANSPORT_TRACKING[estado] = "Incidencia"
+			VAR _reparto = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_en_reparto] ) || LOL_TRANSPORT_TRACKING[estado] = "En reparto"
+			VAR _agencia = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_agencia_destino] ) || LOL_TRANSPORT_TRACKING[estado] = "En agencia destino"
+			VAR _transito = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_en_transito] ) || LOL_TRANSPORT_TRACKING[estado] = "En tránsito"
+			VAR _recogido = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_recogido] ) || LOL_TRANSPORT_TRACKING[estado] = "Recogido"
+			VAR _etiqueta = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_etiqueta] ) || LOL_TRANSPORT_TRACKING[estado] = "Etiqueta creada"
+			VAR _error = LOL_TRANSPORT_TRACKING[estado] = "Error"
+			VAR _lanzado = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_lanzamiento] )
+			RETURN
+			    SWITCH ( TRUE (),
+			        _entregado, "Entregado",
+			        _devuelto, "Devuelto",
+			        _incid, "Incidencia",
+			        _reparto, "En reparto",
+			        _agencia, "En agencia destino",
+			        _transito, "En tránsito",
+			        _recogido, "Recogido",
+			        _etiqueta, "Etiqueta creada",
+			        _error, "Error de tracking",
+			        _lanzado, "Lanzado",
+			        "Sin estado"
+			    )
+		dataType: string
+		lineageTag: d1c00000-0000-4000-8000-00000000000f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Agrupación de alto nivel del estado canónico para donut/embudo:
+	/// Entregado · En curso · Incidencia · Devuelto · Sin datos (Error de tracking, Lanzado, Sin estado).
+	column estado_grupo =
+			SWITCH ( LOL_TRANSPORT_TRACKING[estado_norm],
+			    "Entregado", "Entregado",
+			    "Devuelto", "Devuelto",
+			    "Incidencia", "Incidencia",
+			    "En tránsito", "En curso",
+			    "En reparto", "En curso",
+			    "En agencia destino", "En curso",
+			    "Recogido", "En curso",
+			    "Etiqueta creada", "En curso",
+			    "Sin datos"
+			)
+		dataType: string
+		lineageTag: d1c00000-0000-4000-8000-000000000010
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// 1 si el envío está entregado (estado canónico = Entregado). Incluye los entregados
+	/// cuyo texto [estado] no se actualizó y los que además tienen fecha_devuelto posterior.
+	column es_entregado = IF ( LOL_TRANSPORT_TRACKING[estado_norm] = "Entregado", 1, 0 )
+		dataType: int64
+		formatString: 0
+		lineageTag: d1c00000-0000-4000-8000-000000000002
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// 1 solo si devuelto y NO entregado (mutuamente excluyente con es_entregado).
+	column es_devuelto = IF ( LOL_TRANSPORT_TRACKING[estado_norm] = "Devuelto", 1, 0 )
+		dataType: int64
+		formatString: 0
+		lineageTag: d1c00000-0000-4000-8000-000000000003
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// 1 si hay una incidencia que bloquea la entrega (incidencia y aún no entregado/devuelto).
+	column es_incidencia_bloqueante = IF ( LOL_TRANSPORT_TRACKING[estado_norm] = "Incidencia", 1, 0 )
+		dataType: int64
+		formatString: 0
+		lineageTag: d1c00000-0000-4000-8000-000000000004
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// 1 si el envío está activo en la red (en tránsito, reparto, agencia, recogido o con etiqueta).
+	column es_en_curso = IF ( LOL_TRANSPORT_TRACKING[estado_grupo] = "En curso", 1, 0 )
+		dataType: int64
+		formatString: 0
+		lineageTag: d1c00000-0000-4000-8000-000000000011
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// 1 si el seguimiento falló (estado "Error"): el envío existe pero no hay datos de ciclo.
+	column es_error_tracking = IF ( LOL_TRANSPORT_TRACKING[estado_norm] = "Error de tracking", 1, 0 )
+		dataType: int64
+		formatString: 0
+		lineageTag: d1c00000-0000-4000-8000-000000000012
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// 1 si el envío tiene seguimiento válido (excluye Error de tracking, Lanzado sin estado y Sin estado).
+	/// Es el denominador de las tasas operativas (% entregados, incidencias, devoluciones).
+	column es_operativo = IF ( LOL_TRANSPORT_TRACKING[estado_grupo] = "Sin datos", 0, 1 )
+		dataType: int64
+		formatString: 0
+		lineageTag: d1c00000-0000-4000-8000-000000000013
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column f_inicio =
+			VAR _ent = LOL_TRANSPORT_TRACKING[fecha_entregado]
+			VAR _entD = IF ( ISBLANK ( _ent ), BLANK (), DATE ( YEAR ( _ent ), MONTH ( _ent ), DAY ( _ent ) ) )
+			VAR _tr = LOL_TRANSPORT_TRACKING[fecha_en_transito]
+			VAR _rec = LOL_TRANSPORT_TRACKING[fecha_recogido]
+			VAR _lan = LOL_TRANSPORT_TRACKING[fecha_lanzamiento]
+			VAR _pick =
+			    COALESCE (
+			        IF ( NOT ISBLANK ( _tr ) && DATE ( YEAR ( _tr ), MONTH ( _tr ), DAY ( _tr ) ) <> _entD, _tr ),
+			        IF ( NOT ISBLANK ( _rec ) && DATE ( YEAR ( _rec ), MONTH ( _rec ), DAY ( _rec ) ) <> _entD, _rec ),
+			        _lan
+			    )
+			RETURN IF ( ISBLANK ( _pick ), BLANK (), DATE ( YEAR ( _pick ), MONTH ( _pick ), DAY ( _pick ) ) )
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: d1c00000-0000-4000-8000-000000000005
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column dias_entrega_natural =
+			VAR s = LOL_TRANSPORT_TRACKING[f_inicio]
+			VAR e = LOL_TRANSPORT_TRACKING[fecha_entregado]
+			VAR eD = IF ( ISBLANK ( e ), BLANK (), DATE ( YEAR ( e ), MONTH ( e ), DAY ( e ) ) )
+			RETURN IF ( NOT ISBLANK ( eD ) && NOT ISBLANK ( s ) && eD >= s && DATEDIFF ( s, eD, DAY ) < 60, DATEDIFF ( s, eD, DAY ) )
+		dataType: int64
+		formatString: 0
+		lineageTag: d1c00000-0000-4000-8000-000000000006
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column dias_entrega_laborables =
+			VAR s = LOL_TRANSPORT_TRACKING[f_inicio]
+			VAR e = LOL_TRANSPORT_TRACKING[fecha_entregado]
+			VAR eD = IF ( ISBLANK ( e ), BLANK (), DATE ( YEAR ( e ), MONTH ( e ), DAY ( e ) ) )
+			RETURN
+			    IF (
+			        NOT ISBLANK ( eD ) && NOT ISBLANK ( s ) && eD >= s && DATEDIFF ( s, eD, DAY ) < 60,
+			        COALESCE (
+			            CALCULATE (
+			                COUNTROWS ( Calendario ),
+			                DATESBETWEEN ( Calendario[Date], s, eD - 1 ),
+			                Calendario[EsLaborable] = 1,
+			                Calendario[EsFestivo] = 0
+			            ),
+			            0
+			        )
+			    )
+		dataType: int64
+		formatString: 0
+		lineageTag: d1c00000-0000-4000-8000-000000000007
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column dur_lanz_transito = IF ( NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_lanzamiento] ) && NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_en_transito] ), DATEDIFF ( LOL_TRANSPORT_TRACKING[fecha_lanzamiento], LOL_TRANSPORT_TRACKING[fecha_en_transito], SECOND ) / 86400.0 )
+		dataType: double
+		formatString: 0.0
+		lineageTag: d1c00000-0000-4000-8000-000000000008
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column dur_transito_reparto = IF ( NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_en_transito] ) && NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_en_reparto] ), DATEDIFF ( LOL_TRANSPORT_TRACKING[fecha_en_transito], LOL_TRANSPORT_TRACKING[fecha_en_reparto], SECOND ) / 86400.0 )
+		dataType: double
+		formatString: 0.0
+		lineageTag: d1c00000-0000-4000-8000-000000000009
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column dur_reparto_entrega = IF ( NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_en_reparto] ) && NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_entregado] ), DATEDIFF ( LOL_TRANSPORT_TRACKING[fecha_en_reparto], LOL_TRANSPORT_TRACKING[fecha_entregado], SECOND ) / 86400.0 )
+		dataType: double
+		formatString: 0.0
+		lineageTag: d1c00000-0000-4000-8000-00000000000a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tramo Tiempo' =
+			VAR d = LOL_TRANSPORT_TRACKING[dias_entrega_laborables]
+			RETURN
+			    SWITCH ( TRUE (),
+			        ISBLANK ( d ), BLANK (),
+			        d < 1, "<1d", d < 2, "1-2d", d < 3, "2-3d", d < 4, "3-4d",
+			        d < 5, "4-5d", d < 7, "5-7d", d < 10, "7-10d", ">10d" )
+		dataType: string
+		lineageTag: d1c00000-0000-4000-8000-00000000000b
+		summarizeBy: none
+		sortByColumn: 'Tramo Orden'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tramo Orden' =
+			VAR d = LOL_TRANSPORT_TRACKING[dias_entrega_laborables]
+			RETURN
+			    SWITCH ( TRUE (),
+			        ISBLANK ( d ), BLANK (),
+			        d < 1, 1, d < 2, 2, d < 3, 3, d < 4, 4, d < 5, 5, d < 7, 6, d < 10, 7, 8 )
+		dataType: int64
+		formatString: 0
+		lineageTag: d1c00000-0000-4000-8000-00000000000c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column ciudad_destino_limpia = VAR raw = LOL_TRANSPORT_TRACKING[ciudad_destino] VAR pBreak = IF ( ISBLANK ( raw ), 0, FIND ( UNICHAR ( 10 ), raw, 1, 0 ) ) VAR nb = IF ( pBreak > 0, LEFT ( raw, pBreak - 1 ), raw ) VAR pAL = IF ( ISBLANK ( nb ), 0, FIND ( " - AL ", nb, 1, 0 ) ) VAR _ciu = TRIM ( IF ( pAL > 0, MID ( nb, pAL + 6, LEN ( nb ) ), nb ) ) VAR _p = UPPER ( TRIM ( COALESCE ( LOL_TRANSPORT_TRACKING[pais_destino], "" ) ) ) VAR _pais = SWITCH ( _p, "ES", "Spain", "PT", "Portugal", "FR", "France", "IT", "Italy", "BE", "Belgium", "DE", "Germany", "PL", "Poland", "NL", "Netherlands", "GB", "United Kingdom", "UK", "United Kingdom", "CH", "Switzerland", "AT", "Austria", "LU", "Luxembourg", "IE", "Ireland", "DK", "Denmark", "SE", "Sweden", "MA", "Morocco", "AD", "Andorra", "US", "United States", _p ) RETURN IF ( ISBLANK ( _ciu ) || _ciu = "", BLANK (), _ciu & IF ( _p = "", "", ", " & _pais ) )
+		dataType: string
+		lineageTag: d1c00000-0000-4000-8000-00000000000d
+		dataCategory: Place
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column sla_objetivo = VAR t = LOL_TRANSPORT_TRACKING[transportista_norm] VAR p = UPPER ( TRIM ( COALESCE ( LOL_TRANSPORT_TRACKING[pais_destino], "" ) ) ) VAR esUPS = CONTAINSSTRING ( t, "UPS" ) VAR _raw = LOL_TRANSPORT_TRACKING[ciudad_destino] VAR _pAL = IF ( ISBLANK ( _raw ), 0, FIND ( " - AL ", _raw, 1, 0 ) ) VAR _postal = IF ( _pAL > 0, TRIM ( LEFT ( _raw, _pAL - 1 ) ), "" ) VAR _bal = LEFT ( _postal, 2 ) = "07" RETURN SWITCH ( TRUE (), t = "TIPSA" && p = "ES" && _bal, 3, t = "TIPSA" && p = "ES", 2, t = "TIPSA" && p = "PT", 3, t = "TIPSA" && p = "AD", 4, esUPS && p = "ES", 1, esUPS && p IN { "PT", "FR", "AD", "MC", "BE", "NL", "LU", "DE", "CH", "AT", "IT" }, 2, esUPS && p IN { "GB", "IE", "DK", "PL", "CZ", "SK", "HU", "SI", "HR" }, 3, esUPS && p IN { "SE", "FI", "NO", "EE", "LV", "LT", "RO", "BG", "GR", "RS", "BA", "ME", "MK", "AL", "XK" }, 4, esUPS && p IN { "MD", "UA", "TR", "CY", "MT", "IS" }, 5, 3 )
+		dataType: int64
+		formatString: 0
+		lineageTag: d1c00000-0000-4000-8000-00000000000e
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition LOL_TRANSPORT_TRACKING = m
 		mode: import
 		source =
@@ -281,4 +522,6 @@ table LOL_TRANSPORT_TRACKING
 				    dbo_LOL_TRANSPORT_TRACKING
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegación
 

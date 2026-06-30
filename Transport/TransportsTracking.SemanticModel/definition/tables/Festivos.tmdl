@@ -1,0 +1,37 @@
+table Festivos
+	lineageTag: d1f00000-0000-4000-8000-000000000001
+
+	column Fecha
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: d1f00000-0000-4000-8000-000000000002
+		summarizeBy: none
+		sourceColumn: Fecha
+
+		variation Variación
+			isDefault
+			relationship: 3d64c71c-db1f-4e52-a5b3-0eb1c362eeb2
+			defaultHierarchy: LocalDateTable_7185ac49-e3c7-4dd9-8fde-444fceb76651.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition Festivos = m
+		mode: import
+		source =
+				let
+				    Source = #table(
+				        type table [Fecha = date],
+				        {
+				            {#date(2025, 1, 1)},
+				            {#date(2025, 12, 25)},
+				            {#date(2026, 1, 1)},
+				            {#date(2026, 12, 25)}
+				        }
+				    )
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+
