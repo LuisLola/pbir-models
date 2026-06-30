@@ -389,19 +389,12 @@ table LOL_TRANSPORT_TRACKING
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Punto de inicio del tiempo de entrega = SALIDA DEL ALMACÉN (puesta en tránsito).
+	/// El tiempo de entrega mide el tránsito, no la espera en almacén: por eso arranca en
+	/// fecha_en_transito. Fallback solo si falta: fecha_recogido > fecha_lanzamiento.
 	column f_inicio =
-			VAR _ent = LOL_TRANSPORT_TRACKING[fecha_entregado]
-			VAR _entD = IF ( ISBLANK ( _ent ), BLANK (), DATE ( YEAR ( _ent ), MONTH ( _ent ), DAY ( _ent ) ) )
-			VAR _tr = LOL_TRANSPORT_TRACKING[fecha_en_transito]
-			VAR _rec = LOL_TRANSPORT_TRACKING[fecha_recogido]
-			VAR _lan = LOL_TRANSPORT_TRACKING[fecha_lanzamiento]
-			VAR _pick =
-			    COALESCE (
-			        IF ( NOT ISBLANK ( _tr ) && DATE ( YEAR ( _tr ), MONTH ( _tr ), DAY ( _tr ) ) <> _entD, _tr ),
-			        IF ( NOT ISBLANK ( _rec ) && DATE ( YEAR ( _rec ), MONTH ( _rec ), DAY ( _rec ) ) <> _entD, _rec ),
-			        _lan
-			    )
-			RETURN IF ( ISBLANK ( _pick ), BLANK (), DATE ( YEAR ( _pick ), MONTH ( _pick ), DAY ( _pick ) ) )
+			VAR _start = COALESCE ( LOL_TRANSPORT_TRACKING[fecha_en_transito], LOL_TRANSPORT_TRACKING[fecha_recogido], LOL_TRANSPORT_TRACKING[fecha_lanzamiento] )
+			RETURN IF ( ISBLANK ( _start ), BLANK (), DATE ( YEAR ( _start ), MONTH ( _start ), DAY ( _start ) ) )
 		dataType: dateTime
 		formatString: Short Date
 		lineageTag: d1c00000-0000-4000-8000-000000000005

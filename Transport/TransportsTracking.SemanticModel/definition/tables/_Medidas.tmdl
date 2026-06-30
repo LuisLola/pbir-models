@@ -226,7 +226,7 @@ table _Medidas
 			VAR vCli = SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[cliente] )
 			VAR vTra = SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[transportista_norm] )
 			VAR vPais = SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[pais_destino] )
-			VAR vEstado = SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[estado] )
+			VAR vEstado = SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[estado_norm] )
 			VAR vDias = MAX ( LOL_TRANSPORT_TRACKING[dias_entrega_laborables] )
 			VAR _ciuRaw = SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[ciudad_destino] )
 			VAR _pBreak = IF ( ISBLANK ( _ciuRaw ), 0, FIND ( UNICHAR ( 10 ), _ciuRaw, 1, 0 ) )
@@ -243,6 +243,8 @@ table _Medidas
 			VAR p3 = NOT ISBLANK ( d3 )
 			VAR p4 = NOT ISBLANK ( d4 )
 			VAR p5 = NOT ISBLANK ( d5 )
+			VAR dInc = MAX ( LOL_TRANSPORT_TRACKING[fecha_incidencia] )
+			VAR pInc = NOT ISBLANK ( dInc )
 			VAR lastIdx = IF ( p5, 5, IF ( p4, 4, IF ( p3, 3, IF ( p2, 2, IF ( p1, 1, 0 ) ) ) ) )
 			VAR g2 = IF ( p2 && p1, DATEDIFF ( d1, d2, MINUTE ) / 1440.0 )
 			VAR g3 = VAR pv = COALESCE ( d2, d1 ) RETURN IF ( p3 && NOT ISBLANK ( pv ), DATEDIFF ( pv, d3, MINUTE ) / 1440.0 )
@@ -265,6 +267,13 @@ table _Medidas
 				"<div style='font-size:8.5px;text-transform:uppercase;letter-spacing:.08em;color:#C77FA8;font-weight:700;'>Detalle del env&iacute;o</div>" &
 				"<div style='font-size:15px;font-weight:700;color:#1B141F;margin:0 0 6px;" & _mono & "'>" & COALESCE ( vAlb, vTrack, "&mdash;" ) & "</div>" &
 				_meta & "</div>"
+			VAR _alertInc =
+				IF ( pInc,
+					"<div style='display:flex;align-items:center;gap:8px;margin-top:8px;background:#FBEAF2;border:1px solid #E7B9D3;border-left:3px solid #B5638F;border-radius:10px;padding:7px 10px;'>" &
+					"<span style='font-size:15px;line-height:1;color:#B5638F;'>&#9888;</span>" &
+					"<div><div style='font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#B5638F;'>Incidencia en el env&iacute;o</div>" &
+					"<div style='font-size:10px;color:#6B6470;margin-top:1px;" & _mono & "'>" & FORMAT ( dInc, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( dInc, "HH:mm" ) & IF ( p5, " &middot; resuelta (entregado)", " &middot; sin resolver" ) & "</div></div></div>",
+					"" )
 			VAR _row1 =
 				"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
 				"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;" & IF ( lastIdx = 1, "background:#1B141F;border:2px solid #1B141F;", IF ( p1, "background:#FFFFFF;border:2px solid #DFA0C9;", "background:#FFFFFF;border:2px solid #E0D7E4;" ) ) & "'></span>" &
@@ -294,14 +303,21 @@ table _Medidas
 				"<div style='font-size:11.5px;font-weight:600;color:" & IF ( p5, "#1B141F", "#9A93A0" ) & ";'>Entregado</div>" &
 				IF ( p5, "<div style='font-size:10px;color:#6B6470;margin-top:0;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( d5, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( d5, "HH:mm" ) & "</div>", "<div style='font-size:10px;color:#9A93A0;margin-top:0;display:inline-block;vertical-align:middle;'>Pendiente</div>" ) &
 				IF ( NOT ISBLANK ( g5 ) && g5 >= 0, "<div style='display:inline-block;margin-left:7px;vertical-align:middle;font-size:8.5px;font-weight:600;color:#9A93A0;background:#F5EEF4;padding:1px 6px;border-radius:4px;" & _mono & "'>+" & FORMAT ( g5, "0.0", "es-ES" ) & "d</div>", "" ) & "</li>"
+			VAR _rowInc =
+				IF ( pInc,
+					"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
+					"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;background:#B5638F;border:2px solid #B5638F;'></span>" &
+					"<div style='font-size:11.5px;font-weight:700;color:#B5638F;'>&#9888; Incidencia</div>" &
+					"<div style='font-size:10px;color:#6B6470;margin-top:0;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( dInc, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( dInc, "HH:mm" ) & "</div></li>",
+					"" )
 			VAR _tl =
 				"<div style='margin-top:7px;'>" &
 				"<div style='font-size:8.5px;text-transform:uppercase;letter-spacing:.06em;color:#6B6470;font-weight:700;margin:0 0 6px 2px;'>L&iacute;nea de tiempo</div>" &
-				"<ul style='list-style:none;margin:0;padding:0 0 0 6px;'>" & _row1 & _row2 & _row3 & _row4 & _row5 & "</ul></div>"
+				"<ul style='list-style:none;margin:0;padding:0 0 0 6px;'>" & _row1 & _row2 & _row3 & _row4 & _rowInc & _row5 & "</ul></div>"
 			RETURN
 				IF ( ISBLANK ( vAlb ) && ISBLANK ( vTrack ),
 					"<div style='" & _font & "color:#9A93A0;font-size:12px;padding:16px;'>Pasa el rat&oacute;n por un env&iacute;o para ver su detalle.</div>",
-					"<div style='" & _font & "color:#1B141F;'>" & _hdr & _tl & "</div>" )
+					"<div style='" & _font & "color:#1B141F;'>" & _hdr & _alertInc & _tl & "</div>" )
 		displayFolder: 9 HTML
 		lineageTag: d1ed0000-0000-4000-8000-000000000106
 
