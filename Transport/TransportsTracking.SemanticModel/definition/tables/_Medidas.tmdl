@@ -230,16 +230,6 @@ table _Medidas
 			VAR vPrev = MAX ( LOL_TRANSPORT_TRACKING[fecha_entrega_prevista] )
 			VAR vSla = MAX ( LOL_TRANSPORT_TRACKING[sla_objetivo] )
 			VAR _aTiempo = IF ( NOT ISBLANK ( vDias ) && NOT ISBLANK ( vSla ), IF ( vDias <= vSla, "A tiempo", "Fuera de SLA" ) )
-			VAR gRec = VAR pv = COALESCE ( d2, d1 ) RETURN IF ( pRecv && NOT ISBLANK ( pv ), DATEDIFF ( pv, dRec, MINUTE ) / 1440.0 )
-			VAR gAge = VAR pv = COALESCE ( d3, dRec, d2, d1 ) RETURN IF ( pAgev && NOT ISBLANK ( pv ), DATEDIFF ( pv, dAge, MINUTE ) / 1440.0 )
-			VAR gPen = VAR pv = COALESCE ( dAge, d3, dRec, d2, d1 ) RETURN IF ( pPenv && NOT ISBLANK ( pv ), DATEDIFF ( pv, dPen, MINUTE ) / 1440.0 )
-			VAR gDev = VAR pv = COALESCE ( d5, d4, d3, d2, d1 ) RETURN IF ( pDev && NOT ISBLANK ( pv ), DATEDIFF ( pv, dDev, MINUTE ) / 1440.0 )
-			VAR gFal = VAR pv = COALESCE ( d5, d4, d3, d2, d1 ) RETURN IF ( pFal && NOT ISBLANK ( pv ), DATEDIFF ( pv, dFal, MINUTE ) / 1440.0 )
-			VAR lastIdx = IF ( p5, 5, IF ( p4, 4, IF ( p3, 3, IF ( p2, 2, IF ( p1, 1, 0 ) ) ) ) )
-			VAR g2 = IF ( p2 && p1, DATEDIFF ( d1, d2, MINUTE ) / 1440.0 )
-			VAR g3 = VAR pv = COALESCE ( d2, d1 ) RETURN IF ( p3 && NOT ISBLANK ( pv ), DATEDIFF ( pv, d3, MINUTE ) / 1440.0 )
-			VAR g4 = VAR pv = COALESCE ( d3, d2, d1 ) RETURN IF ( p4 && NOT ISBLANK ( pv ), DATEDIFF ( pv, d4, MINUTE ) / 1440.0 )
-			VAR g5 = VAR pv = COALESCE ( d4, d3, d2, d1 ) RETURN IF ( p5 && NOT ISBLANK ( pv ), DATEDIFF ( pv, d5, MINUTE ) / 1440.0 )
 			VAR _font = "font-family:Montserrat,Segoe UI,system-ui,sans-serif;"
 			VAR _mono = "font-family:ui-monospace,Consolas,monospace;"
 			VAR _destino = COALESCE ( vCiu, "&mdash;" ) & IF ( ISBLANK ( vPais ), "", "<br><span style='color:#6B6470;font-weight:500;'>" & vPais & "</span>" )
@@ -268,86 +258,51 @@ table _Medidas
 					"<div><div style='font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#B5638F;'>Incidencia en el env&iacute;o</div>" &
 					"<div style='font-size:10px;color:#6B6470;margin-top:1px;" & _mono & "'>" & FORMAT ( dInc, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( dInc, "HH:mm" ) & IF ( p5 && dInc <= d5, " &middot; resuelta (entregado)", IF ( p5, " &middot; posterior a la entrega", " &middot; sin resolver" ) ) & "</div></div></div>",
 					"" )
-			VAR _row1 =
-				"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
-				"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;" & IF ( lastIdx = 1, "background:#1B141F;border:2px solid #1B141F;", IF ( p1, "background:#FFFFFF;border:2px solid #DFA0C9;", "background:#FFFFFF;border:2px solid #E0D7E4;" ) ) & "'></span>" &
-				"<div style='font-size:11.5px;font-weight:600;color:" & IF ( p1, "#1B141F", "#9A93A0" ) & ";'>Lanzamiento</div>" &
-				IF ( p1, "<div style='font-size:10px;color:#6B6470;margin-top:0;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( d1, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( d1, "HH:mm" ) & "</div>", "<div style='font-size:10px;color:#9A93A0;margin-top:0;display:inline-block;vertical-align:middle;'>Pendiente</div>" ) & "</li>"
-			VAR _row2 =
-				"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
-				"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;" & IF ( lastIdx = 2, "background:#1B141F;border:2px solid #1B141F;", IF ( p2, "background:#FFFFFF;border:2px solid #DFA0C9;", "background:#FFFFFF;border:2px solid #E0D7E4;" ) ) & "'></span>" &
-				"<div style='font-size:11.5px;font-weight:600;color:" & IF ( p2, "#1B141F", "#9A93A0" ) & ";'>Etiqueta creada</div>" &
-				IF ( p2, "<div style='font-size:10px;color:#6B6470;margin-top:0;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( d2, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( d2, "HH:mm" ) & "</div>", "<div style='font-size:10px;color:#9A93A0;margin-top:0;display:inline-block;vertical-align:middle;'>Pendiente</div>" ) &
-				IF ( NOT ISBLANK ( g2 ) && g2 >= 0, "<div style='display:inline-block;margin-left:7px;vertical-align:middle;font-size:8.5px;font-weight:600;color:#9A93A0;background:#F5EEF4;padding:1px 6px;border-radius:4px;" & _mono & "'>+" & FORMAT ( g2, "0.0", "es-ES" ) & "d</div>", "" ) & "</li>"
-			VAR _row3 =
-				"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
-				"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;" & IF ( lastIdx = 3, "background:#1B141F;border:2px solid #1B141F;", IF ( p3, "background:#FFFFFF;border:2px solid #DFA0C9;", "background:#FFFFFF;border:2px solid #E0D7E4;" ) ) & "'></span>" &
-				"<div style='font-size:11.5px;font-weight:600;color:" & IF ( p3, "#1B141F", "#9A93A0" ) & ";'>En tr&aacute;nsito</div>" &
-				IF ( p3, "<div style='font-size:10px;color:#6B6470;margin-top:0;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( d3, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( d3, "HH:mm" ) & "</div>", "<div style='font-size:10px;color:#9A93A0;margin-top:0;display:inline-block;vertical-align:middle;'>Pendiente</div>" ) &
-				IF ( NOT ISBLANK ( g3 ) && g3 >= 0, "<div style='display:inline-block;margin-left:7px;vertical-align:middle;font-size:8.5px;font-weight:600;color:#9A93A0;background:#F5EEF4;padding:1px 6px;border-radius:4px;" & _mono & "'>+" & FORMAT ( g3, "0.0", "es-ES" ) & "d</div>", "" ) & "</li>"
-			VAR _row4 =
-				"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
-				"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;" & IF ( lastIdx = 4, "background:#1B141F;border:2px solid #1B141F;", IF ( p4, "background:#FFFFFF;border:2px solid #DFA0C9;", "background:#FFFFFF;border:2px solid #E0D7E4;" ) ) & "'></span>" &
-				"<div style='font-size:11.5px;font-weight:600;color:" & IF ( p4, "#1B141F", "#9A93A0" ) & ";'>En reparto</div>" &
-				IF ( p4, "<div style='font-size:10px;color:#6B6470;margin-top:0;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( d4, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( d4, "HH:mm" ) & "</div>", "<div style='font-size:10px;color:#9A93A0;margin-top:0;display:inline-block;vertical-align:middle;'>Pendiente</div>" ) &
-				IF ( NOT ISBLANK ( g4 ) && g4 >= 0, "<div style='display:inline-block;margin-left:7px;vertical-align:middle;font-size:8.5px;font-weight:600;color:#9A93A0;background:#F5EEF4;padding:1px 6px;border-radius:4px;" & _mono & "'>+" & FORMAT ( g4, "0.0", "es-ES" ) & "d</div>", "" ) & "</li>"
-			VAR _row5 =
-				"<li style='position:relative;padding:0 0 2px 18px;border-left:2px solid transparent;'>" &
-				"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;" & IF ( lastIdx = 5, "background:#1B141F;border:2px solid #1B141F;", IF ( p5, "background:#FFFFFF;border:2px solid #DFA0C9;", "background:#FFFFFF;border:2px solid #E0D7E4;" ) ) & "'></span>" &
-				"<div style='font-size:11.5px;font-weight:600;color:" & IF ( p5, "#1B141F", "#9A93A0" ) & ";'>Entregado</div>" &
-				IF ( p5, "<div style='font-size:10px;color:#6B6470;margin-top:0;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( d5, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( d5, "HH:mm" ) & "</div>", "<div style='font-size:10px;color:#9A93A0;margin-top:0;display:inline-block;vertical-align:middle;'>Pendiente</div>" ) &
-				IF ( NOT ISBLANK ( g5 ) && g5 >= 0, "<div style='display:inline-block;margin-left:7px;vertical-align:middle;font-size:8.5px;font-weight:600;color:#9A93A0;background:#F5EEF4;padding:1px 6px;border-radius:4px;" & _mono & "'>+" & FORMAT ( g5, "0.0", "es-ES" ) & "d</div>", "" ) & "</li>"
-			VAR _rowInc =
-				IF ( pInc,
-					"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
-					"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;background:#B5638F;border:2px solid #B5638F;'></span>" &
-					"<div style='font-size:11.5px;font-weight:700;color:#B5638F;'>&#9888; Incidencia</div>" &
-					"<div style='font-size:10px;color:#6B6470;margin-top:0;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( dInc, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( dInc, "HH:mm" ) & "</div></li>",
-					"" )
-			VAR _rowRec =
-				IF ( pRecv && dRec <> d1,
-					"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
-					"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;background:#FFFFFF;border:2px solid #DFA0C9;'></span>" &
-					"<div style='font-size:11.5px;font-weight:600;color:#1B141F;'>Recogido</div>" &
-					"<div style='font-size:10px;color:#6B6470;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( dRec, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( dRec, "HH:mm" ) & "</div>" &
-					IF ( NOT ISBLANK ( gRec ) && gRec >= 0, "<div style='display:inline-block;margin-left:7px;vertical-align:middle;font-size:8.5px;font-weight:600;color:#9A93A0;background:#F5EEF4;padding:1px 6px;border-radius:4px;" & _mono & "'>+" & FORMAT ( gRec, "0.0", "es-ES" ) & "d</div>", "" ) & "</li>",
-					"" )
-			VAR _rowAge =
-				IF ( pAgev,
-					"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
-					"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;background:#FFFFFF;border:2px solid #DFA0C9;'></span>" &
-					"<div style='font-size:11.5px;font-weight:600;color:#1B141F;'>En agencia destino</div>" &
-					"<div style='font-size:10px;color:#6B6470;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( dAge, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( dAge, "HH:mm" ) & "</div>" &
-					IF ( NOT ISBLANK ( gAge ) && gAge >= 0, "<div style='display:inline-block;margin-left:7px;vertical-align:middle;font-size:8.5px;font-weight:600;color:#9A93A0;background:#F5EEF4;padding:1px 6px;border-radius:4px;" & _mono & "'>+" & FORMAT ( gAge, "0.0", "es-ES" ) & "d</div>", "" ) & "</li>",
-					"" )
-			VAR _rowPen =
-				IF ( pPenv,
-					"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
-					"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;background:#FFFFFF;border:2px solid #DFA0C9;'></span>" &
-					"<div style='font-size:11.5px;font-weight:600;color:#1B141F;'>Pendiente de llegada</div>" &
-					"<div style='font-size:10px;color:#6B6470;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( dPen, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( dPen, "HH:mm" ) & "</div>" &
-					IF ( NOT ISBLANK ( gPen ) && gPen >= 0, "<div style='display:inline-block;margin-left:7px;vertical-align:middle;font-size:8.5px;font-weight:600;color:#9A93A0;background:#F5EEF4;padding:1px 6px;border-radius:4px;" & _mono & "'>+" & FORMAT ( gPen, "0.0", "es-ES" ) & "d</div>", "" ) & "</li>",
-					"" )
-			VAR _rowDev =
-				IF ( pDev,
-					"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
-					"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;background:#B5638F;border:2px solid #B5638F;'></span>" &
-					"<div style='font-size:11.5px;font-weight:700;color:#B5638F;'>Devuelto</div>" &
-					"<div style='font-size:10px;color:#6B6470;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( dDev, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( dDev, "HH:mm" ) & "</div>" &
-					IF ( NOT ISBLANK ( gDev ) && gDev >= 0, "<div style='display:inline-block;margin-left:7px;vertical-align:middle;font-size:8.5px;font-weight:600;color:#9A93A0;background:#F5EEF4;padding:1px 6px;border-radius:4px;" & _mono & "'>+" & FORMAT ( gDev, "0.0", "es-ES" ) & "d</div>", "" ) & "</li>",
-					"" )
-			VAR _rowFal =
-				IF ( pFal,
-					"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
-					"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;background:#B5638F;border:2px solid #B5638F;'></span>" &
-					"<div style='font-size:11.5px;font-weight:700;color:#B5638F;'>Falta definitiva</div>" &
-					"<div style='font-size:10px;color:#6B6470;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( dFal, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( dFal, "HH:mm" ) & "</div>" &
-					IF ( NOT ISBLANK ( gFal ) && gFal >= 0, "<div style='display:inline-block;margin-left:7px;vertical-align:middle;font-size:8.5px;font-weight:600;color:#9A93A0;background:#F5EEF4;padding:1px 6px;border-radius:4px;" & _mono & "'>+" & FORMAT ( gFal, "0.0", "es-ES" ) & "d</div>", "" ) & "</li>",
-					"" )
+			VAR _recFecha = IF ( pRecv && dRec <> d1, dRec )
+			VAR _hitos0 =
+				FILTER (
+					UNION (
+						ROW ( "orden", 1, "fecha", d1, "label", "Lanzamiento", "warn", 0, "fase", 1 ),
+						ROW ( "orden", 2, "fecha", d2, "label", "Etiqueta creada", "warn", 0, "fase", 1 ),
+						ROW ( "orden", 3, "fecha", _recFecha, "label", "Recogido", "warn", 0, "fase", 1 ),
+						ROW ( "orden", 4, "fecha", d3, "label", "En tr&aacute;nsito", "warn", 0, "fase", 1 ),
+						ROW ( "orden", 5, "fecha", dPen, "label", "Pendiente de llegada", "warn", 0, "fase", 1 ),
+						ROW ( "orden", 6, "fecha", dAge, "label", "En agencia destino", "warn", 0, "fase", 1 ),
+						ROW ( "orden", 7, "fecha", d4, "label", "En reparto", "warn", 0, "fase", 1 ),
+						ROW ( "orden", 8, "fecha", dInc, "label", "&#9888; Incidencia", "warn", 1, "fase", IF ( p5 && dInc > d5, 3, 1 ) ),
+						ROW ( "orden", 9, "fecha", d5, "label", "Entregado", "warn", 0, "fase", 2 ),
+						ROW ( "orden", 10, "fecha", dDev, "label", "Devuelto", "warn", 1, "fase", 3 ),
+						ROW ( "orden", 11, "fecha", dFal, "label", "Falta definitiva", "warn", 1, "fase", 3 )
+					),
+					NOT ISBLANK ( [fecha] )
+				)
+			VAR _hitos = ADDCOLUMNS ( _hitos0, "sk", [fase] * 100000000 + DATEDIFF ( DATE ( 2000, 1, 1 ), [fecha], MINUTE ) + [orden] * 0.001 )
+			VAR _maxSk = MAXX ( _hitos, [sk] )
+			VAR _liList =
+				CONCATENATEX (
+					_hitos,
+					VAR f = [fecha]
+					VAR curSk = [sk]
+					VAR isWarn = [warn] = 1
+					VAR isCur = curSk = _maxSk
+					VAR prevSk = MAXX ( FILTER ( _hitos, [sk] < curSk ), [sk] )
+					VAR prevF = MAXX ( FILTER ( _hitos, [sk] = prevSk ), [fecha] )
+					VAR gap = IF ( NOT ISBLANK ( prevF ), DATEDIFF ( prevF, f, MINUTE ) / 1440.0 )
+					VAR dot = IF ( isCur, "background:#1B141F;border:2px solid #1B141F;", IF ( isWarn, "background:#B5638F;border:2px solid #B5638F;", "background:#FFFFFF;border:2px solid #DFA0C9;" ) )
+					RETURN
+						"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
+						"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;" & dot & "'></span>" &
+						"<div style='font-size:11.5px;font-weight:" & IF ( isWarn, "700", "600" ) & ";color:" & IF ( isWarn, "#B5638F", "#1B141F" ) & ";'>" & [label] & "</div>" &
+						"<div style='font-size:10px;color:#6B6470;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( f, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( f, "HH:mm" ) & "</div>" &
+						IF ( NOT ISBLANK ( gap ) && gap >= 0, "<div style='display:inline-block;margin-left:7px;vertical-align:middle;font-size:8.5px;font-weight:600;color:#9A93A0;background:#F5EEF4;padding:1px 6px;border-radius:4px;" & _mono & "'>+" & FORMAT ( gap, "0.0", "es-ES" ) & "d</div>", "" ) &
+						"</li>",
+					"",
+					[sk], ASC
+				)
 			VAR _tl =
 				"<div style='margin-top:7px;'>" &
 				"<div style='font-size:8.5px;text-transform:uppercase;letter-spacing:.06em;color:#6B6470;font-weight:700;margin:0 0 6px 2px;'>L&iacute;nea de tiempo</div>" &
-				"<ul style='list-style:none;margin:0;padding:0 0 0 6px;'>" & _row1 & _row2 & _rowRec & _row3 & _rowAge & _rowPen & _row4 & _rowInc & _row5 & _rowDev & _rowFal & "</ul></div>"
+				"<ul style='list-style:none;margin:0;padding:0 0 0 6px;'>" & _liList & "</ul></div>"
 			RETURN
 				IF ( ISBLANK ( vAlb ) && ISBLANK ( vTrack ),
 					"<div style='" & _font & "color:#9A93A0;font-size:12px;padding:16px;'>Pasa el rat&oacute;n por un env&iacute;o para ver su detalle.</div>",

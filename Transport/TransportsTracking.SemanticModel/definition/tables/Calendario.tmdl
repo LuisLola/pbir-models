@@ -84,7 +84,7 @@ table Calendario
 		mode: import
 		source =
 				ADDCOLUMNS (
-				    CALENDAR ( MIN ( LOL_TRANSPORT_TRACKING[fecha_lanzamiento] ), MAX ( LOL_TRANSPORT_TRACKING[fecha_entregado] ) ),
+				    CALENDAR ( MIN ( LOL_TRANSPORT_TRACKING[fecha_lanzamiento] ), MAX ( TODAY (), MAX ( LOL_TRANSPORT_TRACKING[fecha_entregado] ) ) ),
 				    "Año", YEAR ( [Date] ),
 				    "MesNum", MONTH ( [Date] ),
 				    "MesNombre", FORMAT ( [Date], "mmm", "es-ES" ),
