@@ -337,7 +337,7 @@ table Calendario
 		source =
 				
 				VAR FechaInicio = DATE(2022, 1, 1)
-				VAR FechaFin    = DATE(YEAR(TODAY()) + 2, 12, 31)
+				VAR FechaFin    = MAX ( TODAY (), MAX ( LOL_PBIB2BSALESORDER[DocDate] ) )
 				RETURN
 				ADDCOLUMNS(
 				    CALENDAR(FechaInicio, FechaFin),
