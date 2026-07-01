@@ -1,0 +1,158 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "b1ab2519de79833d7e23",
+  "position": {
+    "x": 691.243611584327,
+    "y": 78.500851788756378,
+    "z": 4000,
+    "height": 109.02896081771721,
+    "width": 588.75638841567286,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasTemporadas"
+                    }
+                  },
+                  "Property": "TemporadaSeleccionada"
+                }
+              },
+              "queryRef": "MedidasTemporadas.TemporadaSeleccionada",
+              "nativeQueryRef": "Temporada actual"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasTemporadas"
+                    }
+                  },
+                  "Property": "TemporadaAnterior"
+                }
+              },
+              "queryRef": "MedidasTemporadas.TemporadaAnterior",
+              "nativeQueryRef": "Temporada anterior"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasTemporadas"
+                    }
+                  },
+                  "Property": "TemporadaPasada"
+                }
+              },
+              "queryRef": "MedidasTemporadas.TemporadaPasada",
+              "nativeQueryRef": "Hace 2 temporadas"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasTemporadas"
+                    }
+                  },
+                  "Property": "FechaLimiteSeleccionada"
+                }
+              },
+              "queryRef": "MedidasTemporadas.FechaLimiteSeleccionada",
+              "nativeQueryRef": "Fecha de corte"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "value": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "06460e67d3b00bb72ab0",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasTemporadas"
+              }
+            },
+            "Property": "TemporadaSeleccionada"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "10fc99f05dbb000019b1",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasTemporadas"
+              }
+            },
+            "Property": "TemporadaAnterior"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "c68d93db7522c85c7209",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasTemporadas"
+              }
+            },
+            "Property": "TemporadaPasada"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "1594c8fe759cb4db861b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasTemporadas"
+              }
+            },
+            "Property": "FechaLimiteSeleccionada"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

@@ -376,5 +376,23 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "d400330a74d45c7dec79",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Tiempo Entrega Mediana (Lab)"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

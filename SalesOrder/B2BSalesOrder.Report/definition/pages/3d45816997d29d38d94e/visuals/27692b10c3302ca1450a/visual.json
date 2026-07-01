@@ -1,0 +1,55 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "27692b10c3302ca1450a",
+  "position": {
+    "x": 407.04355885078775,
+    "y": 0,
+    "z": 7000,
+    "height": 64.0593141797961,
+    "width": 320.29657089898052,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasTemporadas"
+                    }
+                  },
+                  "Property": "FechaLimiteSeleccionada"
+                }
+              },
+              "queryRef": "MedidasTemporadas.FechaLimiteSeleccionada",
+              "nativeQueryRef": "FechaLimiteSeleccionada"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MedidasTemporadas"
+                  }
+                },
+                "Property": "FechaLimiteSeleccionada"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

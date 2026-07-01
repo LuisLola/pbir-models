@@ -1,0 +1,195 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "478d96091add07416bed",
+  "position": {
+    "x": 806.865671641791,
+    "y": 0,
+    "z": 14000,
+    "height": 50.149253731343279,
+    "width": 365.37313432835822,
+    "tabOrder": 13001
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasTemporadas"
+                    }
+                  },
+                  "Property": "TemporadaSeleccionada"
+                }
+              },
+              "queryRef": "MedidasTemporadas.TemporadaSeleccionada",
+              "nativeQueryRef": "Temporada",
+              "displayName": "Temporada"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasTemporadas"
+                    }
+                  },
+                  "Property": "TemporadaAnterior"
+                }
+              },
+              "queryRef": "MedidasTemporadas.TemporadaAnterior",
+              "nativeQueryRef": "Temporada anterior"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasTemporadas"
+                    }
+                  },
+                  "Property": "TemporadaPasada"
+                }
+              },
+              "queryRef": "MedidasTemporadas.TemporadaPasada",
+              "nativeQueryRef": "Hace 2 temporadas"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "value": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "label": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "paddingUniform": {
+              "expr": {
+                "Literal": {
+                  "Value": "0L"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "layout": [
+        {
+          "properties": {
+            "paddingUniform": {
+              "expr": {
+                "Literal": {
+                  "Value": "0L"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "shapeCustomRectangle": [
+        {
+          "properties": {
+            "rectangleRoundedCurve": {
+              "expr": {
+                "Literal": {
+                  "Value": "11L"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "4fe2cfcb3c1987b92773",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasTemporadas"
+              }
+            },
+            "Property": "TemporadaSeleccionada"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "4ef94ed923cb8d247090",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasTemporadas"
+              }
+            },
+            "Property": "TemporadaAnterior"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "6534cf81c1235190ab45",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasTemporadas"
+              }
+            },
+            "Property": "TemporadaPasada"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

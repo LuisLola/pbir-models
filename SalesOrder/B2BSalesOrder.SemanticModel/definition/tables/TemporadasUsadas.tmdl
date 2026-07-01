@@ -1,0 +1,24 @@
+table TemporadasUsadas
+	lineageTag: 0b61144b-26ef-4df2-8e6c-196353580f1c
+
+	column Code
+		dataType: string
+		lineageTag: b775554d-4ca5-47c3-9de6-47438e97f7bc
+		summarizeBy: none
+		sourceColumn: [Code]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition TemporadasUsadas = calculated
+		mode: import
+		source =
+				
+				DISTINCT (
+				    SELECTCOLUMNS (
+				        'LOL_PBISEASON',
+				        "Code", 'LOL_PBISEASON'[Code]
+				    )
+				)
+
+	annotation PBI_Id = c1c4bc626e0a44ecbc6b9ed78de7fb07
+

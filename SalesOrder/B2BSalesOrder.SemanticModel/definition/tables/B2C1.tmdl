@@ -1,0 +1,67 @@
+table B2C1
+	lineageTag: f591d9f8-5fff-4b3f-9aca-62c75d7317d9
+
+	measure B2C2 =
+			{
+			    ("Agente_Cajero", NAMEOF('LOL_PBIAGENTES'[Agente_Cajero]), 0),
+			    ("RazonSocial", NAMEOF('LOL_PBICLIENTES'[RazonSocial]), 1),
+			    ("Pais", NAMEOF('LOL_PBICLIENTES'[Pais]), 2),
+			    ("GrupodeArt", NAMEOF('LOL_PBIMODELITEM'[GrupodeArt]), 3),
+			    ("Material", NAMEOF('LOL_PBIMODELITEM'[Material]), 4),
+			    ("Descripcion_familia_agregada", NAMEOF('LOL_PBIMODELITEM'[Descripcion_familia_agregada]), 5),
+			    ("Nombre_familia", NAMEOF('LOL_PBIMODELITEM'[Nombre_familia]), 6),
+			    ("Subfamilia", NAMEOF('LOL_PBIMODELITEM'[Subfamilia]), 7)
+			}
+		lineageTag: 2b2b5e7a-b20f-4759-a08f-7fa62c7b58fa
+
+	column B2C1
+		lineageTag: 2fb68085-3c87-40e0-9590-8b4fbedc3e51
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'B2C1 Orden'
+
+		relatedColumnDetails
+			groupByColumn: 'B2C1 Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'B2C1 Campos'
+		isHidden
+		lineageTag: c91ddbbf-8f6f-4c98-89b4-4edd0623ae6a
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'B2C1 Orden'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'B2C1 Orden'
+		isHidden
+		formatString: 0
+		lineageTag: 5d537530-f60a-43be-9698-7a0412d120f8
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition B2C1 = calculated
+		mode: import
+		source =
+				{
+				    ("Agente_Cajero", NAMEOF('LOL_PBIAGENTES'[Agente_Cajero]), 0),
+				    ("RazonSocial", NAMEOF('LOL_PBICLIENTES'[RazonSocial]), 1),
+				    ("Pais", NAMEOF('LOL_PBICLIENTES'[Pais]), 2),
+				    ("GrupodeArt", NAMEOF('LOL_PBIMODELITEM'[GrupodeArt]), 3),
+				    ("Material", NAMEOF('LOL_PBIMODELITEM'[Material]), 4),
+				    ("Descripcion_familia_agregada", NAMEOF('LOL_PBIMODELITEM'[Descripcion_familia_agregada]), 5),
+				    ("Nombre_familia", NAMEOF('LOL_PBIMODELITEM'[Nombre_familia]), 6),
+				    ("Subfamilia", NAMEOF('LOL_PBIMODELITEM'[Subfamilia]), 7)
+				}
+
+	annotation PBI_Id = fe9904d63e904460b34deb56711ad1ac
+

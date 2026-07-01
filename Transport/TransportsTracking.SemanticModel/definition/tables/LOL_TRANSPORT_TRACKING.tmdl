@@ -278,61 +278,6 @@ table LOL_TRANSPORT_TRACKING
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Estado canónico del envío, derivado por prioridad del hito MÁS AVANZADO alcanzado
-	/// (según las fechas reales, no el texto de [estado] que suele venir obsoleto/desincronizado).
-	/// Prioridad: Entregado > Devuelto > Incidencia > En reparto > En agencia destino >
-	/// En tránsito > Recogido > Etiqueta creada > Error de tracking > Lanzado > Sin estado.
-	column estado_norm =
-			VAR _entregado = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_entregado] ) || LOL_TRANSPORT_TRACKING[estado] = "Entregado"
-			VAR _devuelto = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_devuelto] ) || LOL_TRANSPORT_TRACKING[estado] = "Devuelto"
-			VAR _incid = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_incidencia] ) || LOL_TRANSPORT_TRACKING[estado] = "Incidencia"
-			VAR _reparto = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_en_reparto] ) || LOL_TRANSPORT_TRACKING[estado] = "En reparto"
-			VAR _agencia = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_agencia_destino] ) || LOL_TRANSPORT_TRACKING[estado] = "En agencia destino"
-			VAR _transito = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_en_transito] ) || LOL_TRANSPORT_TRACKING[estado] = "En tránsito"
-			VAR _recogido = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_recogido] ) || LOL_TRANSPORT_TRACKING[estado] = "Recogido"
-			VAR _etiqueta = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_etiqueta] ) || LOL_TRANSPORT_TRACKING[estado] = "Etiqueta creada"
-			VAR _error = LOL_TRANSPORT_TRACKING[estado] = "Error"
-			VAR _lanzado = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_lanzamiento] )
-			RETURN
-			    SWITCH ( TRUE (),
-			        _entregado, "Entregado",
-			        _devuelto, "Devuelto",
-			        _incid, "Incidencia",
-			        _reparto, "En reparto",
-			        _agencia, "En agencia destino",
-			        _transito, "En tránsito",
-			        _recogido, "Recogido",
-			        _etiqueta, "Etiqueta creada",
-			        _error, "Error de tracking",
-			        _lanzado, "Lanzado",
-			        "Sin estado"
-			    )
-		dataType: string
-		lineageTag: d1c00000-0000-4000-8000-00000000000f
-		summarizeBy: none
-
-		annotation SummarizationSetBy = Automatic
-
-	/// Agrupación de alto nivel del estado canónico para donut/embudo:
-	/// Entregado · En curso · Incidencia · Devuelto · Sin datos (Error de tracking, Lanzado, Sin estado).
-	column estado_grupo =
-			SWITCH ( LOL_TRANSPORT_TRACKING[estado_norm],
-			    "Entregado", "Entregado",
-			    "Devuelto", "Devuelto",
-			    "Incidencia", "Incidencia",
-			    "En tránsito", "En curso",
-			    "En reparto", "En curso",
-			    "En agencia destino", "En curso",
-			    "Recogido", "En curso",
-			    "Etiqueta creada", "En curso",
-			    "Sin datos"
-			)
-		dataType: string
-		lineageTag: d1c00000-0000-4000-8000-000000000010
-		summarizeBy: none
-
-		annotation SummarizationSetBy = Automatic
-
 	/// 1 si el envío está entregado (estado canónico = Entregado). Incluye los entregados
 	/// cuyo texto [estado] no se actualizó y los que además tienen fecha_devuelto posterior.
 	column es_entregado = IF ( LOL_TRANSPORT_TRACKING[estado_norm] = "Entregado", 1, 0 )
@@ -357,34 +302,6 @@ table LOL_TRANSPORT_TRACKING
 		dataType: int64
 		formatString: 0
 		lineageTag: d1c00000-0000-4000-8000-000000000004
-		summarizeBy: none
-
-		annotation SummarizationSetBy = Automatic
-
-	/// 1 si el envío está activo en la red (en tránsito, reparto, agencia, recogido o con etiqueta).
-	column es_en_curso = IF ( LOL_TRANSPORT_TRACKING[estado_grupo] = "En curso", 1, 0 )
-		dataType: int64
-		formatString: 0
-		lineageTag: d1c00000-0000-4000-8000-000000000011
-		summarizeBy: none
-
-		annotation SummarizationSetBy = Automatic
-
-	/// 1 si el seguimiento falló (estado "Error"): el envío existe pero no hay datos de ciclo.
-	column es_error_tracking = IF ( LOL_TRANSPORT_TRACKING[estado_norm] = "Error de tracking", 1, 0 )
-		dataType: int64
-		formatString: 0
-		lineageTag: d1c00000-0000-4000-8000-000000000012
-		summarizeBy: none
-
-		annotation SummarizationSetBy = Automatic
-
-	/// 1 si el envío tiene seguimiento válido (excluye Error de tracking, Lanzado sin estado y Sin estado).
-	/// Es el denominador de las tasas operativas (% entregados, incidencias, devoluciones).
-	column es_operativo = IF ( LOL_TRANSPORT_TRACKING[estado_grupo] = "Sin datos", 0, 1 )
-		dataType: int64
-		formatString: 0
-		lineageTag: d1c00000-0000-4000-8000-000000000013
 		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
@@ -504,6 +421,89 @@ table LOL_TRANSPORT_TRACKING
 		dataType: int64
 		formatString: 0
 		lineageTag: d1c00000-0000-4000-8000-00000000000e
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Estado canónico del envío, derivado por prioridad del hito MÁS AVANZADO alcanzado
+	/// (según las fechas reales, no el texto de [estado] que suele venir obsoleto/desincronizado).
+	/// Prioridad: Entregado > Devuelto > Incidencia > En reparto > En agencia destino >
+	/// En tránsito > Recogido > Etiqueta creada > Error de tracking > Lanzado > Sin estado.
+	column estado_norm =
+			VAR _entregado = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_entregado] ) || LOL_TRANSPORT_TRACKING[estado] = "Entregado"
+			VAR _devuelto = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_devuelto] ) || LOL_TRANSPORT_TRACKING[estado] = "Devuelto"
+			VAR _incid = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_incidencia] ) || LOL_TRANSPORT_TRACKING[estado] = "Incidencia"
+			VAR _reparto = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_en_reparto] ) || LOL_TRANSPORT_TRACKING[estado] = "En reparto"
+			VAR _agencia = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_agencia_destino] ) || LOL_TRANSPORT_TRACKING[estado] = "En agencia destino"
+			VAR _transito = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_en_transito] ) || LOL_TRANSPORT_TRACKING[estado] = "En tránsito"
+			VAR _recogido = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_recogido] ) || LOL_TRANSPORT_TRACKING[estado] = "Recogido"
+			VAR _etiqueta = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_etiqueta] ) || LOL_TRANSPORT_TRACKING[estado] = "Etiqueta creada"
+			VAR _error = LOL_TRANSPORT_TRACKING[estado] = "Error"
+			VAR _lanzado = NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_lanzamiento] )
+			RETURN
+			    SWITCH ( TRUE (),
+			        _entregado, "Entregado",
+			        _devuelto, "Devuelto",
+			        _incid, "Incidencia",
+			        _reparto, "En reparto",
+			        _agencia, "En agencia destino",
+			        _transito, "En tránsito",
+			        _recogido, "Recogido",
+			        _etiqueta, "Etiqueta creada",
+			        _error, "Error de tracking",
+			        _lanzado, "Lanzado",
+			        "Sin estado"
+			    )
+		dataType: string
+		lineageTag: d1c00000-0000-4000-8000-00000000000f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Agrupación de alto nivel del estado canónico para donut/embudo:
+	/// Entregado · En curso · Incidencia · Devuelto · Sin datos (Error de tracking, Lanzado, Sin estado).
+	column estado_grupo =
+			SWITCH ( LOL_TRANSPORT_TRACKING[estado_norm],
+			    "Entregado", "Entregado",
+			    "Devuelto", "Devuelto",
+			    "Incidencia", "Incidencia",
+			    "En tránsito", "En curso",
+			    "En reparto", "En curso",
+			    "En agencia destino", "En curso",
+			    "Recogido", "En curso",
+			    "Etiqueta creada", "En curso",
+			    "Sin datos"
+			)
+		dataType: string
+		lineageTag: d1c00000-0000-4000-8000-000000000010
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// 1 si el envío está activo en la red (en tránsito, reparto, agencia, recogido o con etiqueta).
+	column es_en_curso = IF ( LOL_TRANSPORT_TRACKING[estado_grupo] = "En curso", 1, 0 )
+		dataType: int64
+		formatString: 0
+		lineageTag: d1c00000-0000-4000-8000-000000000011
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// 1 si el seguimiento falló (estado "Error"): el envío existe pero no hay datos de ciclo.
+	column es_error_tracking = IF ( LOL_TRANSPORT_TRACKING[estado_norm] = "Error de tracking", 1, 0 )
+		dataType: int64
+		formatString: 0
+		lineageTag: d1c00000-0000-4000-8000-000000000012
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// 1 si el envío tiene seguimiento válido (excluye Error de tracking, Lanzado sin estado y Sin estado).
+	/// Es el denominador de las tasas operativas (% entregados, incidencias, devoluciones).
+	column es_operativo = IF ( LOL_TRANSPORT_TRACKING[estado_grupo] = "Sin datos", 0, 1 )
+		dataType: int64
+		formatString: 0
+		lineageTag: d1c00000-0000-4000-8000-000000000013
 		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic

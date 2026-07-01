@@ -1,0 +1,206 @@
+table LOL_PBICLIENTES
+	lineageTag: ed4fbf1c-6bd9-417a-9058-96e927a71f3a
+
+	column Balance
+		dataType: double
+		lineageTag: d9fe575e-9bd2-4d6b-80e2-0c5651a0a2f3
+		summarizeBy: none
+		sourceColumn: Balance
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CodeCliente
+		dataType: string
+		lineageTag: b0019681-432f-4b2d-bc1d-a5fadf8fbd86
+		summarizeBy: none
+		sourceColumn: CodeCliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column CP
+		dataType: string
+		lineageTag: d2105400-607d-4ee0-8595-f08d0cf0a46d
+		summarizeBy: none
+		sourceColumn: CP
+
+		annotation SummarizationSetBy = Automatic
+
+	column Direccion1F
+		dataType: string
+		lineageTag: 14a30328-1061-40f6-a454-dc89f398e341
+		summarizeBy: none
+		sourceColumn: Direccion1F
+
+		annotation SummarizationSetBy = Automatic
+
+	column Direccion1S
+		dataType: string
+		lineageTag: 886a3fa7-856e-4407-b0b4-47619a11040b
+		summarizeBy: none
+		sourceColumn: Direccion1S
+
+		annotation SummarizationSetBy = Automatic
+
+	column Direccion2F
+		dataType: string
+		lineageTag: faa86642-64c0-4448-bee2-628f2b55f46f
+		summarizeBy: none
+		sourceColumn: Direccion2F
+
+		annotation SummarizationSetBy = Automatic
+
+	column Direccion2S
+		dataType: string
+		lineageTag: d370b2fb-aa39-46d8-a961-144cd8b0efc2
+		summarizeBy: none
+		sourceColumn: Direccion2S
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaComunicacion
+		dataType: string
+		lineageTag: f32aa622-ee37-44ee-a79e-a9c4a14492f2
+		summarizeBy: none
+		sourceColumn: FechaComunicacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column GroupCode
+		dataType: string
+		lineageTag: aee1a7a4-40a7-4691-a0de-473b675f7e37
+		summarizeBy: none
+		sourceColumn: GroupCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column GroupName
+		dataType: string
+		lineageTag: b73aba07-cb97-4719-90bd-2d2e9dcc0e75
+		summarizeBy: none
+		sourceColumn: GroupName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Idioma
+		dataType: string
+		lineageTag: 06cd6f9d-cea8-41de-81d2-b6513e3ff92b
+		summarizeBy: none
+		sourceColumn: Idioma
+
+		annotation SummarizationSetBy = Automatic
+
+	column MailContacto
+		dataType: string
+		lineageTag: d496c20e-576f-430b-ba78-d5c4b84d80ff
+		summarizeBy: none
+		sourceColumn: MailContacto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Moneda
+		dataType: string
+		lineageTag: 53463d94-1a3f-4c4b-b80a-20379b340d3c
+		summarizeBy: none
+		sourceColumn: Moneda
+
+		annotation SummarizationSetBy = Automatic
+
+	column NIF
+		dataType: string
+		lineageTag: d8bf3999-7a30-4309-bf92-80d2e34febed
+		summarizeBy: none
+		sourceColumn: NIF
+
+		annotation SummarizationSetBy = Automatic
+
+	column Pais
+		dataType: string
+		lineageTag: 8af1169e-d023-4bb7-94b3-21c10001b4b3
+		summarizeBy: none
+		sourceColumn: Pais
+
+		annotation SummarizationSetBy = Automatic
+
+	column PersonaContacto
+		dataType: string
+		lineageTag: 86e7140a-f9ce-4922-8ff6-a6e4512cefe7
+		summarizeBy: none
+		sourceColumn: PersonaContacto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Poblacion
+		dataType: string
+		lineageTag: 731b98b6-99de-4e9d-af6c-f63cabee394d
+		summarizeBy: none
+		sourceColumn: Poblacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column Provincia
+		dataType: string
+		lineageTag: 3d42527b-d513-46fd-8e52-c5a018090fb0
+		summarizeBy: none
+		sourceColumn: Provincia
+
+		annotation SummarizationSetBy = Automatic
+
+	column RazonSocial
+		dataType: string
+		lineageTag: 882ed26e-fc79-46ce-849a-5eaa2f2a369c
+		summarizeBy: none
+		sourceColumn: RazonSocial
+
+		annotation SummarizationSetBy = Automatic
+
+	column TarifaCode
+		dataType: string
+		lineageTag: 0f4cc898-b39b-49ae-b2b4-659d1a17cbf4
+		summarizeBy: none
+		sourceColumn: TarifaCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column TarifaName
+		dataType: string
+		lineageTag: 5bb4b1f4-2adf-4d01-a805-8494c6d04a34
+		summarizeBy: none
+		sourceColumn: TarifaName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Telefono
+		dataType: string
+		lineageTag: e55a295f-e7ef-4536-ac59-b8adfc3d295d
+		summarizeBy: none
+		sourceColumn: Telefono
+
+		annotation SummarizationSetBy = Automatic
+
+	column TelefonoMovil
+		dataType: string
+		lineageTag: c3752046-44d2-49d5-b9a5-5d22b72aa46b
+		summarizeBy: none
+		sourceColumn: TelefonoMovil
+
+		annotation SummarizationSetBy = Automatic
+
+	column Web
+		dataType: string
+		lineageTag: 934224e0-161d-4f60-9e29-aa315776f359
+		summarizeBy: none
+		sourceColumn: Web
+
+		annotation SummarizationSetBy = Automatic
+
+	partition LOL_PBICLIENTES = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin"),
+				    dbo_LOL_PBICLIENTES = Origen{[Schema="dbo",Item="LOL_PBICLIENTES"]}[Data]
+				in
+				    dbo_LOL_PBICLIENTES
+

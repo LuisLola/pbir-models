@@ -1,0 +1,80 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "47c8dc41815e20046d24",
+  "position": {
+    "x": 0,
+    "y": 261.36736554238831,
+    "z": 0,
+    "height": 280.03646308113036,
+    "width": 1017.4658158614403,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasTemporadas"
+                    }
+                  },
+                  "Property": "TemporadaSeleccionada"
+                }
+              },
+              "queryRef": "MedidasTemporadas.TemporadaSeleccionada",
+              "nativeQueryRef": "TemporadaSeleccionada"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasVentas"
+                    }
+                  },
+                  "Property": "VentasTemporadaSeleccionada"
+                }
+              },
+              "queryRef": "MedidasVentas.VentasTemporadaSeleccionada",
+              "nativeQueryRef": "VentasTemporadaSeleccionada"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasVentas"
+                    }
+                  },
+                  "Property": "VentasTemporadaAnterior"
+                }
+              },
+              "queryRef": "MedidasVentas.VentasTemporadaAnterior",
+              "nativeQueryRef": "VentasTemporadaAnterior"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasTemporadas"
+                    }
+                  },
+                  "Property": "ValidacionVersionRangos"
+                }
+              },
+              "queryRef": "MedidasTemporadas.ValidacionVersionRangos",
+              "nativeQueryRef": "ValidacionVersionRangos"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

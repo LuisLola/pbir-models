@@ -171,6 +171,7 @@
     "filters": [
       {
         "name": "aa38aeb5f6b2b51d49a2",
+        "ordinal": 0,
         "field": {
           "Column": {
             "Expression": {
@@ -184,21 +185,58 @@
         "type": "Categorical"
       },
       {
-        "name": "f3dfa432214dfb336269",
+        "name": "44fa630fccc6a807a06b",
+        "ordinal": 1,
         "field": {
-          "Measure": {
+          "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "_Medidas"
+                "Entity": "Calendario"
               }
             },
-            "Property": "Envios Totales"
+            "Property": "Año"
           }
         },
-        "type": "Advanced"
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "c",
+              "Entity": "Calendario",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Comparison": {
+                  "ComparisonKind": 2,
+                  "Left": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "c"
+                        }
+                      },
+                      "Property": "Año"
+                    }
+                  },
+                  "Right": {
+                    "Literal": {
+                      "Value": "2026L"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
       },
       {
         "name": "8cc4dcdd46a3b1bfa506",
+        "ordinal": 2,
         "field": {
           "Measure": {
             "Expression": {
@@ -210,7 +248,23 @@
           }
         },
         "type": "Advanced"
+      },
+      {
+        "name": "f3dfa432214dfb336269",
+        "ordinal": 3,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Envios Totales"
+          }
+        },
+        "type": "Advanced"
       }
-    ]
+    ],
+    "filterSortOrder": "Custom"
   }
 }

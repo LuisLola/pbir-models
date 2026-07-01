@@ -92,21 +92,21 @@
             "zoom": {
               "expr": {
                 "Literal": {
-                  "Value": "0.6D"
+                  "Value": "0.47D"
                 }
               }
             },
             "centerLatitude": {
               "expr": {
                 "Literal": {
-                  "Value": "34.39413483760005D"
+                  "Value": "18.766221132504086D"
                 }
               }
             },
             "centerLongitude": {
               "expr": {
                 "Literal": {
-                  "Value": "-38.98709011077881D"
+                  "Value": "-41.07022953033447D"
                 }
               }
             },
@@ -114,6 +114,20 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "heading": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "pitch": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }
@@ -407,5 +421,37 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "fff1410d714b61279591",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_TRANSPORT_TRACKING"
+              }
+            },
+            "Property": "ciudad_destino_limpia"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "8f7eaa1e6c14cfefd03d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Envios Totales"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

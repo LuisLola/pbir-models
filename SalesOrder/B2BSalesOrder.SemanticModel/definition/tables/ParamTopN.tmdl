@@ -1,0 +1,18 @@
+table ParamTopN
+	lineageTag: b1a2c3d4-0100-4100-8100-000000000100
+
+	column 'Top N'
+		dataType: int64
+		formatString: 0
+		lineageTag: b1a2c3d4-0101-4101-8101-000000000101
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ParamTopN = calculated
+		mode: import
+		source = GENERATESERIES(5, 50, 5)
+
+	annotation PBI_Id = b1a2c3d401004100810000000100
+
