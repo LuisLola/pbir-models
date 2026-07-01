@@ -6,13 +6,6 @@ table _Medidas
 		displayFolder: 1 Volumen
 		lineageTag: d1ed0000-0000-4000-8000-0000000000e2
 
-	/// Envíos con seguimiento válido = total excluyendo "Error de tracking" y "Lanzado/Sin estado".
-	/// Denominador de las tasas operativas para que no las diluyan los envíos sin datos.
-	measure 'Envios Operativos' = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), LOL_TRANSPORT_TRACKING[es_operativo] = 1 )
-		formatString: #,0
-		displayFolder: 1 Volumen
-		lineageTag: d1ed0000-0000-4000-8000-000000000201
-
 	measure Entregados = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), LOL_TRANSPORT_TRACKING[es_entregado] = 1 )
 		formatString: #,0
 		displayFolder: 2 Entrega
@@ -32,29 +25,6 @@ table _Medidas
 		formatString: #,0
 		displayFolder: 1 Volumen
 		lineageTag: d1ed0000-0000-4000-8000-0000000000e6
-
-	/// Envíos activos en la red (en tránsito + reparto + agencia destino + recogido + etiqueta).
-	measure 'En Curso' = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), LOL_TRANSPORT_TRACKING[es_en_curso] = 1 )
-		formatString: #,0
-		displayFolder: 1 Volumen
-		lineageTag: d1ed0000-0000-4000-8000-000000000202
-
-	measure 'En Agencia Destino' = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), LOL_TRANSPORT_TRACKING[estado_norm] = "En agencia destino" )
-		formatString: #,0
-		displayFolder: 1 Volumen
-		lineageTag: d1ed0000-0000-4000-8000-000000000203
-
-	/// Envíos cuyo seguimiento falló (estado "Error"): existen pero sin datos de ciclo de vida.
-	measure 'Errores Tracking' = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), LOL_TRANSPORT_TRACKING[es_error_tracking] = 1 )
-		formatString: #,0
-		displayFolder: 1 Volumen
-		lineageTag: d1ed0000-0000-4000-8000-000000000204
-
-	/// % de envíos con seguimiento válido sobre el total (KPI de calidad del dato).
-	measure '% Cobertura Seguimiento' = DIVIDE ( [Envios Operativos], [Envios Totales] )
-		formatString: 0.0%;-0.0%;0.0%
-		displayFolder: 1 Volumen
-		lineageTag: d1ed0000-0000-4000-8000-000000000205
 
 	measure 'SLA Valor' = SELECTEDVALUE ( 'SLA Días'[SLA Días], 3 )
 		formatString: 0
@@ -296,7 +266,7 @@ table _Medidas
 					"<div style='display:flex;align-items:center;gap:8px;margin-top:8px;background:#FBEAF2;border:1px solid #E7B9D3;border-left:3px solid #B5638F;border-radius:10px;padding:7px 10px;'>" &
 					"<span style='font-size:15px;line-height:1;color:#B5638F;'>&#9888;</span>" &
 					"<div><div style='font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#B5638F;'>Incidencia en el env&iacute;o</div>" &
-					"<div style='font-size:10px;color:#6B6470;margin-top:1px;" & _mono & "'>" & FORMAT ( dInc, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( dInc, "HH:mm" ) & IF ( p5, " &middot; resuelta (entregado)", " &middot; sin resolver" ) & "</div></div></div>",
+					"<div style='font-size:10px;color:#6B6470;margin-top:1px;" & _mono & "'>" & FORMAT ( dInc, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( dInc, "HH:mm" ) & IF ( p5 && dInc <= d5, " &middot; resuelta (entregado)", IF ( p5, " &middot; posterior a la entrega", " &middot; sin resolver" ) ) & "</div></div></div>",
 					"" )
 			VAR _row1 =
 				"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
@@ -335,7 +305,7 @@ table _Medidas
 					"<div style='font-size:10px;color:#6B6470;margin-top:0;display:inline-block;vertical-align:middle;" & _mono & "'>" & FORMAT ( dInc, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( dInc, "HH:mm" ) & "</div></li>",
 					"" )
 			VAR _rowRec =
-				IF ( pRecv,
+				IF ( pRecv && dRec <> d1,
 					"<li style='position:relative;padding:0 0 7px 18px;border-left:2px solid #E7DCE6;'>" &
 					"<span style='position:absolute;left:-5px;top:2px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;background:#FFFFFF;border:2px solid #DFA0C9;'></span>" &
 					"<div style='font-size:11.5px;font-weight:600;color:#1B141F;'>Recogido</div>" &
@@ -384,6 +354,36 @@ table _Medidas
 					"<div style='" & _font & "color:#1B141F;'>" & _hdr & _alertInc & _tl & "</div>" )
 		displayFolder: 9 HTML
 		lineageTag: d1ed0000-0000-4000-8000-000000000106
+
+	/// Envíos con seguimiento válido = total excluyendo "Error de tracking" y "Lanzado/Sin estado".
+	/// Denominador de las tasas operativas para que no las diluyan los envíos sin datos.
+	measure 'Envios Operativos' = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), LOL_TRANSPORT_TRACKING[es_operativo] = 1 )
+		formatString: #,0
+		displayFolder: 1 Volumen
+		lineageTag: d1ed0000-0000-4000-8000-000000000201
+
+	/// Envíos activos en la red (en tránsito + reparto + agencia destino + recogido + etiqueta).
+	measure 'En Curso' = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), LOL_TRANSPORT_TRACKING[es_en_curso] = 1 )
+		formatString: #,0
+		displayFolder: 1 Volumen
+		lineageTag: d1ed0000-0000-4000-8000-000000000202
+
+	measure 'En Agencia Destino' = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), LOL_TRANSPORT_TRACKING[estado_norm] = "En agencia destino" )
+		formatString: #,0
+		displayFolder: 1 Volumen
+		lineageTag: d1ed0000-0000-4000-8000-000000000203
+
+	/// Envíos cuyo seguimiento falló (estado "Error"): existen pero sin datos de ciclo de vida.
+	measure 'Errores Tracking' = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), LOL_TRANSPORT_TRACKING[es_error_tracking] = 1 )
+		formatString: #,0
+		displayFolder: 1 Volumen
+		lineageTag: d1ed0000-0000-4000-8000-000000000204
+
+	/// % de envíos con seguimiento válido sobre el total (KPI de calidad del dato).
+	measure '% Cobertura Seguimiento' = DIVIDE ( [Envios Operativos], [Envios Totales] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 1 Volumen
+		lineageTag: d1ed0000-0000-4000-8000-000000000205
 
 	column Value
 		lineageTag: d1ed0000-0000-4000-8000-0000000000ff
