@@ -195,6 +195,11 @@ table _Medidas
 			VAR vTrack = SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[tracking] )
 			VAR vCli = SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[cliente] )
 			VAR vTra = SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[transportista_norm] )
+			VAR _logoTra =
+				SWITCH ( vTra,
+					"UPS", "<svg xmlns='http://www.w3.org/2000/svg' width='66' height='22' viewBox='0 0 66 22' style='vertical-align:middle;'><rect x='0' y='0' width='66' height='22' rx='6' fill='#5A3A22'/><text x='33' y='15' font-family='Segoe UI,Arial,sans-serif' font-size='11' font-weight='700' letter-spacing='0.5' fill='#FFB500' text-anchor='middle'>UPS</text></svg>",
+					"TIPSA", "<svg xmlns='http://www.w3.org/2000/svg' width='66' height='22' viewBox='0 0 66 22' style='vertical-align:middle;'><rect x='0' y='0' width='66' height='22' rx='6' fill='#E2001A'/><text x='33' y='15' font-family='Segoe UI,Arial,sans-serif' font-size='11' font-weight='700' letter-spacing='0.5' fill='#FFFFFF' text-anchor='middle'>TIPSA</text></svg>",
+					"" )
 			VAR vPais = SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[pais_destino] )
 			VAR vEstado = SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[estado_norm] )
 			VAR vDias = MAX ( LOL_TRANSPORT_TRACKING[dias_entrega_laborables] )
@@ -236,7 +241,7 @@ table _Medidas
 			VAR _meta =
 				"<div style='display:flex;flex-wrap:wrap;margin-top:4px;'>" &
 				"<div style='width:50%;box-sizing:border-box;padding:0 8px 5px 0;'><div style='font-size:8px;text-transform:uppercase;letter-spacing:.03em;color:#9A93A0;font-weight:700;'>Cliente</div><div style='font-size:11px;color:#1B141F;font-weight:600;margin-top:1px;'>" & COALESCE ( vCli, "&mdash;" ) & "</div></div>" &
-				"<div style='width:50%;box-sizing:border-box;padding:0 8px 5px 0;'><div style='font-size:8px;text-transform:uppercase;letter-spacing:.03em;color:#9A93A0;font-weight:700;'>Transportista</div><div style='font-size:11px;color:#1B141F;font-weight:600;margin-top:1px;'>" & COALESCE ( vTra, "&mdash;" ) & "</div></div>" &
+				"<div style='width:50%;box-sizing:border-box;padding:0 8px 5px 0;'><div style='font-size:8px;text-transform:uppercase;letter-spacing:.03em;color:#9A93A0;font-weight:700;'>Transportista</div><div style='font-size:11px;color:#1B141F;font-weight:600;margin-top:2px;'>" & IF ( _logoTra <> "", _logoTra, COALESCE ( vTra, "&mdash;" ) ) & "</div></div>" &
 				"<div style='width:50%;box-sizing:border-box;padding:0 8px 5px 0;'><div style='font-size:8px;text-transform:uppercase;letter-spacing:.03em;color:#9A93A0;font-weight:700;'>Destino</div><div style='font-size:11px;color:#1B141F;font-weight:600;margin-top:1px;'>" & _destino & "</div></div>" &
 				"<div style='width:50%;box-sizing:border-box;padding:0 8px 5px 0;'><div style='font-size:8px;text-transform:uppercase;letter-spacing:.03em;color:#9A93A0;font-weight:700;'>Tracking</div><div style='font-size:10px;color:#1B141F;font-weight:600;margin-top:1px;word-break:break-all;" & _mono & "'>" & COALESCE ( vTrack, "&mdash;" ) & "</div></div>" &
 				"<div style='width:50%;box-sizing:border-box;padding:0 10px 0 0;'><div style='font-size:8px;text-transform:uppercase;letter-spacing:.03em;color:#9A93A0;font-weight:700;'>Estado</div><div style='margin-top:4px;'><span style='display:inline-block;font-size:9.5px;font-weight:600;background:#F5EEF4;color:#1B141F;padding:2px 8px;border-radius:6px;'>" & COALESCE ( vEstado, "&mdash;" ) & "</span></div></div>" &
@@ -259,6 +264,7 @@ table _Medidas
 					"<div style='font-size:10px;color:#6B6470;margin-top:1px;" & _mono & "'>" & FORMAT ( dInc, "d mmm", "es-ES" ) & " &middot; " & FORMAT ( dInc, "HH:mm" ) & IF ( p5 && dInc <= d5, " &middot; resuelta (entregado)", IF ( p5, " &middot; posterior a la entrega", " &middot; sin resolver" ) ) & "</div></div></div>",
 					"" )
 			VAR _recFecha = IF ( pRecv && dRec <> d1, dRec )
+			VAR _ageFecha = IF ( pAgev && dAge <> d5, dAge )
 			VAR _hitos0 =
 				FILTER (
 					UNION (
@@ -267,7 +273,7 @@ table _Medidas
 						ROW ( "orden", 3, "fecha", _recFecha, "label", "Recogido", "warn", 0, "fase", 1 ),
 						ROW ( "orden", 4, "fecha", d3, "label", "En tr&aacute;nsito", "warn", 0, "fase", 1 ),
 						ROW ( "orden", 5, "fecha", dPen, "label", "Pendiente de llegada", "warn", 0, "fase", 1 ),
-						ROW ( "orden", 6, "fecha", dAge, "label", "En agencia destino", "warn", 0, "fase", 1 ),
+						ROW ( "orden", 6, "fecha", _ageFecha, "label", "En agencia destino", "warn", 0, "fase", 1 ),
 						ROW ( "orden", 7, "fecha", d4, "label", "En reparto", "warn", 0, "fase", 1 ),
 						ROW ( "orden", 8, "fecha", dInc, "label", "&#9888; Incidencia", "warn", 1, "fase", IF ( p5 && dInc > d5, 3, 1 ) ),
 						ROW ( "orden", 9, "fecha", d5, "label", "Entregado", "warn", 0, "fase", 2 ),

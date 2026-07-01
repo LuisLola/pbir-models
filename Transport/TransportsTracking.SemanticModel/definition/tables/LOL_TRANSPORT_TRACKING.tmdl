@@ -278,6 +278,16 @@ table LOL_TRANSPORT_TRACKING
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Chip identificativo del transportista (SVG en base64) como URL de imagen, para mostrarlo
+	/// en visuales nativos (tablas/matrices). No es el logo oficial; es una etiqueta de marca.
+	column LogoTransportista = SWITCH ( LOL_TRANSPORT_TRACKING[transportista_norm], "UPS", "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NicgaGVpZ2h0PScyMicgdmlld0JveD0nMCAwIDY2IDIyJz48cmVjdCB4PScwJyB5PScwJyB3aWR0aD0nNjYnIGhlaWdodD0nMjInIHJ4PSc2JyBmaWxsPScjNUEzQTIyJy8+PHRleHQgeD0nMzMnIHk9JzE1JyBmb250LWZhbWlseT0nU2Vnb2UgVUksQXJpYWwsc2Fucy1zZXJpZicgZm9udC1zaXplPScxMScgZm9udC13ZWlnaHQ9JzcwMCcgbGV0dGVyLXNwYWNpbmc9JzAuNScgZmlsbD0nI0ZGQjUwMCcgdGV4dC1hbmNob3I9J21pZGRsZSc+VVBTPC90ZXh0Pjwvc3ZnPg==", "TIPSA", "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NicgaGVpZ2h0PScyMicgdmlld0JveD0nMCAwIDY2IDIyJz48cmVjdCB4PScwJyB5PScwJyB3aWR0aD0nNjYnIGhlaWdodD0nMjInIHJ4PSc2JyBmaWxsPScjRTIwMDFBJy8+PHRleHQgeD0nMzMnIHk9JzE1JyBmb250LWZhbWlseT0nU2Vnb2UgVUksQXJpYWwsc2Fucy1zZXJpZicgZm9udC1zaXplPScxMScgZm9udC13ZWlnaHQ9JzcwMCcgbGV0dGVyLXNwYWNpbmc9JzAuNScgZmlsbD0nI0ZGRkZGRicgdGV4dC1hbmNob3I9J21pZGRsZSc+VElQU0E8L3RleHQ+PC9zdmc+" )
+		dataType: string
+		lineageTag: d1c00000-0000-4000-8000-000000000014
+		dataCategory: ImageUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	/// 1 si el envío está entregado (estado canónico = Entregado). Incluye los entregados
 	/// cuyo texto [estado] no se actualizó y los que además tienen fecha_devuelto posterior.
 	column es_entregado = IF ( LOL_TRANSPORT_TRACKING[estado_norm] = "Entregado", 1, 0 )
