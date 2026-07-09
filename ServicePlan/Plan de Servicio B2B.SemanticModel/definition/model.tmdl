@@ -1,0 +1,28 @@
+model Model
+	culture: es-ES
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-ES
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["LOL_PLANMATERIAL"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table LOL_PLANMATERIAL
+ref table DateTableTemplate_521e738a-5842-4c9c-a6ca-c6990d24f116
+ref table LocalDateTable_1146eaba-62f2-473f-b419-76bc203f5f9b
+ref table LocalDateTable_f62ef249-786f-48a7-91a8-256e3fb249c5
+ref table LocalDateTable_b764886d-7170-4468-9eb4-7ec94d712e21
+ref table LocalDateTable_812664f2-ad2c-4693-a3a8-86bd825bdd87
+ref table LocalDateTable_7c91e64e-33fb-4cba-9d43-a8e44f2ea30f
+ref table LocalDateTable_5ab3a577-ffab-49db-ab8b-24d78d46aa49
+ref table Calendario
+ref table VistaTipo
+ref table Horizonte
+
+ref cultureInfo es-ES
+

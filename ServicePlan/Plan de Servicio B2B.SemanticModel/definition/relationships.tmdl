@@ -1,0 +1,38 @@
+relationship b53a8508-d7a3-4d8d-a3f5-2908392856aa
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PLANMATERIAL.'Fecha pedido venta'
+	toColumn: LocalDateTable_1146eaba-62f2-473f-b419-76bc203f5f9b.Date
+
+relationship a0accdf7-e8f4-4acc-a34f-277e1a204753
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PLANMATERIAL.'Fecha Fin pedido venta'
+	toColumn: LocalDateTable_f62ef249-786f-48a7-91a8-256e3fb249c5.Date
+
+relationship 998e0f1a-a699-42fd-9a46-53d0e763249c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PLANMATERIAL.'Fecha disponibilidad (línea del articulo)'
+	toColumn: LocalDateTable_b764886d-7170-4468-9eb4-7ec94d712e21.Date
+
+relationship ed5fb5ef-d61a-411d-b044-7e2b3d79191a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PLANMATERIAL.'Fecha llegada orden de compra (línea del articulo)'
+	toColumn: LocalDateTable_812664f2-ad2c-4693-a3a8-86bd825bdd87.Date
+
+relationship 3a70e902-4b06-4222-98e4-2a283238efa7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PLANMATERIAL.'Fecha llegada entrada mcias.'
+	toColumn: LocalDateTable_7c91e64e-33fb-4cba-9d43-a8e44f2ea30f.Date
+
+relationship 9831fb82-b2e4-45ef-809f-7f9adf5a87de
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PLANMATERIAL.'Fecha llegada solicitud traslado'
+	toColumn: LocalDateTable_5ab3a577-ffab-49db-ab8b-24d78d46aa49.Date
+
+relationship c1e9832c-8b4f-a008-5352-c514f938bc70
+	fromColumn: LOL_PLANMATERIAL.'Fecha Entrega pedido venta'
+	toColumn: Calendario.Date
+
+relationship 03976b1c-7c48-4916-99ad-3d8e0563ad5c
+	fromColumn: LOL_PLANMATERIAL.'Fecha Fin pedido venta'
+	toColumn: Horizonte.Fecha
+

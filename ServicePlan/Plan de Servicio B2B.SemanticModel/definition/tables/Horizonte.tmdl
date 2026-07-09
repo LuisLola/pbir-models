@@ -1,0 +1,16 @@
+table Horizonte
+	lineageTag: e981e1bb-b684-4c48-9cd1-392c38fc7b0c
+
+	column Fecha
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 5f46b7e6-a237-4b23-b918-ff0f3d4a328b
+		summarizeBy: none
+		sourceColumn: [Fecha]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Horizonte = calculated
+		mode: import
+		source = SELECTCOLUMNS(CALENDAR(DATE(2023,1,1), DATE(2030,12,31)), "Fecha", [Date])
+

@@ -1,0 +1,982 @@
+table LOL_PLANMATERIAL
+	lineageTag: c68ab331-40ba-4a50-ac57-02486bdc4ce8
+
+	measure 'Fecha Servicio 1º Quincena' = ```
+			
+			VAR TotalPendiente = 
+			    SUM('LOL_PLANMATERIAL'[Unidades pendientes Entregar])
+			
+			VAR TotalCubierto = 
+			    SUMX(
+			        'LOL_PLANMATERIAL',
+			        VAR Pendiente = 'LOL_PLANMATERIAL'[Unidades pendientes Entregar]
+			        VAR FechaEntrega = 'LOL_PLANMATERIAL'[Fecha Entrega pedido venta]
+			        VAR FechaDisponible = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
+			        VAR SumaCubierta =
+			            'LOL_PLANMATERIAL'[Uniades en Piciking] +
+			            'LOL_PLANMATERIAL'[Unidades asignadas] +
+			            'LOL_PLANMATERIAL'[Unidades asignadas Transito]
+			        RETURN
+			            IF(
+			                NOT ISBLANK( FechaDisponible ) && FechaEntrega + 15 >= FechaDisponible,
+			                SumaCubierta,
+			                0
+			            )
+			    )
+			
+			RETURN
+			    IF(
+			        TotalPendiente > 0,
+			        DIVIDE(TotalCubierto, TotalPendiente),
+			        BLANK()
+			    )
+			
+			
+			
+			
+			```
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: 4a7d358c-6d91-48b9-8eed-0bb0687d33c6
+
+	measure '% Cartera Cubierta Temporada?' = ```
+			
+			VAR OpenQty = SUM('LOL_PLANMATERIAL'[Unidades pendientes Entregar])
+			VAR SumaCubierta =
+			    SUM('LOL_PLANMATERIAL'[Uniades en Piciking]) +
+			    SUM('LOL_PLANMATERIAL'[Unidades asignadas]) +
+			    SUM('LOL_PLANMATERIAL'[Unidades asignadas Transito])
+			RETURN
+			    IF(
+			        NOT ISBLANK(OpenQty) && OpenQty > 0,
+			        ROUND(DIVIDE(SumaCubierta, OpenQty), 2),
+			        BLANK()
+			    )
+			
+			```
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: eb91bbe3-2325-4a71-8a45-1f867677b1a1
+
+	measure 'Fecha Servicio 2º Quincena' = ```
+			
+			VAR TotalPendiente = 
+			    SUM('LOL_PLANMATERIAL'[Unidades pendientes Entregar])
+			
+			VAR TotalCubierto =
+			    SUMX(
+			        'LOL_PLANMATERIAL',
+			        VAR Pendiente = 'LOL_PLANMATERIAL'[Unidades pendientes Entregar]
+			        VAR FechaEntrega = 'LOL_PLANMATERIAL'[Fecha Entrega pedido venta]
+			        VAR FechaDisponible = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
+			        VAR FechaInicio = FechaEntrega + 15
+			        VAR FechaFin = FechaInicio + 15
+			        VAR SumaCubierta =
+			            'LOL_PLANMATERIAL'[Uniades en Piciking] +
+			            'LOL_PLANMATERIAL'[Unidades asignadas] +
+			            'LOL_PLANMATERIAL'[Unidades asignadas Transito]
+			        RETURN
+			            IF(
+			                FechaDisponible > FechaInicio &&
+			                FechaDisponible <= FechaFin,
+			                SumaCubierta,
+			                0
+			            )
+			    )
+			
+			RETURN
+			    IF(
+			        TotalPendiente > 0,
+			        DIVIDE(TotalCubierto, TotalPendiente),
+			        BLANK()
+			    )
+			
+			
+			```
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: b0ede849-d5cf-4c2f-893f-2a4a250683f2
+
+	measure 'Fecha Servicio > 30 días' = ```
+			
+			VAR TotalPendiente = 
+			    SUM('LOL_PLANMATERIAL'[Unidades pendientes Entregar])
+			
+			VAR TotalCubierto =
+			    SUMX(
+			        'LOL_PLANMATERIAL',
+			        VAR Pendiente = 'LOL_PLANMATERIAL'[Unidades pendientes Entregar]
+			        VAR FechaEntrega = 'LOL_PLANMATERIAL'[Fecha Entrega pedido venta]
+			        VAR FechaDisponible = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
+			        VAR FechaLimite = FechaEntrega + 30
+			        VAR SumaCubierta =
+			            'LOL_PLANMATERIAL'[Uniades en Piciking] +
+			            'LOL_PLANMATERIAL'[Unidades asignadas] +
+			            'LOL_PLANMATERIAL'[Unidades asignadas Transito]
+			        RETURN
+			            IF(
+			                FechaDisponible > FechaLimite,
+			                SumaCubierta,
+			                0
+			            )
+			    )
+			
+			RETURN
+			    IF(
+			        TotalPendiente > 0,
+			        DIVIDE(TotalCubierto, TotalPendiente),
+			        BLANK()
+			    )
+			
+			```
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: 2d37f275-f727-405f-9a3c-00f8f42f2880
+
+	measure 'Cantidad Original por Pedido' = ```
+			
+			SUMX(
+			    VALUES('LOL_PLANMATERIAL'[Nº Pedido Ventas]),
+			    CALCULATE(SUM('LOL_PLANMATERIAL'[Cantidad Original]))
+			)
+			
+			
+			```
+		lineageTag: 288c4d3e-193f-4e2e-9e68-cad9ec603d29
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Cantidad Original por Pedido2' = ```
+			
+			SUMX(
+			    SUMMARIZE(
+			        'LOL_PLANMATERIAL',
+			        'LOL_PLANMATERIAL'[Nº Pedido Ventas],
+			        "TotalPedido", SUM('LOL_PLANMATERIAL'[Cantidad Original])
+			    ),
+			    [TotalPedido]
+			)
+			
+			```
+		formatString: #,0
+		lineageTag: 2a2f67c2-a54b-4830-b846-ec055bc9f5a2
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Fecha Servicio 1º Quincena(Importe)' = ```
+			
+			            VAR Tope = MAX ( 'Horizonte'[Fecha] )
+			            VAR TotalPendiente = SUM ( 'LOL_PLANMATERIAL'[Importe pendiente Entregar] )
+			            VAR TotalCubierto =
+			                SUMX (
+			                    'LOL_PLANMATERIAL',
+			                    VAR FechaEntrega = 'LOL_PLANMATERIAL'[Fecha Entrega pedido venta]
+			                    VAR FechaDisponible = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
+			                    VAR ImporteCubierto =
+			                        'LOL_PLANMATERIAL'[Import en Piciking]
+			                            + 'LOL_PLANMATERIAL'[Importe asignado]
+			                            + 'LOL_PLANMATERIAL'[AssignTransitLineTotal]
+			                    RETURN
+			                        IF (
+			                            NOT ISBLANK ( FechaDisponible )
+			                                && FechaDisponible <= FechaEntrega + 15
+			                                && FechaDisponible <= Tope,
+			                            ImporteCubierto,
+			                            0
+			                        )
+			                )
+			            RETURN
+			                IF ( TotalPendiente > 0, DIVIDE ( TotalCubierto, TotalPendiente ), BLANK () )
+			
+			```
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: c1a01ae7-b1d6-4ab4-bd5f-fdcaacb7e44f
+
+	measure 'Fecha Servicio 2º Quincena(Importe)' = ```
+			
+			            VAR Tope = MAX ( 'Horizonte'[Fecha] )
+			            VAR TotalPendiente = SUM ( 'LOL_PLANMATERIAL'[Importe pendiente Entregar] )
+			            VAR TotalCubierto =
+			                SUMX (
+			                    'LOL_PLANMATERIAL',
+			                    VAR FechaEntrega = 'LOL_PLANMATERIAL'[Fecha Entrega pedido venta]
+			                    VAR FechaDisponible = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
+			                    VAR ImporteCubierto =
+			                        'LOL_PLANMATERIAL'[Import en Piciking]
+			                            + 'LOL_PLANMATERIAL'[Importe asignado]
+			                            + 'LOL_PLANMATERIAL'[AssignTransitLineTotal]
+			                    RETURN
+			                        IF (
+			                            NOT ISBLANK ( FechaDisponible )
+			                                && FechaDisponible > FechaEntrega + 15
+			                                && FechaDisponible <= FechaEntrega + 30
+			                                && FechaDisponible <= Tope,
+			                            ImporteCubierto,
+			                            0
+			                        )
+			                )
+			            RETURN
+			                IF ( TotalPendiente > 0, DIVIDE ( TotalCubierto, TotalPendiente ), BLANK () )
+			
+			```
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: 160b919e-57d2-4c23-9b31-a04e79757f12
+
+	measure 'Fecha Servicio > 30 días (Importe)' = ```
+			
+			            VAR Tope = MAX ( 'Horizonte'[Fecha] )
+			            VAR TotalPendiente = SUM ( 'LOL_PLANMATERIAL'[Importe pendiente Entregar] )
+			            VAR TotalCubierto =
+			                SUMX (
+			                    'LOL_PLANMATERIAL',
+			                    VAR FechaEntrega = 'LOL_PLANMATERIAL'[Fecha Entrega pedido venta]
+			                    VAR FechaDisponible = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
+			                    VAR ImporteCubierto =
+			                        'LOL_PLANMATERIAL'[Import en Piciking]
+			                            + 'LOL_PLANMATERIAL'[Importe asignado]
+			                            + 'LOL_PLANMATERIAL'[AssignTransitLineTotal]
+			                    RETURN
+			                        IF (
+			                            NOT ISBLANK ( FechaDisponible )
+			                                && FechaDisponible > FechaEntrega + 30
+			                                && FechaDisponible <= Tope,
+			                            ImporteCubierto,
+			                            0
+			                        )
+			                )
+			            RETURN
+			                IF ( TotalPendiente > 0, DIVIDE ( TotalCubierto, TotalPendiente ), BLANK () )
+			
+			```
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: e72ab152-dc81-4958-833a-43da9fe40d20
+
+	measure Filtro_PH_Activo = ```
+			
+			IF(
+			    ISFILTERED('LOL_PLANMATERIAL'[P&H]),
+			    "✅",
+			    ""
+			)
+			
+			```
+		lineageTag: ca140f53-5b23-4ba3-8ecf-ac8af9910362
+
+	measure Filtro_Bloquead =
+			
+			IF(
+			    ISFILTERED('LOL_PLANMATERIAL'[Bloqueado]),
+			    "✅",
+			    ""
+			)
+		lineageTag: 8a1b581d-de68-427c-994b-519a562e117b
+
+	measure Filtro_Representante =
+			
+			IF(
+			    ISFILTERED('LOL_PLANMATERIAL'[Representante]),
+			    "✅",
+			    ""
+			)
+		lineageTag: 9cf7d6f5-e6ce-4212-9e2f-603bf3edd95c
+
+	measure Filtro_Pais =
+			
+			IF(
+			    ISFILTERED('LOL_PLANMATERIAL'[País]),
+			    "✅",
+			    ""
+			)
+		lineageTag: be3a0a7b-279a-4119-85ed-8e6bc1461c70
+
+	measure Filtro_product =
+			
+			IF(
+			    ISFILTERED('LOL_PLANMATERIAL'[Descripción Artículo]),
+			    "✅",
+			    ""
+			)
+		lineageTag: 5e15b99c-5435-45d1-897a-38080c94f7c2
+
+	measure Filtro_LanzPick =
+			
+			IF(
+			    ISFILTERED('LOL_PLANMATERIAL'[Lanzamiento Picking]),
+			    "✅",
+			    ""
+			)
+		lineageTag: e1f75efd-0b19-414a-80d2-db5ebb812ad3
+
+	measure Filtro_Temporada =
+			
+			IF(
+			    ISFILTERED('LOL_PLANMATERIAL'[Temporada]),
+			    "✅",
+			    ""
+			)
+		lineageTag: a9f0a020-6b01-49de-8109-ec78b21756f8
+
+	measure Filtro_servretard =
+			
+			IF(
+			    ISFILTERED('LOL_PLANMATERIAL'[Servicio con retraso]),
+			    "✅",
+			    ""
+			)
+		lineageTag: 03edf70e-a5b0-4f87-bb68-907ad204a7de
+
+	measure Filtro_PH_Autorizado =
+			
+			IF(
+			    ISFILTERED('LOL_PLANMATERIAL'[Autorizado]),
+			    "✅",
+			    ""
+			)
+		lineageTag: 5cf93ddd-79fc-4eca-9927-ad152bfeaeb3
+
+	measure Filtro_Alm =
+			
+			IF(
+			    ISFILTERED('LOL_PLANMATERIAL'[Almacén]),
+			    "✅",
+			    ""
+			)
+		lineageTag: ed8c995f-f9af-4478-9e84-08aaf4944dfc
+
+	measure 'Valor Servicio 1º Quincena' = ```
+			
+			VAR TotalCubierto = 
+			    SUMX(
+			        'LOL_PLANMATERIAL',
+			        VAR Pendiente = 'LOL_PLANMATERIAL'[Unidades pendientes Entregar]
+			        VAR FechaEntrega = 'LOL_PLANMATERIAL'[Fecha Entrega pedido venta]
+			        VAR FechaDisponible = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
+			        VAR FechaFinPedido = 'LOL_PLANMATERIAL'[Fecha Fin pedido venta]
+			        VAR SumaCubierta =
+			            'LOL_PLANMATERIAL'[Uniades en Piciking] +
+			            'LOL_PLANMATERIAL'[Unidades asignadas] +
+			            'LOL_PLANMATERIAL'[Unidades asignadas Transito]
+			        RETURN
+			            IF(
+			                NOT ISBLANK( FechaDisponible ) && FechaFinPedido >= FechaDisponible,
+			                SumaCubierta,
+			                0
+			            )
+			    )
+			
+			RETURN
+			    TotalCubierto
+			
+			```
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		lineageTag: 2ab8a34f-b68d-4ac5-b0d1-309d716e5f1a
+
+	measure 'Valor Servicio 1º Quincena (Importe Real)' = ```
+			
+			            VAR Tope = MAX ( 'Horizonte'[Fecha] )
+			            RETURN
+			            SUMX (
+			                'LOL_PLANMATERIAL',
+			                VAR FechaEntrega = 'LOL_PLANMATERIAL'[Fecha Entrega pedido venta]
+			                VAR FechaDisponible = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
+			                VAR ImporteCubierto =
+			                    'LOL_PLANMATERIAL'[Import en Piciking]
+			                        + 'LOL_PLANMATERIAL'[Importe asignado]
+			                        + 'LOL_PLANMATERIAL'[AssignTransitLineTotal]
+			                RETURN
+			                    IF (
+			                        NOT ISBLANK ( FechaDisponible )
+			                            && FechaDisponible <= FechaEntrega + 15
+			                            && FechaDisponible <= Tope,
+			                        ImporteCubierto,
+			                        0
+			                    )
+			            )
+			
+			```
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		lineageTag: b7cbfc1a-dd8f-4ee6-89c8-13de67bc171f
+
+	measure 'Valor Servicio 2º Quincena (Importe Real)' = ```
+			
+			            VAR Tope = MAX ( 'Horizonte'[Fecha] )
+			            RETURN
+			            SUMX (
+			                'LOL_PLANMATERIAL',
+			                VAR FechaEntrega = 'LOL_PLANMATERIAL'[Fecha Entrega pedido venta]
+			                VAR FechaDisponible = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
+			                VAR ImporteCubierto =
+			                    'LOL_PLANMATERIAL'[Import en Piciking]
+			                        + 'LOL_PLANMATERIAL'[Importe asignado]
+			                        + 'LOL_PLANMATERIAL'[AssignTransitLineTotal]
+			                RETURN
+			                    IF (
+			                        NOT ISBLANK ( FechaDisponible )
+			                            && FechaDisponible > FechaEntrega + 15
+			                            && FechaDisponible <= FechaEntrega + 30
+			                            && FechaDisponible <= Tope,
+			                        ImporteCubierto,
+			                        0
+			                    )
+			            )
+			
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 75f8ed16-ad79-4f59-baad-fb38c13305a7
+
+	measure 'Valor Servicio > 30 días (Importe Real)' = ```
+			
+			            VAR Tope = MAX ( 'Horizonte'[Fecha] )
+			            RETURN
+			            SUMX (
+			                'LOL_PLANMATERIAL',
+			                VAR FechaEntrega = 'LOL_PLANMATERIAL'[Fecha Entrega pedido venta]
+			                VAR FechaDisponible = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
+			                VAR ImporteCubierto =
+			                    'LOL_PLANMATERIAL'[Import en Piciking]
+			                        + 'LOL_PLANMATERIAL'[Importe asignado]
+			                        + 'LOL_PLANMATERIAL'[AssignTransitLineTotal]
+			                RETURN
+			                    IF (
+			                        NOT ISBLANK ( FechaDisponible )
+			                            && FechaDisponible > FechaEntrega + 30
+			                            && FechaDisponible <= Tope,
+			                        ImporteCubierto,
+			                        0
+			                    )
+			            )
+			
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 12609953-d71a-49be-ba67-5b9f75f0fb9f
+
+	column Almacén
+		dataType: string
+		lineageTag: 53e604c5-2638-4059-aa1e-35ce8cc0e982
+		summarizeBy: none
+		sourceColumn: Almacén
+
+		annotation SummarizationSetBy = Automatic
+
+	column Representante
+		dataType: string
+		lineageTag: c28e685b-2844-4b5e-aa30-c3eb462fce8d
+		summarizeBy: none
+		sourceColumn: Representante
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nº Pedido Ventas'
+		dataType: int64
+		formatString: 0
+		lineageTag: 27b79cea-ef30-4f6b-bf37-ea8cc9e5dbc9
+		summarizeBy: sum
+		sourceColumn: Nº Pedido Ventas
+
+		annotation SummarizationSetBy = Automatic
+
+	column Autorizado
+		dataType: string
+		lineageTag: 23d8ad8a-de89-40b2-aea4-06a52ac67107
+		summarizeBy: none
+		sourceColumn: Autorizado
+
+		annotation SummarizationSetBy = Automatic
+
+	column País
+		dataType: string
+		lineageTag: d12f02f8-7186-4f5d-a2b9-3c37027ba5aa
+		summarizeBy: none
+		sourceColumn: País
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Código Cliente'
+		dataType: string
+		lineageTag: e04fe134-8eea-4943-8152-f7bac200a4ef
+		summarizeBy: none
+		sourceColumn: Código Cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Prioridad Cliente'
+		dataType: int64
+		formatString: 0
+		lineageTag: 1bd7ffed-fe44-419d-bf89-b6e7255b7e14
+		summarizeBy: sum
+		sourceColumn: Prioridad Cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Riesgo Disponible'
+		dataType: double
+		formatString: "€"\ #,0.0;-"€"\ #,0.0;"€"\ #,0.0
+		lineageTag: 03713b19-afc8-420b-bc54-4ba0144949d9
+		summarizeBy: sum
+		sourceColumn: Riesgo Disponible
+
+		annotation SummarizationSetBy = Automatic
+
+	column Bloqueado
+		dataType: string
+		lineageTag: 58f89a6d-65d7-424b-9517-8140fa6df435
+		summarizeBy: none
+		sourceColumn: Bloqueado
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tipo Bloqueo'
+		dataType: string
+		lineageTag: 10414e82-74bd-4b81-82a0-c8143455dbef
+		summarizeBy: none
+		sourceColumn: Tipo Bloqueo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Temporada
+		dataType: string
+		lineageTag: c165da63-70d9-4803-9ee5-f04caf0935ae
+		summarizeBy: none
+		sourceColumn: Temporada
+
+		annotation SummarizationSetBy = Automatic
+
+	column ItemCode
+		dataType: string
+		lineageTag: d90eae02-13db-428e-a123-7f6d49faa83c
+		summarizeBy: none
+		sourceColumn: ItemCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column EAN
+		dataType: string
+		lineageTag: 19940a1a-19d1-4d4f-9847-f3530e18ca2a
+		summarizeBy: none
+		sourceColumn: EAN
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ref. Modelo'
+		dataType: string
+		lineageTag: c936c5b8-9265-4070-9491-1cea09b0588c
+		summarizeBy: none
+		sourceColumn: Ref. Modelo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Color
+		dataType: string
+		lineageTag: fb0adb70-2bfb-4fe7-8d33-c4115807c3dc
+		summarizeBy: none
+		sourceColumn: Color
+
+		annotation SummarizationSetBy = Automatic
+
+	column Talla
+		dataType: string
+		lineageTag: 609c120d-6095-4d89-8074-32c5d535b855
+		summarizeBy: none
+		sourceColumn: Talla
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Descripción Artículo'
+		dataType: string
+		lineageTag: 44d79e3c-c107-4aaa-8c51-cf73381b6ab5
+		summarizeBy: none
+		sourceColumn: Descripción Artículo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unidades pendientes Entregar'
+		dataType: double
+		formatString: #,0
+		lineageTag: ef8c6ee2-5037-42a5-8f0e-5fa3a2b755aa
+		summarizeBy: sum
+		sourceColumn: Unidades pendientes Entregar
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column 'Importe pendiente Entregar'
+		dataType: double
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: bab3964b-eada-4521-85b0-450f19868385
+		summarizeBy: sum
+		sourceColumn: Importe pendiente Entregar
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Uniades en Piciking'
+		dataType: double
+		lineageTag: e96a4207-be41-4937-97dd-442e2557120d
+		summarizeBy: sum
+		sourceColumn: Uniades en Piciking
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Import en Piciking'
+		dataType: double
+		formatString: "€"\ #,0.0;-"€"\ #,0.0;"€"\ #,0.0
+		lineageTag: 515bb8d3-2e05-48c1-bbef-f11dd5d3ee2d
+		summarizeBy: sum
+		sourceColumn: Import en Piciking
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unidades pte. picking'
+		dataType: double
+		lineageTag: 5930ee56-614a-47b3-8fcb-093e7250f89a
+		summarizeBy: sum
+		sourceColumn: Unidades pte. picking
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Imporet pte. picking'
+		dataType: double
+		formatString: "€"\ #,0.0;-"€"\ #,0.0;"€"\ #,0.0
+		lineageTag: 6186e11c-b1c0-40fe-bd1b-4f3c0d7fb495
+		summarizeBy: sum
+		sourceColumn: Imporet pte. picking
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unidades asignadas'
+		dataType: double
+		formatString: #,0
+		lineageTag: b65d5805-bf2d-40d6-8267-a9e48148695a
+		summarizeBy: sum
+		sourceColumn: Unidades asignadas
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column 'Importe asignado'
+		dataType: double
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 472448bb-3c42-473f-a1a4-b607aca3c4a8
+		summarizeBy: sum
+		sourceColumn: Importe asignado
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unidades asignadas Transito'
+		dataType: double
+		formatString: #,0
+		lineageTag: 565fba8c-0b3c-4e73-94a6-a9f2d731dcc8
+		summarizeBy: sum
+		sourceColumn: Unidades asignadas Transito
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column AssignTransitLineTotal
+		dataType: double
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 9097069c-423b-4c0f-b2ad-7e07522ca36b
+		summarizeBy: sum
+		sourceColumn: AssignTransitLineTotal
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cartera cubierta'
+		dataType: string
+		lineageTag: 1571cdb3-212f-46b0-91c1-b2f249c48eb4
+		summarizeBy: none
+		sourceColumn: Cartera cubierta
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cartera 60%'
+		dataType: string
+		lineageTag: 0150c2bf-e9bd-4670-ac96-27f69887c19d
+		summarizeBy: none
+		sourceColumn: Cartera 60%
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Porcentaje Cartera Cubierta'
+		dataType: double
+		lineageTag: 1386049f-d08c-4acf-a5a7-187deb0f7990
+		summarizeBy: sum
+		sourceColumn: Porcentaje Cartera Cubierta
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Faltas
+		dataType: double
+		lineageTag: eda35d24-841b-4dcf-b521-eb98210740bb
+		summarizeBy: sum
+		sourceColumn: Faltas
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Lanzamiento Picking'
+		dataType: string
+		lineageTag: b13b3eb9-5de0-475f-bf69-cf2cc8fd302a
+		summarizeBy: none
+		sourceColumn: Lanzamiento Picking
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Grupo total look'
+		dataType: string
+		lineageTag: 9b175f3d-8f86-4515-87d0-dfe9d9c2b65a
+		summarizeBy: none
+		sourceColumn: Grupo total look
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Orden de compra'
+		dataType: int64
+		formatString: 0
+		lineageTag: 43281cc2-c4b1-461a-8b53-c0a57cefffa5
+		summarizeBy: sum
+		sourceColumn: Orden de compra
+
+		annotation SummarizationSetBy = Automatic
+
+	column Proveedor
+		dataType: string
+		lineageTag: 14ebed5c-18cc-4682-be24-f8449621610e
+		summarizeBy: none
+		sourceColumn: Proveedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'NºEntrada mcias.'
+		dataType: int64
+		formatString: 0
+		lineageTag: 2a9d03fd-fef1-4aca-90b8-fad98afb314f
+		summarizeBy: sum
+		sourceColumn: NºEntrada mcias.
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Solicitud traslado'
+		dataType: int64
+		formatString: 0
+		lineageTag: e625ce3b-0eff-49ff-a024-b2ca41ae5d33
+		summarizeBy: sum
+		sourceColumn: Solicitud traslado
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fecha pedido venta'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 6dfa0430-1fef-4a9b-aa9d-aa9715669795
+		summarizeBy: none
+		sourceColumn: Fecha pedido venta
+
+		variation Variación
+			isDefault
+			relationship: b53a8508-d7a3-4d8d-a3f5-2908392856aa
+			defaultHierarchy: LocalDateTable_1146eaba-62f2-473f-b419-76bc203f5f9b.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fecha Entrega pedido venta'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 7e80ff4c-4bad-411e-8b50-12af864fe317
+		summarizeBy: none
+		sourceColumn: Fecha Entrega pedido venta
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fecha Fin pedido venta'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 29b2b406-b4e2-4058-a948-fb37be0f5017
+		summarizeBy: none
+		sourceColumn: Fecha Fin pedido venta
+
+		variation Variación
+			isDefault
+			relationship: a0accdf7-e8f4-4acc-a34f-277e1a204753
+			defaultHierarchy: LocalDateTable_f62ef249-786f-48a7-91a8-256e3fb249c5.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Semana Entrega'
+		dataType: int64
+		formatString: 0
+		lineageTag: 86ffb06c-5426-4248-8441-713f3bab3553
+		summarizeBy: sum
+		sourceColumn: Semana Entrega
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fecha disponibilidad (línea del articulo)'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: e3e807cf-6c0a-4d25-b869-ede60e9ad2c9
+		summarizeBy: none
+		sourceColumn: Fecha disponibilidad (línea del articulo)
+
+		variation Variación
+			isDefault
+			relationship: 998e0f1a-a699-42fd-9a46-53d0e763249c
+			defaultHierarchy: LocalDateTable_b764886d-7170-4468-9eb4-7ec94d712e21.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Servicio con retraso'
+		dataType: string
+		lineageTag: 5469bbf6-2ed6-488f-84f1-072bd27e288a
+		summarizeBy: none
+		sourceColumn: Servicio con retraso
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fecha entrega orden de compra (línea del articulo)'
+		dataType: string
+		lineageTag: a9c402d2-0692-4381-ac5d-dd17af70306f
+		summarizeBy: none
+		sourceColumn: Fecha entrega orden de compra (línea del articulo)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fecha llegada orden de compra (línea del articulo)'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 76170bd5-8cff-41cf-8730-fbd5e64831cf
+		summarizeBy: none
+		sourceColumn: Fecha llegada orden de compra (línea del articulo)
+
+		variation Variación
+			isDefault
+			relationship: ed5fb5ef-d61a-411d-b044-7e2b3d79191a
+			defaultHierarchy: LocalDateTable_812664f2-ad2c-4693-a3a8-86bd825bdd87.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fecha llegada entrada mcias.'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 92d19840-693a-41ca-aa08-a9d5adf0f3d4
+		summarizeBy: none
+		sourceColumn: Fecha llegada entrada mcias.
+
+		variation Variación
+			isDefault
+			relationship: 3a70e902-4b06-4222-98e4-2a283238efa7
+			defaultHierarchy: LocalDateTable_7c91e64e-33fb-4cba-9d43-a8e44f2ea30f.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fecha llegada solicitud traslado'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 63231a0f-b0af-4630-aeaa-128f9f32e9b2
+		summarizeBy: none
+		sourceColumn: Fecha llegada solicitud traslado
+
+		variation Variación
+			isDefault
+			relationship: 9831fb82-b2e4-45ef-809f-7f9adf5a87de
+			defaultHierarchy: LocalDateTable_5ab3a577-ffab-49db-ab8b-24d78d46aa49.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cantidad Original'
+		dataType: double
+		formatString: #,0
+		lineageTag: 8c614f6b-6b37-43c2-b345-425a0164bfde
+		summarizeBy: sum
+		sourceColumn: Cantidad Original
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column 'Cantidad Entregada'
+		dataType: double
+		formatString: 0
+		lineageTag: 2dd44d5b-132a-4e48-b66a-428aa4f91080
+		summarizeBy: sum
+		sourceColumn: Cantidad Entregada
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column CardName
+		dataType: string
+		lineageTag: a8528cd3-c4c9-4600-9863-47096d799afe
+		summarizeBy: none
+		sourceColumn: CardName
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Importe Original'
+		dataType: double
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 5d71eeb1-8e0a-43ab-ba1f-79d837ab6d68
+		summarizeBy: sum
+		sourceColumn: Importe Original
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Importe Entregado'
+		dataType: double
+		formatString: "€"\ #,0.0;-"€"\ #,0.0;"€"\ #,0.0
+		lineageTag: f421e859-a169-4a2e-9138-08ecfdeaa0b0
+		summarizeBy: sum
+		sourceColumn: Importe Entregado
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Clasificación Entrega' = ```
+			
+			VAR FechaEntrega = 'LOL_PLANMATERIAL'[Fecha Entrega pedido venta]
+			VAR FechaDisponible = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK( FechaDisponible ), BLANK(),
+			        FechaDisponible <= FechaEntrega + 15, "Fecha Servicio 1º Quincena",
+			        FechaDisponible <= FechaEntrega + 30, "Fecha Servicio 2º Quincena",
+			        FechaDisponible > FechaEntrega + 30, "Fecha Servicio > 30 días",
+			        BLANK()
+			    )
+			
+			```
+		lineageTag: 5a3a4cde-419f-4fdc-bff2-957b270a2d03
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column P&H
+		dataType: string
+		lineageTag: 42e5329e-d5ef-4c85-ab8b-61a64ef4d1a0
+		summarizeBy: none
+		sourceColumn: P&H
+
+		annotation SummarizationSetBy = Automatic
+
+	column TipoPedido
+		dataType: string
+		lineageTag: b0d818dd-3eb7-4060-af51-78ba17118f13
+		summarizeBy: none
+		sourceColumn: TipoPedido
+
+		annotation SummarizationSetBy = Automatic
+
+	partition LOL_PLANMATERIAL = m
+		mode: import
+		source = Value.NativeQuery(SapHana.Database("192.168.0.231:30015", [Implementation="2.0"]), "WITH ""PICK"" AS (#(lf)SELECT#(lf)#(tab)T1.""BaseObject"",#(lf)#(tab)T1.""OrderEntry"",#(lf)#(tab)T1.""OrderLine"",#(lf)#(tab)SUM(T1.""PrevReleas"") ""PrevReleas""#(lf)FROM#(lf)#(tab)SBO_LOLA_SUCURSAL.OPKL T0#(lf)LEFT JOIN SBO_LOLA_SUCURSAL.PKL1 T1 ON#(lf)#(tab)T0.""AbsEntry"" = T1.""AbsEntry""#(lf)WHERE#(lf)#(tab)T1.""PickStatus"" <> 'C'#(lf)GROUP BY#(lf)#(tab)T1.""BaseObject"",#(lf)#(tab)T1.""OrderEntry"",#(lf)#(tab)T1.""OrderLine""), #(lf)#(tab)#(lf)#(lf)#(lf)    -- Primer bloque: OPKL retenido (sin enviar a RMT)#(lf)""PACK_HOLD"" AS (#(lf)  SELECT #(lf)    T1.""DocEntry"",T1.""LineNum"",#(lf)    MAX(T4.""SlpName"") AS ""Representante"",#(lf)    MAX(T3.""CardCode"") AS ""CardCode"",#(lf)    SUM(#(lf)        CASE #(lf)          WHEN T5.""U_GSP_LOLENVIORMT"" = 'N' AND T5.""Status"" <> 'C' #(lf)          THEN T1.""Quantity""#(lf)          ELSE 0 #(lf)        END#(lf)    ) AS ""UnidadesRetenidas"",#(lf)    SUM(#(lf)        CASE #(lf)          WHEN T5.""U_GSP_LOLENVIORMT"" = 'N' AND T5.""Status"" <> 'C' #(lf)          THEN ROUND(#(lf)                  ROUND((T1.""PriceBefDi"" * T1.""Quantity"") - ((T1.""PriceBefDi"" * T1.""Quantity"") * T1.""DiscPrcnt"" / 100), 2)#(lf)                  - (#(lf)                      ROUND((T1.""PriceBefDi"" * T1.""Quantity"") - ((T1.""PriceBefDi"" * T1.""Quantity"") * T1.""DiscPrcnt"" / 100), 2) * T3.""DiscPrcnt"" / 100#(lf)                    ), 2)#(lf)          ELSE 0 #(lf)        END#(lf)    ) AS ""MontoRetenido"",#(lf)    'Y' AS ""P&H""#(lf)  FROM SBO_LOLA_SUCURSAL.PKL1 T0#(lf)  LEFT JOIN SBO_LOLA_SUCURSAL.RDR1 T1 ON T0.""OrderEntry"" = T1.""DocEntry"" AND T0.""OrderLine"" = T1.""LineNum"" AND T0.""BaseObject"" = '17'#(lf)  LEFT JOIN SBO_LOLA_SUCURSAL.ORDR T3 ON T1.""DocEntry"" = T3.""DocEntry""#(lf)  LEFT JOIN SBO_LOLA_SUCURSAL.OSLP T4 ON T3.""SlpCode"" = T4.""SlpCode""#(lf)  LEFT JOIN SBO_LOLA_SUCURSAL.OPKL T5 ON T0.""AbsEntry"" = T5.""AbsEntry""#(lf)  WHERE (T5.""U_GSP_LOLENVIORMT"" = 'N' AND T5.""Status"" <> 'C') OR T3.""TrnspCode"" = '14'#(lf)  GROUP BY T1.""DocEntry"",T1.""LineNum""#(lf)),#(lf)#(tab)#(lf)#(tab)""RDR1_CALCULOS"" AS (#(lf)SELECT#(lf)#(tab)""T"".""DocEntry"" ,#(lf)#(tab)""T"".""LineNum"" ,#(lf)#(tab)""T"".""ItemCode"" ,#(lf)#(tab)""T"".""ShipDate"" ,#(lf)#(tab)""T"".""U_GSP_TCMODELGRPLIN"" , #(lf)#(tab)""T"".""WhsCode"" ,#(lf)#(tab)""T"".""InvQty"" ,#(lf)#(tab)""T"".""DelivrdQty"",#(lf)#(tab)""T"".""OpenInvQty"" ,#(lf)#(tab)""T"".""PrevReleas"" ,#(lf)#(tab)""T"".""QtyPtePicking"" , #(lf)#(tab)""T"".""U_GSP_LOLASSIGNQTY"" ,#(lf)#(tab)""T"".""U_GSP_LOLASSIGNQTYTR"" , #(lf)#(tab)""T"".""U_GSP_LOLTRANSITDATE"" ,#(lf)#(tab)""T"".""PriceBefDi"" ,#(lf)#(tab)""T"".""LineDiscPrcnt"" ,#(lf)#(tab)""T"".""CabDiscPrcnt"" , #(lf)#(tab)""T"".""U_LOL_REP"",#(lf)#(tab)ROUND(ROUND((""PriceBefDi"" * ""OpenInvQty"")-(""PriceBefDi"" * ""OpenInvQty"" * ""LineDiscPrcnt"" / 100), 2) - (ROUND((""PriceBefDi"" * ""OpenInvQty"")-(""PriceBefDi"" * ""OpenInvQty"" * ""LineDiscPrcnt"" / 100), 2) * ""CabDiscPrcnt"" / 100), 2) ""OpenLineTotal"" , #(lf)#(tab)ROUND(ROUND((""PriceBefDi"" * ""PrevReleas"")-(""PriceBefDi"" * ""PrevReleas"" * ""LineDiscPrcnt"" / 100), 2) - (ROUND((""PriceBefDi"" * ""PrevReleas"")-(""PriceBefDi"" * ""PrevReleas"" * ""LineDiscPrcnt"" / 100), 2) * ""CabDiscPrcnt"" / 100), 2) ""PickLineTotal"" , #(lf)#(tab)ROUND(ROUND((""PriceBefDi"" * ""QtyPtePicking"")-(""PriceBefDi"" * ""QtyPtePicking"" * ""LineDiscPrcnt"" / 100), 2) - (ROUND((""PriceBefDi"" * ""QtyPtePicking"")-(""PriceBefDi"" * ""QtyPtePicking"" * ""LineDiscPrcnt"" / 100), 2) * ""CabDiscPrcnt"" / 100), 2) ""PtePickLineTotal"" , #(lf)#(tab)ROUND(ROUND((""PriceBefDi"" *(""U_GSP_LOLASSIGNQTY""))-(""PriceBefDi"" *(""U_GSP_LOLASSIGNQTY"")* ""LineDiscPrcnt"" / 100), 2) - (ROUND((""PriceBefDi"" *(""U_GSP_LOLASSIGNQTY""))-(""PriceBefDi"" *(""U_GSP_LOLASSIGNQTY"")* ""LineDiscPrcnt"" / 100), 2) * ""CabDiscPrcnt"" / 100), 2) ""AssignLineTotal"",#(lf)#(tab)ROUND(ROUND((""PriceBefDi"" *(""U_GSP_LOLASSIGNQTYTR""))-(""PriceBefDi"" *(""U_GSP_LOLASSIGNQTYTR"")* ""LineDiscPrcnt"" / 100), 2) - (ROUND((""PriceBefDi"" *(""U_GSP_LOLASSIGNQTYTR""))-(""PriceBefDi"" *(""U_GSP_LOLASSIGNQTYTR"")* ""LineDiscPrcnt"" / 100), 2) * ""CabDiscPrcnt"" / 100), 2) ""AssignTransitLineTotal"",#(lf)#(tab)-- Importe total línea original sin descuentos#(lf)ROUND(ROUND((""PriceBefDi"" * ""InvQty"") - (""PriceBefDi"" * ""InvQty"" * ""LineDiscPrcnt"" / 100), 2)#(lf)    - (ROUND((""PriceBefDi"" * ""InvQty"") - (""PriceBefDi"" * ""InvQty"" * ""LineDiscPrcnt"" / 100), 2) * ""CabDiscPrcnt"" / 100), 2) #(lf)AS ""TotalLineOriginal"",#(lf)#(lf)-- Importe entregado (basado en la cantidad entregada)#(lf)ROUND(ROUND((""PriceBefDi"" * ""DelivrdQty"") - (""PriceBefDi"" * ""DelivrdQty"" * ""LineDiscPrcnt"" / 100), 2)#(lf)    - (ROUND((""PriceBefDi"" * ""DelivrdQty"") - (""PriceBefDi"" * ""DelivrdQty"" * ""LineDiscPrcnt"" / 100), 2) * ""CabDiscPrcnt"" / 100), 2) #(lf)AS ""DeliveredLineTotal""#(lf)#(lf)FROM#(lf)#(tab)(#(lf)#(tab)SELECT#(lf)#(tab)#(tab)D.""DocEntry"", #(lf)#(tab)#(tab)#(tab)#(tab)#(tab)L.""LineNum"", #(lf)#(tab)#(tab)#(tab)#(tab)#(tab)L.""ItemCode"",#(lf)#(tab)#(tab)#(tab)#(tab)#(tab)L.""ShipDate"",#(lf)#(tab)#(tab)#(tab)#(tab)#(tab)L.U_GSP_TCMODELGRPLIN,#(lf)#(tab)#(tab)#(tab)#(tab)#(tab)L.""WhsCode"",#(lf)#(tab)#(tab)#(tab)#(tab)#(tab)L.""InvQty"",#(lf)#(tab)#(tab)#(tab)#(tab)#(tab)L.""OpenInvQty"",#(lf)#(tab)#(tab)#(tab)#(tab)#(tab)L.""DelivrdQty"",#(lf)#(tab)#(tab)#(tab)#(tab)#(tab)COALESCE(PICK.""PrevReleas"",#(lf)#(tab)#(tab)0) ""PrevReleas"",#(lf)#(tab)#(tab)#(tab)#(tab)#(tab)L.""OpenInvQty""-COALESCE(PICK.""PrevReleas"",#(lf)#(tab)#(tab)0) ""QtyPtePicking"",#(lf)#(tab)#(tab)#(tab)#(tab)#(tab)(CASE#(lf)#(tab)#(tab)#(tab)WHEN (CASE#(lf)#(tab)#(tab)#(tab)#(tab)WHEN COALESCE(L.U_GSP_LOLASSIGNQTY,#(lf)#(tab)#(tab)#(tab)#(tab)0)-(L.""InvQty""-L.""OpenInvQty"") < 0 THEN 0#(lf)#(tab)#(tab)#(tab)#(tab)ELSE COALESCE(L.U_GSP_LOLASSIGNQTY,#(lf)#(tab)#(tab)#(tab)#(tab)0)-(L.""InvQty""-L.""OpenInvQty"")#(lf)#(tab)#(tab)#(tab)END) - COALESCE(PICK.""PrevReleas"",#(lf)#(tab)#(tab)#(tab)0) < 0 THEN 0#(lf)#(tab)#(tab)#(tab)ELSE (CASE#(lf)#(tab)#(tab)#(tab)#(tab)WHEN COALESCE(L.U_GSP_LOLASSIGNQTY,#(lf)#(tab)#(tab)#(tab)#(tab)0)-(L.""InvQty""-L.""OpenInvQty"") < 0 THEN 0#(lf)#(tab)#(tab)#(tab)#(tab)ELSE COALESCE(L.U_GSP_LOLASSIGNQTY,#(lf)#(tab)#(tab)#(tab)#(tab)0)-(L.""InvQty""-L.""OpenInvQty"")#(lf)#(tab)#(tab)#(tab)END) - COALESCE(PICK.""PrevReleas"",#(lf)#(tab)#(tab)#(tab)0)#(lf)#(tab)#(tab)END) U_GSP_LOLASSIGNQTY,#(lf)#(tab)#(tab)#(tab)#(tab)#(tab)COALESCE(L.U_GSP_LOLASSIGNQTYTR,#(lf)#(tab)#(tab)0) U_GSP_LOLASSIGNQTYTR,#(lf)#(tab)#(tab)#(tab)#(tab)#(tab)L.U_GSP_LOLTRANSITDATE,#(lf)#(tab)#(tab)#(tab)#(tab)#(tab)L.""PriceBefDi"",#(lf)#(tab)#(tab)#(tab)#(tab)#(tab)COALESCE(L.""DiscPrcnt"",#(lf)#(tab)#(tab)0) ""LineDiscPrcnt"",#(lf)#(tab)#(tab)#(tab)#(tab)#(tab)COALESCE(D.""DiscPrcnt"",#(lf)#(tab)#(tab)0) ""CabDiscPrcnt"",#(lf)#(tab)#(tab)L.""U_LOL_REP""#(lf)#(tab)FROM#(lf)#(tab)#(tab)SBO_LOLA_SUCURSAL.ORDR D#(lf)#(tab)INNER JOIN SBO_LOLA_SUCURSAL.RDR1 L ON#(lf)#(tab)#(tab)D.""DocEntry"" = L.""DocEntry""#(lf)#(tab)LEFT JOIN PICK ON#(lf)#(tab)#(tab)PICK.""BaseObject"" = D.""ObjType""#(lf)#(tab)#(tab)AND PICK.""OrderEntry"" = L.""DocEntry""#(lf)#(tab)#(tab)AND PICK.""OrderLine"" = L.""LineNum""#(lf)#(tab)WHERE#(lf)#(tab)#(tab)L.""LineStatus"" = 'O'#(lf)#(tab)#(tab)--AND l.""OpenInvQty""-COALESCE(PICK.""PrevReleas"",0) > 0#(lf)#(tab)#(tab)--AND D.""DocNum"" = 234000027 AND #(lf)#(tab)) T),#(lf)""DESTALLADOS"" AS (#(lf)SELECT#(lf)#(tab)r.""DocEntry"",#(lf)#(tab)i.""U_GSP_ModelCode"",#(lf)#(tab)i.""U_GSP_Color"",  #(lf)#(tab)#(tab)#(tab)#(tab)#(tab)#(tab)min(CASE WHEN U_GSP_LOLASSIGNQTY > 0 THEN 'Y' ELSE 'N' END) ""StockTodasTallas""#(lf)FROM#(lf)#(tab)RDR1_CALCULOS r#(lf)LEFT JOIN SBO_LOLA_SUCURSAL.OITM i ON#(lf)#(tab)r.""ItemCode"" = i.""ItemCode""#(lf)WHERE#(lf)#(tab)""QtyPtePicking"" > 0#(lf)GROUP BY#(lf)#(tab)r.""DocEntry"",#(lf)#(tab)i.""U_GSP_ModelCode"",#(lf)#(tab)i.""U_GSP_Color""),#(lf)""TOTAL_LOOK"" AS (#(lf)SELECT#(lf)#(tab)r.""DocEntry"",#(lf)#(tab)r.U_GSP_TCMODELGRPLIN ,  #(lf)#(tab)#(tab)#(tab)#(tab)min(CASE WHEN U_GSP_LOLASSIGNQTY > 0 THEN 'Y' ELSE 'N' END) ""StockTodasTallas""#(lf)FROM#(lf)#(tab)RDR1_CALCULOS r#(lf)WHERE#(lf)#(tab)""QtyPtePicking"" > 0#(lf)#(tab)AND COALESCE(r.U_GSP_TCMODELGRPLIN ,#(lf)#(tab)0) <> 0#(lf)GROUP BY#(lf)#(tab)r.""DocEntry"",#(lf)#(tab)r.U_GSP_TCMODELGRPLIN), #(lf)#(tab)#(tab)#(lf)#(tab)#(tab)""PEDIDOS_COMPRA_REL"" AS (#(lf)SELECT#(lf)#(tab)U_TARGETOBJTYPE,#(lf)#(tab)U_TARGETDOCENTRY ,#(lf)#(tab)U_TARGETLINENUM, #(lf)#(tab)#(tab)max(""DocEntry"")""DocEntry"",#(lf)#(tab)STRING_AGG(T.""ShipDate"",#(lf)#(tab)', ')""ShipDate""#(lf)FROM#(lf)#(tab)(#(lf)#(tab)SELECT#(lf)#(tab)#(tab)U_TARGETOBJTYPE,#(lf)#(tab)#(tab)U_TARGETDOCENTRY ,#(lf)#(tab)#(tab)U_TARGETLINENUM,#(lf)#(tab)#(tab)OPOR.""DocEntry"",#(lf)#(tab)#(tab)OPOR.""ShipDate""#(lf)#(tab)FROM#(lf)#(tab)#(tab)SBO_LOLA_SUCURSAL.""@GSP_LOLASSSTK"" T0#(lf)#(tab)LEFT JOIN SBO_LOLA_SUCURSAL.RDR1 T1 ON#(lf)#(tab)#(tab)T0.U_TARGETDOCENTRY = T1.""DocEntry""#(lf)#(tab)#(tab)AND T0.U_TARGETLINENUM = T1.""LineNum""#(lf)#(tab)#(tab)AND T0.U_TARGETOBJTYPE = T1.""ObjType""#(lf)#(tab)LEFT JOIN (#(lf)#(tab)#(tab)SELECT#(lf)#(tab)#(tab)#(tab)POR1.""ObjType"",#(lf)#(tab)#(tab)#(tab)POR1.""DocEntry"",#(lf)#(tab)#(tab)#(tab)POR1.""ItemCode"",#(lf)#(tab)#(tab)#(tab)max(POR1.""ShipDate"") ""ShipDate""#(lf)#(tab)#(tab)FROM#(lf)#(tab)#(tab)#(tab)SBO_LOLA_SUCURSAL.POR1#(lf)#(tab)#(tab)GROUP BY#(lf)#(tab)#(tab)#(tab)POR1.""ObjType"",#(lf)#(tab)#(tab)#(tab)POR1.""DocEntry"",#(lf)#(tab)#(tab)#(tab)POR1.""ItemCode""#(lf)#(tab)#(tab)#(tab)#(tab)) OPOR ON#(lf)#(tab)#(tab)OPOR.""ObjType"" = U_BASETYPE#(lf)#(tab)#(tab)AND OPOR.""DocEntry"" = U_BASEENTRY#(lf)#(tab)#(tab)AND T1.""ItemCode"" = OPOR.""ItemCode""#(lf)#(tab)WHERE#(lf)#(tab)#(tab)T0.U_BASETYPE = '22'#(lf)UNION#(lf)#(tab)SELECT#(lf)#(tab)#(tab)T0.U_TARGETOBJTYPE,#(lf)#(tab)#(tab)T0.U_TARGETDOCENTRY ,#(lf)#(tab)#(tab)T0.U_TARGETLINENUM ,#(lf)#(tab)#(tab)T5.""OPOR_DocEntry"" ,#(lf)#(tab)#(tab)T5.""OPOR_ShipDate""#(lf)#(tab)FROM#(lf)#(tab)#(tab)SBO_LOLA_SUCURSAL.""@GSP_LOLASSSTK"" T0#(lf)#(tab)LEFT JOIN SBO_LOLA_SUCURSAL.RDR1 T1 ON#(lf)#(tab)#(tab)T0.U_TARGETDOCENTRY = T1.""DocEntry""#(lf)#(tab)#(tab)AND T0.U_TARGETLINENUM = T1.""LineNum""#(lf)#(tab)#(tab)AND T0.U_TARGETOBJTYPE = T1.""ObjType""#(lf)#(tab)LEFT JOIN SBO_LOLA_SUCURSAL.OWTQ T2 ON#(lf)#(tab)#(tab)T2.""ObjType"" = T0.U_BASETYPE#(lf)#(tab)#(tab)AND T2.""DocEntry"" = T0.U_BASEENTRY#(lf)#(tab)LEFT JOIN (#(lf)#(tab)#(tab)SELECT#(lf)#(tab)#(tab)#(tab)""BaseEntry"" ""OPDN_DocEntry"",#(lf)#(tab)#(tab)#(tab)max(""DocEntry"") ""OWTQ_DocEntry""#(lf)#(tab)#(tab)FROM#(lf)#(tab)#(tab)#(tab)SBO_LOLA_SUCURSAL.WTQ1#(lf)#(tab)#(tab)WHERE#(lf)#(tab)#(tab)#(tab)""BaseType"" = '20'#(lf)#(tab)#(tab)GROUP BY#(lf)#(tab)#(tab)#(tab)""BaseEntry""#(lf)#(tab)#(tab)#(tab)#(tab)#(tab)#(tab)#(tab)) T3 ON#(lf)#(tab)#(tab)T3.""OWTQ_DocEntry"" = T2.""DocEntry""#(lf)#(tab)LEFT JOIN SBO_LOLA_SUCURSAL.OPDN T4 ON#(lf)#(tab)#(tab)T4.""DocEntry"" = T3.""OPDN_DocEntry""#(lf)#(tab)LEFT JOIN (#(lf)#(tab)#(tab)SELECT#(lf)#(tab)#(tab)#(tab)T0.""DocEntry"",#(lf)#(tab)#(tab)#(tab)T0.""ItemCode"",#(lf)#(tab)#(tab)#(tab)T1.""WhsCode"",#(lf)#(tab)#(tab)#(tab)max(T1.""DocEntry"") ""OPOR_DocEntry"",#(lf)#(tab)#(tab)#(tab)max(T1.""ShipDate"") ""OPOR_ShipDate""#(lf)#(tab)#(tab)FROM#(lf)#(tab)#(tab)#(tab)SBO_LOLA_SUCURSAL.PDN1 T0#(lf)#(tab)#(tab)LEFT JOIN SBO_LOLA_SUCURSAL.POR1 T1 ON#(lf)#(tab)#(tab)#(tab)T0.""BaseType"" = T1.""ObjType""#(lf)#(tab)#(tab)#(tab)AND T0.""BaseEntry"" = T1.""DocEntry""#(lf)#(tab)#(tab)#(tab)AND T0.""BaseLine"" = T1.""LineNum""#(lf)#(tab)#(tab)WHERE#(lf)#(tab)#(tab)#(tab)T0.""BaseType"" = 22#(lf)#(tab)#(tab)GROUP BY#(lf)#(tab)#(tab)#(tab)T0.""DocEntry"",#(lf)#(tab)#(tab)#(tab)T0.""ItemCode"",#(lf)#(tab)#(tab)#(tab)T1.""WhsCode""#(lf)#(tab)#(tab)#(tab)#(tab)#(tab)#(tab)#(tab)#(tab)) T5 ON#(lf)#(tab)#(tab)T5.""DocEntry"" = T4.""DocEntry""#(lf)#(tab)#(tab)AND T1.""ItemCode"" = T5.""ItemCode""#(lf)#(tab)#(tab)AND T1.""WhsCode"" = T5.""WhsCode""#(lf)#(tab)WHERE#(lf)#(tab)#(tab)T0.U_BASETYPE = '1250000001'#(lf)) T#(lf)GROUP BY#(lf)#(tab)U_TARGETOBJTYPE,#(lf)#(tab)U_TARGETDOCENTRY ,#(lf)#(tab)U_TARGETLINENUM),#(lf)""SOL_TRASLADO_REL"" AS (#(lf)SELECT#(lf)#(tab)U_TARGETOBJTYPE,#(lf)#(tab)U_TARGETDOCENTRY ,#(lf)#(tab)U_TARGETLINENUM,#(lf)#(tab)max(""WTQ_DocEntry"")""WTQ_DocEntry"",#(lf)#(tab)max(""PDN_DocEntry"")""PDN_DocEntry""#(lf)FROM#(lf)#(tab)(#(lf)#(tab)SELECT#(lf)#(tab)#(tab)DISTINCT T.U_TARGETOBJTYPE,#(lf)#(tab)#(tab)T.U_TARGETDOCENTRY ,#(lf)#(tab)#(tab)T.U_TARGETLINENUM ,#(lf)#(tab)#(tab)T2.""DocEntry"" ""WTQ_DocEntry"",#(lf)#(tab)#(tab)T4.""DocEntry"" ""PDN_DocEntry""#(lf)#(tab)FROM#(lf)#(tab)#(tab)SBO_LOLA_SUCURSAL.""@GSP_LOLASSSTK"" T#(lf)#(tab)LEFT JOIN SBO_LOLA_SUCURSAL.OWTQ T2 ON#(lf)#(tab)#(tab)T2.""ObjType"" = T.U_BASETYPE#(lf)#(tab)#(tab)AND T2.""DocEntry"" = T.U_BASEENTRY#(lf)#(tab)LEFT JOIN (#(lf)#(tab)#(tab)SELECT#(lf)#(tab)#(tab)#(tab)""BaseEntry"" ""OPDN_DocEntry"",#(lf)#(tab)#(tab)#(tab)max(""DocEntry"") ""OWTQ_DocEntry""#(lf)#(tab)#(tab)FROM#(lf)#(tab)#(tab)#(tab)SBO_LOLA_SUCURSAL.WTQ1#(lf)#(tab)#(tab)WHERE#(lf)#(tab)#(tab)#(tab)""BaseType"" = '20'#(lf)#(tab)#(tab)GROUP BY#(lf)#(tab)#(tab)#(tab)""BaseEntry""#(lf)#(tab)#(tab)#(tab)#(tab)#(tab)#(tab)#(tab)#(tab)#(tab)#(tab)#(tab)) T3 ON#(lf)#(tab)#(tab)T3.""OWTQ_DocEntry"" = T2.""DocEntry""#(lf)#(tab)LEFT JOIN SBO_LOLA_SUCURSAL.OPDN T4 ON#(lf)#(tab)#(tab)T4.""DocEntry"" = T3.""OPDN_DocEntry""#(lf)#(tab)WHERE#(lf)#(tab)#(tab)T.U_BASETYPE = '1250000001'#(lf)#(tab)#(tab)#(tab)#(tab)#(tab)#(tab)) T#(lf)GROUP BY#(lf)#(tab)U_TARGETOBJTYPE,#(lf)#(tab)U_TARGETDOCENTRY ,#(lf)#(tab)U_TARGETLINENUM)#(lf)#(tab)#(lf)#(tab)#(lf)#(lf)#(tab)#(lf)#(tab)#(lf)SELECT#(lf)#(tab)L.""WhsCode"" ""Almacén"",#(lf)#(tab)R.""SlpName"" ""Representante"", #(lf)#(tab)#(tab)#(tab)#(tab)#(tab)#(tab)D.""DocNum"" ""Nº Pedido Ventas"",#(lf)#(tab)CASE#(lf)#(tab)#(tab)WHEN D.""Confirmed"" = 'Y' THEN 'SI'#(lf)#(tab)#(tab)ELSE 'NO'#(lf)#(tab)END ""Autorizado"",#(lf)#(tab)OCRY.""Name"" ""País"",#(lf)#(tab)D.""CardCode"" ""Código Cliente"",#(lf)#(tab)OCRD.U_GSP_LOLPRIORIDAD ""Prioridad Cliente"",#(lf)#(tab)RIESGO.""CreditLine"" ""Riesgo Disponible"",#(lf)#(tab)CASE#(lf)#(tab)#(tab)WHEN OCRD.U_GSP_LOLEXCLASSTK = 'Y'#(lf)#(tab)#(tab)OR D.U_GSP_LOLEXCLASSTK = 'Y'#(lf)#(tab)#(tab)OR OCRD.""frozenFor"" = 'Y'#(lf)#(tab)#(tab)OR OCRD.U_GSP_TCODLNLOCKED = 'Y' THEN 'SI'#(lf)#(tab)#(tab)ELSE 'NO'#(lf)#(tab)END ""Bloqueado"",#(lf)#(tab)CASE#(lf)#(tab)#(tab)WHEN OCRD.""frozenFor"" = 'Y' THEN 'INACTIVO'#(lf)#(tab)#(tab)WHEN OCRD.U_GSP_TCODLNLOCKED = 'Y' THEN 'BLOQUEO ENVIOS'#(lf)#(tab)#(tab)WHEN OCRD.U_GSP_LOLEXCLASSTK = 'Y'#(lf)#(tab)#(tab)OR D.U_GSP_LOLEXCLASSTK = 'Y' THEN 'NO RESERVA'#(lf)#(tab)#(tab)ELSE ''#(lf)#(tab)END ""Tipo Bloqueo"", #(lf)#(tab)I.""U_GSP_Season"" ""Temporada"",#(lf)#(tab)I.""ItemCode"",#(lf)#(tab)I.""CodeBars"" ""EAN"",#(lf)#(tab)I.U_GSP_REFERENCE ""Ref. Modelo"",#(lf)#(tab)C.""U_GSP_Code"" || ' - ' || C.""U_GSP_Name"" ""Color"",#(lf)#(tab)S.""U_GSP_Desc"" ""Talla"",#(lf)#(tab)I.""ItemName"" ""Descripción Artículo"", #(lf)#(tab)L.""InvQty"" AS ""Cantidad Original"",#(lf)#(tab)L.""DelivrdQty"" AS ""Cantidad Entregada"",#(lf)#(lf)#(tab)COALESCE(L.""OpenInvQty"",#(lf)#(tab)0) ""Unidades pendientes Entregar"", #(lf)#(tab)COALESCE(L.""OpenLineTotal"",#(lf)#(tab)0) ""Importe pendiente Entregar"",#(tab)#(lf)#(tab)COALESCE(L.""PrevReleas"",#(lf)#(tab)0) ""Uniades en Piciking"", #(lf)#(tab)COALESCE(L.""PickLineTotal"",#(lf)#(tab)0) ""Import en Piciking"", #(lf)#(tab)COALESCE(L.""QtyPtePicking"",#(lf)#(tab)0) ""Unidades pte. picking"",#(tab)#(lf)#(tab)COALESCE(L.""PtePickLineTotal"",#(lf)#(tab)0) ""Imporet pte. picking"",#(lf)#(tab) COALESCE(L.U_GSP_LOLASSIGNQTY,#(lf)#(tab)0) ""Unidades asignadas"",#(lf)#(tab) L.""AssignLineTotal"" ""Importe asignado"",#(lf)#(tab)COALESCE(LS.U_QUANTITY,#(lf)#(tab)L.U_GSP_LOLASSIGNQTYTR,#(lf)#(tab)0) ""Unidades asignadas Transito"",#(lf)#(tab) L.""AssignTransitLineTotal"" ""AssignTransitLineTotal"",#(lf)#(tab) CASE#(lf)#(tab)#(tab)WHEN COALESCE(L.""PrevReleas"",#(lf)#(tab)#(tab)0) + COALESCE(L.U_GSP_LOLASSIGNQTY,#(lf)#(tab)#(tab)0) + COALESCE(LS.U_QUANTITY,#(lf)#(tab)#(tab)L.U_GSP_LOLASSIGNQTYTR,#(lf)#(tab)#(tab)0) >= L.""OpenInvQty"" THEN 'SI'#(lf)#(tab)#(tab)ELSE 'NO'#(lf)#(tab)END ""Cartera cubierta"",#(lf)#(tab)#(lf)#(tab) #(lf)#(tab) CASE#(lf)    WHEN #(lf)        COALESCE(L.""PrevReleas"", 0)#(lf)        + COALESCE(L.U_GSP_LOLASSIGNQTY, 0)#(lf)        + COALESCE(LS.U_QUANTITY, COALESCE(L.U_GSP_LOLASSIGNQTYTR, 0)) #(lf)        >= COALESCE(L.""OpenInvQty"", 0) * 0.6#(lf)        AND ADD_DAYS(L.""ShipDate"", 15) > L.U_GSP_LOLTRANSITDATE#(lf)    THEN 'SI'#(lf)    ELSE 'NO'#(lf)END AS ""Cartera 60%"",#(lf)#(lf)#(lf)CASE #(lf)    WHEN L.""OpenInvQty"" > 0#(lf)         AND ADD_DAYS(L.""ShipDate"", 15) > L.""U_GSP_LOLTRANSITDATE""#(lf)    THEN ROUND(#(lf)        100 * (#(lf)            COALESCE(L.""PrevReleas"", 0) +#(lf)            COALESCE(L.""U_GSP_LOLASSIGNQTY"", 0) +#(lf)            COALESCE(LS.""U_QUANTITY"", L.""U_GSP_LOLASSIGNQTYTR"", 0)#(lf)        ) / L.""OpenInvQty""#(lf)    , 2)#(lf)    ELSE NULL#(lf)END AS ""Porcentaje Cartera Cubierta"",#(lf)#(lf)#(lf)#(lf)#(lf)#(tab) #(lf)#(tab) L.""OpenInvQty"" - (COALESCE(L.""PrevReleas"",#(lf)#(tab)0) + COALESCE(L.U_GSP_LOLASSIGNQTY,#(lf)#(tab)0) + COALESCE(LS.U_QUANTITY,#(lf)#(tab)L.U_GSP_LOLASSIGNQTYTR,#(lf)#(tab)0)) ""Faltas"",#(lf)#(tab) CASE#(lf)#(tab)#(tab)WHEN ST.""StockTodasTallas"" = 'Y'#(lf)#(tab)#(tab)AND COALESCE(TL.""StockTodasTallas"",#(lf)#(tab)#(tab)'Y') = 'Y'#(lf)#(tab)#(tab)AND D.""Confirmed"" = 'Y'#(lf)#(tab)#(tab)AND (CASE#(lf)#(tab)#(tab)#(tab)WHEN OCRD.U_GSP_LOLEXCLASSTK = 'Y'#(lf)#(tab)#(tab)#(tab)#(tab)OR D.U_GSP_LOLEXCLASSTK = 'Y'#(lf)#(tab)#(tab)#(tab)#(tab)OR OCRD.""frozenFor"" = 'Y'#(lf)#(tab)#(tab)#(tab)#(tab)OR OCRD.U_GSP_TCODLNLOCKED = 'Y' THEN 'SI'#(lf)#(tab)#(tab)#(tab)#(tab)ELSE 'NO'#(lf)#(tab)#(tab)#(tab)END) = 'NO'#(lf)#(tab) #(tab)#(tab)#(tab)THEN 'SI'#(lf)#(tab)#(tab)ELSE 'NO'#(lf)#(tab)END ""Lanzamiento Picking"",#(lf)#(tab)--Si tengo estoc de tosas las tallas, todo el totoal look, pedido autorizado y cliente no confirmado = SI,#(lf)#(tab)I.U_GSP_LOLTOTALLOOK ""Grupo total look"",#(lf)#(tab)PC.""DocNum"" ""Orden de compra"",#(lf)#(tab)PC.""CardName"" ""Proveedor"",#(lf)#(tab)OPDN.""DocNum"" ""NºEntrada mcias."",#(lf)#(tab)OWTQ.""DocNum"" ""Solicitud traslado"",#(lf)#(tab)D.""TaxDate"" ""Fecha pedido venta"", #(lf)#(tab)L.""ShipDate"" ""Fecha Entrega pedido venta"",#(lf)#(tab)ADD_DAYS(L.""ShipDate"",15) ""Fecha Fin pedido venta"",#(lf)#(tab)WEEK(L.""ShipDate"") ""Semana Entrega"", #(lf)#(tab)L.U_GSP_LOLTRANSITDATE ""Fecha disponibilidad (línea del articulo)"",#(lf)#(tab)CASE#(lf)#(tab)#(tab)WHEN L.""ShipDate"" < NOW() THEN 'SI'#(lf)#(tab)#(tab)WHEN COALESCE(L.""QtyPtePicking"",#(lf)#(tab)#(tab)0) <= COALESCE(L.U_GSP_LOLASSIGNQTY,#(lf)#(tab)#(tab)0) THEN 'NO'#(lf)#(tab)#(tab)WHEN L.U_GSP_LOLTRANSITDATE <= L.""ShipDate"" THEN 'NO'#(lf)#(tab)#(tab)ELSE 'SI'#(lf)#(tab)END ""Servicio con retraso"",#(lf)#(tab)--PC.""DocDate"" ""Fecha orden de compra (línea del artículo)"",#(lf)#(tab)PCR.""ShipDate"" ""Fecha entrega orden de compra (línea del articulo)"", #(lf)#(tab)PC.U_GSP_LOLRECEPTIONDATE ""Fecha llegada orden de compra (línea del articulo)"",#(lf)#(tab)OPDN.""DocDueDate"" ""Fecha llegada entrada mcias."",#(lf)#(tab)OWTQ.""DocDueDate"" ""Fecha llegada solicitud traslado"",#(lf)#(tab)OCRD.""CardName"",#(lf)#(tab)L.""TotalLineOriginal"" AS ""Importe Original"",#(lf)L.""DeliveredLineTotal"" AS ""Importe Entregado""#(lf),CASE WHEN PH.""P&H"" IS NULL THEN 'N' ELSE PH.""P&H"" END AS ""P&H"", CASE WHEN L.""U_LOL_REP""  = 'Y' THEN 'Reposición' ELSE 'Inicial' END AS ""TipoPedido""#(lf)FROM#(lf)#(tab)SBO_LOLA_SUCURSAL.ORDR D#(lf)LEFT JOIN RDR1_CALCULOS L ON#(lf)#(tab)D.""DocEntry"" = L.""DocEntry""#(lf)INNER JOIN SBO_LOLA_SUCURSAL.OCRD ON#(lf)#(tab)OCRD.""CardCode"" = D.""CardCode""#(lf)LEFT JOIN SBO_LOLA_SUCURSAL.OSLP R ON#(lf)#(tab)R.""SlpCode"" = D.""SlpCode""#(lf)LEFT JOIN SBO_LOLA_SUCURSAL.RDR12 DD ON#(lf)#(tab)D.""DocEntry"" = DD.""DocEntry""#(lf)LEFT JOIN SBO_LOLA_SUCURSAL.OCRY ON#(lf)#(tab)OCRY.""Code"" = DD.""CountryS""#(lf)LEFT JOIN SBO_LOLA_SUCURSAL.OITM I ON#(lf)#(tab)I.""ItemCode"" = L.""ItemCode""#(lf)LEFT JOIN DESTALLADOS ST ON#(lf)#(tab)ST.""DocEntry"" = D.""DocEntry""#(lf)#(tab)AND I.""U_GSP_ModelCode"" = ST.""U_GSP_ModelCode""#(lf)#(tab)AND I.""U_GSP_Color"" = ST.""U_GSP_Color""#(lf)LEFT JOIN TOTAL_LOOK TL ON#(lf)#(tab)TL.""DocEntry"" = D.""DocEntry""#(lf)#(tab)AND TL.""U_GSP_TCMODELGRPLIN"" = L.U_GSP_TCMODELGRPLIN#(lf)LEFT JOIN SBO_LOLA_SUCURSAL.""@GSP_TCCOLOR"" C ON#(lf)#(tab)I.""U_GSP_Color"" = C.""Code""#(lf)LEFT JOIN SBO_LOLA_SUCURSAL.""@GSP_TCSIZE"" S ON#(lf)#(tab)I.""U_GSP_Size"" = S.""Code""#(lf)LEFT JOIN (#(lf)#(tab)SELECT#(lf)#(tab)#(tab)U_TARGETOBJTYPE,#(lf)#(tab)#(tab)U_TARGETDOCENTRY,#(lf)#(tab)#(tab)U_TARGETLINENUM,#(lf)#(tab)#(tab)SUM(U_QUANTITY) U_QUANTITY#(lf)#(tab)FROM#(lf)#(tab)#(tab)SBO_LOLA_SUCURSAL.""@GSP_LOLASSSTK""#(lf)#(tab)GROUP BY#(lf)#(tab)#(tab)U_TARGETOBJTYPE,#(lf)#(tab)#(tab)U_TARGETDOCENTRY,#(lf)#(tab)#(tab)U_TARGETLINENUM ) LS ON#(lf)#(tab)LS.U_TARGETOBJTYPE = '17'#(lf)#(tab)AND LS.U_TARGETDOCENTRY = L.""DocEntry""#(lf)#(tab)AND LS.U_TARGETLINENUM = L.""LineNum""#(lf)LEFT JOIN PEDIDOS_COMPRA_REL PCR ON#(lf)#(tab)PCR.U_TARGETOBJTYPE = '17'#(lf)#(tab)AND PCR.U_TARGETDOCENTRY = L.""DocEntry""#(lf)#(tab)AND PCR.U_TARGETLINENUM = L.""LineNum""#(lf)LEFT JOIN SBO_LOLA_SUCURSAL.OPOR PC ON#(lf)#(tab)PC.""DocEntry"" = PCR.""DocEntry""#(lf)LEFT JOIN SOL_TRASLADO_REL WTQ ON#(lf)#(tab)WTQ.U_TARGETOBJTYPE = '17'#(lf)#(tab)AND WTQ.U_TARGETDOCENTRY = L.""DocEntry""#(lf)#(tab)AND WTQ.U_TARGETLINENUM = L.""LineNum""#(lf)LEFT JOIN SBO_LOLA_SUCURSAL.OWTQ ON#(lf)#(tab)OWTQ.""DocEntry"" = WTQ.""WTQ_DocEntry""#(lf)LEFT JOIN SBO_LOLA_SUCURSAL.OPDN ON#(lf)#(tab)OPDN.""DocEntry"" = WTQ.""PDN_DocEntry""#(lf)LEFT JOIN SBO_LOLA_SUCURSAL.GSP_LOL_OCRD_RIESGO RIESGO ON#(lf)#(tab)RIESGO.""CardCode"" = D.""CardCode""#(lf)LEFT JOIN ""PACK_HOLD"" PH ON L.""DocEntry"" = PH.""DocEntry"" AND L.""LineNum"" = PH.""LineNum""#(lf)WHERE#(lf)#(tab)D.""DocStatus"" = 'O' --AND PH.""DocEntry"" IS NOT NULL#(lf)#(tab)--AND D.""DocNum"" = '254005797'#(lf)#(tab)--AND I.""ItemCode"" = 'MF2504002.057.U'#(lf)ORDER BY#(lf)#(tab)L.""LineNum""#(lf)#(lf)#(lf)#(tab)/*#(lf)#(tab)SELECT D.""DocEntry""#(lf)FROM SBO_LOLA_SUCURSAL.ORDR D#(lf)LEFT JOIN PACK_HOLD PH ON D.""DocEntry"" = PH.""DocEntry""#(lf)WHERE PH.""DocEntry"" IS NOT NULL#(lf)*/#(lf)#(lf)#(lf)", null, [EnableFolding=true])
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegación
+
