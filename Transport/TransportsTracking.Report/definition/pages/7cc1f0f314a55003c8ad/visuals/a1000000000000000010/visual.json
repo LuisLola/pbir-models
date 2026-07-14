@@ -376,37 +376,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "d4dc0e125fd96c28eb96",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_TRANSPORT_TRACKING"
-              }
-            },
-            "Property": "estado_grupo"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "8f750abe787b095f5f30",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Medidas"
-              }
-            },
-            "Property": "Envios Totales"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

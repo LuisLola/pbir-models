@@ -550,7 +550,7 @@ table LOL_TRANSPORT_TRACKING
 				let
 				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin"),
 				    dbo_LOL_TRANSPORT_TRACKING = Origen{[Schema="dbo",Item="LOL_TRANSPORT_TRACKING"]}[Data],
-				    #"Poner En Mayúsculas Cada Palabra" = Table.TransformColumns(dbo_LOL_TRANSPORT_TRACKING,{{"cliente", Text.Proper, type text}})
+				    #"Poner En Mayúsculas Cada Palabra" = Table.TransformColumns(dbo_LOL_TRANSPORT_TRACKING,{{"cliente", Text.Proper, type text}, {"ciudad_destino", Text.Proper, type text}})
 				in
 				    #"Poner En Mayúsculas Cada Palabra"
 

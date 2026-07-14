@@ -202,6 +202,106 @@
             }
           }
         }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "82D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_TRANSPORT_TRACKING.albaran"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "161D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_TRANSPORT_TRACKING.tracking"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "248D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_TRANSPORT_TRACKING.cliente"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "77D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_TRANSPORT_TRACKING.dias_entrega_laborables"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "75D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_TRANSPORT_TRACKING.sla_objetivo"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "177D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_TRANSPORT_TRACKING.ciudad_destino"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "102D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_TRANSPORT_TRACKING.f_inicio"
+          }
+        }
       ]
     },
     "visualContainerObjects": {
@@ -435,121 +535,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "114e5816de7550c5e79b",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_TRANSPORT_TRACKING"
-              }
-            },
-            "Property": "albaran"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "e8f9dc50b6db02c38ba0",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_TRANSPORT_TRACKING"
-              }
-            },
-            "Property": "tracking"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "35f3cab4094ecc13d286",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_TRANSPORT_TRACKING"
-              }
-            },
-            "Property": "cliente"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "82ba621740e172d4dee3",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_TRANSPORT_TRACKING"
-              }
-            },
-            "Property": "transportista_norm"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "2b7478b960b4689ecdaa",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_TRANSPORT_TRACKING"
-              }
-            },
-            "Property": "estado"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "ade43cd9549c815068ba",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_TRANSPORT_TRACKING"
-              }
-            },
-            "Property": "ciudad_destino"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "e3e4c56a6c06de270be7",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_TRANSPORT_TRACKING"
-              }
-            },
-            "Property": "dias_entrega_laborables"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "5639c987986ffba73e89",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_TRANSPORT_TRACKING"
-              }
-            },
-            "Property": "sla_objetivo"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

@@ -92,21 +92,21 @@
             "zoom": {
               "expr": {
                 "Literal": {
-                  "Value": "1.79D"
+                  "Value": "2.68D"
                 }
               }
             },
             "centerLatitude": {
               "expr": {
                 "Literal": {
-                  "Value": "43.778090540607224D"
+                  "Value": "37.18355904906032D"
                 }
               }
             },
             "centerLongitude": {
               "expr": {
                 "Literal": {
-                  "Value": "-44.078343205878696D"
+                  "Value": "-45.01690459707629D"
                 }
               }
             },
@@ -421,37 +421,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "fff1410d714b61279591",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_TRANSPORT_TRACKING"
-              }
-            },
-            "Property": "ciudad_destino_limpia"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "8f7eaa1e6c14cfefd03d",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Medidas"
-              }
-            },
-            "Property": "Envios Totales"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }
