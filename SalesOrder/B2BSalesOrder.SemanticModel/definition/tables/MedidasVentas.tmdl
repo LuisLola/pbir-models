@@ -534,6 +534,113 @@ table MedidasVentas
 		displayFolder: Validacion
 		lineageTag: 7b1721dd-e52e-4e97-96e1-0282b82fc443
 
+	measure 'Pedido Original' = ```
+			CALCULATE ( SUM ( 'LOL_PBIB2BSALESORDER'[ImporteBruto_LC]), 'LOL_PBIB2BSALESORDER'[IsIncidence] = "N" )
+			
+			```
+		displayFolder: Servicio Temporada
+		lineageTag: 9a3bdc11-4125-402e-beb4-2ac48eef606d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Pedidos Cancelados' = ```
+			CALCULATE ( SUM ( 'LOL_PBIB2BSALESORDER'[ImporteBruto_LC] ), 'LOL_PBIB2BSALESORDER'[IsIncidence] = "Y")
+			
+			```
+		displayFolder: Servicio Temporada
+		lineageTag: 87d9cba2-144b-43b7-a0c3-5f3216e58c1b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Pedido Final' = ```
+			SUM ( 'LOL_PBIB2BSALESORDER'[ImporteBruto_LC] )
+			
+			```
+		displayFolder: Servicio Temporada
+		lineageTag: de2162fb-eef9-4173-83c9-efdc58523d91
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Cancelado' = ```
+			DIVIDE ( - [Pedidos Cancelados], [Pedido Original] )
+			
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Servicio Temporada
+		lineageTag: bcad1adb-8e03-4f4c-9c00-a1a5d01308c1
+
+	measure 'Importe Servido' = ```
+			SUM ( 'LOL_PBISALESDELIVERY'[ImporteNetoLineaML] )
+			
+			```
+		displayFolder: Servicio Temporada
+		lineageTag: 592fe288-7792-4511-889b-f65c3067a682
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Servido' = ```
+			DIVIDE ( [Importe Servido], [Pedido Final] )
+			
+			```
+		displayFolder: Servicio Temporada
+		lineageTag: 45c6c149-96e7-475d-8478-459c1d12f549
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Pendiente Servir' = ```
+			[Pedido Final] - [Importe Servido]
+			
+			```
+		displayFolder: Servicio Temporada
+		lineageTag: 61acb71a-e562-4557-abcc-90bb46ae4d8d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Importe Facturado' = ```
+			SUM ( 'LOL_PBIINVOICESSALES'[LineTotal_LC] )
+			
+			```
+		displayFolder: Servicio Temporada
+		lineageTag: f4404a23-fc49-488c-8d72-294fc24680b9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Facturado' = ```
+			DIVIDE ( [Importe Facturado], [Pedido Final] )
+			
+			```
+		displayFolder: Servicio Temporada
+		lineageTag: a24c3813-3b1a-46e9-91c6-6da5fbb26f9e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Pendiente Facturar' = ```
+			[Pedido Final] - [Importe Facturado]
+			
+			```
+		displayFolder: Servicio Temporada
+		lineageTag: 8738ff97-7266-4954-8ec5-8bf1b9be5db4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Importe Notas Credito' = ```
+			SUM ( 'LOL_PBICREDITNOTESSALES'[LineTotal_LC] )
+			
+			```
+		displayFolder: Servicio Temporada
+		lineageTag: bebb375c-b595-4a95-bfba-c50c36125e93
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Notas Credito' = ```
+			DIVIDE ( [Importe Notas Credito], [Importe Facturado] )
+			
+			```
+		displayFolder: Servicio Temporada
+		lineageTag: 4244beea-0e91-44b4-82fd-d1c2fbb78c09
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column Value
 		lineageTag: 2ddc9eb7-b8c8-4537-91e0-8de67fa58299
 		isNameInferred
