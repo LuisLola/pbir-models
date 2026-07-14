@@ -167,6 +167,23 @@
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_TRANSPORT_TRACKING"
+                  }
+                },
+                "Property": "fecha_entregado"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
       }
     },
     "objects": {
@@ -300,6 +317,20 @@
           },
           "selector": {
             "metadata": "LOL_TRANSPORT_TRACKING.f_inicio"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "97D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_TRANSPORT_TRACKING.estado"
           }
         }
       ]

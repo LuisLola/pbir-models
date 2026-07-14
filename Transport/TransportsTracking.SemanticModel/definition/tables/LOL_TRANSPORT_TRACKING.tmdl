@@ -417,11 +417,11 @@ table LOL_TRANSPORT_TRACKING
 
 		annotation SummarizationSetBy = Automatic
 
-	column sla_objetivo = VAR t = LOL_TRANSPORT_TRACKING[transportista_norm] VAR p = UPPER ( TRIM ( COALESCE ( LOL_TRANSPORT_TRACKING[pais_destino], "" ) ) ) VAR esUPS = CONTAINSSTRING ( t, "UPS" ) VAR _raw = LOL_TRANSPORT_TRACKING[ciudad_destino] VAR _pAL = IF ( ISBLANK ( _raw ), 0, FIND ( " - AL ", _raw, 1, 0 ) ) VAR _postal = IF ( _pAL > 0, TRIM ( LEFT ( _raw, _pAL - 1 ) ), "" ) VAR _bal = LEFT ( _postal, 2 ) = "07" RETURN SWITCH ( TRUE (), t = "TIPSA" && p = "ES" && _bal, 3, t = "TIPSA" && p = "ES", 2, t = "TIPSA" && p = "PT", 3, t = "TIPSA" && p = "AD", 4, esUPS && p = "ES", 1, esUPS && p IN { "PT", "FR", "AD", "MC", "BE", "NL", "LU", "DE", "CH", "AT", "IT" }, 2, esUPS && p IN { "GB", "IE", "DK", "PL", "CZ", "SK", "HU", "SI", "HR" }, 3, esUPS && p IN { "SE", "FI", "NO", "EE", "LV", "LT", "RO", "BG", "GR", "RS", "BA", "ME", "MK", "AL", "XK" }, 4, esUPS && p IN { "MD", "UA", "TR", "CY", "MT", "IS" }, 5, 3 )
+	column sla_objetivo = VAR t = LOL_TRANSPORT_TRACKING[transportista_norm] VAR p = UPPER ( TRIM ( COALESCE ( LOL_TRANSPORT_TRACKING[pais_destino], "" ) ) ) VAR esUPS = CONTAINSSTRING ( t, "UPS" ) VAR _raw = LOL_TRANSPORT_TRACKING[ciudad_destino] VAR _pAL = IF ( ISBLANK ( _raw ), 0, FIND ( " - AL ", _raw, 1, 0 ) ) VAR _postal = IF ( _pAL > 0, TRIM ( LEFT ( _raw, _pAL - 1 ) ), "" ) VAR _bal = LEFT ( _postal, 2 ) = "07" RETURN SWITCH ( TRUE (), t = "TIPSA" && p = "ES" && _bal, 3, t = "TIPSA" && p = "ES", 1, t = "TIPSA" && p = "PT", 3, t = "TIPSA" && p = "AD", 4, esUPS && p = "ES", 1, esUPS && p IN { "PT", "FR", "AD", "MC", "BE", "NL", "LU", "DE", "CH", "AT", "IT" }, 2, esUPS && p IN { "GB", "IE", "DK", "PL", "CZ", "SK", "HU", "SI", "HR" }, 3, esUPS && p IN { "SE", "FI", "NO", "EE", "LV", "LT", "RO", "BG", "GR", "RS", "BA", "ME", "MK", "AL", "XK" }, 4, esUPS && p IN { "MD", "UA", "TR", "CY", "MT", "IS" }, 5, 3 )
 		dataType: int64
 		formatString: 0
 		lineageTag: d1c00000-0000-4000-8000-00000000000e
-		summarizeBy: none
+		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
 
