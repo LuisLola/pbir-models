@@ -37,12 +37,12 @@ table _Medidas
 		lineageTag: d1ed0000-0000-4000-8000-0000000000e8
 
 	measure 'Tiempo Entrega Mediana (Lab)' = MEDIANX ( FILTER ( LOL_TRANSPORT_TRACKING, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[dias_entrega_laborables] ) ), LOL_TRANSPORT_TRACKING[dias_entrega_laborables] )
-		formatString: 0.0
+		formatString: #,0.0
 		displayFolder: 3 Tiempo
 		lineageTag: d1ed0000-0000-4000-8000-0000000000e9
 
 	measure 'Tiempo Entrega Media (Lab)' = AVERAGEX ( FILTER ( LOL_TRANSPORT_TRACKING, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[dias_entrega_laborables] ) ), LOL_TRANSPORT_TRACKING[dias_entrega_laborables] )
-		formatString: 0.0
+		formatString: 0.00
 		displayFolder: 3 Tiempo
 		lineageTag: d1ed0000-0000-4000-8000-0000000000ea
 
@@ -346,6 +346,18 @@ table _Medidas
 		formatString: 0.0%;-0.0%;0.0%
 		displayFolder: 1 Volumen
 		lineageTag: d1ed0000-0000-4000-8000-000000000205
+
+	measure 'Tiempo Entrega Mediana (Lab)2' = MEDIANX ( FILTER ( LOL_TRANSPORT_TRACKING, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[dias_entrega_laborables2] ) ), LOL_TRANSPORT_TRACKING[dias_entrega_laborables2] )
+		displayFolder: 3 Tiempo
+		lineageTag: 692f94d6-3299-48a9-bf5f-06f079467f2d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tiempo Entrega Media (Lab)2' = AVERAGEX ( FILTER ( LOL_TRANSPORT_TRACKING, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[dias_entrega_laborables2] ) ), LOL_TRANSPORT_TRACKING[dias_entrega_laborables2] )
+		displayFolder: 3 Tiempo
+		lineageTag: 32cd0ac6-7723-41d3-9fd3-dc66052989fc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column Value
 		lineageTag: d1ed0000-0000-4000-8000-0000000000ff

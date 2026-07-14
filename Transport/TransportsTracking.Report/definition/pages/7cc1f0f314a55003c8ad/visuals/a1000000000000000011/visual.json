@@ -102,11 +102,11 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Tiempo Entrega Mediana (Lab)"
+                  "Property": "Tiempo Entrega Media (Lab)"
                 }
               },
-              "queryRef": "_Medidas.Tiempo Entrega Mediana (Lab)",
-              "nativeQueryRef": "Mediana"
+              "queryRef": "_Medidas.Tiempo Entrega Media (Lab)",
+              "nativeQueryRef": "Tiempo Entrega Media (Lab)"
             },
             {
               "field": {
@@ -200,20 +200,6 @@
     ],
     "objects": {
       "columnWidth": [
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "119.11115176320875D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_Medidas.Tiempo Entrega Mediana (Lab)"
-          }
-        },
         {
           "properties": {
             "value": {
@@ -379,20 +365,6 @@
         "type": "Advanced"
       },
       {
-        "name": "b1e2ced6ea467d4c381f",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Medidas"
-              }
-            },
-            "Property": "Tiempo Entrega Mediana (Lab)"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
         "name": "93ba689879913fc65b7e",
         "field": {
           "Measure": {
@@ -419,6 +391,20 @@
           }
         },
         "type": "Categorical"
+      },
+      {
+        "name": "ff2a1e0310d991f0f75c",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Tiempo Entrega Media (Lab)"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

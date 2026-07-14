@@ -46,6 +46,16 @@ cultureInfo es-ES
 			          "albaran": {
 			            "State": "Generated"
 			          }
+			        },
+			        {
+			          "Albarán": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -221,6 +231,16 @@ cultureInfo es-ES
 			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "Ciudad": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -1626,6 +1646,16 @@ cultureInfo es-ES
 			            "State": "Generated",
 			            "Weight": 0.7
 			          }
+			        },
+			        {
+			          "Entregado": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ],
 			      "SemanticType": "Time"
@@ -2379,6 +2409,16 @@ cultureInfo es-ES
 			            "State": "Generated",
 			            "Weight": 0.7
 			          }
+			        },
+			        {
+			          "Fecha Recogida": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ],
 			      "SemanticType": "Time"
@@ -2425,6 +2465,16 @@ cultureInfo es-ES
 			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "Días Entrega": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -3777,6 +3827,445 @@ cultureInfo es-ES
 			        }
 			      ],
 			      "SemanticType": "Location"
+			    },
+			    "lol_transport_tracking.sla_objetivo": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_TRANSPORT_TRACKING",
+			          "ConceptualProperty": "sla_objetivo"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "sla objetivo": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "sla_objetivo": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "Días Objetivo": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "lol_transport_tracking.estado_norm": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_TRANSPORT_TRACKING",
+			          "ConceptualProperty": "estado_norm"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "estado norm": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "estado_norm": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "norm": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "estado standard": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "estado average": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "estado custom": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "estado rule": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "estado model": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "estado type": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "estado mean": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "estado median": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "estado pattern": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "standard": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    },
+			    "lol_transport_tracking.estado_grupo": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_TRANSPORT_TRACKING",
+			          "ConceptualProperty": "estado_grupo"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "estado grupo": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "estado_grupo": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "lol_transport_tracking.es_en_curso": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_TRANSPORT_TRACKING",
+			          "ConceptualProperty": "es_en_curso"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "es en curso": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "es_en_curso": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "lol_transport_tracking.es_error_tracking": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_TRANSPORT_TRACKING",
+			          "ConceptualProperty": "es_error_tracking"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "es error tracking": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "es_error_tracking": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "lol_transport_tracking.es_operativo": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_TRANSPORT_TRACKING",
+			          "ConceptualProperty": "es_operativo"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "es operativo": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "es_operativo": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "lol_transport_tracking.logo_transportista": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_TRANSPORT_TRACKING",
+			          "ConceptualProperty": "LogoTransportista"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "logo transportista": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "LogoTransportista": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "lol_transport_tracking.dias_entrega_laborables_2": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_TRANSPORT_TRACKING",
+			          "ConceptualProperty": "dias_entrega_laborables2"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "dias entrega laborables 2": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "dias entrega laborable 2": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.78
+			          }
+			        },
+			        {
+			          "dias_entrega_laborables2": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "entity__medida.envios_operativos": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Medidas",
+			          "ConceptualProperty": "Envios Operativos"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "envios operativos": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "entity__medida.en_curso": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Medidas",
+			          "ConceptualProperty": "En Curso"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "en curso": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "entity__medida.en_agencia_destino": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Medidas",
+			          "ConceptualProperty": "En Agencia Destino"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "en agencia destino": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "entity__medida.errores_tracking": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Medidas",
+			          "ConceptualProperty": "Errores Tracking"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "errores tracking": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "entity__medida.cobertura_seguimiento": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Medidas",
+			          "ConceptualProperty": "% Cobertura Seguimiento"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "% cobertura seguimiento": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "percentage cobertura seguimiento": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "pct cobertura seguimiento": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        }
+			      ]
+			    },
+			    "entity__medida.tiempo_entrega_mediana_lab2": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Medidas",
+			          "ConceptualProperty": "Tiempo Entrega Mediana (Lab)2"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "tiempo entrega mediana (lab)2": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "entity__medida.tiempo_entrega_media_lab2": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Medidas",
+			          "ConceptualProperty": "Tiempo Entrega Media (Lab)2"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "tiempo entrega media (lab)2": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {
@@ -8476,6 +8965,501 @@ cultureInfo es-ES
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "calendarios_have_lol_transport_tracking"
+			        }
+			      ]
+			    },
+			    "lol_transport_tracking_has_entity__medida_tiempo_entrega_media_lab2": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_TRANSPORT_TRACKING"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_transport_tracking": {
+			          "Target": {
+			            "Entity": "lol_transport_tracking"
+			          }
+			        },
+			        "entity__medida.tiempo_entrega_media_lab2": {
+			          "Target": {
+			            "Entity": "entity__medida.tiempo_entrega_media_lab2"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_transport_tracking"
+			            },
+			            "Object": {
+			              "Role": "entity__medida.tiempo_entrega_media_lab2"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_transport_tracking_have_tiempo_entrega_media_lab2"
+			        }
+			      ]
+			    },
+			    "lol_transport_tracking_has_entity__medida_tiempo_entrega_mediana_lab2": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_TRANSPORT_TRACKING"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_transport_tracking": {
+			          "Target": {
+			            "Entity": "lol_transport_tracking"
+			          }
+			        },
+			        "entity__medida.tiempo_entrega_mediana_lab2": {
+			          "Target": {
+			            "Entity": "entity__medida.tiempo_entrega_mediana_lab2"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_transport_tracking"
+			            },
+			            "Object": {
+			              "Role": "entity__medida.tiempo_entrega_mediana_lab2"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_transport_tracking_have_tiempo_entrega_mediana_lab2"
+			        }
+			      ]
+			    },
+			    "lol_transport_tracking_has_entity__medida_cobertura_seguimiento": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_TRANSPORT_TRACKING"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_transport_tracking": {
+			          "Target": {
+			            "Entity": "lol_transport_tracking"
+			          }
+			        },
+			        "entity__medida.cobertura_seguimiento": {
+			          "Target": {
+			            "Entity": "entity__medida.cobertura_seguimiento"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_transport_tracking"
+			            },
+			            "Object": {
+			              "Role": "entity__medida.cobertura_seguimiento"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_transport_tracking_have__cobertura_seguimiento"
+			        }
+			      ]
+			    },
+			    "lol_transport_tracking_has_entity__medida_errores_tracking": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_TRANSPORT_TRACKING"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_transport_tracking": {
+			          "Target": {
+			            "Entity": "lol_transport_tracking"
+			          }
+			        },
+			        "entity__medida.errores_tracking": {
+			          "Target": {
+			            "Entity": "entity__medida.errores_tracking"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_transport_tracking"
+			            },
+			            "Object": {
+			              "Role": "entity__medida.errores_tracking"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_transport_tracking_have_errores_tracking"
+			        }
+			      ]
+			    },
+			    "lol_transport_tracking_has_entity__medida_en_agencia_destino": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_TRANSPORT_TRACKING"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_transport_tracking": {
+			          "Target": {
+			            "Entity": "lol_transport_tracking"
+			          }
+			        },
+			        "entity__medida.en_agencia_destino": {
+			          "Target": {
+			            "Entity": "entity__medida.en_agencia_destino"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_transport_tracking"
+			            },
+			            "Object": {
+			              "Role": "entity__medida.en_agencia_destino"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_transport_tracking_have_en_agencia_destino"
+			        }
+			      ]
+			    },
+			    "lol_transport_tracking_has_entity__medida_en_curso": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_TRANSPORT_TRACKING"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_transport_tracking": {
+			          "Target": {
+			            "Entity": "lol_transport_tracking"
+			          }
+			        },
+			        "entity__medida.en_curso": {
+			          "Target": {
+			            "Entity": "entity__medida.en_curso"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_transport_tracking"
+			            },
+			            "Object": {
+			              "Role": "entity__medida.en_curso"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_transport_tracking_have_en_curso"
+			        }
+			      ]
+			    },
+			    "lol_transport_tracking_has_entity__medida_envios_operativos": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_TRANSPORT_TRACKING"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_transport_tracking": {
+			          "Target": {
+			            "Entity": "lol_transport_tracking"
+			          }
+			        },
+			        "entity__medida.envios_operativos": {
+			          "Target": {
+			            "Entity": "entity__medida.envios_operativos"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_transport_tracking"
+			            },
+			            "Object": {
+			              "Role": "entity__medida.envios_operativos"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_transport_tracking_have_envios_operativos"
+			        }
+			      ]
+			    },
+			    "lol_transport_tracking_has_dias_entrega_laborables_2": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_TRANSPORT_TRACKING"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_transport_tracking": {
+			          "Target": {
+			            "Entity": "lol_transport_tracking"
+			          }
+			        },
+			        "lol_transport_tracking.dias_entrega_laborables_2": {
+			          "Target": {
+			            "Entity": "lol_transport_tracking.dias_entrega_laborables_2"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_transport_tracking"
+			            },
+			            "Object": {
+			              "Role": "lol_transport_tracking.dias_entrega_laborables_2"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_transport_tracking_have_dias_entrega_laborables_2"
+			        }
+			      ]
+			    },
+			    "lol_transport_tracking_has_logo_transportista": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_TRANSPORT_TRACKING"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_transport_tracking": {
+			          "Target": {
+			            "Entity": "lol_transport_tracking"
+			          }
+			        },
+			        "lol_transport_tracking.logo_transportista": {
+			          "Target": {
+			            "Entity": "lol_transport_tracking.logo_transportista"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_transport_tracking"
+			            },
+			            "Object": {
+			              "Role": "lol_transport_tracking.logo_transportista"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_transport_tracking_have_logo_transportistas"
+			        }
+			      ]
+			    },
+			    "lol_transport_tracking_has_es_operativo": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_TRANSPORT_TRACKING"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_transport_tracking": {
+			          "Target": {
+			            "Entity": "lol_transport_tracking"
+			          }
+			        },
+			        "lol_transport_tracking.es_operativo": {
+			          "Target": {
+			            "Entity": "lol_transport_tracking.es_operativo"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_transport_tracking"
+			            },
+			            "Object": {
+			              "Role": "lol_transport_tracking.es_operativo"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_transport_tracking_have_es_operativos"
+			        }
+			      ]
+			    },
+			    "lol_transport_tracking_has_es_error_tracking": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_TRANSPORT_TRACKING"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_transport_tracking": {
+			          "Target": {
+			            "Entity": "lol_transport_tracking"
+			          }
+			        },
+			        "lol_transport_tracking.es_error_tracking": {
+			          "Target": {
+			            "Entity": "lol_transport_tracking.es_error_tracking"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_transport_tracking"
+			            },
+			            "Object": {
+			              "Role": "lol_transport_tracking.es_error_tracking"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_transport_tracking_have_es_error_tracking"
+			        }
+			      ]
+			    },
+			    "lol_transport_tracking_has_es_en_curso": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_TRANSPORT_TRACKING"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_transport_tracking": {
+			          "Target": {
+			            "Entity": "lol_transport_tracking"
+			          }
+			        },
+			        "lol_transport_tracking.es_en_curso": {
+			          "Target": {
+			            "Entity": "lol_transport_tracking.es_en_curso"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_transport_tracking"
+			            },
+			            "Object": {
+			              "Role": "lol_transport_tracking.es_en_curso"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_transport_tracking_have_es_en_cursos"
+			        }
+			      ]
+			    },
+			    "lol_transport_tracking_has_estado_grupo": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_TRANSPORT_TRACKING"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_transport_tracking": {
+			          "Target": {
+			            "Entity": "lol_transport_tracking"
+			          }
+			        },
+			        "lol_transport_tracking.estado_grupo": {
+			          "Target": {
+			            "Entity": "lol_transport_tracking.estado_grupo"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_transport_tracking"
+			            },
+			            "Object": {
+			              "Role": "lol_transport_tracking.estado_grupo"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_transport_tracking_have_estado_grupos"
+			        }
+			      ]
+			    },
+			    "lol_transport_tracking_has_estado_norm": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_TRANSPORT_TRACKING"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_transport_tracking": {
+			          "Target": {
+			            "Entity": "lol_transport_tracking"
+			          }
+			        },
+			        "lol_transport_tracking.estado_norm": {
+			          "Target": {
+			            "Entity": "lol_transport_tracking.estado_norm"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_transport_tracking"
+			            },
+			            "Object": {
+			              "Role": "lol_transport_tracking.estado_norm"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_transport_tracking_have_estado_norms"
+			        }
+			      ]
+			    },
+			    "lol_transport_tracking_has_sla_objetivo": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_TRANSPORT_TRACKING"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_transport_tracking": {
+			          "Target": {
+			            "Entity": "lol_transport_tracking"
+			          }
+			        },
+			        "lol_transport_tracking.sla_objetivo": {
+			          "Target": {
+			            "Entity": "lol_transport_tracking.sla_objetivo"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_transport_tracking"
+			            },
+			            "Object": {
+			              "Role": "lol_transport_tracking.sla_objetivo"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_transport_tracking_have_sla_objetivos"
 			        }
 			      ]
 			    },

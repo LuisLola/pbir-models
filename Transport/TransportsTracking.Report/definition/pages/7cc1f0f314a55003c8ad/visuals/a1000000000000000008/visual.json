@@ -23,14 +23,32 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Tiempo Entrega Mediana (Lab)"
+                  "Property": "Tiempo Entrega Media (Lab)"
                 }
               },
-              "queryRef": "_Medidas.Tiempo Entrega Mediana (Lab)",
-              "nativeQueryRef": "Mediana Lab"
+              "queryRef": "_Medidas.Tiempo Entrega Media (Lab)",
+              "nativeQueryRef": "Tiempo Entrega Media (Lab)"
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Medidas"
+                  }
+                },
+                "Property": "Tiempo Entrega Media (Lab)"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
       }
     },
     "objects": {
@@ -380,7 +398,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "d400330a74d45c7dec79",
+        "name": "423027ce89e5f3e705b8",
         "field": {
           "Measure": {
             "Expression": {
@@ -388,7 +406,7 @@
                 "Entity": "_Medidas"
               }
             },
-            "Property": "Tiempo Entrega Mediana (Lab)"
+            "Property": "Tiempo Entrega Media (Lab)"
           }
         },
         "type": "Advanced"

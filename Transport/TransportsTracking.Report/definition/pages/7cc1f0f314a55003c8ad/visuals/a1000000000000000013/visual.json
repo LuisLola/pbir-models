@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "LOL_TRANSPORT_TRACKING.albaran",
-              "nativeQueryRef": "Albaran"
+              "nativeQueryRef": "Albarán",
+              "displayName": "Albarán"
             },
             {
               "field": {
@@ -41,7 +42,8 @@
                 }
               },
               "queryRef": "LOL_TRANSPORT_TRACKING.tracking",
-              "nativeQueryRef": "Tracking"
+              "nativeQueryRef": "Tracking",
+              "displayName": "Tracking"
             },
             {
               "field": {
@@ -55,7 +57,8 @@
                 }
               },
               "queryRef": "LOL_TRANSPORT_TRACKING.cliente",
-              "nativeQueryRef": "Cliente"
+              "nativeQueryRef": "Cliente",
+              "displayName": "Cliente"
             },
             {
               "field": {
@@ -69,21 +72,8 @@
                 }
               },
               "queryRef": "LOL_TRANSPORT_TRACKING.transportista_norm",
-              "nativeQueryRef": "Transportista"
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "LOL_TRANSPORT_TRACKING"
-                    }
-                  },
-                  "Property": "LogoTransportista"
-                }
-              },
-              "queryRef": "LOL_TRANSPORT_TRACKING.LogoTransportista",
-              "nativeQueryRef": "Logo"
+              "nativeQueryRef": "Transportista",
+              "displayName": "Transportista"
             },
             {
               "field": {
@@ -97,7 +87,8 @@
                 }
               },
               "queryRef": "LOL_TRANSPORT_TRACKING.estado",
-              "nativeQueryRef": "Estado"
+              "nativeQueryRef": "Estado",
+              "displayName": "Estado"
             },
             {
               "field": {
@@ -111,7 +102,8 @@
                 }
               },
               "queryRef": "LOL_TRANSPORT_TRACKING.ciudad_destino",
-              "nativeQueryRef": "Ciudad"
+              "nativeQueryRef": "Ciudad",
+              "displayName": "Ciudad"
             },
             {
               "field": {
@@ -121,11 +113,12 @@
                       "Entity": "LOL_TRANSPORT_TRACKING"
                     }
                   },
-                  "Property": "fecha_lanzamiento"
+                  "Property": "f_inicio"
                 }
               },
-              "queryRef": "LOL_TRANSPORT_TRACKING.fecha_lanzamiento",
-              "nativeQueryRef": "Lanzamiento"
+              "queryRef": "LOL_TRANSPORT_TRACKING.f_inicio",
+              "nativeQueryRef": "Fecha Recogida",
+              "displayName": "Fecha Recogida"
             },
             {
               "field": {
@@ -139,7 +132,8 @@
                 }
               },
               "queryRef": "LOL_TRANSPORT_TRACKING.fecha_entregado",
-              "nativeQueryRef": "Entregado"
+              "nativeQueryRef": "Entregado",
+              "displayName": "Entregado"
             },
             {
               "field": {
@@ -153,7 +147,8 @@
                 }
               },
               "queryRef": "LOL_TRANSPORT_TRACKING.dias_entrega_laborables",
-              "nativeQueryRef": "Dias lab"
+              "nativeQueryRef": "Días Entrega",
+              "displayName": "Días Entrega"
             },
             {
               "field": {
@@ -167,27 +162,11 @@
                 }
               },
               "queryRef": "LOL_TRANSPORT_TRACKING.sla_objetivo",
-              "nativeQueryRef": "sla_objetivo"
+              "nativeQueryRef": "Días Objetivo",
+              "displayName": "Días Objetivo"
             }
           ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "LOL_TRANSPORT_TRACKING"
-                  }
-                },
-                "Property": "fecha_entregado"
-              }
-            },
-            "direction": "Descending"
-          }
-        ]
       }
     },
     "objects": {
@@ -539,34 +518,6 @@
               }
             },
             "Property": "ciudad_destino"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "4bcc92deed4852b4b618",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_TRANSPORT_TRACKING"
-              }
-            },
-            "Property": "fecha_lanzamiento"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "5bd9ac0c655b107982c9",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_TRANSPORT_TRACKING"
-              }
-            },
-            "Property": "fecha_entregado"
           }
         },
         "type": "Categorical"

@@ -518,14 +518,41 @@ table LOL_TRANSPORT_TRACKING
 
 		annotation SummarizationSetBy = Automatic
 
+	column dias_entrega_laborables2 =
+			VAR s = LOL_TRANSPORT_TRACKING[f_inicio]
+			VAR e = LOL_TRANSPORT_TRACKING[fecha_entregado]
+			VAR eD = IF ( ISBLANK ( e ), BLANK (), DATE ( YEAR ( e ), MONTH ( e ), DAY ( e ) ) )
+			RETURN
+			    IF (
+			        NOT ISBLANK ( eD ) && NOT ISBLANK ( s ) && eD >= s && DATEDIFF ( s, eD, DAY ) < 60,
+			        MAX (
+			            COALESCE (
+			                CALCULATE (
+			                    COUNTROWS ( Calendario ),
+			                    DATESBETWEEN ( Calendario[Date], s, eD),
+			                    Calendario[EsLaborable] = 1,
+			                    Calendario[EsFestivo] = 0
+			                ),
+			                0
+			            ),
+			            1
+			        )
+			    )
+		formatString: 0
+		lineageTag: d183b1fe-a6d2-4f2f-ba3a-02f7551c8f60
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
 	partition LOL_TRANSPORT_TRACKING = m
 		mode: import
 		source =
 				let
 				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin"),
-				    dbo_LOL_TRANSPORT_TRACKING = Origen{[Schema="dbo",Item="LOL_TRANSPORT_TRACKING"]}[Data]
+				    dbo_LOL_TRANSPORT_TRACKING = Origen{[Schema="dbo",Item="LOL_TRANSPORT_TRACKING"]}[Data],
+				    #"Poner En Mayúsculas Cada Palabra" = Table.TransformColumns(dbo_LOL_TRANSPORT_TRACKING,{{"cliente", Text.Proper, type text}})
 				in
-				    dbo_LOL_TRANSPORT_TRACKING
+				    #"Poner En Mayúsculas Cada Palabra"
 
 	annotation PBI_ResultType = Table
 

@@ -120,6 +120,48 @@
           "selector": {
             "metadata": "_Medidas.Entregados"
           }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.5
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "LOL_TRANSPORT_TRACKING"
+                          }
+                        },
+                        "Property": "estado_grupo"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'En curso'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
         }
       ]
     },
