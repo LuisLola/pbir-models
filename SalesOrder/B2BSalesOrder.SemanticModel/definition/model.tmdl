@@ -8,7 +8,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["LOL_PBIAGENTES","LOL_PBIMODELITEM","LOL_PBISEASON","LOL_PBICLIENTES","LOL_PBIB2BSALESORDER"]
+annotation PBI_QueryOrder = ["LOL_PBIAGENTES","LOL_PBIMODELITEM","LOL_PBISEASON","LOL_PBICLIENTES","LOL_PBIB2BSALESORDER","LOL_PBIINVOICESSALES","LOL_PBICREDITNOTESSALES","LOL_PBIRETURNSALES","LOL_PBISALESDELIVERY"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
@@ -35,13 +35,23 @@ ref table MedidasVentas
 ref table MedidasIncidencias
 ref table MedidasFormato
 ref table LOL_PBIB2BSALESORDER
-ref table LocalDateTable_22461c45-eb28-4f72-93c8-3e755961f3f7
 ref table LocalDateTable_d10ef2a1-6646-4299-80ea-f13f81c7480a
 ref table LocalDateTable_eef1df2a-c00a-4774-9d5b-3bafba496cc4
 ref table ParamTopN
 ref table OrdenSelector
 ref table DimensionB2B
 ref table MedidasCatalogo
+ref table LOL_PBIINVOICESSALES
+ref table LocalDateTable_6aa375de-4215-4783-aa05-06a0c87cab02
+ref table LOL_PBICREDITNOTESSALES
+ref table LocalDateTable_ca9969ef-d406-4a4b-9e0b-132258c9dbb9
+ref table LOL_PBIRETURNSALES
+ref table LocalDateTable_088b783c-1eff-4e66-b683-878f1a99c248
+ref table LOL_PBISALESDELIVERY
+ref table LocalDateTable_a5f930e5-05d8-4411-995a-80591b230243
+ref table LocalDateTable_0326de2e-02be-4c01-9e8a-060fde1100ff
+ref table LocalDateTable_6b6a1243-64b7-4695-81d8-36370566aa0d
+ref table LocalDateTable_e1039d0e-3b63-4ad5-9437-3a7a82b55a6f
 
 ref cultureInfo es-ES
 
