@@ -310,7 +310,7 @@ table LOL_TRANSPORT_TRACKING
 	/// El tiempo de entrega mide el tránsito, no la espera en almacén: por eso arranca en
 	/// fecha_en_transito. Fallback solo si falta: fecha_recogido > fecha_lanzamiento.
 	column f_inicio =
-			VAR _start = COALESCE ( LOL_TRANSPORT_TRACKING[fecha_en_transito], LOL_TRANSPORT_TRACKING[fecha_recogido], LOL_TRANSPORT_TRACKING[fecha_lanzamiento] )
+			VAR _start = IF ( LOL_TRANSPORT_TRACKING[transportista_norm] = "UPS", COALESCE ( LOL_TRANSPORT_TRACKING[fecha_recogido], LOL_TRANSPORT_TRACKING[fecha_en_transito], LOL_TRANSPORT_TRACKING[fecha_lanzamiento] ), COALESCE ( LOL_TRANSPORT_TRACKING[fecha_en_transito], LOL_TRANSPORT_TRACKING[fecha_recogido], LOL_TRANSPORT_TRACKING[fecha_lanzamiento] ) )
 			RETURN IF ( ISBLANK ( _start ), BLANK (), DATE ( YEAR ( _start ), MONTH ( _start ), DAY ( _start ) ) )
 		dataType: dateTime
 		formatString: Short Date
