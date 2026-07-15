@@ -544,7 +544,7 @@ table MedidasVentas
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Pedidos Cancelados' = ```
-			CALCULATE ( SUM ( 'LOL_PBIB2BSALESORDER'[ImporteBruto_LC] ), 'LOL_PBIB2BSALESORDER'[IsIncidence] = "Y")
+			CALCULATE ( SUM ( 'LOL_PBIB2BSALESORDER'[ImporteBruto_LC] ), 'LOL_PBIB2BSALESORDER'[Canceled] = "Y" )
 			
 			```
 		displayFolder: Servicio Temporada
@@ -562,7 +562,7 @@ table MedidasVentas
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure '% Cancelado' = ```
-			DIVIDE ( - [Pedidos Cancelados], [Pedido Final] )
+			DIVIDE ( - [Pedidos Cancelados], [Pedido Original] )
 			
 			```
 		formatString: 0.00\ %;-0.00\ %;0.00\ %
