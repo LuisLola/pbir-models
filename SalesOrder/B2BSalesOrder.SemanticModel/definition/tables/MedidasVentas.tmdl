@@ -534,7 +534,7 @@ table MedidasVentas
 		displayFolder: Validacion
 		lineageTag: 7b1721dd-e52e-4e97-96e1-0282b82fc443
 
-	measure 'Pedido Original' = ```
+	measure 'Pedido Final' = ```
 			CALCULATE ( SUM ( 'LOL_PBIB2BSALESORDER'[ImporteBruto_LC]), 'LOL_PBIB2BSALESORDER'[IsIncidence] = "N" )
 			
 			```
@@ -552,7 +552,7 @@ table MedidasVentas
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Pedido Final' = ```
+	measure 'Pedido Original' = ```
 			SUM ( 'LOL_PBIB2BSALESORDER'[ImporteBruto_LC] )
 			
 			```
@@ -562,7 +562,7 @@ table MedidasVentas
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure '% Cancelado' = ```
-			DIVIDE ( - [Pedidos Cancelados], [Pedido Original] )
+			DIVIDE ( - [Pedidos Cancelados], [Pedido Final] )
 			
 			```
 		formatString: 0.00\ %;-0.00\ %;0.00\ %
@@ -579,7 +579,7 @@ table MedidasVentas
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure '% Servido' = ```
-			DIVIDE ( [Importe Servido], [Pedido Final] )
+			DIVIDE ( [Importe Servido], [Pedido Original] )
 			
 			```
 		displayFolder: Servicio Temporada
@@ -588,7 +588,7 @@ table MedidasVentas
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Pendiente Servir' = ```
-			[Pedido Final] - [Importe Servido]
+			[Pedido Original] - [Importe Servido]
 			
 			```
 		displayFolder: Servicio Temporada
@@ -606,7 +606,7 @@ table MedidasVentas
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure '% Facturado' = ```
-			DIVIDE ( [Importe Facturado], [Pedido Final] )
+			DIVIDE ( [Importe Facturado], [Pedido Original] )
 			
 			```
 		displayFolder: Servicio Temporada
@@ -615,7 +615,7 @@ table MedidasVentas
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Pendiente Facturar' = ```
-			[Pedido Final] - [Importe Facturado]
+			[Pedido Original] - [Importe Facturado]
 			
 			```
 		displayFolder: Servicio Temporada

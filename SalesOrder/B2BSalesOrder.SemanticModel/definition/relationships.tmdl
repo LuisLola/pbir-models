@@ -209,3 +209,22 @@ relationship 9241d8bb-9996-4c51-bf7f-ff15d9330f8a
 	fromColumn: LOL_PBISALESDELIVERY.FechaVencimiento
 	toColumn: LocalDateTable_e1039d0e-3b63-4ad5-9437-3a7a82b55a6f.Date
 
+relationship 8e3421ec-dccd-4bc9-bd77-ed1b52c02dc9
+	fromColumn: LOL_PBISALESDELIVERY.CodigoCliente
+	toColumn: LOL_PBICLIENTES.CodeCliente
+
+relationship c8573eeb-4f33-4568-be2b-d0f390d86ecf
+	fromColumn: LOL_PBISALESDELIVERY.CodigoVendedor
+	toColumn: LOL_PBIAGENTES.SlpCode
+
+relationship 5649caf9-dfd5-4937-b748-ce2c539391f7
+	fromColumn: LOL_PBISALESDELIVERY.CodigoArticulo
+	toColumn: LOL_PBIMODELITEM.ItemCode
+
+relationship 87f8d542-3d64-419d-97f8-9399c0163041
+	fromColumn: LOL_PBISALESDELIVERY.TemporadaLinea
+	toColumn: LOL_PBISEASON.Code
+
+relationship df211b77-0ae8-4616-a606-d20a947b03ec
+	fromColumn: LOL_PBISALESDELIVERY.FechaDocumento
+	toColumn: Calendario.Date

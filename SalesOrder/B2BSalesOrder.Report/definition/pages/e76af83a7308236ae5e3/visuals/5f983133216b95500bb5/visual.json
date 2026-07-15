@@ -75,7 +75,7 @@
                   "Property": "Pedido Original"
                 }
               },
-              "queryRef": "MedidasVentas.Pedido Original",
+              "queryRef": "MedidasVentas.Pedido Final",
               "nativeQueryRef": "Pedido Original"
             },
             {
@@ -103,7 +103,7 @@
                   "Property": "Pedido Final"
                 }
               },
-              "queryRef": "MedidasVentas.Pedido Final",
+              "queryRef": "MedidasVentas.Pedido Original",
               "nativeQueryRef": "Pedido Final"
             },
             {
@@ -329,7 +329,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "99.39024390243902D"
+                  "Value": "124.58356844221078D"
                 }
               }
             }
@@ -429,20 +429,6 @@
         "type": "Categorical"
       },
       {
-        "name": "7daa503a44232c63d27f",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasVentas"
-              }
-            },
-            "Property": "Pedido Original"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
         "name": "609bd6cfb9d4118a58d5",
         "field": {
           "Measure": {
@@ -452,20 +438,6 @@
               }
             },
             "Property": "Pedidos Cancelados"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "b5a1b41302ac987cf66d",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasVentas"
-              }
-            },
-            "Property": "Pedido Final"
           }
         },
         "type": "Advanced"
@@ -508,6 +480,34 @@
               }
             },
             "Property": "Importe Notas Credito"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "e2c30ccfb844961e4ff8",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "Pedido Final"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "c36f158c48ee34efd0d8",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "Pedido Original"
           }
         },
         "type": "Advanced"
