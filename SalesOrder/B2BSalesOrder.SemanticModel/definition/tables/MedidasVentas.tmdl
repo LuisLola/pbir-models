@@ -644,13 +644,13 @@ table MedidasVentas
 	measure 'Servido (cadena)' = ```
 			VAR OrdKeys =
 			    FILTER (
-			        VALUES ( LOL_PBIB2BSALESORDER[ClavePedidoLinea] ),
-			        NOT ISBLANK ( LOL_PBIB2BSALESORDER[ClavePedidoLinea] )
+			        VALUES ( LOL_PBIB2BSALESORDER[KPedidoLinea] ),
+			        NOT ISBLANK ( LOL_PBIB2BSALESORDER[KPedidoLinea] )
 			    )
 			RETURN
 			CALCULATE (
 			    [Importe Servido],
-			    TREATAS ( OrdKeys, LOL_PBISALESDELIVERY[ClaveBasePedido] ),
+			    TREATAS ( OrdKeys, LOL_PBISALESDELIVERY[KAlbaranBase] ),
 			    REMOVEFILTERS ( LOL_PBISALESDELIVERY )
 			)
 			```
@@ -662,22 +662,22 @@ table MedidasVentas
 	measure 'Facturado (cadena)' = ```
 			VAR OrdKeys =
 			    FILTER (
-			        VALUES ( LOL_PBIB2BSALESORDER[ClavePedidoLinea] ),
-			        NOT ISBLANK ( LOL_PBIB2BSALESORDER[ClavePedidoLinea] )
+			        VALUES ( LOL_PBIB2BSALESORDER[KPedidoLinea] ),
+			        NOT ISBLANK ( LOL_PBIB2BSALESORDER[KPedidoLinea] )
 			    )
 			VAR DelvKeys =
 			    CALCULATETABLE (
 			        FILTER (
-			            VALUES ( LOL_PBISALESDELIVERY[ClaveEntregaLinea] ),
-			            NOT ISBLANK ( LOL_PBISALESDELIVERY[ClaveEntregaLinea] )
+			            VALUES ( LOL_PBISALESDELIVERY[KAlbaranLinea] ),
+			            NOT ISBLANK ( LOL_PBISALESDELIVERY[KAlbaranLinea] )
 			        ),
-			        TREATAS ( OrdKeys, LOL_PBISALESDELIVERY[ClaveBasePedido] ),
+			        TREATAS ( OrdKeys, LOL_PBISALESDELIVERY[KAlbaranBase] ),
 			        REMOVEFILTERS ( LOL_PBISALESDELIVERY )
 			    )
 			RETURN
 			CALCULATE (
 			    [Importe Facturado],
-			    TREATAS ( DelvKeys, LOL_PBIINVOICESSALES[ClaveBaseEntrega] ),
+			    TREATAS ( DelvKeys, LOL_PBIINVOICESSALES[KFacturaBase] ),
 			    REMOVEFILTERS ( LOL_PBIINVOICESSALES )
 			)
 			```

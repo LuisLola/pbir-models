@@ -229,13 +229,3 @@ relationship df211b77-0ae8-4616-a606-d20a947b03ec
 	fromColumn: LOL_PBISALESDELIVERY.FechaDocumento
 	toColumn: Calendario.Date
 
-relationship 933be513-3b72-406d-9683-5cf69668b102
-	isActive: false
-	fromColumn: LOL_PBISALESDELIVERY.ClaveBasePedido
-	toColumn: LOL_PBIB2BSALESORDER.ClavePedidoLinea
-
-relationship daaa3d4f-bea8-4b74-b1c9-4047a4076dc7
-	isActive: false
-	fromColumn: LOL_PBIINVOICESSALES.ClaveBaseEntrega
-	toColumn: LOL_PBISALESDELIVERY.ClaveEntregaLinea
-

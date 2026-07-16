@@ -438,10 +438,10 @@ table LOL_PBIINVOICESSALES
 
 		annotation SummarizationSetBy = Automatic
 
-	column ClaveBaseEntrega = IF ( LOL_PBIINVOICESSALES[BaseType] = "15", LOL_PBIINVOICESSALES[BaseEntry] & "-" & LOL_PBIINVOICESSALES[BaseLine] )
+	column KFacturaBase = IF ( LOL_PBIINVOICESSALES[BaseType] = "15", LOL_PBIINVOICESSALES[BaseEntry] & "-" & LOL_PBIINVOICESSALES[BaseLine] )
 		dataType: string
 		isHidden
-		lineageTag: fe0d6773-c8df-4bb3-81e5-3a3567ed22a5
+		lineageTag: 8000030a-98e6-4f80-a146-09a992153d3d
 		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
