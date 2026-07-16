@@ -641,6 +641,65 @@ table MedidasVentas
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	measure 'Servido (cadena)' = ```
+			VAR OrdKeys =
+			    FILTER (
+			        VALUES ( LOL_PBIB2BSALESORDER[ClavePedidoLinea] ),
+			        NOT ISBLANK ( LOL_PBIB2BSALESORDER[ClavePedidoLinea] )
+			    )
+			RETURN
+			CALCULATE (
+			    [Importe Servido],
+			    TREATAS ( OrdKeys, LOL_PBISALESDELIVERY[ClaveBasePedido] ),
+			    REMOVEFILTERS ( LOL_PBISALESDELIVERY )
+			)
+			```
+		displayFolder: Servicio Temporada
+		lineageTag: 92efa572-bb62-4118-adab-202c38a9e56b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Facturado (cadena)' = ```
+			VAR OrdKeys =
+			    FILTER (
+			        VALUES ( LOL_PBIB2BSALESORDER[ClavePedidoLinea] ),
+			        NOT ISBLANK ( LOL_PBIB2BSALESORDER[ClavePedidoLinea] )
+			    )
+			VAR DelvKeys =
+			    CALCULATETABLE (
+			        FILTER (
+			            VALUES ( LOL_PBISALESDELIVERY[ClaveEntregaLinea] ),
+			            NOT ISBLANK ( LOL_PBISALESDELIVERY[ClaveEntregaLinea] )
+			        ),
+			        TREATAS ( OrdKeys, LOL_PBISALESDELIVERY[ClaveBasePedido] ),
+			        REMOVEFILTERS ( LOL_PBISALESDELIVERY )
+			    )
+			RETURN
+			CALCULATE (
+			    [Importe Facturado],
+			    TREATAS ( DelvKeys, LOL_PBIINVOICESSALES[ClaveBaseEntrega] ),
+			    REMOVEFILTERS ( LOL_PBIINVOICESSALES )
+			)
+			```
+		displayFolder: Servicio Temporada
+		lineageTag: 9ae82633-f020-44d3-b3fc-15921e6e8f62
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Notas Credito (cadena)' = ```
+			VAR OrdUIDs = VALUES ( LOL_PBIB2BSALESORDER[LineUID] )
+			RETURN
+			CALCULATE (
+			    [Importe Notas Credito],
+			    TREATAS ( OrdUIDs, LOL_PBICREDITNOTESSALES[LineUID] ),
+			    REMOVEFILTERS ( LOL_PBICREDITNOTESSALES )
+			)
+			```
+		displayFolder: Servicio Temporada
+		lineageTag: 3b5e0f79-b830-4e47-b6ce-7dec97b683b3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column Value
 		lineageTag: 2ddc9eb7-b8c8-4537-91e0-8de67fa58299
 		isNameInferred

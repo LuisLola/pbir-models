@@ -20,21 +20,6 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "LOL_PBICLIENTES"
-                    }
-                  },
-                  "Property": "RazonSocial"
-                }
-              },
-              "queryRef": "LOL_PBICLIENTES.RazonSocial",
-              "nativeQueryRef": "Cliente",
-              "active": true
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
                       "Entity": "LOL_PBIAGENTES"
                     }
                   },
@@ -43,6 +28,21 @@
               },
               "queryRef": "LOL_PBIAGENTES.Agente_Cajero",
               "nativeQueryRef": "Agente",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBICLIENTES"
+                    }
+                  },
+                  "Property": "RazonSocial"
+                }
+              },
+              "queryRef": "LOL_PBICLIENTES.RazonSocial",
+              "nativeQueryRef": "Cliente",
               "active": false
             },
             {
@@ -128,11 +128,11 @@
                       "Entity": "MedidasVentas"
                     }
                   },
-                  "Property": "Importe Facturado"
+                  "Property": "Servido (cadena)"
                 }
               },
-              "queryRef": "MedidasVentas.Importe Facturado",
-              "nativeQueryRef": "Importe Facturado"
+              "queryRef": "MedidasVentas.Servido (cadena)",
+              "nativeQueryRef": "Servido (cadena)"
             },
             {
               "field": {
@@ -142,11 +142,25 @@
                       "Entity": "MedidasVentas"
                     }
                   },
-                  "Property": "Importe Notas Credito"
+                  "Property": "Facturado (cadena)"
                 }
               },
-              "queryRef": "MedidasVentas.Importe Notas Credito",
-              "nativeQueryRef": "Importe Notas Credito"
+              "queryRef": "MedidasVentas.Facturado (cadena)",
+              "nativeQueryRef": "Facturado (cadena)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasVentas"
+                    }
+                  },
+                  "Property": "Notas Credito (cadena)"
+                }
+              },
+              "queryRef": "MedidasVentas.Notas Credito (cadena)",
+              "nativeQueryRef": "Notas Credito (cadena)"
             }
           ]
         }
@@ -161,7 +175,7 @@
                     "Entity": "MedidasVentas"
                   }
                 },
-                "Property": "Pedidos Cancelados"
+                "Property": "Servido (cadena)"
               }
             },
             "direction": "Descending"
@@ -177,25 +191,6 @@
         "levels": [
           {
             "queryRefs": [
-              "LOL_PBICLIENTES.RazonSocial"
-            ],
-            "isCollapsed": true,
-            "identityKeys": [
-              {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "LOL_PBICLIENTES"
-                    }
-                  },
-                  "Property": "RazonSocial"
-                }
-              }
-            ],
-            "isPinned": true
-          },
-          {
-            "queryRefs": [
               "LOL_PBIAGENTES.Agente_Cajero"
             ],
             "isCollapsed": true,
@@ -208,6 +203,25 @@
                     }
                   },
                   "Property": "Agente_Cajero"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "LOL_PBICLIENTES.RazonSocial"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBICLIENTES"
+                    }
+                  },
+                  "Property": "RazonSocial"
                 }
               }
             ],
@@ -239,7 +253,7 @@
               "identityValues": [
                 {
                   "Literal": {
-                    "Value": "'ORNELYS B2B'"
+                    "Value": "'NV FASHION CLUB 70'"
                   }
                 }
               ],
@@ -248,7 +262,7 @@
                   "identityValues": [
                     {
                       "Literal": {
-                        "Value": "'LOLA-EXPORT'"
+                        "Value": "'SRL PACY'"
                       }
                     }
                   ],
@@ -301,7 +315,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "200D"
+                  "Value": "263.1204527081649D"
                 }
               }
             }
@@ -336,6 +350,48 @@
           },
           "selector": {
             "metadata": "MedidasVentas.Pedido Original"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "118.37429092620654D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasVentas.Importe Facturado"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "115.50525464834277D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasVentas.Importe Notas Credito"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "101.50525272358439D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasVentas.Pedidos Cancelados"
           }
         }
       ],
@@ -396,20 +452,6 @@
               }
             },
             "Property": "RazonSocial"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "efa57994a9e3fcb28e5f",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PBIAGENTES"
-              }
-            },
-            "Property": "Agente_Cajero"
           }
         },
         "type": "Categorical"
@@ -511,6 +553,34 @@
           }
         },
         "type": "Advanced"
+      },
+      {
+        "name": "1b7de1784b7fdc118e7d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "Importe Servido"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "381c41afc3646c14ec0d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIAGENTES"
+              }
+            },
+            "Property": "Agente_Cajero"
+          }
+        },
+        "type": "Categorical"
       }
     ]
   }
