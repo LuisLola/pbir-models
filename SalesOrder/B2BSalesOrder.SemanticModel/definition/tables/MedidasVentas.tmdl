@@ -641,7 +641,7 @@ table MedidasVentas
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Servido (cadena)' = ```
+	measure 'Servido (cadena)' =
 			VAR OrdKeys =
 			    FILTER (
 			        VALUES ( LOL_PBIB2BSALESORDER[KPedidoLinea] ),
@@ -653,13 +653,12 @@ table MedidasVentas
 			    TREATAS ( OrdKeys, LOL_PBISALESDELIVERY[KAlbaranBase] ),
 			    REMOVEFILTERS ( LOL_PBISALESDELIVERY )
 			)
-			```
 		displayFolder: Servicio Temporada
 		lineageTag: 92efa572-bb62-4118-adab-202c38a9e56b
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Facturado (cadena)' = ```
+	measure 'Facturado (cadena)' =
 			VAR OrdKeys =
 			    FILTER (
 			        VALUES ( LOL_PBIB2BSALESORDER[KPedidoLinea] ),
@@ -680,13 +679,12 @@ table MedidasVentas
 			    TREATAS ( DelvKeys, LOL_PBIINVOICESSALES[KFacturaBase] ),
 			    REMOVEFILTERS ( LOL_PBIINVOICESSALES )
 			)
-			```
 		displayFolder: Servicio Temporada
 		lineageTag: 9ae82633-f020-44d3-b3fc-15921e6e8f62
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Notas Credito (cadena)' = ```
+	measure 'Notas Credito (cadena)' =
 			VAR OrdUIDs = VALUES ( LOL_PBIB2BSALESORDER[LineUID] )
 			RETURN
 			CALCULATE (
@@ -694,7 +692,6 @@ table MedidasVentas
 			    TREATAS ( OrdUIDs, LOL_PBICREDITNOTESSALES[LineUID] ),
 			    REMOVEFILTERS ( LOL_PBICREDITNOTESSALES )
 			)
-			```
 		displayFolder: Servicio Temporada
 		lineageTag: 3b5e0f79-b830-4e47-b6ce-7dec97b683b3
 
