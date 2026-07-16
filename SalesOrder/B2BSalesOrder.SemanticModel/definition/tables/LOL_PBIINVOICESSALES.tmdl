@@ -414,6 +414,38 @@ table LOL_PBIINVOICESSALES
 
 		annotation SummarizationSetBy = Automatic
 
+	column BaseType
+		dataType: string
+		lineageTag: 4afd5136-4f47-491a-baa2-5c3c0615d78d
+		summarizeBy: none
+		sourceColumn: BaseType
+
+		annotation SummarizationSetBy = Automatic
+
+	column BaseLine
+		dataType: string
+		lineageTag: f8eccab7-094c-41ab-913d-96d65d312347
+		summarizeBy: none
+		sourceColumn: BaseLine
+
+		annotation SummarizationSetBy = Automatic
+
+	column BaseEntry
+		dataType: string
+		lineageTag: 5d43cc4d-0115-4e20-aea2-5f5169582b84
+		summarizeBy: none
+		sourceColumn: BaseEntry
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClaveBaseEntrega = IF ( LOL_PBIINVOICESSALES[BaseType] = "15", COMBINEVALUES ( "-", LOL_PBIINVOICESSALES[BaseEntry], LOL_PBIINVOICESSALES[BaseLine] ) )
+		dataType: string
+		isHidden
+		lineageTag: fe0d6773-c8df-4bb3-81e5-3a3567ed22a5
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition LOL_PBIINVOICESSALES = m
 		mode: import
 		source =

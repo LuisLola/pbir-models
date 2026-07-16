@@ -234,3 +234,8 @@ relationship 933be513-3b72-406d-9683-5cf69668b102
 	fromColumn: LOL_PBISALESDELIVERY.ClaveBasePedido
 	toColumn: LOL_PBIB2BSALESORDER.ClavePedidoLinea
 
+relationship daaa3d4f-bea8-4b74-b1c9-4047a4076dc7
+	isActive: false
+	fromColumn: LOL_PBIINVOICESSALES.ClaveBaseEntrega
+	toColumn: LOL_PBISALESDELIVERY.ClaveEntregaLinea
+

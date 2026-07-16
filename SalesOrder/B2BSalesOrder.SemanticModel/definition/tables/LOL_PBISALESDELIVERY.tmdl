@@ -555,6 +555,14 @@ table LOL_PBISALESDELIVERY
 
 		annotation SummarizationSetBy = Automatic
 
+	column ClaveEntregaLinea = IF ( NOT ISBLANK ( LOL_PBISALESDELIVERY[LineaInternaDocumento] ), COMBINEVALUES ( "-", LOL_PBISALESDELIVERY[DocEntry], LOL_PBISALESDELIVERY[LineaInternaDocumento] ) )
+		dataType: string
+		isHidden
+		lineageTag: 5a69e08f-39e5-4b26-b6e7-7e55aa6cd995
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition LOL_PBISALESDELIVERY = m
 		mode: import
 		source =
