@@ -438,7 +438,7 @@ table LOL_PBIINVOICESSALES
 
 		annotation SummarizationSetBy = Automatic
 
-	column ClaveBaseEntrega = IF ( LOL_PBIINVOICESSALES[BaseType] = "15", COMBINEVALUES ( "-", LOL_PBIINVOICESSALES[BaseEntry], LOL_PBIINVOICESSALES[BaseLine] ) )
+	column ClaveBaseEntrega = IF ( LOL_PBIINVOICESSALES[BaseType] = "15", LOL_PBIINVOICESSALES[BaseEntry] & "-" & LOL_PBIINVOICESSALES[BaseLine] )
 		dataType: string
 		isHidden
 		lineageTag: fe0d6773-c8df-4bb3-81e5-3a3567ed22a5
