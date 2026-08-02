@@ -2,6 +2,8 @@
 
 Documentación técnica de los modelos semánticos (Power BI / PBIP-TMDL) de Lola Casademunt en este repositorio.
 
+← Volver al [README de la rama](../README.md) · Índice general con accesos directos: [README de `main`](https://github.com/LuisLola/pbir-models/tree/main)
+
 *Última revisión: 2 de agosto de 2026.*
 
 ## Estructura del repositorio
@@ -15,10 +17,14 @@ El repo está organizado **una rama por modelo** (cambiar de rama muestra/oculta
 | `sgiretail` | SgiRetail | SgiRetail |
 | `transport` | Transport, SalesOrder | Transport |
 | `salesorder` | SalesOrder, SgiRetail, Transport | — (SalesOrder quedó atrás, ver nota) |
-| `compras` | Compras, SalesOrder, SgiRetail, Transport | Compras, SalesOrder |
-| `finanzas` | Finanzas, Compras, SalesOrder, SgiRetail, Transport | Finanzas, SalesOrder |
+| `compras` | Compras, SalesOrder, SgiRetail, Transport | SalesOrder |
+| `finanzas` | Finanzas, Compras, SalesOrder, SgiRetail, Transport | Finanzas, Compras, SalesOrder |
 
 > ⚠️ **La rama `salesorder` está por detrás.** El trabajo posterior sobre **B2BSalesOrder** (embudo por documento, devoluciones, página ejecutiva de cumplimiento) se commiteó sobre la línea `compras` → `finanzas`, no sobre `salesorder`. El estado canónico de SalesOrder está en `compras` y `finanzas` (mismo árbol); `salesorder` se quedó en 2026-07-16.
+>
+> ⚠️ **`Compras` también va por delante en `finanzas`.** La rama `compras` no tiene la Página 3 del informe (la matriz que valida la cadena Pedido→Entrada→Factura). El modelo semántico es el mismo en las dos.
+>
+> ⚠️ **`compras` y `finanzas` no están pusheadas** a GitHub: solo existen en local.
 
 ## Modelos documentados
 
@@ -29,8 +35,8 @@ El repo está organizado **una rama por modelo** (cambiar de rama muestra/oculta
 | **Plan de Servicio B2B** | ServicePlan/ | 23 | [ServicePlan-Plan de Servicio B2B.md](ServicePlan-Plan%20de%20Servicio%20B2B.md) | `serviceplan` |
 | **SgiRetail** | SgiRetail/ | 238 | [SgiRetail-SgiRetail.md](SgiRetail-SgiRetail.md) | `sgiretail` |
 | **TransportsTracking** | Transport/ | 34 | [Transport-TransportsTracking.md](Transport-TransportsTracking.md) | `transport` |
-| **B2BSalesOrder** | SalesOrder/ | 96 | [SalesOrder-B2BSalesOrder.md](SalesOrder-B2BSalesOrder.md) | `compras`, `finanzas` |
-| **PurchaseOrders (Compras)** | Compras/ | 0 (agregaciones implícitas) | [Compras-PurchaseOrders.md](Compras-PurchaseOrders.md) | `compras`, `finanzas` |
+| **B2BSalesOrder** | SalesOrder/ | 96 | [SalesOrder-B2BSalesOrder.md](SalesOrder-B2BSalesOrder.md) | `compras` = `finanzas` |
+| **PurchaseOrders (Compras)** | Compras/ | 0 (agregaciones implícitas) | [Compras-PurchaseOrders.md](Compras-PurchaseOrders.md) | `finanzas` |
 | **Finanzas** | Finanzas/ | 118 + 19 auxiliares | [Finanzas-Finanzas.md](Finanzas-Finanzas.md) | `finanzas` |
 
 > Cada `.md` describe el modelo tal y como está **en su rama al día**. Si lo lees desde otra rama, la carpeta del modelo que tienes en disco puede ser anterior a lo que cuenta el documento — y los enlaces relativos a ficheros `.tmdl` pueden no resolver. Para tocar el modelo, cambia a la rama de la última columna.

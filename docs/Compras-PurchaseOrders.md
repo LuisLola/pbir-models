@@ -1,13 +1,13 @@
 # PurchaseOrders (Compras) — Documentación del modelo
 
-> 📁 **Esta documentación está replicada en todas las ramas.** Describe el modelo tal y como está en la rama **`compras` / `finanzas`**. En otras ramas la carpeta `Compras/` puede existir pero en un estado anterior: para trabajar sobre el modelo, sitúate en la rama indicada. Índice: [README.md](README.md).
+> 📁 **Esta documentación está replicada en todas las ramas.** Describe el modelo tal y como está en la rama **`finanzas`** (la rama `compras` tiene el mismo modelo semántico pero le falta la Página 3 del informe). En otras ramas la carpeta `Compras/` puede existir en un estado anterior: para trabajar sobre el modelo, sitúate en la rama indicada. Índice: [README.md](README.md).
 
 Panel de **compras / aprovisionamiento** de Lola Casademunt. Sigue las **líneas de pedido de compra** y su recorrido documental hasta la entrada de mercancía y la factura de proveedor, cruzado con el maestro de artículos y el maestro de tiendas/almacenes.
 
 - **Proyecto:** [Compras/PurchaseOrders](../Compras/) · `PurchaseOrders.pbip`
 - **Modelo:** `PurchaseOrders.SemanticModel` · **Informe:** `PurchaseOrders.Report`
 - **compatibilityLevel:** 1606 · **Cultura:** es-ES · **Modo:** Import
-- **Ramas:** `compras` (canónica) y `finanzas`
+- **Ramas:** `finanzas` (canónica) y `compras`
 - **RLS:** ninguno
 
 > Modelo **joven**: la estructura (tablas, claves, relaciones) está montada, pero **todavía no tiene ni una sola medida DAX** — el informe trabaja con agregaciones implícitas. Ver §6.
