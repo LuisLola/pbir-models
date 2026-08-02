@@ -22,18 +22,18 @@ El repo está organizado **una rama por modelo** (cambiar de rama muestra/oculta
 
 ## Modelos documentados
 
-Cada documentación técnica vive **en la rama donde su modelo está al día** (junto a su definición, para que los enlaces relativos resuelvan). Para leerla: `git checkout <rama>` y abrir el `.md`.
+**La carpeta `docs/` completa está replicada idéntica en las 7 ramas.** Da igual en cuál estés: siempre ves la documentación de los 6 modelos. Lo que sí cambia por rama son las **carpetas de modelo** — ahí es donde tienes que situarte para trabajar.
 
-| Modelo | Carpeta | Medidas | Documentación | Rama(s) con la doc |
+| Modelo | Carpeta | Medidas | Documentación | Rama donde el modelo está al día |
 |---|---|---:|---|---|
-| **Plan de Servicio B2B** | ServicePlan/ | 23 | `docs/ServicePlan-Plan de Servicio B2B.md` | `serviceplan` |
-| **SgiRetail** | SgiRetail/ | 238 | `docs/SgiRetail-SgiRetail.md` | `sgiretail` |
-| **TransportsTracking** | Transport/ | 34 | `docs/Transport-TransportsTracking.md` | `transport` |
-| **B2BSalesOrder** | SalesOrder/ | 96 | `docs/SalesOrder-B2BSalesOrder.md` | `compras`, `finanzas` |
-| **PurchaseOrders (Compras)** | Compras/ | 0 (agregaciones implícitas) | `docs/Compras-PurchaseOrders.md` | `compras`, `finanzas` |
-| **Finanzas** | Finanzas/ | 118 + 19 auxiliares | `docs/Finanzas-Finanzas.md` | `finanzas` |
+| **Plan de Servicio B2B** | ServicePlan/ | 23 | [ServicePlan-Plan de Servicio B2B.md](ServicePlan-Plan%20de%20Servicio%20B2B.md) | `serviceplan` |
+| **SgiRetail** | SgiRetail/ | 238 | [SgiRetail-SgiRetail.md](SgiRetail-SgiRetail.md) | `sgiretail` |
+| **TransportsTracking** | Transport/ | 34 | [Transport-TransportsTracking.md](Transport-TransportsTracking.md) | `transport` |
+| **B2BSalesOrder** | SalesOrder/ | 96 | [SalesOrder-B2BSalesOrder.md](SalesOrder-B2BSalesOrder.md) | `compras`, `finanzas` |
+| **PurchaseOrders (Compras)** | Compras/ | 0 (agregaciones implícitas) | [Compras-PurchaseOrders.md](Compras-PurchaseOrders.md) | `compras`, `finanzas` |
+| **Finanzas** | Finanzas/ | 118 + 19 auxiliares | [Finanzas-Finanzas.md](Finanzas-Finanzas.md) | `finanzas` |
 
-Este índice (`docs/README.md`) está replicado **idéntico en todas las ramas**, para poder llegar al mapa completo desde cualquiera.
+> Cada `.md` describe el modelo tal y como está **en su rama al día**. Si lo lees desde otra rama, la carpeta del modelo que tienes en disco puede ser anterior a lo que cuenta el documento — y los enlaces relativos a ficheros `.tmdl` pueden no resolver. Para tocar el modelo, cambia a la rama de la última columna.
 
 ## Orígenes de datos
 
