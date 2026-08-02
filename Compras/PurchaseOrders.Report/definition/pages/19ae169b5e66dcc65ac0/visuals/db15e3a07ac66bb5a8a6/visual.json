@@ -1,0 +1,86 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "db15e3a07ac66bb5a8a6",
+  "position": {
+    "x": 18.900738310090237,
+    "y": 480.91878589007382,
+    "z": 1009,
+    "height": 65.1025430680886,
+    "width": 279.31091058244459,
+    "tabOrder": 1009
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "Nombre_familia"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.Nombre_familia",
+              "nativeQueryRef": "Familia",
+              "active": true,
+              "displayName": "Familia"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Dropdown'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "orientation": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "74b7eb2e58c1234c4861",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIMODELITEM"
+              }
+            },
+            "Property": "Nombre_familia"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

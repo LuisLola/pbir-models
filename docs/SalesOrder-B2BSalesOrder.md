@@ -1,12 +1,8 @@
 # Modelo semántico: B2BSalesOrder
 
-> 📁 **Esta documentación está replicada en todas las ramas.** Describe el modelo tal y como está en la rama **`compras` / `finanzas`**. En otras ramas la carpeta `SalesOrder/` puede existir pero en un estado anterior: para trabajar sobre el modelo, sitúate en la rama indicada. Índice: [README.md](README.md).
-
 > Documentación técnica generada a partir del modelo TMDL ubicado en
 > [`SalesOrder/B2BSalesOrder.SemanticModel/definition/`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/).
 > **Solo lectura**: este documento describe el modelo, no lo modifica.
->
-> ⚠️ **Rama.** Esta documentación describe el estado de las ramas **`compras` / `finanzas`** (mismo árbol). La rama `salesorder` se quedó en 2026-07-16 y **no** contiene el embudo por documento ni las devoluciones descritos aquí.
 
 ---
 

@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "aa694f5bc3410045eb59",
   "position": {
-    "x": 865.97014925373128,
-    "y": 2.6865671641791042,
-    "z": 2000,
-    "height": 85.970149253731336,
-    "width": 118.20895522388059,
+    "x": 1004.7416413373861,
+    "y": 0,
+    "z": 0,
+    "height": 43.768996960486326,
+    "width": 275.258358662614,
     "tabOrder": 2000
   },
   "visual": {
@@ -59,7 +59,7 @@
             "endDate": {
               "expr": {
                 "Literal": {
-                  "Value": "datetime'2026-06-08T00:00:00'"
+                  "Value": "datetime'2026-06-14T00:00:00'"
                 }
               }
             },
@@ -75,44 +75,7 @@
       ],
       "general": [
         {
-          "properties": {
-            "filter": {
-              "filter": {
-                "Version": 2,
-                "From": [
-                  {
-                    "Name": "c",
-                    "Entity": "Calendario",
-                    "Type": 0
-                  }
-                ],
-                "Where": [
-                  {
-                    "Condition": {
-                      "Comparison": {
-                        "ComparisonKind": 3,
-                        "Left": {
-                          "Column": {
-                            "Expression": {
-                              "SourceRef": {
-                                "Source": "c"
-                              }
-                            },
-                            "Property": "Date"
-                          }
-                        },
-                        "Right": {
-                          "Literal": {
-                            "Value": "datetime'2026-06-09T00:00:00'"
-                          }
-                        }
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          }
+          "properties": {}
         }
       ],
       "header": [
@@ -129,12 +92,17 @@
         }
       ]
     },
+    "syncGroup": {
+      "groupName": "Date",
+      "fieldChanges": true,
+      "filterChanges": true
+    },
     "drillFilterOtherVisuals": true
   },
   "filterConfig": {
     "filters": [
       {
-        "name": "a5a9151fee3082c5c021",
+        "name": "f2b897d37a01314d3348",
         "field": {
           "Column": {
             "Expression": {

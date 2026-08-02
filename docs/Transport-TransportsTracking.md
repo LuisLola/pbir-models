@@ -1,13 +1,10 @@
 # TransportsTracking — Documentación del modelo
 
-> 📁 **Esta documentación está replicada en todas las ramas.** Describe el modelo tal y como está en la rama **`transport`**. En otras ramas la carpeta `Transport/` puede existir pero en un estado anterior: para trabajar sobre el modelo, sitúate en la rama indicada. Índice: [README.md](README.md).
-
 Panel de **seguimiento de transportes / envíos** de Lola Casademunt. Sigue el ciclo de vida de cada envío (albarán) desde su lanzamiento hasta la entrega, con métricas de volumen, tiempos de entrega, incidencias y devoluciones por transportista, segmento y destino.
 
 - **Proyecto:** [Transport/TransportsTracking](../Transport/)
 - **Modelo:** `TransportsTracking.SemanticModel` · **Informe:** `TransportsTracking.Report`
 - **Cultura:** es-ES · **Modo:** Import
-- **Rama git:** `transport`
 - **RLS:** ninguno
 
 > Para consultar el modelo en vivo (DAX) con Power BI Desktop abierto, ver la nota al final.

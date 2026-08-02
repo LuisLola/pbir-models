@@ -1,0 +1,102 @@
+table Calendario
+	lineageTag: d390f9ff-fba0-4c57-bd6f-cb6124a5907a
+	dataCategory: Time
+
+	column Date
+		isKey
+		formatString: General Date
+		lineageTag: 130bf035-684a-4c53-9b65-8bc51fd05039
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Año
+		formatString: 0
+		lineageTag: c02fd88f-b239-49eb-9fbc-4a923d701804
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Año]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AñoTexto
+		lineageTag: 7281f814-1a9e-4fdc-9941-e1be16b86182
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [AñoTexto]
+
+		annotation SummarizationSetBy = Automatic
+
+	column NombreMesAño
+		lineageTag: 02a6eaf3-8568-4df2-ae7d-ab72476e7d33
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [NombreMesAño]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Semana
+		formatString: 0
+		lineageTag: 49500a54-1063-46b2-9b39-7711f73c582d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Semana]
+
+		annotation SummarizationSetBy = Automatic
+
+	column NombreSemana
+		lineageTag: b1caf6f1-03eb-47c9-802e-839820bf1168
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [NombreSemana]
+
+		annotation SummarizationSetBy = Automatic
+
+	column NombreDía
+		lineageTag: b457a0c9-07d1-456a-a233-dbd4d3875cbc
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [NombreDía]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DíaMes
+		formatString: 0
+		lineageTag: ae1e0b61-f434-409d-afcb-70b881de1b95
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [DíaMes]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mes
+		formatString: 0
+		lineageTag: 3912c5cd-7e90-4f36-b212-aa5623ee5ef6
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Mes]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calendario = calculated
+		mode: import
+		source = ```
+				
+				ADDCOLUMNS (
+				    CALENDAR (DATE(2025, 1, 1), DATE(2025, 12, 31)),
+				    "Año", YEAR([Date]),
+				    "AñoTexto", FORMAT([Date], "0000"),
+				    "NombreMesAño", FORMAT([Date], "MMM YYYY"),
+				    "Semana", WEEKNUM([Date], 2),
+				    "NombreSemana", "Semana " & WEEKNUM([Date], 2) & " " & YEAR([Date]),
+				    "NombreDía", FORMAT([Date], "DD MMMM YYYY"),
+				    "DíaMes", DAY([Date]),
+				    "Mes", MONTH([Date])
+				)
+				
+				```
+
+	annotation PBI_Id = 1dc876e9f79143cb9b9d096f47a2e617
+

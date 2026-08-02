@@ -1,0 +1,17 @@
+table VistaTipo
+	lineageTag: 9f786089-b299-4ea1-b699-052772316785
+
+	column Vista
+		lineageTag: 61c7d6c7-e66d-421d-ad8d-7d6f6c379c62
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Vista]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition VistaTipo = calculated
+		mode: import
+		source = DATATABLE("Vista", STRING, {{"Importe"}, {"Unidades"}})
+
+	annotation PBI_Id = f8e8dc433c154aa8b36ffbfcd9e6683e
+

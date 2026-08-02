@@ -1,0 +1,132 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "1d65d2ae8b7988f04d0c",
+  "position": {
+    "x": 18.900738310090237,
+    "y": 341.2633305988515,
+    "z": 1002,
+    "height": 63.002461033634127,
+    "width": 279.31091058244459,
+    "tabOrder": 1002
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIPURCHASEORDERS"
+                    }
+                  },
+                  "Property": "MktDoc_Row_GSP_SEASON"
+                }
+              },
+              "queryRef": "LOL_PBIPURCHASEORDERS.MktDoc_Row_GSP_SEASON",
+              "nativeQueryRef": "Temporada",
+              "active": true,
+              "displayName": "Temporada"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Dropdown'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "orientation": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            },
+            "filter": {
+              "filter": {
+                "Version": 2,
+                "From": [
+                  {
+                    "Name": "l",
+                    "Entity": "LOL_PBIPURCHASEORDERS",
+                    "Type": 0
+                  }
+                ],
+                "Where": [
+                  {
+                    "Condition": {
+                      "In": {
+                        "Expressions": [
+                          {
+                            "Column": {
+                              "Expression": {
+                                "SourceRef": {
+                                  "Source": "l"
+                                }
+                              },
+                              "Property": "MktDoc_Row_GSP_SEASON"
+                            }
+                          }
+                        ],
+                        "Values": [
+                          [
+                            {
+                              "Literal": {
+                                "Value": "'F26'"
+                              }
+                            }
+                          ]
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "syncGroup": {
+      "groupName": "MktDoc_Row_GSP_SEASON",
+      "fieldChanges": true,
+      "filterChanges": true
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "2665ace6ca57ee8221c9",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIPURCHASEORDERS"
+              }
+            },
+            "Property": "MktDoc_Row_GSP_SEASON"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

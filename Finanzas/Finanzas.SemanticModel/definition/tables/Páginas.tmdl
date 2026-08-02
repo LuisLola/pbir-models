@@ -1,0 +1,55 @@
+table Páginas
+	lineageTag: 57044cf4-8d93-4f39-82e5-8f35c55ee3d5
+
+	measure 'Param Página (número)' = ```
+			
+			SELECTEDVALUE('Páginas'[Value], 1)
+			
+			```
+		formatString: 0
+		lineageTag: e669fe3a-a11b-40ad-8ac4-11ace7d5ad0f
+
+	measure 'Max Páginas' = ```
+			
+			VAR dim = [Param DimFin (texto)]
+			RETURN
+			    IF(
+			        dim = "Tienda"
+			            || CONTAINSSTRING(dim, "[Código 2 de regla de distribución]")
+			            || CONTAINSSTRING(dim, "Código 2 de regla de distribución"),
+			        4,
+			        1
+			    )
+			
+			```
+		formatString: 0
+		lineageTag: 898a8c46-d73b-4567-943d-985c895f8854
+
+	measure 'Mostrar Página' = ```
+			
+			VAR pg = SELECTEDVALUE('Páginas'[Value], 1)
+			RETURN IF(pg <= [Max Páginas], 1, 0)
+			
+			```
+		formatString: 0
+		lineageTag: 25378f69-dfce-4fce-9535-da07468e2303
+
+	column Value
+		formatString: 0
+		lineageTag: 3da6b350-e9f6-48da-8341-c101cf41df14
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Páginas = calculated
+		mode: import
+		source = ```
+				
+				 GENERATESERIES(1, 4, 1)
+				
+				```
+
+	annotation PBI_Id = 0e2f0a9934784c12bf804aa7ddb16242
+

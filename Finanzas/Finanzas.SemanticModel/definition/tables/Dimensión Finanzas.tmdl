@@ -1,0 +1,108 @@
+table 'Dimensión Finanzas'
+	lineageTag: d4a89fd4-d9d2-4532-987f-4e436773d00e
+
+	measure 'Param DimFin (texto)' = ```
+			
+			SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Campos], "Canal" )
+			
+			```
+		lineageTag: 80e9a35f-346a-41e3-8928-1199a166e2b0
+
+	measure 'DimFin Orden (vis)' =
+			
+			SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden] )
+		formatString: 0
+		lineageTag: 5ce8f3f5-16de-44d7-ac49-832d2f32102e
+
+	measure 'Título Descripción (vis)' = ```
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    /* 0 = Canal: buscar en CostCenter */
+			    0, CALCULATE (
+			           SELECTEDVALUE ( 'CostCenter'[Nombre de centro de coste] ),
+			           TREATAS ( DimVals, 'JournalEntryItem'[Código 1 de regla de distribución] )
+			       ),
+			    /* 1 = Tienda: buscar en CostCenter_Dim2 */
+			    1, CALCULATE (
+			           SELECTEDVALUE ( CostCenter_Dim2[Nombre de centro de coste] ),
+			           TREATAS ( DimVals, 'JournalEntryItem'[Código 2 de regla de distribución] )
+			       ),
+			    /* Resto: usa la propia etiqueta del nivel */
+			    2, SELECTEDVALUE ( 'JournalEntryItem'[Nombre sucursal] ),
+			    3, SELECTEDVALUE ( 'Calendario'[Date].[Trimestre] ),
+			    4, SELECTEDVALUE ( 'Calendario'[Mes] ),
+			    5, SELECTEDVALUE ( 'Calendario'[Año] )
+			)
+			
+			```
+		lineageTag: b0f548b6-abd8-4adf-bd5b-13f583501d54
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Filtro Dimensión Activa (vis)' = ```
+			
+			VAR SelOrden  = SELECTEDVALUE('Dimensión Finanzas'[Dimensión Finanzas Orden])
+			VAR OrdenFila = SELECTEDVALUE('KPI Export (Dim)'[Dimensión Finanzas Orden])
+			RETURN IF ( NOT ISBLANK(SelOrden) && OrdenFila = SelOrden, 1 )
+			
+			```
+		formatString: 0
+		lineageTag: b6ecfb9f-b0eb-43f7-82f1-3b15e49a41e9
+
+	column 'Dimensión Finanzas'
+		lineageTag: eb91109e-55b1-4e4c-9f08-13f439635cdc
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Dimensión Finanzas Orden'
+
+		relatedColumnDetails
+			groupByColumn: 'Dimensión Finanzas Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dimensión Finanzas Campos'
+		lineageTag: da4bf809-e85a-44da-ba42-4909d8f0b849
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Dimensión Finanzas Orden'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dimensión Finanzas Orden'
+		isHidden
+		formatString: 0
+		lineageTag: 965d12ad-ea46-44b0-8b08-9232de91710a
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Dimensión Finanzas' = calculated
+		mode: import
+		source =
+				{
+				    ("Canal", NAMEOF('JournalEntryItem'[Código 1 de regla de distribución]), 0),
+				    ("Tienda", NAMEOF('JournalEntryItem'[Código 2 de regla de distribución]), 1),
+				    ("Sucursal", NAMEOF('JournalEntryItem'[Nombre sucursal]), 2),
+				    ("Trimestre", NAMEOF('Calendario'[Date].[Trimestre]), 3),
+				    ("Mes", NAMEOF('Calendario'[Date].[Mes]), 4),
+				    ("Año", NAMEOF('Calendario'[Date].[Año]), 5)
+				}
+
+	annotation PBI_Id = c0fa04313dbf477fa316885c49b9badb
+

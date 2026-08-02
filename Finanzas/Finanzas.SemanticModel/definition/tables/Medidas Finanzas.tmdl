@@ -1,0 +1,1793 @@
+table 'Medidas Finanzas'
+	lineageTag: 0a1b2c3d-4e5f-6071-8293-a4b5c6d7e8f9
+
+	measure 'Sum Amount' =
+			
+			SUM ( LOL_PBIFINANCIALENTRIES[CreditLC] )
+			- SUM(LOL_PBIFINANCIALENTRIES[DebitLC])
+		displayFolder: 01 Base
+		lineageTag: 6eb434e7-2f2e-4726-b278-e3dabe559c82
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Base YTD' =
+			
+			VAR Val = [Ventas_YTD]
+			VAR EntityShowRow =
+			    [EntityBrowseDepth] <= LOL_PBIFINANCIALMODEL[EntityRowDepth]
+			VAR Result =
+			    IF ( EntityShowRow, Val )
+			RETURN
+			    Result
+		displayFolder: 01 Base
+		lineageTag: 7e41885a-fd86-4186-a45c-dd080a22ad86
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Ventas_YTD =
+			
+			VAR FechasSeleccionadas =
+			    VALUES(TablaFechasFiltro[FechaFiltro])  -- o el nombre exacto de tu tabla de fechas para filtros
+			RETURN
+			CALCULATE(
+			   ( SUM(LOL_PBIFINANCIALENTRIES[CreditLC]) - SUM(LOL_PBIFINANCIALENTRIES[DebitLC]))*AVERAGE(LOL_PBIFINANCIALMODEL[CORRECION]),
+			    TREATAS(FechasSeleccionadas, 'Calendario'[Date])
+			)
+		displayFolder: 01 Base
+		lineageTag: 11f4e4f0-8bae-4a43-b0cd-1f22bca4c80c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure VENTAS_YTD_LY = ```
+			
+			VAR FechasSeleccionadas =
+			    VALUES(TablaFechasFiltro[FechaFiltro])  -- Fechas filtradas por el usuario
+			 
+			RETURN
+			CALCULATE(
+			( SUM(LOL_PBIFINANCIALENTRIES[CreditLC]) - SUM(LOL_PBIFINANCIALENTRIES[DebitLC]))*AVERAGE(LOL_PBIFINANCIALMODEL[CORRECION]),
+			    SAMEPERIODLASTYEAR(FechasSeleccionadas)
+			)
+			```
+		displayFolder: 01 Base
+		lineageTag: 1cf1f45e-7841-4693-ad9c-3d18e9a296e3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Base YTD_LY' =
+			
+			VAR Val = [VENTAS_YTD_LY]
+			VAR EntityShowRow =
+			    [EntityBrowseDepth] <= LOL_PBIFINANCIALMODEL[EntityRowDepth]
+			VAR Result =
+			    IF ( EntityShowRow, Val )
+			RETURN
+			    Result
+		displayFolder: 01 Base
+		lineageTag: 0c9d7bf3-3db7-4253-a7a3-949cc2fbe4b1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Balance Evol.' =
+			
+			[Total Base YTD] - [Total Base YTD_LY]
+		displayFolder: 01 Base
+		lineageTag: 09969a74-80f2-4df1-8fea-f0182ac90baf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Balance Porc Evol' =
+			
+			DIVIDE([Total Base YTD] - [Total Base YTD_LY],[VENTAS_YTD_LY])
+		formatString: 0\ %;-0\ %;0\ %
+		displayFolder: 01 Base
+		lineageTag: f4f31c8d-79d5-40fe-89f7-de7317a657a4
+
+	measure 'PyG_A RESULTADO DE EXPLOTACIÓN' = ```
+			
+			CALCULATE(
+			    SUM(LOL_PBIFINANCIALENTRIES[CreditLC])-SUM(LOL_PBIFINANCIALENTRIES[DebitLC]), 
+			    LOL_PBIFINANCIALMODEL[VISUAL_ORDER]<  AVERAGE(LOL_PBIFINANCIALMODEL[PyG_POSICION_A RESULTADO DE EXPLOTACION]),
+			    REMOVEFILTERS(LOL_PBIFINANCIALMODEL[ORDER_N3],LOL_PBIFINANCIALMODEL[NIVEL_3],LOL_PBIFINANCIALMODEL[NIVEL_4],LOL_PBIFINANCIALMODEL[Nivel5_Limpio],LOL_PBIFINANCIALMODEL[Nivel6_Limpio]
+			))
+			```
+		displayFolder: 02 P&G
+		lineageTag: bf82b4d7-3675-416a-98e4-dc9d1a855568
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG Sum_Switch' =
+			
+			var __groupord = SELECTEDVALUE(LOL_PBIFINANCIALMODEL[VISUAL_ORDER])
+			var __switch = SWITCH(__groupord,
+			               MIN(LOL_PBIFINANCIALMODEL[PyG_POSICION_A RESULTADO DE EXPLOTACION]), [PyG_A RESULTADO DE EXPLOTACIÓN],
+			               MIN(LOL_PBIFINANCIALMODEL[PyG_POSICION_B RESULTADO FINANCIERO]),[PyG_B RESULTADO FINANCIERO],
+			               MIN(LOL_PBIFINANCIALMODEL[PyG_POSICION_C RESULTADO ANTES DE IMPUESTOS]), [PyG_C RESULTADO ANTES IMPUESTOS],
+			               MIN(LOL_PBIFINANCIALMODEL[PyG_POSICION_D RESULTADO DEL EJERICIO]), [PyG_D RESULTADO EJERCICIO],
+			               [Ventas_YTD])
+			return
+			__switch
+		displayFolder: 02 P&G
+		lineageTag: 7f41949f-f020-4542-bf1d-b0f53b1fd4ac
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Base YTD PYG' =
+			
+			VAR Val = [PyG Sum_Switch]
+			VAR EntityShowRow =
+			    [EntityBrowseDepth] <= LOL_PBIFINANCIALMODEL[EntityRowDepth]
+			VAR Result =
+			    IF ( EntityShowRow, Val )
+			RETURN
+			    Result
+		formatString: 0
+		displayFolder: 02 P&G
+		lineageTag: ee317f67-4e9a-4c0d-bd64-bc39e94d3634
+
+	measure 'PyG_B RESULTADO FINANCIERO' = ```
+			
+			CALCULATE(
+			    SUM(LOL_PBIFINANCIALENTRIES[CreditLC])-SUM(LOL_PBIFINANCIALENTRIES[DebitLC]), 
+			    AND(LOL_PBIFINANCIALMODEL[VISUAL_ORDER]> AVERAGE(LOL_PBIFINANCIALMODEL[PyG_POSICION_A RESULTADO DE EXPLOTACION]), LOL_PBIFINANCIALMODEL[VISUAL_ORDER]<AVERAGE(LOL_PBIFINANCIALMODEL[PyG_POSICION_B RESULTADO FINANCIERO])),
+			    REMOVEFILTERS(LOL_PBIFINANCIALMODEL[ORDER_N3],LOL_PBIFINANCIALMODEL[NIVEL_3],LOL_PBIFINANCIALMODEL[NIVEL_4],LOL_PBIFINANCIALMODEL[Nivel5_Limpio],LOL_PBIFINANCIALMODEL[Nivel6_Limpio]
+			))
+			```
+		displayFolder: 02 P&G
+		lineageTag: 4cbeb159-2f5c-4fe3-a852-f7aefd86444e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG_C RESULTADO ANTES IMPUESTOS' =
+			
+			CALCULATE(
+			    [PyG_A RESULTADO DE EXPLOTACIÓN]+[PyG_B RESULTADO FINANCIERO],
+			    REMOVEFILTERS(LOL_PBIFINANCIALMODEL[ORDER_N3],LOL_PBIFINANCIALMODEL[NIVEL_3],LOL_PBIFINANCIALMODEL[NIVEL_4],LOL_PBIFINANCIALMODEL[Nivel5_Limpio],LOL_PBIFINANCIALMODEL[Nivel6_Limpio]
+			))
+		displayFolder: 02 P&G
+		lineageTag: 1b64e8e2-13a8-4068-bbc2-c9e0d511a62a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG_D RESULTADO EJERCICIO' = ```
+			
+			CALCULATE(
+			    [PyG_C RESULTADO ANTES IMPUESTOS] + SUM(LOL_PBIFINANCIALENTRIES[CreditLC])-SUM(LOL_PBIFINANCIALENTRIES[DebitLC]), 
+			    AND(LOL_PBIFINANCIALMODEL[VISUAL_ORDER]> LOL_PBIFINANCIALMODEL[PyG_POSICION_C RESULTADO ANTES DE IMPUESTOS], LOL_PBIFINANCIALMODEL[VISUAL_ORDER]<LOL_PBIFINANCIALMODEL[PyG_POSICION_D RESULTADO DEL EJERICIO]),
+			    REMOVEFILTERS(LOL_PBIFINANCIALMODEL[ORDER_N3],LOL_PBIFINANCIALMODEL[NIVEL_3],LOL_PBIFINANCIALMODEL[Nivel5_Limpio],LOL_PBIFINANCIALMODEL[Nivel6_Limpio]
+			))
+			```
+		displayFolder: 02 P&G
+		lineageTag: 2342bdda-7caf-4de8-b10a-99b6177916f0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG_A RESULTADO DE EXPLOTACIÓN_LY' = ```
+			
+			VAR FechasSeleccionadas =
+			    VALUES(TablaFechasFiltro[FechaFiltro])  -- Fechas filtradas por el usuario
+			RETURN    
+			CALCULATE(
+			    SUM(LOL_PBIFINANCIALENTRIES[CreditLC])-SUM(LOL_PBIFINANCIALENTRIES[DebitLC]), 
+			    LOL_PBIFINANCIALMODEL[VISUAL_ORDER]< AVERAGE(LOL_PBIFINANCIALMODEL[PyG_POSICION_A RESULTADO DE EXPLOTACION]),
+			    REMOVEFILTERS(LOL_PBIFINANCIALMODEL[ORDER_N3],LOL_PBIFINANCIALMODEL[NIVEL_3],LOL_PBIFINANCIALMODEL[Nivel5_Limpio],LOL_PBIFINANCIALMODEL[Nivel6_Limpio]),
+			    SAMEPERIODLASTYEAR(FechasSeleccionadas)
+			)
+			```
+		displayFolder: 02 P&G
+		lineageTag: 68b49e87-8ecb-4b98-a5c5-e298bc8c57fa
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG Sum_Switch_LY' =
+			
+			var __groupord = SELECTEDVALUE(LOL_PBIFINANCIALMODEL[VISUAL_ORDER])
+			var __switch = SWITCH(__groupord,
+			               MIN(LOL_PBIFINANCIALMODEL[PyG_POSICION_A RESULTADO DE EXPLOTACION]), [PyG_A RESULTADO DE EXPLOTACIÓN_LY],
+			               MIN(LOL_PBIFINANCIALMODEL[PyG_POSICION_B RESULTADO FINANCIERO]),[PyG_B RESULTADO FINANCIERO_LY],
+			               MIN(LOL_PBIFINANCIALMODEL[PyG_POSICION_C RESULTADO ANTES DE IMPUESTOS]), [PyG_C RESULTADO ANTES IMPUESTOS_LY],
+			               MIN(LOL_PBIFINANCIALMODEL[PyG_POSICION_D RESULTADO DEL EJERICIO]), [PyG_D RESULTADO EJERCICIO_LY],
+			               [VENTAS_YTD_LY])
+			return
+			__switch
+		displayFolder: 02 P&G
+		lineageTag: e1f93b37-9300-436b-bdbd-7a31e86f2cbf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Base YTD_LY PYG' =
+			
+			VAR Val = [PyG Sum_Switch_LY]
+			VAR EntityShowRow =
+			    [EntityBrowseDepth] <= LOL_PBIFINANCIALMODEL[EntityRowDepth]
+			VAR Result =
+			    IF ( EntityShowRow, Val )
+			RETURN
+			    Result
+		displayFolder: 02 P&G
+		lineageTag: 08256c14-03fb-4ff1-9640-5c724973a45b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG_B RESULTADO FINANCIERO_LY' = ```
+			
+			VAR FechasSeleccionadas =
+			    VALUES(TablaFechasFiltro[FechaFiltro])  -- Fechas filtradas por el usuario
+			RETURN 
+			CALCULATE(
+			    SUM(LOL_PBIFINANCIALENTRIES[CreditLC])-SUM(LOL_PBIFINANCIALENTRIES[DebitLC]), 
+			    AND(LOL_PBIFINANCIALMODEL[VISUAL_ORDER]> AVERAGE(LOL_PBIFINANCIALMODEL[PyG_POSICION_A RESULTADO DE EXPLOTACION]), LOL_PBIFINANCIALMODEL[VISUAL_ORDER]<AVERAGE(LOL_PBIFINANCIALMODEL[PyG_POSICION_B RESULTADO FINANCIERO])),
+			    REMOVEFILTERS(LOL_PBIFINANCIALMODEL[ORDER_N3],LOL_PBIFINANCIALMODEL[NIVEL_3],LOL_PBIFINANCIALMODEL[NIVEL_4],LOL_PBIFINANCIALMODEL[Nivel5_Limpio],LOL_PBIFINANCIALMODEL[Nivel6_Limpio]),
+			    SAMEPERIODLASTYEAR(FechasSeleccionadas))
+			```
+		displayFolder: 02 P&G
+		lineageTag: 7b3e0de5-5a79-410e-b207-f2ba5163f6f3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG_C RESULTADO ANTES IMPUESTOS_LY' = ```
+			
+			VAR FechasSeleccionadas =
+			    VALUES(TablaFechasFiltro[FechaFiltro])  -- Fechas filtradas por el usuario
+			RETURN 
+			CALCULATE(
+			    [PyG_A RESULTADO DE EXPLOTACIÓN]+[PyG_B RESULTADO FINANCIERO],
+			    REMOVEFILTERS(LOL_PBIFINANCIALMODEL[ORDER_N3],LOL_PBIFINANCIALMODEL[NIVEL_3],LOL_PBIFINANCIALMODEL[NIVEL_4],LOL_PBIFINANCIALMODEL[Nivel5_Limpio],LOL_PBIFINANCIALMODEL[Nivel6_Limpio]),
+			    SAMEPERIODLASTYEAR(FechasSeleccionadas)
+			)
+			```
+		displayFolder: 02 P&G
+		lineageTag: f10444c7-57ed-4f00-a05e-555173ae428f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG_D RESULTADO EJERCICIO_LY' = ```
+			
+			VAR FechasSeleccionadas =
+			    VALUES(TablaFechasFiltro[FechaFiltro])  -- Fechas filtradas por el usuario
+			RETURN 
+			CALCULATE(
+			    [PyG_C RESULTADO ANTES IMPUESTOS] + SUM(LOL_PBIFINANCIALENTRIES[CreditLC])-SUM(LOL_PBIFINANCIALENTRIES[DebitLC]), 
+			    AND(LOL_PBIFINANCIALMODEL[VISUAL_ORDER]> LOL_PBIFINANCIALMODEL[PyG_POSICION_C RESULTADO ANTES DE IMPUESTOS], LOL_PBIFINANCIALMODEL[VISUAL_ORDER]<LOL_PBIFINANCIALMODEL[PyG_POSICION_D RESULTADO DEL EJERICIO]),
+			    REMOVEFILTERS(LOL_PBIFINANCIALMODEL[ORDER_N3],LOL_PBIFINANCIALMODEL[NIVEL_3],LOL_PBIFINANCIALMODEL[Nivel5_Limpio],LOL_PBIFINANCIALMODEL[Nivel6_Limpio]),
+			    SAMEPERIODLASTYEAR(FechasSeleccionadas)
+			)
+			```
+		displayFolder: 02 P&G
+		lineageTag: b5ec814e-882c-4dce-ad04-59833ba2b3df
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG Evol.' =
+			
+			[Total Base YTD PYG]-[Total Base YTD_LY PYG]
+		displayFolder: 02 P&G
+		lineageTag: 59b28c5f-4ec9-4b63-9b7f-596287d55b32
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG Porc Evol' =
+			
+			DIVIDE([Total Base YTD PYG] - [Total Base YTD_LY PYG],[Total Base YTD PYG])
+		displayFolder: 02 P&G
+		lineageTag: 17b88d8d-d395-4220-9354-1a8856bb1972
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG 01.ImporteNeto' = ```
+			
+			CALCULATE(
+			    SUM(LOL_PBIFINANCIALENTRIES[CreditLC])-SUM(LOL_PBIFINANCIALENTRIES[DebitLC]), 
+			    LOL_PBIFINANCIALMODEL[ORDER_N3]=5003,    LOL_PBIFINANCIALENTRIES[DocumentTypeCode]<> "-3", LOL_PBIFINANCIALENTRIES[DocumentTypeCode]<> "-2",
+			     REMOVEFILTERS(LOL_PBIFINANCIALMODEL[ORDER_N3],LOL_PBIFINANCIALMODEL[NIVEL_3],LOL_PBIFINANCIALMODEL[NIVEL_4],LOL_PBIFINANCIALMODEL[Nivel5_Limpio],LOL_PBIFINANCIALMODEL[Nivel6_Limpio]
+			)
+			)
+			```
+		displayFolder: 02 P&G
+		lineageTag: aa47d5e4-a3a6-4cb9-9a9b-419031958760
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG %CN' =
+			
+			DIVIDE([Total Base YTD PYG],[PyG 01.ImporteNeto])
+		displayFolder: 02 P&G
+		lineageTag: 7824e7f6-0ae7-4128-8fda-dad097339fe2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG 01.ImporteNeto_LY' = ```
+			
+			VAR FechasSeleccionadas =
+			    VALUES(TablaFechasFiltro[FechaFiltro])  -- Fechas filtradas por el usuario
+			RETURN 
+			CALCULATE(
+			    SUM(LOL_PBIFINANCIALENTRIES[CreditLC])-SUM(LOL_PBIFINANCIALENTRIES[DebitLC]), 
+			    LOL_PBIFINANCIALMODEL[ORDER_N3]=5003,
+			     REMOVEFILTERS(LOL_PBIFINANCIALMODEL[ORDER_N3],LOL_PBIFINANCIALMODEL[NIVEL_3],LOL_PBIFINANCIALMODEL[NIVEL_4],LOL_PBIFINANCIALMODEL[Nivel5_Limpio],LOL_PBIFINANCIALMODEL[Nivel6_Limpio]
+			), SAMEPERIODLASTYEAR(FechasSeleccionadas)
+			)
+			```
+		displayFolder: 02 P&G
+		lineageTag: 6a56ccab-d613-479a-91fa-93217e6db38b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG %CN_LY' =
+			
+			DIVIDE([Total Base YTD_LY PYG],[PyG 01.ImporteNeto_LY])
+		displayFolder: 02 P&G
+		lineageTag: b6d89815-b276-4827-8e15-671a0eb5c8a9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG 04.Aprovisionamiento' = ```
+			
+			CALCULATE(
+			    SUM(LOL_PBIFINANCIALENTRIES[CreditLC])-SUM(LOL_PBIFINANCIALENTRIES[DebitLC]), 
+			    LOL_PBIFINANCIALMODEL[ORDER_N3]=5011,
+			     REMOVEFILTERS(LOL_PBIFINANCIALMODEL[ORDER_N3],LOL_PBIFINANCIALMODEL[NIVEL_3],LOL_PBIFINANCIALMODEL[NIVEL_4],LOL_PBIFINANCIALMODEL[Nivel5_Limpio],LOL_PBIFINANCIALMODEL[Nivel6_Limpio]
+			)
+			)
+			```
+		displayFolder: 02 P&G
+		lineageTag: b01494d5-531f-4e89-8d8f-da195fa9a90d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG 04.Aprovisionamiento_LY' = ```
+			
+			VAR FechasSeleccionadas =
+			    VALUES(TablaFechasFiltro[FechaFiltro])  -- Fechas filtradas por el usuario
+			RETURN 
+			CALCULATE(
+			    SUM(LOL_PBIFINANCIALENTRIES[CreditLC])-SUM(LOL_PBIFINANCIALENTRIES[DebitLC]), 
+			    LOL_PBIFINANCIALMODEL[ORDER_N3]=5011,
+			     REMOVEFILTERS(LOL_PBIFINANCIALMODEL[ORDER_N3],LOL_PBIFINANCIALMODEL[NIVEL_3],LOL_PBIFINANCIALMODEL[NIVEL_4],LOL_PBIFINANCIALMODEL[Nivel5_Limpio],LOL_PBIFINANCIALMODEL[Nivel6_Limpio]
+			), SAMEPERIODLASTYEAR(FechasSeleccionadas)
+			
+			)
+			```
+		displayFolder: 02 P&G
+		lineageTag: 1ea6aa82-56db-493f-8fb3-8c2e4e29e7fd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG Var_ImporteNeto %' = ```
+			( 
+			[PyG 01.ImporteNeto]-[PyG 01.ImporteNeto_LY])/[PyG 01.ImporteNeto]
+			```
+		displayFolder: 02 P&G
+		lineageTag: 7aa214da-aa8a-477d-bc15-d8c4d8d2f0e9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CN (vis)' =
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyG 01.ImporteNeto], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyG 01.ImporteNeto], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyG 01.ImporteNeto], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyG 01.ImporteNeto], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyG 01.ImporteNeto], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyG 01.ImporteNeto], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 04 Margenes y KPIs
+		lineageTag: 89e84069-950c-4f17-b9ae-1ccd3c7e235a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CN LY (vis)' =
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyG 01.ImporteNeto_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyG 01.ImporteNeto_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyG 01.ImporteNeto_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyG 01.ImporteNeto_LY], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyG 01.ImporteNeto_LY], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyG 01.ImporteNeto_LY], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 04 Margenes y KPIs
+		lineageTag: bc155b1f-3b1e-465b-8f5e-8b67a786cf8f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'AP (vis)' =
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyG 04.Aprovisionamiento], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyG 04.Aprovisionamiento], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyG 04.Aprovisionamiento], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyG 04.Aprovisionamiento], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyG 04.Aprovisionamiento], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyG 04.Aprovisionamiento], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 04 Margenes y KPIs
+		lineageTag: 1bb23ccc-3241-4f45-8d68-58ba596c628f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'AP LY (vis)' =
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyG 04.Aprovisionamiento_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyG 04.Aprovisionamiento_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyG 04.Aprovisionamiento_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyG 04.Aprovisionamiento_LY], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyG 04.Aprovisionamiento_LY], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyG 04.Aprovisionamiento_LY], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 04 Margenes y KPIs
+		lineageTag: 26f1055d-10f3-48a6-b7fa-a496c6ab2635
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'OP (vis)' =
+			
+			VAR SelOrden = SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			VAR DimVals  = VALUES ( 'KPI Export (Dim)'[Dimensión] )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 04 Margenes y KPIs
+		lineageTag: 151278e4-e308-4af8-ae7b-5b6350cfaea2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'OP LY (vis)' =
+			
+			VAR SelOrden = SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			VAR DimVals  = VALUES ( 'KPI Export (Dim)'[Dimensión] )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN_LY], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN_LY], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN_LY], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 04 Margenes y KPIs
+		lineageTag: 0a147b4e-d6af-45e7-9ea9-d069c5429e04
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'NETOAI (vis)' =
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 04 Margenes y KPIs
+		lineageTag: 7339614b-a9c5-47d1-980d-9efbdc8cffc3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'NETOAI LY (vis)' =
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS_LY], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS_LY], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS_LY], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 04 Margenes y KPIs
+		lineageTag: 7b9e2e89-79d6-4619-a7a6-3ba61727a368
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Margen Bruto (vis)' = DIVIDE ( [CN (vis)] + [AP (vis)], [CN (vis)] )
+		displayFolder: 04 Margenes y KPIs
+		lineageTag: 50be7894-0eb8-4bb3-9a16-b9aa9f0fb7dd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Margen Bruto LY (vis)' = DIVIDE ( [CN LY (vis)] + [AP LY (vis)], [CN LY (vis)] )
+		displayFolder: 04 Margenes y KPIs
+		lineageTag: cbf2ecba-3e45-4c9f-8e33-0500e092c378
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Margen Operativo (vis)' = DIVIDE ( [OP (vis)], [CN (vis)] )
+		displayFolder: 04 Margenes y KPIs
+		lineageTag: 9fcc220a-908a-4757-a6e6-9726e360411c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Margen Operativo LY (vis)' = DIVIDE ( [OP LY (vis)], [CN LY (vis)] )
+		displayFolder: 04 Margenes y KPIs
+		lineageTag: 9eab6133-6a0d-422e-becc-95a4a6333253
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Margen Neto A.I. (vis)' = DIVIDE ( [NETOAI (vis)], [CN (vis)] )
+		displayFolder: 04 Margenes y KPIs
+		lineageTag: 783d307d-e391-4e15-b113-e349ec423e57
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Margen Neto A.I. LY (vis)' = DIVIDE ( [NETOAI LY (vis)], [CN LY (vis)] )
+		displayFolder: 04 Margenes y KPIs
+		lineageTag: 288b2a26-069c-4e5b-a209-fccda592f0d9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Δ CN % (vis)' = VAR cur=[CN (vis)]   VAR ly=[CN LY (vis)]   RETURN IF ( NOT ISBLANK(ly) && ly<>0, DIVIDE(cur,ly)-1 )
+		displayFolder: 04 Margenes y KPIs
+		lineageTag: 4e07d0b1-9a6a-4d71-bd10-f4f14fd4d271
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Δ MB (p) (vis)' = [Margen Bruto (vis)]        - [Margen Bruto LY (vis)]
+		displayFolder: 04 Margenes y KPIs
+		lineageTag: 6d0451e4-06ba-485a-bedd-99f15cfc0552
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Δ MO (p) (vis)' = [Margen Operativo (vis)]    - [Margen Operativo LY (vis)]
+		displayFolder: 04 Margenes y KPIs
+		lineageTag: 18772046-56c3-4662-9279-d001646a055d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Δ MN (p) (vis)' = [Margen Neto A.I. (vis)]    - [Margen Neto A.I. LY (vis)]
+		displayFolder: 04 Margenes y KPIs
+		lineageTag: ce2ab29d-eb34-40a2-a320-ce8ad324eb53
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CN DIF' =
+			
+			[CN (vis)]-[CN LY (vis)]
+		displayFolder: 04 Margenes y KPIs
+		lineageTag: 8c22532a-3bd3-4431-ac11-2bae68194389
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CN (vis)2' =
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyG 01.ImporteNeto], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyG 01.ImporteNeto], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyG 01.ImporteNeto], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyG 01.ImporteNeto], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyG 01.ImporteNeto], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyG 01.ImporteNeto], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 04 Margenes y KPIs
+		lineageTag: fcb11995-1866-4f0d-96fe-04bd3c9b8b00
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Margen Bruto (vis)2' = DIVIDE ( [CN (vis)] + [AP (vis)], [CN (vis)] )
+		displayFolder: 04 Margenes y KPIs
+		lineageTag: ca1d5970-410d-44e2-8e21-5d964fb1214e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Margen Operativo (vis)2' = DIVIDE ( [OP (vis)], [CN (vis)] )
+		displayFolder: 04 Margenes y KPIs
+		lineageTag: c64c4b43-d057-4016-8c44-0103a72e4b8e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG Ventas_YTD' =
+			
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [Ventas_YTD], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [Ventas_YTD], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [Ventas_YTD], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [Ventas_YTD], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [Ventas_YTD], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [Ventas_YTD], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 02 P&G
+		lineageTag: bc5cff60-36df-4d79-adfe-645ad90c21e9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG Ventas_YTD_LY' =
+			
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [VENTAS_YTD_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [VENTAS_YTD_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [VENTAS_YTD_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [VENTAS_YTD_LY], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [VENTAS_YTD_LY], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [VENTAS_YTD_LY], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 02 P&G
+		lineageTag: 5c7b90d1-bf9d-4e70-ab8f-22591bf2170d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG TotalBase YTD_DIM' =
+			
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [Total Base YTD PYG], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [Total Base YTD PYG], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [Total Base YTD PYG], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [Total Base YTD PYG], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ([Total Base YTD PYG], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [Total Base YTD PYG], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 02 P&G\Por dimension
+		lineageTag: bcfc2d1e-eef1-4285-a3ca-77d3cb80051b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG_A RESULTADO DE EXPLOTACIÓN DIM' =
+			
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 02 P&G\Por dimension
+		lineageTag: 338a09a1-ff73-432a-a103-8446c891490f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG_A RESULTADO DE EXPLOTACIÓN_LY DIM' =
+			
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN_LY], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN_LY], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyG_A RESULTADO DE EXPLOTACIÓN_LY], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 02 P&G\Por dimension
+		lineageTag: a039c37d-c5d7-4704-a6e6-6ccd0a95f1fe
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG_B RESULTADO FINANCIERO DIM' =
+			
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyG_B RESULTADO FINANCIERO], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyG_B RESULTADO FINANCIERO], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyG_B RESULTADO FINANCIERO], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyG_B RESULTADO FINANCIERO], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyG_B RESULTADO FINANCIERO], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyG_B RESULTADO FINANCIERO], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 02 P&G\Por dimension
+		lineageTag: dbc20c6f-7e40-4ccf-a260-81a454b0c14b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG_B RESULTADO FINANCIERO_LY DIM' =
+			
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyG_B RESULTADO FINANCIERO_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyG_B RESULTADO FINANCIERO_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyG_B RESULTADO FINANCIERO_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyG_B RESULTADO FINANCIERO_LY], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyG_B RESULTADO FINANCIERO_LY], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyG_B RESULTADO FINANCIERO_LY], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 02 P&G\Por dimension
+		lineageTag: 70c44b1b-2702-488b-8031-85ecc28ffce9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG_C RESULTADO ANTES IMPUESTOS DIM' =
+			
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 02 P&G\Por dimension
+		lineageTag: d81adbc7-296b-47d2-8178-bffc57b923f7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG_C RESULTADO ANTES IMPUESTOS_LY DIM' =
+			
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS_LY], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS_LY], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyG_C RESULTADO ANTES IMPUESTOS_LY], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 02 P&G\Por dimension
+		lineageTag: dd7fe4a3-9199-4983-a98b-b20bb40ce051
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG_D RESULTADO EJERCICIO DIM' =
+			
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyG_D RESULTADO EJERCICIO], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyG_D RESULTADO EJERCICIO], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyG_D RESULTADO EJERCICIO], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyG_D RESULTADO EJERCICIO], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyG_D RESULTADO EJERCICIO], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyG_D RESULTADO EJERCICIO], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 02 P&G\Por dimension
+		lineageTag: 08b8b570-1630-4ed4-a4e0-47ca4d40db55
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG_D RESULTADO EJERCICIO_LY DIM' =
+			
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyG_D RESULTADO EJERCICIO_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyG_D RESULTADO EJERCICIO_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyG_D RESULTADO EJERCICIO_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyG_D RESULTADO EJERCICIO_LY], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyG_D RESULTADO EJERCICIO_LY], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyG_D RESULTADO EJERCICIO_LY], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 02 P&G\Por dimension
+		lineageTag: e65e4af4-9ab8-471b-b502-7d0c52235dc1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG Sum_Switch_DIM' =
+			
+			var __groupord = SELECTEDVALUE(LOL_PBIFINANCIALMODEL[VISUAL_ORDER])
+			var __switch = SWITCH(__groupord,
+			               MIN(LOL_PBIFINANCIALMODEL[PyG_POSICION_A RESULTADO DE EXPLOTACION]), [PyG_A RESULTADO DE EXPLOTACIÓN DIM],
+			               MIN(LOL_PBIFINANCIALMODEL[PyG_POSICION_B RESULTADO FINANCIERO]),[PyG_B RESULTADO FINANCIERO DIM],
+			               MIN(LOL_PBIFINANCIALMODEL[PyG_POSICION_C RESULTADO ANTES DE IMPUESTOS]), [PyG_C RESULTADO ANTES IMPUESTOS DIM],
+			               MIN(LOL_PBIFINANCIALMODEL[PyG_POSICION_D RESULTADO DEL EJERICIO]), [PyG_D RESULTADO EJERCICIO DIM],
+			               [PyG Ventas_YTD] )
+			return
+			__switch
+		displayFolder: 02 P&G\Por dimension
+		lineageTag: 43265a40-a5c8-4a44-b858-6db650565702
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG Sum_Switch_LY DIM' =
+			
+			var __groupord = SELECTEDVALUE(LOL_PBIFINANCIALMODEL[VISUAL_ORDER])
+			var __switch = SWITCH(__groupord,
+			               MIN(LOL_PBIFINANCIALMODEL[PyG_POSICION_A RESULTADO DE EXPLOTACION]), [PyG_A RESULTADO DE EXPLOTACIÓN_LY DIM],
+			               MIN(LOL_PBIFINANCIALMODEL[PyG_POSICION_B RESULTADO FINANCIERO]),[PyG_B RESULTADO FINANCIERO_LY DIM],
+			               MIN(LOL_PBIFINANCIALMODEL[PyG_POSICION_C RESULTADO ANTES DE IMPUESTOS]), [PyG_C RESULTADO ANTES IMPUESTOS_LY DIM],
+			               MIN(LOL_PBIFINANCIALMODEL[PyG_POSICION_D RESULTADO DEL EJERICIO]), [PyG_D RESULTADO EJERCICIO_LY DIM],
+			               [PyG Ventas_YTD_LY])
+			return
+			__switch
+		displayFolder: 02 P&G\Por dimension
+		lineageTag: d62ccc8b-9870-417e-8594-76a89dd35973
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Base YTD PYG DIM' =
+			
+			VAR Val = [PyG Sum_Switch_DIM]
+			VAR EntityShowRow =
+			    [EntityBrowseDepth] <= LOL_PBIFINANCIALMODEL[EntityRowDepth]
+			VAR Result =
+			    IF ( EntityShowRow, Val )
+			RETURN
+			    Result
+		displayFolder: 02 P&G\Por dimension
+		lineageTag: ecf50fd6-a447-4e38-9f60-4f46364f282a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Base YTD_LY PYG DIM' =
+			
+			VAR Val = [PyG Sum_Switch_LY DIM]
+			VAR EntityShowRow =
+			    [EntityBrowseDepth] <= LOL_PBIFINANCIALMODEL[EntityRowDepth]
+			VAR Result =
+			    IF ( EntityShowRow, Val )
+			RETURN
+			    Result
+		displayFolder: 02 P&G\Por dimension
+		lineageTag: b667b469-8cd3-4791-af3d-d55e9b08a2a4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG Evol.DIM' =
+			
+			[Total Base YTD PYG DIM]-[Total Base YTD_LY PYG DIM]
+		displayFolder: 02 P&G\Por dimension
+		lineageTag: 8b1dd3ca-4edc-4d59-9445-e3ec1f30c6d8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG %CN DIM' =
+			
+			DIVIDE([Total Base YTD PYG DIM],[CN (vis)])
+		displayFolder: 02 P&G\Por dimension
+		lineageTag: db8344c4-b42e-425b-9258-1a8205c70480
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG %CN_LY DIM' =
+			
+			DIVIDE([Total Base YTD_LY PYG DIM],[CN LY (vis)])
+		displayFolder: 02 P&G\Por dimension
+		lineageTag: 3517073c-bf5f-41a2-8957-3af0f82b68e6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG Porc Evol DIM' =
+			
+			DIVIDE([Total Base YTD PYG DIM] - [Total Base YTD_LY PYG DIM],[Total Base YTD PYG DIM])
+		displayFolder: 02 P&G\Por dimension
+		lineageTag: 750ad83e-ed97-4daf-9a9b-a704db13a5d1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG CN' = ```
+			
+			CALCULATE(
+			    SUM(LOL_PBIFINANCIALENTRIES[CreditLC])-SUM(LOL_PBIFINANCIALENTRIES[DebitLC]), 
+			    LOL_PBIFINANCIALMODEL[ORDER_N3]=7003,
+			     REMOVEFILTERS(LOL_PBIFINANCIALMODEL[ORDER_N3],LOL_PBIFINANCIALMODEL[NIVEL_3],LOL_PBIFINANCIALMODEL[NIVEL_4],LOL_PBIFINANCIALMODEL[Nivel5_Limpio],LOL_PBIFINANCIALMODEL[Nivel6_Limpio]
+			)
+			)
+			```
+		formatString: 0
+		displayFolder: 03 P&G Gestion
+		lineageTag: b5fadd07-f285-4942-a52c-8d537c7409de
+
+	measure 'PyGG CN_LY' = ```
+			
+			VAR FechasSeleccionadas =
+			    VALUES(TablaFechasFiltro[FechaFiltro])  -- Fechas filtradas por el usuario
+			RETURN 
+			CALCULATE(
+			    SUM(LOL_PBIFINANCIALENTRIES[CreditLC])-SUM(LOL_PBIFINANCIALENTRIES[DebitLC]), 
+			    LOL_PBIFINANCIALMODEL[ORDER_N3]=7003,
+			     REMOVEFILTERS(LOL_PBIFINANCIALMODEL[ORDER_N3],LOL_PBIFINANCIALMODEL[NIVEL_3],LOL_PBIFINANCIALMODEL[NIVEL_4],LOL_PBIFINANCIALMODEL[Nivel5_Limpio],LOL_PBIFINANCIALMODEL[Nivel6_Limpio]
+			), SAMEPERIODLASTYEAR(FechasSeleccionadas)
+			
+			)
+			```
+		displayFolder: 03 P&G Gestion
+		lineageTag: 367e5efe-3033-447d-9470-0339c1e651c9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG CONSUMO MERCADERIAS' = ```
+			
+			CALCULATE(
+			    SUM(LOL_PBIFINANCIALENTRIES[CreditLC])-SUM(LOL_PBIFINANCIALENTRIES[DebitLC]), 
+			    LOL_PBIFINANCIALMODEL[ORDER_N3]=7013,
+			     REMOVEFILTERS(LOL_PBIFINANCIALMODEL[ORDER_N3],LOL_PBIFINANCIALMODEL[NIVEL_3],LOL_PBIFINANCIALMODEL[NIVEL_4],LOL_PBIFINANCIALMODEL[Nivel5_Limpio],LOL_PBIFINANCIALMODEL[Nivel6_Limpio]
+			)
+			)
+			```
+		displayFolder: 03 P&G Gestion
+		lineageTag: bf1b628a-f018-4897-8763-4c14c3ef8c9b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG CONSUMO MERCADERIAS_LY' = ```
+			
+			VAR FechasSeleccionadas =
+			    VALUES(TablaFechasFiltro[FechaFiltro])  -- Fechas filtradas por el usuario
+			RETURN 
+			CALCULATE(
+			    SUM(LOL_PBIFINANCIALENTRIES[CreditLC])-SUM(LOL_PBIFINANCIALENTRIES[DebitLC]), 
+			    LOL_PBIFINANCIALMODEL[ORDER_N3]=7013,
+			     REMOVEFILTERS(LOL_PBIFINANCIALMODEL[ORDER_N3],LOL_PBIFINANCIALMODEL[NIVEL_3],LOL_PBIFINANCIALMODEL[NIVEL_4],LOL_PBIFINANCIALMODEL[Nivel5_Limpio],LOL_PBIFINANCIALMODEL[Nivel6_Limpio]
+			), SAMEPERIODLASTYEAR(FechasSeleccionadas)
+			
+			)
+			```
+		displayFolder: 03 P&G Gestion
+		lineageTag: 83ef2b58-3796-48d3-b3e6-c592732ab12f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG TOTAL GASTOS' = ```
+			
+			CALCULATE(
+			    SUM(LOL_PBIFINANCIALENTRIES[CreditLC])-SUM(LOL_PBIFINANCIALENTRIES[DebitLC]), 
+			    LOL_PBIFINANCIALMODEL[NIVEL_1]="GASTOS",
+			     REMOVEFILTERS(LOL_PBIFINANCIALMODEL[ORDER_N3],LOL_PBIFINANCIALMODEL[NIVEL_3],LOL_PBIFINANCIALMODEL[NIVEL_4],LOL_PBIFINANCIALMODEL[Nivel5_Limpio],LOL_PBIFINANCIALMODEL[Nivel6_Limpio]
+			)
+			)
+			```
+		displayFolder: 03 P&G Gestion
+		lineageTag: 0fa3dade-3369-486d-904d-f3541ee63940
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG TOTAL GASTOS_LY' = ```
+			
+			VAR FechasSeleccionadas =
+			    VALUES(TablaFechasFiltro[FechaFiltro])  -- Fechas filtradas por el usuario
+			RETURN 
+			CALCULATE(
+			    SUM(LOL_PBIFINANCIALENTRIES[CreditLC])-SUM(LOL_PBIFINANCIALENTRIES[DebitLC]), 
+			    LOL_PBIFINANCIALMODEL[NIVEL_1]="GASTOS",
+			     REMOVEFILTERS(LOL_PBIFINANCIALMODEL[ORDER_N3],LOL_PBIFINANCIALMODEL[NIVEL_3],LOL_PBIFINANCIALMODEL[NIVEL_4],LOL_PBIFINANCIALMODEL[Nivel5_Limpio],LOL_PBIFINANCIALMODEL[Nivel6_Limpio]
+			), SAMEPERIODLASTYEAR(FechasSeleccionadas)
+			
+			)
+			```
+		displayFolder: 03 P&G Gestion
+		lineageTag: de3d42d4-7083-42ba-bf57-202c14dad4cd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG Sum_Switch' =
+			
+			var __groupord = SELECTEDVALUE(LOL_PBIFINANCIALMODEL[VISUAL_ORDER])
+			var __switch = SWITCH(__groupord,
+			               MIN(LOL_PBIFINANCIALMODEL[PyGG_POSICION_MARGENBRUTO]), [PyGG MARGEN BRUTO],
+			               MIN(LOL_PBIFINANCIALMODEL[PyGG_POSICION TOTALGASTOS]),[PyGG TOTAL GASTOS],
+			               [PyG Ventas_YTD])
+			return
+			__switch
+		displayFolder: 03 P&G Gestion
+		lineageTag: ce692f3a-fc64-47e6-8eb8-18f3112ffc6f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG MARGEN BRUTO' = [PyGG CN]+[PyGG CONSUMO MERCADERIAS]
+		displayFolder: 03 P&G Gestion
+		lineageTag: 706cc34f-ab14-4b4a-8627-65cf012917f5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Base YTD PYGG' =
+			
+			VAR Val = [PyGG Sum_Switch]
+			VAR EntityShowRow =
+			    [EntityBrowseDepth] <= LOL_PBIFINANCIALMODEL[EntityRowDepth]
+			VAR Result =
+			    IF ( EntityShowRow, Val )
+			RETURN
+			    Result
+		displayFolder: 03 P&G Gestion
+		lineageTag: b644606d-204c-44d2-b5c7-4170b199ed0f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG CN DIM' =
+			
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyGG CN], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyGG CN], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyGG CN], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyGG CN], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyGG CN], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyGG CN], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 03 P&G Gestion\Por dimension
+		lineageTag: 670db601-74b0-466e-8b68-843b3f4e1a40
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG CN_LY DIM' =
+			
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyGG CN_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyGG CN_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyGG CN_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyGG CN_LY], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyGG CN_LY], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyGG CN_LY], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 03 P&G Gestion\Por dimension
+		lineageTag: a52edba7-6578-49b9-b49f-ed6f9270a22c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG CONSUMO MERCADERIAS DIM' =
+			
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyGG CONSUMO MERCADERIAS], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyGG CONSUMO MERCADERIAS], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyGG CONSUMO MERCADERIAS], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyGG CONSUMO MERCADERIAS], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyGG CONSUMO MERCADERIAS], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyGG CONSUMO MERCADERIAS], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 03 P&G Gestion\Por dimension
+		lineageTag: e512b8ec-4059-40f2-acb1-51d6575eaacd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG CONSUMO MERCADERIAS_LY DIM' =
+			
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyGG CONSUMO MERCADERIAS_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyGG CONSUMO MERCADERIAS_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyGG CONSUMO MERCADERIAS_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyGG CONSUMO MERCADERIAS_LY], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyGG CONSUMO MERCADERIAS_LY], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyGG CONSUMO MERCADERIAS_LY], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 03 P&G Gestion\Por dimension
+		lineageTag: 2cd57f7a-1996-403b-b754-a8d90f6f7625
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG MARGEN BRUTO DIM' = [PyGG CN DIM]+[PyGG CONSUMO MERCADERIAS DIM]
+		displayFolder: 03 P&G Gestion\Por dimension
+		lineageTag: 1ca54de0-25b9-4461-a202-3e4e2fc20ead
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG Sum_Switch DIM' =
+			
+			var __groupord = SELECTEDVALUE(LOL_PBIFINANCIALMODEL[VISUAL_ORDER])
+			var __switch = SWITCH(__groupord,
+			               MIN(LOL_PBIFINANCIALMODEL[PyGG_POSICION_MARGENBRUTO]), [PyGG MARGEN BRUTO DIM],
+			               MIN(LOL_PBIFINANCIALMODEL[PyGG_POSICION TOTALGASTOS]),[PyGG TOTAL GASTOS],
+			               [PyG Ventas_YTD])
+			return
+			__switch
+		displayFolder: 03 P&G Gestion\Por dimension
+		lineageTag: bbb80faa-da41-4539-9ba5-3c28bf2aa6e8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG TOTAL GASTOS DIM' =
+			
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyGG TOTAL GASTOS], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyGG TOTAL GASTOS], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyGG TOTAL GASTOS], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyGG TOTAL GASTOS], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyGG TOTAL GASTOS], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyGG TOTAL GASTOS], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 03 P&G Gestion\Por dimension
+		lineageTag: 1532a34e-bd2c-4bb4-b12f-6e1b97b567c3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG TOTAL GASTOS_LY DIM' =
+			
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyGG TOTAL GASTOS_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyGG TOTAL GASTOS_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyGG TOTAL GASTOS_LY], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyGG TOTAL GASTOS_LY], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyGG TOTAL GASTOS_LY], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyGG TOTAL GASTOS_LY], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 03 P&G Gestion\Por dimension
+		lineageTag: 2a66e443-3b4f-43c4-8aa3-1fd375812a56
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG Sum_Switch_LY' =
+			
+			var __groupord = SELECTEDVALUE(LOL_PBIFINANCIALMODEL[VISUAL_ORDER])
+			var __switch = SWITCH(__groupord,
+			               MIN(LOL_PBIFINANCIALMODEL[PyGG_POSICION_MARGENBRUTO]), [PyGG MARGEN BRUTO LY],
+			               MIN(LOL_PBIFINANCIALMODEL[PyGG_POSICION TOTALGASTOS]),[PyGG TOTAL GASTOS_LY],
+			               [PyG Ventas_YTD_LY])
+			return
+			__switch
+		displayFolder: 03 P&G Gestion
+		lineageTag: 10e37cf6-f2ad-42b4-8a4b-24a583366d3d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG MARGEN BRUTO LY' = [PyGG CN_LY]+[PyGG CONSUMO MERCADERIAS_LY]
+		displayFolder: 03 P&G Gestion
+		lineageTag: 2d959844-da3f-4b2b-832a-eaf4ed3881a4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG MARGEN BRUTO_LY DIM' = [PyGG CN_LY DIM]+[PyGG CONSUMO MERCADERIAS_LY DIM]
+		displayFolder: 03 P&G Gestion\Por dimension
+		lineageTag: ca67a440-c27e-47b3-9a5d-adcbc2044bcd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG Sum_Switch_LY DIM' =
+			
+			var __groupord = SELECTEDVALUE(LOL_PBIFINANCIALMODEL[VISUAL_ORDER])
+			var __switch = SWITCH(__groupord,
+			               MIN(LOL_PBIFINANCIALMODEL[PyGG_POSICION_MARGENBRUTO]), [PyGG MARGEN BRUTO_LY DIM],
+			               MIN(LOL_PBIFINANCIALMODEL[PyGG_POSICION TOTALGASTOS]),[PyGG TOTAL GASTOS_LY DIM],
+			               [PyG Ventas_YTD_LY])
+			return
+			__switch
+		formatString: 0
+		displayFolder: 03 P&G Gestion\Por dimension
+		lineageTag: e76d20d2-e030-452f-beec-08a87a14e455
+
+	measure 'PyGG %CN' =
+			
+			ABS(DIVIDE([Total Base YTD PYGG],[PyGG CN]))
+		displayFolder: 03 P&G Gestion
+		lineageTag: 16b7e487-efec-4f76-abb4-0d9c0df3d3a0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Base YTD PYGG DIM' =
+			
+			VAR Val = [PyGG Sum_Switch DIM]
+			VAR EntityShowRow =
+			    [EntityBrowseDepth] <= LOL_PBIFINANCIALMODEL[EntityRowDepth]
+			VAR Result =
+			    IF ( EntityShowRow, Val )
+			RETURN
+			    Result
+		displayFolder: 03 P&G Gestion\Por dimension
+		lineageTag: ece1ab44-2dfd-4cc6-b0e4-be673a0afb7b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Base YTD_LY PYGG' =
+			
+			VAR Val = [PyGG Sum_Switch_LY]
+			VAR EntityShowRow =
+			    [EntityBrowseDepth] <= LOL_PBIFINANCIALMODEL[EntityRowDepth]
+			VAR Result =
+			    IF ( EntityShowRow, Val )
+			RETURN
+			    Result
+		displayFolder: 03 P&G Gestion
+		lineageTag: e1a2907f-63d6-4ce5-afc4-f87187311dfb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Base YTD_LY PYGG DIM' =
+			
+			VAR Val = [PyGG Sum_Switch_LY DIM]
+			VAR EntityShowRow =
+			    [EntityBrowseDepth] <= LOL_PBIFINANCIALMODEL[EntityRowDepth]
+			VAR Result =
+			    IF ( EntityShowRow, Val )
+			RETURN
+			    Result
+		displayFolder: 03 P&G Gestion\Por dimension
+		lineageTag: 8b58a993-61c8-488f-b4d8-79d93aab3589
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG %CN_LY' =
+			
+			ABS(DIVIDE([Total Base YTD_LY PYGG],[PyGG CN_LY]))
+		displayFolder: 03 P&G Gestion
+		lineageTag: 29112af2-2708-4384-83f2-3aa7487c3d3d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG Evol.' =
+			
+			[Total Base YTD PYGG]-[Total Base YTD_LY PYGG]
+		displayFolder: 03 P&G Gestion
+		lineageTag: c1fd3fef-9e6d-48a1-9ec2-0062833835f7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG Porc Evol' =
+			
+			([PyGG %CN]-[PyGG %CN_LY])*100
+		displayFolder: 03 P&G Gestion
+		lineageTag: f995abb3-69c8-46d6-9ae9-364c4deca2ee
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG CN DIM2' =
+			
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyGG CN], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyGG CN], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyGG CN], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyGG CN], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyGG CN], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyGG CN], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 03 P&G Gestion\Por dimension
+		lineageTag: 4179334e-3511-4509-af1c-75df458c31cb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG Evol.DIM' =
+			
+			[Total Base YTD PYGG DIM]-[Total Base YTD_LY PYGG DIM]
+		displayFolder: 03 P&G Gestion\Por dimension
+		lineageTag: 822f5ca9-f855-4177-8f1c-5840879f391a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG evol CN DIM' =
+			
+			DIVIDE([PyGG CN DIM]-[PyGG CN_LY DIM], [PyGG CN DIM])
+		displayFolder: 03 P&G Gestion\Por dimension
+		lineageTag: 120697d3-257a-4d10-907e-3c2547534181
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG MargenBruto sobre ventas %' =
+			
+			DIVIDE([PyGG MARGEN BRUTO DIM],[PyGG CN DIM],0)
+		displayFolder: 03 P&G Gestion
+		lineageTag: 06c5cda8-3700-4f0a-ba6d-1718f0e5cfd4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG Alquiler' = ```
+			
+			CALCULATE(
+			    SUM(LOL_PBIFINANCIALENTRIES[CreditLC])-SUM(LOL_PBIFINANCIALENTRIES[DebitLC]), 
+			    LOL_PBIFINANCIALMODEL[ORDER_N3]=7033,
+			     REMOVEFILTERS(LOL_PBIFINANCIALMODEL[ORDER_N3],LOL_PBIFINANCIALMODEL[NIVEL_3],LOL_PBIFINANCIALMODEL[NIVEL_4],LOL_PBIFINANCIALMODEL[Nivel5_Limpio],LOL_PBIFINANCIALMODEL[Nivel6_Limpio]
+			)
+			)
+			```
+		displayFolder: 03 P&G Gestion
+		lineageTag: 002d184d-4d50-46c4-8eb8-c2816e8bf00c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG Alquiler DIM' =
+			
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyGG Alquiler], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyGG Alquiler], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyGG Alquiler], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyGG Alquiler], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyGG Alquiler], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyGG Alquiler], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 03 P&G Gestion\Por dimension
+		lineageTag: 61751518-d266-4ce8-9eb3-dff05585f1c4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG Alquiler sobre ventas %' =
+			
+			ABS(DIVIDE([PyGG Alquiler DIM],[PyGG CN DIM],0))
+		displayFolder: 03 P&G Gestion
+		lineageTag: d0d1c4b7-e99a-4682-86c4-27edb16074c3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG Personas' = ```
+			
+			CALCULATE(
+			    SUM(LOL_PBIFINANCIALENTRIES[CreditLC])-SUM(LOL_PBIFINANCIALENTRIES[DebitLC]), 
+			    LOL_PBIFINANCIALMODEL[ORDER_N3]=7027,
+			     REMOVEFILTERS(LOL_PBIFINANCIALMODEL[ORDER_N3],LOL_PBIFINANCIALMODEL[NIVEL_3],LOL_PBIFINANCIALMODEL[NIVEL_4],LOL_PBIFINANCIALMODEL[Nivel5_Limpio],LOL_PBIFINANCIALMODEL[Nivel6_Limpio]
+			)
+			)
+			```
+		displayFolder: 03 P&G Gestion
+		lineageTag: 63998fa8-8b73-44bc-9482-dab0fb1a6afe
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG Personas DIM' =
+			
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyGG Personas], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyGG Personas], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyGG Personas], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyGG Personas], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyGG Personas], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyGG Personas], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 03 P&G Gestion\Por dimension
+		lineageTag: 9024eabd-537a-4ac6-b469-ed5edaa02b59
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG Personas sobre ventas %' =
+			
+			ABS(DIVIDE([PyGG Personas DIM], [PyGG CN DIM],0))
+		displayFolder: 03 P&G Gestion
+		lineageTag: 32b6475a-f7c2-4dca-9d8e-f4fc112eed09
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG %CN DIM' =
+			
+			ABS(DIVIDE([Total Base YTD PYGG DIM],[PyGG CN DIM]))
+		displayFolder: 03 P&G Gestion\Por dimension
+		lineageTag: 39834eed-d8b8-427e-b41a-7109682ae2e8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG %CN_LY DIM' =
+			
+			ABS(DIVIDE([Total Base YTD_LY PYGG DIM],[PyGG CN_LY DIM]))
+		displayFolder: 03 P&G Gestion\Por dimension
+		lineageTag: dd449411-4591-4102-b07d-dff56bade250
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG Porc Evol DIM' =
+			
+			([PyGG %CN DIM]-[PyGG %CN_LY DIM])*100
+		displayFolder: 03 P&G Gestion\Por dimension
+		lineageTag: dfd9c320-119b-4647-936c-242b86f44b9a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyGG EBITDA SOBRE VENTAS' =
+			DIVIDE(
+			[Total Base YTD PYGG DIM],[PyGG CN DIM],0)
+		displayFolder: 03 P&G Gestion
+		lineageTag: 3c2d7d24-806f-4398-9327-31728bb42ebe
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PyG 01.ImporteNeto_LY_complete' = ```
+			
+			VAR FechasSelec = VALUES ( TablaFechasFiltro[FechaFiltro] )
+			VAR AoDesdeSlicer =
+			    IF ( NOT ISEMPTY ( FechasSelec ),
+			        MAXX ( FechasSelec, YEAR ( TablaFechasFiltro[FechaFiltro] ) )
+			    )
+			VAR AoDesdeContexto = MIN ( 'Calendario'[Año] )   -- si la matriz tiene Año/Mes de Calendario
+			VAR AoBase = COALESCE ( AoDesdeSlicer, AoDesdeContexto, YEAR ( TODAY() ) )
+			VAR AoPrevio = AoBase - 1
+			RETURN 
+			CALCULATE(
+			    SUM(LOL_PBIFINANCIALENTRIES[CreditLC])-SUM(LOL_PBIFINANCIALENTRIES[DebitLC]), 
+			    LOL_PBIFINANCIALMODEL[ORDER_N3]=5003,
+			    LOL_PBIFINANCIALENTRIES[DocumentTypeCode]<> "-3", LOL_PBIFINANCIALENTRIES[DocumentTypeCode]<> "-2",
+			     REMOVEFILTERS(LOL_PBIFINANCIALMODEL[ORDER_N3],LOL_PBIFINANCIALMODEL[NIVEL_3],LOL_PBIFINANCIALMODEL[NIVEL_4],LOL_PBIFINANCIALMODEL[Nivel5_Limpio],LOL_PBIFINANCIALMODEL[Nivel6_Limpio]
+			),
+			
+			PREVIOUSYEAR(FechasSelec)
+			)
+			```
+		displayFolder: 02 P&G
+		lineageTag: 38ea9f92-1047-42bb-a033-608aec7fc5c9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CN LY (vis) complete' =
+			
+			VAR SelOrden =
+			    SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			
+			VAR DimVals =
+			    CALCULATETABLE(
+			        VALUES ( 'KPI Export (Dim)'[Dimensión] ),
+			        KEEPFILTERS ( 'KPI Export (Dim)'[Dimensión Finanzas Orden] = SelOrden )
+			    )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, CALCULATE ( [PyG 01.ImporteNeto_LY_complete], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode1] ) ),
+			    1, CALCULATE ( [PyG 01.ImporteNeto_LY_complete], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[DistributionRuleCode2] ) ),
+			    2, CALCULATE ( [PyG 01.ImporteNeto_LY_complete], TREATAS ( DimVals, 'LOL_PBIFINANCIALENTRIES'[BranchCode] ) ),
+			    3, CALCULATE ( [PyG 01.ImporteNeto_LY_complete], TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ) ),
+			    4, CALCULATE ( [PyG 01.ImporteNeto_LY_complete], TREATAS ( DimVals, 'Calendario'[Mes] ) ),
+			    5, CALCULATE ( [PyG 01.ImporteNeto_LY_complete], TREATAS ( DimVals, 'Calendario'[Año] ) )
+			)
+		displayFolder: 04 Margenes y KPIs
+		lineageTag: 7dc16c9c-5eb9-45c6-a034-bde38892d224
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Importe Neto' =
+			
+			SUM ( LOL_PBIFINANCIALENTRIES[CreditLC] )
+			- SUM ( LOL_PBIFINANCIALENTRIES[DebitLC] )
+		displayFolder: 01 Base
+		lineageTag: 9b1398f1-b424-4cad-9d25-9ecfdb4537e7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure AñoPrevio_test =
+			
+			VAR FechasSelec = VALUES ( TablaFechasFiltro[FechaFiltro] )
+			VAR AoSelec = MAXX ( FechasSelec, YEAR ( TablaFechasFiltro[FechaFiltro] ) )
+			RETURN AoSelec - 1
+		formatString: 0
+		displayFolder: 05 Diagnostico
+		lineageTag: b5733e82-ff50-4c82-b9e7-3940a20e7db2
+
+	measure 'DBG Filas año previo' = ```
+			
+			CALCULATE (
+			    COUNTROWS ( JournalEntryItem ),
+			    ALL ( 'Calendario' ),
+			    DATESBETWEEN ( 'Calendario'[Date], DATE ( [AñoPrevio_test], 1, 1 ), DATE ( [AñoPrevio_test], 12, 31 ) )
+			)
+			
+			```
+		formatString: 0
+		displayFolder: 05 Diagnostico
+		lineageTag: 45d6fd05-3e4e-4148-b681-10db7b8c6592
+
+	measure Media_Saldo_MesFin_Últimos12_PorCuenta = ```
+			
+			VAR SelectedDateRaw = MAX( TablaFechasFiltro[FechaFiltro] )
+			VAR SelectedDate = IF( ISBLANK( SelectedDateRaw ), TODAY(), SelectedDateRaw )
+			
+			VAR LastMonthEnd = EOMONTH( SelectedDate, -1 )
+			VAR FirstMonthEnd = EOMONTH( LastMonthEnd, -11 )
+			
+			VAR MonthsTable =
+			    DISTINCT(
+			        SELECTCOLUMNS(
+			            FILTER( ALL( Calendario ),
+			                Calendario[Date] >= FirstMonthEnd &&
+			                Calendario[Date] <= LastMonthEnd
+			            ),
+			            "MonthEnd", EOMONTH( Calendario[Date], 0 )
+			        )
+			    )
+			
+			VAR SumMonthEndBalances =
+			    SUMX(
+			        MonthsTable,
+			        CALCULATE(
+			            -SUM( LOL_PBIFINANCIALENTRIES[CreditLC] ) + SUM( LOL_PBIFINANCIALENTRIES[DebitLC] ),
+			            -- filtros por código de cuenta y interlocutor
+			            LEFT( LOL_PBIFINANCIALENTRIES[AccountCode], 3 ) = "430"
+			                || LEFT( LOL_PBIFINANCIALENTRIES[AccountCode], 3 ) = "431"
+			                || LEFT( LOL_PBIFINANCIALENTRIES[AccountCode], 3 ) = "432",
+			            LEFT( LOL_PBIFINANCIALENTRIES[BusinessPartnerCode], 1 ) = "M",
+			            -- solo movimientos cuya Fecha de vencimiento sea > MonthEnd (el [MonthEnd] viene de MonthsTable)
+			            FILTER( ALL( JournalEntryItem ), LOL_PBIFINANCIALENTRIES[DueDate] > [MonthEnd] ),
+			            -- acumulado hasta el MonthEnd (para calcular saldo de cierre)
+			            FILTER( ALL( Calendario ), Calendario[Date] <= [MonthEnd] )
+			        )
+			    )
+			
+			RETURN
+			DIVIDE( SumMonthEndBalances, 12 )
+			
+			```
+		displayFolder: 05 Diagnostico
+		lineageTag: 5c5ee08c-9fce-4f83-bbd5-26bffb7f50c5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Media_Saldo_MesFin_Últimos12_PorCuenta TABLA' =
+			
+			VAR SelectedDateRaw = MAX( TablaFechasFiltro[FechaFiltro] )
+			VAR SelectedDate = IF( ISBLANK( SelectedDateRaw ), TODAY(), SelectedDateRaw )
+			
+			VAR LastMonthEnd = EOMONTH( SelectedDate, -1 )
+			VAR FirstMonthEnd = EOMONTH( LastMonthEnd, -11 )
+			
+			VAR MonthsTable =
+			    DISTINCT(
+			        SELECTCOLUMNS(
+			            FILTER( ALL( Calendario ),
+			                Calendario[Date] >= FirstMonthEnd &&
+			                Calendario[Date] <= LastMonthEnd
+			            ),
+			            "MonthEnd", EOMONTH( Calendario[Date], 0 )
+			        )
+			    )
+			
+			RETURN FirstMonthEnd
+		formatString: General Date
+		displayFolder: 05 Diagnostico
+		lineageTag: 9da96a05-1160-4023-b29a-d9ef7ac25f57
+
+	column Value
+		lineageTag: 1b2c3d4e-5f60-7182-93a4-b5c6d7e8f901
+		isNameInferred
+		sourceColumn: [Value]
+
+	partition 'Medidas Finanzas' = calculated
+		mode: import
+		source = {BLANK()}
+
+	annotation PBI_ResultType = Table
+

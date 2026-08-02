@@ -1,8 +1,43 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(git reset *)",
+      "Bash(awk '{print $NF}')",
+      "Bash(powershell.exe -NoProfile -Command ' *)",
+      "Bash(powershell.exe -NoProfile -File C:/Users/luisdiaz/AppData/Local/Temp/claude/c--projects-pbir-models/96ef702c-5ddb-4ed1-8d88-75d8bcbcfd3a/scratchpad/run-dax.ps1 -Port 50655 -QueryFile C:/Users/luisdiaz/AppData/Local/Temp/claude/c--projects-pbir-models/fd671fb2-8269-418a-a675-af3e8939aeaa/scratchpad/diagreq.dax)",
+      "Bash(powershell.exe -NoProfile -File C:/Users/luisdiaz/AppData/Local/Temp/claude/c--projects-pbir-models/96ef702c-5ddb-4ed1-8d88-75d8bcbcfd3a/scratchpad/run-dax.ps1 -Port 50655 -QueryFile C:/Users/luisdiaz/AppData/Local/Temp/claude/c--projects-pbir-models/fd671fb2-8269-418a-a675-af3e8939aeaa/scratchpad/directvs.dax)",
+      "Bash(py --version)",
+      "Bash(python \"C:/Users/luisdiaz/AppData/Local/Temp/claude/c--projects-pbir-models/fd671fb2-8269-418a-a675-af3e8939aeaa/scratchpad/mover_medidas.py\")",
+      "Bash(python \"C:/Users/luisdiaz/AppData/Local/Temp/claude/c--projects-pbir-models/fd671fb2-8269-418a-a675-af3e8939aeaa/scratchpad/report_refs.py\")",
+      "Bash(python -c ' *)",
+      "Bash(python \"C:/Users/luisdiaz/AppData/Local/Temp/claude/c--projects-pbir-models/fd671fb2-8269-418a-a675-af3e8939aeaa/scratchpad/migrar_modelo.py\")",
+      "Bash(python \"C:/Users/luisdiaz/AppData/Local/Temp/claude/c--projects-pbir-models/fd671fb2-8269-418a-a675-af3e8939aeaa/scratchpad/quitar_journal.py\")",
+      "Bash(sed \"s#.*definition/##\")",
+      "Bash(grep -nE \"^\\\\s{1,2}\\(measure|column|table|hierarchy\\)\\\\s|displayFolder:|isHidden|partition \" \"Medidas Finanzas.tmdl\")",
+      "Bash(grep -nE \"^\\\\s{1,2}measure \" \"Medidas Finanzas.tmdl\")",
+      "Bash(grep -cE \"^\\\\s{1,2}measure \" \"Medidas Finanzas.tmdl\")",
+      "Bash(grep -vE \"lineageTag|annotation|summarizeBy|^\\\\s*$\")",
+      "Bash(grep -vE \"lineageTag|^\\\\s*$\" model.tmdl)",
+      "Bash(grep -vE \"lineageTag|^\\\\s*$\" relationships.tmdl)",
+      "Bash(python -)",
+      "Bash(grep -vE \"lineageTag|^\\\\s*$\" cultures/es-ES.tmdl)",
+      "Bash(xargs git log -1 --format=\"%h %ad %s\" --date=short)",
+      "Bash(awk '/^relationship/{blk=$0; rest=\"\"} {if\\(!/^relationship/\\) rest=rest\"\\\\n\"$0} /^$/{if\\(blk!=\"\" && rest !~ /LocalDateTable/\\) print blk rest; blk=\"\"; rest=\"\"}' relationships.tmdl)",
+      "Bash(grep -nE \"^\\\\s{1,2}column \\\\w+ =|^\\\\s{1,2}column '[^']+' =\" LOL_PBIB2BSALESORDER.tmdl LOL_PBISALESDELIVERY.tmdl LOL_PBIINVOICESSALES.tmdl LOL_PBICREDITNOTESSALES.tmdl LOL_PBIRETURNSALES.tmdl LOL_PBIMODELITEM.tmdl)",
+      "Bash(grep -nE \"^\\\\s{1,2}column \\\\w+ =|^\\\\s{1,2}column '[^']+' =\" LOL_PBIRETURNREQUESTS.tmdl)",
+      "Bash(sed -n '/partition/,$p' LOL_PBIRETURNREQUESTS.tmdl)",
+      "Bash(git --no-pager diff --stat -- Finanzas)",
+      "Bash(git --no-pager diff -- Finanzas/Finanzas.SemanticModel/definition/tables/LOL_PBIFINANCIALMODEL.tmdl)",
+      "Bash(PYTHONIOENCODING=utf-8 python -)"
+    ]
+  },
   "mcpServers": {
     "fabric": {
       "command": "npx",
-      "args": ["-y", "@microsoft/fabric-mcp"]
+      "args": [
+        "-y",
+        "@microsoft/fabric-mcp"
+      ]
     }
   }
 }

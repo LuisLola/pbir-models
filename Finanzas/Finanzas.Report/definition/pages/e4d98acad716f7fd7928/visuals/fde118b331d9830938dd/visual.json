@@ -1,0 +1,1265 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "fde118b331d9830938dd",
+  "position": {
+    "x": 0,
+    "y": 2.0984709059879378,
+    "z": 0,
+    "height": 335.52562404482933,
+    "width": 1230.2606214977077,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIFINANCIALMODEL"
+                        }
+                      },
+                      "Hierarchy": "PLAN_DE_CUENTA"
+                    }
+                  },
+                  "Level": "NIVEL_1"
+                }
+              },
+              "queryRef": "LOL_PBIFINANCIALMODEL.PLAN_DE_CUENTA.NIVEL_1",
+              "nativeQueryRef": "PLAN_DE_CUENTA NIVEL_1",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIFINANCIALMODEL"
+                        }
+                      },
+                      "Hierarchy": "PLAN_DE_CUENTA"
+                    }
+                  },
+                  "Level": "NIVEL_2"
+                }
+              },
+              "queryRef": "LOL_PBIFINANCIALMODEL.PLAN_DE_CUENTA.NIVEL_2",
+              "nativeQueryRef": "PLAN_DE_CUENTA NIVEL_2",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIFINANCIALMODEL"
+                        }
+                      },
+                      "Hierarchy": "PLAN_DE_CUENTA"
+                    }
+                  },
+                  "Level": "NIVEL_3"
+                }
+              },
+              "queryRef": "LOL_PBIFINANCIALMODEL.PLAN_DE_CUENTA.NIVEL_3",
+              "nativeQueryRef": "PLAN_DE_CUENTA NIVEL_3",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIFINANCIALMODEL"
+                        }
+                      },
+                      "Hierarchy": "PLAN_DE_CUENTA"
+                    }
+                  },
+                  "Level": "NIVEL_4"
+                }
+              },
+              "queryRef": "LOL_PBIFINANCIALMODEL.PLAN_DE_CUENTA.NIVEL_4",
+              "nativeQueryRef": "PLAN_DE_CUENTA NIVEL_4",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIFINANCIALMODEL"
+                        }
+                      },
+                      "Hierarchy": "PLAN_DE_CUENTA"
+                    }
+                  },
+                  "Level": "Nivel5_Limpio"
+                }
+              },
+              "queryRef": "LOL_PBIFINANCIALMODEL.PLAN_DE_CUENTA.Nivel5_Limpio",
+              "nativeQueryRef": "PLAN_DE_CUENTA Nivel5_Limpio",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIFINANCIALMODEL"
+                        }
+                      },
+                      "Hierarchy": "PLAN_DE_CUENTA"
+                    }
+                  },
+                  "Level": "Nivel6_Limpio"
+                }
+              },
+              "queryRef": "LOL_PBIFINANCIALMODEL.PLAN_DE_CUENTA.Nivel6_Limpio",
+              "nativeQueryRef": "PLAN_DE_CUENTA Nivel6_Limpio",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Finanzas"
+                    }
+                  },
+                  "Property": "Total Base YTD"
+                }
+              },
+              "queryRef": "JournalEntryItem.Total Base YTD",
+              "nativeQueryRef": "Total Base YTD",
+              "format": "#,0 \"€\";-#,0 \"€\";#,0 \"€\""
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Finanzas"
+                    }
+                  },
+                  "Property": "Total Base YTD_LY"
+                }
+              },
+              "queryRef": "JournalEntryItem.Total Base YTD_LY",
+              "nativeQueryRef": "Total Base YTD_LY",
+              "format": "#,0 \"€\";-#,0 \"€\";#,0 \"€\""
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Finanzas"
+                    }
+                  },
+                  "Property": "Balance Evol."
+                }
+              },
+              "queryRef": "JournalEntryItem.Balance Evol.",
+              "nativeQueryRef": "Balance Evol."
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Finanzas"
+                    }
+                  },
+                  "Property": "Balance Porc Evol"
+                }
+              },
+              "queryRef": "JournalEntryItem.Balance Porc Evol",
+              "nativeQueryRef": "Balance Porc Evol"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "HierarchyLevel": {
+                "Expression": {
+                  "Hierarchy": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "LOL_PBIFINANCIALMODEL"
+                      }
+                    },
+                    "Hierarchy": "PLAN_DE_CUENTA"
+                  }
+                },
+                "Level": "NIVEL_1"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "LOL_PBIFINANCIALMODEL.PLAN_DE_CUENTA.NIVEL_1"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIFINANCIALMODEL"
+                    }
+                  },
+                  "Property": "NIVEL_1"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "LOL_PBIFINANCIALMODEL.PLAN_DE_CUENTA.NIVEL_2"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIFINANCIALMODEL"
+                    }
+                  },
+                  "Property": "NIVEL_2"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "LOL_PBIFINANCIALMODEL.PLAN_DE_CUENTA.NIVEL_3"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIFINANCIALMODEL"
+                    }
+                  },
+                  "Property": "NIVEL_3"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "LOL_PBIFINANCIALMODEL.PLAN_DE_CUENTA.NIVEL_4"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIFINANCIALMODEL"
+                    }
+                  },
+                  "Property": "NIVEL_4"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "LOL_PBIFINANCIALMODEL.PLAN_DE_CUENTA.Nivel5_Limpio"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIFINANCIALMODEL"
+                    }
+                  },
+                  "Property": "Nivel5_Limpio"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "LOL_PBIFINANCIALMODEL.PLAN_DE_CUENTA.Nivel6_Limpio"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          }
+        ],
+        "root": {
+          "children": [
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "'ACTIVO'"
+                  }
+                }
+              ],
+              "isToggled": true,
+              "children": [
+                {
+                  "identityValues": [
+                    {
+                      "Literal": {
+                        "Value": "'B) ACTIVO CORRIENTE'"
+                      }
+                    }
+                  ],
+                  "isToggled": true,
+                  "children": [
+                    {
+                      "identityValues": [
+                        {
+                          "Literal": {
+                            "Value": "'II. Existencias'"
+                          }
+                        }
+                      ],
+                      "children": [
+                        {
+                          "identityValues": [
+                            {
+                              "Literal": {
+                                "Value": "'300 - Mercaderías A'"
+                              }
+                            }
+                          ],
+                          "isToggled": true
+                        }
+                      ]
+                    },
+                    {
+                      "identityValues": [
+                        {
+                          "Literal": {
+                            "Value": "'III. Deudores comerciales y otras cuentas a cobrar'"
+                          }
+                        }
+                      ],
+                      "isToggled": true,
+                      "children": [
+                        {
+                          "identityValues": [
+                            {
+                              "Literal": {
+                                "Value": "'1. Clientes por ventas y prestación de servicios'"
+                              }
+                            }
+                          ],
+                          "isToggled": true,
+                          "children": [
+                            {
+                              "identityValues": [
+                                {
+                                  "Literal": {
+                                    "Value": "'430 - Clientes'"
+                                  }
+                                }
+                              ],
+                              "isToggled": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "identityValues": [
+                    {
+                      "Literal": {
+                        "Value": "'A) ACTIVO NO CORRIENTE'"
+                      }
+                    }
+                  ],
+                  "isToggled": true,
+                  "children": [
+                    {
+                      "identityValues": [
+                        {
+                          "Literal": {
+                            "Value": "'I. Inmovilizado Intangible'"
+                          }
+                        }
+                      ],
+                      "children": [
+                        {
+                          "identityValues": [
+                            {
+                              "Literal": {
+                                "Value": "'203 - Propiedad Industrial'"
+                              }
+                            }
+                          ],
+                          "isToggled": true,
+                          "children": [
+                            {
+                              "identityValues": [
+                                {
+                                  "Literal": {
+                                    "Value": "'203000-Propiedad industrial'"
+                                  }
+                                }
+                              ],
+                              "isToggled": true
+                            }
+                          ]
+                        },
+                        {
+                          "identityValues": [
+                            {
+                              "Literal": {
+                                "Value": "'208 - Proyectos'"
+                              }
+                            }
+                          ],
+                          "isToggled": true,
+                          "children": [
+                            {
+                              "identityValues": [
+                                {
+                                  "Literal": {
+                                    "Value": "'208000-Proyecto de FQ, Tiendas propias y Expansión'"
+                                  }
+                                }
+                              ],
+                              "isToggled": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "identityValues": [
+                        {
+                          "Literal": {
+                            "Value": "'II. Inmovilizado material'"
+                          }
+                        }
+                      ],
+                      "children": [
+                        {
+                          "identityValues": [
+                            {
+                              "Literal": {
+                                "Value": "'212 -Instalaciones técnicas'"
+                              }
+                            }
+                          ],
+                          "children": [
+                            {
+                              "identityValues": [
+                                {
+                                  "Literal": {
+                                    "Value": "'212000-Instalaciones técnicas'"
+                                  }
+                                }
+                              ],
+                              "isToggled": true
+                            }
+                          ]
+                        },
+                        {
+                          "identityValues": [
+                            {
+                              "Literal": {
+                                "Value": "'281 - Amortización acumulada del inmovilizado material'"
+                              }
+                            }
+                          ],
+                          "isToggled": true,
+                          "children": [
+                            {
+                              "identityValues": [
+                                {
+                                  "Literal": {
+                                    "Value": "'281700-Amortización acumulada de equipos para procesos de información'"
+                                  }
+                                }
+                              ],
+                              "isToggled": true
+                            }
+                          ]
+                        },
+                        {
+                          "identityValues": [
+                            {
+                              "Literal": {
+                                "Value": "'210 -  Terrenos y bienes naturales'"
+                              }
+                            }
+                          ],
+                          "isToggled": true,
+                          "children": [
+                            {
+                              "identityValues": [
+                                {
+                                  "Literal": {
+                                    "Value": "'210000-Terrenos y bienes naturales'"
+                                  }
+                                }
+                              ],
+                              "isToggled": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "'PATRIMONIO NETO Y PASIVO'"
+                  }
+                }
+              ],
+              "children": [
+                {
+                  "identityValues": [
+                    {
+                      "Literal": {
+                        "Value": "'A) PATRIMONIO NETO'"
+                      }
+                    }
+                  ],
+                  "children": [
+                    {
+                      "identityValues": [
+                        {
+                          "Literal": {
+                            "Value": "'VII. Resultado del ejercicio'"
+                          }
+                        }
+                      ],
+                      "isToggled": true,
+                      "children": [
+                        {
+                          "identityValues": [
+                            {
+                              "Literal": {
+                                "Value": "'708 - Devoluciones de ventas y operaciones similares'"
+                              }
+                            }
+                          ],
+                          "isToggled": true,
+                          "children": [
+                            {
+                              "identityValues": [
+                                {
+                                  "Literal": {
+                                    "Value": "'708000-Devoluciones de ventas y operaciones similares'"
+                                  }
+                                }
+                              ],
+                              "isToggled": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "identityValues": [
+                    {
+                      "Literal": {
+                        "Value": "'C) PASIVO CORRIENTE'"
+                      }
+                    }
+                  ],
+                  "children": [
+                    {
+                      "identityValues": [
+                        {
+                          "Literal": {
+                            "Value": "'III. Deudas a corto plazo'"
+                          }
+                        }
+                      ],
+                      "isToggled": true
+                    },
+                    {
+                      "identityValues": [
+                        {
+                          "Literal": {
+                            "Value": "'V. Acreedores comerciales y otras cuentas a pagar'"
+                          }
+                        }
+                      ],
+                      "isToggled": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "objects": {
+      "rowHeaders": [
+        {
+          "properties": {}
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "147.88851275642062D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "JournalEntryItem.Total Base YTD_LY"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "104D"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "754.835352786991D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_PBIFINANCIALMODEL.PLAN_DE_CUENTA.NIVEL_1"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "97D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "JournalEntryItem.Total Base YTD"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "104D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "JournalEntryItem.Balance Evol."
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "113D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "JournalEntryItem.Balance Porc Evol"
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "layout": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Compact'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTotals": [
+        {
+          "properties": {
+            "columnSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "rowSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "perRowLevel": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnFormatting": [
+        {
+          "properties": {
+            "styleValues": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "styleSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "styleHeader": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "JournalEntryItem.Total Base YTD_LY"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "autoSizeColumnWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "valuesOnRow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnTotal": [
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "rowTotal": [
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "applyToHeaders": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "gridHorizontalColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.1
+                    }
+                  }
+                }
+              }
+            },
+            "outlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#EACCCE'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "''"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Minimal'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "41a7118aa029d29a4bbc",
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "f5eb51bdd53003e26a45",
+        "field": {
+          "HierarchyLevel": {
+            "Expression": {
+              "Hierarchy": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PBIFINANCIALMODEL"
+                  }
+                },
+                "Hierarchy": "PLAN_DE_CUENTA"
+              }
+            },
+            "Level": "NIVEL_1"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "m",
+              "Entity": "LOL_PBIFINANCIALMODEL",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Not": {
+                  "Expression": {
+                    "In": {
+                      "Expressions": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "m"
+                              }
+                            },
+                            "Property": "NIVEL_1"
+                          }
+                        }
+                      ],
+                      "Values": [
+                        [
+                          {
+                            "Literal": {
+                              "Value": "null"
+                            }
+                          }
+                        ]
+                      ]
+                    }
+                  }
+                }
+              },
+              "Annotations": {
+                "filterExpressionMetadata": {
+                  "expressions": [
+                    {
+                      "HierarchyLevel": {
+                        "Expression": {
+                          "Hierarchy": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "LOL_PBIFINANCIALMODEL"
+                              }
+                            },
+                            "Hierarchy": "PLAN_DE_CUENTA"
+                          }
+                        },
+                        "Level": "NIVEL_1"
+                      }
+                    }
+                  ],
+                  "decomposedIdentities": {
+                    "values": [
+                      [
+                        {
+                          "0": [
+                            {
+                              "Literal": {
+                                "Value": "null"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    ],
+                    "columns": [
+                      {
+                        "value": {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "LOL_PBIFINANCIALMODEL"
+                              }
+                            },
+                            "Property": "NIVEL_1"
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "valueMap": [
+                    {
+                      "0": "(En blanco)"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "objects": {
+          "general": [
+            {
+              "properties": {
+                "isInvertedSelectionMode": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "true"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "02c08da01e4ca80a7546",
+        "field": {
+          "HierarchyLevel": {
+            "Expression": {
+              "Hierarchy": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PBIFINANCIALMODEL"
+                  }
+                },
+                "Hierarchy": "PLAN_DE_CUENTA"
+              }
+            },
+            "Level": "NIVEL_2"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "690e5273ed8b9a00bbe4",
+        "field": {
+          "HierarchyLevel": {
+            "Expression": {
+              "Hierarchy": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PBIFINANCIALMODEL"
+                  }
+                },
+                "Hierarchy": "PLAN_DE_CUENTA"
+              }
+            },
+            "Level": "NIVEL_3"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "4e73af50dbea0e4730c8",
+        "field": {
+          "HierarchyLevel": {
+            "Expression": {
+              "Hierarchy": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PBIFINANCIALMODEL"
+                  }
+                },
+                "Hierarchy": "PLAN_DE_CUENTA"
+              }
+            },
+            "Level": "NIVEL_4"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2b7788404690ca27ba65",
+        "field": {
+          "HierarchyLevel": {
+            "Expression": {
+              "Hierarchy": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PBIFINANCIALMODEL"
+                  }
+                },
+                "Hierarchy": "PLAN_DE_CUENTA"
+              }
+            },
+            "Level": "Nivel5_Limpio"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "1008d5f50696ee545010",
+        "field": {
+          "HierarchyLevel": {
+            "Expression": {
+              "Hierarchy": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PBIFINANCIALMODEL"
+                  }
+                },
+                "Hierarchy": "PLAN_DE_CUENTA"
+              }
+            },
+            "Level": "Nivel6_Limpio"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "40ad20fc7756b2149762",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Medidas Finanzas"
+              }
+            },
+            "Property": "Total Base YTD"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "84e636b0bb677a873cd1",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Medidas Finanzas"
+              }
+            },
+            "Property": "Total Base YTD_LY"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "08e8c6ef00019e15373c",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Medidas Finanzas"
+              }
+            },
+            "Property": "Balance Evol."
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f63613f1eab8d3de005a",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Medidas Finanzas"
+              }
+            },
+            "Property": "Balance Porc Evol"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

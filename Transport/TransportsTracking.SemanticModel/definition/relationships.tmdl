@@ -1,0 +1,81 @@
+relationship ac5b1dbe-97ef-4438-abed-3e7281a87385
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_TRANSPORT_TRACKING.fecha_lanzamiento
+	toColumn: LocalDateTable_1d679787-5f05-4e9d-8734-921f96a68a6c.Date
+
+relationship d9894bf0-3515-4c2b-8b87-f939e29d14f2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_TRANSPORT_TRACKING.fecha_etiqueta
+	toColumn: LocalDateTable_003d2bde-0a00-4d35-8b31-f2e0b25388c4.Date
+
+relationship 9631db83-74e5-4cbb-85db-293cfd0b7885
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_TRANSPORT_TRACKING.fecha_recogido
+	toColumn: LocalDateTable_a8599a9a-a06c-4370-b0e7-bf3176f1a796.Date
+
+relationship a899fb0e-cecc-4e76-ae65-b21c29337844
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_TRANSPORT_TRACKING.fecha_en_transito
+	toColumn: LocalDateTable_9b9b394b-7423-41a2-8b5d-22959530578b.Date
+
+relationship a3a4d1ad-9ffb-4f80-af07-daf19298e4b7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_TRANSPORT_TRACKING.fecha_pendiente_llegada
+	toColumn: LocalDateTable_412a3fe9-f6ac-46b3-a094-d637513e2879.Date
+
+relationship f60af607-505b-4589-b319-9604fbad9554
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_TRANSPORT_TRACKING.fecha_agencia_destino
+	toColumn: LocalDateTable_baee2494-cb20-4925-a553-c51ff665412e.Date
+
+relationship ebe3b185-5a41-4f7a-ade6-89010694f8b8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_TRANSPORT_TRACKING.fecha_en_reparto
+	toColumn: LocalDateTable_3948a5f2-0cf3-485c-b6bf-4dee3c297ef1.Date
+
+relationship 407c1cc7-051d-4b83-9015-b8fd0fb8aa2b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_TRANSPORT_TRACKING.fecha_incidencia
+	toColumn: LocalDateTable_e60ce81a-f888-4821-869d-d08c789e451f.Date
+
+relationship fd3b1e13-04fa-4de7-8918-6b4e3d142204
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_TRANSPORT_TRACKING.fecha_falta_definitiva
+	toColumn: LocalDateTable_3378e162-14f0-4f92-a1ef-a8408152fdbe.Date
+
+relationship a5c2ae86-0e67-4e3b-a302-e4b757c85c5f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_TRANSPORT_TRACKING.fecha_devuelto
+	toColumn: LocalDateTable_d25146c2-e15b-4b8d-8538-260459284525.Date
+
+relationship 6bbf3095-4007-435a-b111-0cdebab589f1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_TRANSPORT_TRACKING.fecha_entregado
+	toColumn: LocalDateTable_28c0f053-da3f-49bd-8fae-65fa9f84c195.Date
+
+relationship 72729d51-da01-4545-90dd-a291efefdd22
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_TRANSPORT_TRACKING.fecha_entrega_prevista
+	toColumn: LocalDateTable_5b7aa76b-4927-48e7-8c2f-7d79fc2c7ba4.Date
+
+relationship dc9df330-b815-456a-8494-931f4eb84ccf
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_TRANSPORT_TRACKING.fecha_actualizacion
+	toColumn: LocalDateTable_28a3eb52-281b-43d9-8a69-4bab0e291cf6.Date
+
+relationship d1ca0000-0000-4000-8000-0000000000d1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_TRANSPORT_TRACKING.fecha_lanzamiento
+	toColumn: Calendario.Date
+
+relationship d1ca0000-0000-4000-8000-0000000000d2
+	isActive: false
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_TRANSPORT_TRACKING.fecha_entregado
+	toColumn: Calendario.Date
+
+relationship 3d64c71c-db1f-4e52-a5b3-0eb1c362eeb2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Festivos.Fecha
+	toColumn: LocalDateTable_7185ac49-e3c7-4dd9-8fde-444fceb76651.Date
+

@@ -1,0 +1,336 @@
+table LOL_PBIFINANCIALENTRIES
+	lineageTag: c9de588f-4148-4f47-92b2-228214dd03a3
+
+	column AccountCode
+		dataType: string
+		lineageTag: baf1ef23-c9b4-4fe8-a96c-30ea0bcee3dc
+		summarizeBy: none
+		sourceColumn: AccountCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column BaseDocumentInternalKey
+		dataType: string
+		lineageTag: 024aa456-1fc8-4417-a2c2-f3569e875b94
+		summarizeBy: none
+		sourceColumn: BaseDocumentInternalKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchCode
+		dataType: string
+		lineageTag: 649289f5-f82a-4c94-92ce-424bef3bbaa5
+		summarizeBy: none
+		sourceColumn: BranchCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column BusinessPartnerCode
+		dataType: string
+		lineageTag: 3551f42c-709e-4b4d-85a1-1db26a129e40
+		summarizeBy: none
+		sourceColumn: BusinessPartnerCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column ControlAccountCode
+		dataType: string
+		lineageTag: 316d5848-9c1d-4ef7-97af-c85c9111857b
+		summarizeBy: none
+		sourceColumn: ControlAccountCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreateDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 62d92a5a-fb0c-4d6e-9fb5-fb4e42c172c9
+		summarizeBy: none
+		sourceColumn: CreateDate
+
+		variation Variación
+			isDefault
+			relationship: 9eccb25c-d9e8-4486-995b-824406b9d088
+			defaultHierarchy: LocalDateTable_471da0d1-edef-4d87-9cc3-8597ab4fa803.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CreditLC
+		dataType: double
+		lineageTag: ae945ab0-90a9-4816-9bf1-5d6611fe8c9c
+		summarizeBy: sum
+		sourceColumn: CreditLC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CreditSC
+		dataType: double
+		lineageTag: 107702a9-4acc-49c1-b7cc-7634ac8a6d57
+		summarizeBy: sum
+		sourceColumn: CreditSC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DebitLC
+		dataType: double
+		lineageTag: a516d89c-3ef6-4788-a2d2-48a8dd1c72d7
+		summarizeBy: sum
+		sourceColumn: DebitLC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DebitSC
+		dataType: double
+		lineageTag: 0d3da216-d484-47ae-90c5-111d895287ec
+		summarizeBy: sum
+		sourceColumn: DebitSC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DistributionRuleCode1
+		dataType: string
+		lineageTag: 0c8229b5-bef5-4c62-8329-ea9cfb2335c3
+		summarizeBy: none
+		sourceColumn: DistributionRuleCode1
+
+		annotation SummarizationSetBy = Automatic
+
+	column DistributionRuleCode2
+		dataType: string
+		lineageTag: 0bcb875a-1f6a-4285-90e3-550961076ea4
+		summarizeBy: none
+		sourceColumn: DistributionRuleCode2
+
+		annotation SummarizationSetBy = Automatic
+
+	column DistributionRuleCode3
+		dataType: string
+		lineageTag: 1055e749-c4a3-4a1c-9f04-150746af1a1c
+		summarizeBy: none
+		sourceColumn: DistributionRuleCode3
+
+		annotation SummarizationSetBy = Automatic
+
+	column DistributionRuleCode4
+		dataType: string
+		lineageTag: 4a5c5592-1cdc-4a3f-9f7f-736e253ad9f8
+		summarizeBy: none
+		sourceColumn: DistributionRuleCode4
+
+		annotation SummarizationSetBy = Automatic
+
+	column DistributionRuleCode5
+		dataType: string
+		lineageTag: d1c5ac99-1497-4392-9032-6bd2fdc72f52
+		summarizeBy: none
+		sourceColumn: DistributionRuleCode5
+
+		annotation SummarizationSetBy = Automatic
+
+	column DocumentDate
+		dataType: string
+		lineageTag: f61d4c34-b12f-4c87-909c-f0f3d4f07d9f
+		summarizeBy: none
+		sourceColumn: DocumentDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column DocumentNumber
+		dataType: string
+		lineageTag: cd16bbbc-9da9-4756-9dc1-953454cef44c
+		summarizeBy: none
+		sourceColumn: DocumentNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column DocumentTypeCode
+		dataType: string
+		lineageTag: e0bc16e9-7daf-4dff-993d-62989f691c46
+		summarizeBy: none
+		sourceColumn: DocumentTypeCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column DueDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 09ed6173-b153-4aac-9491-30b71cc2e91e
+		summarizeBy: none
+		sourceColumn: DueDate
+
+		variation Variación
+			isDefault
+			relationship: 761664fd-d23b-47a4-90a5-1bbf242f8336
+			defaultHierarchy: LocalDateTable_12ef9990-e8df-4d53-94f9-d29a0f17e79b.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FinancialPeriodInternalKey
+		dataType: string
+		lineageTag: 1b14bd7d-9ae6-4ba1-9bcc-b71726d16768
+		summarizeBy: none
+		sourceColumn: FinancialPeriodInternalKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column IndicatorCode
+		dataType: string
+		lineageTag: 84e48a46-da58-4479-b5bc-5c5a88af59f3
+		summarizeBy: none
+		sourceColumn: IndicatorCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column JournalTransactionInternalKey
+		dataType: string
+		lineageTag: 616ef117-11c4-4c6d-a5af-87027e411e32
+		summarizeBy: none
+		sourceColumn: JournalTransactionInternalKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column JournalTransactionLineInternalKey
+		dataType: string
+		lineageTag: 924885d4-19ab-49b1-880f-714e674d9678
+		summarizeBy: none
+		sourceColumn: JournalTransactionLineInternalKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column JournalType
+		dataType: string
+		lineageTag: 6138e6d4-5aad-4798-bf46-49e107df3147
+		summarizeBy: none
+		sourceColumn: JournalType
+
+		annotation SummarizationSetBy = Automatic
+
+	column PostingDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 05e9f910-3025-4bac-bf4a-bcfccdf6548a
+		summarizeBy: none
+		sourceColumn: PostingDate
+
+		variation Variación
+			isDefault
+			relationship: cd43b139-08a3-4ee1-866c-edd036983724
+			defaultHierarchy: LocalDateTable_16525a9b-3b14-401b-8eb0-d30810702cec.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ProjectCode
+		dataType: string
+		lineageTag: 0910eece-dd41-450f-9a55-af1df7783b7c
+		summarizeBy: none
+		sourceColumn: ProjectCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reference1
+		dataType: string
+		lineageTag: c1310d1c-e3b2-44d1-8598-aa5f7473b227
+		summarizeBy: none
+		sourceColumn: Reference1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reference2
+		dataType: string
+		lineageTag: 231f82b0-99c1-470b-bed0-057e2cdf7148
+		summarizeBy: none
+		sourceColumn: Reference2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reference3
+		dataType: string
+		lineageTag: 2a9db5a9-46e2-4fa0-bce7-28080e0f6c7b
+		summarizeBy: none
+		sourceColumn: Reference3
+
+		annotation SummarizationSetBy = Automatic
+
+	column RemarkInRow
+		dataType: string
+		lineageTag: 90747e68-de32-472e-b0c7-c73a8412fec0
+		summarizeBy: none
+		sourceColumn: RemarkInRow
+
+		annotation SummarizationSetBy = Automatic
+
+	column Remarks
+		dataType: string
+		lineageTag: f0ad5680-5e19-44c9-981d-0b2cd9f6601b
+		summarizeBy: none
+		sourceColumn: Remarks
+
+		annotation SummarizationSetBy = Automatic
+
+	column Series
+		dataType: string
+		lineageTag: 142c3b4e-aada-442d-9af0-272ebd226791
+		summarizeBy: none
+		sourceColumn: Series
+
+		annotation SummarizationSetBy = Automatic
+
+	column SeriesNumber
+		dataType: string
+		lineageTag: 39839e20-64db-41ce-a0ce-e9014995d92d
+		summarizeBy: none
+		sourceColumn: SeriesNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column LineUID
+		dataType: string
+		lineageTag: 8dd0cd51-a768-4df2-ae73-ce4a5028f575
+		summarizeBy: none
+		sourceColumn: LineUID
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaComunicacion
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4f230b8f-ea50-4192-aa60-fc420fa2bd06
+		summarizeBy: none
+		sourceColumn: FechaComunicacion
+
+		variation Variación
+			isDefault
+			relationship: ce048dea-e11a-4f56-9fab-67098ebd35fc
+			defaultHierarchy: LocalDateTable_45060eeb-1207-48ad-868d-e00308198235.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition LOL_PBIFINANCIALENTRIES = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin"),
+				    dbo_LOL_PBIFINANCIALENTRIES = Origen{[Schema="dbo",Item="LOL_PBIFINANCIALENTRIES"]}[Data]
+				in
+				    dbo_LOL_PBIFINANCIALENTRIES
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

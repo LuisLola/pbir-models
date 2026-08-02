@@ -1,0 +1,144 @@
+table MedidasCatalogo
+	lineageTag: b1a2c3d4-0400-4400-8400-000000000400
+
+	measure 'Catálogo Top N' = SELECTEDVALUE( ParamTopN[Top N], 10 )
+		formatString: 0
+		displayFolder: Catálogo B2B
+		lineageTag: b1a2c3d4-0401-4401-8401-000000000401
+
+	/// Catálogo visual de productos B2B (foto, ranking con medallas, badge de marca). Se agrupa por la dimensión elegida en DimensionB2B, se ordena por OrdenSelector y muestra Top N (ParamTopN) por grupo. Ventas = ImporteBruto (excluye anulados/incidencias, hasta fecha de corte, respeta la temporada seleccionada). Devuelve HTML: usar en el visual "HTML Content".
+	measure 'HTML Catálogo B2B' =
+			VAR _TopN = [Catálogo Top N]
+			VAR _ix = SELECTEDVALUE( DimensionB2B[Orden], 0 )
+			VAR _ord = SELECTEDVALUE( OrdenSelector[Orden], "Ventas (€)" )
+			VAR _FechaCorte = [FechaLimiteSeleccionada]
+			VAR _temp = [TemporadaSeleccionada]
+			VAR _Css =
+			    "<style>@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');" &
+			    ".wrap{font-family:Montserrat,'Segoe UI',Arial,sans-serif;background:transparent;color:#000000;padding:8px}" &
+			    ".sec{margin:0 0 16px}" &
+			    ".sh{display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid #DFA0C9;padding-bottom:4px;margin:4px 0 9px}" &
+			    ".sh .t{font-size:13px;font-weight:800;color:#000000;text-transform:uppercase;letter-spacing:.6px}" &
+			    ".sh .e{font-size:13px;font-weight:800;color:#DFA0C9}" &
+			    ".grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:8px}" &
+			    ".card{position:relative;background:#fff;border:1px solid #EAEAEA;border-radius:11px;padding:7px;box-shadow:0 1px 2px rgba(0,0,0,.08)}" &
+			    ".rank{position:absolute;top:11px;left:11px;width:21px;height:21px;border-radius:6px;color:#fff;font-weight:800;font-size:10px;display:flex;align-items:center;justify-content:center;z-index:2}" &
+			    ".brand{position:absolute;top:11px;right:11px;color:#fff;font-size:8px;font-weight:700;padding:2px 6px;border-radius:9px;z-index:2}" &
+			    ".ib{position:relative;aspect-ratio:3/4;border-radius:8px;border:1px solid #F0E6EC;background:#F9ECF3;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:6px}" &
+			    ".ib img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}" &
+			    ".sil{width:38px;height:38px}" &
+			    ".sku{font-family:Consolas,monospace;font-size:10px;color:#8A8A8A}" &
+			    ".nm{font-size:11px;font-weight:700;line-height:1.15;margin:2px 0 1px}" &
+			    ".mt{font-size:9px;color:#8A8A8A;margin-bottom:5px}" &
+			    ".sl{font-size:14px;font-weight:800;color:#000000}" &
+			    ".bt{height:5px;background:#EFEFEF;border-radius:3px;margin:3px 0;overflow:hidden}" &
+			    ".bf{height:5px;background:#DFA0C9;border-radius:3px}" &
+			    ".kp{font-size:9px;color:#8A8A8A}" &
+			    ".empty{font-size:12px;color:#8A8A8A;padding:10px}" &
+			    "</style>"
+			VAR _silP = "<svg class='sil' viewBox='0 0 48 48' fill='none' stroke='#D9C2D0' stroke-width='2' stroke-linejoin='round'><path d='M19 7 L11 13 L14 20 L19 17 L19 41 L29 41 L29 17 L34 20 L37 13 L29 7 Q24 11 19 7 Z'/></svg>"
+			VAR _silA = "<svg class='sil' viewBox='0 0 48 48' fill='none' stroke='#D9C2D0' stroke-width='2' stroke-linejoin='round'><path d='M14 19 L34 19 L36 41 L12 41 Z'/><path d='M20 19 Q20 11 24 11 Q28 11 28 19'/></svg>"
+			VAR _pairs0 =
+			    CALCULATETABLE(
+			        UNION(
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBIB2BSALESORDER, LOL_PBIMODELITEM[Categoria], LOL_PBIMODELITEM[Modelo-Color] ), "ven", CALCULATE( SUM( LOL_PBIB2BSALESORDER[ImporteBruto] ) ), "u", CALCULATE( SUMX( LOL_PBIB2BSALESORDER, IFERROR( VALUE( LOL_PBIB2BSALESORDER[Qty] ), 0 ) ) ) ), "@g", LOL_PBIMODELITEM[Categoria] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 0 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBIB2BSALESORDER, LOL_PBIMODELITEM[Descripcion_familia_agregada], LOL_PBIMODELITEM[Modelo-Color] ), "ven", CALCULATE( SUM( LOL_PBIB2BSALESORDER[ImporteBruto] ) ), "u", CALCULATE( SUMX( LOL_PBIB2BSALESORDER, IFERROR( VALUE( LOL_PBIB2BSALESORDER[Qty] ), 0 ) ) ) ), "@g", LOL_PBIMODELITEM[Descripcion_familia_agregada] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 1 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBIB2BSALESORDER, LOL_PBIMODELITEM[Nombre_familia], LOL_PBIMODELITEM[Modelo-Color] ), "ven", CALCULATE( SUM( LOL_PBIB2BSALESORDER[ImporteBruto] ) ), "u", CALCULATE( SUMX( LOL_PBIB2BSALESORDER, IFERROR( VALUE( LOL_PBIB2BSALESORDER[Qty] ), 0 ) ) ) ), "@g", LOL_PBIMODELITEM[Nombre_familia] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 2 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBIB2BSALESORDER, LOL_PBIMODELITEM[Subfamilia], LOL_PBIMODELITEM[Modelo-Color] ), "ven", CALCULATE( SUM( LOL_PBIB2BSALESORDER[ImporteBruto] ) ), "u", CALCULATE( SUMX( LOL_PBIB2BSALESORDER, IFERROR( VALUE( LOL_PBIB2BSALESORDER[Qty] ), 0 ) ) ) ), "@g", LOL_PBIMODELITEM[Subfamilia] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 3 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBIB2BSALESORDER, LOL_PBIMODELITEM[GrupodeArt], LOL_PBIMODELITEM[Modelo-Color] ), "ven", CALCULATE( SUM( LOL_PBIB2BSALESORDER[ImporteBruto] ) ), "u", CALCULATE( SUMX( LOL_PBIB2BSALESORDER, IFERROR( VALUE( LOL_PBIB2BSALESORDER[Qty] ), 0 ) ) ) ), "@g", LOL_PBIMODELITEM[GrupodeArt] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 4 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBIB2BSALESORDER, LOL_PBICLIENTES[RazonSocial], LOL_PBIMODELITEM[Modelo-Color] ), "ven", CALCULATE( SUM( LOL_PBIB2BSALESORDER[ImporteBruto] ) ), "u", CALCULATE( SUMX( LOL_PBIB2BSALESORDER, IFERROR( VALUE( LOL_PBIB2BSALESORDER[Qty] ), 0 ) ) ) ), "@g", LOL_PBICLIENTES[RazonSocial] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 5 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBIB2BSALESORDER, LOL_PBICLIENTES[GroupName], LOL_PBIMODELITEM[Modelo-Color] ), "ven", CALCULATE( SUM( LOL_PBIB2BSALESORDER[ImporteBruto] ) ), "u", CALCULATE( SUMX( LOL_PBIB2BSALESORDER, IFERROR( VALUE( LOL_PBIB2BSALESORDER[Qty] ), 0 ) ) ) ), "@g", LOL_PBICLIENTES[GroupName] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 6 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBIB2BSALESORDER, LOL_PBICLIENTES[Pais], LOL_PBIMODELITEM[Modelo-Color] ), "ven", CALCULATE( SUM( LOL_PBIB2BSALESORDER[ImporteBruto] ) ), "u", CALCULATE( SUMX( LOL_PBIB2BSALESORDER, IFERROR( VALUE( LOL_PBIB2BSALESORDER[Qty] ), 0 ) ) ) ), "@g", LOL_PBICLIENTES[Pais] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 7 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBIB2BSALESORDER, LOL_PBIAGENTES[Agente_Cajero], LOL_PBIMODELITEM[Modelo-Color] ), "ven", CALCULATE( SUM( LOL_PBIB2BSALESORDER[ImporteBruto] ) ), "u", CALCULATE( SUMX( LOL_PBIB2BSALESORDER, IFERROR( VALUE( LOL_PBIB2BSALESORDER[Qty] ), 0 ) ) ) ), "@g", LOL_PBIAGENTES[Agente_Cajero] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 8 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBIB2BSALESORDER, LOL_PBISEASON[Name], LOL_PBIMODELITEM[Modelo-Color] ), "ven", CALCULATE( SUM( LOL_PBIB2BSALESORDER[ImporteBruto] ) ), "u", CALCULATE( SUMX( LOL_PBIB2BSALESORDER, IFERROR( VALUE( LOL_PBIB2BSALESORDER[Qty] ), 0 ) ) ) ), "@g", LOL_PBISEASON[Name] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 9 )
+			        ),
+			        REMOVEFILTERS( 'Calendario' ),
+			        REMOVEFILTERS( LOL_PBIB2BSALESORDER[DocDate] ),
+			        LOL_PBIB2BSALESORDER[Canceled] <> "Y",
+			        LOL_PBIB2BSALESORDER[IsIncidence] <> "Y",
+			        LOL_PBIB2BSALESORDER[DocDate] <= _FechaCorte,
+			        LOL_PBIB2BSALESORDER[Season] = _temp || ISBLANK( _temp )
+			    )
+			VAR _pairs =
+			    ADDCOLUMNS(
+			        _pairs0,
+			        "@v",
+			            SWITCH(
+			                _ord,
+			                "Unidades", [@u],
+			                "PVP",
+			                    VAR _mm = [@m]
+			                    VAR _t = CALCULATE( MAX( LOL_PBIMODELITEM[PVP_ESPANA_Y_PORTUGAL] ), LOL_PBIMODELITEM[Modelo-Color] = _mm )
+			                    RETURN COALESCE( IFERROR( VALUE( _t ), IFERROR( VALUE( SUBSTITUTE( SUBSTITUTE( _t, ".", "" ), ",", "." ) ), 0 ) ), 0 ),
+			                [@ven]
+			            )
+			    )
+			VAR _groupsTop =
+			    TOPN(
+			        12,
+			        ADDCOLUMNS(
+			            DISTINCT( SELECTCOLUMNS( _pairs, "@g", [@g] ) ),
+			            "@gt", VAR g = [@g] RETURN SUMX( FILTER( _pairs, [@g] = g ), [@ven] )
+			        ),
+			        [@gt], DESC
+			    )
+			VAR _body =
+			    CONCATENATEX(
+			        FILTER( _groupsTop, [@gt] > 0 ),
+			        VAR _gv = [@g]
+			        VAR _gt = [@gt]
+			        VAR _inG = FILTER( _pairs, [@g] = _gv && [@ven] > 0 )
+			        VAR _max = MAXX( _inG, [@v] )
+			        VAR _top = TOPN( _TopN, _inG, [@v], DESC )
+			        VAR _cards =
+			            CONCATENATEX(
+			                _top,
+			                VAR _m = [@m]
+			                VAR _ven = [@ven]
+			                VAR _u = [@u]
+			                VAR _v = [@v]
+			                VAR _r = RANKX( _inG, [@v],, DESC, DENSE )
+			                VAR _medal = SWITCH( _r, 1, "#DFA0C9", 2, "#000000", 3, "#8A8A8A", "#C9C9C9" )
+			                VAR _marca = CALCULATE( MAX( LOL_PBIMODELITEM[GrupodeArt] ), LOL_PBIMODELITEM[Modelo-Color] = _m )
+			                VAR _bu = UPPER( COALESCE( _marca, "" ) )
+			                VAR _bcol = SWITCH( TRUE(), _bu = "MAITE", "#DFA0C9", _bu = "LOLA", "#000000", "#8A8A8A" )
+			                VAR _nm = CALCULATE( MAX( LOL_PBIMODELITEM[Descripcion_modelo] ), LOL_PBIMODELITEM[Modelo-Color] = _m )
+			                VAR _cat = CALCULATE( MAX( LOL_PBIMODELITEM[Categoria] ), LOL_PBIMODELITEM[Modelo-Color] = _m )
+			                VAR _pvp = CALCULATE( MAX( LOL_PBIMODELITEM[PVP_ESPANA_Y_PORTUGAL] ), LOL_PBIMODELITEM[Modelo-Color] = _m )
+			                VAR _sil = IF( _cat = "Accesorio", _silA, _silP )
+			                VAR _img = CALCULATE( MAX( LOL_PBIMODELITEM[URL_imagen_producto] ), LOL_PBIMODELITEM[Modelo-Color] = _m )
+			                VAR _imgT = IF( NOT ISBLANK( _img ) && LEN( _img ) > 5, "<img src='" & _img & "' onerror=""this.style.display='none'"" />", "" )
+			                VAR _bp = INT( DIVIDE( _v, _max ) * 100 )
+			                RETURN
+			                    "<div class='card'>" &
+			                    "<div class='rank' style='background:" & _medal & "'>" & _r & "</div>" &
+			                    "<div class='brand' style='background:" & _bcol & "'>" & COALESCE( _marca, "" ) & "</div>" &
+			                    "<div class='ib'>" & _sil & _imgT & "</div>" &
+			                    "<div class='sku'>" & _m & "</div>" &
+			                    "<div class='nm'>" & COALESCE( _nm, "" ) & "</div>" &
+			                    "<div class='mt'>" & COALESCE( _cat, "" ) & IF( NOT ISBLANK( _pvp ), " · PVP " & _pvp, "" ) & "</div>" &
+			                    "<div class='sl'>" & FORMAT( _ven, "#,##0", "es-ES" ) & " €</div>" &
+			                    "<div class='bt'><div class='bf' style='width:" & _bp & "%'></div></div>" &
+			                    "<div class='kp'>" & FORMAT( _u, "#,##0", "es-ES" ) & " uds</div>" &
+			                    "</div>",
+			                "", [@v], DESC
+			            )
+			        RETURN "<div class='sec'><div class='sh'><span class='t'>" & _gv & "</span><span class='e'>" & FORMAT( _gt, "#,##0", "es-ES" ) & " €</span></div><div class='grid'>" & _cards & "</div></div>",
+			        "", [@gt], DESC
+			    )
+			RETURN
+			    _Css & "<div class='wrap'>" & IF( LEN( _body ) = 0, "<div class='empty'>Sin ventas para los filtros actuales.</div>", _body ) & "</div>"
+		displayFolder: Catálogo B2B
+		lineageTag: b1a2c3d4-0402-4402-8402-000000000402
+
+	column Value
+		lineageTag: b1a2c3d4-0403-4403-8403-000000000403
+		isNameInferred
+		sourceColumn: [Value]
+
+	partition MedidasCatalogo = calculated
+		mode: import
+		source = {BLANK()}
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "356770966041b673ec29",
+  "position": {
+    "x": 665.19329465426176,
+    "y": 7.3790861244789312,
+    "z": 3000,
+    "height": 25,
+    "width": 149.97007908462052,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "TablaFechasFiltro"
+                    }
+                  },
+                  "Property": "Titulo VENTAS_YTD_LY"
+                }
+              },
+              "queryRef": "TablaFechasFiltro.Titulo VENTAS_YTD_LY",
+              "nativeQueryRef": "Titulo VENTAS_YTD_LY"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "aa16577a8192a93ec002"
+}

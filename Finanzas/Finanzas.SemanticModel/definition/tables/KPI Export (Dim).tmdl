@@ -1,0 +1,81 @@
+table 'KPI Export (Dim)'
+	lineageTag: e5ce6c8b-a83b-4744-af29-7e898474ac07
+
+	measure 'Filtro Dimensión (TREATAS)' = ```
+			
+			VAR SelOrden = SELECTEDVALUE ( 'Dimensión Finanzas'[Dimensión Finanzas Orden], 0 )
+			VAR DimVals  = VALUES ( 'KPI Export (Dim)'[Dimensión] )
+			RETURN
+			SWITCH (
+			    SelOrden,
+			    0, TREATAS ( DimVals, 'JournalEntryItem'[Código 1 de regla de distribución] ),
+			    1, TREATAS ( DimVals, 'JournalEntryItem'[Código 2 de regla de distribución] ),
+			    2, TREATAS ( DimVals, 'JournalEntryItem'[Nombre sucursal] ),
+			    3, TREATAS ( DimVals, 'Calendario'[Date].[Trimestre] ),
+			    4, TREATAS ( DimVals, 'Calendario'[Mes] ),
+			    5, TREATAS ( DimVals, 'Calendario'[Año] )
+			)
+			
+			```
+		lineageTag: 08ff423b-65fa-4e5c-b82c-b1522c61d364
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Dimensión Finanzas Orden'
+		formatString: 0
+		lineageTag: a058f683-8234-48c6-9fe9-fb3804ca2518
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Dimensión Finanzas Orden]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dimensión
+		lineageTag: 0228cd5f-d561-4932-9faa-3b945fef0b14
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Dimensión]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'KPI Export (Dim)' = calculated
+		mode: import
+		source = ```
+				
+				UNION (
+				    SELECTCOLUMNS(
+				        SUMMARIZE ( ALL('JournalEntryItem'[Código 1 de regla de distribución]), 'JournalEntryItem'[Código 1 de regla de distribución] ),
+				        "Dimensión Finanzas Orden", 0,
+				        "Dimensión", 'JournalEntryItem'[Código 1 de regla de distribución]
+				    ),
+				    SELECTCOLUMNS(
+				        SUMMARIZE ( ALL('JournalEntryItem'[Código 2 de regla de distribución]), 'JournalEntryItem'[Código 2 de regla de distribución] ),
+				        "Dimensión Finanzas Orden", 1,
+				        "Dimensión", 'JournalEntryItem'[Código 2 de regla de distribución]
+				    ),
+				    SELECTCOLUMNS(
+				        SUMMARIZE ( ALL('JournalEntryItem'[Nombre sucursal]), 'JournalEntryItem'[Nombre sucursal] ),
+				        "Dimensión Finanzas Orden", 2,
+				        "Dimensión", 'JournalEntryItem'[Nombre sucursal]
+				    ),
+				    SELECTCOLUMNS(
+				        SUMMARIZE ( ALL(Calendario[Date].[Trimestre]), Calendario[Date].[Trimestre] ),
+				        "Dimensión Finanzas Orden", 3,
+				        "Dimensión", Calendario[Date].[Trimestre]
+				    ),
+				    SELECTCOLUMNS(
+				        SUMMARIZE ( ALL('Calendario'[Mes]), 'Calendario'[Mes] ),
+				        "Dimensión Finanzas Orden", 4,
+				        "Dimensión", 'Calendario'[Mes]
+				    ),
+				    SELECTCOLUMNS(
+				        SUMMARIZE ( ALL('Calendario'[Año]), 'Calendario'[Año] ),
+				        "Dimensión Finanzas Orden", 5,
+				        "Dimensión", 'Calendario'[Año]
+				    )
+				)
+				
+				```
+
+	annotation PBI_Id = 8dfd37ea0e1b4b45a600f1e355602f52
+

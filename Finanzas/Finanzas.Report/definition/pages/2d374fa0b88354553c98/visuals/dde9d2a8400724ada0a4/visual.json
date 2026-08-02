@@ -1,0 +1,787 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "dde9d2a8400724ada0a4",
+  "position": {
+    "x": 25.555555555555554,
+    "y": 105.55555555555556,
+    "z": 0,
+    "height": 551.11111111111109,
+    "width": 1192.2222222222222,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "pythonVisual",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI Export (Dim)"
+                    }
+                  },
+                  "Property": "Dimensión"
+                }
+              },
+              "queryRef": "KPI Export (Dim).Dimensión",
+              "nativeQueryRef": "Dimensión"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Finanzas"
+                    }
+                  },
+                  "Property": "AP (vis)"
+                }
+              },
+              "queryRef": "JournalEntryItem.AP (vis)",
+              "nativeQueryRef": "AP (vis)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Finanzas"
+                    }
+                  },
+                  "Property": "AP LY (vis)"
+                }
+              },
+              "queryRef": "JournalEntryItem.AP LY (vis)",
+              "nativeQueryRef": "AP LY (vis)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Finanzas"
+                    }
+                  },
+                  "Property": "CN (vis)"
+                }
+              },
+              "queryRef": "JournalEntryItem.CN (vis)",
+              "nativeQueryRef": "CN (vis)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Finanzas"
+                    }
+                  },
+                  "Property": "CN LY (vis)"
+                }
+              },
+              "queryRef": "JournalEntryItem.CN LY (vis)",
+              "nativeQueryRef": "CN LY (vis)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Finanzas"
+                    }
+                  },
+                  "Property": "Margen Bruto (vis)"
+                }
+              },
+              "queryRef": "JournalEntryItem.Margen Bruto (vis)",
+              "nativeQueryRef": "Margen Bruto (vis)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Finanzas"
+                    }
+                  },
+                  "Property": "Margen Bruto LY (vis)"
+                }
+              },
+              "queryRef": "JournalEntryItem.Margen Bruto LY (vis)",
+              "nativeQueryRef": "Margen Bruto LY (vis)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Finanzas"
+                    }
+                  },
+                  "Property": "Margen Neto A.I. (vis)"
+                }
+              },
+              "queryRef": "JournalEntryItem.Margen Neto A.I. (vis)",
+              "nativeQueryRef": "Margen Neto A.I. (vis)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Finanzas"
+                    }
+                  },
+                  "Property": "Margen Neto A.I. LY (vis)"
+                }
+              },
+              "queryRef": "JournalEntryItem.Margen Neto A.I. LY (vis)",
+              "nativeQueryRef": "Margen Neto A.I. LY (vis)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Finanzas"
+                    }
+                  },
+                  "Property": "Margen Operativo (vis)"
+                }
+              },
+              "queryRef": "JournalEntryItem.Margen Operativo (vis)",
+              "nativeQueryRef": "Margen Operativo (vis)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Finanzas"
+                    }
+                  },
+                  "Property": "Margen Operativo LY (vis)"
+                }
+              },
+              "queryRef": "JournalEntryItem.Margen Operativo LY (vis)",
+              "nativeQueryRef": "Margen Operativo LY (vis)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Finanzas"
+                    }
+                  },
+                  "Property": "NETOAI (vis)"
+                }
+              },
+              "queryRef": "JournalEntryItem.NETOAI (vis)",
+              "nativeQueryRef": "NETOAI (vis)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Finanzas"
+                    }
+                  },
+                  "Property": "NETOAI LY (vis)"
+                }
+              },
+              "queryRef": "JournalEntryItem.NETOAI LY (vis)",
+              "nativeQueryRef": "NETOAI LY (vis)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Finanzas"
+                    }
+                  },
+                  "Property": "OP (vis)"
+                }
+              },
+              "queryRef": "JournalEntryItem.OP (vis)",
+              "nativeQueryRef": "OP (vis)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Finanzas"
+                    }
+                  },
+                  "Property": "OP LY (vis)"
+                }
+              },
+              "queryRef": "JournalEntryItem.OP LY (vis)",
+              "nativeQueryRef": "OP LY (vis)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Finanzas"
+                    }
+                  },
+                  "Property": "Δ CN % (vis)"
+                }
+              },
+              "queryRef": "JournalEntryItem.Δ CN % (vis)",
+              "nativeQueryRef": "Δ CN % (vis)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Finanzas"
+                    }
+                  },
+                  "Property": "Δ MB (p) (vis)"
+                }
+              },
+              "queryRef": "JournalEntryItem.Δ MB (p) (vis)",
+              "nativeQueryRef": "Δ MB (p) (vis)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Finanzas"
+                    }
+                  },
+                  "Property": "Δ MN (p) (vis)"
+                }
+              },
+              "queryRef": "JournalEntryItem.Δ MN (p) (vis)",
+              "nativeQueryRef": "Δ MN (p) (vis)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Finanzas"
+                    }
+                  },
+                  "Property": "Δ MO (p) (vis)"
+                }
+              },
+              "queryRef": "JournalEntryItem.Δ MO (p) (vis)",
+              "nativeQueryRef": "Δ MO (p) (vis)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Páginas"
+                    }
+                  },
+                  "Property": "Param Página (número)"
+                }
+              },
+              "queryRef": "Páginas.Param Página (número)",
+              "nativeQueryRef": "Param Página (número)"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI Export (Dim)"
+                    }
+                  },
+                  "Property": "Dimensión Finanzas Orden"
+                }
+              },
+              "queryRef": "KPI Export (Dim).Dimensión Finanzas Orden",
+              "nativeQueryRef": "Dimensión Finanzas Orden"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dimensión Finanzas"
+                    }
+                  },
+                  "Property": "DimFin Orden (vis)"
+                }
+              },
+              "queryRef": "Dimensión Finanzas.DimFin Orden (vis)",
+              "nativeQueryRef": "DimFin Orden (vis)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dimensión Finanzas"
+                    }
+                  },
+                  "Property": "Título Descripción (vis)"
+                }
+              },
+              "queryRef": "Dimensión Finanzas.Título Descripción (vis)",
+              "nativeQueryRef": "Título Descripción (vis)"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "KPI Export (Dim)"
+                  }
+                },
+                "Property": "Dimensión"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "script": [
+        {
+          "properties": {
+            "source": {
+              "expr": {
+                "Literal": {
+                  "Value": "'# ======================== Python visual Power BI =========================\n# Tarjetas KPI (consumiendo medidas (vis) sin agregarlas)\n# - Muestra Actual / LY para: CN, AP, OP, NETOAI y márgenes derivados\n# - Deltas: ΔCN% y Δ márgenes (puntos)\n# - Field Parameter (Dimensión Finanzas) + paginación (Tienda -> 4 páginas; resto -> 1)\n# - Título: usa ''Título Descripción (vis)'' si llega; si no, ''Dimensión''\n# - Sucursal: tamaño de título dinámico (SUCURSAL_TITLE_FONTSIZE)\n# - ORDEN configurable: ORDER_MODE = ''auto'' | ''crono'' | ''cn''\n# ========================================================================\n\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport math\nimport unicodedata\nimport re\n\n# ---------- Nombres de columnas del dataset ----------\nDIM_COL      = \"Dimensión\"           # ''KPI Export (Dim)''[Dimensión]\nCN_COL       = \"CN (vis)\"\nCN_LY_COL    = \"CN LY (vis)\"\nAP_COL       = \"AP (vis)\"\nAP_LY_COL    = \"AP LY (vis)\"\nOP_COL       = \"OP (vis)\"\nOP_LY_COL    = \"OP LY (vis)\"\nNA_COL       = \"NETOAI (vis)\"\nNA_LY_COL    = \"NETOAI LY (vis)\"\nTITLE_DESC_COL = \"Título Descripción (vis)\"   # opcional para el título\n\n# (Opcionales para detectar dimensión y página)\nPARAM_DIM_MEASURE  = \"Param DimFin (texto)\"\nPARAM_DIM_COLUMN   = \"Dimensión Finanzas Campos\"\nPARAM_PAGE_MEASURE = \"Param Página (número)\"\nPARAM_PAGE_COLUMN  = \"Página Facet\"\n\n# ---------- Layout / paginación ----------\nN_COLS, N_ROWS = 6, 4\nFACETS_PER_PAGE = N_COLS * N_ROWS\nCARD_PAD = 0.001\nTITLE_FONTSIZE, ROW_LABEL_FONTSIZE = 20, 15\nVALUE_FONTSIZE, BADGE_FONTSIZE = 24, 15\nCOLOR_BORDER = \"#E6E6E6\"; COLOR_TEXT = \"#333333\"; COLOR_SUB = \"#6C6C6C\"\nCOLOR_BADGE_POS = \"#38b2ac\"; COLOR_BADGE_NEG = \"#e57373\"; COLOR_BADGE_TEXT = \"#000000\"\n\n# Tamaño específico para títulos cuando la dimensión es Sucursal\nSUCURSAL_TITLE_FONTSIZE = 14  # <- ajusta aquí\n\n# ---------- ORDEN ----------\n# ''auto''  : Mes/Trimestre/Año -> cronológico; resto -> CN desc\n# ''crono'' : fuerza cronológico\n# ''cn''    : fuerza CN desc\nORDER_MODE = \"cn\"\n\n# ---------- Utils ----------\ndef normalize_text(s):\n    s = str(s).strip().lower()\n    return ''''.join(c for c in unicodedata.normalize(''NFKD'', s) if not unicodedata.combining(c))\n\ndef read_single_value(df, col, default=None, coerce_num=False):\n    if col in df.columns and df[col].notna().any():\n        vals = pd.unique(df[col].dropna())\n        v = vals[0] if len(vals) == 1 else pd.Series(vals).mode().iloc[0]\n        if coerce_num:\n            try:\n                vn = float(v); \n                return vn if np.isfinite(vn) else default\n            except:\n                return default\n        return v\n    return default\n\ndef first_non_null(series):\n    s = pd.to_numeric(series, errors=\"coerce\") if series.dtype.kind in \"iufc\" else series\n    s = s.dropna()\n    return s.iloc[0] if len(s) else np.nan\n\ndef to_number(x):\n    try:\n        return float(str(x).replace(\".\", \"_\").replace(\",\", \".\").replace(\"_\", \"\"))\n    except:\n        return np.nan\n\ndef fmt_int(n):\n    if pd.isna(n): return \"-\"\n    s = f\"{n:,.0f}\"\n    return s.replace(\",\", \"X\").replace(\".\", \",\").replace(\"X\", \".\")\n\ndef fmt_pct(v):\n    return \"-\" if pd.isna(v) else f\"{v:.0%}\"\n\ndef coerce_int_page(v, default=1):\n    try:\n        if v is None or (isinstance(v, float) and np.isnan(v)): return default\n        return max(1, int(float(v)))\n    except:\n        return default\n\n# ---------- Parse helpers para orden cronológico ----------\n_MONTHS = {\n    \"ene\":1,\"enero\":1, \"feb\":2,\"febrero\":2, \"mar\":3,\"marzo\":3, \"abr\":4,\"abril\":4,\n    \"may\":5,\"mayo\":5, \"jun\":6,\"junio\":6, \"jul\":7,\"julio\":7, \"ago\":8,\"agosto\":8,\n    \"sep\":9,\"sept\":9,\"septiembre\":9, \"oct\":10,\"octubre\":10, \"nov\":11,\"noviembre\":11,\n    \"dic\":12,\"diciembre\":12\n}\n\ndef _parse_year(s):\n    m = re.search(r\"(20\\d{2}|19\\d{2})\", s)\n    return int(m.group(1)) if m else None\n\ndef _parse_month_label(label):\n    \"\"\"\n    Devuelve (year, month, fallback_text) para ordenar.\n    Acepta: ''Ene'', ''Enero'', ''ene 2024'', ''2024-01'', ''01/2024'', ''2024 1'', etc.\n    \"\"\"\n    s = normalize_text(label)\n    y = _parse_year(s)\n    # YYYY-MM o YYYY/MM\n    m = re.search(r\"(19|20)\\d{2}[-/\\. ](1[0-2]|0?[1-9])\", s)\n    if m:\n        if y is None: y = int(m.group(0)[:4])\n        mon = int(m.group(2))\n        return (y or 0, mon, s)\n    # MM-YYYY o MM/YYYY\n    m = re.search(r\"(1[0-2]|0?[1-9])[-/\\. ](19|20)\\d{2}\", s)\n    if m:\n        mon = int(m.group(1)); \n        if y is None: y = int(m.group(0)[-4:])\n        return (y or 0, mon, s)\n    # Nombre de mes (+ opcional año)\n    for k, idx in _MONTHS.items():\n        if re.search(rf\"\\b{k}\\b\", s):\n            return (y or 0, idx, s)\n    # Solo número de mes (1..12)\n    m = re.fullmatch(r\"(1[0-2]|[1-9])\", s)\n    if m:\n        return (y or 0, int(m.group(1)), s)\n    # Fallback: orden por texto\n    return (y or 0, 99, s)\n\ndef _parse_quarter_label(label):\n    \"\"\"\n    Devuelve (year, quarter, fallback_text) para ordenar.\n    Acepta: ''Q1 2024'', ''T1 2024'', ''2024Q1'', ''2024 T1'', ''Trim 1 2024'', etc.\n    \"\"\"\n    s = normalize_text(label)\n    y = _parse_year(s) or 0\n    # Q/T seguido o antes\n    m = re.search(r\"(?:q|t|trim)[^\\d]*([1-4])\", s)\n    if m:\n        q = int(m.group(1)); \n        return (y, q, s)\n    # Formato ''YYYY Q'' o ''YYYY T''\n    m = re.search(r\"(19|20)\\d{2}[^\\d]*(?:q|t)[^\\d]*([1-4])\", s)\n    if m:\n        y2 = int(m.group(0)[:4]); q = int(m.group(2))\n        return (y2, q, s)\n    # Fallback: por texto\n    return (y, 9, s)\n\ndef apply_order(grp, dim_key):\n    mode = normalize_text(ORDER_MODE)\n    if mode == \"cn\":\n        return grp.sort_values(\"__CN__\", ascending=False).reset_index(drop=True)\n    if mode == \"crono\" or (mode == \"auto\" and dim_key in (\"mes\",\"trimestre\",\"anio\",\"ano\",\"año\")):\n        # Orden cronológico según dimensión\n        if dim_key == \"mes\":\n            keys = grp[DIM_COL].apply(_parse_month_label)\n            sort_df = pd.DataFrame(keys.tolist(), columns=[\"_y\",\"_m\",\"_t\"])\n            out = pd.concat([grp.reset_index(drop=True), sort_df], axis=1)\n            out = out.sort_values([\"_y\",\"_m\",\"_t\"], ascending=[True, True, True]).drop(columns=[\"_y\",\"_m\",\"_t\"])\n            return out.reset_index(drop=True)\n        elif dim_key in (\"trimestre\",\"trim\",\"quarter\"):\n            keys = grp[DIM_COL].apply(_parse_quarter_label)\n            sort_df = pd.DataFrame(keys.tolist(), columns=[\"_y\",\"_q\",\"_t\"])\n            out = pd.concat([grp.reset_index(drop=True), sort_df], axis=1)\n            out = out.sort_values([\"_y\",\"_q\",\"_t\"], ascending=[True, True, True]).drop(columns=[\"_y\",\"_q\",\"_t\"])\n            return out.reset_index(drop=True)\n        elif dim_key in (\"anio\",\"ano\",\"año\",\"year\"):\n            # intentar parsear año numérico\n            def _year_key(x):\n                s = normalize_text(x)\n                y = _parse_year(s)\n                # si no hay año, intenta castear entero\n                if y is None:\n                    try: y = int(re.sub(r\"\\D\",\"\",s))\n                    except: y = 0\n                return y\n            return grp.assign(_y=grp[DIM_COL].apply(_year_key)).sort_values(\"_y\").drop(columns=\"_y\").reset_index(drop=True)\n        else:\n            # si no aplica, cae a CN desc\n            return grp.sort_values(\"__CN__\", ascending=False).reset_index(drop=True)\n    # ''auto'' para otras dimensiones -> CN desc\n    return grp.sort_values(\"__CN__\", ascending=False).reset_index(drop=True)\n\n# ---------- Validaciones mínimas ----------\nneed_cols = [DIM_COL, CN_COL]\nmissing = [c for c in need_cols if c not in dataset.columns]\nif missing:\n    raise ValueError(f\"Faltan columnas requeridas en el Python visual: {missing}\")\n\ndf = dataset.copy()\n\n# Filtrado opcional por orden de dimensión (si llega desde el modelo)\nDIMORD_COL = \"Dimensión Finanzas Orden\"\ndim_orden = read_single_value(df, \"DimFin Orden (vis)\", default=None, coerce_num=True)\nif dim_orden is not None and DIMORD_COL in df.columns:\n    df = df[df[DIMORD_COL].astype(float) == float(dim_orden)]\n\n# ---------- Detección de \"Dimensión Finanzas\" ----------\nDIMFIN_ORDEN_MEASURE = \"DimFin Orden (vis)\"\nDIMFIN_LABEL_MEASURE = \"DimFin Label (vis)\"\n\ndim_label = read_single_value(df, DIMFIN_LABEL_MEASURE, default=None)\nif dim_label is None:\n    dim_orden = read_single_value(df, DIMFIN_ORDEN_MEASURE, default=None, coerce_num=True)\n    mapping = {0:\"Canal\", 1:\"Tienda\", 2:\"Sucursal\", 3:\"Trimestre\", 4:\"Mes\", 5:\"Año\"}\n    dim_label = mapping.get(int(dim_orden) if dim_orden is not None else -1, None)\nif dim_label is None:\n    dim_label = read_single_value(df, PARAM_DIM_MEASURE, default=None)\nif dim_label is None:\n    dim_label = read_single_value(df, PARAM_DIM_COLUMN, default=None)\nif not dim_label:\n    dim_label = \"Canal\"\n\ndim_key = normalize_text(dim_label)\nis_tienda   = (\"tienda\" in dim_key) or (\"codigo 2\" in dim_key)\nis_sucursal = (\"sucursal\" in dim_key)\n\n# ---------- Página actual ----------\npage_raw = read_single_value(df, PARAM_PAGE_MEASURE, default=None, coerce_num=False)\nif page_raw is None:\n    page_raw = read_single_value(df, PARAM_PAGE_COLUMN, default=1, coerce_num=False)\npage = coerce_int_page(page_raw, default=1)\n\n# ---------- Preparación por faceta (sin agregación: tomamos el primer valor no nulo de cada medida) ----------\nreq_measures = [CN_COL, CN_LY_COL, AP_COL, AP_LY_COL, OP_COL, OP_LY_COL, NA_COL, NA_LY_COL, TITLE_DESC_COL]\nfor c in req_measures:\n    if c in df.columns and df[c].dtype == object and c != TITLE_DESC_COL:\n        df[c] = df[c].apply(to_number)\n\nrows = []\nfor key, g in df.groupby(DIM_COL, sort=False):\n    cn    = first_non_null(g[CN_COL])    if CN_COL    in g.columns else np.nan\n    cn_ly = first_non_null(g[CN_LY_COL]) if CN_LY_COL in g.columns else np.nan\n    ap    = first_non_null(g[AP_COL])    if AP_COL    in g.columns else np.nan\n    ap_ly = first_non_null(g[AP_LY_COL]) if AP_LY_COL in g.columns else np.nan\n    op    = first_non_null(g[OP_COL])    if OP_COL    in g.columns else np.nan\n    op_ly = first_non_null(g[OP_LY_COL]) if OP_LY_COL in g.columns else np.nan\n    na    = first_non_null(g[NA_COL])    if NA_COL    in g.columns else np.nan\n    na_ly = first_non_null(g[NA_LY_COL]) if NA_LY_COL in g.columns else np.nan\n\n    mb    = (cn + ap)/cn if pd.notna(cn) and cn != 0 and pd.notna(ap)    else np.nan\n    mb_ly = (cn_ly + ap_ly)/cn_ly if pd.notna(cn_ly) and cn_ly != 0 and pd.notna(ap_ly) else np.nan\n    mo    = op/cn   if pd.notna(cn)   and cn   != 0 and pd.notna(op)    else np.nan\n    mo_ly = op_ly/cn_ly if pd.notna(cn_ly) and cn_ly != 0 and pd.notna(op_ly) else np.nan\n    mn    = na/cn   if pd.notna(cn)   and cn   != 0 and pd.notna(na)    else np.nan\n    mn_ly = na_ly/cn_ly if pd.notna(cn_ly) and cn_ly != 0 and pd.notna(na_ly) else np.nan\n\n    d_cn = (cn/cn_ly - 1) if pd.notna(cn_ly) and cn_ly not in (0, np.inf, -np.inf) else np.nan\n    d_mb = (mb - mb_ly) if pd.notna(mb) and pd.notna(mb_ly) else np.nan\n    d_mo = (mo - mo_ly) if pd.notna(mo) and pd.notna(mo_ly) else np.nan\n    d_mn = (mn - mn_ly) if pd.notna(mn) and pd.notna(mn_ly) else np.nan\n\n    # título con descripción (si llega)\n    title_desc = None\n    if TITLE_DESC_COL in g.columns:\n        td = g[TITLE_DESC_COL].dropna()\n        if len(td):\n            title_desc = str(td.iloc[0])\n\n    rows.append({\n        DIM_COL: key,\n        \"TITLE_DESC\": title_desc,\n        \"__CN__\": cn, \"__CN_LY__\": cn_ly, \"__D_CN__\": d_cn,\n        \"__AP__\": ap, \"__AP_LY__\": ap_ly,\n        \"__OP__\": op, \"__OP_LY__\": op_ly,\n        \"__NA__\": na, \"__NA_LY__\": na_ly,\n        \"__MB__\": mb, \"__MB_LY__\": mb_ly, \"__D_MB__\": d_mb,\n        \"__MO__\": mo, \"__MO_LY__\": mo_ly, \"__D_MO__\": d_mo,\n        \"__MN__\": mn, \"__MN_LY__\": mn_ly, \"__D_MN__\": d_mn\n    })\n\ngrp = pd.DataFrame(rows)\ngrp = grp.dropna(subset=[\"__CN__\", \"__MB__\", \"__MO__\", \"__MN__\"], how=\"all\")\n\n# ---------- ORDEN (cronológico o por CN) ----------\ngrp = apply_order(grp, dim_key)\n\n# ---------- Paginación ----------\ntotal_facets = len(grp)\nif total_facets == 0:\n    fig, ax = plt.subplots(figsize=(6,3)); ax.axis(\"off\")\n    ax.text(0.5, 0.5, \"Sin datos.\", ha=\"center\", va=\"center\"); plt.show(); raise SystemExit\n\ntotal_pages = max(1, math.ceil(total_facets / FACETS_PER_PAGE))\nENFORCE_TIENDA_RULE = True\nallowed_max_pages = min(4, total_pages) if (ENFORCE_TIENDA_RULE and is_tienda) else (1 if ENFORCE_TIENDA_RULE else total_pages)\npage = max(1, min(page, allowed_max_pages, total_pages))\n\nstart, end = (page-1)*FACETS_PER_PAGE, (page-1)*FACETS_PER_PAGE + FACETS_PER_PAGE\npage_df = grp.iloc[start:end].reset_index(drop=True)\n\n# ---------- Dibujo de tarjeta (Actual / Δ) ----------\nfig_w, fig_h = max(6, N_COLS*6.0), max(4, N_ROWS*4.0)\nfig, axes = plt.subplots(N_ROWS, N_COLS, figsize=(fig_w, fig_h))\nif N_ROWS == 1 and N_COLS == 1: axes = np.array([[axes]])\nelif N_ROWS == 1: axes = np.array([axes])\nelif N_COLS == 1: axes = axes.reshape(-1,1)\n\nx_label, x_act, x_badge = 0.03, 0.6,  0.80\nrow_y = [0.7, 0.5, 0.3, 0.1]  # CN, MB, MO, MN\n\ndef draw_badge(ax, x, y, text, positive=True):\n    ax.text(x, y, text, ha=\"left\", va=\"center\",\n            fontsize=BADGE_FONTSIZE, color=COLOR_BADGE_TEXT,\n            bbox=dict(boxstyle=\"round,pad=0.3\",\n                      fc=COLOR_BADGE_POS if positive else COLOR_BADGE_NEG,\n                      ec=\"none\"))\n\nfor i in range(FACETS_PER_PAGE):\n    r, c = divmod(i, N_COLS)\n    ax = axes[r, c]\n    ax.set_xlim(0,1); ax.set_ylim(0,1); ax.axis(\"off\")\n    if i >= len(page_df): continue\n    row = page_df.iloc[i]\n\n    # marco tarjeta\n    ax.add_patch(plt.Rectangle((CARD_PAD, CARD_PAD), 1-2*CARD_PAD, 1-2*CARD_PAD,\n                               fill=False, ec=COLOR_BORDER, lw=1.2))\n\n    # ----- TÍTULO -----\n    if (\"TITLE_DESC\" in row) and pd.notna(row[\"TITLE_DESC\"]) and str(row[\"TITLE_DESC\"]).strip() != \"\":\n        title_text = str(row[\"TITLE_DESC\"])\n    else:\n        title_text = str(row[DIM_COL]).upper()\n    title_size = SUCURSAL_TITLE_FONTSIZE if is_sucursal else TITLE_FONTSIZE\n\n    ax.text(0.5, 0.90, title_text, ha=\"center\", va=\"center\",\n            fontsize=title_size, color=COLOR_TEXT, wrap=True)\n\n    # ----- Filas -----\n    labels = [\"CN\",  \"Margen bruto\", \"Margen operativo\", \"Margen neto A.I.\"]\n    act_vals = [row[\"__CN__\"],  row[\"__MB__\"], row[\"__MO__\"], row[\"__MN__\"]]\n    delta_keys = [ \"__D_CN__\", \"__D_MB__\", \"__D_MO__\", \"__D_MN__\" ]\n\n    for y, label, a, dk in zip(row_y, labels, act_vals, delta_keys):\n        ax.text(x_label, y, label, ha=\"left\", va=\"center\", fontsize=ROW_LABEL_FONTSIZE, color=COLOR_SUB)\n\n        if label == \"CN\":\n            ax.text(x_act, y, fmt_int(a), ha=\"center\", va=\"center\", fontsize=VALUE_FONTSIZE, color=\"#333333\")\n        else:\n            ax.text(x_act, y, fmt_pct(a), ha=\"center\", va=\"center\", fontsize=VALUE_FONTSIZE, color=\"#333333\")\n\n        if dk is not None and pd.notna(row[dk]):\n            if label == \"CN\":\n                txt = f\"{row[dk]:+.0%}\"; pos = row[dk] >= 0\n            else:\n                txt = f\"{row[dk]*100:+.0f}p\"; pos = row[dk] >= 0\n            draw_badge(ax, x_badge, y, txt, positive=pos)\n\nplt.tight_layout(); plt.show()\n'"
+                }
+              }
+            },
+            "provider": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Python'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "lockAspect": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "keepLayerOrder": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "d9adb144164124ca2396",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KPI Export (Dim)"
+              }
+            },
+            "Property": "Dimensión"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "a93892e5a0e0d002d0e0",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Medidas Finanzas"
+              }
+            },
+            "Property": "AP (vis)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "b92a9a1782c50c0b303c",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Medidas Finanzas"
+              }
+            },
+            "Property": "AP LY (vis)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "5a31587707b0e3e0520c",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Medidas Finanzas"
+              }
+            },
+            "Property": "CN (vis)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "fa1dc350100062a6442d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Medidas Finanzas"
+              }
+            },
+            "Property": "CN LY (vis)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "1969af50a267e9405ab8",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Medidas Finanzas"
+              }
+            },
+            "Property": "Margen Bruto (vis)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "fa70580a972c0a1e4b00",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Medidas Finanzas"
+              }
+            },
+            "Property": "Margen Bruto LY (vis)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "d3e4f3691a81b93604d1",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Medidas Finanzas"
+              }
+            },
+            "Property": "Margen Neto A.I. (vis)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "c71089857e897db0a739",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Medidas Finanzas"
+              }
+            },
+            "Property": "Margen Neto A.I. LY (vis)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "10430c4a03e9aaba0dd2",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Medidas Finanzas"
+              }
+            },
+            "Property": "Margen Operativo (vis)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "4ffbf8d34c0aa548ebb4",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Medidas Finanzas"
+              }
+            },
+            "Property": "Margen Operativo LY (vis)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "8182f5d357c3889c477e",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Medidas Finanzas"
+              }
+            },
+            "Property": "NETOAI (vis)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "d100b7f0257119c49350",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Medidas Finanzas"
+              }
+            },
+            "Property": "NETOAI LY (vis)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "9b2ca47d800c3c60a2ae",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Medidas Finanzas"
+              }
+            },
+            "Property": "OP (vis)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "06efe6a0e531557be506",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Medidas Finanzas"
+              }
+            },
+            "Property": "OP LY (vis)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "ba7238647d0e1a7338ec",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Medidas Finanzas"
+              }
+            },
+            "Property": "Δ CN % (vis)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "130d1dc3e1102e08cd37",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Medidas Finanzas"
+              }
+            },
+            "Property": "Δ MB (p) (vis)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "64a1127959ba28907837",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Medidas Finanzas"
+              }
+            },
+            "Property": "Δ MN (p) (vis)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "4070fae6c963da1869c8",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Medidas Finanzas"
+              }
+            },
+            "Property": "Δ MO (p) (vis)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "c33710897222bc4a0356",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Páginas"
+              }
+            },
+            "Property": "Param Página (número)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "97f25ded1cb02404d50c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KPI Export (Dim)"
+              }
+            },
+            "Property": "Dimensión Finanzas Orden"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "58091adab8e673e32320",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Dimensión Finanzas"
+              }
+            },
+            "Property": "DimFin Orden (vis)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "1fc0d5236e0ce9a08994",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Dimensión Finanzas"
+              }
+            },
+            "Property": "Título Descripción (vis)"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

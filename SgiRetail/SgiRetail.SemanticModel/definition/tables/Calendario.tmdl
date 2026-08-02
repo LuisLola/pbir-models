@@ -312,7 +312,7 @@ table Calendario
 		source =
 				
 				VAR FechaInicio = DATE(2023, 1, 1)
-				VAR FechaFin    = DATE(2027, 12, 31)
+				VAR FechaFin    = MAX ( TODAY (), MAX ( LOL_PBISGIRETAIL[TicketData] ) )
 				RETURN
 				ADDCOLUMNS(
 				    CALENDAR(FechaInicio, FechaFin),

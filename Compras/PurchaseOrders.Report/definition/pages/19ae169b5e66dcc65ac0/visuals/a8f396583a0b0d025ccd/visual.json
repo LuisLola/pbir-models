@@ -1,0 +1,63 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "a8f396583a0b0d025ccd",
+  "position": {
+    "x": 18.900738310090237,
+    "y": 623.72436423297779,
+    "z": 1015,
+    "height": 67.202625102543067,
+    "width": 279.31091058244459,
+    "tabOrder": 1014
+  },
+  "visual": {
+    "visualType": "textFilter25A4896A83E0487089E2B90C9AE57C8A",
+    "query": {
+      "queryState": {
+        "field": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIPURCHASEORDERS"
+                    }
+                  },
+                  "Property": "DocumentNumber"
+                }
+              },
+              "queryRef": "LOL_PBIPURCHASEORDERS.DocumentNumber",
+              "nativeQueryRef": "DocumentNumber"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "general": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "920f6cc886b3b706c3b2",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIPURCHASEORDERS"
+              }
+            },
+            "Property": "DocumentNumber"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

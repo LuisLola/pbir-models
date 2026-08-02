@@ -1,0 +1,176 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "c7b9030cdfdc72670305",
+  "position": {
+    "x": 10.151405912040376,
+    "y": 0,
+    "z": 0,
+    "height": 635.84715212689264,
+    "width": 1176.6402307137707,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIPURCHASEORDERS"
+                    }
+                  },
+                  "Property": "DocumentNumber"
+                }
+              },
+              "queryRef": "LOL_PBIPURCHASEORDERS.DocumentNumber",
+              "nativeQueryRef": "DocumentNumber"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBITIENDAS"
+                    }
+                  },
+                  "Property": "NombreTienda"
+                }
+              },
+              "queryRef": "LOL_PBITIENDAS.NombreTienda",
+              "nativeQueryRef": "NombreTienda"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIPURCHASEORDERS"
+                    }
+                  },
+                  "Property": "ItemCode"
+                }
+              },
+              "queryRef": "LOL_PBIPURCHASEORDERS.ItemCode",
+              "nativeQueryRef": "ItemCode"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "Descripcion_Larga"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.Descripcion_Larga",
+              "nativeQueryRef": "Descripcion_Larga"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIPURCHASEORDERS"
+                        }
+                      },
+                      "Property": "Quantity"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(LOL_PBIPURCHASEORDERS.Quantity)",
+              "nativeQueryRef": "Suma de Quantity"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIPURCHASEORDERS"
+                        }
+                      },
+                      "Property": "OpenQuantity"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(LOL_PBIPURCHASEORDERS.OpenQuantity)",
+              "nativeQueryRef": "Suma de OpenQuantity"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PBIMODELITEM"
+                  }
+                },
+                "Property": "Descripcion_Larga"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "155.9142015692402D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_PBIPURCHASEORDERS.ItemCode"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "a23fa378b9e0eed4d704",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBITIENDAS"
+              }
+            },
+            "Property": "NombreTienda"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

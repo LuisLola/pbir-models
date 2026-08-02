@@ -1,13 +1,10 @@
 # Finanzas — Documentación del modelo
 
-> 📁 **Esta documentación está replicada en todas las ramas.** Describe el modelo tal y como está en la rama **`finanzas`**. En otras ramas la carpeta `Finanzas/` puede existir pero en un estado anterior: para trabajar sobre el modelo, sitúate en la rama indicada. Índice: [README.md](README.md).
-
 Panel **financiero** de Lola Casademunt: **Balance**, **Cuenta de Pérdidas y Ganancias** (oficial) y **P&G de Gestión**, con comparativa contra el año anterior y desglose por dimensión analítica (canal, tienda, sucursal, trimestre, mes, año).
 
 - **Proyecto:** [Finanzas](../Finanzas/) · `Finanzas.pbip`
 - **Modelo:** `Finanzas.SemanticModel` · **Informe:** `Finanzas.Report`
 - **compatibilityLevel:** 1606 · **Cultura:** es-ES · **Modo:** Import
-- **Rama:** `finanzas`
 - **RLS:** ninguno
 
 > **Modelo en migración.** Los apuntes contables se están moviendo de la vista HANA `JournalEntryItem` a la tabla de staging SQL `LOL_PBIFINANCIALENTRIES`. Todas las medidas ya leen la tabla nueva; quedan piezas apuntando a la vieja (ver §7).

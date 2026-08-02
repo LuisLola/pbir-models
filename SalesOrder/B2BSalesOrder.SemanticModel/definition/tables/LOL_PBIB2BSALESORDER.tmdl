@@ -72,11 +72,6 @@ table LOL_PBIB2BSALESORDER
 		summarizeBy: none
 		sourceColumn: DocDate
 
-		variation Variación
-			isDefault
-			relationship: 0fbeb1a8-1c44-4fd1-89f7-019d17d93239
-			defaultHierarchy: LocalDateTable_22461c45-eb28-4f72-93c8-3e755961f3f7.'Jerarquía de fechas'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
@@ -396,10 +391,21 @@ table LOL_PBIB2BSALESORDER
 		annotation SummarizationSetBy = User
 
 	column ImporteBruto_LC
-		dataType: string
+		dataType: double
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
 		lineageTag: 391269ac-a329-4237-8c2a-a266d1ba473a
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: ImporteBruto_LC
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column KPedidoLinea = IF ( NOT ISBLANK ( LOL_PBIB2BSALESORDER[LineNum] ), LOL_PBIB2BSALESORDER[DocEntry] & "-" & LOL_PBIB2BSALESORDER[LineNum] )
+		dataType: string
+		isHidden
+		lineageTag: d74bc4c3-e16a-430a-bc03-1fac4f6db895
+		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
 

@@ -1,0 +1,99 @@
+table Calendario
+	lineageTag: d1ca0000-0000-4000-8000-0000000000c1
+
+	column Date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: d1ca0000-0000-4000-8000-0000000000c2
+		summarizeBy: none
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Año
+		dataType: int64
+		formatString: 0
+		lineageTag: d1ca0000-0000-4000-8000-0000000000c3
+		summarizeBy: none
+		sourceColumn: [Año]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesNum
+		dataType: int64
+		formatString: 0
+		lineageTag: d1ca0000-0000-4000-8000-0000000000c4
+		summarizeBy: none
+		sourceColumn: [MesNum]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesNombre
+		dataType: string
+		lineageTag: d1ca0000-0000-4000-8000-0000000000c5
+		summarizeBy: none
+		sourceColumn: [MesNombre]
+		sortByColumn: MesNum
+
+		annotation SummarizationSetBy = Automatic
+
+	column AñoMes
+		dataType: string
+		lineageTag: d1ca0000-0000-4000-8000-0000000000c6
+		summarizeBy: none
+		sourceColumn: [AñoMes]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiaSemana
+		dataType: int64
+		formatString: 0
+		lineageTag: d1ca0000-0000-4000-8000-0000000000c7
+		summarizeBy: none
+		sourceColumn: [DiaSemana]
+
+		annotation SummarizationSetBy = Automatic
+
+	column EsFinDeSemana
+		dataType: boolean
+		lineageTag: d1ca0000-0000-4000-8000-0000000000c8
+		summarizeBy: none
+		sourceColumn: [EsFinDeSemana]
+
+		annotation SummarizationSetBy = Automatic
+
+	column EsLaborable
+		dataType: int64
+		formatString: 0
+		lineageTag: d1ca0000-0000-4000-8000-0000000000c9
+		summarizeBy: none
+		sourceColumn: [EsLaborable]
+
+		annotation SummarizationSetBy = Automatic
+
+	column EsFestivo
+		dataType: int64
+		formatString: 0
+		lineageTag: d1ca0000-0000-4000-8000-0000000000ca
+		summarizeBy: none
+		sourceColumn: [EsFestivo]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calendario = calculated
+		mode: import
+		source =
+				ADDCOLUMNS (
+				    CALENDAR ( MIN ( LOL_TRANSPORT_TRACKING[fecha_lanzamiento] ), MAX ( TODAY (), MAX ( LOL_TRANSPORT_TRACKING[fecha_entregado] ) ) ),
+				    "Año", YEAR ( [Date] ),
+				    "MesNum", MONTH ( [Date] ),
+				    "MesNombre", FORMAT ( [Date], "mmm", "es-ES" ),
+				    "AñoMes", FORMAT ( [Date], "YYYY-MM" ),
+				    "DiaSemana", WEEKDAY ( [Date], 2 ),
+				    "EsFinDeSemana", IF ( WEEKDAY ( [Date], 2 ) >= 6, TRUE, FALSE ),
+				    "EsLaborable", IF ( WEEKDAY ( [Date], 2 ) < 6, 1, 0 ),
+				    "EsFestivo", IF ( COUNTROWS ( FILTER ( Festivos, Festivos[Fecha] = [Date] ) ) > 0, 1, 0 )
+				)
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,182 @@
+{
+  "name": "Lola Transportes Claro",
+  "dataColors": [
+    "#DFA0C9",
+    "#1E1A22",
+    "#C77FA8",
+    "#B5638F",
+    "#8A4A6E",
+    "#BDBDBD",
+    "#9A9A9A",
+    "#6B6470"
+  ],
+  "foreground": "#1B141F",
+  "foregroundNeutralSecondary": "#6B6470",
+  "foregroundNeutralTertiary": "#9A93A0",
+  "background": "#FFFFFF",
+  "backgroundLight": "#F5EEF4",
+  "backgroundNeutral": "#F1ECF1",
+  "tableAccent": "#DFA0C9",
+  "good": "#1E1A22",
+  "neutral": "#C77FA8",
+  "bad": "#B5638F",
+  "maximum": "#DFA0C9",
+  "minimum": "#F0D4E6",
+  "hyperlink": "#C77FA8",
+  "textClasses": {
+    "callout": {
+      "fontFace": "Montserrat SemiBold",
+      "color": "#1B141F"
+    },
+    "title": {
+      "fontFace": "Montserrat",
+      "color": "#1B141F"
+    },
+    "largeTitle": {
+      "fontFace": "Montserrat",
+      "color": "#1B141F"
+    },
+    "header": {
+      "fontFace": "Montserrat",
+      "color": "#6B6470"
+    },
+    "label": {
+      "fontFace": "Montserrat",
+      "color": "#1B141F"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#E7DCE6"
+              }
+            },
+            "radius": 14
+          }
+        ],
+        "dropShadow": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#1B141F"
+              }
+            },
+            "position": "Outer",
+            "preset": "Custom",
+            "shadowSpread": 2,
+            "shadowBlur": 12,
+            "angle": 90,
+            "transparency": 90
+          }
+        ],
+        "visualHeader": [
+          {
+            "show": false
+          }
+        ],
+        "title": [
+          {
+            "show": true,
+            "alignment": "left",
+            "fontColor": {
+              "solid": {
+                "color": "#1B141F"
+              }
+            },
+            "fontFamily": "Montserrat",
+            "fontSize": 12
+          }
+        ]
+      }
+    },
+    "cardVisual": {
+      "*": {
+        "value": [
+          {
+            "fontFamily": "Montserrat SemiBold",
+            "color": {
+              "solid": {
+                "color": "#1B141F"
+              }
+            }
+          }
+        ],
+        "label": [
+          {
+            "color": {
+              "solid": {
+                "color": "#6B6470"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "pivotTable": {
+      "*": {
+        "columnHeaders": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#6B6470"
+              }
+            },
+            "fontSize": 11,
+            "bold": false
+          }
+        ],
+        "grid": [
+          {
+            "gridVertical": false,
+            "gridHorizontalColor": {
+              "solid": {
+                "color": "#E7DCE6"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "tableEx": {
+      "*": {
+        "columnHeaders": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#6B6470"
+              }
+            },
+            "fontSize": 11
+          }
+        ],
+        "grid": [
+          {
+            "gridVertical": false,
+            "gridHorizontalColor": {
+              "solid": {
+                "color": "#E7DCE6"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

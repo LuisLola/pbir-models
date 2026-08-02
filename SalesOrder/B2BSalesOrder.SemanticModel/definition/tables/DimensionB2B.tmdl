@@ -1,0 +1,44 @@
+table DimensionB2B
+	lineageTag: b1a2c3d4-0300-4300-8300-000000000300
+
+	column Dimension
+		dataType: string
+		lineageTag: b1a2c3d4-0301-4301-8301-000000000301
+		summarizeBy: none
+		sourceColumn: [Dimension]
+		sortByColumn: Orden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Orden
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b1a2c3d4-0302-4302-8302-000000000302
+		summarizeBy: none
+		sourceColumn: [Orden]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimensionB2B = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Dimension", STRING,
+				    "Orden", INTEGER,
+				    {
+				        { "Categoría", 0 },
+				        { "Familia agregada", 1 },
+				        { "Familia", 2 },
+				        { "Subfamilia", 3 },
+				        { "Marca", 4 },
+				        { "Cliente", 5 },
+				        { "Grupo cliente", 6 },
+				        { "País", 7 },
+				        { "Agente", 8 },
+				        { "Temporada", 9 }
+				    }
+				)
+
+	annotation PBI_Id = b1a2c3d403004300830000000300
+

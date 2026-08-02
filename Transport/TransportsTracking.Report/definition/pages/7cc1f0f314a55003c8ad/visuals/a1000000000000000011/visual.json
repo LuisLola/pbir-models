@@ -1,0 +1,309 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "a1000000000000000011",
+  "position": {
+    "x": 647,
+    "y": 508,
+    "z": 3000,
+    "height": 205,
+    "width": 621,
+    "tabOrder": 10000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_TRANSPORT_TRACKING"
+                    }
+                  },
+                  "Property": "transportista_norm"
+                }
+              },
+              "queryRef": "LOL_TRANSPORT_TRACKING.transportista_norm",
+              "nativeQueryRef": "Transportista",
+              "active": true,
+              "displayName": "Transportista"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_TRANSPORT_TRACKING"
+                    }
+                  },
+                  "Property": "estado"
+                }
+              },
+              "queryRef": "LOL_TRANSPORT_TRACKING.estado",
+              "nativeQueryRef": "Estado",
+              "active": false,
+              "displayName": "Estado"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_TRANSPORT_TRACKING"
+                    }
+                  },
+                  "Property": "pais_destino"
+                }
+              },
+              "queryRef": "LOL_TRANSPORT_TRACKING.pais_destino",
+              "nativeQueryRef": "pais_destino",
+              "active": false
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Envios Totales"
+                }
+              },
+              "queryRef": "_Medidas.Envios Totales",
+              "nativeQueryRef": "Envios"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "% A Tiempo"
+                }
+              },
+              "queryRef": "_Medidas.% A Tiempo",
+              "nativeQueryRef": "% SLA"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Tiempo Entrega Media (Lab)"
+                }
+              },
+              "queryRef": "_Medidas.Tiempo Entrega Media (Lab)",
+              "nativeQueryRef": "Tiempo Entrega Media (Lab)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Incidencias Bloqueantes"
+                }
+              },
+              "queryRef": "_Medidas.Incidencias Bloqueantes",
+              "nativeQueryRef": "Incid."
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Medidas"
+                  }
+                },
+                "Property": "Envios Totales"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "LOL_TRANSPORT_TRACKING.transportista_norm"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_TRANSPORT_TRACKING"
+                    }
+                  },
+                  "Property": "transportista_norm"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "LOL_TRANSPORT_TRACKING.estado"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_TRANSPORT_TRACKING"
+                    }
+                  },
+                  "Property": "estado"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "LOL_TRANSPORT_TRACKING.pais_destino"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          }
+        ],
+        "root": {}
+      }
+    ],
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "133.74188641047192D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_TRANSPORT_TRACKING.transportista_norm"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "85.11112142243988D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Medidas.Envios Totales"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "78.11109526386366D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Medidas.% A Tiempo"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "132.11107765636228D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Medidas.Incidencias Bloqueantes"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Rendimiento por transportista'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.6
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

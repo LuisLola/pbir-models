@@ -1,0 +1,396 @@
+table LOL_PBIFINANCIALMODEL
+	lineageTag: e2a5bc47-2388-4ab5-bf3c-bd597bb6417d
+
+	measure 'Remove Blanks' =
+			
+			SWITCH(TRUE(),
+			AND(ISINSCOPE(LOL_PBIFINANCIALMODEL[Nivel6_Limpio]),ISBLANK(VALUES(LOL_PBIFINANCIALMODEL[Nivel6_Limpio]))),BLANK(),
+			1)
+		formatString: 0
+		lineageTag: 07c6d055-4ba8-42ad-8cb2-85802e10d5b5
+
+		changedProperty = IsHidden
+
+	measure EntityBrowseDepth = ```
+			
+			    ISINSCOPE ( LOL_PBIFINANCIALMODEL[NIVEL_1])
+			    + ISINSCOPE ( LOL_PBIFINANCIALMODEL[NIVEL_2] )
+			    + ISINSCOPE ( LOL_PBIFINANCIALMODEL[NIVEL_3] )
+			    + ISINSCOPE ( LOL_PBIFINANCIALMODEL[NIVEL_4] )
+			    + ISINSCOPE( LOL_PBIFINANCIALMODEL[Nivel5_Limpio])
+			    + ISINSCOPE( LOL_PBIFINANCIALMODEL[Nivel6_Limpio])
+			```
+		formatString: 0
+		lineageTag: f1a0a7b4-74f9-44e4-9f23-da629ce6f91d
+
+		changedProperty = IsHidden
+
+	measure EntityRowDepth =
+			
+			MAX(LOL_PBIFINANCIALMODEL[NIVEL]) +1
+		formatString: 0
+		lineageTag: d339b17f-ea08-4143-93c8-e58065cc13d0
+
+		changedProperty = IsHidden
+
+	column CLAVE_CUENTA_SUPERIOR
+		dataType: int64
+		formatString: 0
+		lineageTag: 172ed764-ed47-4eec-b77d-918802609333
+		summarizeBy: sum
+		sourceColumn: CLAVE_CUENTA_SUPERIOR
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CODIGO_CUENTA
+		dataType: string
+		lineageTag: b93bc2c5-54b7-45bf-9502-79bdca305528
+		summarizeBy: none
+		sourceColumn: CODIGO_CUENTA
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CODIGO_INTERNO_CUENTA
+		dataType: string
+		lineageTag: 61ee4e0c-1a9d-4ea3-a75a-8989adac49ba
+		summarizeBy: none
+		sourceColumn: CODIGO_INTERNO_CUENTA
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CODIGO_MODELO
+		dataType: int64
+		formatString: 0
+		lineageTag: b704ba48-d615-4e9e-a4f4-40efcca65445
+		summarizeBy: sum
+		sourceColumn: CODIGO_MODELO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Descr
+		dataType: string
+		lineageTag: b8446b78-be7e-47d6-8c53-24b3d97e9f5c
+		summarizeBy: none
+		sourceColumn: Descr
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dummy
+		dataType: string
+		lineageTag: 09a21a9c-afc9-498a-bc7f-b316eedda35c
+		summarizeBy: none
+		sourceColumn: Dummy
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column NIVEL
+		dataType: int64
+		formatString: 0
+		lineageTag: 2e13ff61-73bd-4f8f-a853-e7807d3166f1
+		summarizeBy: max
+		sourceColumn: NIVEL
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column NIVEL_1
+		dataType: string
+		lineageTag: f244397b-33f2-4a5e-a90c-0b8e44d3f5ba
+		summarizeBy: none
+		sourceColumn: NIVEL_1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column NIVEL_2
+		dataType: string
+		lineageTag: 83268a50-38b6-4aac-96eb-0035708c2489
+		summarizeBy: none
+		sourceColumn: NIVEL_2
+		sortByColumn: ORDER_N2
+
+		changedProperty = IsHidden
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column NIVEL_3
+		dataType: string
+		lineageTag: 2e846bde-2e86-4506-a85b-66a64efbdad1
+		summarizeBy: none
+		sourceColumn: NIVEL_3
+		sortByColumn: ORDER_N3
+
+		changedProperty = IsHidden
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column NIVEL_4
+		dataType: string
+		lineageTag: 70b84202-c278-4e13-a96d-8af437825037
+		summarizeBy: none
+		sourceColumn: NIVEL_4
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column NIVEL_5
+		dataType: string
+		lineageTag: 3e33be42-563a-4797-8c86-a1034141a861
+		summarizeBy: none
+		sourceColumn: NIVEL_5
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOMBRE_CUENTA
+		dataType: string
+		lineageTag: f2227f8f-8bd7-43ea-b07c-5465b04b5d11
+		summarizeBy: none
+		sourceColumn: NOMBRE_CUENTA
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOMBRE_MODELO
+		dataType: string
+		lineageTag: 0891e956-1072-4b71-b6c6-069bd5147d0e
+		summarizeBy: none
+		sourceColumn: NOMBRE_MODELO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column NUMERADOR
+		dataType: int64
+		formatString: 0
+		lineageTag: 6816178c-8e02-49a9-9856-d2c1405e0310
+		summarizeBy: sum
+		sourceColumn: NUMERADOR
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_N2
+		dataType: int64
+		formatString: 0
+		lineageTag: 700237d8-a5f0-4cfd-a152-3884102ae4b5
+		summarizeBy: sum
+		sourceColumn: ORDER_N2
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_N3
+		dataType: int64
+		formatString: 0
+		lineageTag: 417c836f-9af2-4e99-bdf5-041c7254ad10
+		summarizeBy: sum
+		sourceColumn: ORDER_N3
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubSum
+		dataType: string
+		lineageTag: f7d68abf-7192-4cb5-bc68-2b163f37b575
+		summarizeBy: none
+		sourceColumn: SubSum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column U_LOL_CLASSACCT
+		dataType: string
+		lineageTag: b198304d-36f0-4bb7-9302-77e5f6f7304c
+		summarizeBy: none
+		sourceColumn: U_LOL_CLASSACCT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column VISUAL_ORDER
+		dataType: int64
+		formatString: 0
+		lineageTag: 818f0ead-b9e1-4713-af5c-6c08200c897a
+		summarizeBy: sum
+		sourceColumn: VISUAL_ORDER
+
+		changedProperty = SortByColumn
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nivel5_Limpio =
+			
+			VAR x0 = TRIM('LOL_PBIFINANCIALMODEL'[NIVEL_5])
+			VAR x1 = SUBSTITUTE(x0, UNICHAR(160), " ")
+			VAR x2 = TRIM(x1)
+			RETURN IF( ISBLANK(x2) || x2 = "" ,CONCATENATE(CONCATENATE( LOL_PBIFINANCIALMODEL[CODIGO_CUENTA],"-"),LOL_PBIFINANCIALMODEL[NOMBRE_CUENTA]), x2 )
+		lineageTag: cbec83a0-2100-456c-a30c-04acefe74402
+		summarizeBy: none
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nivel6_Limpio =
+			
+			VAR x0 = TRIM('LOL_PBIFINANCIALMODEL'[NIVEL_5])
+			VAR x1 = SUBSTITUTE(x0, UNICHAR(160), " ")
+			VAR x2 = TRIM(x1)
+			RETURN IF( ISBLANK(x2) || x2 = "" && LOL_PBIFINANCIALMODEL[SubSum]="Y", BLANK() , CONCATENATE( CONCATENATE(LOL_PBIFINANCIALMODEL[CODIGO_CUENTA],"-"),LOL_PBIFINANCIALMODEL[NOMBRE_CUENTA]) )
+		lineageTag: 3c6d5dc5-bfec-4091-b8c2-3236dbebdf7b
+		summarizeBy: none
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PyG_POSICION_A RESULTADO DE EXPLOTACION' =
+			
+			LOOKUPVALUE(LOL_PBIFINANCIALMODEL[VISUAL_ORDER],LOL_PBIFINANCIALMODEL[NIVEL_1],"A) RESULTADO DE EXPLOTACIÓN")
+		formatString: 0
+		lineageTag: 866c1321-a0b4-4053-8922-3c406a60b753
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PyG_POSICION_B RESULTADO FINANCIERO' =
+			
+			LOOKUPVALUE(LOL_PBIFINANCIALMODEL[VISUAL_ORDER],LOL_PBIFINANCIALMODEL[NIVEL_1],"B) RESULTADO FINANCIERO")
+		formatString: 0
+		lineageTag: 757f2e9f-4849-41ba-a493-613954f15be8
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PyG_POSICION_C RESULTADO ANTES DE IMPUESTOS' =
+			
+			LOOKUPVALUE(LOL_PBIFINANCIALMODEL[VISUAL_ORDER],LOL_PBIFINANCIALMODEL[NIVEL_1],"C) RESULTADO ANTES DE IMPUESTOS (A+B)")
+		formatString: 0
+		lineageTag: 17f6e6e7-54f4-47ab-a914-d798111bd5cd
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PyG_POSICION_D RESULTADO DEL EJERICIO' =
+			
+			LOOKUPVALUE(LOL_PBIFINANCIALMODEL[VISUAL_ORDER],LOL_PBIFINANCIALMODEL[NIVEL_1],"D) RESULTADO DEL EJERCICIO (C+17)")
+		formatString: 0
+		lineageTag: f89540b3-b796-4e8d-870a-c0a3389bef1a
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column CORRECION = IF(LOL_PBIFINANCIALMODEL[CODIGO_MODELO]=4 || LOL_PBIFINANCIALMODEL[CODIGO_MODELO]=6, -1, 1 )
+		formatString: 0
+		lineageTag: 5b478f32-eb47-40a4-9b87-fceb5f1f5844
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column NIVEL3_BOLD =
+			
+			IF(LOL_PBIFINANCIALMODEL[NIVEL_3]="A) RESULTADO DE EXPLOTACIÓN",CONCATENATE(CONCATENATE(CONCATENATE(CONCATENATE(CONCATENATE(CONCATENATE(CONCATENATE(CONCATENATE(CONCATENATE(CONCATENATE(CONCATENATE(CONCATENATE(CONCATENATE(CONCATENATE(CONCATENATE(CONCATENATE(CONCATENATE(CONCATENATE(CONCATENATE(CONCATENATE(CONCATENATE(CONCATENATE(CONCATENATE(CONCATENATE(CONCATENATE(CONCATENATE(UNICHAR(119808),UNICHAR(41))," "),UNICHAR(119825)),UNICHAR(119812)),UNICHAR(119826)),UNICHAR(119828)),UNICHAR(119819)),UNICHAR(119827)),UNICHAR(119808)),UNICHAR(119811)),UNICHAR(119822))," "),UNICHAR(119811)),UNICHAR(119812))," "),UNICHAR(119812)),UNICHAR(119831)),UNICHAR(119823)),UNICHAR(119819)),UNICHAR(119822)),UNICHAR(119827)),UNICHAR(119808)),UNICHAR(119810)),UNICHAR(119816)),UNICHAR(119822)),UNICHAR(119821))
+			,LOL_PBIFINANCIALMODEL[NIVEL_3])
+		lineageTag: 5d485aae-a2d1-47a8-b457-ac99642ae4d7
+		summarizeBy: none
+		sortByColumn: ORDER_N3
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column PyGG_POSICION_MARGENBRUTO =
+			
+			LOOKUPVALUE(LOL_PBIFINANCIALMODEL[VISUAL_ORDER],LOL_PBIFINANCIALMODEL[NIVEL_1],"MARGEN BRUTO")
+		formatString: 0
+		lineageTag: 37c672c1-db85-4026-a89b-3e11fc161025
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PyGG_POSICION TOTALGASTOS' =
+			
+			LOOKUPVALUE(LOL_PBIFINANCIALMODEL[VISUAL_ORDER],LOL_PBIFINANCIALMODEL[NIVEL_1],"TOTAL GASTOS DE EXPLOTACIÓN")
+		formatString: 0
+		lineageTag: 7678a504-28af-4291-842a-12c9b8d8fe01
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy PLAN_DE_CUENTA
+		lineageTag: 977af3c9-c099-4640-ac3b-343f99b7e00a
+
+		level NIVEL_1
+			lineageTag: 007967d2-4f5f-4062-929e-1f97d48f54aa
+			column: NIVEL_1
+
+		level NIVEL_2
+			lineageTag: c2fc75c3-9287-4bb3-bbae-7c86eabfe83a
+			column: NIVEL_2
+
+		level NIVEL_3
+			lineageTag: f5c8c076-69dc-4297-99ab-de9ff33b6a24
+			column: NIVEL_3
+
+		level NIVEL_4
+			lineageTag: 7a0a2340-1174-4ce2-898a-d9c056cb68ac
+			column: NIVEL_4
+
+		level Nivel5_Limpio
+			lineageTag: 31ad8d2a-1dc1-4ccc-9731-d444ed4c207b
+			column: Nivel5_Limpio
+
+		level Nivel6_Limpio
+			lineageTag: 09be11b5-22d7-4b62-a665-98d4198818d6
+			column: Nivel6_Limpio
+
+		level NIVEL3_BOLD
+			lineageTag: 744b7ed4-e429-4fe7-84ac-0e46562fef81
+			column: NIVEL3_BOLD
+
+		changedProperty = IsHidden
+
+	partition LOL_PBIFINANCIALMODEL = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin"),
+				    dbo_LOL_PBIFINANCIALMODEL = Origen{[Schema="dbo",Item="LOL_PBIFINANCIALMODEL"]}[Data],
+				    #"Tipos" = Table.TransformColumnTypes(dbo_LOL_PBIFINANCIALMODEL, {{"CODIGO_MODELO", Int64.Type}, {"NUMERADOR", Int64.Type}, {"NIVEL", Int64.Type}, {"CLAVE_CUENTA_SUPERIOR", Int64.Type}, {"VISUAL_ORDER", Int64.Type}, {"ORDER_N2", Int64.Type}, {"ORDER_N3", Int64.Type}})
+				in
+				    #"Tipos"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegación
+

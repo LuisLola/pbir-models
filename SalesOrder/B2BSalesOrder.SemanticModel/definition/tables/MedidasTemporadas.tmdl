@@ -19,27 +19,23 @@ table MedidasTemporadas
 			
 			VAR TemporadaSel = [TemporadaSeleccionada]
 			RETURN
-			    CALCULATE (
-			        MAX ( 'LOL_PBISEASON'[CompareSeason] ),
-			        'LOL_PBISEASON'[Code] = TemporadaSel
+			    IF (
+			        ISBLANK ( TemporadaSel ),
+			        BLANK (),
+			        CALCULATE (
+			            SELECTEDVALUE ( 'LOL_PBISEASON'[CompareSeason] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
+			            'LOL_PBISEASON'[Code] = TemporadaSel
+			        )
 			    )
 		displayFolder: Seleccion
 		lineageTag: 4c4136fc-3711-4904-bdf6-b685b731fdcc
 
 	measure TemporadaAnteriorTotal =
 			
-			VAR TemporadaSel = [TemporadaSeleccionada]
-			VAR _val =
-			    CALCULATE (
-			        MAX ( 'LOL_PBISEASON'[CompareSeason] ),
-			        KEEPFILTERS ( 'LOL_PBISEASON'[Code] = TemporadaSel )
-			    )
+			VAR _val = [TemporadaAnterior]
 			RETURN
-			    IF (
-			        NOT ISBLANK ( TemporadaSel ),
-			        _val & " Total",
-			        "Total"
-			    )
+			    IF ( ISBLANK ( _val ), "Total", _val & " Total" )
 		displayFolder: Seleccion
 		lineageTag: ed219fef-99a4-4776-b0f3-b55cf48e5314
 
@@ -47,9 +43,14 @@ table MedidasTemporadas
 			
 			VAR TemporadaSel = [TemporadaSeleccionada]
 			RETURN
-			    CALCULATE (
-			        MAX ( 'LOL_PBISEASON'[TemporadaAnterior] ),
-			        'LOL_PBISEASON'[Code] = TemporadaSel
+			    IF (
+			        ISBLANK ( TemporadaSel ),
+			        BLANK (),
+			        CALCULATE (
+			            SELECTEDVALUE ( 'LOL_PBISEASON'[TemporadaAnterior] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
+			            'LOL_PBISEASON'[Code] = TemporadaSel
+			        )
 			    )
 		displayFolder: Seleccion
 		lineageTag: 5055189e-b34c-4dc9-8060-c2e75a822fef
@@ -110,6 +111,147 @@ table MedidasTemporadas
 			    IF ( ISBLANK ( Pas ), "T. pasada", Pas )
 		displayFolder: Cabeceras
 		lineageTag: b9c0d1e2-f3a4-5b6c-7d8e-9f0a1b2c3d4e
+
+	measure ValidacionFechaInicioTemporadaSel =
+			
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel ),
+			        BLANK (),
+			        CALCULATE (
+			            MAX ( 'LOL_PBISEASON'[Fin] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
+			            'LOL_PBISEASON'[Code] = TemporadaSel
+			        )
+			    )
+		formatString: D MMM YYYY
+		displayFolder: Validacion
+		lineageTag: fbe4bf9f-4ccc-4e2d-a1c4-84a2c03b48cf
+
+	measure ValidacionFechaFinTemporadaSel =
+			
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel ),
+			        BLANK (),
+			        CALCULATE (
+			            MAX ( 'LOL_PBIB2BSALESORDER'[DocDate] ),
+			            REMOVEFILTERS ( 'Calendario' ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
+			            REMOVEFILTERS ( 'LOL_PBIB2BSALESORDER' ),
+			            'LOL_PBIB2BSALESORDER'[Canceled] <> "Y",
+			            'LOL_PBIB2BSALESORDER'[IsIncidence] <> "Y",
+			            'LOL_PBIB2BSALESORDER'[Season] = TemporadaSel
+			        )
+			    )
+		formatString: D MMM YYYY
+		displayFolder: Validacion
+		lineageTag: 4d00277b-cf68-4fb6-bfeb-6124bcbde9a8
+
+	measure ValidacionFechaInicioTemporadaAnt =
+			
+			VAR TemporadaAnt = [TemporadaAnterior]
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaAnt ),
+			        BLANK (),
+			        CALCULATE (
+			            MAX ( 'LOL_PBISEASON'[Fin] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
+			            'LOL_PBISEASON'[Code] = TemporadaAnt
+			        )
+			    )
+		formatString: D MMM YYYY
+		displayFolder: Validacion
+		lineageTag: 088eb999-353b-40b8-8b8d-7dfa54b159e3
+
+	measure ValidacionFechaFinTemporadaAnt =
+			
+			VAR TemporadaAnt = [TemporadaAnterior]
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaAnt ),
+			        BLANK (),
+			        CALCULATE (
+			            MAX ( 'LOL_PBIB2BSALESORDER'[DocDate] ),
+			            REMOVEFILTERS ( 'Calendario' ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
+			            REMOVEFILTERS ( 'LOL_PBIB2BSALESORDER' ),
+			            'LOL_PBIB2BSALESORDER'[Canceled] <> "Y",
+			            'LOL_PBIB2BSALESORDER'[IsIncidence] <> "Y",
+			            'LOL_PBIB2BSALESORDER'[Season] = TemporadaAnt
+			        )
+			    )
+		formatString: D MMM YYYY
+		displayFolder: Validacion
+		lineageTag: cc2550bb-8387-4878-8268-428ec2a8eac1
+
+	measure ValidacionDiasTemporadaSel =
+			
+			VAR FechaInicio = [ValidacionFechaInicioTemporadaSel]
+			VAR FechaCorte = [FechaLimiteSeleccionada]
+			RETURN
+			    IF (
+			        ISBLANK ( FechaInicio ) || ISBLANK ( FechaCorte ) || FechaCorte < FechaInicio,
+			        BLANK (),
+			        DATEDIFF ( FechaInicio, FechaCorte, DAY ) + 1
+			    )
+		formatString: #,##0
+		displayFolder: Validacion
+		lineageTag: 3e2d435a-d7ae-44d1-b596-708548334e07
+
+	measure ValidacionFechaCorteAnt12M =
+			
+			VAR FechaCorte = [FechaLimiteSeleccionada]
+			RETURN
+			    IF ( ISBLANK ( FechaCorte ), BLANK (), EDATE ( FechaCorte, -12 ) )
+		formatString: D MMM YYYY
+		displayFolder: Validacion
+		lineageTag: 5ed7a61a-a97f-4aec-84a4-a34d32619210
+
+	measure ValidacionFechaFinAntDiasEq =
+			
+			VAR FechaInicioAnt = [ValidacionFechaInicioTemporadaAnt]
+			VAR DiasTemporada = [ValidacionDiasTemporadaSel]
+			RETURN
+			    IF (
+			        ISBLANK ( FechaInicioAnt ) || ISBLANK ( DiasTemporada ),
+			        BLANK (),
+			        FechaInicioAnt + DiasTemporada - 1
+			    )
+		formatString: D MMM YYYY
+		displayFolder: Validacion
+		lineageTag: 4d7d1423-a788-481a-8559-6a65ba5614bc
+
+	measure ValidacionRangoTemporadaAnt =
+			
+			VAR TemporadaAnt = [TemporadaAnterior]
+			VAR InicioAnt = [ValidacionFechaInicioTemporadaAnt]
+			VAR FinAntDiasEq = [ValidacionFechaFinAntDiasEq]
+			VAR Corte12M = [ValidacionFechaCorteAnt12M]
+			VAR InicioSel = [ValidacionFechaInicioTemporadaSel]
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaAnt ) || ISBLANK ( InicioAnt ),
+			        BLANK (),
+			        TemporadaAnt
+			            & " | Inicio sel: "
+			            & FORMAT ( InicioSel, "dd/MM/yyyy" )
+			            & " | Dias eq: "
+			            & FORMAT ( InicioAnt, "dd/MM/yyyy" )
+			            & " - "
+			            & FORMAT ( FinAntDiasEq, "dd/MM/yyyy" )
+			            & " | Corte 12M: <= "
+			            & FORMAT ( Corte12M, "dd/MM/yyyy" )
+			    )
+		displayFolder: Validacion
+		lineageTag: 729cb414-b2b2-4d10-9bff-8cc7f122ddb5
+
+	measure ValidacionVersionRangos = "Rangos por LOL_PBISEASON[Fin] v3"
+		displayFolder: Validacion
+		lineageTag: 2ada80f9-10e9-4c31-9f04-038f55ff9d7a
 
 	column Value
 		lineageTag: 3915f981-843f-41fe-b265-cfed01e0e2ac

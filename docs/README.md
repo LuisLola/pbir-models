@@ -1,63 +1,67 @@
-# Documentación — pbir-models
+# Documentación técnica — pbir-models
 
-Documentación técnica de los modelos semánticos (Power BI / PBIP-TMDL) de Lola Casademunt en este repositorio.
+Documentación de los modelos semánticos (Power BI / PBIP-TMDL) de Lola Casademunt.
 
-← Volver al [README de la rama](../README.md) · Índice general con accesos directos: [README de `main`](https://github.com/LuisLola/pbir-models/tree/main)
+← [README del repositorio](../README.md)
 
 *Última revisión: 2 de agosto de 2026.*
 
-## Estructura del repositorio
+## Los seis modelos
 
-El repo está organizado **una rama por modelo** (cambiar de rama muestra/oculta las carpetas de modelo correspondientes — comportamiento esperado, no pérdida de datos). Las ramas más recientes arrastran además las carpetas de los modelos anteriores en el estado que tenían al bifurcarse, así que **la carpeta de un modelo no está al día en todas las ramas donde aparece**.
-
-| Rama | Carpetas presentes | Modelo(s) que esta rama tiene **al día** |
-|---|---|---|
-| `main` | SalesOrder, SgiRetail | — (estado de 2026-06-09) |
-| `serviceplan` | ServicePlan | ServicePlan |
-| `sgiretail` | SgiRetail | SgiRetail |
-| `transport` | Transport, SalesOrder | Transport |
-| `salesorder` | SalesOrder, SgiRetail, Transport | — (SalesOrder quedó atrás, ver nota) |
-| `compras` | Compras, SalesOrder, SgiRetail, Transport | SalesOrder |
-| `finanzas` | Finanzas, Compras, SalesOrder, SgiRetail, Transport | Finanzas, Compras, SalesOrder |
-
-> ⚠️ **La rama `salesorder` está por detrás.** El trabajo posterior sobre **B2BSalesOrder** (embudo por documento, devoluciones, página ejecutiva de cumplimiento) se commiteó sobre la línea `compras` → `finanzas`, no sobre `salesorder`. El estado canónico de SalesOrder está en `compras` y `finanzas` (mismo árbol); `salesorder` se quedó en 2026-07-16.
->
-> ⚠️ **`Compras` también va por delante en `finanzas`.** La rama `compras` no tiene la Página 3 del informe (la matriz que valida la cadena Pedido→Entrada→Factura). El modelo semántico es el mismo en las dos.
->
-> ⚠️ **`compras` y `finanzas` no están pusheadas** a GitHub: solo existen en local.
-
-## Modelos documentados
-
-**La carpeta `docs/` completa está replicada idéntica en las 7 ramas.** Da igual en cuál estés: siempre ves la documentación de los 6 modelos. Lo que sí cambia por rama son las **carpetas de modelo** — ahí es donde tienes que situarte para trabajar.
-
-| Modelo | Carpeta | Medidas | Documentación | Rama donde el modelo está al día |
-|---|---|---:|---|---|
-| **Plan de Servicio B2B** | ServicePlan/ | 23 | [ServicePlan-Plan de Servicio B2B.md](ServicePlan-Plan%20de%20Servicio%20B2B.md) | `serviceplan` |
-| **SgiRetail** | SgiRetail/ | 238 | [SgiRetail-SgiRetail.md](SgiRetail-SgiRetail.md) | `sgiretail` |
-| **TransportsTracking** | Transport/ | 34 | [Transport-TransportsTracking.md](Transport-TransportsTracking.md) | `transport` |
-| **B2BSalesOrder** | SalesOrder/ | 96 | [SalesOrder-B2BSalesOrder.md](SalesOrder-B2BSalesOrder.md) | `compras` = `finanzas` |
-| **PurchaseOrders (Compras)** | Compras/ | 0 (agregaciones implícitas) | [Compras-PurchaseOrders.md](Compras-PurchaseOrders.md) | `finanzas` |
-| **Finanzas** | Finanzas/ | 118 + 19 auxiliares | [Finanzas-Finanzas.md](Finanzas-Finanzas.md) | `finanzas` |
-
-> Cada `.md` describe el modelo tal y como está **en su rama al día**. Si lo lees desde otra rama, la carpeta del modelo que tienes en disco puede ser anterior a lo que cuenta el documento — y los enlaces relativos a ficheros `.tmdl` pueden no resolver. Para tocar el modelo, cambia a la rama de la última columna.
+| Modelo | Carpeta | Hechos principales | Medidas | Documentación |
+|---|---|---|---:|---|
+| **Finanzas** | [Finanzas/](../Finanzas/) | `LOL_PBIFINANCIALENTRIES` (apuntes de diario) | 118 + 19 aux. | [Finanzas-Finanzas.md](Finanzas-Finanzas.md) |
+| **PurchaseOrders (Compras)** | [Compras/](../Compras/) | Pedido, entrada de mercancía, factura de proveedor | 0 | [Compras-PurchaseOrders.md](Compras-PurchaseOrders.md) |
+| **B2BSalesOrder** | [SalesOrder/](../SalesOrder/) | Pedido, albarán, factura, nota de crédito, devolución | 96 | [SalesOrder-B2BSalesOrder.md](SalesOrder-B2BSalesOrder.md) |
+| **SgiRetail** | [SgiRetail/](../SgiRetail/) | `LOL_PBISGIRETAIL` (líneas de ticket), tráfico, objetivos | 238 | [SgiRetail-SgiRetail.md](SgiRetail-SgiRetail.md) |
+| **TransportsTracking** | [Transport/](../Transport/) | `LOL_TRANSPORT_TRACKING` (un envío por fila) | 34 | [Transport-TransportsTracking.md](Transport-TransportsTracking.md) |
+| **Plan de Servicio B2B** | [ServicePlan/](../ServicePlan/) | `LOL_PLANMATERIAL` (cartera abierta) | 23 | [ServicePlan-Plan de Servicio B2B.md](ServicePlan-Plan%20de%20Servicio%20B2B.md) |
 
 ## Orígenes de datos
 
 | Origen | Uso |
 |---|---|
-| `Sql.Database("192.168.0.232", "hana_etl_admin")` → `dbo.*` | Origen principal de **SgiRetail, B2BSalesOrder, TransportsTracking, Compras y Finanzas** (tablas `LOL_PBI*` / `LOL_*` pobladas por ETL). |
+| `Sql.Database("192.168.0.232", "hana_etl_admin")` → `dbo.*` | Origen principal de **todos** los modelos (tablas `LOL_PBI*` / `LOL_*` pobladas por ETL). |
 | `SapHana.Database("192.168.0.231:30015")` | **ServicePlan** (`LOL_PLANMATERIAL`, vía `Value.NativeQuery`) y **Finanzas** (`JournalEntryItem` — legado en retirada — y los dos `CostCenter`). |
 
 La dirección general es sacar las lecturas de HANA y servirlas desde el SQL de staging; Finanzas está a medio camino (ver su documentación).
 
-## Convenciones
+## Patrones comunes
 
-- Modelos en formato **TMDL** (carpeta `*.SemanticModel/definition/`), `compatibilityLevel` 1600/1606, cultura **es-ES**, modo **Import**.
-- La lógica de negocio suele vivir en **columnas calculadas** y en medidas alojadas en **tablas-contenedor** (`_Medidas`, `MedidasVentas`, `Medidas Finanzas`, …) con `displayFolder` para agruparlas.
-- **Cadenas de documentos** (pedido → albarán/entrada → factura): se resuelven con **claves compuestas** `DocEntry & "-" & LineNum` en columnas calculadas. En Compras se usan **relaciones físicas**; en SalesOrder se usan **medidas con `TREATAS`** (las relaciones daban ambigüedad). Usar `&`, no `COMBINEVALUES`.
-- Al crear **tablas calculadas** a mano en TMDL, el nombre de columna debe coincidir con el que produce el DAX (usar `SELECTCOLUMNS(..., "Nombre", [col])`), o al publicar el servicio da `Missing_References`.
-- Todos los modelos tienen la **fecha/hora automática activada**, lo que genera decenas de tablas `LocalDateTable_*` ocultas. Con un `Calendario` propio en el modelo son redundantes; desactivarla es la mejora pendiente común a todos.
-- **Ningún modelo tiene RLS** definido.
+**Cadenas de documentos.** Tres modelos siguen un documento hasta sus derivados. SAP encadena por la pareja (`BaseEntry`, `BaseLine`), que son dos columnas; Power BI necesita una. La solución en todos los casos es una **clave compuesta en columna calculada**, concatenando con `&` (no `COMBINEVALUES`):
+
+```dax
+KLinea = <tabla>[DocEntry] & "-" & <tabla>[LineNum]
+KBase  = IF ( NOT ISBLANK ( <tabla>[BaseEntry] ) && <tabla>[BaseEntry] <> "",
+              <tabla>[BaseEntry] & "-" & <tabla>[BaseLine] )
+```
+
+El `IF` evita que las líneas sin documento base acaben todas agrupadas bajo la cadena `"-"`.
+
+A partir de ahí, los dos modelos divergen y **no por capricho**:
+
+| | Compras | SalesOrder |
+|---|---|---|
+| Cómo se recorre | **Relaciones físicas** | **Medidas con `TREATAS`** |
+| Por qué | Entradas y facturas no comparten dimensiones con el pedido: no hay caminos múltiples | Las cinco tablas de documento comparten cliente, agente, artículo, temporada y calendario: las relaciones daban ambigüedad |
+
+**Tablas-contenedor de medidas.** Todos los modelos alojan las medidas en tablas sin datos (partición calculada `{BLANK()}` o `Row("Column", BLANK())`), agrupadas con `displayFolder`: `_Medidas`, `MedidasVentas`, `MedidasTemporadas`, `Medidas Finanzas`…
+
+**Tablas desconectadas como selector.** Parámetros y *field parameters* (`ParamTopN`, `OrdenSelector`, `DimensionB2B`, `Dimensión Finanzas`, `TablaFechasFiltro`) sin relación física, leídos con `SELECTEDVALUE` y aplicados con `TREATAS`. Implica que el filtrado pasa **por medida**: un visual que no use esas medidas no queda filtrado.
+
+**Tablas calculadas escritas a mano en TMDL.** El nombre de columna debe coincidir con el que produce el DAX (`SELECTCOLUMNS(..., "Nombre", [col])`), o al publicar el servicio da `Missing_References`.
+
+## Deuda técnica compartida
+
+| Problema | Alcance | Nota |
+|---|---|---|
+| **Fecha/hora automática activada** | Los 6 modelos | Decenas de `LocalDateTable_*` ocultas, una por columna de fecha. Todos salvo Compras tienen ya un `Calendario` propio, así que son redundantes: desactivarla aligera modelo y refresco. |
+| **Sin `Calendario` propio** | Compras | El caso peor: sus tres tablas de documento se filtran por fechas independientes, sin eje temporal común. |
+| **Sin ninguna medida** | Compras | El informe va con agregaciones implícitas y solo mide unidades; los importes están sin usar. |
+| **Importes que llegan como texto** | SalesOrder | Se convierten con `VALUE`/`INT`/`Number.From` al calcular, y los fallos de parseo quedan en 0 o blank en silencio. |
+| **Sin RLS** | Los 6 modelos | Quien accede al informe ve todos los datos. |
+| **`cultures/es-ES.tmdl`** | Los 6 modelos | Solo metadatos lingüísticos de Q&A auto-generados; no aporta documentación funcional. |
+| **Migración HANA → SQL a medias** | Finanzas | Las medidas ya leen la tabla nueva, pero cinco piezas siguen apuntando a `JournalEntryItem`, así que el refresco aún necesita HANA. |
 
 ---
 
@@ -66,4 +70,4 @@ La dirección general es sacar las lecturas de HANA y servirlas desde el SQL de 
 Con Power BI Desktop abierto: localizar el proceso `msmdsrv` y su puerto (`Get-NetTCPConnection -OwningProcess <pid> -State Listen`), conectar con el cliente ADOMD del GAC (`Data Source=localhost:<puerto>`) y ejecutar DAX. Tras editar `.tmdl`, Desktop **no** relee en caliente: cerrar (sin guardar) y reabrir el `.pbip`.
 
 ---
-*Documentación generada analizando los ficheros TMDL de cada modelo. Para regenerar/ampliar, revisar los `.tmdl` en `*.SemanticModel/definition/tables/`.*
+*Documentación generada analizando los ficheros TMDL de cada modelo. Para regenerar o ampliar, revisar los `.tmdl` en `*.SemanticModel/definition/tables/`.*

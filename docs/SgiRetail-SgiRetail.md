@@ -1,7 +1,5 @@
 # Modelo semántico **SgiRetail** — Documentación técnica
 
-> 📁 **Esta documentación está replicada en todas las ramas.** Describe el modelo tal y como está en la rama **`sgiretail`**. En otras ramas la carpeta `SgiRetail/` puede existir pero en un estado anterior: para trabajar sobre el modelo, sitúate en la rama indicada. Índice: [README.md](README.md).
-
 > Panel de **Retail** de Lola Casademunt: análisis de ventas de tiendas físicas y online, tráfico/afluencia, objetivos comerciales, conversión, comparativa de temporadas y catálogo visual de producto.
 
 ## Resumen del modelo
@@ -13,7 +11,6 @@
 | Cultura / idioma | `es-ES` |
 | Formato | TMDL (Power BI Desktop, DevMode/TMDLView) |
 | Modo de almacenamiento | Import |
-| Rama git | `sgiretail` |
 | Time Intelligence automático | **Activado** (`__PBI_TimeIntelligenceEnabled = 1`) |
 | Nº de tablas (total) | **31** |
 | — Tablas de datos (origen SQL) | 6 (`LOL_PBISGIRETAIL`, `LOL_PBITIENDAS`, `LOL_PBIMODELITEM`, `LOL_PBISEASON`, `LOL_PBIOBJETIVOSRETAIL`, `LOL_PBITRAFICOTIENDAS`) |

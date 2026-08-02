@@ -1,0 +1,36 @@
+model Model
+	culture: es-ES
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-ES
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["JournalEntryItem","LOL_PBIFINANCIALMODEL","CostCenter","CostCenter_Dim2","LOL_PBIFINANCIALENTRIES"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table JournalEntryItem
+ref table DateTableTemplate_1c5e85b4-12d0-4848-b448-cf63ba181efa
+ref table LocalDateTable_d507226a-8495-4b56-aa91-fd8183529bdc
+ref table LocalDateTable_7a5886f3-59e9-4215-90a7-e2bc0c557b08
+ref table TablaFechasFiltro
+ref table Calendario
+ref table 'Dimensión Finanzas'
+ref table Páginas
+ref table CostCenter
+ref table 'KPI Export (Dim)'
+ref table CostCenter_Dim2
+ref table LocalDateTable_7678d907-d54d-40b5-b20a-c5e609305e3f
+ref table LOL_PBIFINANCIALENTRIES
+ref table LocalDateTable_471da0d1-edef-4d87-9cc3-8597ab4fa803
+ref table LocalDateTable_12ef9990-e8df-4d53-94f9-d29a0f17e79b
+ref table LocalDateTable_16525a9b-3b14-401b-8eb0-d30810702cec
+ref table LocalDateTable_45060eeb-1207-48ad-868d-e00308198235
+ref table 'Medidas Finanzas'
+ref table LOL_PBIFINANCIALMODEL
+
+ref cultureInfo es-ES
+

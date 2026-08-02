@@ -1,13 +1,10 @@
 # Plan de Servicio B2B — Documentación del modelo
 
-> 📁 **Esta documentación está replicada en todas las ramas.** Describe el modelo tal y como está en la rama **`serviceplan`**. En otras ramas la carpeta `ServicePlan/` puede existir pero en un estado anterior: para trabajar sobre el modelo, sitúate en la rama indicada. Índice: [README.md](README.md).
-
 Panel de **plan de servicio B2B** de Lola Casademunt. Mide, sobre la cartera de pedidos de venta **abiertos**, cuánto importe/unidades se puede **servir** y **cuándo** (1ª quincena, 2ª quincena, +30 días) según la fecha de disponibilidad de stock de cada línea, comparándolo con lo pendiente de entregar y el estado de cobertura (picking / asignado / tránsito).
 
 - **Proyecto:** [ServicePlan/Plan de Servicio B2B](../ServicePlan/)
 - **Modelo:** `Plan de Servicio B2B.SemanticModel` · **Informe:** `Plan de Servicio B2B.Report`
 - **Cultura:** es-ES · **Modo:** Import
-- **Rama git:** `serviceplan`
 
 > Para consultar el modelo en vivo (DAX) con Power BI Desktop abierto, ver la nota al final.
 

@@ -69,11 +69,6 @@ relationship 25ad6f70-89dc-48ff-97be-f80a598d1d17
 	fromColumn: VentasIncidencias.TemporadaLinea
 	toColumn: LOL_PBISEASON.Code
 
-relationship 0fbeb1a8-1c44-4fd1-89f7-019d17d93239
-	joinOnDateBehavior: datePartOnly
-	fromColumn: LOL_PBIB2BSALESORDER.DocDate
-	toColumn: LocalDateTable_22461c45-eb28-4f72-93c8-3e755961f3f7.Date
-
 relationship 2ffda839-38b1-4e04-bba3-6703ff420cf8
 	joinOnDateBehavior: datePartOnly
 	fromColumn: LOL_PBIB2BSALESORDER.DocDueDate
@@ -103,5 +98,165 @@ relationship b2c3d4e5-f6a7-8b9c-0d1e-f2a3b4c5d6e7
 
 relationship c3d4e5f6-a7b8-9c0d-1e2f-a3b4c5d6e7f8
 	fromColumn: LOL_PBIB2BSALESORDER.Season
+	toColumn: LOL_PBISEASON.Code
+
+relationship b3924885-b3fc-4581-9cc1-fb5ac268347c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBIINVOICESSALES.DocDueDate
+	toColumn: LocalDateTable_6aa375de-4215-4783-aa05-06a0c87cab02.Date
+
+relationship 70a55d3a-05d8-40e1-bc5e-ba7e39ef49ca
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBICREDITNOTESSALES.DocDueDate
+	toColumn: LocalDateTable_ca9969ef-d406-4a4b-9e0b-132258c9dbb9.Date
+
+relationship AutoDetected_77709638-a2a6-4992-93ff-4a415f9b7b82
+	fromColumn: LOL_PBIINVOICESSALES.ItemCode
+	toColumn: LOL_PBIMODELITEM.ItemCode
+
+relationship AutoDetected_668e7727-3f83-4c64-9277-e9049e4d6850
+	fromColumn: LOL_PBICREDITNOTESSALES.ItemCode
+	toColumn: LOL_PBIMODELITEM.ItemCode
+
+relationship AutoDetected_2cd55d48-3dfb-4d2c-8019-147cdfc2eef3
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: LOL_PBICREDITNOTESSALES.LineUID
+	toColumn: LOL_PBIB2BSALESORDER.LineUID
+
+relationship b4972572-3158-429f-aece-193a8f305515
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBIRETURNSALES.DocDueDate
+	toColumn: LocalDateTable_088b783c-1eff-4e66-b683-878f1a99c248.Date
+
+relationship AutoDetected_8cdba471-e022-4194-86d5-d379c7f9c291
+	fromColumn: LOL_PBIRETURNSALES.ItemCode
+	toColumn: LOL_PBIMODELITEM.ItemCode
+
+relationship 34e8bc7e-2b01-4d55-91f9-f0a3d7b8c123
+	fromColumn: TemporadasUsadas.Code
+	toColumn: LOL_PBISEASON.Code
+
+relationship 1183a6d1-3b1a-4d96-b4a8-c6e0d8d7e118
+	fromColumn: LOL_PBIINVOICESSALES.CardCode
+	toColumn: LOL_PBICLIENTES.CodeCliente
+
+relationship 11d0f0b6-c82b-4f0f-903b-3b0f0d7e0bfa
+	fromColumn: LOL_PBIINVOICESSALES.SlpCode
+	toColumn: LOL_PBIAGENTES.SlpCode
+
+relationship 0b7e90b7-4e1a-4301-9b6f-1c70b3cf0530
+	fromColumn: LOL_PBIINVOICESSALES.Season
+	toColumn: LOL_PBISEASON.Code
+
+relationship 9c0f0c33-d9af-45bf-9d6c-825fd0c96d61
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBIINVOICESSALES.DocDate
+	toColumn: Calendario.Date
+
+relationship f9582a4d-8c0f-4bb9-8d8d-98cae0cf0c15
+	fromColumn: LOL_PBICREDITNOTESSALES.CardCode
+	toColumn: LOL_PBICLIENTES.CodeCliente
+
+relationship 0ebc2ec3-04bb-4d7d-bf45-4d3df9566c4b
+	fromColumn: LOL_PBICREDITNOTESSALES.SlpCode
+	toColumn: LOL_PBIAGENTES.SlpCode
+
+relationship 37f3eb06-7a6a-4cf2-b11d-ae8ddf6aa734
+	fromColumn: LOL_PBICREDITNOTESSALES.Season
+	toColumn: LOL_PBISEASON.Code
+
+relationship e84e4726-e335-4d57-8e3b-14c66f7d1bc7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBICREDITNOTESSALES.DocDate
+	toColumn: Calendario.Date
+
+relationship 3fb5124b-c849-4ae4-95ab-d7ccb2ed76b5
+	fromColumn: LOL_PBIRETURNSALES.CardCode
+	toColumn: LOL_PBICLIENTES.CodeCliente
+
+relationship 4a404f75-cd25-4c64-96fe-027327073f0d
+	fromColumn: LOL_PBIRETURNSALES.SlpCode
+	toColumn: LOL_PBIAGENTES.SlpCode
+
+relationship 6d8b0da4-530f-4ee8-9c3b-4ff1c0a9f8ca
+	fromColumn: LOL_PBIRETURNSALES.Season
+	toColumn: LOL_PBISEASON.Code
+
+relationship 7d4e7d95-171d-4f3a-9052-2b3e9ff94e60
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBIRETURNSALES.DocDate
+	toColumn: Calendario.Date
+
+relationship 6b957a50-e10c-4d1a-88ff-04bab841cb49
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISALESDELIVERY.FechaContabilizacion
+	toColumn: LocalDateTable_a5f930e5-05d8-4411-995a-80591b230243.Date
+
+relationship 995edc8f-aca4-4ba5-929e-dd88b2c09238
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISALESDELIVERY.FechaEntregaLinea
+	toColumn: LocalDateTable_6b6a1243-64b7-4695-81d8-36370566aa0d.Date
+
+relationship 9241d8bb-9996-4c51-bf7f-ff15d9330f8a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISALESDELIVERY.FechaVencimiento
+	toColumn: LocalDateTable_e1039d0e-3b63-4ad5-9437-3a7a82b55a6f.Date
+
+relationship 8e3421ec-dccd-4bc9-bd77-ed1b52c02dc9
+	fromColumn: LOL_PBISALESDELIVERY.CodigoCliente
+	toColumn: LOL_PBICLIENTES.CodeCliente
+
+relationship c8573eeb-4f33-4568-be2b-d0f390d86ecf
+	fromColumn: LOL_PBISALESDELIVERY.CodigoVendedor
+	toColumn: LOL_PBIAGENTES.SlpCode
+
+relationship 5649caf9-dfd5-4937-b748-ce2c539391f7
+	fromColumn: LOL_PBISALESDELIVERY.CodigoArticulo
+	toColumn: LOL_PBIMODELITEM.ItemCode
+
+relationship 87f8d542-3d64-419d-97f8-9399c0163041
+	fromColumn: LOL_PBISALESDELIVERY.TemporadaLinea
+	toColumn: LOL_PBISEASON.Code
+
+relationship df211b77-0ae8-4616-a606-d20a947b03ec
+	fromColumn: LOL_PBISALESDELIVERY.FechaDocumento
+	toColumn: Calendario.Date
+
+relationship 7df0968b-a480-4fba-a973-7141a15f79fe
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBIRETURNREQUESTS.DocDate
+	toColumn: LocalDateTable_eee4a784-caa8-431f-bde8-0a6810226fca.Date
+
+relationship f8e296ec-9d65-44d9-a4f2-a282e10e3ea0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBIRETURNREQUESTS.DocDueDate
+	toColumn: LocalDateTable_17cb4af7-d50a-4a5f-85d8-fdd88089d344.Date
+
+relationship AutoDetected_cf003e78-5eae-4525-a8de-1adb706cd6eb
+	fromColumn: LOL_PBIRETURNREQUESTS.ItemCode
+	toColumn: LOL_PBIMODELITEM.ItemCode
+
+relationship AutoDetected_83ccd16d-2701-4fc1-b856-bdc3dc13a496
+	isActive: false
+	fromColumn: LOL_PBIRETURNREQUESTS.LineUID
+	toColumn: LOL_PBIB2BSALESORDER.LineUID
+
+relationship AutoDetected_6a37628c-dcbf-427a-aec6-8e872be5521b
+	isActive: false
+	fromColumn: LOL_PBIRETURNREQUESTS.LineUID
+	toColumn: LOL_PBIRETURNSALES.LineUID
+
+relationship 49ec28c8-1848-af34-1c0f-b9ca17f8fc1d
+	fromColumn: LOL_PBIRETURNREQUESTS.CardCode
+	toColumn: LOL_PBICLIENTES.CodeCliente
+
+relationship b8d82c30-96a4-c0d0-328d-471a26cc5618
+	fromColumn: LOL_PBIRETURNREQUESTS.SlpCode
+	toColumn: LOL_PBIAGENTES.SlpCode
+
+relationship b60be744-8fbf-42bb-df40-b2d4a9e577be
+	fromColumn: LOL_PBIRETURNREQUESTS.SeasonResuelta
 	toColumn: LOL_PBISEASON.Code
 

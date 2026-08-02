@@ -1,0 +1,150 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "23bcd5db3775b02d6303",
+  "position": {
+    "x": 710.47448522829006,
+    "y": 169.59713518352731,
+    "z": 4,
+    "height": 380.44762757385854,
+    "width": 523.68845120859442,
+    "tabOrder": 4
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIB2BSALESORDER"
+                    }
+                  },
+                  "Property": "DocDate"
+                }
+              },
+              "queryRef": "LOL_PBIB2BSALESORDER.DocDate",
+              "nativeQueryRef": "DocDate"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIB2BSALESORDER"
+                    }
+                  },
+                  "Property": "Season"
+                }
+              },
+              "queryRef": "LOL_PBIB2BSALESORDER.Season",
+              "nativeQueryRef": "Season"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIB2BSALESORDER"
+                    }
+                  },
+                  "Property": "Source"
+                }
+              },
+              "queryRef": "LOL_PBIB2BSALESORDER.Source",
+              "nativeQueryRef": "Source"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIB2BSALESORDER"
+                        }
+                      },
+                      "Property": "ImporteBruto"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(LOL_PBIB2BSALESORDER.ImporteBruto)",
+              "nativeQueryRef": "Suma de ImporteBruto"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "94b1c2199e819e24b5e6",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIB2BSALESORDER"
+              }
+            },
+            "Property": "DocDate"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2e3b78e6a2eedd0e0381",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PBIB2BSALESORDER"
+                  }
+                },
+                "Property": "ImporteBruto"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "438139f025cca49336b9",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIB2BSALESORDER"
+              }
+            },
+            "Property": "Season"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "6dc88c8a8053e3ad9d4e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIB2BSALESORDER"
+              }
+            },
+            "Property": "Source"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

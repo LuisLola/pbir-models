@@ -1,0 +1,140 @@
+table TablaFechasFiltro
+	lineageTag: 54f3f24f-f017-4a84-b054-34fd1343d051
+
+	measure 'Titulo VENTAS_YTD_LY' = ```
+			
+			VAR MinY =
+			    MINX(
+			        ALLSELECTED( TablaFechasFiltro[FechaFiltro] ),
+			        YEAR( TablaFechasFiltro[FechaFiltro] )
+			    )
+			VAR MaxY =
+			    MAXX(
+			        ALLSELECTED( TablaFechasFiltro[FechaFiltro] ),
+			        YEAR( TablaFechasFiltro[FechaFiltro] )
+			    )
+			VAR HaySeleccion = NOT ISBLANK(MinY) && NOT ISBLANK(MaxY)
+			VAR TextoAniosLY =
+			    IF(
+			        HaySeleccion,
+			        IF(MinY = MaxY,
+			            FORMAT(MinY - 1, "0"),
+			            FORMAT(MinY - 1, "0") & "–" & FORMAT(MaxY - 1, "0")
+			        ),
+			        FORMAT( YEAR(EDATE(TODAY(), -12)), "0" )   -- por si no hay selección
+			    )
+			RETURN
+			TextoAniosLY
+			
+			
+			```
+		lineageTag: f4ca22f7-cb15-46d0-8d99-c8228e06b5d2
+
+	measure FechaInicioPeriodoSeleccionado = MIN(TablaFechasFiltro[FechaFiltro])
+		formatString: General Date
+		lineageTag: 5748013b-8d5f-4857-839e-b968c9a15d01
+
+	measure 'Titulo VENTAS_YTD' = ```
+			
+			VAR MinY =
+			    MINX(
+			        ALLSELECTED( TablaFechasFiltro[FechaFiltro] ),
+			        YEAR( TablaFechasFiltro[FechaFiltro] )
+			    )
+			VAR MaxY =
+			    MAXX(
+			        ALLSELECTED( TablaFechasFiltro[FechaFiltro] ),
+			        YEAR( TablaFechasFiltro[FechaFiltro] )
+			    )
+			VAR HaySeleccion = NOT ISBLANK(MinY) && NOT ISBLANK(MaxY)
+			VAR TextoAniosLY =
+			    IF(
+			        HaySeleccion,
+			        IF(MinY = MaxY,
+			            FORMAT(MinY , "0"),
+			            FORMAT(MinY , "0") & "–" & FORMAT(MaxY , "0")
+			        ),
+			        FORMAT( YEAR(EDATE(TODAY(), -12)), "0" )   -- por si no hay selección
+			    )
+			RETURN
+			TextoAniosLY 
+			```
+		lineageTag: 3869d682-da7a-4edd-9e31-5d6c4d260aa6
+
+	measure 'Titulo %CN' = ```
+			
+			VAR MinY =
+			    MINX(
+			        ALLSELECTED( TablaFechasFiltro[FechaFiltro] ),
+			        YEAR( TablaFechasFiltro[FechaFiltro] )
+			    )
+			VAR MaxY =
+			    MAXX(
+			        ALLSELECTED( TablaFechasFiltro[FechaFiltro] ),
+			        YEAR( TablaFechasFiltro[FechaFiltro] )
+			    )
+			VAR HaySeleccion = NOT ISBLANK(MinY) && NOT ISBLANK(MaxY)
+			VAR TextoAniosLY =
+			    IF(
+			        HaySeleccion,
+			        IF(MinY = MaxY,
+			            FORMAT(MinY , "0"),
+			            FORMAT(MinY , "0") & "–" & FORMAT(MaxY , "0")
+			        ),
+			        FORMAT( YEAR(EDATE(TODAY(), -12)), "0" )   -- por si no hay selección
+			    )
+			RETURN
+			"%CN " & TextoAniosLY 
+			```
+		lineageTag: ff9074c5-b546-444a-bec7-06c3e8817af2
+
+	measure 'Titulo %CN_LY' =
+			
+			VAR MinY =
+			    MINX(
+			        ALLSELECTED( TablaFechasFiltro[FechaFiltro] ),
+			        YEAR( TablaFechasFiltro[FechaFiltro] )
+			    )
+			VAR MaxY =
+			    MAXX(
+			        ALLSELECTED( TablaFechasFiltro[FechaFiltro] ),
+			        YEAR( TablaFechasFiltro[FechaFiltro] )
+			    )
+			VAR HaySeleccion = NOT ISBLANK(MinY) && NOT ISBLANK(MaxY)
+			VAR TextoAniosLY =
+			    IF(
+			        HaySeleccion,
+			        IF(MinY = MaxY,
+			            FORMAT(MinY - 1, "0"),
+			            FORMAT(MinY - 1, "0") & "–" & FORMAT(MaxY - 1, "0")
+			        ),
+			        FORMAT( YEAR(EDATE(TODAY(), -12)), "0" )   -- por si no hay selección
+			    )
+			RETURN
+			"%CN " & TextoAniosLY
+		lineageTag: 4f33b55c-d8d0-4433-9c23-5964bd2291d7
+
+	measure 'TITULO EVOL' = "Evol."
+		lineageTag: 932bf146-2fc7-426c-be3b-11e4a19b5851
+
+	measure 'TITULO CONCEPTO' = "CONCEPTO"
+		lineageTag: 8142ee17-21da-4748-94d8-7f31b9d00077
+
+	measure 'TITULO EVOL %CN' = "Evol. %CN"
+		lineageTag: dde38236-2c38-4376-96c0-93ef8bd0b2d6
+
+	column FechaFiltro
+		formatString: General Date
+		lineageTag: 495c0fa5-4021-4fe1-bc47-4f2b5821e337
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [FechaFiltro]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition TablaFechasFiltro = calculated
+		mode: import
+		source = DISTINCT(SELECTCOLUMNS('Calendario', "FechaFiltro", 'Calendario'[Date]))
+
+	annotation PBI_Id = b0bbe621ec1f4fbaa23efe0e801c10d8
+

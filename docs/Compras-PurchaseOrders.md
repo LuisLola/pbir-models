@@ -1,13 +1,10 @@
 # PurchaseOrders (Compras) — Documentación del modelo
 
-> 📁 **Esta documentación está replicada en todas las ramas.** Describe el modelo tal y como está en la rama **`finanzas`** (la rama `compras` tiene el mismo modelo semántico pero le falta la Página 3 del informe). En otras ramas la carpeta `Compras/` puede existir en un estado anterior: para trabajar sobre el modelo, sitúate en la rama indicada. Índice: [README.md](README.md).
-
 Panel de **compras / aprovisionamiento** de Lola Casademunt. Sigue las **líneas de pedido de compra** y su recorrido documental hasta la entrada de mercancía y la factura de proveedor, cruzado con el maestro de artículos y el maestro de tiendas/almacenes.
 
 - **Proyecto:** [Compras/PurchaseOrders](../Compras/) · `PurchaseOrders.pbip`
 - **Modelo:** `PurchaseOrders.SemanticModel` · **Informe:** `PurchaseOrders.Report`
 - **compatibilityLevel:** 1606 · **Cultura:** es-ES · **Modo:** Import
-- **Ramas:** `finanzas` (canónica) y `compras`
 - **RLS:** ninguno
 
 > Modelo **joven**: la estructura (tablas, claves, relaciones) está montada, pero **todavía no tiene ni una sola medida DAX** — el informe trabaja con agregaciones implícitas. Ver §6.
@@ -181,8 +178,6 @@ Con las relaciones de cadena ya montadas, estas medidas funcionan directamente s
 | **Página 1** (17 visuales) | Panel principal. Tres tarjetas de `Quantity`, cuatro matrices de unidades por `Estado` (por artículo × fecha de recepción, por tienda, por categoría, por documento×tienda) y una barra de segmentadores: temporada de línea (`MktDoc_Row_GSP_SEASON`), artículo, categoría, familia, tienda, fecha de recepción y buscador de nº de documento. |
 | **Página 2** (2 visuales) | Tabla de detalle línea a línea: documento, artículo, descripción larga, tienda, cantidad y cantidad abierta. |
 | **Página 3** (2 visuales) | **Matriz de la cadena** — el único visual que recorre las tres tablas de documento a la vez (pedido, entrada y factura) más artículo y tienda, con segmentador de temporada. Es la validación visual de que la cadena `KBase`/`KLinea` encadena bien. |
-
-> ⚠️ La **Página 3 solo está en la rama `finanzas`** (commit `1dbc224`); la rama `compras` se quedó en `cc212c6`, sin ella. Si se trabaja desde `compras` no aparecerá.
 
 ---
 

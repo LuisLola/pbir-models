@@ -1,0 +1,550 @@
+table LOL_PBIPURCHASEINVOICE
+	lineageTag: d79da0cf-1dae-40f5-b992-508a758e2896
+
+	column BaseDocumentInternalKey
+		dataType: string
+		lineageTag: 63d8cf08-bf61-4d13-a907-a9e07efcacf1
+		summarizeBy: none
+		sourceColumn: BaseDocumentInternalKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column BaseDocumentLineInternalKey
+		dataType: string
+		lineageTag: 62682655-02c2-40e0-902a-7f443b6521f4
+		summarizeBy: none
+		sourceColumn: BaseDocumentLineInternalKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column BaseDocumentTypeCode
+		dataType: string
+		lineageTag: 897b37a6-d197-40de-8d09-26c61404e28e
+		summarizeBy: none
+		sourceColumn: BaseDocumentTypeCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column CardCode
+		dataType: string
+		lineageTag: 7bb824b6-ac34-49ac-9d05-623e9f071024
+		summarizeBy: none
+		sourceColumn: CardCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column DocumentDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b6e6de7a-3a88-437c-98a7-63c22b5e6746
+		summarizeBy: none
+		sourceColumn: DocumentDate
+
+		variation Variación
+			isDefault
+			relationship: b2d25961-8a52-451a-9666-2f93b1b1b3db
+			defaultHierarchy: LocalDateTable_a7d16dbe-1231-4ffe-8c2c-7922e7b4f91f.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DocumentInternalKey
+		dataType: string
+		lineageTag: 981fe32f-48a6-44cb-bfd2-ead90ec9a743
+		summarizeBy: none
+		sourceColumn: DocumentInternalKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column DocumentLineInternalKey
+		dataType: string
+		lineageTag: 328a0d54-2037-4135-8b47-f766ed971998
+		summarizeBy: none
+		sourceColumn: DocumentLineInternalKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column DocumentNumber
+		dataType: string
+		lineageTag: a017f213-318c-4155-be09-4a77be099a4f
+		summarizeBy: none
+		sourceColumn: DocumentNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column DocumentRowNumber
+		dataType: string
+		lineageTag: 7be41797-7042-402e-9f85-4dabb63defb0
+		summarizeBy: none
+		sourceColumn: DocumentRowNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column DocumentTypeCode
+		dataType: string
+		lineageTag: 695b0e46-9e32-430e-8901-7c0174c2d999
+		summarizeBy: none
+		sourceColumn: DocumentTypeCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column DueDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0b2dbd0f-3b4d-41fd-a1f7-4862c3f08e6e
+		summarizeBy: none
+		sourceColumn: DueDate
+
+		variation Variación
+			isDefault
+			relationship: 0da9912b-14de-4b3d-b2bf-fefe91edbe4f
+			defaultHierarchy: LocalDateTable_4bd0a01b-ad53-470a-94f3-8984c534a04f.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column EtiquetasEnviadas
+		dataType: string
+		lineageTag: 9bb92a44-ac49-403d-a7f0-19572d9a6e1d
+		summarizeBy: none
+		sourceColumn: EtiquetasEnviadas
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaComunicacion
+		dataType: string
+		lineageTag: aca0166c-23fa-4f9b-ba0f-2a4e942f0aa2
+		summarizeBy: none
+		sourceColumn: FechaComunicacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaDelivery
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ad846e32-ee99-447d-ba16-b54b3002498a
+		summarizeBy: none
+		sourceColumn: FechaDelivery
+
+		variation Variación
+			isDefault
+			relationship: 756e245c-7364-4314-839c-f4a2440093b9
+			defaultHierarchy: LocalDateTable_4456c80e-f85a-4041-8f8d-8374b729b6b6.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FechaDeliveryActualizada
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7af272b1-cba5-4496-9ac3-1cca5c3a3566
+		summarizeBy: none
+		sourceColumn: FechaDeliveryActualizada
+
+		variation Variación
+			isDefault
+			relationship: 6eb9703f-ead8-41fe-b399-66b5006c3255
+			defaultHierarchy: LocalDateTable_15dee13f-ab75-4334-bc37-02d9198d45f9.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FechaEmbarque
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 071a8b35-19ce-429a-8eae-318f847e6a71
+		summarizeBy: none
+		sourceColumn: FechaEmbarque
+
+		variation Variación
+			isDefault
+			relationship: f6964b8c-1ba4-4e81-9043-5670ad981ed2
+			defaultHierarchy: LocalDateTable_90803cb3-dcb8-4ff2-a50f-9ef23ebbb3a1.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FechaRecepcion
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8fe7eb5c-d042-4bfb-bc2a-7a9934e73215
+		summarizeBy: none
+		sourceColumn: FechaRecepcion
+
+		variation Variación
+			isDefault
+			relationship: 38f13ae8-f79c-4448-94da-dfef83812358
+			defaultHierarchy: LocalDateTable_da39c579-8e32-4e2b-9620-be1e0e40e9f1.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column GrossUnitPriceLC
+		dataType: double
+		lineageTag: 153e37d0-b5f2-4cac-9d51-2c1f871867b7
+		summarizeBy: sum
+		sourceColumn: GrossUnitPriceLC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ItemCode
+		dataType: string
+		lineageTag: 744d1ad6-caf7-4d44-bc2d-2a4147cd2c8e
+		summarizeBy: none
+		sourceColumn: ItemCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column ItemsPerUnit
+		dataType: double
+		lineageTag: 6a853de7-079a-4dff-850c-b8e198dbf49c
+		summarizeBy: sum
+		sourceColumn: ItemsPerUnit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LineDeliveryDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 681b0182-68e8-4425-91c2-1313fbb8ea74
+		summarizeBy: none
+		sourceColumn: LineDeliveryDate
+
+		variation Variación
+			isDefault
+			relationship: 32edd21c-b955-4c5d-bb49-fae9fa163668
+			defaultHierarchy: LocalDateTable_86722f70-8be7-44e7-8b16-0c6f00300ad5.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column LineDiscountPercentage
+		dataType: double
+		lineageTag: 0152bab2-efa8-4216-99b4-5c746ad047bc
+		summarizeBy: sum
+		sourceColumn: LineDiscountPercentage
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LineExchangeRate
+		dataType: double
+		lineageTag: 7615a770-9eec-4142-afe6-bc2bf1131f68
+		summarizeBy: sum
+		sourceColumn: LineExchangeRate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LineStatus
+		dataType: string
+		lineageTag: 522d6d13-8179-43e1-8cf0-666ef665e275
+		summarizeBy: none
+		sourceColumn: LineStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column LineTotalAmountLC
+		dataType: double
+		lineageTag: 783e2dad-63a5-4bad-889d-313cec1de9ac
+		summarizeBy: sum
+		sourceColumn: LineTotalAmountLC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LineTotalAmountSC
+		dataType: double
+		lineageTag: b18fe39f-56e1-41fa-aea0-3a16fd225a1e
+		summarizeBy: sum
+		sourceColumn: LineTotalAmountSC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LineUID
+		dataType: string
+		lineageTag: 33e4426b-4a95-418f-b96a-44d398ec828f
+		summarizeBy: none
+		sourceColumn: LineUID
+
+		annotation SummarizationSetBy = Automatic
+
+	column MktDoc_Row_GSP_SEASON
+		dataType: string
+		lineageTag: 203a9d53-f0b1-427f-a8c5-24c2cc22cb18
+		summarizeBy: none
+		sourceColumn: MktDoc_Row_GSP_SEASON
+
+		annotation SummarizationSetBy = Automatic
+
+	column MktDoc_Titl_GSP_PEDREG
+		dataType: string
+		lineageTag: cfbc1b8c-cfb2-40f1-b2c3-2ac09083817f
+		summarizeBy: none
+		sourceColumn: MktDoc_Titl_GSP_PEDREG
+
+		annotation SummarizationSetBy = Automatic
+
+	column MktDoc_Titl_GSP_REP
+		dataType: string
+		lineageTag: b426d6b0-1893-44a1-8fec-e9978876a479
+		summarizeBy: none
+		sourceColumn: MktDoc_Titl_GSP_REP
+
+		annotation SummarizationSetBy = Automatic
+
+	column MktDoc_Titl_GSP_SEASON
+		dataType: string
+		lineageTag: e65ce852-a163-4731-97c5-42d170a8b627
+		summarizeBy: none
+		sourceColumn: MktDoc_Titl_GSP_SEASON
+
+		annotation SummarizationSetBy = Automatic
+
+	column MktDoc_Titl_LOL_TIPLOG
+		dataType: string
+		lineageTag: f191d304-5e8c-417d-a3ac-139e76362f92
+		summarizeBy: none
+		sourceColumn: MktDoc_Titl_LOL_TIPLOG
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumAtCard
+		dataType: string
+		lineageTag: 9bdc2216-a84e-4e11-b5e3-8e6061e5717c
+		summarizeBy: none
+		sourceColumn: NumAtCard
+
+		annotation SummarizationSetBy = Automatic
+
+	column OpenQuantity
+		dataType: double
+		lineageTag: d06f6171-10e6-4022-a94b-d385ae46cd11
+		summarizeBy: sum
+		sourceColumn: OpenQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OpenQuantityInInventoryUoM
+		dataType: double
+		lineageTag: 2141b816-d1d1-458c-9323-fd431d12533d
+		summarizeBy: sum
+		sourceColumn: OpenQuantityInInventoryUoM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Owner
+		dataType: string
+		lineageTag: db9c9df7-91ff-4822-8f7e-914c0d2f5be9
+		summarizeBy: none
+		sourceColumn: Owner
+
+		annotation SummarizationSetBy = Automatic
+
+	column PostingDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3c272060-34d5-4b1e-9a28-26145d54f133
+		summarizeBy: none
+		sourceColumn: PostingDate
+
+		variation Variación
+			isDefault
+			relationship: c79c8fe0-9977-4e89-9dd2-e046860b4ec3
+			defaultHierarchy: LocalDateTable_ee00c7d9-5303-47b8-a3be-a669a5931f6a.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column PriceCurrency
+		dataType: string
+		lineageTag: 7c674804-9dd6-4ccd-b4d6-953043069200
+		summarizeBy: none
+		sourceColumn: PriceCurrency
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductionBoMType
+		dataType: string
+		lineageTag: b92e760b-44d3-47ba-9916-23c2073f1d30
+		summarizeBy: none
+		sourceColumn: ProductionBoMType
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProjectCode
+		dataType: string
+		lineageTag: e4aca8d6-0c09-4ab0-aaaf-f382edf25507
+		summarizeBy: none
+		sourceColumn: ProjectCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantity
+		dataType: double
+		lineageTag: 72ba88d8-2201-4112-98ee-8a6a1ac1e395
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column QuantityInInventoryUoM
+		dataType: double
+		lineageTag: 1a1b71a9-c9ab-4263-a596-3ec21dbc187f
+		summarizeBy: sum
+		sourceColumn: QuantityInInventoryUoM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SalesEmployeeOrBuyerNumber
+		dataType: string
+		lineageTag: 5f0056e8-c3a8-4f01-bedc-1cb51e607c31
+		summarizeBy: none
+		sourceColumn: SalesEmployeeOrBuyerNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShippingType
+		dataType: string
+		lineageTag: 912e2c9b-ebb7-4a2d-a9bd-48108dd579d9
+		summarizeBy: none
+		sourceColumn: ShippingType
+
+		annotation SummarizationSetBy = Automatic
+
+	column TaxAmountLC
+		dataType: double
+		lineageTag: 3d5e6212-d060-40ea-959e-33be98745f9c
+		summarizeBy: sum
+		sourceColumn: TaxAmountLC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TaxOnly
+		dataType: string
+		lineageTag: 22c15608-4633-46cf-b9f0-a0c3b03cd45b
+		summarizeBy: none
+		sourceColumn: TaxOnly
+
+		annotation SummarizationSetBy = Automatic
+
+	column U_GSP_LOLSENTPAPERLESS
+		dataType: string
+		lineageTag: b0362e04-c94c-46a1-915d-478f1bca1551
+		summarizeBy: none
+		sourceColumn: U_GSP_LOLSENTPAPERLESS
+
+		annotation SummarizationSetBy = Automatic
+
+	column U_LOL_INSPECTION
+		dataType: string
+		lineageTag: 5d99678e-d108-4e69-856b-a026e49b131a
+		summarizeBy: none
+		sourceColumn: U_LOL_INSPECTION
+
+		annotation SummarizationSetBy = Automatic
+
+	column U_LOL_PORT
+		dataType: string
+		lineageTag: 7d8dedb5-d49e-419f-a754-120b5076a4f5
+		summarizeBy: none
+		sourceColumn: U_LOL_PORT
+
+		annotation SummarizationSetBy = Automatic
+
+	column U_LOL_TIPOIMPUTACION
+		dataType: string
+		lineageTag: 258fc45b-b687-4c97-95df-f5337019ae59
+		summarizeBy: none
+		sourceColumn: U_LOL_TIPOIMPUTACION
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitPrice
+		dataType: double
+		lineageTag: 3bbfe12e-e071-4560-89bf-a360f02df26d
+		summarizeBy: sum
+		sourceColumn: UnitPrice
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column UnitPriceLC
+		dataType: double
+		lineageTag: 25bd62df-a4b9-4991-875e-0ed2400360ae
+		summarizeBy: sum
+		sourceColumn: UnitPriceLC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column UoMCode
+		dataType: string
+		lineageTag: ed473fff-ad4c-4b30-9c89-736337fd45f3
+		summarizeBy: none
+		sourceColumn: UoMCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column ValidacionOC
+		dataType: string
+		lineageTag: c4343008-b613-4721-a8ac-b70260db9e7e
+		summarizeBy: none
+		sourceColumn: ValidacionOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column WarehouseCode
+		dataType: string
+		lineageTag: 126993fa-bcb7-48b3-9872-fc43c808663d
+		summarizeBy: none
+		sourceColumn: WarehouseCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column KBase = IF ( NOT ISBLANK ( LOL_PBIPURCHASEINVOICE[BaseDocumentInternalKey] ) && LOL_PBIPURCHASEINVOICE[BaseDocumentInternalKey] <> "", LOL_PBIPURCHASEINVOICE[BaseDocumentInternalKey] & "-" & LOL_PBIPURCHASEINVOICE[BaseDocumentLineInternalKey] )
+		dataType: string
+		isHidden
+		lineageTag: 11111111-0004-4004-8004-000000000004
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition LOL_PBIPURCHASEINVOICE = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin"),
+				    dbo_LOL_PBIPURCHASEINVOICE = Origen{[Schema="dbo",Item="LOL_PBIPURCHASEINVOICE"]}[Data]
+				in
+				    dbo_LOL_PBIPURCHASEINVOICE
+

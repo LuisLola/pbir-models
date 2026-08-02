@@ -1,0 +1,74 @@
+relationship 59b44d13-ca18-4e0c-9678-457ddf55cc7f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: JournalEntryItem.'Fecha de documento'
+	toColumn: LocalDateTable_d507226a-8495-4b56-aa91-fd8183529bdc.Date
+
+relationship 40e60ea8-5d6a-41c5-a46a-ee0795a6521e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: JournalEntryItem.'Fecha de vencimiento'
+	toColumn: LocalDateTable_7a5886f3-59e9-4215-90a7-e2bc0c557b08.Date
+
+relationship 5cd43bbb-da50-192f-5add-9f43b5b0bd15
+	toCardinality: many
+	fromColumn: CostCenter.'Código de centro de coste'
+	toColumn: LOL_PBIFINANCIALENTRIES.DistributionRuleCode1
+
+relationship 74ea28f5-30d4-f9b6-9124-009b44240c12
+	fromColumn: 'KPI Export (Dim)'.'Dimensión Finanzas Orden'
+	toColumn: 'Dimensión Finanzas'.'Dimensión Finanzas Orden'
+
+relationship 1e1cf09f-0d7f-8373-7894-111088ae80fd
+	toCardinality: many
+	fromColumn: CostCenter_Dim2.'Código de centro de coste'
+	toColumn: LOL_PBIFINANCIALENTRIES.DistributionRuleCode2
+
+relationship 8d3dc268-15e8-ff37-b21f-4edbafb2cfbf
+	toCardinality: many
+	fromColumn: JournalEntryItem.'Código de cuenta'
+	toColumn: LOL_PBIFINANCIALMODEL.CODIGO_CUENTA
+
+relationship a963189d-f1c5-4a38-880a-d356c4e4d106
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendario.Date
+	toColumn: LocalDateTable_7678d907-d54d-40b5-b20a-c5e609305e3f.Date
+
+relationship 1bd3aab8-c9cb-e61c-ef43-c1cc979a88bc
+	fromColumn: JournalEntryItem.'Fecha de contabilización'
+	toColumn: Calendario.Date
+
+relationship 9eeb54f9-99b1-ca26-9ead-db96f00a2601
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: TablaFechasFiltro.FechaFiltro
+	toColumn: Calendario.Date
+
+relationship 9eccb25c-d9e8-4486-995b-824406b9d088
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBIFINANCIALENTRIES.CreateDate
+	toColumn: LocalDateTable_471da0d1-edef-4d87-9cc3-8597ab4fa803.Date
+
+relationship 761664fd-d23b-47a4-90a5-1bbf242f8336
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBIFINANCIALENTRIES.DueDate
+	toColumn: LocalDateTable_12ef9990-e8df-4d53-94f9-d29a0f17e79b.Date
+
+relationship cd43b139-08a3-4ee1-866c-edd036983724
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBIFINANCIALENTRIES.PostingDate
+	toColumn: LocalDateTable_16525a9b-3b14-401b-8eb0-d30810702cec.Date
+
+relationship ce048dea-e11a-4f56-9fab-67098ebd35fc
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBIFINANCIALENTRIES.FechaComunicacion
+	toColumn: LocalDateTable_45060eeb-1207-48ad-868d-e00308198235.Date
+
+relationship e1ac4133-1df6-cff3-4a02-315391354bab
+	fromColumn: LOL_PBIFINANCIALENTRIES.PostingDate
+	toColumn: Calendario.Date
+
+relationship 68069b39-c30f-3c44-b625-0ee9643e995f
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: LOL_PBIFINANCIALENTRIES.AccountCode
+	toColumn: LOL_PBIFINANCIALMODEL.CODIGO_CUENTA
+

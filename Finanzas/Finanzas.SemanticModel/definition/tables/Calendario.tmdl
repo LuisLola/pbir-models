@@ -1,0 +1,122 @@
+table Calendario
+	lineageTag: 91215ef0-5b78-4e99-97bc-113ca610a2a4
+
+	column Date
+		formatString: General Date
+		lineageTag: 62d5a5dc-a0de-4caa-9f76-fc405699511f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variación
+			isDefault
+			relationship: a963189d-f1c5-4a38-880a-d356c4e4d106
+			defaultHierarchy: LocalDateTable_7678d907-d54d-40b5-b20a-c5e609305e3f.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Año
+		formatString: 0
+		lineageTag: 82d7bf92-2d71-4081-b9c3-2bba578310c8
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Año]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AñoTexto
+		lineageTag: 8b4456eb-f07b-4f16-a44b-03ab30d329f9
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [AñoTexto]
+
+		annotation SummarizationSetBy = Automatic
+
+	column NombreMesAño
+		lineageTag: 83f7ee73-44a1-4bec-a11a-156675ab233d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [NombreMesAño]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Semana
+		formatString: 0
+		lineageTag: b6f0ce59-6679-4df2-ae0b-8b5bc127ebab
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Semana]
+
+		annotation SummarizationSetBy = Automatic
+
+	column NombreSemana
+		lineageTag: 72296b8d-7d7a-44d7-b0d1-3cc4a3beb764
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [NombreSemana]
+
+		annotation SummarizationSetBy = Automatic
+
+	column NombreDía
+		lineageTag: 32f8393e-dbfe-4487-bdfe-da8d884f49b5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [NombreDía]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DíaMes
+		formatString: 0
+		lineageTag: 499c9dc6-7ca0-4d3c-aa54-7610623a6bdb
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [DíaMes]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mes
+		formatString: 0
+		lineageTag: c51bf8f4-9623-4bce-9138-30568b966206
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Mes]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiaSemana
+		formatString: 0
+		lineageTag: d11022c0-62c0-405b-9d64-0ecbfdbf2059
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [DiaSemana]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiaSemanaTexto
+		lineageTag: c71baa54-5478-42be-aca8-ab18126fe74a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [DiaSemanaTexto]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calendario = calculated
+		mode: import
+		source =
+				
+				ADDCOLUMNS (
+				    CALENDAR (DATE(2023, 1, 1), DATE(2029, 12, 31)),
+				    "Año", YEAR([Date]),
+				    "AñoTexto", FORMAT([Date], "0000"),
+				    "NombreMesAño", FORMAT([Date], "MMM YYYY"),
+				    "Semana", WEEKNUM([Date], 2),
+				    "NombreSemana", "Semana " & WEEKNUM([Date], 2) & " " & YEAR([Date]),
+				    "NombreDía", FORMAT([Date], "DD MMMM YYYY"),
+				    "DíaMes", DAY([Date]),
+				    "Mes", MONTH([Date]),
+				    "DiaSemana", WEEKDAY([Date]),
+				     "DiaSemanaTexto", FORMAT([Date], "dddd")
+				)
+
+	annotation PBI_Id = 74c0da6b2bab4d23be9822838443e164
+

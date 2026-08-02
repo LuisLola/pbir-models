@@ -1,11 +1,11 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "364e9dd0a12587d69a26",
   "position": {
     "x": 0,
-    "y": 155,
-    "z": 0,
-    "height": 565,
+    "y": 301.4262023217247,
+    "z": 1000,
+    "height": 418.17578772802653,
     "width": 1280,
     "tabOrder": 0
   },
@@ -20,21 +20,6 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "LOL_PBIAGENTES"
-                    }
-                  },
-                  "Property": "Agente_Cajero"
-                }
-              },
-              "queryRef": "LOL_PBIAGENTES.Agente_Cajero",
-              "nativeQueryRef": "Agente",
-              "active": true
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
                       "Entity": "LOL_PBICLIENTES"
                     }
                   },
@@ -43,6 +28,21 @@
               },
               "queryRef": "LOL_PBICLIENTES.RazonSocial",
               "nativeQueryRef": "Cliente",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIAGENTES"
+                    }
+                  },
+                  "Property": "Agente_Cajero"
+                }
+              },
+              "queryRef": "LOL_PBIAGENTES.Agente_Cajero",
+              "nativeQueryRef": "Agente",
               "active": false
             },
             {
@@ -219,14 +219,26 @@
         "levels": [
           {
             "queryRefs": [
-              "LOL_PBIAGENTES.Agente_Cajero"
+              "LOL_PBICLIENTES.RazonSocial"
             ],
             "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBICLIENTES"
+                    }
+                  },
+                  "Property": "RazonSocial"
+                }
+              }
+            ],
             "isPinned": true
           },
           {
             "queryRefs": [
-              "LOL_PBICLIENTES.RazonSocial"
+              "LOL_PBIAGENTES.Agente_Cajero"
             ],
             "isCollapsed": true,
             "isPinned": true
@@ -353,7 +365,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "110D"
+                  "Value": "135.2887537993921D"
                 }
               }
             }
@@ -367,7 +379,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "167.38600275186008D"
+                  "Value": "133.41972837920122D"
                 }
               }
             }
@@ -409,7 +421,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "110D"
+                  "Value": "147.93313069908814D"
                 }
               }
             }
@@ -473,6 +485,62 @@
           "selector": {
             "metadata": "MedidasVentas.VentasTemporadaPasada_SoloInicio"
           }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "266.4303907487594D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_PBICLIENTES.RazonSocial"
+          }
+        }
+      ],
+      "rowHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTotals": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "Column"
+          }
+        }
+      ],
+      "rowTotal": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
         }
       ]
     },
@@ -481,35 +549,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "2f822f5f89172b0d24c8",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PBICLIENTES"
-              }
-            },
-            "Property": "RazonSocial"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "c5180a73d6071543b5dd",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasVentas"
-              }
-            },
-            "Property": "VentasTemporadaAnterior"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "49a6e346a73ad2797262",
+        "name": "a8a1fb7876ba2700a612",
         "field": {
           "Column": {
             "Expression": {
@@ -523,7 +563,7 @@
         "type": "Categorical"
       },
       {
-        "name": "66b97371a08cc5cb72dc",
+        "name": "9de7622cd5b056834b06",
         "field": {
           "Column": {
             "Expression": {
@@ -537,7 +577,7 @@
         "type": "Categorical"
       },
       {
-        "name": "474f1d90ab3d944cb404",
+        "name": "e43444070d4912bab25a",
         "field": {
           "Measure": {
             "Expression": {
@@ -551,7 +591,21 @@
         "type": "Advanced"
       },
       {
-        "name": "5e534214d30eeb190104",
+        "name": "95f879e5a4d2420a7980",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "VentasTemporadaAnterior"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "4c006016ae78a4d0d6a3",
         "field": {
           "Measure": {
             "Expression": {
@@ -565,7 +619,7 @@
         "type": "Advanced"
       },
       {
-        "name": "26ff717bd0cba9950810",
+        "name": "cdd3621b23dc768432b8",
         "field": {
           "Measure": {
             "Expression": {
@@ -579,7 +633,7 @@
         "type": "Advanced"
       },
       {
-        "name": "806e44420cc68ea4080b",
+        "name": "8ce0f5b894eb98cbd77d",
         "field": {
           "Measure": {
             "Expression": {
@@ -593,7 +647,7 @@
         "type": "Advanced"
       },
       {
-        "name": "fab524a480ae14a1d5b1",
+        "name": "bb05dce1a9045cb1406c",
         "field": {
           "Measure": {
             "Expression": {
@@ -607,7 +661,7 @@
         "type": "Advanced"
       },
       {
-        "name": "a29f9f77de601d228bc3",
+        "name": "b185cf8eec3d2530ac03",
         "field": {
           "Measure": {
             "Expression": {
@@ -621,7 +675,7 @@
         "type": "Advanced"
       },
       {
-        "name": "87df5ceb571416c6ac55",
+        "name": "f14a40db06c7b5673c69",
         "field": {
           "Measure": {
             "Expression": {
@@ -635,7 +689,7 @@
         "type": "Advanced"
       },
       {
-        "name": "53b79bbc782373de5464",
+        "name": "93e3172f48506b23055e",
         "field": {
           "Measure": {
             "Expression": {
@@ -647,6 +701,20 @@
           }
         },
         "type": "Advanced"
+      },
+      {
+        "name": "22623c15055aa4ae20ec",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBICLIENTES"
+              }
+            },
+            "Property": "RazonSocial"
+          }
+        },
+        "type": "Categorical"
       }
     ]
   }

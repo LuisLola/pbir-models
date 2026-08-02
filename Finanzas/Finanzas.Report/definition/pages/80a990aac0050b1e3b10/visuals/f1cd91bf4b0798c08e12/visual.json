@@ -1,0 +1,261 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "f1cd91bf4b0798c08e12",
+  "position": {
+    "x": 49.473125560456047,
+    "y": 482.73777062020753,
+    "z": 1000,
+    "height": 235.37214281792726,
+    "width": 1230.8313965192247,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "JournalEntryItem"
+                    }
+                  },
+                  "Property": "Número de documento"
+                }
+              },
+              "queryRef": "JournalEntryItem.Número de documento",
+              "nativeQueryRef": "Número de documento"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "JournalEntryItem"
+                    }
+                  },
+                  "Property": "Fecha de contabilización"
+                }
+              },
+              "queryRef": "JournalEntryItem.Fecha de contabilización",
+              "nativeQueryRef": "Fecha de contabilización",
+              "format": "dd/MM/yyyy"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "JournalEntryItem"
+                    }
+                  },
+                  "Property": "Código de cuenta"
+                }
+              },
+              "queryRef": "JournalEntryItem.Código de cuenta",
+              "nativeQueryRef": "Código de cuenta"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "JournalEntryItem"
+                    }
+                  },
+                  "Property": "Código de interlocutor comercial"
+                }
+              },
+              "queryRef": "JournalEntryItem.Código de interlocutor comercial",
+              "nativeQueryRef": "Código de interlocutor comercial"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "JournalEntryItem"
+                    }
+                  },
+                  "Property": "Comentarios"
+                }
+              },
+              "queryRef": "JournalEntryItem.Comentarios",
+              "nativeQueryRef": "Comentarios"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "JournalEntryItem"
+                        }
+                      },
+                      "Property": "Abono (ML)"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(JournalEntryItem.Abono (ML))",
+              "nativeQueryRef": "Suma de Abono (ML)"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "JournalEntryItem"
+                        }
+                      },
+                      "Property": "Cargo (ML)"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(JournalEntryItem.Cargo (ML))",
+              "nativeQueryRef": "Suma de Cargo (ML)"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "JournalEntryItem"
+                    }
+                  },
+                  "Property": "Código 1 de regla de distribución"
+                }
+              },
+              "queryRef": "JournalEntryItem.Código 1 de regla de distribución",
+              "nativeQueryRef": "Código 1 de regla de distribución"
+            }
+          ],
+          "showAll": true
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "JournalEntryItem"
+                  }
+                },
+                "Property": "Código de interlocutor comercial"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnFormatting": [
+        {
+          "properties": {
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Auto'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "JournalEntryItem.Número de documento"
+          }
+        },
+        {
+          "properties": {
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "JournalEntryItem.Fecha de contabilización"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#ffffff'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Condensed'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualTooltip": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,296 @@
+table JournalEntryItem
+	lineageTag: 9901029a-b8a9-400d-b498-833e26ed1992
+
+	column 'Código de cuenta'
+		dataType: string
+		lineageTag: c6eb6ee3-4990-41ef-8cea-1dbe8b266dd8
+		summarizeBy: none
+		sourceColumn: Código de cuenta
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Código de cuenta asociada'
+		dataType: string
+		lineageTag: a8bd99ab-a14d-42ca-995d-b10a70ac1465
+		summarizeBy: none
+		sourceColumn: Código de cuenta asociada
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Código de interlocutor comercial'
+		dataType: string
+		lineageTag: 88e886ce-2f8f-42fd-9041-9665b3fbb834
+		summarizeBy: none
+		sourceColumn: Código de interlocutor comercial
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Comentario en línea'
+		dataType: string
+		lineageTag: 999f5e01-d39e-41f3-b4be-9f0a666b1d0d
+		summarizeBy: none
+		sourceColumn: Comentario en línea
+
+		annotation SummarizationSetBy = Automatic
+
+	column Comentarios
+		dataType: string
+		lineageTag: f62e587e-77f2-468e-b701-64c41f9fd0de
+		summarizeBy: none
+		sourceColumn: Comentarios
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fecha de documento'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9551232c-85db-4d3b-abb1-8d48aa07a6db
+		summarizeBy: none
+		sourceColumn: Fecha de documento
+
+		variation Variación
+			isDefault
+			relationship: 59b44d13-ca18-4e0c-9678-457ddf55cc7f
+			defaultHierarchy: LocalDateTable_d507226a-8495-4b56-aa91-fd8183529bdc.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fecha de vencimiento'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a9eb0b7f-17bd-4c41-b41b-dfa3b5f748d4
+		summarizeBy: none
+		sourceColumn: Fecha de vencimiento
+
+		variation Variación
+			isDefault
+			relationship: 40e60ea8-5d6a-41c5-a46a-ee0795a6521e
+			defaultHierarchy: LocalDateTable_7a5886f3-59e9-4215-90a7-e2bc0c557b08.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Número de documento'
+		dataType: string
+		lineageTag: 38cd356a-55c9-458a-94ae-df317b5609b3
+		summarizeBy: none
+		sourceColumn: Número de documento
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Referencia 1'
+		dataType: string
+		lineageTag: 7dc577f2-ac94-4b68-b197-43d2485b1cd4
+		summarizeBy: none
+		sourceColumn: Referencia 1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Referencia 2'
+		dataType: string
+		lineageTag: fa4ba4e3-c501-4294-927a-d7931604fc22
+		summarizeBy: none
+		sourceColumn: Referencia 2
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Referencia 3'
+		dataType: string
+		lineageTag: 7c215acf-c7d3-42fd-b2ba-cf4b586b5fc3
+		summarizeBy: none
+		sourceColumn: Referencia 3
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Abono (ML)'
+		dataType: double
+		lineageTag: b94d2a71-6594-4168-bfb7-afa74b65756c
+		summarizeBy: sum
+		sourceColumn: Abono (ML)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Cargo (ML)'
+		dataType: double
+		lineageTag: 80e8673f-63b7-446a-a773-072c1449c885
+		summarizeBy: sum
+		sourceColumn: Cargo (ML)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Debe (MS)'
+		dataType: double
+		lineageTag: cd32d06a-cc45-49b7-b73b-961f97baa3f5
+		summarizeBy: sum
+		sourceColumn: Debe (MS)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Haber (MS)'
+		dataType: double
+		lineageTag: f6668464-717b-4728-a200-dfda6956b836
+		summarizeBy: sum
+		sourceColumn: Haber (MS)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Clave interna de operación de diario'
+		dataType: int64
+		formatString: 0
+		lineageTag: fabca0a1-cd85-4869-8bba-b0716a88f6ad
+		summarizeBy: sum
+		sourceColumn: Clave interna de operación de diario
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fecha de contabilización'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a7720257-7926-44af-ade5-19aef375f94e
+		summarizeBy: none
+		sourceColumn: Fecha de contabilización
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nombre sucursal'
+		dataType: string
+		lineageTag: c82fff75-479b-4959-9672-3c035315ea1a
+		summarizeBy: none
+		sourceColumn: Nombre sucursal
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Código 1 de regla de distribución'
+		dataType: string
+		lineageTag: 8bddd911-5eaf-49a2-a897-fd67280b8946
+		summarizeBy: none
+		sourceColumn: Código 1 de regla de distribución
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Código 2 de regla de distribución'
+		dataType: string
+		lineageTag: 5e7ec30e-e1f6-46ee-9014-faee1bff910b
+		summarizeBy: none
+		sourceColumn: Código 2 de regla de distribución
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Código 3 de regla de distribución'
+		dataType: string
+		lineageTag: 960bef7c-c561-4eb4-b5dd-9dc2bc0d86e2
+		summarizeBy: none
+		sourceColumn: Código 3 de regla de distribución
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Código 4 de regla de distribución'
+		dataType: string
+		lineageTag: 9fbc9600-5b09-4e39-9236-6be4ed1fc640
+		summarizeBy: none
+		sourceColumn: Código 4 de regla de distribución
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Código 5 de regla de distribución'
+		dataType: string
+		lineageTag: 7c290ed0-e469-4df2-972a-7da90076b4aa
+		summarizeBy: none
+		sourceColumn: Código 5 de regla de distribución
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Clave interna de documento de diario'
+		dataType: int64
+		formatString: 0
+		lineageTag: f691527b-f6e6-4c7f-a1ac-72937f6b240a
+		summarizeBy: sum
+		sourceColumn: Clave interna de documento de diario
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Clave interna de operación de diario.1'
+		dataType: int64
+		formatString: 0
+		lineageTag: 136333a3-fe2a-445f-841e-bb588fdebc6e
+		summarizeBy: sum
+		sourceColumn: Clave interna de operación de diario.1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Código del tipo de documento'
+		dataType: string
+		lineageTag: 935afeff-86f5-4333-a2cb-e8ab13fb9037
+		summarizeBy: none
+		sourceColumn: Código del tipo de documento
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tipo de diario'
+		dataType: string
+		lineageTag: 6b241e64-f0de-41a8-9078-edef0616aa72
+		summarizeBy: none
+		sourceColumn: Tipo de diario
+
+		annotation SummarizationSetBy = Automatic
+
+	partition JournalEntryItem = m
+		mode: import
+		source =
+				let
+				    Origen = SapHana.Database("192.168.0.231:30015", [Implementation="2.0"]),
+				    Contents = Origen{[Name="Contents"]}[Data],
+				    sap.sbololasucursal.fin = Contents{[Name="sap.sbololasucursal.fin"]}[Data],
+				    JournalEntryItem1 = sap.sbololasucursal.fin{[Name="JournalEntryItem"]}[Data],
+				    #"Elementos agregados" = Cube.Transform(JournalEntryItem1,
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[JournalEntryItem]", {"[AccountCode].[AccountCode].Attribute", "[ControlAccountCode].[ControlAccountCode].Attribute", "[BusinessPartnerCode].[BusinessPartnerCode].Attribute", "[RemarkInRow].[RemarkInRow].Attribute", "[Remarks].[Remarks].Attribute", "[DocumentDate].[DocumentDate].Attribute", "[DueDate].[DueDate].Attribute", "[DocumentNumber].[DocumentNumber].Attribute", "[Reference1].[Reference1].Attribute", "[Reference2].[Reference2].Attribute", "[Reference3].[Reference3].Attribute"}, {"Código de cuenta", "Código de cuenta asociada", "Código de interlocutor comercial", "Comentario en línea", "Comentarios", "Fecha de documento", "Fecha de vencimiento", "Número de documento", "Referencia 1", "Referencia 2", "Referencia 3"}},
+				            {Cube.AddMeasureColumn, "Abono (ML)", "[Measures].[CreditLC]"},
+				            {Cube.AddMeasureColumn, "Cargo (ML)", "[Measures].[DebitLC]"},
+				            {Cube.AddMeasureColumn, "Debe (MS)", "[Measures].[DebitSC]"},
+				            {Cube.AddMeasureColumn, "Haber (MS)", "[Measures].[CreditSC]"}
+				        }),
+				    #"Elementos agregados2" = Cube.Transform(#"Elementos agregados",
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[JournalEntryItem]", {"[JournalVoucherInternalKey].[JournalVoucherInternalKey].Attribute", "[JournalTransactionInternalKey].[JournalTransactionInternalKey].Attribute"}, {"Clave interna de documento de diario", "Clave interna de operación de diario"}}
+				        }),
+				    #"Columnas quitadas" = Table.RemoveColumns(#"Elementos agregados2",{"Clave interna de documento de diario"}),
+				    #"Elementos agregados1" = Cube.Transform(#"Columnas quitadas",
+				        {
+				        }),
+				    #"Elementos agregados3" = Cube.Transform(#"Elementos agregados1",
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[JournalEntryItem]", {"[PostingDate].[PostingDate].Attribute"}, {"Fecha de contabilización"}}
+				        }),
+				    #"Elementos agregados4" = Cube.Transform(#"Elementos agregados3",
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[JournalEntryItem]", {"[BranchName].[BranchName].Attribute"}, {"Nombre sucursal"}}
+				        }),
+				    #"Elementos agregados5" = Cube.Transform(#"Elementos agregados4",
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[JournalEntryItem]", {"[DistributionRuleCode1].[DistributionRuleCode1].Attribute", "[DistributionRuleCode2].[DistributionRuleCode2].Attribute", "[DistributionRuleCode3].[DistributionRuleCode3].Attribute", "[DistributionRuleCode4].[DistributionRuleCode4].Attribute", "[DistributionRuleCode5].[DistributionRuleCode5].Attribute"}, {"Código 1 de regla de distribución", "Código 2 de regla de distribución", "Código 3 de regla de distribución", "Código 4 de regla de distribución", "Código 5 de regla de distribución"}}
+				        }),
+				    #"Valor reemplazado" = Table.ReplaceValue(#"Elementos agregados5",null,"",Replacer.ReplaceValue,{"Código 1 de regla de distribución"}),
+				    #"Valor reemplazado1" = Table.ReplaceValue(#"Valor reemplazado",null,"",Replacer.ReplaceValue,{"Código 2 de regla de distribución"}),
+				    #"Elementos agregados6" = Cube.Transform(#"Valor reemplazado1",
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[JournalEntryItem]", {"[JournalVoucherInternalKey].[JournalVoucherInternalKey].Attribute", "[JournalTransactionInternalKey].[JournalTransactionInternalKey].Attribute"}, {"Clave interna de documento de diario", "Clave interna de operación de diario.1"}}
+				        }),
+				    #"Elementos agregados7" = Cube.Transform(#"Elementos agregados6",
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[JournalEntryItem]", {"[DocumentTypeCode].[DocumentTypeCode].Attribute", "[JournalType].[JournalType].Attribute"}, {"Código del tipo de documento", "Tipo de diario"}}
+				        })
+				in
+				    #"Elementos agregados7"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegación
+

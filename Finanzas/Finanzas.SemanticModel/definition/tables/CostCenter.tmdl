@@ -1,0 +1,56 @@
+table CostCenter
+	lineageTag: 577caaef-164a-4a93-825b-5f68881bcfb9
+
+	column 'Código de centro de coste'
+		dataType: string
+		lineageTag: db56dcd4-9e9c-490d-8cb7-0ff3d1cefc5c
+		summarizeBy: none
+		sourceColumn: Código de centro de coste
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Código de dimensión del centro de costes'
+		dataType: int64
+		formatString: 0
+		lineageTag: f7436c73-9026-4820-8415-1a4fdf89d290
+		summarizeBy: sum
+		sourceColumn: Código de dimensión del centro de costes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Descripción de dimensión'
+		dataType: string
+		lineageTag: d7206b36-94cd-4d0d-8fe0-4ffa55bcc1a5
+		summarizeBy: none
+		sourceColumn: Descripción de dimensión
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nombre de centro de coste'
+		dataType: string
+		lineageTag: eca50dc2-2329-4ac0-966f-c09078425c6d
+		summarizeBy: none
+		sourceColumn: Nombre de centro de coste
+
+		annotation SummarizationSetBy = Automatic
+
+	partition CostCenter = m
+		mode: import
+		source =
+				let
+				    Origen = SapHana.Database("192.168.0.231:30015", [Implementation="2.0"]),
+				    Contents = Origen{[Name="Contents"]}[Data],
+				    sap.sbololasucursal.adm = Contents{[Name="sap.sbololasucursal.adm"]}[Data],
+				    CostCenter1 = sap.sbololasucursal.adm{[Name="CostCenter"]}[Data],
+				    #"Elementos agregados" = Cube.Transform(CostCenter1,
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[CostCenter]", {"[CostCenter].[CostCenterCode]", "[CostCenter].[CostCenterDimensionCode]", "[CostCenter].[DimensionDescription].Attribute", "[CostCenter].[CostCenterName]"}, {"Código de centro de coste", "Código de dimensión del centro de costes", "Descripción de dimensión", "Nombre de centro de coste"}}
+				        }),
+				    #"Filas filtradas" = Table.SelectRows(#"Elementos agregados", each ([Código de dimensión del centro de costes] = 1))
+				in
+				    #"Filas filtradas"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,884 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "5f983133216b95500bb5",
+  "position": {
+    "x": 0,
+    "y": 298.66666666666669,
+    "z": 1000,
+    "height": 420.42276422764229,
+    "width": 1280,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIAGENTES"
+                    }
+                  },
+                  "Property": "Agente_Cajero"
+                }
+              },
+              "queryRef": "LOL_PBIAGENTES.Agente_Cajero",
+              "nativeQueryRef": "Agente",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBICLIENTES"
+                    }
+                  },
+                  "Property": "RazonSocial"
+                }
+              },
+              "queryRef": "LOL_PBICLIENTES.RazonSocial",
+              "nativeQueryRef": "Cliente",
+              "active": false
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIB2BSALESORDER"
+                    }
+                  },
+                  "Property": "DocNum"
+                }
+              },
+              "queryRef": "LOL_PBIB2BSALESORDER.DocNum",
+              "nativeQueryRef": "Pedido",
+              "active": false
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasVentas"
+                    }
+                  },
+                  "Property": "Pedido Original"
+                }
+              },
+              "queryRef": "MedidasVentas.Pedido Original",
+              "nativeQueryRef": "Pedido Original"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasVentas"
+                    }
+                  },
+                  "Property": "Pedidos Cancelados"
+                }
+              },
+              "queryRef": "MedidasVentas.Pedidos Cancelados",
+              "nativeQueryRef": "Pedidos Cancelados"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasVentas"
+                    }
+                  },
+                  "Property": "Pedido Final"
+                }
+              },
+              "queryRef": "MedidasVentas.Pedido Final",
+              "nativeQueryRef": "Pedido Final"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasVentas"
+                    }
+                  },
+                  "Property": "% Cancelado"
+                }
+              },
+              "queryRef": "MedidasVentas.% Cancelado",
+              "nativeQueryRef": "% Cancelado"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasVentas"
+                    }
+                  },
+                  "Property": "Servido (cadena)"
+                }
+              },
+              "queryRef": "MedidasVentas.Servido (cadena)",
+              "nativeQueryRef": "Servido (cadena)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasVentas"
+                    }
+                  },
+                  "Property": "Pendiente Servir"
+                }
+              },
+              "queryRef": "MedidasVentas.Pendiente Servir",
+              "nativeQueryRef": "Pendiente Servir"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasVentas"
+                    }
+                  },
+                  "Property": "Facturado (cadena)"
+                }
+              },
+              "queryRef": "MedidasVentas.Facturado (cadena)",
+              "nativeQueryRef": "Facturado (cadena)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasVentas"
+                    }
+                  },
+                  "Property": "Pendiente Facturar"
+                }
+              },
+              "queryRef": "MedidasVentas.Pendiente Facturar",
+              "nativeQueryRef": "Pendiente Facturar"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasVentas"
+                    }
+                  },
+                  "Property": "Notas + Devol. Abiertas (cadena)"
+                }
+              },
+              "queryRef": "MedidasVentas.Notas + Devol. Abiertas (cadena)",
+              "nativeQueryRef": "Notas + Devol. Abiertas (cadena)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasVentas"
+                    }
+                  },
+                  "Property": "Solicitudes Devol. Abiertas"
+                }
+              },
+              "queryRef": "MedidasVentas.Solicitudes Devol. Abiertas",
+              "nativeQueryRef": "Solicitudes Devol. Abiertas"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MedidasVentas"
+                  }
+                },
+                "Property": "Pedido Final"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "LOL_PBIAGENTES.Agente_Cajero"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIAGENTES"
+                    }
+                  },
+                  "Property": "Agente_Cajero"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "LOL_PBICLIENTES.RazonSocial"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBICLIENTES"
+                    }
+                  },
+                  "Property": "RazonSocial"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "LOL_PBIB2BSALESORDER.DocNum"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIB2BSALESORDER"
+                    }
+                  },
+                  "Property": "DocNum"
+                }
+              }
+            ],
+            "isPinned": true
+          }
+        ],
+        "root": {
+          "children": [
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "'NV FASHION CLUB 70'"
+                  }
+                }
+              ],
+              "children": [
+                {
+                  "identityValues": [
+                    {
+                      "Literal": {
+                        "Value": "'SRL PACY'"
+                      }
+                    }
+                  ],
+                  "isToggled": true
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "autoSizeColumnWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Right'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "203.14539480686437D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_PBIAGENTES.Agente_Cajero"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "266.4303907487594D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_PBICLIENTES.RazonSocial"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "101.48024959631016D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasVentas.Pedido Original"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "118.37429092620654D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasVentas.Importe Facturado"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "115.50525464834277D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasVentas.Importe Notas Credito"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "95.19467790915839D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasVentas.Pedidos Cancelados"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "159.1367795238309D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasVentas.Notas Credito (cadena)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "96.55361805459724D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasVentas.Facturado (cadena)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "110.69501226492233D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasVentas.Pendiente Facturar"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "96.54869888167703D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasVentas.Pendiente Servir"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "97.11897961906304D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasVentas.Servido (cadena)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "93.02125919869174D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasVentas.Pedido Final"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "136.51672202630732D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasVentas.Notas + Devol. Abiertas (cadena)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "118.91490226280946D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasVentas.Solicitudes Devol. Abiertas"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "84D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasVentas.% Cancelado"
+          }
+        }
+      ],
+      "rowHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTotals": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "Column"
+          }
+        }
+      ],
+      "rowTotal": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "7f15aa19e65056ba4e59",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBICLIENTES"
+              }
+            },
+            "Property": "RazonSocial"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "1e7e4522dd739c29796c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIB2BSALESORDER"
+              }
+            },
+            "Property": "DocNum"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "609bd6cfb9d4118a58d5",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "Pedidos Cancelados"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "2b6da1f70a11608a09eb",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "% Cancelado"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "c55a2b185b248dac4b91",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "Importe Facturado"
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User"
+      },
+      {
+        "name": "34f1fbd380c6df71f6d8",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "Importe Notas Credito"
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User"
+      },
+      {
+        "name": "e2c30ccfb844961e4ff8",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "Pedido Final"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "c36f158c48ee34efd0d8",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "Pedido Original"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "1b7de1784b7fdc118e7d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "Importe Servido"
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User"
+      },
+      {
+        "name": "381c41afc3646c14ec0d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIAGENTES"
+              }
+            },
+            "Property": "Agente_Cajero"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "e58acb7cd99ce075eca9",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "Servido (cadena)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f73297d202e1b979c4bb",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "Facturado (cadena)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "38a3e93e03012e0b6167",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "Notas Credito (cadena)"
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User"
+      },
+      {
+        "name": "ec30af0da4dd6ccd9dbb",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "Pendiente Servir"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "ac7ef71ab8aa89a70a4c",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "Pendiente Facturar"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "c86f176c67b3e7871da4",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "Notas + Devol. Abiertas (cadena)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "c44e5f17b6707344114c",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "Solicitudes Devol. Abiertas (cadena)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "d8b7ddb65a5b1c071083",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasVentas"
+              }
+            },
+            "Property": "Solicitudes Devol. Abiertas"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}
