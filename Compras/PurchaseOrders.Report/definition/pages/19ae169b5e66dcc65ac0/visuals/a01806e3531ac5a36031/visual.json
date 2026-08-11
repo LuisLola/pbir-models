@@ -2,36 +2,17 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
   "name": "a01806e3531ac5a36031",
   "position": {
-    "x": 322.36259228876128,
-    "y": 88.203445447087773,
+    "x": 249.85074626865671,
+    "y": 125.3731343283582,
     "z": 0,
-    "height": 279.59044368600684,
-    "width": 499.11262798634812,
+    "height": 334.02985074626866,
+    "width": 471.94029850746267,
     "tabOrder": 0
   },
   "visual": {
     "visualType": "pivotTable",
     "query": {
       "queryState": {
-        "Columns": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "LOL_PBIPURCHASEORDERS"
-                    }
-                  },
-                  "Property": "Estado"
-                }
-              },
-              "queryRef": "LOL_PBIPURCHASEORDERS.Estado",
-              "nativeQueryRef": "Estado",
-              "active": true
-            }
-          ]
-        },
         "Rows": {
           "projections": [
             {
@@ -46,8 +27,9 @@
                 }
               },
               "queryRef": "LOL_PBIPURCHASEORDERS.DocumentNumber",
-              "nativeQueryRef": "DocumentNumber",
-              "active": true
+              "nativeQueryRef": "Pedido",
+              "active": true,
+              "displayName": "Pedido"
             },
             {
               "field": {
@@ -85,7 +67,48 @@
                 }
               },
               "queryRef": "Sum(LOL_PBIPURCHASEORDERS.Quantity)",
-              "nativeQueryRef": "Quantity"
+              "nativeQueryRef": "Cantidad",
+              "displayName": "Cantidad"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBISTOCKTRANSFERSTATUS"
+                        }
+                      },
+                      "Property": "CantidadesEnviadasRMT"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(LOL_PBISTOCKTRANSFERSTATUS.CantidadesEnviadasRMT)",
+              "nativeQueryRef": "Informadas Almacén",
+              "displayName": "Informadas Almacén"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBISTOCKTRANSFERSTATUS"
+                        }
+                      },
+                      "Property": "CantidadesRecibidasRMT"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(LOL_PBISTOCKTRANSFERSTATUS.CantidadesRecibidasRMT)",
+              "nativeQueryRef": "Recepcionadas Almacén",
+              "displayName": "Recepcionadas Almacén"
             }
           ]
         }
@@ -94,13 +117,18 @@
         "sort": [
           {
             "field": {
-              "Column": {
+              "Aggregation": {
                 "Expression": {
-                  "SourceRef": {
-                    "Entity": "LOL_PBIPURCHASEORDERS"
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "LOL_PBISTOCKTRANSFERSTATUS"
+                      }
+                    },
+                    "Property": "CantidadesRecibidasRMT"
                   }
                 },
-                "Property": "DocumentNumber"
+                "Function": 0
               }
             },
             "direction": "Descending"
@@ -180,34 +208,6 @@
         }
       ],
       "columnWidth": [
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "118.37429092620654D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "MedidasVentas.Importe Facturado"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "115.50525464834277D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "MedidasVentas.Importe Notas Credito"
-          }
-        },
         {
           "properties": {
             "value": {
@@ -324,6 +324,34 @@
               }
             ]
           }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "87.07164085705492D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(LOL_PBISTOCKTRANSFERSTATUS.CantidadesEnviadasRMT)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "98.14927528595146D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(LOL_PBISTOCKTRANSFERSTATUS.CantidadesRecibidasRMT)"
+          }
         }
       ],
       "rowHeaders": [
@@ -383,7 +411,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Por Documento'"
+                  "Value": "'Por pedido'"
                 }
               }
             }
@@ -392,85 +420,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "34f1fbd380c6df71f6d8",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasVentas"
-              }
-            },
-            "Property": "Importe Notas Credito"
-          }
-        },
-        "type": "Advanced",
-        "howCreated": "User"
-      },
-      {
-        "name": "26fa4e3e6898e3c4d854",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PBIPURCHASEORDERS"
-              }
-            },
-            "Property": "DocumentNumber"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "751f85a9d3581fd6fdde",
-        "field": {
-          "Aggregation": {
-            "Expression": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "LOL_PBIPURCHASEORDERS"
-                  }
-                },
-                "Property": "Quantity"
-              }
-            },
-            "Function": 0
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "dc639a154019adf7d16f",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PBITIENDAS"
-              }
-            },
-            "Property": "TiendaID"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "aef14ebb1094d7031942",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PBIPURCHASEORDERS"
-              }
-            },
-            "Property": "Estado"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

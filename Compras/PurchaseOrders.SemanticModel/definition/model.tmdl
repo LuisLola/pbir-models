@@ -8,7 +8,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["LOL_PBIPURCHASEORDERS","LOL_PBIMODELITEM","LOL_PBITIENDAS","LOL_PBIPURCHASEGOODRECEIPT","LOL_PBIPURCHASEINVOICE"]
+annotation PBI_QueryOrder = ["LOL_PBIPURCHASEORDERS","LOL_PBIMODELITEM","LOL_PBITIENDAS","LOL_PBIPURCHASEGOODRECEIPT","LOL_PBIPURCHASEINVOICE","LOL_PBISTOCKTRANSFERSTATUS"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
@@ -19,7 +19,6 @@ ref table LocalDateTable_09500b9c-be44-449e-bab6-5154eca9c0c9
 ref table LocalDateTable_c1c284be-f9b1-4736-abda-5c17ef375bde
 ref table LocalDateTable_662fa2ee-22e9-4288-b925-4ac33166e17f
 ref table LocalDateTable_7eb6586b-554b-4a32-8b07-88509093b3d5
-ref table LocalDateTable_7910c7e5-7273-4c8d-acb0-279572108dd0
 ref table LocalDateTable_188fc6dc-c397-47c3-b93a-4e29f029f800
 ref table LOL_PBIMODELITEM
 ref table LOL_PBITIENDAS
@@ -45,6 +44,17 @@ ref table LocalDateTable_90803cb3-dcb8-4ff2-a50f-9ef23ebbb3a1
 ref table LocalDateTable_da39c579-8e32-4e2b-9620-be1e0e40e9f1
 ref table LocalDateTable_86722f70-8be7-44e7-8b16-0c6f00300ad5
 ref table LocalDateTable_ee00c7d9-5303-47b8-a3be-a669a5931f6a
+ref table LocalDateTable_de839597-b9f8-48fe-955b-76dc2d91c921
+ref table LocalDateTable_68053ed8-2115-4aee-9111-66d874fe0b9c
+ref table LocalDateTable_e2111adb-6f7c-4b2b-a628-d570fb67e47d
+ref table LocalDateTable_0f41b8a0-9abf-48f7-b34d-088f89a7ffd6
+ref table LOL_PBISTOCKTRANSFERSTATUS
+ref table LocalDateTable_8993aad5-18bf-4e93-aeee-d4fb496c1bc6
+ref table LocalDateTable_4a56f1e4-de00-45f9-9a5f-3056cb986f05
+ref table LocalDateTable_85639332-2624-45ad-a05e-5ad63797059b
+ref table LocalDateTable_60552a56-7df2-4515-8b1e-4fa559ee4f14
+ref table LocalDateTable_6f230283-ed75-4940-bf44-2be80fe780e2
+ref table LocalDateTable_1b938c48-bf70-470e-8380-1a113f473e27
 
 ref cultureInfo es-ES
 

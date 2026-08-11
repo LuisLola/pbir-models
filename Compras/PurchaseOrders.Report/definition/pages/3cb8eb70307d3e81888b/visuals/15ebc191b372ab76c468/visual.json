@@ -1,0 +1,43 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "15ebc191b372ab76c468",
+  "position": {
+    "x": 321,
+    "y": 28,
+    "z": 7000,
+    "height": 113,
+    "width": 350,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIPURCHASEORDERS"
+                        }
+                      },
+                      "Property": "DocumentNumber"
+                    }
+                  },
+                  "Function": 3
+                }
+              },
+              "queryRef": "Min(LOL_PBIPURCHASEORDERS.DocumentNumber)",
+              "nativeQueryRef": "Primera fecha: DocumentNumber"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

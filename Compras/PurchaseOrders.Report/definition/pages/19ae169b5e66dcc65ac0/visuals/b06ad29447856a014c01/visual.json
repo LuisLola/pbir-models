@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
   "name": "b06ad29447856a014c01",
   "position": {
-    "x": 18.900738310090237,
-    "y": 411.61607875307629,
-    "z": 1008,
-    "height": 61.95242001640689,
-    "width": 279.31091058244459,
-    "tabOrder": 1008
+    "x": 5,
+    "y": 365.71428571428572,
+    "z": 8000,
+    "height": 62,
+    "width": 211,
+    "tabOrder": 5000
   },
   "visual": {
     "visualType": "slicer",
@@ -63,23 +63,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "4ec30e61e73d237c0f36",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PBIMODELITEM"
-              }
-            },
-            "Property": "Categoria"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

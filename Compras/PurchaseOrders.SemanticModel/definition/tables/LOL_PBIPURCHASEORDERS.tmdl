@@ -114,12 +114,20 @@ table LOL_PBIPURCHASEORDERS
 		annotation SummarizationSetBy = Automatic
 
 	column FechaComunicacion
-		dataType: string
+		dataType: dateTime
+		formatString: Long Date
 		lineageTag: a269c9b7-dfb6-499d-8b9d-36484e2a5c52
 		summarizeBy: none
 		sourceColumn: FechaComunicacion
 
+		variation Variación
+			isDefault
+			relationship: 9cd8dd96-3f9a-47b9-858a-df6f659da109
+			defaultHierarchy: LocalDateTable_0f41b8a0-9abf-48f7-b34d-088f89a7ffd6.'Jerarquía de fechas'
+
 		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
 
 	column FechaDelivery
 		dataType: dateTime
@@ -177,8 +185,6 @@ table LOL_PBIPURCHASEORDERS
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	column ItemCode
 		dataType: string
 		lineageTag: af479484-aa7b-4905-bdd6-8d03e7a61500
@@ -195,24 +201,6 @@ table LOL_PBIPURCHASEORDERS
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	column LineDeliveryDate
-		dataType: dateTime
-		formatString: Long Date
-		lineageTag: e5cfd0e7-34de-4ee0-ad9b-73cf38d4f79c
-		summarizeBy: none
-		sourceColumn: LineDeliveryDate
-
-		variation Variación
-			isDefault
-			relationship: e91ea9a3-6e2a-4b7c-979c-3905aaff82f3
-			defaultHierarchy: LocalDateTable_7910c7e5-7273-4c8d-acb0-279572108dd0.'Jerarquía de fechas'
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation UnderlyingDateTimeDataType = Date
-
 	column LineDiscountPercentage
 		dataType: double
 		lineageTag: 8c363ebe-098b-4918-bf47-67699e7706ba
@@ -221,8 +209,6 @@ table LOL_PBIPURCHASEORDERS
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	column LineExchangeRate
 		dataType: double
 		lineageTag: c8a799cb-dab1-4512-959f-36835303efba
@@ -230,8 +216,6 @@ table LOL_PBIPURCHASEORDERS
 		sourceColumn: LineExchangeRate
 
 		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column LineStatus
 		dataType: string
@@ -249,8 +233,6 @@ table LOL_PBIPURCHASEORDERS
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	column LineTotalAmountSC
 		dataType: double
 		lineageTag: 39f49e4b-6e39-429e-8872-7d69887574cc
@@ -258,8 +240,6 @@ table LOL_PBIPURCHASEORDERS
 		sourceColumn: LineTotalAmountSC
 
 		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column LineUID
 		dataType: string
@@ -325,23 +305,11 @@ table LOL_PBIPURCHASEORDERS
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	column OpenQuantityInInventoryUoM
 		dataType: double
 		lineageTag: 301d6441-ed93-4685-a62a-d577025a5a59
 		summarizeBy: sum
 		sourceColumn: OpenQuantityInInventoryUoM
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	column Owner
-		dataType: string
-		lineageTag: 6e70508e-18ec-4820-95a2-b91fb0c6d24c
-		summarizeBy: none
-		sourceColumn: Owner
 
 		annotation SummarizationSetBy = Automatic
 
@@ -386,14 +354,15 @@ table LOL_PBIPURCHASEORDERS
 		annotation SummarizationSetBy = Automatic
 
 	column Quantity
-		dataType: double
+		dataType: int64
+		formatString: #,0
 		lineageTag: 5df595d1-63cc-4ba2-9235-3e08fe3e0951
 		summarizeBy: sum
 		sourceColumn: Quantity
 
-		annotation SummarizationSetBy = Automatic
+		changedProperty = DataType
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
+		annotation SummarizationSetBy = Automatic
 
 	column QuantityInInventoryUoM
 		dataType: double
@@ -402,8 +371,6 @@ table LOL_PBIPURCHASEORDERS
 		sourceColumn: QuantityInInventoryUoM
 
 		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column SalesEmployeeOrBuyerNumber
 		dataType: string
@@ -429,8 +396,6 @@ table LOL_PBIPURCHASEORDERS
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	column TaxOnly
 		dataType: string
 		lineageTag: 286d8cb1-9e52-4ab1-985a-9d2979ba7891
@@ -444,14 +409,6 @@ table LOL_PBIPURCHASEORDERS
 		lineageTag: 6384c0dd-c3c9-4674-b522-4f263256b246
 		summarizeBy: none
 		sourceColumn: U_GSP_LOLSENTPAPERLESS
-
-		annotation SummarizationSetBy = Automatic
-
-	column U_LOL_INSPECTION
-		dataType: string
-		lineageTag: ec921895-5d9b-4591-91c1-cb2464b44072
-		summarizeBy: none
-		sourceColumn: U_LOL_INSPECTION
 
 		annotation SummarizationSetBy = Automatic
 
@@ -479,8 +436,6 @@ table LOL_PBIPURCHASEORDERS
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	column UnitPriceLC
 		dataType: double
 		lineageTag: 8d215cb1-738b-4067-9e07-82ee16144d60
@@ -488,8 +443,6 @@ table LOL_PBIPURCHASEORDERS
 		sourceColumn: UnitPriceLC
 
 		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column UoMCode
 		dataType: string
@@ -545,14 +498,105 @@ table LOL_PBIPURCHASEORDERS
 
 		annotation SummarizationSetBy = Automatic
 
+	column CANCELED
+		dataType: string
+		lineageTag: dec800e1-1ad7-4116-9571-2fe1398274a0
+		summarizeBy: none
+		sourceColumn: CANCELED
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaDisponibilidad
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e9dbdfae-57a7-46e1-a649-348c73704548
+		summarizeBy: none
+		sourceColumn: FechaDisponibilidad
+
+		variation Variación
+			isDefault
+			relationship: cba17680-2595-480a-9e17-0a7447d5b59b
+			defaultHierarchy: LocalDateTable_de839597-b9f8-48fe-955b-76dc2d91c921.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FechaInspeccion
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3f6deaae-dcc1-46fc-8871-80541fefa05c
+		summarizeBy: none
+		sourceColumn: FechaInspeccion
+
+		variation Variación
+			isDefault
+			relationship: 26e4d670-9ce3-4b16-a091-94d8d35176b3
+			defaultHierarchy: LocalDateTable_68053ed8-2115-4aee-9111-66d874fe0b9c.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FechaInspeccionReal
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c1bf5e32-9a6c-4f24-b0da-013d3f04d8c8
+		summarizeBy: none
+		sourceColumn: FechaInspeccionReal
+
+		variation Variación
+			isDefault
+			relationship: 310e788b-c656-42b8-a237-7d630d45333c
+			defaultHierarchy: LocalDateTable_e2111adb-6f7c-4b2b-a628-d570fb67e47d.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column InspeccionCalidad
+		dataType: string
+		lineageTag: 9cdf57f9-0e78-444e-85d1-e4f2570aaa3c
+		summarizeBy: none
+		sourceColumn: InspeccionCalidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tipo_Transporte
+		dataType: string
+		lineageTag: bcdb047a-baef-4f40-abea-45666ee6e2c9
+		summarizeBy: none
+		sourceColumn: Tipo_Transporte
+
+		annotation SummarizationSetBy = Automatic
+
+	column User
+		dataType: string
+		lineageTag: e90be021-f143-4e3b-b14c-dbbd291727b7
+		summarizeBy: none
+		sourceColumn: User
+
+		annotation SummarizationSetBy = Automatic
+
 	partition LOL_PBIPURCHASEORDERS = m
 		mode: import
 		source =
 				let
 				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin"),
-				    dbo_LOL_PBIPURCHASEORDERS = Origen{[Schema="dbo",Item="LOL_PBIPURCHASEORDERS"]}[Data]
+				    dbo_LOL_PBIPURCHASEORDERS = Origen{[Schema="dbo",Item="LOL_PBIPURCHASEORDERS"]}[Data],
+				    ColumnasNumericas = {
+				        "GrossUnitPriceLC", "ItemsPerUnit", "LineDiscountPercentage", "LineExchangeRate",
+				        "LineTotalAmountLC", "LineTotalAmountSC", "OpenQuantity", "OpenQuantityInInventoryUoM",
+				        "QuantityInInventoryUoM", "TaxAmountLC", "UnitPrice", "UnitPriceLC"
+				    },
+				    Presentes = List.Intersect({ColumnasNumericas, Table.ColumnNames(dbo_LOL_PBIPURCHASEORDERS)}),
+				    TiposNumericos = Table.TransformColumnTypes(
+				        dbo_LOL_PBIPURCHASEORDERS,
+				        List.Transform(Presentes, each {_, type number}),
+				        "en-US"
+				    )
 				in
-				    dbo_LOL_PBIPURCHASEORDERS
+				    TiposNumericos
 
 	annotation PBI_ResultType = Table
 

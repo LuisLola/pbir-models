@@ -23,11 +23,6 @@ relationship 66e726c5-6dd4-40ad-92d5-e4118a95e894
 	fromColumn: LOL_PBIPURCHASEORDERS.FechaEmbarque
 	toColumn: LocalDateTable_7eb6586b-554b-4a32-8b07-88509093b3d5.Date
 
-relationship e91ea9a3-6e2a-4b7c-979c-3905aaff82f3
-	joinOnDateBehavior: datePartOnly
-	fromColumn: LOL_PBIPURCHASEORDERS.LineDeliveryDate
-	toColumn: LocalDateTable_7910c7e5-7273-4c8d-acb0-279572108dd0.Date
-
 relationship b952652f-7f38-4b54-a81a-833b3291148b
 	joinOnDateBehavior: datePartOnly
 	fromColumn: LOL_PBIPURCHASEORDERS.PostingDate
@@ -155,4 +150,79 @@ relationship 22222222-0001-4001-8001-000000000001
 relationship 22222222-0002-4002-8002-000000000002
 	fromColumn: LOL_PBIPURCHASEINVOICE.KBase
 	toColumn: LOL_PBIPURCHASEGOODRECEIPT.KLinea
+
+relationship cba17680-2595-480a-9e17-0a7447d5b59b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBIPURCHASEORDERS.FechaDisponibilidad
+	toColumn: LocalDateTable_de839597-b9f8-48fe-955b-76dc2d91c921.Date
+
+relationship 26e4d670-9ce3-4b16-a091-94d8d35176b3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBIPURCHASEORDERS.FechaInspeccion
+	toColumn: LocalDateTable_68053ed8-2115-4aee-9111-66d874fe0b9c.Date
+
+relationship 310e788b-c656-42b8-a237-7d630d45333c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBIPURCHASEORDERS.FechaInspeccionReal
+	toColumn: LocalDateTable_e2111adb-6f7c-4b2b-a628-d570fb67e47d.Date
+
+relationship 9cd8dd96-3f9a-47b9-858a-df6f659da109
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBIPURCHASEORDERS.FechaComunicacion
+	toColumn: LocalDateTable_0f41b8a0-9abf-48f7-b34d-088f89a7ffd6.Date
+
+relationship a0e8cc3d-c8d1-4de6-8b88-3ded07eb7120
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.FechaDelivery
+	toColumn: LocalDateTable_8993aad5-18bf-4e93-aeee-d4fb496c1bc6.Date
+
+relationship d190bee8-7a95-4d1c-ad1f-aa05244c48de
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.FechaDeliveryActualizada
+	toColumn: LocalDateTable_4a56f1e4-de00-45f9-9a5f-3056cb986f05.Date
+
+relationship 4a7f621d-74b0-4b19-8467-c7d852ab0733
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.FechaDisponibilidad
+	toColumn: LocalDateTable_85639332-2624-45ad-a05e-5ad63797059b.Date
+
+relationship 785b5fdb-8d40-46e4-a3be-6874a553ea52
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.FechaEmbarque
+	toColumn: LocalDateTable_60552a56-7df2-4515-8b1e-4fa559ee4f14.Date
+
+relationship b322d3c9-86fb-4743-9c15-c576f7367904
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.FechaInspeccion
+	toColumn: LocalDateTable_6f230283-ed75-4940-bf44-2be80fe780e2.Date
+
+relationship f81a2894-9c1e-4edf-98af-166ae84baac3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.FechaInspeccionReal
+	toColumn: LocalDateTable_1b938c48-bf70-470e-8380-1a113f473e27.Date
+
+relationship AutoDetected_5382f507-2b28-4880-aef9-a32e27c4f250
+	isActive: false
+	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.LineUID
+	toColumn: LOL_PBIPURCHASEGOODRECEIPT.LineUID
+
+relationship d6127b7a-7f1e-f91b-553f-8d5190d2c03b
+	isActive: false
+	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.SKU
+	toColumn: LOL_PBIMODELITEM.ItemCode
+
+relationship 140bdaf2-ced2-6454-f098-4c192e6ee128
+	isActive: false
+	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.WhsCode
+	toColumn: LOL_PBITIENDAS.TiendaID
+
+relationship 22222222-0003-4003-8003-000000000003
+	crossFilteringBehavior: bothDirections
+	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.KBaseEntrada
+	toColumn: LOL_PBIPURCHASEGOODRECEIPT.KLinea
+
+relationship 22222222-0004-4004-8004-000000000004
+	isActive: false
+	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.KPedido
+	toColumn: LOL_PBIPURCHASEORDERS.KLinea
 

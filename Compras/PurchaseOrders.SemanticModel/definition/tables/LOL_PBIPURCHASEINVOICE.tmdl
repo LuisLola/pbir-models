@@ -531,7 +531,7 @@ table LOL_PBIPURCHASEINVOICE
 
 		annotation SummarizationSetBy = Automatic
 
-	column KBase = IF ( NOT ISBLANK ( LOL_PBIPURCHASEINVOICE[BaseDocumentInternalKey] ) && LOL_PBIPURCHASEINVOICE[BaseDocumentInternalKey] <> "", LOL_PBIPURCHASEINVOICE[BaseDocumentInternalKey] & "-" & LOL_PBIPURCHASEINVOICE[BaseDocumentLineInternalKey] )
+	column KBase = IF ( LOL_PBIPURCHASEINVOICE[BaseDocumentTypeCode] = "20" && NOT ISBLANK ( LOL_PBIPURCHASEINVOICE[BaseDocumentInternalKey] ) && LOL_PBIPURCHASEINVOICE[BaseDocumentInternalKey] <> "", LOL_PBIPURCHASEINVOICE[BaseDocumentInternalKey] & "-" & LOL_PBIPURCHASEINVOICE[BaseDocumentLineInternalKey] )
 		dataType: string
 		isHidden
 		lineageTag: 11111111-0004-4004-8004-000000000004

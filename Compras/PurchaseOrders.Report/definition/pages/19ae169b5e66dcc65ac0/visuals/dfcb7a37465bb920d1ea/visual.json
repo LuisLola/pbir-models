@@ -1,0 +1,101 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "dfcb7a37465bb920d1ea",
+  "position": {
+    "x": 249.85074626865671,
+    "y": 467.46268656716416,
+    "z": 16000,
+    "height": 252.53731343283582,
+    "width": 1029.8507462686566,
+    "tabOrder": 12000
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIPURCHASEORDERS"
+                    }
+                  },
+                  "Property": "FechaRecepcion"
+                }
+              },
+              "queryRef": "LOL_PBIPURCHASEORDERS.FechaRecepcion",
+              "nativeQueryRef": "FechaRecepcion",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIPURCHASEORDERS"
+                        }
+                      },
+                      "Property": "Quantity"
+                    }
+                  },
+                  "Function": 5
+                }
+              },
+              "queryRef": "CountNonNull(LOL_PBIPURCHASEORDERS.Quantity)",
+              "nativeQueryRef": "Recuento de Quantity"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PBIPURCHASEORDERS"
+                  }
+                },
+                "Property": "FechaRecepcion"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Por Fecha de Recepción'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

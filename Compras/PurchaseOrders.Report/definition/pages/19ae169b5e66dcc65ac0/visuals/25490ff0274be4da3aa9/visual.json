@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
   "name": "25490ff0274be4da3aa9",
   "position": {
     "x": 0,
-    "y": 1.5590742996345921,
-    "z": 1003,
-    "height": 73.276492082825825,
-    "width": 241.37037416195375
+    "y": 2.2443517928649546,
+    "z": 0,
+    "height": 72.761194029850742,
+    "width": 177.19832441565759
   },
   "visual": {
     "visualType": "cardVisual",
@@ -177,7 +177,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "22D"
+                  "Value": "16D"
                 }
               }
             },
@@ -327,34 +327,18 @@
                   "Value": "'Total Unidades Compradas'"
                 }
               }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
             }
           }
         }
       ]
     }
   },
-  "parentGroupName": "c4f30b86a5c4022e95b5",
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "8fa11d37877887338d94",
-        "field": {
-          "Aggregation": {
-            "Expression": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "LOL_PBIPURCHASEORDERS"
-                  }
-                },
-                "Property": "Quantity"
-              }
-            },
-            "Function": 0
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
-  }
+  "parentGroupName": "314709229a0a004369b4"
 }

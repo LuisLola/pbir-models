@@ -539,7 +539,7 @@ table LOL_PBIPURCHASEGOODRECEIPT
 
 		annotation SummarizationSetBy = Automatic
 
-	column KBase = IF ( NOT ISBLANK ( LOL_PBIPURCHASEGOODRECEIPT[BaseDocumentInternalKey] ) && LOL_PBIPURCHASEGOODRECEIPT[BaseDocumentInternalKey] <> "", LOL_PBIPURCHASEGOODRECEIPT[BaseDocumentInternalKey] & "-" & LOL_PBIPURCHASEGOODRECEIPT[BaseDocumentLineInternalKey] )
+	column KBase = IF ( LOL_PBIPURCHASEGOODRECEIPT[BaseDocumentTypeCode] = "22" && NOT ISBLANK ( LOL_PBIPURCHASEGOODRECEIPT[BaseDocumentInternalKey] ) && LOL_PBIPURCHASEGOODRECEIPT[BaseDocumentInternalKey] <> "", LOL_PBIPURCHASEGOODRECEIPT[BaseDocumentInternalKey] & "-" & LOL_PBIPURCHASEGOODRECEIPT[BaseDocumentLineInternalKey] )
 		dataType: string
 		isHidden
 		lineageTag: 11111111-0003-4003-8003-000000000003
