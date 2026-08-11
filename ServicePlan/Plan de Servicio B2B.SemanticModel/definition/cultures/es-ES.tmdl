@@ -1471,120 +1471,6 @@ cultureInfo es-ES
 			      ],
 			      "SemanticType": "Time"
 			    },
-			    "lol_planmaterial.fecha_fin_pedido_venta.jerarquía_de_fecha": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "LOL_PLANMATERIAL",
-			          "VariationSource": "Fecha Fin pedido venta",
-			          "VariationSet": "Variación",
-			          "Hierarchy": "Jerarquía de fechas"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "jerarquía de fecha": {
-			            "State": "Generated"
-			          }
-			        }
-			      ]
-			    },
-			    "lol_planmaterial.fecha_fin_pedido_venta.año": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "LOL_PLANMATERIAL",
-			          "VariationSource": "Fecha Fin pedido venta",
-			          "VariationSet": "Variación",
-			          "Hierarchy": "Jerarquía de fechas",
-			          "HierarchyLevel": "Año"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "año": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "fecha fin pedido venta año": {
-			            "State": "Generated"
-			          }
-			        }
-			      ]
-			    },
-			    "lol_planmaterial.fecha_fin_pedido_venta.trimestre": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "LOL_PLANMATERIAL",
-			          "VariationSource": "Fecha Fin pedido venta",
-			          "VariationSet": "Variación",
-			          "Hierarchy": "Jerarquía de fechas",
-			          "HierarchyLevel": "Trimestre"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "trimestre": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "fecha fin pedido venta trimestre": {
-			            "State": "Generated"
-			          }
-			        }
-			      ]
-			    },
-			    "lol_planmaterial.fecha_fin_pedido_venta.me": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "LOL_PLANMATERIAL",
-			          "VariationSource": "Fecha Fin pedido venta",
-			          "VariationSet": "Variación",
-			          "Hierarchy": "Jerarquía de fechas",
-			          "HierarchyLevel": "Mes"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "me": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "fecha fin pedido venta me": {
-			            "State": "Generated"
-			          }
-			        }
-			      ]
-			    },
-			    "lol_planmaterial.fecha_fin_pedido_venta.día": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "LOL_PLANMATERIAL",
-			          "VariationSource": "Fecha Fin pedido venta",
-			          "VariationSet": "Variación",
-			          "Hierarchy": "Jerarquía de fechas",
-			          "HierarchyLevel": "Día"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "día": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "fecha fin pedido venta día": {
-			            "State": "Generated"
-			          }
-			        }
-			      ]
-			    },
 			    "lol_planmaterial.semana_entrega": {
 			      "Definition": {
 			        "Binding": {
@@ -3409,372 +3295,47 @@ cultureInfo es-ES
 			          }
 			        }
 			      ]
+			    },
+			    "horizonte": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Horizonte"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "horizonte": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "horizonte.fecha": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Horizonte",
+			          "ConceptualProperty": "Fecha"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "fecha": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
 			    }
 			  },
 			  "Relationships": {
-			    "lol_planmaterial_fecha_llegada_entrada_mcias__me_has_lol_planmaterial_fecha_llegada_entrada_mcias__día": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PLANMATERIAL"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_planmaterial.fecha_llegada_entrada_mcias_.me": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.me"
-			          }
-			        },
-			        "lol_planmaterial.fecha_llegada_entrada_mcias_.día": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.día"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.me"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.día"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "me_have_días"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.día"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.me"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "días_have_me"
-			        },
-			        {
-			          "Preposition": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.día"
-			            },
-			            "Prepositions": [
-			              {
-			                "in": {
-			                  "State": "Generated"
-			                }
-			              }
-			            ],
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.me"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "días_are_in_me4"
-			        }
-			      ]
-			    },
-			    "lol_planmaterial_fecha_llegada_entrada_mcias__trimestre_has_lol_planmaterial_fecha_llegada_entrada_mcias__me": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PLANMATERIAL"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre"
-			          }
-			        },
-			        "lol_planmaterial.fecha_llegada_entrada_mcias_.me": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.me"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.me"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "trimestres_have_me"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.me"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "me_have_trimestres"
-			        },
-			        {
-			          "Preposition": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.me"
-			            },
-			            "Prepositions": [
-			              {
-			                "in": {
-			                  "State": "Generated"
-			                }
-			              }
-			            ],
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "me_are_in_trimestres4"
-			        }
-			      ]
-			    },
-			    "lol_planmaterial_fecha_llegada_entrada_mcias__año_has_lol_planmaterial_fecha_llegada_entrada_mcias__trimestre": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PLANMATERIAL"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_planmaterial.fecha_llegada_entrada_mcias_.año": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.año"
-			          }
-			        },
-			        "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.año"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "años_have_trimestres"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.año"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "trimestres_have_años"
-			        },
-			        {
-			          "Preposition": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre"
-			            },
-			            "Prepositions": [
-			              {
-			                "in": {
-			                  "State": "Generated"
-			                }
-			              }
-			            ],
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.año"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "trimestres_are_in_años4"
-			        }
-			      ]
-			    },
-			    "lol_planmaterial_fecha_llegada_entrada_mcias__jerarquía_de_fecha_has_lol_planmaterial_fecha_llegada_entrada_mcias__día": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PLANMATERIAL"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha"
-			          }
-			        },
-			        "lol_planmaterial.fecha_llegada_entrada_mcias_.día": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.día"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.día"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días"
-			        }
-			      ]
-			    },
-			    "lol_planmaterial_fecha_llegada_entrada_mcias__jerarquía_de_fecha_has_lol_planmaterial_fecha_llegada_entrada_mcias__me": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PLANMATERIAL"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha"
-			          }
-			        },
-			        "lol_planmaterial.fecha_llegada_entrada_mcias_.me": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.me"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.me"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me"
-			        }
-			      ]
-			    },
-			    "lol_planmaterial_fecha_llegada_entrada_mcias__jerarquía_de_fecha_has_lol_planmaterial_fecha_llegada_entrada_mcias__trimestre": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PLANMATERIAL"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha"
-			          }
-			        },
-			        "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres"
-			        }
-			      ]
-			    },
-			    "lol_planmaterial_fecha_llegada_entrada_mcias__jerarquía_de_fecha_has_lol_planmaterial_fecha_llegada_entrada_mcias__año": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PLANMATERIAL"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha"
-			          }
-			        },
-			        "lol_planmaterial.fecha_llegada_entrada_mcias_.año": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.año"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.año"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años"
-			        }
-			      ]
-			    },
-			    "lol_planmaterial_fecha_llegada_entrada_mcias__has_jerarquía_de_fecha": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PLANMATERIAL"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_planmaterial.fecha_llegada_entrada_mcias_": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_"
-			          }
-			        },
-			        "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "fecha_llegada_entrada_mcias__have_jerarquía_de_fechas"
-			        }
-			      ]
-			    },
 			    "lol_planmaterial_fecha_llegada_orden_de_compra_línea_del_articulo_me_has_lol_planmaterial_fecha_llegada_orden_de_compra_línea_del_articulo_día": {
 			      "Binding": {
 			        "ConceptualEntity": "LOL_PLANMATERIAL"
@@ -3804,7 +3365,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días1"
+			          "ID": "me_have_días"
 			        },
 			        {
 			          "Attribute": {
@@ -3817,7 +3378,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me1"
+			          "ID": "días_have_me"
 			        },
 			        {
 			          "Preposition": {
@@ -3837,7 +3398,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_are_in_me3"
+			          "ID": "días_are_in_me2"
 			        }
 			      ]
 			    },
@@ -3870,7 +3431,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me1"
+			          "ID": "trimestres_have_me"
 			        },
 			        {
 			          "Attribute": {
@@ -3883,7 +3444,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres1"
+			          "ID": "me_have_trimestres"
 			        },
 			        {
 			          "Preposition": {
@@ -3903,7 +3464,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_are_in_trimestres3"
+			          "ID": "me_are_in_trimestres2"
 			        }
 			      ]
 			    },
@@ -3936,7 +3497,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "años_have_trimestres1"
+			          "ID": "años_have_trimestres"
 			        },
 			        {
 			          "Attribute": {
@@ -3949,7 +3510,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_años1"
+			          "ID": "trimestres_have_años"
 			        },
 			        {
 			          "Preposition": {
@@ -3969,7 +3530,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_are_in_años3"
+			          "ID": "trimestres_are_in_años2"
 			        }
 			      ]
 			    },
@@ -4002,7 +3563,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días1"
+			          "ID": "jerarquía_de_fechas_have_días"
 			        }
 			      ]
 			    },
@@ -4035,7 +3596,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me1"
+			          "ID": "jerarquía_de_fechas_have_me"
 			        }
 			      ]
 			    },
@@ -4068,7 +3629,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres1"
+			          "ID": "jerarquía_de_fechas_have_trimestres"
 			        }
 			      ]
 			    },
@@ -4101,7 +3662,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años1"
+			          "ID": "jerarquía_de_fechas_have_años"
 			        }
 			      ]
 			    },
@@ -4167,7 +3728,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días2"
+			          "ID": "me_have_días1"
 			        },
 			        {
 			          "Attribute": {
@@ -4180,7 +3741,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me2"
+			          "ID": "días_have_me1"
 			        },
 			        {
 			          "Preposition": {
@@ -4200,7 +3761,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_are_in_me2"
+			          "ID": "días_are_in_me1"
 			        }
 			      ]
 			    },
@@ -4233,7 +3794,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me2"
+			          "ID": "trimestres_have_me1"
 			        },
 			        {
 			          "Attribute": {
@@ -4246,7 +3807,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres2"
+			          "ID": "me_have_trimestres1"
 			        },
 			        {
 			          "Preposition": {
@@ -4266,7 +3827,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_are_in_trimestres2"
+			          "ID": "me_are_in_trimestres1"
 			        }
 			      ]
 			    },
@@ -4299,7 +3860,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "años_have_trimestres2"
+			          "ID": "años_have_trimestres1"
 			        },
 			        {
 			          "Attribute": {
@@ -4312,7 +3873,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_años2"
+			          "ID": "trimestres_have_años1"
 			        },
 			        {
 			          "Preposition": {
@@ -4332,7 +3893,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_are_in_años2"
+			          "ID": "trimestres_are_in_años1"
 			        }
 			      ]
 			    },
@@ -4365,7 +3926,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días2"
+			          "ID": "jerarquía_de_fechas_have_días1"
 			        }
 			      ]
 			    },
@@ -4398,7 +3959,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me2"
+			          "ID": "jerarquía_de_fechas_have_me1"
 			        }
 			      ]
 			    },
@@ -4431,7 +3992,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres2"
+			          "ID": "jerarquía_de_fechas_have_trimestres1"
 			        }
 			      ]
 			    },
@@ -4464,7 +4025,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años2"
+			          "ID": "jerarquía_de_fechas_have_años1"
 			        }
 			      ]
 			    },
@@ -4501,369 +4062,6 @@ cultureInfo es-ES
 			        }
 			      ]
 			    },
-			    "lol_planmaterial_fecha_fin_pedido_venta_me_has_lol_planmaterial_fecha_fin_pedido_venta_día": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PLANMATERIAL"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_planmaterial.fecha_fin_pedido_venta.me": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_fin_pedido_venta.me"
-			          }
-			        },
-			        "lol_planmaterial.fecha_fin_pedido_venta.día": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_fin_pedido_venta.día"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.me"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.día"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "me_have_días3"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.día"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.me"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "días_have_me3"
-			        },
-			        {
-			          "Preposition": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.día"
-			            },
-			            "Prepositions": [
-			              {
-			                "in": {
-			                  "State": "Generated"
-			                }
-			              }
-			            ],
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.me"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "días_are_in_me1"
-			        }
-			      ]
-			    },
-			    "lol_planmaterial_fecha_fin_pedido_venta_trimestre_has_lol_planmaterial_fecha_fin_pedido_venta_me": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PLANMATERIAL"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_planmaterial.fecha_fin_pedido_venta.trimestre": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_fin_pedido_venta.trimestre"
-			          }
-			        },
-			        "lol_planmaterial.fecha_fin_pedido_venta.me": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_fin_pedido_venta.me"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.trimestre"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.me"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "trimestres_have_me3"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.me"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.trimestre"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "me_have_trimestres3"
-			        },
-			        {
-			          "Preposition": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.me"
-			            },
-			            "Prepositions": [
-			              {
-			                "in": {
-			                  "State": "Generated"
-			                }
-			              }
-			            ],
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.trimestre"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "me_are_in_trimestres1"
-			        }
-			      ]
-			    },
-			    "lol_planmaterial_fecha_fin_pedido_venta_año_has_lol_planmaterial_fecha_fin_pedido_venta_trimestre": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PLANMATERIAL"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_planmaterial.fecha_fin_pedido_venta.año": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_fin_pedido_venta.año"
-			          }
-			        },
-			        "lol_planmaterial.fecha_fin_pedido_venta.trimestre": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_fin_pedido_venta.trimestre"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.año"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.trimestre"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "años_have_trimestres3"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.trimestre"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.año"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "trimestres_have_años3"
-			        },
-			        {
-			          "Preposition": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.trimestre"
-			            },
-			            "Prepositions": [
-			              {
-			                "in": {
-			                  "State": "Generated"
-			                }
-			              }
-			            ],
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.año"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "trimestres_are_in_años1"
-			        }
-			      ]
-			    },
-			    "lol_planmaterial_fecha_fin_pedido_venta_jerarquía_de_fecha_has_lol_planmaterial_fecha_fin_pedido_venta_día": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PLANMATERIAL"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_planmaterial.fecha_fin_pedido_venta.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_fin_pedido_venta.jerarquía_de_fecha"
-			          }
-			        },
-			        "lol_planmaterial.fecha_fin_pedido_venta.día": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_fin_pedido_venta.día"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.jerarquía_de_fecha"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.día"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días3"
-			        }
-			      ]
-			    },
-			    "lol_planmaterial_fecha_fin_pedido_venta_jerarquía_de_fecha_has_lol_planmaterial_fecha_fin_pedido_venta_me": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PLANMATERIAL"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_planmaterial.fecha_fin_pedido_venta.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_fin_pedido_venta.jerarquía_de_fecha"
-			          }
-			        },
-			        "lol_planmaterial.fecha_fin_pedido_venta.me": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_fin_pedido_venta.me"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.jerarquía_de_fecha"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.me"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me3"
-			        }
-			      ]
-			    },
-			    "lol_planmaterial_fecha_fin_pedido_venta_jerarquía_de_fecha_has_lol_planmaterial_fecha_fin_pedido_venta_trimestre": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PLANMATERIAL"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_planmaterial.fecha_fin_pedido_venta.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_fin_pedido_venta.jerarquía_de_fecha"
-			          }
-			        },
-			        "lol_planmaterial.fecha_fin_pedido_venta.trimestre": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_fin_pedido_venta.trimestre"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.jerarquía_de_fecha"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.trimestre"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres3"
-			        }
-			      ]
-			    },
-			    "lol_planmaterial_fecha_fin_pedido_venta_jerarquía_de_fecha_has_lol_planmaterial_fecha_fin_pedido_venta_año": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PLANMATERIAL"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_planmaterial.fecha_fin_pedido_venta.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_fin_pedido_venta.jerarquía_de_fecha"
-			          }
-			        },
-			        "lol_planmaterial.fecha_fin_pedido_venta.año": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_fin_pedido_venta.año"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.jerarquía_de_fecha"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.año"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años3"
-			        }
-			      ]
-			    },
-			    "lol_planmaterial_fecha_fin_pedido_venta_has_jerarquía_de_fecha": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PLANMATERIAL"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_planmaterial.fecha_fin_pedido_venta": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_fin_pedido_venta"
-			          }
-			        },
-			        "lol_planmaterial.fecha_fin_pedido_venta.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_fin_pedido_venta.jerarquía_de_fecha"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_fin_pedido_venta.jerarquía_de_fecha"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "fecha_fin_pedido_ventas_have_jerarquía_de_fechas"
-			        }
-			      ]
-			    },
 			    "lol_planmaterial_fecha_pedido_venta_me_has_lol_planmaterial_fecha_pedido_venta_día": {
 			      "Binding": {
 			        "ConceptualEntity": "LOL_PLANMATERIAL"
@@ -4893,7 +4091,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días4"
+			          "ID": "me_have_días2"
 			        },
 			        {
 			          "Attribute": {
@@ -4906,7 +4104,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me4"
+			          "ID": "días_have_me2"
 			        },
 			        {
 			          "Preposition": {
@@ -4959,7 +4157,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me4"
+			          "ID": "trimestres_have_me2"
 			        },
 			        {
 			          "Attribute": {
@@ -4972,7 +4170,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres4"
+			          "ID": "me_have_trimestres2"
 			        },
 			        {
 			          "Preposition": {
@@ -5025,7 +4223,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "años_have_trimestres4"
+			          "ID": "años_have_trimestres2"
 			        },
 			        {
 			          "Attribute": {
@@ -5038,7 +4236,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_años4"
+			          "ID": "trimestres_have_años2"
 			        },
 			        {
 			          "Preposition": {
@@ -5091,7 +4289,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días4"
+			          "ID": "jerarquía_de_fechas_have_días2"
 			        }
 			      ]
 			    },
@@ -5124,7 +4322,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me4"
+			          "ID": "jerarquía_de_fechas_have_me2"
 			        }
 			      ]
 			    },
@@ -5157,7 +4355,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres4"
+			          "ID": "jerarquía_de_fechas_have_trimestres2"
 			        }
 			      ]
 			    },
@@ -5190,7 +4388,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años4"
+			          "ID": "jerarquía_de_fechas_have_años2"
 			        }
 			      ]
 			    },
@@ -5224,6 +4422,52 @@ cultureInfo es-ES
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "fecha_pedido_ventas_have_jerarquía_de_fechas"
+			        }
+			      ]
+			    },
+			    "lol_planmaterial_has_horizonte": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PLANMATERIAL"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_planmaterial": {
+			          "Target": {
+			            "Entity": "lol_planmaterial"
+			          }
+			        },
+			        "horizonte": {
+			          "Target": {
+			            "Entity": "horizonte"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_planmaterial"
+			            },
+			            "Object": {
+			              "Role": "horizonte"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_planmaterials_have_horizonte"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "horizonte"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "horizonte_have_lol_planmaterials"
 			        }
 			      ]
 			    },
@@ -5273,6 +4517,39 @@ cultureInfo es-ES
 			        }
 			      ]
 			    },
+			    "horizonte_has_fecha": {
+			      "Binding": {
+			        "ConceptualEntity": "Horizonte"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "horizonte": {
+			          "Target": {
+			            "Entity": "horizonte"
+			          }
+			        },
+			        "horizonte.fecha": {
+			          "Target": {
+			            "Entity": "horizonte.fecha"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "horizonte"
+			            },
+			            "Object": {
+			              "Role": "horizonte.fecha"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "horizonte_have_fechas"
+			        }
+			      ]
+			    },
 			    "lol_planmaterial_has_valor_servicio__30_días_importe_real": {
 			      "Binding": {
 			        "ConceptualEntity": "LOL_PLANMATERIAL"
@@ -5303,6 +4580,39 @@ cultureInfo es-ES
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "lol_planmaterials_have_valor_servicio__30_días_importe_real"
+			        }
+			      ]
+			    },
+			    "horizonte_has_lol_planmaterial_valor_servicio__30_días_importe_real": {
+			      "Binding": {
+			        "ConceptualEntity": "Horizonte"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "horizonte": {
+			          "Target": {
+			            "Entity": "horizonte"
+			          }
+			        },
+			        "lol_planmaterial.valor_servicio__30_días_importe_real": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.valor_servicio__30_días_importe_real"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "horizonte"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.valor_servicio__30_días_importe_real"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "horizonte_have_valor_servicio__30_días_importe_real"
 			        }
 			      ]
 			    },
@@ -5339,6 +4649,39 @@ cultureInfo es-ES
 			        }
 			      ]
 			    },
+			    "horizonte_has_lol_planmaterial_valor_servicio_2º_quincena_importe_real": {
+			      "Binding": {
+			        "ConceptualEntity": "Horizonte"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "horizonte": {
+			          "Target": {
+			            "Entity": "horizonte"
+			          }
+			        },
+			        "lol_planmaterial.valor_servicio_2º_quincena_importe_real": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.valor_servicio_2º_quincena_importe_real"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "horizonte"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.valor_servicio_2º_quincena_importe_real"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "horizonte_have_valor_servicio_2º_quincena_importe_real"
+			        }
+			      ]
+			    },
 			    "lol_planmaterial_has_valor_servicio_1º_quincena_importe_real": {
 			      "Binding": {
 			        "ConceptualEntity": "LOL_PLANMATERIAL"
@@ -5369,6 +4712,39 @@ cultureInfo es-ES
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "lol_planmaterials_have_valor_servicio_1º_quincena_importe_real"
+			        }
+			      ]
+			    },
+			    "horizonte_has_lol_planmaterial_valor_servicio_1º_quincena_importe_real": {
+			      "Binding": {
+			        "ConceptualEntity": "Horizonte"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "horizonte": {
+			          "Target": {
+			            "Entity": "horizonte"
+			          }
+			        },
+			        "lol_planmaterial.valor_servicio_1º_quincena_importe_real": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.valor_servicio_1º_quincena_importe_real"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "horizonte"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.valor_servicio_1º_quincena_importe_real"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "horizonte_have_valor_servicio_1º_quincena_importe_real"
 			        }
 			      ]
 			    },
@@ -6032,6 +5408,39 @@ cultureInfo es-ES
 			        }
 			      ]
 			    },
+			    "horizonte_has_lol_planmaterial_fecha_servicio__30_días_importe": {
+			      "Binding": {
+			        "ConceptualEntity": "Horizonte"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "horizonte": {
+			          "Target": {
+			            "Entity": "horizonte"
+			          }
+			        },
+			        "lol_planmaterial.fecha_servicio__30_días_importe": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.fecha_servicio__30_días_importe"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "horizonte"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.fecha_servicio__30_días_importe"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "horizonte_have_fecha_servicio__30_días_importe"
+			        }
+			      ]
+			    },
 			    "lol_planmaterial_has_fecha_servicio_2º_quincenaimporte": {
 			      "Binding": {
 			        "ConceptualEntity": "LOL_PLANMATERIAL"
@@ -6065,6 +5474,39 @@ cultureInfo es-ES
 			        }
 			      ]
 			    },
+			    "horizonte_has_lol_planmaterial_fecha_servicio_2º_quincenaimporte": {
+			      "Binding": {
+			        "ConceptualEntity": "Horizonte"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "horizonte": {
+			          "Target": {
+			            "Entity": "horizonte"
+			          }
+			        },
+			        "lol_planmaterial.fecha_servicio_2º_quincenaimporte": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.fecha_servicio_2º_quincenaimporte"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "horizonte"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.fecha_servicio_2º_quincenaimporte"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "horizonte_have_fecha_servicio_2º_quincenaimporte"
+			        }
+			      ]
+			    },
 			    "lol_planmaterial_has_fecha_servicio_1º_quincenaimporte": {
 			      "Binding": {
 			        "ConceptualEntity": "LOL_PLANMATERIAL"
@@ -6095,6 +5537,39 @@ cultureInfo es-ES
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "lol_planmaterials_have_fecha_servicio_1º_quincenaimporte"
+			        }
+			      ]
+			    },
+			    "horizonte_has_lol_planmaterial_fecha_servicio_1º_quincenaimporte": {
+			      "Binding": {
+			        "ConceptualEntity": "Horizonte"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "horizonte": {
+			          "Target": {
+			            "Entity": "horizonte"
+			          }
+			        },
+			        "lol_planmaterial.fecha_servicio_1º_quincenaimporte": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.fecha_servicio_1º_quincenaimporte"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "horizonte"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.fecha_servicio_1º_quincenaimporte"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "horizonte_have_fecha_servicio_1º_quincenaimporte"
 			        }
 			      ]
 			    },
@@ -8393,6 +7868,369 @@ cultureInfo es-ES
 			        }
 			      ]
 			    },
+			    "lol_planmaterial_fecha_llegada_entrada_mcias__has_jerarquía_de_fecha": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PLANMATERIAL"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_planmaterial.fecha_llegada_entrada_mcias_": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_"
+			          }
+			        },
+			        "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fecha_llegada_entrada_mcias__have_jerarquía_de_fechas"
+			        }
+			      ]
+			    },
+			    "lol_planmaterial_fecha_llegada_entrada_mcias__jerarquía_de_fecha_has_lol_planmaterial_fecha_llegada_entrada_mcias__año": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PLANMATERIAL"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha"
+			          }
+			        },
+			        "lol_planmaterial.fecha_llegada_entrada_mcias_.año": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.año"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.año"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "jerarquía_de_fechas_have_años3"
+			        }
+			      ]
+			    },
+			    "lol_planmaterial_fecha_llegada_entrada_mcias__jerarquía_de_fecha_has_lol_planmaterial_fecha_llegada_entrada_mcias__trimestre": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PLANMATERIAL"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha"
+			          }
+			        },
+			        "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "jerarquía_de_fechas_have_trimestres3"
+			        }
+			      ]
+			    },
+			    "lol_planmaterial_fecha_llegada_entrada_mcias__jerarquía_de_fecha_has_lol_planmaterial_fecha_llegada_entrada_mcias__me": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PLANMATERIAL"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha"
+			          }
+			        },
+			        "lol_planmaterial.fecha_llegada_entrada_mcias_.me": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.me"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "jerarquía_de_fechas_have_me3"
+			        }
+			      ]
+			    },
+			    "lol_planmaterial_fecha_llegada_entrada_mcias__jerarquía_de_fecha_has_lol_planmaterial_fecha_llegada_entrada_mcias__día": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PLANMATERIAL"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha"
+			          }
+			        },
+			        "lol_planmaterial.fecha_llegada_entrada_mcias_.día": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.día"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.jerarquía_de_fecha"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.día"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "jerarquía_de_fechas_have_días3"
+			        }
+			      ]
+			    },
+			    "lol_planmaterial_fecha_llegada_entrada_mcias__año_has_lol_planmaterial_fecha_llegada_entrada_mcias__trimestre": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PLANMATERIAL"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_planmaterial.fecha_llegada_entrada_mcias_.año": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.año"
+			          }
+			        },
+			        "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.año"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "años_have_trimestres3"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.año"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "trimestres_have_años3"
+			        },
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.año"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "trimestres_are_in_años3"
+			        }
+			      ]
+			    },
+			    "lol_planmaterial_fecha_llegada_entrada_mcias__trimestre_has_lol_planmaterial_fecha_llegada_entrada_mcias__me": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PLANMATERIAL"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre"
+			          }
+			        },
+			        "lol_planmaterial.fecha_llegada_entrada_mcias_.me": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.me"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "trimestres_have_me3"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.me"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "me_have_trimestres3"
+			        },
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.me"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.trimestre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "me_are_in_trimestres3"
+			        }
+			      ]
+			    },
+			    "lol_planmaterial_fecha_llegada_entrada_mcias__me_has_lol_planmaterial_fecha_llegada_entrada_mcias__día": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PLANMATERIAL"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_planmaterial.fecha_llegada_entrada_mcias_.me": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.me"
+			          }
+			        },
+			        "lol_planmaterial.fecha_llegada_entrada_mcias_.día": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.fecha_llegada_entrada_mcias_.día"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.me"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.día"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "me_have_días3"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.día"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "días_have_me3"
+			        },
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.día"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "lol_planmaterial.fecha_llegada_entrada_mcias_.me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "días_are_in_me3"
+			        }
+			      ]
+			    },
 			    "lol_planmaterial_fecha_llegada_solicitud_traslado_has_jerarquía_de_fecha": {
 			      "Binding": {
 			        "ConceptualEntity": "LOL_PLANMATERIAL"
@@ -8455,7 +8293,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años5"
+			          "ID": "jerarquía_de_fechas_have_años4"
 			        }
 			      ]
 			    },
@@ -8488,7 +8326,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres5"
+			          "ID": "jerarquía_de_fechas_have_trimestres4"
 			        }
 			      ]
 			    },
@@ -8521,7 +8359,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me5"
+			          "ID": "jerarquía_de_fechas_have_me4"
 			        }
 			      ]
 			    },
@@ -8554,7 +8392,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días5"
+			          "ID": "jerarquía_de_fechas_have_días4"
 			        }
 			      ]
 			    },
@@ -8587,7 +8425,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "años_have_trimestres5"
+			          "ID": "años_have_trimestres4"
 			        },
 			        {
 			          "Attribute": {
@@ -8600,7 +8438,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_años5"
+			          "ID": "trimestres_have_años4"
 			        },
 			        {
 			          "Preposition": {
@@ -8620,7 +8458,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_are_in_años5"
+			          "ID": "trimestres_are_in_años4"
 			        }
 			      ]
 			    },
@@ -8653,7 +8491,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me5"
+			          "ID": "trimestres_have_me4"
 			        },
 			        {
 			          "Attribute": {
@@ -8666,7 +8504,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres5"
+			          "ID": "me_have_trimestres4"
 			        },
 			        {
 			          "Preposition": {
@@ -8686,7 +8524,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_are_in_trimestres5"
+			          "ID": "me_are_in_trimestres4"
 			        }
 			      ]
 			    },
@@ -8719,7 +8557,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días5"
+			          "ID": "me_have_días4"
 			        },
 			        {
 			          "Attribute": {
@@ -8732,7 +8570,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me5"
+			          "ID": "días_have_me4"
 			        },
 			        {
 			          "Preposition": {
@@ -8752,7 +8590,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_are_in_me5"
+			          "ID": "días_are_in_me4"
 			        }
 			      ]
 			    }

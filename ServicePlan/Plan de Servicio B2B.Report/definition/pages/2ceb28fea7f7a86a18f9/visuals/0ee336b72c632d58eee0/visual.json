@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
   "name": "0ee336b72c632d58eee0",
   "position": {
     "x": 0,
@@ -298,18 +298,13 @@
         "sort": [
           {
             "field": {
-              "Aggregation": {
+              "Measure": {
                 "Expression": {
-                  "Column": {
-                    "Expression": {
-                      "SourceRef": {
-                        "Entity": "LOL_PLANMATERIAL"
-                      }
-                    },
-                    "Property": "Importe Original"
+                  "SourceRef": {
+                    "Entity": "LOL_PLANMATERIAL"
                   }
                 },
-                "Function": 0
+                "Property": "Valor Servicio > 30 días (Importe Real)"
               }
             },
             "direction": "Descending"
