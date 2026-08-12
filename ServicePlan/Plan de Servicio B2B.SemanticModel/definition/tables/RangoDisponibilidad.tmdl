@@ -1,0 +1,16 @@
+table RangoDisponibilidad
+	lineageTag: 7f3c1a90-6d24-4b8e-9c51-2a4d8e6b3f10
+
+	column Fecha
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 7f3c1a90-6d24-4b8e-9c51-2a4d8e6b3f11
+		summarizeBy: none
+		sourceColumn: [Fecha]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition RangoDisponibilidad = calculated
+		mode: import
+		source = SELECTCOLUMNS(CALENDAR(DATE(2008,1,1), DATE(2030,12,31)), "Fecha", [Date])
+

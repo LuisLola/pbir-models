@@ -3,36 +3,30 @@ table LOL_PLANMATERIAL
 
 	measure 'Fecha Servicio 1º Quincena' = ```
 			
-			VAR TotalPendiente = 
-			    SUM('LOL_PLANMATERIAL'[Unidades pendientes Entregar])
-			
-			VAR TotalCubierto = 
-			    SUMX(
+			VAR RangoIni = MIN ( 'RangoDisponibilidad'[Fecha] )
+			VAR RangoFin = MAX ( 'RangoDisponibilidad'[Fecha] )
+			VAR TotalPendiente = SUM ( 'LOL_PLANMATERIAL'[Unidades pendientes Entregar] )
+			VAR TotalCubierto =
+			    SUMX (
 			        'LOL_PLANMATERIAL',
-			        VAR Pendiente = 'LOL_PLANMATERIAL'[Unidades pendientes Entregar]
-			        VAR FechaEntrega = 'LOL_PLANMATERIAL'[Fecha Entrega pedido venta]
-			        VAR FechaDisponible = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
-			        VAR SumaCubierta =
-			            'LOL_PLANMATERIAL'[Uniades en Piciking] +
-			            'LOL_PLANMATERIAL'[Unidades asignadas] +
-			            'LOL_PLANMATERIAL'[Unidades asignadas Transito]
+			        VAR FechaFin = 'LOL_PLANMATERIAL'[Fecha Fin pedido venta]
+			        VAR FechaDisp = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
+			        VAR EnAlmacen = 'LOL_PLANMATERIAL'[Uniades en Piciking] + 'LOL_PLANMATERIAL'[Unidades asignadas]
+			        VAR EnTransito = 'LOL_PLANMATERIAL'[Unidades asignadas Transito]
 			        RETURN
-			            IF(
-			                NOT ISBLANK( FechaDisponible ) && FechaEntrega + 15 >= FechaDisponible,
-			                SumaCubierta,
+			            EnAlmacen
+			                + IF (
+			                NOT ISBLANK ( FechaDisp )
+			                    && FechaDisp >= RangoIni
+			                    && FechaDisp <= RangoFin
+			                    && NOT ISBLANK ( FechaFin )
+			                    && FechaDisp <= FechaFin - 4,
+			                EnTransito,
 			                0
 			            )
 			    )
-			
 			RETURN
-			    IF(
-			        TotalPendiente > 0,
-			        DIVIDE(TotalCubierto, TotalPendiente),
-			        BLANK()
-			    )
-			
-			
-			
+			    IF ( TotalPendiente > 0, DIVIDE ( TotalCubierto, TotalPendiente ), BLANK () )
 			
 			```
 		formatString: 0\ %;-0\ %;0\ %
@@ -58,37 +52,29 @@ table LOL_PLANMATERIAL
 
 	measure 'Fecha Servicio 2º Quincena' = ```
 			
-			VAR TotalPendiente = 
-			    SUM('LOL_PLANMATERIAL'[Unidades pendientes Entregar])
-			
+			VAR RangoIni = MIN ( 'RangoDisponibilidad'[Fecha] )
+			VAR RangoFin = MAX ( 'RangoDisponibilidad'[Fecha] )
+			VAR TotalPendiente = SUM ( 'LOL_PLANMATERIAL'[Unidades pendientes Entregar] )
 			VAR TotalCubierto =
-			    SUMX(
+			    SUMX (
 			        'LOL_PLANMATERIAL',
-			        VAR Pendiente = 'LOL_PLANMATERIAL'[Unidades pendientes Entregar]
-			        VAR FechaEntrega = 'LOL_PLANMATERIAL'[Fecha Entrega pedido venta]
-			        VAR FechaDisponible = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
-			        VAR FechaInicio = FechaEntrega + 15
-			        VAR FechaFin = FechaInicio + 15
-			        VAR SumaCubierta =
-			            'LOL_PLANMATERIAL'[Uniades en Piciking] +
-			            'LOL_PLANMATERIAL'[Unidades asignadas] +
-			            'LOL_PLANMATERIAL'[Unidades asignadas Transito]
+			        VAR FechaFin = 'LOL_PLANMATERIAL'[Fecha Fin pedido venta]
+			        VAR FechaDisp = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
+			        VAR EnAlmacen = 'LOL_PLANMATERIAL'[Uniades en Piciking] + 'LOL_PLANMATERIAL'[Unidades asignadas]
+			        VAR EnTransito = 'LOL_PLANMATERIAL'[Unidades asignadas Transito]
 			        RETURN
-			            IF(
-			                FechaDisponible > FechaInicio &&
-			                FechaDisponible <= FechaFin,
-			                SumaCubierta,
+			            IF (
+			                NOT ISBLANK ( FechaDisp )
+			                    && FechaDisp >= RangoIni
+			                    && FechaDisp <= RangoFin
+			                    && NOT ISBLANK ( FechaFin )
+			                    && FechaDisp > FechaFin - 4 && FechaDisp <= FechaFin + 11,
+			                EnTransito,
 			                0
 			            )
 			    )
-			
 			RETURN
-			    IF(
-			        TotalPendiente > 0,
-			        DIVIDE(TotalCubierto, TotalPendiente),
-			        BLANK()
-			    )
-			
+			    IF ( TotalPendiente > 0, DIVIDE ( TotalCubierto, TotalPendiente ), BLANK () )
 			
 			```
 		formatString: 0\ %;-0\ %;0\ %
@@ -96,34 +82,29 @@ table LOL_PLANMATERIAL
 
 	measure 'Fecha Servicio > 30 días' = ```
 			
-			VAR TotalPendiente = 
-			    SUM('LOL_PLANMATERIAL'[Unidades pendientes Entregar])
-			
+			VAR RangoIni = MIN ( 'RangoDisponibilidad'[Fecha] )
+			VAR RangoFin = MAX ( 'RangoDisponibilidad'[Fecha] )
+			VAR TotalPendiente = SUM ( 'LOL_PLANMATERIAL'[Unidades pendientes Entregar] )
 			VAR TotalCubierto =
-			    SUMX(
+			    SUMX (
 			        'LOL_PLANMATERIAL',
-			        VAR Pendiente = 'LOL_PLANMATERIAL'[Unidades pendientes Entregar]
-			        VAR FechaEntrega = 'LOL_PLANMATERIAL'[Fecha Entrega pedido venta]
-			        VAR FechaDisponible = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
-			        VAR FechaLimite = FechaEntrega + 30
-			        VAR SumaCubierta =
-			            'LOL_PLANMATERIAL'[Uniades en Piciking] +
-			            'LOL_PLANMATERIAL'[Unidades asignadas] +
-			            'LOL_PLANMATERIAL'[Unidades asignadas Transito]
+			        VAR FechaFin = 'LOL_PLANMATERIAL'[Fecha Fin pedido venta]
+			        VAR FechaDisp = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
+			        VAR EnAlmacen = 'LOL_PLANMATERIAL'[Uniades en Piciking] + 'LOL_PLANMATERIAL'[Unidades asignadas]
+			        VAR EnTransito = 'LOL_PLANMATERIAL'[Unidades asignadas Transito]
 			        RETURN
-			            IF(
-			                FechaDisponible > FechaLimite,
-			                SumaCubierta,
+			            IF (
+			                NOT ISBLANK ( FechaDisp )
+			                    && FechaDisp >= RangoIni
+			                    && FechaDisp <= RangoFin
+			                    && NOT ISBLANK ( FechaFin )
+			                    && FechaDisp > FechaFin + 11,
+			                EnTransito,
 			                0
 			            )
 			    )
-			
 			RETURN
-			    IF(
-			        TotalPendiente > 0,
-			        DIVIDE(TotalCubierto, TotalPendiente),
-			        BLANK()
-			    )
+			    IF ( TotalPendiente > 0, DIVIDE ( TotalCubierto, TotalPendiente ), BLANK () )
 			
 			```
 		formatString: 0\ %;-0\ %;0\ %
@@ -161,28 +142,30 @@ table LOL_PLANMATERIAL
 
 	measure 'Fecha Servicio 1º Quincena(Importe)' = ```
 			
-			            VAR Tope = MAX ( 'Horizonte'[Fecha] )
-			            VAR TotalPendiente = SUM ( 'LOL_PLANMATERIAL'[Importe pendiente Entregar] )
-			            VAR TotalCubierto =
-			                SUMX (
-			                    'LOL_PLANMATERIAL',
-			                    VAR FechaEntrega = 'LOL_PLANMATERIAL'[Fecha Entrega pedido venta]
-			                    VAR FechaDisponible = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
-			                    VAR ImporteCubierto =
-			                        'LOL_PLANMATERIAL'[Import en Piciking]
-			                            + 'LOL_PLANMATERIAL'[Importe asignado]
-			                            + 'LOL_PLANMATERIAL'[AssignTransitLineTotal]
-			                    RETURN
-			                        IF (
-			                            NOT ISBLANK ( FechaDisponible )
-			                                && FechaDisponible <= FechaEntrega + 15
-			                                && FechaDisponible <= Tope,
-			                            ImporteCubierto,
-			                            0
-			                        )
-			                )
-			            RETURN
-			                IF ( TotalPendiente > 0, DIVIDE ( TotalCubierto, TotalPendiente ), BLANK () )
+			VAR RangoIni = MIN ( 'RangoDisponibilidad'[Fecha] )
+			VAR RangoFin = MAX ( 'RangoDisponibilidad'[Fecha] )
+			VAR TotalPendiente = SUM ( 'LOL_PLANMATERIAL'[Importe pendiente Entregar] )
+			VAR TotalCubierto =
+			    SUMX (
+			        'LOL_PLANMATERIAL',
+			        VAR FechaFin = 'LOL_PLANMATERIAL'[Fecha Fin pedido venta]
+			        VAR FechaDisp = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
+			        VAR EnAlmacen = 'LOL_PLANMATERIAL'[Import en Piciking] + 'LOL_PLANMATERIAL'[Importe asignado]
+			        VAR EnTransito = 'LOL_PLANMATERIAL'[AssignTransitLineTotal]
+			        RETURN
+			            EnAlmacen
+			                + IF (
+			                NOT ISBLANK ( FechaDisp )
+			                    && FechaDisp >= RangoIni
+			                    && FechaDisp <= RangoFin
+			                    && NOT ISBLANK ( FechaFin )
+			                    && FechaDisp <= FechaFin - 4,
+			                EnTransito,
+			                0
+			            )
+			    )
+			RETURN
+			    IF ( TotalPendiente > 0, DIVIDE ( TotalCubierto, TotalPendiente ), BLANK () )
 			
 			```
 		formatString: 0\ %;-0\ %;0\ %
@@ -190,29 +173,29 @@ table LOL_PLANMATERIAL
 
 	measure 'Fecha Servicio 2º Quincena(Importe)' = ```
 			
-			            VAR Tope = MAX ( 'Horizonte'[Fecha] )
-			            VAR TotalPendiente = SUM ( 'LOL_PLANMATERIAL'[Importe pendiente Entregar] )
-			            VAR TotalCubierto =
-			                SUMX (
-			                    'LOL_PLANMATERIAL',
-			                    VAR FechaEntrega = 'LOL_PLANMATERIAL'[Fecha Entrega pedido venta]
-			                    VAR FechaDisponible = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
-			                    VAR ImporteCubierto =
-			                        'LOL_PLANMATERIAL'[Import en Piciking]
-			                            + 'LOL_PLANMATERIAL'[Importe asignado]
-			                            + 'LOL_PLANMATERIAL'[AssignTransitLineTotal]
-			                    RETURN
-			                        IF (
-			                            NOT ISBLANK ( FechaDisponible )
-			                                && FechaDisponible > FechaEntrega + 15
-			                                && FechaDisponible <= FechaEntrega + 30
-			                                && FechaDisponible <= Tope,
-			                            ImporteCubierto,
-			                            0
-			                        )
-			                )
-			            RETURN
-			                IF ( TotalPendiente > 0, DIVIDE ( TotalCubierto, TotalPendiente ), BLANK () )
+			VAR RangoIni = MIN ( 'RangoDisponibilidad'[Fecha] )
+			VAR RangoFin = MAX ( 'RangoDisponibilidad'[Fecha] )
+			VAR TotalPendiente = SUM ( 'LOL_PLANMATERIAL'[Importe pendiente Entregar] )
+			VAR TotalCubierto =
+			    SUMX (
+			        'LOL_PLANMATERIAL',
+			        VAR FechaFin = 'LOL_PLANMATERIAL'[Fecha Fin pedido venta]
+			        VAR FechaDisp = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
+			        VAR EnAlmacen = 'LOL_PLANMATERIAL'[Import en Piciking] + 'LOL_PLANMATERIAL'[Importe asignado]
+			        VAR EnTransito = 'LOL_PLANMATERIAL'[AssignTransitLineTotal]
+			        RETURN
+			            IF (
+			                NOT ISBLANK ( FechaDisp )
+			                    && FechaDisp >= RangoIni
+			                    && FechaDisp <= RangoFin
+			                    && NOT ISBLANK ( FechaFin )
+			                    && FechaDisp > FechaFin - 4 && FechaDisp <= FechaFin + 11,
+			                EnTransito,
+			                0
+			            )
+			    )
+			RETURN
+			    IF ( TotalPendiente > 0, DIVIDE ( TotalCubierto, TotalPendiente ), BLANK () )
 			
 			```
 		formatString: 0\ %;-0\ %;0\ %
@@ -220,28 +203,29 @@ table LOL_PLANMATERIAL
 
 	measure 'Fecha Servicio > 30 días (Importe)' = ```
 			
-			            VAR Tope = MAX ( 'Horizonte'[Fecha] )
-			            VAR TotalPendiente = SUM ( 'LOL_PLANMATERIAL'[Importe pendiente Entregar] )
-			            VAR TotalCubierto =
-			                SUMX (
-			                    'LOL_PLANMATERIAL',
-			                    VAR FechaEntrega = 'LOL_PLANMATERIAL'[Fecha Entrega pedido venta]
-			                    VAR FechaDisponible = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
-			                    VAR ImporteCubierto =
-			                        'LOL_PLANMATERIAL'[Import en Piciking]
-			                            + 'LOL_PLANMATERIAL'[Importe asignado]
-			                            + 'LOL_PLANMATERIAL'[AssignTransitLineTotal]
-			                    RETURN
-			                        IF (
-			                            NOT ISBLANK ( FechaDisponible )
-			                                && FechaDisponible > FechaEntrega + 30
-			                                && FechaDisponible <= Tope,
-			                            ImporteCubierto,
-			                            0
-			                        )
-			                )
-			            RETURN
-			                IF ( TotalPendiente > 0, DIVIDE ( TotalCubierto, TotalPendiente ), BLANK () )
+			VAR RangoIni = MIN ( 'RangoDisponibilidad'[Fecha] )
+			VAR RangoFin = MAX ( 'RangoDisponibilidad'[Fecha] )
+			VAR TotalPendiente = SUM ( 'LOL_PLANMATERIAL'[Importe pendiente Entregar] )
+			VAR TotalCubierto =
+			    SUMX (
+			        'LOL_PLANMATERIAL',
+			        VAR FechaFin = 'LOL_PLANMATERIAL'[Fecha Fin pedido venta]
+			        VAR FechaDisp = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
+			        VAR EnAlmacen = 'LOL_PLANMATERIAL'[Import en Piciking] + 'LOL_PLANMATERIAL'[Importe asignado]
+			        VAR EnTransito = 'LOL_PLANMATERIAL'[AssignTransitLineTotal]
+			        RETURN
+			            IF (
+			                NOT ISBLANK ( FechaDisp )
+			                    && FechaDisp >= RangoIni
+			                    && FechaDisp <= RangoFin
+			                    && NOT ISBLANK ( FechaFin )
+			                    && FechaDisp > FechaFin + 11,
+			                EnTransito,
+			                0
+			            )
+			    )
+			RETURN
+			    IF ( TotalPendiente > 0, DIVIDE ( TotalCubierto, TotalPendiente ), BLANK () )
 			
 			```
 		formatString: 0\ %;-0\ %;0\ %
@@ -341,53 +325,55 @@ table LOL_PLANMATERIAL
 
 	measure 'Valor Servicio 1º Quincena' = ```
 			
-			VAR TotalCubierto = 
-			    SUMX(
+			VAR RangoIni = MIN ( 'RangoDisponibilidad'[Fecha] )
+			VAR RangoFin = MAX ( 'RangoDisponibilidad'[Fecha] )
+			RETURN
+			SUMX (
 			        'LOL_PLANMATERIAL',
-			        VAR Pendiente = 'LOL_PLANMATERIAL'[Unidades pendientes Entregar]
-			        VAR FechaEntrega = 'LOL_PLANMATERIAL'[Fecha Entrega pedido venta]
-			        VAR FechaDisponible = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
-			        VAR FechaFinPedido = 'LOL_PLANMATERIAL'[Fecha Fin pedido venta]
-			        VAR SumaCubierta =
-			            'LOL_PLANMATERIAL'[Uniades en Piciking] +
-			            'LOL_PLANMATERIAL'[Unidades asignadas] +
-			            'LOL_PLANMATERIAL'[Unidades asignadas Transito]
+			        VAR FechaFin = 'LOL_PLANMATERIAL'[Fecha Fin pedido venta]
+			        VAR FechaDisp = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
+			        VAR EnAlmacen = 'LOL_PLANMATERIAL'[Uniades en Piciking] + 'LOL_PLANMATERIAL'[Unidades asignadas]
+			        VAR EnTransito = 'LOL_PLANMATERIAL'[Unidades asignadas Transito]
 			        RETURN
-			            IF(
-			                NOT ISBLANK( FechaDisponible ) && FechaFinPedido >= FechaDisponible,
-			                SumaCubierta,
+			            EnAlmacen
+			                + IF (
+			                NOT ISBLANK ( FechaDisp )
+			                    && FechaDisp >= RangoIni
+			                    && FechaDisp <= RangoFin
+			                    && NOT ISBLANK ( FechaFin )
+			                    && FechaDisp <= FechaFin - 4,
+			                EnTransito,
 			                0
 			            )
 			    )
 			
-			RETURN
-			    TotalCubierto
-			
 			```
-		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		formatString: #,0
 		lineageTag: 2ab8a34f-b68d-4ac5-b0d1-309d716e5f1a
 
 	measure 'Valor Servicio 1º Quincena (Importe Real)' = ```
 			
-			            VAR Tope = MAX ( 'Horizonte'[Fecha] )
-			            RETURN
-			            SUMX (
-			                'LOL_PLANMATERIAL',
-			                VAR FechaEntrega = 'LOL_PLANMATERIAL'[Fecha Entrega pedido venta]
-			                VAR FechaDisponible = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
-			                VAR ImporteCubierto =
-			                    'LOL_PLANMATERIAL'[Import en Piciking]
-			                        + 'LOL_PLANMATERIAL'[Importe asignado]
-			                        + 'LOL_PLANMATERIAL'[AssignTransitLineTotal]
-			                RETURN
-			                    IF (
-			                        NOT ISBLANK ( FechaDisponible )
-			                            && FechaDisponible <= FechaEntrega + 15
-			                            && FechaDisponible <= Tope,
-			                        ImporteCubierto,
-			                        0
-			                    )
+			VAR RangoIni = MIN ( 'RangoDisponibilidad'[Fecha] )
+			VAR RangoFin = MAX ( 'RangoDisponibilidad'[Fecha] )
+			RETURN
+			SUMX (
+			        'LOL_PLANMATERIAL',
+			        VAR FechaFin = 'LOL_PLANMATERIAL'[Fecha Fin pedido venta]
+			        VAR FechaDisp = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
+			        VAR EnAlmacen = 'LOL_PLANMATERIAL'[Importe asignado]
+			        VAR EnTransito = 'LOL_PLANMATERIAL'[AssignTransitLineTotal]
+			        RETURN
+			            EnAlmacen
+			                + IF (
+			                NOT ISBLANK ( FechaDisp )
+			                    && FechaDisp >= RangoIni
+			                    && FechaDisp <= RangoFin
+			                    && NOT ISBLANK ( FechaFin )
+			                    && FechaDisp <= FechaFin - 4,
+			                EnTransito,
+			                0
 			            )
+			    )
 			
 			```
 		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
@@ -395,56 +381,160 @@ table LOL_PLANMATERIAL
 
 	measure 'Valor Servicio 2º Quincena (Importe Real)' = ```
 			
-			            VAR Tope = MAX ( 'Horizonte'[Fecha] )
-			            RETURN
-			            SUMX (
-			                'LOL_PLANMATERIAL',
-			                VAR FechaEntrega = 'LOL_PLANMATERIAL'[Fecha Entrega pedido venta]
-			                VAR FechaDisponible = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
-			                VAR ImporteCubierto =
-			                    'LOL_PLANMATERIAL'[Import en Piciking]
-			                        + 'LOL_PLANMATERIAL'[Importe asignado]
-			                        + 'LOL_PLANMATERIAL'[AssignTransitLineTotal]
-			                RETURN
-			                    IF (
-			                        NOT ISBLANK ( FechaDisponible )
-			                            && FechaDisponible > FechaEntrega + 15
-			                            && FechaDisponible <= FechaEntrega + 30
-			                            && FechaDisponible <= Tope,
-			                        ImporteCubierto,
-			                        0
-			                    )
+			VAR RangoIni = MIN ( 'RangoDisponibilidad'[Fecha] )
+			VAR RangoFin = MAX ( 'RangoDisponibilidad'[Fecha] )
+			RETURN
+			SUMX (
+			        'LOL_PLANMATERIAL',
+			        VAR FechaFin = 'LOL_PLANMATERIAL'[Fecha Fin pedido venta]
+			        VAR FechaDisp = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
+			        VAR EnAlmacen = 'LOL_PLANMATERIAL'[Importe asignado]
+			        VAR EnTransito = 'LOL_PLANMATERIAL'[AssignTransitLineTotal]
+			        RETURN
+			            IF (
+			                NOT ISBLANK ( FechaDisp )
+			                    && FechaDisp >= RangoIni
+			                    && FechaDisp <= RangoFin
+			                    && NOT ISBLANK ( FechaFin )
+			                    && FechaDisp > FechaFin - 4 && FechaDisp <= FechaFin + 11,
+			                EnTransito,
+			                0
 			            )
+			    )
 			
 			```
-		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
 		lineageTag: 75f8ed16-ad79-4f59-baad-fb38c13305a7
 
 	measure 'Valor Servicio > 30 días (Importe Real)' = ```
 			
-			            VAR Tope = MAX ( 'Horizonte'[Fecha] )
-			            RETURN
-			            SUMX (
-			                'LOL_PLANMATERIAL',
-			                VAR FechaEntrega = 'LOL_PLANMATERIAL'[Fecha Entrega pedido venta]
-			                VAR FechaDisponible = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
-			                VAR ImporteCubierto =
-			                    'LOL_PLANMATERIAL'[Import en Piciking]
-			                        + 'LOL_PLANMATERIAL'[Importe asignado]
-			                        + 'LOL_PLANMATERIAL'[AssignTransitLineTotal]
-			                RETURN
-			                    IF (
-			                        NOT ISBLANK ( FechaDisponible )
-			                            && FechaDisponible > FechaEntrega + 30
-			                            && FechaDisponible <= Tope,
-			                        ImporteCubierto,
-			                        0
-			                    )
+			VAR RangoIni = MIN ( 'RangoDisponibilidad'[Fecha] )
+			VAR RangoFin = MAX ( 'RangoDisponibilidad'[Fecha] )
+			RETURN
+			SUMX (
+			        'LOL_PLANMATERIAL',
+			        VAR FechaFin = 'LOL_PLANMATERIAL'[Fecha Fin pedido venta]
+			        VAR FechaDisp = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
+			        VAR EnAlmacen = 'LOL_PLANMATERIAL'[Importe asignado]
+			        VAR EnTransito = 'LOL_PLANMATERIAL'[AssignTransitLineTotal]
+			        RETURN
+			            IF (
+			                NOT ISBLANK ( FechaDisp )
+			                    && FechaDisp >= RangoIni
+			                    && FechaDisp <= RangoFin
+			                    && NOT ISBLANK ( FechaFin )
+			                    && FechaDisp > FechaFin + 11,
+			                EnTransito,
+			                0
 			            )
+			    )
 			
 			```
-		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
 		lineageTag: 12609953-d71a-49be-ba67-5b9f75f0fb9f
+
+	measure 'Cartera pte. + en picking' = ```
+			
+			SUM ( 'LOL_PLANMATERIAL'[Imporet pte. picking] ) + SUM ( 'LOL_PLANMATERIAL'[Import en Piciking] )
+			
+			```
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		lineageTag: b80717de-5170-4830-b8ed-3a3384ba314e
+
+	measure 'Importe cubierto' = ```
+			
+			SUM ( 'LOL_PLANMATERIAL'[Import en Piciking] )
+			    + SUM ( 'LOL_PLANMATERIAL'[Importe asignado] )
+			    + SUM ( 'LOL_PLANMATERIAL'[AssignTransitLineTotal] )
+			
+			```
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		lineageTag: 29de3eed-6084-46b0-acd9-0c246f5ba8f2
+
+	measure 'Importe faltas' = ```
+			
+			SUM ( 'LOL_PLANMATERIAL'[Importe pendiente Entregar] ) - [Importe cubierto]
+			
+			```
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		lineageTag: 4e3cb28a-7ce2-41b8-8958-2a5f9cfbfc7b
+
+	measure 'Unidades cubiertas' = ```
+			
+			SUM ( 'LOL_PLANMATERIAL'[Uniades en Piciking] )
+			    + SUM ( 'LOL_PLANMATERIAL'[Unidades asignadas] )
+			    + SUM ( 'LOL_PLANMATERIAL'[Unidades asignadas Transito] )
+			
+			```
+		formatString: #,0
+		lineageTag: 8f0a63db-30e3-4c03-98df-2698bb1f5517
+
+	measure 'Importe retrasado' =
+			
+			[Importe cubierto]
+			    - [Valor Servicio 1º Quincena (Importe Real)]
+			    - [Valor Servicio 2º Quincena (Importe Real)]
+			    - [Valor Servicio > 30 días (Importe Real)]
+			    -[en picking]
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		lineageTag: e87614fc-b2ba-46f5-8fcc-b997001f4f49
+
+	measure 'en picking' = ```
+			
+			SUM ( 'LOL_PLANMATERIAL'[Import en Piciking] )
+			
+			```
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		lineageTag: 609cc28c-0b67-493e-90c6-63215a395836
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% en picking' = ```
+			
+			DIVIDE ( [en picking], SUM ( 'LOL_PLANMATERIAL'[Importe pendiente Entregar] ) )
+			
+			```
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: 7a1e5221-b400-4e65-9951-a523160da241
+
+	measure '% retrasado' = ```
+			
+			DIVIDE ( [Importe retrasado], SUM ( 'LOL_PLANMATERIAL'[Importe pendiente Entregar] ) )
+			
+			```
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: 1dfa6b6e-1c7a-4a15-b374-06a6705f128a
+
+	measure '% faltas' = ```
+			
+			DIVIDE ( [Importe faltas], SUM ( 'LOL_PLANMATERIAL'[Importe pendiente Entregar] ) )
+			
+			```
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: 31927bd0-5c4d-4efa-952c-e2fde750b873
+
+	measure '% Total' = ```
+			
+			DIVIDE (
+			    [en picking]
+			        + [Valor Servicio 1º Quincena (Importe Real)]
+			        + [Valor Servicio 2º Quincena (Importe Real)]
+			        + [Valor Servicio > 30 días (Importe Real)]
+			        + [Importe retrasado],
+			    SUM ( 'LOL_PLANMATERIAL'[Importe pendiente Entregar] )
+			)
+			
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 982ba24e-d5e6-4e4b-b2c4-0ab2471c39ec
+
+	measure ServicioDentroRango =
+			
+			[Valor Servicio 1º Quincena (Importe Real)]
+			    + [Valor Servicio 2º Quincena (Importe Real)]
+			    + [Valor Servicio > 30 días (Importe Real)]
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		lineageTag: 7ff80190-bf17-4fbd-9c1d-e9f7cf71c7ba
 
 	column Almacén
 		dataType: string

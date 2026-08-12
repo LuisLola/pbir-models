@@ -5,9 +5,8 @@
     "x": 0,
     "y": 0,
     "z": 18000,
-    "height": 559.39949958298575,
-    "width": 1115.5963302752293,
-    "tabOrder": 16000
+    "height": 582,
+    "width": 1120
   },
   "visual": {
     "visualType": "tableEx",
@@ -131,46 +130,6 @@
                           "Entity": "LOL_PLANMATERIAL"
                         }
                       },
-                      "Property": "Importe Entregado"
-                    }
-                  },
-                  "Function": 0
-                }
-              },
-              "queryRef": "Sum(LOL_PLANMATERIAL.Importe Entregado)",
-              "nativeQueryRef": "Importe Entregado",
-              "displayName": "Importe Entregado"
-            },
-            {
-              "field": {
-                "Aggregation": {
-                  "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "LOL_PLANMATERIAL"
-                        }
-                      },
-                      "Property": "Importe pendiente Entregar"
-                    }
-                  },
-                  "Function": 0
-                }
-              },
-              "queryRef": "Sum(LOL_PLANMATERIAL.Importe pendiente Entregar)",
-              "nativeQueryRef": "Importe pendiente Entregar",
-              "displayName": "Importe pendiente Entregar"
-            },
-            {
-              "field": {
-                "Aggregation": {
-                  "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "LOL_PLANMATERIAL"
-                        }
-                      },
                       "Property": "Importe asignado"
                     }
                   },
@@ -209,12 +168,54 @@
                       "Entity": "LOL_PLANMATERIAL"
                     }
                   },
+                  "Property": "Importe faltas"
+                }
+              },
+              "queryRef": "LOL_PLANMATERIAL.Importe faltas",
+              "nativeQueryRef": "Importe faltas"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PLANMATERIAL"
+                    }
+                  },
+                  "Property": "% en picking"
+                }
+              },
+              "queryRef": "LOL_PLANMATERIAL.% en picking",
+              "nativeQueryRef": "% en picking"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PLANMATERIAL"
+                    }
+                  },
+                  "Property": "en picking"
+                }
+              },
+              "queryRef": "LOL_PLANMATERIAL.en picking",
+              "nativeQueryRef": "en picking"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PLANMATERIAL"
+                    }
+                  },
                   "Property": "Fecha Servicio 1º Quincena(Importe)"
                 }
               },
               "queryRef": "LOL_PLANMATERIAL.% Cartera Cubierta Compromiso (Importe)",
-              "nativeQueryRef": "% Servicio 1º Quincena",
-              "displayName": "% Servicio 1º Quincena"
+              "nativeQueryRef": "% Servicio 1º",
+              "displayName": "% Servicio 1º"
             },
             {
               "field": {
@@ -228,8 +229,8 @@
                 }
               },
               "queryRef": "LOL_PLANMATERIAL.Valor Servicio 1º Quincena (Importe Real)",
-              "nativeQueryRef": "Valor Servicio 1º Quincena (Importe)",
-              "displayName": "Valor Servicio 1º Quincena (Importe)"
+              "nativeQueryRef": "1º Servicio",
+              "displayName": "1º Servicio"
             },
             {
               "field": {
@@ -243,8 +244,8 @@
                 }
               },
               "queryRef": "LOL_PLANMATERIAL.% Cartera Cubierta 2ª Quincena (Importe)",
-              "nativeQueryRef": "% Servicio 2º Quincena",
-              "displayName": "% Servicio 2º Quincena"
+              "nativeQueryRef": "% Servicio 2º",
+              "displayName": "% Servicio 2º"
             },
             {
               "field": {
@@ -258,8 +259,8 @@
                 }
               },
               "queryRef": "LOL_PLANMATERIAL.Valor Servicio 2º Quincena (Importe Real)",
-              "nativeQueryRef": "Valor Servicio 2º Quincena (Importe)",
-              "displayName": "Valor Servicio 2º Quincena (Importe)"
+              "nativeQueryRef": "2º Servicio",
+              "displayName": "2º Servicio"
             },
             {
               "field": {
@@ -273,8 +274,8 @@
                 }
               },
               "queryRef": "LOL_PLANMATERIAL.% Cartera Cubierta > +30 días (Importe)",
-              "nativeQueryRef": "% Servicio > 30 días",
-              "displayName": "% Servicio > 30 días"
+              "nativeQueryRef": "% Servicio 3º",
+              "displayName": "% Servicio 3º"
             },
             {
               "field": {
@@ -288,8 +289,66 @@
                 }
               },
               "queryRef": "LOL_PLANMATERIAL.Valor Servicio > 30 días (Importe Real)",
-              "nativeQueryRef": "Valor Servicio > 30 días (Importe)",
-              "displayName": "Valor Servicio > 30 días (Importe)"
+              "nativeQueryRef": "3º Servicio",
+              "displayName": "3º Servicio"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PLANMATERIAL"
+                    }
+                  },
+                  "Property": "% retrasado"
+                }
+              },
+              "queryRef": "LOL_PLANMATERIAL.% retrasado",
+              "nativeQueryRef": "% retrasado"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PLANMATERIAL"
+                    }
+                  },
+                  "Property": "Importe retrasado"
+                }
+              },
+              "queryRef": "LOL_PLANMATERIAL.Importe fuera de quincena",
+              "nativeQueryRef": "Servicio retrasado",
+              "displayName": "Servicio retrasado"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PLANMATERIAL"
+                    }
+                  },
+                  "Property": "ServicioDentroRango"
+                }
+              },
+              "queryRef": "LOL_PLANMATERIAL.ServicioDentroRango",
+              "nativeQueryRef": "Dentro Rango",
+              "displayName": "Dentro Rango"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PLANMATERIAL"
+                    }
+                  },
+                  "Property": "% faltas"
+                }
+              },
+              "queryRef": "LOL_PLANMATERIAL.% faltas",
+              "nativeQueryRef": "% faltas"
             }
           ]
         }
@@ -298,16 +357,16 @@
         "sort": [
           {
             "field": {
-              "Measure": {
+              "Column": {
                 "Expression": {
                   "SourceRef": {
                     "Entity": "LOL_PLANMATERIAL"
                   }
                 },
-                "Property": "Valor Servicio > 30 días (Importe Real)"
+                "Property": "Nº Pedido Ventas"
               }
             },
-            "direction": "Descending"
+            "direction": "Ascending"
           }
         ]
       }
@@ -403,7 +462,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "74.44363568995486D"
+                  "Value": "75.437758276017D"
                 }
               }
             }
@@ -417,7 +476,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "173.23080155470421D"
+                  "Value": "148.2532615345428D"
                 }
               }
             }
@@ -431,7 +490,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "70.30091342239135D"
+                  "Value": "66.31780606520086D"
                 }
               }
             }
@@ -445,21 +504,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "80.75882438340501D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Sum(LOL_PLANMATERIAL.Importe pendiente Entregar)"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "81.53476424525782D"
+                  "Value": "69.46577229431875D"
                 }
               }
             }
@@ -473,21 +518,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "74.23059357341687D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Sum(LOL_PLANMATERIAL.Importe Entregado)"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "74.66772142993815D"
+                  "Value": "71.65390811892937D"
                 }
               }
             }
@@ -501,7 +532,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "70.21315436594918D"
+                  "Value": "69.21604775566652D"
                 }
               }
             }
@@ -515,7 +546,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "69.88898200691823D"
+                  "Value": "61.88939320531975D"
                 }
               }
             }
@@ -529,7 +560,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "68.75724467977426D"
+                  "Value": "58.72088104341062D"
                 }
               }
             }
@@ -543,7 +574,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "75.64179388690484D"
+                  "Value": "64.5895319575514D"
                 }
               }
             }
@@ -557,7 +588,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "64.89351643215115D"
+                  "Value": "63.89183090361755D"
                 }
               }
             }
@@ -571,7 +602,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "80.36364981490901D"
+                  "Value": "73.39626815779829D"
                 }
               }
             }
@@ -585,7 +616,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "73.78200705048164D"
+                  "Value": "77.79386643209959D"
                 }
               }
             }
@@ -599,7 +630,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "85.18185080315854D"
+                  "Value": "75.20053129006591D"
                 }
               }
             }
@@ -620,6 +651,48 @@
           },
           "selector": {
             "metadata": "LOL_PLANMATERIAL.Fecha Fin pedido venta"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "60D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_PLANMATERIAL.Importe faltas"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "77D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_PLANMATERIAL.Importe fuera de quincena"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "52D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_PLANMATERIAL.% en picking"
           }
         }
       ],
