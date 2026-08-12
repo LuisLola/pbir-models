@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
-  "name": "93b3166741859c3609ee",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "b06e5461e155c1b2da61",
   "position": {
-    "x": 479.51367781155017,
-    "y": 93.373860182370819,
-    "z": 6005,
-    "height": 109.90881458966565,
-    "width": 320,
-    "tabOrder": 3010
+    "x": 227.67659574468084,
+    "y": 92.59574468085107,
+    "z": 0,
+    "height": 93.685106382978717,
+    "width": 204.8,
+    "tabOrder": 14000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -23,11 +23,11 @@
                       "Entity": "MedidasVentas"
                     }
                   },
-                  "Property": "EvolTemporadaSeleccionada"
+                  "Property": "VentasTemporadaAnterior"
                 }
               },
-              "queryRef": "MedidasVentas.EvolTemporadaSeleccionada",
-              "nativeQueryRef": "EvolTemporadaSeleccionada"
+              "queryRef": "MedidasVentas.VentasTemporadaAnterior",
+              "nativeQueryRef": "VentasTemporadaAnterior"
             }
           ]
         }
@@ -42,7 +42,7 @@
                     "Entity": "MedidasVentas"
                   }
                 },
-                "Property": "EvolTemporadaSeleccionada"
+                "Property": "VentasTemporadaAnterior"
               }
             },
             "direction": "Descending"
@@ -109,6 +109,13 @@
                   }
                 }
               }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
             }
           },
           "selector": {
@@ -161,7 +168,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "22D"
+                  "Value": "18D"
                 }
               }
             },
@@ -275,7 +282,19 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
                 }
               }
             }
@@ -294,13 +313,60 @@
             }
           }
         }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Venta Temporada Anterior'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "15D"
+                }
+              }
+            }
+          }
+        }
       ]
     }
   },
   "filterConfig": {
     "filters": [
       {
-        "name": "ad296719181825050d4c",
+        "name": "f3b293079c0eb3765040",
         "field": {
           "Measure": {
             "Expression": {
@@ -308,7 +374,7 @@
                 "Entity": "MedidasVentas"
               }
             },
-            "Property": "EvolTemporadaSeleccionada"
+            "Property": "VentasTemporadaAnterior"
           }
         },
         "type": "Advanced"

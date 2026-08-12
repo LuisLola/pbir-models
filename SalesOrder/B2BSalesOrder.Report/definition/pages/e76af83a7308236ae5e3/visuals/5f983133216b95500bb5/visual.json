@@ -624,62 +624,6 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "7f15aa19e65056ba4e59",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PBICLIENTES"
-              }
-            },
-            "Property": "RazonSocial"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "1e7e4522dd739c29796c",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PBIB2BSALESORDER"
-              }
-            },
-            "Property": "DocNum"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "609bd6cfb9d4118a58d5",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasVentas"
-              }
-            },
-            "Property": "Pedidos Cancelados"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "2b6da1f70a11608a09eb",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasVentas"
-              }
-            },
-            "Property": "% Cancelado"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
         "name": "c55a2b185b248dac4b91",
         "field": {
           "Measure": {
@@ -710,34 +654,6 @@
         "howCreated": "User"
       },
       {
-        "name": "e2c30ccfb844961e4ff8",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasVentas"
-              }
-            },
-            "Property": "Pedido Final"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "c36f158c48ee34efd0d8",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasVentas"
-              }
-            },
-            "Property": "Pedido Original"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
         "name": "1b7de1784b7fdc118e7d",
         "field": {
           "Measure": {
@@ -753,48 +669,6 @@
         "howCreated": "User"
       },
       {
-        "name": "381c41afc3646c14ec0d",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PBIAGENTES"
-              }
-            },
-            "Property": "Agente_Cajero"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "e58acb7cd99ce075eca9",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasVentas"
-              }
-            },
-            "Property": "Servido (cadena)"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "f73297d202e1b979c4bb",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasVentas"
-              }
-            },
-            "Property": "Facturado (cadena)"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
         "name": "38a3e93e03012e0b6167",
         "field": {
           "Measure": {
@@ -808,76 +682,6 @@
         },
         "type": "Advanced",
         "howCreated": "User"
-      },
-      {
-        "name": "ec30af0da4dd6ccd9dbb",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasVentas"
-              }
-            },
-            "Property": "Pendiente Servir"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "ac7ef71ab8aa89a70a4c",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasVentas"
-              }
-            },
-            "Property": "Pendiente Facturar"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "c86f176c67b3e7871da4",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasVentas"
-              }
-            },
-            "Property": "Notas + Devol. Abiertas (cadena)"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "c44e5f17b6707344114c",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasVentas"
-              }
-            },
-            "Property": "Solicitudes Devol. Abiertas (cadena)"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "d8b7ddb65a5b1c071083",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasVentas"
-              }
-            },
-            "Property": "Solicitudes Devol. Abiertas"
-          }
-        },
-        "type": "Advanced"
       }
     ]
   }

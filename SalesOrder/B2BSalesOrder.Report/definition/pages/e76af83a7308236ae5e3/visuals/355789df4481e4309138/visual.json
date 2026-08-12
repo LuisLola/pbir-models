@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
   "name": "355789df4481e4309138",
   "position": {
-    "x": 923.03951367781156,
+    "x": 818.50746268656712,
     "y": 0,
     "z": 2000,
     "height": 64.194528875379945,
@@ -102,23 +102,5 @@
       "filterChanges": true
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "06be2b4f4084f38a00b3",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PBISEASON"
-              }
-            },
-            "Property": "Code"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

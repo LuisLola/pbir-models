@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
   "name": "42196ac2ed6e3edb0337",
   "position": {
     "x": 479.74185829879946,
     "y": 217.4762341678655,
-    "z": 6012,
+    "z": 14000,
     "height": 64.285714285714278,
     "width": 248.27586206896549,
-    "tabOrder": 3017
+    "tabOrder": 12000
   },
   "visual": {
     "visualType": "slicer",
@@ -167,23 +167,5 @@
         }
       ]
     }
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "08750291c468a9523225",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimensionB2B"
-              }
-            },
-            "Property": "Dimension"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

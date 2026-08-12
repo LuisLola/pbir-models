@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
   "name": "565cb701951e9d909d09",
   "position": {
     "x": 73.339301700984777,
@@ -67,56 +67,5 @@
       }
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "8b3157758eaa94c55d0b",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PBIB2BSALESORDER"
-              }
-            },
-            "Property": "DocDate"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "05b8146ee17a429b0513",
-        "field": {
-          "Aggregation": {
-            "Expression": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "LOL_PBIB2BSALESORDER"
-                  }
-                },
-                "Property": "ImporteBruto"
-              }
-            },
-            "Function": 0
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "904ff0ea1066e918bca9",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PBIB2BSALESORDER"
-              }
-            },
-            "Property": "Season"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

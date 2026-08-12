@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
   "name": "aa05e5304450c3d066d3",
   "position": {
-    "x": 26.261398176291795,
-    "y": 93.373860182370819,
-    "z": 6002,
-    "height": 109.90881458966565,
-    "width": 320,
-    "tabOrder": 3007
+    "x": 7.7811550151975686,
+    "y": 92.401215805471125,
+    "z": 8000,
+    "height": 93.373860182370819,
+    "width": 204.25531914893617,
+    "tabOrder": 6000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -109,6 +109,13 @@
                   }
                 }
               }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
             }
           },
           "selector": {
@@ -161,7 +168,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "22D"
+                  "Value": "18D"
                 }
               }
             },
@@ -275,7 +282,19 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
                 }
               }
             }
@@ -294,25 +313,54 @@
             }
           }
         }
-      ]
-    }
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "88721ccdca65dcadaea0",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "MedidasVentas"
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
               }
             },
-            "Property": "VentasTemporadaSeleccionada_Bruta"
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Venta Temporada Seleccionada'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
           }
-        },
-        "type": "Advanced"
-      }
-    ]
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "15D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
   }
 }
