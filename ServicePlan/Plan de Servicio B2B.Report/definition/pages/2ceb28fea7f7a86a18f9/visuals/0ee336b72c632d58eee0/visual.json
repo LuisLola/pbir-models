@@ -6,7 +6,8 @@
     "y": 0,
     "z": 18000,
     "height": 582,
-    "width": 1120
+    "width": 1120,
+    "tabOrder": 0
   },
   "visual": {
     "visualType": "tableEx",
@@ -84,7 +85,8 @@
                 }
               },
               "queryRef": "LOL_PLANMATERIAL.Fecha Entrega pedido venta",
-              "nativeQueryRef": "Fecha Entrega pedido venta"
+              "nativeQueryRef": "Fecha Servicio Pedido",
+              "displayName": "Fecha Servicio Pedido"
             },
             {
               "field": {
@@ -98,7 +100,8 @@
                 }
               },
               "queryRef": "LOL_PLANMATERIAL.Fecha Fin pedido venta",
-              "nativeQueryRef": "Fecha Fin pedido venta"
+              "nativeQueryRef": "Fecha Fin Servicio Pedido",
+              "displayName": "Fecha Fin Servicio Pedido"
             },
             {
               "field": {
@@ -117,8 +120,8 @@
                 }
               },
               "queryRef": "Sum(LOL_PLANMATERIAL.Importe Original)",
-              "nativeQueryRef": "Importe Original",
-              "displayName": "Importe Original"
+              "nativeQueryRef": "Importe Cartera Pendiente",
+              "displayName": "Importe Cartera Pendiente"
             },
             {
               "field": {
@@ -137,8 +140,8 @@
                 }
               },
               "queryRef": "Sum(LOL_PLANMATERIAL.Importe asignado)",
-              "nativeQueryRef": "Importe asignado",
-              "displayName": "Importe asignado"
+              "nativeQueryRef": "Importe asignado Stock",
+              "displayName": "Importe asignado Stock"
             },
             {
               "field": {
@@ -157,8 +160,8 @@
                 }
               },
               "queryRef": "Sum(LOL_PLANMATERIAL.AssignTransitLineTotal)",
-              "nativeQueryRef": "Importe asignado transito",
-              "displayName": "Importe asignado transito"
+              "nativeQueryRef": "Importe asignado Tránsito",
+              "displayName": "Importe asignado Tránsito"
             },
             {
               "field": {
@@ -172,21 +175,8 @@
                 }
               },
               "queryRef": "LOL_PLANMATERIAL.Importe faltas",
-              "nativeQueryRef": "Importe faltas"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "LOL_PLANMATERIAL"
-                    }
-                  },
-                  "Property": "% en picking"
-                }
-              },
-              "queryRef": "LOL_PLANMATERIAL.% en picking",
-              "nativeQueryRef": "% en picking"
+              "nativeQueryRef": "Importe Cartera no Cubierta",
+              "displayName": "Importe Cartera no Cubierta"
             },
             {
               "field": {
@@ -200,22 +190,8 @@
                 }
               },
               "queryRef": "LOL_PLANMATERIAL.en picking",
-              "nativeQueryRef": "en picking"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "LOL_PLANMATERIAL"
-                    }
-                  },
-                  "Property": "Fecha Servicio 1º Quincena(Importe)"
-                }
-              },
-              "queryRef": "LOL_PLANMATERIAL.% Cartera Cubierta Compromiso (Importe)",
-              "nativeQueryRef": "% Servicio 1º",
-              "displayName": "% Servicio 1º"
+              "nativeQueryRef": "Importe en picking",
+              "displayName": "Importe en picking"
             },
             {
               "field": {
@@ -240,12 +216,12 @@
                       "Entity": "LOL_PLANMATERIAL"
                     }
                   },
-                  "Property": "Fecha Servicio 2º Quincena(Importe)"
+                  "Property": "Fecha Servicio 1º Quincena(Importe)"
                 }
               },
-              "queryRef": "LOL_PLANMATERIAL.% Cartera Cubierta 2ª Quincena (Importe)",
-              "nativeQueryRef": "% Servicio 2º",
-              "displayName": "% Servicio 2º"
+              "queryRef": "LOL_PLANMATERIAL.% Cartera Cubierta Compromiso (Importe)",
+              "nativeQueryRef": "% Servicio 1º",
+              "displayName": "% Servicio 1º"
             },
             {
               "field": {
@@ -270,12 +246,12 @@
                       "Entity": "LOL_PLANMATERIAL"
                     }
                   },
-                  "Property": "Fecha Servicio > 30 días (Importe)"
+                  "Property": "Fecha Servicio 2º Quincena(Importe)"
                 }
               },
-              "queryRef": "LOL_PLANMATERIAL.% Cartera Cubierta > +30 días (Importe)",
-              "nativeQueryRef": "% Servicio 3º",
-              "displayName": "% Servicio 3º"
+              "queryRef": "LOL_PLANMATERIAL.% Cartera Cubierta 2ª Quincena (Importe)",
+              "nativeQueryRef": "% Servicio 2º",
+              "displayName": "% Servicio 2º"
             },
             {
               "field": {
@@ -300,11 +276,12 @@
                       "Entity": "LOL_PLANMATERIAL"
                     }
                   },
-                  "Property": "% retrasado"
+                  "Property": "Fecha Servicio > 30 días (Importe)"
                 }
               },
-              "queryRef": "LOL_PLANMATERIAL.% retrasado",
-              "nativeQueryRef": "% retrasado"
+              "queryRef": "LOL_PLANMATERIAL.% Cartera Cubierta > +30 días (Importe)",
+              "nativeQueryRef": "% Servicio 3º",
+              "displayName": "% Servicio 3º"
             },
             {
               "field": {
@@ -318,8 +295,8 @@
                 }
               },
               "queryRef": "LOL_PLANMATERIAL.Importe fuera de quincena",
-              "nativeQueryRef": "Servicio retrasado",
-              "displayName": "Servicio retrasado"
+              "nativeQueryRef": "Servicio No Disponible",
+              "displayName": "Servicio No Disponible"
             },
             {
               "field": {
@@ -333,22 +310,8 @@
                 }
               },
               "queryRef": "LOL_PLANMATERIAL.ServicioDentroRango",
-              "nativeQueryRef": "Dentro Rango",
-              "displayName": "Dentro Rango"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "LOL_PLANMATERIAL"
-                    }
-                  },
-                  "Property": "% faltas"
-                }
-              },
-              "queryRef": "LOL_PLANMATERIAL.% faltas",
-              "nativeQueryRef": "% faltas"
+              "nativeQueryRef": "Facturación",
+              "displayName": "Facturación"
             }
           ]
         }
@@ -357,16 +320,16 @@
         "sort": [
           {
             "field": {
-              "Column": {
+              "Measure": {
                 "Expression": {
                   "SourceRef": {
                     "Entity": "LOL_PLANMATERIAL"
                   }
                 },
-                "Property": "Nº Pedido Ventas"
+                "Property": "Importe retrasado"
               }
             },
-            "direction": "Ascending"
+            "direction": "Descending"
           }
         ]
       }
@@ -686,13 +649,27 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "52D"
+                  "Value": "79.78947368421052D"
                 }
               }
             }
           },
           "selector": {
-            "metadata": "LOL_PLANMATERIAL.% en picking"
+            "metadata": "LOL_PLANMATERIAL.en picking"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "88.15789473684211D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_PLANMATERIAL.ServicioDentroRango"
           }
         }
       ],

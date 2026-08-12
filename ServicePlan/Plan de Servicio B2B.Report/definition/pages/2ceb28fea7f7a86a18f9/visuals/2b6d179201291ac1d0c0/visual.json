@@ -1,35 +1,34 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
-  "name": "a68ebc4daa352a1e0a76",
+  "name": "2b6d179201291ac1d0c0",
   "position": {
-    "x": 887,
-    "y": 8,
-    "z": 32000,
-    "height": 52,
-    "width": 191,
-    "tabOrder": 32000
+    "x": 454.25563909774434,
+    "y": 68.330827067669176,
+    "z": 34003,
+    "height": 59.669172932330824,
+    "width": 145.3233082706767,
+    "tabOrder": 25003
   },
   "visual": {
-    "visualType": "slicer",
+    "visualType": "card",
     "query": {
       "queryState": {
         "Values": {
           "projections": [
             {
               "field": {
-                "Column": {
+                "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Horizonte"
+                      "Entity": "LOL_PLANMATERIAL"
                     }
                   },
-                  "Property": "Fecha"
+                  "Property": "Importe retrasado"
                 }
               },
-              "queryRef": "Horizonte.Fecha",
-              "nativeQueryRef": "Hasta Fecha Servicio",
-              "active": true,
-              "displayName": "Hasta Fecha Servicio"
+              "queryRef": "LOL_PLANMATERIAL.Importe retrasado",
+              "nativeQueryRef": "Total Retraso Entradas",
+              "displayName": "Total Retraso Entradas"
             }
           ]
         }
@@ -38,117 +37,69 @@
         "sort": [
           {
             "field": {
-              "Column": {
+              "Measure": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Horizonte"
+                    "Entity": "LOL_PLANMATERIAL"
                   }
                 },
-                "Property": "Fecha"
+                "Property": "Importe retrasado"
               }
             },
-            "direction": "Ascending"
+            "direction": "Descending"
           }
         ],
         "isDefaultSort": true
       }
     },
     "objects": {
-      "data": [
+      "labels": [
         {
           "properties": {
-            "endDate": {
+            "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "datetime'2026-09-01T00:00:00'"
+                  "Value": "13D"
                 }
               }
             },
-            "mode": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Before'"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "general": [
-        {
-          "properties": {
-            "outlineColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 0,
-                      "Percent": 0
-                    }
-                  }
-                }
-              }
-            },
-            "orientation": {
+            "labelDisplayUnits": {
               "expr": {
                 "Literal": {
                   "Value": "1D"
                 }
               }
             },
-            "filter": {
-              "filter": {
-                "Version": 2,
-                "From": [
-                  {
-                    "Name": "h",
-                    "Entity": "Horizonte",
-                    "Type": 0
-                  }
-                ],
-                "Where": [
-                  {
-                    "Condition": {
-                      "Comparison": {
-                        "ComparisonKind": 3,
-                        "Left": {
-                          "Column": {
-                            "Expression": {
-                              "SourceRef": {
-                                "Source": "h"
-                              }
-                            },
-                            "Property": "Fecha"
-                          }
-                        },
-                        "Right": {
-                          "Literal": {
-                            "Value": "datetime'2026-09-02T00:00:00'"
-                          }
-                        }
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          }
-        }
-      ],
-      "selection": [
-        {
-          "properties": {
-            "selectAllCheckboxEnabled": {
+            "bold": {
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.6
+                    }
+                  }
+                }
+              }
+            },
+            "labelPrecision": {
+              "expr": {
+                "Literal": {
+                  "Value": "0L"
                 }
               }
             }
           }
         }
       ],
-      "header": [
+      "categoryLabels": [
         {
           "properties": {
             "show": {
@@ -158,7 +109,7 @@
                 }
               }
             },
-            "textSize": {
+            "fontSize": {
               "expr": {
                 "Literal": {
                   "Value": "8D"
@@ -171,45 +122,42 @@
                   "Value": "true"
                 }
               }
-            },
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 0,
-                      "Percent": -0.6
-                    }
-                  }
-                }
-              }
             }
           }
         }
-      ],
-      "items": [
+      ]
+    },
+    "visualContainerObjects": {
+      "border": [
         {
           "properties": {
-            "textSize": {
+            "show": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "true"
                 }
               }
             },
-            "fontColor": {
+            "color": {
               "solid": {
                 "color": {
                   "expr": {
                     "ThemeDataColor": {
                       "ColorId": 0,
-                      "Percent": -0.6
+                      "Percent": -0.3
                     }
                   }
                 }
               }
             },
-            "padding": {
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            },
+            "width": {
               "expr": {
                 "Literal": {
                   "Value": "1D"
@@ -219,29 +167,23 @@
           }
         }
       ],
-      "date": [
+      "dropShadow": [
         {
           "properties": {
-            "textSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "8D"
-                }
-              }
-            },
-            "bold": {
+            "show": {
               "expr": {
                 "Literal": {
                   "Value": "false"
                 }
               }
             },
-            "fontColor": {
+            "color": {
               "solid": {
                 "color": {
                   "expr": {
-                    "Literal": {
-                      "Value": "'#666666'"
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.3
                     }
                   }
                 }
@@ -249,12 +191,17 @@
             }
           }
         }
-      ]
-    },
-    "visualContainerObjects": {
+      ],
       "title": [
         {
           "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Venta Neta con Iva'"
+                }
+              }
+            },
             "show": {
               "expr": {
                 "Literal": {
@@ -266,6 +213,18 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.6
+                    }
+                  }
                 }
               }
             }
@@ -308,42 +267,23 @@
                   "Value": "0D"
                 }
               }
-            },
-            "left": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
-                }
-              }
-            },
-            "right": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
-                }
-              }
             }
           }
         }
       ],
-      "border": [
+      "visualHeader": [
         {
           "properties": {
-            "width": {
+            "show": {
               "expr": {
                 "Literal": {
-                  "Value": "1D"
+                  "Value": "true"
                 }
               }
             }
           }
         }
       ]
-    },
-    "syncGroup": {
-      "groupName": "Fecha1",
-      "fieldChanges": true,
-      "filterChanges": true
     },
     "drillFilterOtherVisuals": true
   }

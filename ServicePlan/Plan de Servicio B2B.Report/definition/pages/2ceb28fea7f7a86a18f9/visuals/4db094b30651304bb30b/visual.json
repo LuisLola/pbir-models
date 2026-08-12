@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
-  "name": "1171e06568e7667b5723",
+  "name": "4db094b30651304bb30b",
   "position": {
-    "x": 164,
-    "y": 2,
-    "z": 31000,
-    "height": 73,
-    "width": 129,
-    "tabOrder": 25000
+    "x": 160,
+    "y": 68.181818181818173,
+    "z": 34001,
+    "height": 59.999999999999993,
+    "width": 145.45454545454544,
+    "tabOrder": 25001
   },
   "visual": {
     "visualType": "card",
@@ -25,15 +25,15 @@
                           "Entity": "LOL_PLANMATERIAL"
                         }
                       },
-                      "Property": "Imporet pte. picking"
+                      "Property": "Importe Original"
                     }
                   },
                   "Function": 0
                 }
               },
-              "queryRef": "Sum(LOL_PLANMATERIAL.Imporet pte. picking)",
-              "nativeQueryRef": "Cartera Total pte. picking",
-              "displayName": "Cartera Total pte. picking"
+              "queryRef": "Sum(LOL_PLANMATERIAL.Importe Original)",
+              "nativeQueryRef": "Total Cartera",
+              "displayName": "Total Cartera"
             }
           ]
         }
@@ -50,7 +50,7 @@
                         "Entity": "LOL_PLANMATERIAL"
                       }
                     },
-                    "Property": "Imporet pte. picking"
+                    "Property": "Importe Original"
                   }
                 },
                 "Function": 0
