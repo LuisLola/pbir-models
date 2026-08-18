@@ -1323,6 +1323,16 @@ cultureInfo es-ES
 			            "State": "Generated",
 			            "Weight": 0.7
 			          }
+			        },
+			        {
+			          "Fecha Servicio Pedido": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ],
 			      "SemanticType": "Time"
@@ -1466,6 +1476,16 @@ cultureInfo es-ES
 			          "date": {
 			            "State": "Generated",
 			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "Fecha Fin Servicio Pedido": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ],
@@ -3435,6 +3455,16 @@ cultureInfo es-ES
 			          }
 			        },
 			        {
+			          "Total Cartera Cubierta": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
 			          "Cartera cubierta": {
 			            "State": "Suggested",
 			            "Source": {
@@ -3458,6 +3488,26 @@ cultureInfo es-ES
 			        {
 			          "importe faltas": {
 			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Importe Cartera no Cubierta": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Cartera no Cubierta": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -3519,16 +3569,6 @@ cultureInfo es-ES
 			            "State": "Generated",
 			            "Weight": 0.7
 			          }
-			        },
-			        {
-			          "Hasta Fecha Disponibilidad": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ],
 			      "SemanticType": "Time"
@@ -3548,7 +3588,17 @@ cultureInfo es-ES
 			          }
 			        },
 			        {
-			          "Servicio retrasado": {
+			          "Servicio No Disponible": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Total Retraso Entradas": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -3677,6 +3727,16 @@ cultureInfo es-ES
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "Importe en picking": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -4031,7 +4091,17 @@ cultureInfo es-ES
 			          }
 			        },
 			        {
-			          "Dentro Rango": {
+			          "Facturación": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Total Facturación": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -4041,9 +4111,2520 @@ cultureInfo es-ES
 			          }
 			        }
 			      ]
+			    },
+			    "lol_planmaterial.doc_entry": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PLANMATERIAL",
+			          "ConceptualProperty": "DocEntry"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "doc entry": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "DocEntry": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "entry": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "doc admission": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "doc admittance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "admission": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "admittance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "doc entrance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "doc access": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "doc pass": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "doc ticket": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "entrance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "access": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    },
+			    "lol_planmaterial.line_num": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PLANMATERIAL",
+			          "ConceptualProperty": "LineNum"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "line num": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "LineNum": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "line number": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "lol_planmaterial.K_linea": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PLANMATERIAL",
+			          "ConceptualProperty": "KLinea"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "K linea": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "KLinea": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "linea": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ]
+			    },
+			    "lol_planmaterial.K_pedido": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PLANMATERIAL",
+			          "ConceptualProperty": "KPedido"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "K pedido": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "KPedido": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "lol_planmaterial.importe_albaranado": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PLANMATERIAL",
+			          "ConceptualProperty": "Importe albaranado"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "importe albaranado": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "lol_planmaterial.importe_facturado": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PLANMATERIAL",
+			          "ConceptualProperty": "Importe facturado"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "importe facturado": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "lol_planmaterial.prospeccion_venta": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PLANMATERIAL",
+			          "ConceptualProperty": "Prospeccion venta"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "prospeccion venta": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "lol_planmaterial.servido_sobre_prospeccion": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PLANMATERIAL",
+			          "ConceptualProperty": "% Servido sobre prospeccion"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "% servido sobre prospeccion": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "percentage servido sobre prospeccion": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.617
+			          }
+			        },
+			        {
+			          "pct servido sobre prospeccion": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.599
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "lol pbisalesdelivery": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "LOL_PBISALESDELIVERY": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery.doc_num": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBISALESDELIVERY",
+			          "ConceptualProperty": "DocNum"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "doc num": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "DocNum": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "doc number": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery.doc_entry": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBISALESDELIVERY",
+			          "ConceptualProperty": "DocEntry"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "doc entry": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "DocEntry": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "entry": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "doc admission": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "doc admittance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "admission": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "admittance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "doc entrance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "doc access": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "doc pass": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "doc ticket": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "entrance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "access": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery.linea_interna_documento": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBISALESDELIVERY",
+			          "ConceptualProperty": "LineaInternaDocumento"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "linea interna documento": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "LineaInternaDocumento": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery.base_type": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBISALESDELIVERY",
+			          "ConceptualProperty": "BaseType"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "base type": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "BaseType": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "type": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "base category": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "base genre": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "base manner": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "base variety": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "category": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "genre": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "manner": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "variety": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "base brand": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "base class": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery.base_entry": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBISALESDELIVERY",
+			          "ConceptualProperty": "BaseEntry"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "base entry": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "BaseEntry": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "entry": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "base admission": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "base admittance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "admission": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "admittance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "base entrance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "base access": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "base pass": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "base ticket": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "entrance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "access": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery.base_line": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBISALESDELIVERY",
+			          "ConceptualProperty": "BaseLine"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "base line": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "BaseLine": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "base streak": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "base stroke": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "base stripe": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "base contour": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "base mark": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "base connection": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.475
+			          }
+			        },
+			        {
+			          "base link": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.461
+			          }
+			        },
+			        {
+			          "base route": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.461
+			          }
+			        },
+			        {
+			          "base track": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.461
+			          }
+			        },
+			        {
+			          "base course": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.461
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery.codigo_articulo": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBISALESDELIVERY",
+			          "ConceptualProperty": "CodigoArticulo"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "codigo articulo": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "CodigoArticulo": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery.codigo_almacen": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBISALESDELIVERY",
+			          "ConceptualProperty": "CodigoAlmacen"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "codigo almacen": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "CodigoAlmacen": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery.cantidad": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBISALESDELIVERY",
+			          "ConceptualProperty": "Cantidad"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "cantidad": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery.importe_neto_linea_ML": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBISALESDELIVERY",
+			          "ConceptualProperty": "ImporteNetoLineaML"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "importe neto linea ML": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "ImporteNetoLineaML": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery.fecha_entrega_linea": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBISALESDELIVERY",
+			          "ConceptualProperty": "FechaEntregaLinea"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "fecha entrega linea": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "FechaEntregaLinea": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "lol_pbisalesdelivery.fecha_contabilizacion": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBISALESDELIVERY",
+			          "ConceptualProperty": "FechaContabilizacion"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "fecha contabilizacion": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "FechaContabilizacion": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "lol_pbisalesdelivery.estado_linea": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBISALESDELIVERY",
+			          "ConceptualProperty": "EstadoLinea"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "estado linea": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "EstadoLinea": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "linea": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery.K_albaran_base": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBISALESDELIVERY",
+			          "ConceptualProperty": "KAlbaranBase"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "K albaran base": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "KAlbaranBase": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "k albaran headquarters": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.468
+			          }
+			        },
+			        {
+			          "k albaran center": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.468
+			          }
+			        },
+			        {
+			          "k albaran seat": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.468
+			          }
+			        },
+			        {
+			          "k albaran station": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.468
+			          }
+			        },
+			        {
+			          "k albaran pier": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.458
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery.K_albaran_linea": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBISALESDELIVERY",
+			          "ConceptualProperty": "KAlbaranLinea"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "K albaran linea": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "KAlbaranLinea": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery.K_pedido_alb": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBISALESDELIVERY",
+			          "ConceptualProperty": "KPedidoAlb"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "K pedido alb": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "KPedidoAlb": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBIINVOICESSALES"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "lol pbiinvoicessale": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "LOL_PBIINVOICESSALES": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale.doc_num": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBIINVOICESSALES",
+			          "ConceptualProperty": "DocNum"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "doc num": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "DocNum": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "doc number": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale.doc_entry": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBIINVOICESSALES",
+			          "ConceptualProperty": "DocEntry"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "doc entry": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "DocEntry": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "entry": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "doc admission": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "doc admittance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "admission": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "admittance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "doc entrance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "doc access": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "doc pass": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "doc ticket": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "entrance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "access": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale.line_num": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBIINVOICESSALES",
+			          "ConceptualProperty": "LineNum"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "line num": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "LineNum": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "line number": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale.base_type": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBIINVOICESSALES",
+			          "ConceptualProperty": "BaseType"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "base type": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "BaseType": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "type": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "base category": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "base genre": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "base manner": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "base variety": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "category": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "genre": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "manner": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "variety": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "base brand": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "base class": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale.base_entry": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBIINVOICESSALES",
+			          "ConceptualProperty": "BaseEntry"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "base entry": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "BaseEntry": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "entry": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "base admission": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "base admittance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "admission": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "admittance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "base entrance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "base access": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "base pass": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "base ticket": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "entrance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "access": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale.base_line": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBIINVOICESSALES",
+			          "ConceptualProperty": "BaseLine"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "base line": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "BaseLine": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "base streak": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "base stroke": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "base stripe": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "base contour": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "base mark": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "base connection": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.475
+			          }
+			        },
+			        {
+			          "base link": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.461
+			          }
+			        },
+			        {
+			          "base route": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.461
+			          }
+			        },
+			        {
+			          "base track": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.461
+			          }
+			        },
+			        {
+			          "base course": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.461
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale.item_code": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBIINVOICESSALES",
+			          "ConceptualProperty": "ItemCode"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "item code": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "ItemCode": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "item id": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "item key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "product code": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "element code": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "entry code": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "article code": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
+			          }
+			        },
+			        {
+			          "object code": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
+			          }
+			        },
+			        {
+			          "piece code": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
+			          }
+			        },
+			        {
+			          "token code": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale.whs_code": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBIINVOICESSALES",
+			          "ConceptualProperty": "WhsCode"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "whs code": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "wh code": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.78
+			          }
+			        },
+			        {
+			          "WhsCode": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "wh id": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "wh key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale.qty": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBIINVOICESSALES",
+			          "ConceptualProperty": "Qty"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "qty": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale.net_amt_EUR": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBIINVOICESSALES",
+			          "ConceptualProperty": "NetAmt_EUR"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "net amt EUR": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "NetAmt_EUR": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale.doc_date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBIINVOICESSALES",
+			          "ConceptualProperty": "DocDate"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "doc date": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "DocDate": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "doc moment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "doc period": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "lol_pbiinvoicessale.line_status": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBIINVOICESSALES",
+			          "ConceptualProperty": "LineStatus"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "line status": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "LineStatus": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "status": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "line category": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "line importance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "line prestige": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "line prominence": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "category": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "importance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "prestige": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "prominence": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "line condition": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "line class": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale.canceled": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBIINVOICESSALES",
+			          "ConceptualProperty": "Canceled"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "canceled": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "irrecoverable": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "lost": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "disregarded": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "annulled": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "void": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "invalid": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "negated": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale.K_factura_base": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBIINVOICESSALES",
+			          "ConceptualProperty": "KFacturaBase"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "K factura base": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "KFacturaBase": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "k factura headquarters": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.468
+			          }
+			        },
+			        {
+			          "k factura center": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.468
+			          }
+			        },
+			        {
+			          "k factura seat": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.468
+			          }
+			        },
+			        {
+			          "k factura station": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.468
+			          }
+			        },
+			        {
+			          "k factura pier": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.458
+			          }
+			        }
+			      ]
+			    },
+			    "pedido": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Pedidos"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "pedido": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "pedido.K_pedido": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Pedidos",
+			          "ConceptualProperty": "KPedido"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "K pedido": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "KPedido": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {
+			    "lol_planmaterial_fecha_llegada_solicitud_traslado_me_has_lol_planmaterial_fecha_llegada_solicitud_traslado_día": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PLANMATERIAL"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_planmaterial.fecha_llegada_solicitud_traslado.me": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.fecha_llegada_solicitud_traslado.me"
+			          }
+			        },
+			        "lol_planmaterial.fecha_llegada_solicitud_traslado.día": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.fecha_llegada_solicitud_traslado.día"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.me"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.día"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "me_have_días"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.día"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "días_have_me"
+			        },
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.día"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "días_are_in_me4"
+			        }
+			      ]
+			    },
+			    "lol_planmaterial_fecha_llegada_solicitud_traslado_trimestre_has_lol_planmaterial_fecha_llegada_solicitud_traslado_me": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PLANMATERIAL"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_planmaterial.fecha_llegada_solicitud_traslado.trimestre": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.fecha_llegada_solicitud_traslado.trimestre"
+			          }
+			        },
+			        "lol_planmaterial.fecha_llegada_solicitud_traslado.me": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.fecha_llegada_solicitud_traslado.me"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.trimestre"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "trimestres_have_me"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.me"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.trimestre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "me_have_trimestres"
+			        },
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.me"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.trimestre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "me_are_in_trimestres4"
+			        }
+			      ]
+			    },
 			    "lol_planmaterial_fecha_llegada_solicitud_traslado_año_has_lol_planmaterial_fecha_llegada_solicitud_traslado_trimestre": {
 			      "Binding": {
 			        "ConceptualEntity": "LOL_PLANMATERIAL"
@@ -4304,7 +6885,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días"
+			          "ID": "me_have_días1"
 			        },
 			        {
 			          "Attribute": {
@@ -4317,7 +6898,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me"
+			          "ID": "días_have_me1"
 			        },
 			        {
 			          "Preposition": {
@@ -4370,7 +6951,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me"
+			          "ID": "trimestres_have_me1"
 			        },
 			        {
 			          "Attribute": {
@@ -4383,7 +6964,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres"
+			          "ID": "me_have_trimestres1"
 			        },
 			        {
 			          "Preposition": {
@@ -4667,7 +7248,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días1"
+			          "ID": "me_have_días2"
 			        },
 			        {
 			          "Attribute": {
@@ -4680,7 +7261,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me1"
+			          "ID": "días_have_me2"
 			        },
 			        {
 			          "Preposition": {
@@ -4733,7 +7314,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me1"
+			          "ID": "trimestres_have_me2"
 			        },
 			        {
 			          "Attribute": {
@@ -4746,7 +7327,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres1"
+			          "ID": "me_have_trimestres2"
 			        },
 			        {
 			          "Preposition": {
@@ -5030,7 +7611,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días2"
+			          "ID": "me_have_días3"
 			        },
 			        {
 			          "Attribute": {
@@ -5043,7 +7624,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me2"
+			          "ID": "días_have_me3"
 			        },
 			        {
 			          "Preposition": {
@@ -5096,7 +7677,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me2"
+			          "ID": "trimestres_have_me3"
 			        },
 			        {
 			          "Attribute": {
@@ -5109,7 +7690,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres2"
+			          "ID": "me_have_trimestres3"
 			        },
 			        {
 			          "Preposition": {
@@ -5393,7 +7974,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días3"
+			          "ID": "me_have_días4"
 			        },
 			        {
 			          "Attribute": {
@@ -5406,7 +7987,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me3"
+			          "ID": "días_have_me4"
 			        },
 			        {
 			          "Preposition": {
@@ -5459,7 +8040,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me3"
+			          "ID": "trimestres_have_me4"
 			        },
 			        {
 			          "Attribute": {
@@ -5472,7 +8053,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres3"
+			          "ID": "me_have_trimestres4"
 			        },
 			        {
 			          "Preposition": {
@@ -5727,6 +8308,144 @@ cultureInfo es-ES
 			        }
 			      ]
 			    },
+			    "lol_pbiinvoicessale_has_lol_pbisalesdelivery": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBIINVOICESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbiinvoicessale": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale"
+			          }
+			        },
+			        "lol_pbisalesdelivery": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbiinvoicessale"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbiinvoicessales_have_lol_pbisalesdeliveries"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery"
+			            },
+			            "Object": {
+			              "Role": "lol_pbiinvoicessale"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbisalesdeliveries_have_lol_pbiinvoicessales"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_has_pedido": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery"
+			          }
+			        },
+			        "pedido": {
+			          "Target": {
+			            "Entity": "pedido"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery"
+			            },
+			            "Object": {
+			              "Role": "pedido"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbisalesdeliveries_have_pedidos"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "pedido"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "pedidos_have_lol_pbisalesdeliveries"
+			        }
+			      ]
+			    },
+			    "lol_planmaterial_has_pedido": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PLANMATERIAL"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_planmaterial": {
+			          "Target": {
+			            "Entity": "lol_planmaterial"
+			          }
+			        },
+			        "pedido": {
+			          "Target": {
+			            "Entity": "pedido"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_planmaterial"
+			            },
+			            "Object": {
+			              "Role": "pedido"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_planmaterials_have_pedidos"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "pedido"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "pedidos_have_lol_planmaterials"
+			        }
+			      ]
+			    },
 			    "lol_planmaterial_has_horizonte": {
 			      "Binding": {
 			        "ConceptualEntity": "LOL_PLANMATERIAL"
@@ -5816,6 +8535,1095 @@ cultureInfo es-ES
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "calendarios_have_lol_planmaterials"
+			        }
+			      ]
+			    },
+			    "pedido_has_K_pedido": {
+			      "Binding": {
+			        "ConceptualEntity": "Pedidos"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "pedido": {
+			          "Target": {
+			            "Entity": "pedido"
+			          }
+			        },
+			        "pedido.K_pedido": {
+			          "Target": {
+			            "Entity": "pedido.K_pedido"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "pedido"
+			            },
+			            "Object": {
+			              "Role": "pedido.K_pedido"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "pedidos_have_K_pedidos"
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale_has_canceled": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBIINVOICESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbiinvoicessale": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale"
+			          }
+			        },
+			        "lol_pbiinvoicessale.canceled": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale.canceled"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbiinvoicessale"
+			            },
+			            "Object": {
+			              "Role": "lol_pbiinvoicessale.canceled"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbiinvoicessales_have_canceled"
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale_has_line_status": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBIINVOICESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbiinvoicessale": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale"
+			          }
+			        },
+			        "lol_pbiinvoicessale.line_status": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale.line_status"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbiinvoicessale"
+			            },
+			            "Object": {
+			              "Role": "lol_pbiinvoicessale.line_status"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbiinvoicessales_have_line_statuses"
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale_has_doc_date": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBIINVOICESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbiinvoicessale": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale"
+			          }
+			        },
+			        "lol_pbiinvoicessale.doc_date": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale.doc_date"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbiinvoicessale"
+			            },
+			            "Object": {
+			              "Role": "lol_pbiinvoicessale.doc_date"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbiinvoicessales_have_doc_dates"
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale_has_net_amt_EUR": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBIINVOICESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbiinvoicessale": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale"
+			          }
+			        },
+			        "lol_pbiinvoicessale.net_amt_EUR": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale.net_amt_EUR"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbiinvoicessale"
+			            },
+			            "Object": {
+			              "Role": "lol_pbiinvoicessale.net_amt_EUR"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbiinvoicessales_have_net_amt_EURs"
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale_has_qty": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBIINVOICESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbiinvoicessale": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale"
+			          }
+			        },
+			        "lol_pbiinvoicessale.qty": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale.qty"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbiinvoicessale"
+			            },
+			            "Object": {
+			              "Role": "lol_pbiinvoicessale.qty"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbiinvoicessales_have_qties"
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale_has_whs_code": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBIINVOICESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbiinvoicessale": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale"
+			          }
+			        },
+			        "lol_pbiinvoicessale.whs_code": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale.whs_code"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbiinvoicessale"
+			            },
+			            "Object": {
+			              "Role": "lol_pbiinvoicessale.whs_code"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbiinvoicessales_have_whs_codes"
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale_has_item_code": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBIINVOICESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbiinvoicessale": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale"
+			          }
+			        },
+			        "lol_pbiinvoicessale.item_code": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale.item_code"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbiinvoicessale"
+			            },
+			            "Object": {
+			              "Role": "lol_pbiinvoicessale.item_code"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbiinvoicessales_have_item_codes"
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale_has_base_line": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBIINVOICESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbiinvoicessale": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale"
+			          }
+			        },
+			        "lol_pbiinvoicessale.base_line": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale.base_line"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbiinvoicessale"
+			            },
+			            "Object": {
+			              "Role": "lol_pbiinvoicessale.base_line"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbiinvoicessales_have_base_lines"
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale_has_base_entry": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBIINVOICESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbiinvoicessale": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale"
+			          }
+			        },
+			        "lol_pbiinvoicessale.base_entry": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale.base_entry"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbiinvoicessale"
+			            },
+			            "Object": {
+			              "Role": "lol_pbiinvoicessale.base_entry"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbiinvoicessales_have_base_entries"
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale_has_base_type": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBIINVOICESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbiinvoicessale": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale"
+			          }
+			        },
+			        "lol_pbiinvoicessale.base_type": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale.base_type"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbiinvoicessale"
+			            },
+			            "Object": {
+			              "Role": "lol_pbiinvoicessale.base_type"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbiinvoicessales_have_base_types"
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale_has_line_num": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBIINVOICESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbiinvoicessale": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale"
+			          }
+			        },
+			        "lol_pbiinvoicessale.line_num": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale.line_num"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbiinvoicessale"
+			            },
+			            "Object": {
+			              "Role": "lol_pbiinvoicessale.line_num"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbiinvoicessales_have_line_nums"
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale_has_doc_entry": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBIINVOICESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbiinvoicessale": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale"
+			          }
+			        },
+			        "lol_pbiinvoicessale.doc_entry": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale.doc_entry"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbiinvoicessale"
+			            },
+			            "Object": {
+			              "Role": "lol_pbiinvoicessale.doc_entry"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbiinvoicessales_have_doc_entries"
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale_has_doc_num": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBIINVOICESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbiinvoicessale": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale"
+			          }
+			        },
+			        "lol_pbiinvoicessale.doc_num": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale.doc_num"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbiinvoicessale"
+			            },
+			            "Object": {
+			              "Role": "lol_pbiinvoicessale.doc_num"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbiinvoicessales_have_doc_nums"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_has_estado_linea": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery"
+			          }
+			        },
+			        "lol_pbisalesdelivery.estado_linea": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.estado_linea"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.estado_linea"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbisalesdeliveries_have_estado_linea"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_has_fecha_contabilizacion": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery"
+			          }
+			        },
+			        "lol_pbisalesdelivery.fecha_contabilizacion": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_contabilizacion"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_contabilizacion"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbisalesdeliveries_have_fecha_contabilizacions"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_has_fecha_entrega_linea": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery"
+			          }
+			        },
+			        "lol_pbisalesdelivery.fecha_entrega_linea": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbisalesdeliveries_have_fecha_entrega_linea"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_has_importe_neto_linea_ML": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery"
+			          }
+			        },
+			        "lol_pbisalesdelivery.importe_neto_linea_ML": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.importe_neto_linea_ML"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.importe_neto_linea_ML"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbisalesdeliveries_have_importe_neto_linea_ML"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_has_cantidad": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery"
+			          }
+			        },
+			        "lol_pbisalesdelivery.cantidad": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.cantidad"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.cantidad"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbisalesdeliveries_have_cantidads"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_has_codigo_almacen": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery"
+			          }
+			        },
+			        "lol_pbisalesdelivery.codigo_almacen": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.codigo_almacen"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.codigo_almacen"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbisalesdeliveries_have_codigo_almacens"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_has_codigo_articulo": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery"
+			          }
+			        },
+			        "lol_pbisalesdelivery.codigo_articulo": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.codigo_articulo"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.codigo_articulo"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbisalesdeliveries_have_codigo_articulos"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_has_base_line": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery"
+			          }
+			        },
+			        "lol_pbisalesdelivery.base_line": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.base_line"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.base_line"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbisalesdeliveries_have_base_lines"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_has_base_entry": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery"
+			          }
+			        },
+			        "lol_pbisalesdelivery.base_entry": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.base_entry"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.base_entry"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbisalesdeliveries_have_base_entries"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_has_base_type": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery"
+			          }
+			        },
+			        "lol_pbisalesdelivery.base_type": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.base_type"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.base_type"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbisalesdeliveries_have_base_types"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_has_linea_interna_documento": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery"
+			          }
+			        },
+			        "lol_pbisalesdelivery.linea_interna_documento": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.linea_interna_documento"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.linea_interna_documento"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbisalesdeliveries_have_linea_interna_documentos"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_has_doc_entry": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery"
+			          }
+			        },
+			        "lol_pbisalesdelivery.doc_entry": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.doc_entry"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.doc_entry"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbisalesdeliveries_have_doc_entries"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_has_doc_num": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery"
+			          }
+			        },
+			        "lol_pbisalesdelivery.doc_num": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.doc_num"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.doc_num"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbisalesdeliveries_have_doc_nums"
+			        }
+			      ]
+			    },
+			    "lol_planmaterial_has_servido_sobre_prospeccion": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PLANMATERIAL"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_planmaterial": {
+			          "Target": {
+			            "Entity": "lol_planmaterial"
+			          }
+			        },
+			        "lol_planmaterial.servido_sobre_prospeccion": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.servido_sobre_prospeccion"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_planmaterial"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.servido_sobre_prospeccion"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_planmaterials_have__servido_sobre_prospeccion"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_has_lol_planmaterial_servido_sobre_prospeccion": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery"
+			          }
+			        },
+			        "lol_planmaterial.servido_sobre_prospeccion": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.servido_sobre_prospeccion"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.servido_sobre_prospeccion"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbisalesdeliveries_have__servido_sobre_prospeccion"
+			        }
+			      ]
+			    },
+			    "lol_planmaterial_has_prospeccion_venta": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PLANMATERIAL"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_planmaterial": {
+			          "Target": {
+			            "Entity": "lol_planmaterial"
+			          }
+			        },
+			        "lol_planmaterial.prospeccion_venta": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.prospeccion_venta"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_planmaterial"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.prospeccion_venta"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_planmaterials_have_prospeccion_venta"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_has_lol_planmaterial_prospeccion_venta": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery"
+			          }
+			        },
+			        "lol_planmaterial.prospeccion_venta": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.prospeccion_venta"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.prospeccion_venta"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbisalesdeliveries_have_prospeccion_venta"
+			        }
+			      ]
+			    },
+			    "lol_pbiinvoicessale_has_lol_planmaterial_importe_facturado": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBIINVOICESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbiinvoicessale": {
+			          "Target": {
+			            "Entity": "lol_pbiinvoicessale"
+			          }
+			        },
+			        "lol_planmaterial.importe_facturado": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.importe_facturado"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbiinvoicessale"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.importe_facturado"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbiinvoicessales_have_importe_facturado"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_has_lol_planmaterial_importe_albaranado": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery"
+			          }
+			        },
+			        "lol_planmaterial.importe_albaranado": {
+			          "Target": {
+			            "Entity": "lol_planmaterial.importe_albaranado"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery"
+			            },
+			            "Object": {
+			              "Role": "lol_planmaterial.importe_albaranado"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbisalesdeliveries_have_importe_albaranado"
 			        }
 			      ]
 			    },
@@ -9827,138 +13635,6 @@ cultureInfo es-ES
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "lol_planmaterials_have_almacéns"
-			        }
-			      ]
-			    },
-			    "lol_planmaterial_fecha_llegada_solicitud_traslado_trimestre_has_lol_planmaterial_fecha_llegada_solicitud_traslado_me": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PLANMATERIAL"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_planmaterial.fecha_llegada_solicitud_traslado.trimestre": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_llegada_solicitud_traslado.trimestre"
-			          }
-			        },
-			        "lol_planmaterial.fecha_llegada_solicitud_traslado.me": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_llegada_solicitud_traslado.me"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.trimestre"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.me"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "trimestres_have_me4"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.me"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.trimestre"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "me_have_trimestres4"
-			        },
-			        {
-			          "Preposition": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.me"
-			            },
-			            "Prepositions": [
-			              {
-			                "in": {
-			                  "State": "Generated"
-			                }
-			              }
-			            ],
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.trimestre"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "me_are_in_trimestres4"
-			        }
-			      ]
-			    },
-			    "lol_planmaterial_fecha_llegada_solicitud_traslado_me_has_lol_planmaterial_fecha_llegada_solicitud_traslado_día": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PLANMATERIAL"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_planmaterial.fecha_llegada_solicitud_traslado.me": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_llegada_solicitud_traslado.me"
-			          }
-			        },
-			        "lol_planmaterial.fecha_llegada_solicitud_traslado.día": {
-			          "Target": {
-			            "Entity": "lol_planmaterial.fecha_llegada_solicitud_traslado.día"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.me"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.día"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "me_have_días4"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.día"
-			            },
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.me"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "días_have_me4"
-			        },
-			        {
-			          "Preposition": {
-			            "Subject": {
-			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.día"
-			            },
-			            "Prepositions": [
-			              {
-			                "in": {
-			                  "State": "Generated"
-			                }
-			              }
-			            ],
-			            "Object": {
-			              "Role": "lol_planmaterial.fecha_llegada_solicitud_traslado.me"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "días_are_in_me4"
 			        }
 			      ]
 			    },

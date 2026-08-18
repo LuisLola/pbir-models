@@ -1,0 +1,46 @@
+table MesFacturacion
+	lineageTag: 566b3c91-ca4f-4d6d-8d1e-b2776090e98c
+
+	column Mes
+		lineageTag: 5e64905b-1e8e-42d4-898d-a1eb15c808ea
+		isNameInferred
+		sourceColumn: [Mes]
+		sortByColumn: Orden
+
+	column Orden
+		isHidden
+		lineageTag: bdd888d4-e605-412e-b9e3-2e9b0c64659b
+		isNameInferred
+		sourceColumn: [Orden]
+
+	column Inicio
+		isHidden
+		formatString: Short Date
+		lineageTag: 8176a2fc-8c16-4bff-b5fa-f864edf2c84d
+		isNameInferred
+		sourceColumn: [Inicio]
+
+	column Fin
+		isHidden
+		formatString: Short Date
+		lineageTag: e7268e95-9bf1-4804-ae9d-b0d35d4f9a25
+		isNameInferred
+		sourceColumn: [Fin]
+
+	partition MesFacturacion = calculated
+		mode: import
+		source =
+				SELECTCOLUMNS (
+				    ADDCOLUMNS (
+				        SUMMARIZE ( Calendario, Calendario[MesAño], Calendario[MesAñoOrden] ),
+				        "@Ini", EOMONTH ( CALCULATE ( MIN ( Calendario[Date] ) ), -1 ) + 1,
+				        "@Fin", EOMONTH ( CALCULATE ( MIN ( Calendario[Date] ) ), 0 )
+				    ),
+				    "Mes", Calendario[MesAño],
+				    "Orden", Calendario[MesAñoOrden],
+				    "Inicio", [@Ini],
+				    "Fin", [@Fin]
+				)
+
+	annotation PBI_ResultType = Table
+

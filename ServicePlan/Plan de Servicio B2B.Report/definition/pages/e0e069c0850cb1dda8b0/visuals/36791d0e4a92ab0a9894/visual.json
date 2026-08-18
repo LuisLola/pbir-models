@@ -1,9 +1,9 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
   "name": "36791d0e4a92ab0a9894",
   "position": {
     "x": 0,
-    "y": 130.47501955962892,
+    "y": 101.15501519756839,
     "z": 1000,
     "height": 590.57114116463617,
     "width": 1279.5708058567118,
@@ -1211,6 +1211,185 @@
             }
           ]
         }
+      },
+      {
+        "name": "961956877ba4a0526bea",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Nº Pedido Ventas"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "9a87e6bb75d62668076f",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Descripción Artículo"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "370268b12b15f9485c9d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Fecha disponibilidad (línea del articulo)"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "cd776adfd7c869be17c2",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PLANMATERIAL"
+                  }
+                },
+                "Property": "Cantidad Original"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "64de8da0cf75a606ea1b",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PLANMATERIAL"
+                  }
+                },
+                "Property": "Cantidad Entregada"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f518c9a69a5b7b4160c5",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PLANMATERIAL"
+                  }
+                },
+                "Property": "Unidades pendientes Entregar"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "fedf91e12ed8a418af1c",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PLANMATERIAL"
+                  }
+                },
+                "Property": "Unidades asignadas"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f6bf90fc18c8e05060dd",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PLANMATERIAL"
+                  }
+                },
+                "Property": "Unidades asignadas Transito"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "acb373b2b9923b2052b7",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Fecha Servicio 1º Quincena"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "0356d7e52e1c00834a81",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Fecha Servicio 2º Quincena"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "7be6b18e79c86f7c2263",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Fecha Servicio > 30 días"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

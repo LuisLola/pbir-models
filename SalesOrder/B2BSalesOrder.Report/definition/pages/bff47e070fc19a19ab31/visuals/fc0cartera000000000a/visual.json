@@ -1,0 +1,435 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "fc0cartera000000000a",
+  "position": {
+    "x": 10,
+    "y": 218.57142857142858,
+    "z": 0,
+    "height": 500.00000000000006,
+    "width": 1255.7142857142858,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBICLIENTES"
+                    }
+                  },
+                  "Property": "RazonSocial"
+                }
+              },
+              "queryRef": "LOL_PBICLIENTES.RazonSocial",
+              "nativeQueryRef": "RazonSocial"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIB2BSALESORDER"
+                    }
+                  },
+                  "Property": "DocNum"
+                }
+              },
+              "queryRef": "LOL_PBIB2BSALESORDER.DocNum",
+              "nativeQueryRef": "Pedido",
+              "displayName": "Pedido"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PLANMATERIAL"
+                    }
+                  },
+                  "Property": "Fecha Fin pedido venta"
+                }
+              },
+              "queryRef": "LOL_PLANMATERIAL.Fecha Fin pedido venta",
+              "nativeQueryRef": "Fecha fin servicio",
+              "displayName": "Fecha fin servicio"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasCartera"
+                    }
+                  },
+                  "Property": "Cartera pendiente"
+                }
+              },
+              "queryRef": "MedidasCartera.Cartera pendiente",
+              "nativeQueryRef": "Pendiente",
+              "displayName": "Pendiente"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasCartera"
+                    }
+                  },
+                  "Property": "Cartera en picking"
+                }
+              },
+              "queryRef": "MedidasCartera.Cartera en picking",
+              "nativeQueryRef": "En picking",
+              "displayName": "En picking"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasCartera"
+                    }
+                  },
+                  "Property": "Cartera asignada stock"
+                }
+              },
+              "queryRef": "MedidasCartera.Cartera asignada stock",
+              "nativeQueryRef": "Asignado stock",
+              "displayName": "Asignado stock"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasCartera"
+                    }
+                  },
+                  "Property": "Cartera en transito"
+                }
+              },
+              "queryRef": "MedidasCartera.Cartera en transito",
+              "nativeQueryRef": "En tránsito",
+              "displayName": "En tránsito"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasCartera"
+                    }
+                  },
+                  "Property": "Importe facturable"
+                }
+              },
+              "queryRef": "MedidasCartera.Importe facturable",
+              "nativeQueryRef": "Facturable",
+              "displayName": "Facturable"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasCartera"
+                    }
+                  },
+                  "Property": "Importe no facturable"
+                }
+              },
+              "queryRef": "MedidasCartera.Importe no facturable",
+              "nativeQueryRef": "No facturable",
+              "displayName": "No facturable"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasCartera"
+                    }
+                  },
+                  "Property": "% Facturable"
+                }
+              },
+              "queryRef": "MedidasCartera.% Facturable",
+              "nativeQueryRef": "% Facturable"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PLANMATERIAL"
+                  }
+                },
+                "Property": "Fecha Fin pedido venta"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "96.44577433760865D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_PBIB2BSALESORDER.DocNum"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "298.34943050157835D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_PBICLIENTES.RazonSocial"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "98.76561500128338D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasCartera.Cartera asignada stock"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "99.62618486186851D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_PLANMATERIAL.Fecha Fin pedido venta"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "spacing": [
+        {
+          "properties": {
+            "verticalSpacing": {
+              "expr": {
+                "Literal": {
+                  "Value": "2D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "5D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#B3B3B3'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "15D"
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "fltvence",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MedidasCartera"
+              }
+            },
+            "Property": "Vence en el mes"
+          }
+        },
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "m",
+              "Entity": "MedidasCartera",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Comparison": {
+                  "ComparisonKind": 0,
+                  "Left": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "m"
+                        }
+                      },
+                      "Property": "Vence en el mes"
+                    }
+                  },
+                  "Right": {
+                    "Literal": {
+                      "Value": "1L"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ]
+  }
+}

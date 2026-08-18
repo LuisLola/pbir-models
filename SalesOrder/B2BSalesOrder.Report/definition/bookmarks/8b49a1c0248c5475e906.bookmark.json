@@ -1,0 +1,1563 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "Cumplmiento Cerrado",
+  "name": "8b49a1c0248c5475e906",
+  "options": {
+    "targetVisualNames": [
+      "1b84980c0f48c548d5c5",
+      "b0fc2af1bd0660b2b3bd",
+      "7638ceeef89efd8626ae",
+      "21b6517bd9b61d1d5ef7",
+      "5cca9b1ef5df4e1f303b",
+      "c488e0e0086af88c197b",
+      "5851d52f665cdb89c451",
+      "7145f93ddc42a12b2fe2",
+      "9ced0bf7c50773d5d4ca",
+      "697b674aeb258402c8b5",
+      "b3c0233182885f487fdb",
+      "9b2871cb1b7426311024",
+      "e2f6298fb32d767e4fff",
+      "023115a323c53e6050d9",
+      "b828b914c7c498242b0e",
+      "1f92204431b507e40b89",
+      "693918adac9551666c40",
+      "635a1abd6534ec35fdab",
+      "8de695dcc84998742b20",
+      "6333362111976fd7b481",
+      "74cfbe13ef7384965b4e",
+      "7a332f7b4b5113069e61",
+      "ba20cdaeabdd8a71f7f4",
+      "a3353d59d9f165e1a64e",
+      "135f94ba0c6c301b7afe",
+      "fce8fc7495091568806b"
+    ],
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "bff47e070fc19a19ab31",
+    "filters": {
+      "byExpr": [
+        {
+          "name": "8e64200378b0c1ca5c17",
+          "type": "Categorical",
+          "filter": {
+            "Version": 2,
+            "From": [
+              {
+                "Name": "l",
+                "Entity": "LOL_PBIB2BSALESORDER",
+                "Type": 0
+              }
+            ],
+            "Where": [
+              {
+                "Condition": {
+                  "Not": {
+                    "Expression": {
+                      "In": {
+                        "Expressions": [
+                          {
+                            "Column": {
+                              "Expression": {
+                                "SourceRef": {
+                                  "Source": "l"
+                                }
+                              },
+                              "Property": "WhsCode"
+                            }
+                          }
+                        ],
+                        "Values": [
+                          [
+                            {
+                              "Literal": {
+                                "Value": "'4-C002L'"
+                              }
+                            }
+                          ]
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Entity": "LOL_PBIB2BSALESORDER"
+                }
+              },
+              "Property": "WhsCode"
+            }
+          },
+          "howCreated": 1
+        },
+        {
+          "name": "ffeda20ee9a50673ee1b",
+          "type": "Categorical",
+          "expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Entity": "LOL_PBICLIENTES"
+                }
+              },
+              "Property": "GroupCode"
+            }
+          },
+          "howCreated": 1
+        },
+        {
+          "name": "f20cd680e48aa715e018",
+          "type": "Categorical",
+          "filter": {
+            "Version": 2,
+            "From": [
+              {
+                "Name": "l",
+                "Entity": "LOL_PBICLIENTES",
+                "Type": 0
+              }
+            ],
+            "Where": [
+              {
+                "Condition": {
+                  "In": {
+                    "Expressions": [
+                      {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "l"
+                            }
+                          },
+                          "Property": "GroupCode"
+                        }
+                      }
+                    ],
+                    "Values": [
+                      [
+                        {
+                          "Literal": {
+                            "Value": "'105'"
+                          }
+                        }
+                      ],
+                      [
+                        {
+                          "Literal": {
+                            "Value": "'108'"
+                          }
+                        }
+                      ]
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          "expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Entity": "LOL_PBICLIENTES"
+                }
+              },
+              "Property": "GroupCode"
+            }
+          },
+          "howCreated": 1
+        }
+      ]
+    },
+    "sections": {
+      "bff47e070fc19a19ab31": {
+        "visualContainers": {
+          "fc0cartera000000000a": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "fltvence",
+                  "type": "Advanced",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "m",
+                        "Entity": "MedidasCartera",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "Comparison": {
+                            "ComparisonKind": 0,
+                            "Left": {
+                              "Measure": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": "m"
+                                  }
+                                },
+                                "Property": "Vence en el mes"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "1L"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Vence en el mes"
+                    }
+                  },
+                  "howCreated": 1
+                },
+                {
+                  "name": "9419591c1c4f98fdc400",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIB2BSALESORDER"
+                        }
+                      },
+                      "Property": "DocNum"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "25b425263fab167cb482",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "Fecha Fin pedido venta"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "b58fb466fdbc4f754e39",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Cartera pendiente"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "6fc2a5fbc7f421ad6903",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Cartera en picking"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "17361d7c610b4406450a",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Cartera asignada stock"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "37d13decd4dd762d794e",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Cartera en transito"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "89511a40be021d27bbf4",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Importe facturable"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "cc8d66d2b237662128b7",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Importe no facturable"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "e7c26450638109aa07c9",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "% Facturable"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "cb509954421795a10f09",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBICLIENTES"
+                        }
+                      },
+                      "Property": "RazonSocial"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "tableEx",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBICLIENTES"
+                        }
+                      },
+                      "Property": "RazonSocial"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "fc0tj010000000000001": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "d86436150f0acc7d6351",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Facturado del mes"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "fc0tj020000000000002": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "dac778f213033fd5e97c",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Servido sin facturar"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "fc0tj030000000000003": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "f7719da82e91ccf7afd2",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Cartera que vence en el mes"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "fc0tj040000000000004": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "18af60a9e9c39880c6e0",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Cierre previsto del mes"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "fc0tj050000000000005": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "ded1f32472a61f518883",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Adelanto entrega"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Adelanto entrega"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "c488e0e0086af88c197b": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "b3c0233182885f487fdb": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "ee3cda8553d60a9757e7",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "TotalLook"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "TotalLook"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "9b2871cb1b7426311024": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "7cb86bba784874974c9e",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "Bloqueado"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "Bloqueado"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "023115a323c53e6050d9": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "cde71e37d57743cba063",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "Fecha Fin pedido venta"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "l",
+                                "Entity": "LOL_PLANMATERIAL",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "Comparison": {
+                                    "ComparisonKind": 3,
+                                    "Left": {
+                                      "Column": {
+                                        "Expression": {
+                                          "SourceRef": {
+                                            "Source": "l"
+                                          }
+                                        },
+                                        "Property": "Fecha Fin pedido venta"
+                                      }
+                                    },
+                                    "Right": {
+                                      "Literal": {
+                                        "Value": "datetime'2026-09-01T00:00:00'"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "data": [
+                    {
+                      "properties": {
+                        "endDate": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "datetime'2026-08-31T00:00:00'"
+                            }
+                          }
+                        },
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Before'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "Fecha Fin pedido venta"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "Fecha Fin pedido venta"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "635a1abd6534ec35fdab": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "2c9105e61775b06b6b7d",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "Fecha disponibilidad (línea del articulo)"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "l",
+                                "Entity": "LOL_PLANMATERIAL",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "Comparison": {
+                                    "ComparisonKind": 3,
+                                    "Left": {
+                                      "Column": {
+                                        "Expression": {
+                                          "SourceRef": {
+                                            "Source": "l"
+                                          }
+                                        },
+                                        "Property": "Fecha disponibilidad (línea del articulo)"
+                                      }
+                                    },
+                                    "Right": {
+                                      "Literal": {
+                                        "Value": "datetime'2026-08-29T00:00:00'"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "data": [
+                    {
+                      "properties": {
+                        "endDate": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "datetime'2026-08-28T00:00:00'"
+                            }
+                          }
+                        },
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Before'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "Fecha disponibilidad (línea del articulo)"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "Fecha disponibilidad (línea del articulo)"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "8de695dcc84998742b20": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "6333362111976fd7b481": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "894d380fd08585882cee",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "Autorizado"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "Autorizado"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "74cfbe13ef7384965b4e": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "fdcf39dbd2cefeda2e46",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "P&H"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "P&H"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "7a332f7b4b5113069e61": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "0c58145d2d8ae7cc7771",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBISEASON"
+                        }
+                      },
+                      "Property": "Code"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "l",
+                                "Entity": "LOL_PBISEASON",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "In": {
+                                    "Expressions": [
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "l"
+                                            }
+                                          },
+                                          "Property": "Code"
+                                        }
+                                      }
+                                    ],
+                                    "Values": [
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'F26'"
+                                          }
+                                        }
+                                      ]
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBISEASON"
+                        }
+                      },
+                      "Property": "Code"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "ba20cdaeabdd8a71f7f4": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "ee055e2eb6304ac1eece",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MesFacturacion"
+                        }
+                      },
+                      "Property": "Mes"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "m",
+                                "Entity": "MesFacturacion",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "In": {
+                                    "Expressions": [
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "m"
+                                            }
+                                          },
+                                          "Property": "Mes"
+                                        }
+                                      }
+                                    ],
+                                    "Values": [
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'ago 2026'"
+                                          }
+                                        }
+                                      ]
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MesFacturacion"
+                        }
+                      },
+                      "Property": "Mes"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "a3353d59d9f165e1a64e": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "135f94ba0c6c301b7afe": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "fce8fc7495091568806b": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "af8d21769f3044d54ee2",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIAGENTES"
+                        }
+                      },
+                      "Property": "Agente_Cajero"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIAGENTES"
+                        }
+                      },
+                      "Property": "Agente_Cajero"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "795fd4c890a85abcae82": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "7638ceeef89efd8626ae": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "b0fc2af1bd0660b2b3bd": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "9ced0bf7c50773d5d4ca": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "d5006d1d6025f3d161ec",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Check Agente"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "5851d52f665cdb89c451": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "d413fd8357c67a23852a",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Check Temporada"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "7145f93ddc42a12b2fe2": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "6d60d551fafb6f4a3384",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Check Mes de cierre"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "697b674aeb258402c8b5": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "9a554ee4ca5aa42d92de",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Check P&H"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "e2f6298fb32d767e4fff": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "834c8c5c4074d7e86b87",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Check Total Look"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "1f92204431b507e40b89": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "0b530e3fbfacd3db8f88",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Check Bloqueado"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "b828b914c7c498242b0e": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "af9d3235e7e5af3fd152",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Check Autorizado"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "5cca9b1ef5df4e1f303b": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "ea31b7937b52d41ddc60",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Check Mes de cierre"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "693918adac9551666c40": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "c776ba8047703b9a520c",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Check Mes de cierre"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "21b6517bd9b61d1d5ef7": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          }
+        },
+        "visualContainerGroups": {
+          "1b84980c0f48c548d5c5": {
+            "isHidden": true
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

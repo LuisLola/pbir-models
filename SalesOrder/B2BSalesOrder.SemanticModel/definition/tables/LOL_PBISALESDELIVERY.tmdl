@@ -562,7 +562,7 @@ table LOL_PBISALESDELIVERY
 		mode: import
 		source =
 				let
-				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin"),
+				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin", [CommandTimeout=#duration(0, 1, 0, 0)]),
 				    dbo_LOL_PBISALESDELIVERY = Origen{[Schema="dbo",Item="LOL_PBISALESDELIVERY"]}[Data]
 				in
 				    dbo_LOL_PBISALESDELIVERY

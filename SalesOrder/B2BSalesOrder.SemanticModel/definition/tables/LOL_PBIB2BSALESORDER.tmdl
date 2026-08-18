@@ -413,7 +413,7 @@ table LOL_PBIB2BSALESORDER
 		mode: import
 		source =
 				let
-				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin"),
+				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin", [CommandTimeout=#duration(0, 1, 0, 0)]),
 				    dbo_LOL_PBIB2BSALESORDER = Origen{[Schema="dbo",Item="LOL_PBIB2BSALESORDER"]}[Data],
 				    #"LineTotal_Num" = Table.AddColumn(dbo_LOL_PBIB2BSALESORDER, "LineTotal_Num", each try Number.From([LineTotal_LC], "en-US") otherwise 0, type number),
 				    #"ImporteBruto" = Table.AddColumn(#"LineTotal_Num", "ImporteBruto", each try Number.From([ImporteBruto_LC], "en-US") otherwise 0, type number)

@@ -45,6 +45,25 @@
             },
             {
               "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "Solicitud traslado"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(LOL_PLANMATERIAL.Solicitud traslado)",
+              "nativeQueryRef": "Suma de Solicitud traslado"
+            },
+            {
+              "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
@@ -255,21 +274,16 @@
         "sort": [
           {
             "field": {
-              "Aggregation": {
+              "Column": {
                 "Expression": {
-                  "Column": {
-                    "Expression": {
-                      "SourceRef": {
-                        "Entity": "LOL_PLANMATERIAL"
-                      }
-                    },
-                    "Property": "Import en Piciking"
+                  "SourceRef": {
+                    "Entity": "LOL_PLANMATERIAL"
                   }
                 },
-                "Function": 0
+                "Property": "Fecha disponibilidad (línea del articulo)"
               }
             },
-            "direction": "Descending"
+            "direction": "Ascending"
           }
         ]
       }
@@ -1182,6 +1196,237 @@
             }
           ]
         }
+      },
+      {
+        "name": "2017a2f6ce2b4ddfae88",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Descripción Artículo"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "ddb1fce59573e93afbe5",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Fecha disponibilidad (línea del articulo)"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "5db85dcd93ccaf70f7e0",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PLANMATERIAL"
+                  }
+                },
+                "Property": "Importe Original"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f1d786be95608d3a333f",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PLANMATERIAL"
+                  }
+                },
+                "Property": "Importe pendiente Entregar"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "5b79368cc8787a21f551",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PLANMATERIAL"
+                  }
+                },
+                "Property": "Importe Entregado"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "deec1a32bc2d8869738c",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PLANMATERIAL"
+                  }
+                },
+                "Property": "AssignTransitLineTotal"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "82e5798d255fd41427bf",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PLANMATERIAL"
+                  }
+                },
+                "Property": "Importe asignado"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "dd33e5716cee21b08a78",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Importe faltas"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "9c6ad0cb0570f010d935",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PLANMATERIAL"
+                  }
+                },
+                "Property": "Import en Piciking"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "5a14dd22c5c4dd915b5f",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Valor Servicio 1º Quincena (Importe Real)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "4236879d5eca914cf226",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Valor Servicio 2º Quincena (Importe Real)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "d58d6db54db7ae4608cc",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Valor Servicio > 30 días (Importe Real)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "e6458c4ae135766e96c4",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Importe retrasado"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "d82f0f9be798af75d8aa",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PLANMATERIAL"
+                  }
+                },
+                "Property": "Solicitud traslado"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

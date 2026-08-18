@@ -118,13 +118,6 @@ relationship AutoDetected_668e7727-3f83-4c64-9277-e9049e4d6850
 	fromColumn: LOL_PBICREDITNOTESSALES.ItemCode
 	toColumn: LOL_PBIMODELITEM.ItemCode
 
-relationship AutoDetected_2cd55d48-3dfb-4d2c-8019-147cdfc2eef3
-	isActive: false
-	crossFilteringBehavior: bothDirections
-	fromCardinality: one
-	fromColumn: LOL_PBICREDITNOTESSALES.LineUID
-	toColumn: LOL_PBIB2BSALESORDER.LineUID
-
 relationship b4972572-3158-429f-aece-193a8f305515
 	joinOnDateBehavior: datePartOnly
 	fromColumn: LOL_PBIRETURNSALES.DocDueDate
@@ -238,16 +231,6 @@ relationship AutoDetected_cf003e78-5eae-4525-a8de-1adb706cd6eb
 	fromColumn: LOL_PBIRETURNREQUESTS.ItemCode
 	toColumn: LOL_PBIMODELITEM.ItemCode
 
-relationship AutoDetected_83ccd16d-2701-4fc1-b856-bdc3dc13a496
-	isActive: false
-	fromColumn: LOL_PBIRETURNREQUESTS.LineUID
-	toColumn: LOL_PBIB2BSALESORDER.LineUID
-
-relationship AutoDetected_6a37628c-dcbf-427a-aec6-8e872be5521b
-	isActive: false
-	fromColumn: LOL_PBIRETURNREQUESTS.LineUID
-	toColumn: LOL_PBIRETURNSALES.LineUID
-
 relationship 49ec28c8-1848-af34-1c0f-b9ca17f8fc1d
 	fromColumn: LOL_PBIRETURNREQUESTS.CardCode
 	toColumn: LOL_PBICLIENTES.CodeCliente
@@ -259,4 +242,9 @@ relationship b8d82c30-96a4-c0d0-328d-471a26cc5618
 relationship b60be744-8fbf-42bb-df40-b2d4a9e577be
 	fromColumn: LOL_PBIRETURNREQUESTS.SeasonResuelta
 	toColumn: LOL_PBISEASON.Code
+
+relationship 55555555-0002-4002-8002-000000000002
+	crossFilteringBehavior: bothDirections
+	fromColumn: LOL_PBIB2BSALESORDER.KPedidoLinea
+	toColumn: LOL_PLANMATERIAL.KLinea
 

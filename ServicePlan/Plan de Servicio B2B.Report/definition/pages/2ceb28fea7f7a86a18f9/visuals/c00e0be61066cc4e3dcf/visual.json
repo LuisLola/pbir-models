@@ -4,7 +4,7 @@
   "position": {
     "x": 2,
     "y": 396,
-    "z": 6000,
+    "z": 5000,
     "height": 49,
     "width": 129,
     "tabOrder": 4000
@@ -309,5 +309,23 @@
       "filterChanges": true
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "8266946eab36b1100441",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Autorizado"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

@@ -6,7 +6,8 @@
     "y": 8.007218045112781,
     "z": 31000,
     "height": 52.046917293233079,
-    "width": 244.31712191872086
+    "width": 244.31712191872086,
+    "tabOrder": 2000
   },
   "visual": {
     "visualType": "slicer",
@@ -59,7 +60,7 @@
             "endDate": {
               "expr": {
                 "Literal": {
-                  "Value": "datetime'2026-09-01T00:00:00'"
+                  "Value": "datetime'2026-08-31T00:00:00'"
                 }
               }
             },
@@ -122,7 +123,7 @@
                         },
                         "Right": {
                           "Literal": {
-                            "Value": "datetime'2026-09-02T00:00:00'"
+                            "Value": "datetime'2026-09-01T00:00:00'"
                           }
                         }
                       }
@@ -346,5 +347,23 @@
     },
     "drillFilterOtherVisuals": true
   },
-  "parentGroupName": "a344ef794467d46507bd"
+  "parentGroupName": "a344ef794467d46507bd",
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "f0e7bb2ec0abfd459244",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Horizonte"
+              }
+            },
+            "Property": "Fecha"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
 }

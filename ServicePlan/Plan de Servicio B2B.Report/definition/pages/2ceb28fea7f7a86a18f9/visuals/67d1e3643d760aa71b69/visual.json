@@ -4,10 +4,10 @@
   "position": {
     "x": 601.50375939849619,
     "y": 67.368421052631575,
-    "z": 33000,
+    "z": 29000,
     "height": 59.669172932330824,
     "width": 145.3233082706767,
-    "tabOrder": 24000
+    "tabOrder": 21000
   },
   "visual": {
     "visualType": "card",
@@ -286,5 +286,23 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "18df8aebe86d39f5feb7",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Importe faltas"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

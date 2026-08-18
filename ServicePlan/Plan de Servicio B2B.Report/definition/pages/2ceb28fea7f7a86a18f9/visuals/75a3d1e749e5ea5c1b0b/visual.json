@@ -6,7 +6,8 @@
     "y": 8.007218045112781,
     "z": 30000,
     "height": 52.046917293233079,
-    "width": 248.1545636242505
+    "width": 248.1545636242505,
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "slicer",
@@ -19,16 +20,15 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "RangoDisponibilidad"
+                      "Entity": "LOL_PLANMATERIAL"
                     }
                   },
-                  "Property": "Fecha"
+                  "Property": "Fecha disponibilidad (línea del articulo)"
                 }
               },
-              "queryRef": "RangoDisponibilidad.Fecha",
-              "nativeQueryRef": "Hasta Fecha Disponibilidad",
-              "active": true,
-              "displayName": "Hasta Fecha Disponibilidad"
+              "queryRef": "LOL_PLANMATERIAL.Fecha disponibilidad (línea del articulo)",
+              "nativeQueryRef": "Fecha disponibilidad (línea del articulo)",
+              "active": true
             }
           ]
         }
@@ -40,10 +40,10 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "RangoDisponibilidad"
+                    "Entity": "LOL_PLANMATERIAL"
                   }
                 },
-                "Property": "Fecha"
+                "Property": "Fecha disponibilidad (línea del articulo)"
               }
             },
             "direction": "Ascending"
@@ -100,8 +100,8 @@
                 "Version": 2,
                 "From": [
                   {
-                    "Name": "r",
-                    "Entity": "RangoDisponibilidad",
+                    "Name": "l",
+                    "Entity": "LOL_PLANMATERIAL",
                     "Type": 0
                   }
                 ],
@@ -114,10 +114,10 @@
                           "Column": {
                             "Expression": {
                               "SourceRef": {
-                                "Source": "r"
+                                "Source": "l"
                               }
                             },
-                            "Property": "Fecha"
+                            "Property": "Fecha disponibilidad (línea del articulo)"
                           }
                         },
                         "Right": {

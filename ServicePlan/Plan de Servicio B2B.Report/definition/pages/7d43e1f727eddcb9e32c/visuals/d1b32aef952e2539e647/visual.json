@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
   "name": "d1b32aef952e2539e647",
   "position": {
-    "x": 160,
+    "x": 160.48632218844986,
     "y": 0,
     "z": 3000,
-    "height": 68.955223880597018,
-    "width": 1119.4029850746269,
+    "height": 80.729483282674778,
+    "width": 1118.5410334346504,
     "tabOrder": 1000
   },
   "visual": {
@@ -330,5 +330,135 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "8d67a48b1da98148808c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "CardName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "d722132b07c56cbf5a1b",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Fecha Entrega pedido venta"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "9d9c923a91b0f1c6af2a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Fecha Fin pedido venta"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "4f56972386cdefe8beaa",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Nº Pedido Ventas"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a95938b34d50a606cd13",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Autorizado"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "59ad7873b6c3c13d94a9",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Bloqueado"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2cd2054326b9a14d7703",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Lanzamiento Picking"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "05cbd4eeb7d7c87edd24",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Prioridad Cliente"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "b9a538dfffa0011e77fd",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Riesgo Disponible"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

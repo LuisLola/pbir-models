@@ -1,0 +1,447 @@
+table MedidasCartera
+	lineageTag: 5d0392c9-85a7-49ac-8009-ee31192a6173
+
+	measure 'Cartera pendiente' = SUM ( 'LOL_PLANMATERIAL'[Importe pendiente Entregar] )
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		displayFolder: Cartera facturable
+		lineageTag: fc6ca68b-9a8b-4688-870a-3198be0a04bf
+
+	measure 'Cartera en picking' = SUM ( 'LOL_PLANMATERIAL'[Import en Piciking] )
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		displayFolder: Cartera facturable
+		lineageTag: 33d2cf75-d4be-4f81-8601-7503232d4e16
+
+	measure 'Cartera asignada stock' = SUM ( 'LOL_PLANMATERIAL'[Importe asignado] )
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		displayFolder: Cartera facturable
+		lineageTag: 3dae4ad1-c860-4ad4-8987-b219a54c20e6
+
+	measure 'Cartera en transito' = SUM ( 'LOL_PLANMATERIAL'[AssignTransitLineTotal] )
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		displayFolder: Cartera facturable
+		lineageTag: 32283b1b-e829-4a2f-82a5-0a88950168eb
+
+	measure 'Importe facturable' =
+			
+			[Cartera en picking] + [Cartera asignada stock] + [Cartera en transito]
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		displayFolder: Cartera facturable
+		lineageTag: 1cfa452b-45c3-4295-898e-bd89da8263c2
+
+	measure 'Importe no facturable' =
+			
+			[Cartera pendiente] - [Importe facturable]
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		displayFolder: Cartera facturable
+		lineageTag: e7a0da1d-2b5b-47cf-85e7-516012543346
+
+	measure '% Facturable' = DIVIDE ( [Importe facturable], [Cartera pendiente] )
+		formatString: 0\ %;-0\ %;0\ %
+		displayFolder: Cartera facturable
+		lineageTag: 6b6ff195-3cc2-4a56-8844-2ac148af5738
+
+	measure 'Facturado del mes' =
+			VAR Ini = MIN ( MesFacturacion[Inicio] )
+			VAR Fin = MAX ( MesFacturacion[Fin] )
+			RETURN
+			CALCULATE (
+			    [Importe Facturado],
+			    FILTER (
+			        ALL ( LOL_PBIINVOICESSALES[DocDate] ),
+			        LOL_PBIINVOICESSALES[DocDate] >= Ini
+			            && LOL_PBIINVOICESSALES[DocDate] <= Fin
+			    )
+			)
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		displayFolder: Cierre del mes
+		lineageTag: f5ba297e-98c2-41f4-8c29-03377b14813a
+
+	measure 'Servido sin facturar' =
+			
+			[Pendiente Facturar]
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		displayFolder: Cierre del mes
+		lineageTag: 6edbab05-8366-49a2-93ae-4e1201f32828
+
+	measure 'Cartera que vence en el mes' =
+			
+			VAR Fin = [Fin efectivo cartera]
+			RETURN
+			CALCULATE (
+			    [Importe facturable],
+			    FILTER (
+			        ALL ( LOL_PLANMATERIAL[Fecha Fin pedido venta] ),
+			        LOL_PLANMATERIAL[Fecha Fin pedido venta] <= Fin
+			    )
+			)
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		displayFolder: Cierre del mes
+		lineageTag: 5e4713bd-519d-4536-8e38-ce09e6283874
+
+	measure 'Cierre previsto del mes' =
+			
+			[Facturado del mes] + [Servido sin facturar] + [Cartera que vence en el mes]
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		displayFolder: Cierre del mes
+		lineageTag: 4053e673-108c-4c27-a25d-ebab63d0706b
+
+	measure '% Avance del cierre' =
+			
+			DIVIDE ( [Facturado del mes], [Cierre previsto del mes] )
+		formatString: 0\ %;-0\ %;0\ %
+		displayFolder: Cierre del mes
+		lineageTag: af282bc4-3dbc-448d-ae0f-53f336a482e4
+
+	measure 'Vence en el mes' =
+			
+			VAR Fin = [Fin efectivo cartera]
+			VAR f = MAX ( LOL_PLANMATERIAL[Fecha Fin pedido venta] )
+			RETURN
+			    IF ( NOT ISBLANK ( f ) && f <= Fin, 1, 0 )
+		formatString: 0
+		displayFolder: Cierre del mes
+		lineageTag: 8c8962f3-aaf7-4962-8dbc-24928780299b
+
+	measure 'Tiene movimiento en el mes' =
+			
+			VAR Ini = MIN ( MesFacturacion[Inicio] )
+			VAR FinMes = MAX ( MesFacturacion[Fin] )
+			VAR Fin = [Fin efectivo cartera]
+			VAR abierto =
+			    CALCULATE (
+			        COUNTROWS ( LOL_PLANMATERIAL ),
+			        FILTER (
+			            ALL ( LOL_PLANMATERIAL[Fecha Fin pedido venta] ),
+			            LOL_PLANMATERIAL[Fecha Fin pedido venta] <= Fin
+			        )
+			    )
+			VAR facturado =
+			    CALCULATE (
+			        COUNTROWS ( LOL_PBIINVOICESSALES ),
+			        FILTER (
+			            ALL ( LOL_PBIINVOICESSALES[DocDate] ),
+			            LOL_PBIINVOICESSALES[DocDate] >= Ini
+			                && LOL_PBIINVOICESSALES[DocDate] <= FinMes
+			        )
+			    )
+			RETURN
+			    IF ( COALESCE ( abierto, 0 ) + COALESCE ( facturado, 0 ) > 0, 1, 0 )
+		formatString: 0
+		displayFolder: Cierre del mes
+		lineageTag: 3f1bf85c-88ec-4365-8284-8d05cc8e5e81
+
+	measure 'Adelanto entrega' =
+			
+			VAR FinMes = MAX ( MesFacturacion[Fin] )
+			VAR Extra =
+			    CALCULATE (
+			        [Importe facturable],
+			        KEEPFILTERS (
+			            FILTER (
+			                VALUES ( LOL_PLANMATERIAL[Fecha Fin pedido venta] ),
+			                LOL_PLANMATERIAL[Fecha Fin pedido venta] > FinMes
+			            )
+			        )
+			    )
+			RETURN
+			    COALESCE ( Extra, 0 )
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		displayFolder: Cierre del mes
+		lineageTag: 981d76bb-771a-4ab0-8bda-16d10b026139
+
+	measure '% Adelanto sobre cierre' =
+			
+			DIVIDE ( [Adelanto entrega], [Cierre previsto del mes] )
+		formatString: 0\ %;-0\ %;0\ %
+		displayFolder: Cierre del mes
+		lineageTag: 7abfbb42-fd2f-4e02-91d9-f8f9a75bac37
+
+	measure 'Fin efectivo cartera' =
+			
+			VAR FinMes = MAX ( MesFacturacion[Fin] )
+			VAR FinSlicer =
+			    CALCULATE (
+			        MAX ( LOL_PLANMATERIAL[Fecha Fin pedido venta] ),
+			        ALLSELECTED ( LOL_PLANMATERIAL[Fecha Fin pedido venta] )
+			    )
+			RETURN
+			    MAX ( FinMes, FinSlicer )
+		formatString: Short Date
+		displayFolder: Cierre del mes
+		lineageTag: 79ee71b4-ce9e-453d-8f23-e257fa1ef5cd
+
+	measure 'Filtros aplicados' = ```
+			
+			VAR NL = UNICHAR ( 10 )
+			
+			VAR n1 = IF ( ISFILTERED ( LOL_PBIAGENTES[Agente_Cajero] ), COUNTROWS ( VALUES ( LOL_PBIAGENTES[Agente_Cajero] ) ) )
+			VAR v1 =
+			    IF ( ISBLANK ( n1 ), BLANK (),
+			        IF ( n1 <= 3,
+			            CONCATENATEX ( VALUES ( LOL_PBIAGENTES[Agente_Cajero] ), LOL_PBIAGENTES[Agente_Cajero], ", " ),
+			            FORMAT ( n1, "#,0" ) & " valores" ) )
+			
+			VAR n2 = IF ( ISFILTERED ( MesFacturacion[Mes] ), COUNTROWS ( VALUES ( MesFacturacion[Mes] ) ) )
+			VAR v2 =
+			    IF ( ISBLANK ( n2 ), BLANK (),
+			        IF ( n2 <= 3,
+			            CONCATENATEX ( VALUES ( MesFacturacion[Mes] ), MesFacturacion[Mes], ", " ),
+			            FORMAT ( n2, "#,0" ) & " valores" ) )
+			
+			VAR n3 = IF ( ISFILTERED ( LOL_PBISEASON[Code] ), COUNTROWS ( VALUES ( LOL_PBISEASON[Code] ) ) )
+			VAR v3 =
+			    IF ( ISBLANK ( n3 ), BLANK (),
+			        IF ( n3 <= 3,
+			            CONCATENATEX ( VALUES ( LOL_PBISEASON[Code] ), LOL_PBISEASON[Code], ", " ),
+			            FORMAT ( n3, "#,0" ) & " valores" ) )
+			
+			VAR n4 = IF ( ISFILTERED ( LOL_PLANMATERIAL[P&H] ), COUNTROWS ( VALUES ( LOL_PLANMATERIAL[P&H] ) ) )
+			VAR v4 =
+			    IF ( ISBLANK ( n4 ), BLANK (),
+			        IF ( n4 <= 3,
+			            CONCATENATEX ( VALUES ( LOL_PLANMATERIAL[P&H] ), LOL_PLANMATERIAL[P&H], ", " ),
+			            FORMAT ( n4, "#,0" ) & " valores" ) )
+			
+			VAR n5 = IF ( ISFILTERED ( LOL_PLANMATERIAL[TotalLook] ), COUNTROWS ( VALUES ( LOL_PLANMATERIAL[TotalLook] ) ) )
+			VAR v5 =
+			    IF ( ISBLANK ( n5 ), BLANK (),
+			        IF ( n5 <= 3,
+			            CONCATENATEX ( VALUES ( LOL_PLANMATERIAL[TotalLook] ), LOL_PLANMATERIAL[TotalLook], ", " ),
+			            FORMAT ( n5, "#,0" ) & " valores" ) )
+			
+			VAR n6 = IF ( ISFILTERED ( LOL_PLANMATERIAL[Autorizado] ), COUNTROWS ( VALUES ( LOL_PLANMATERIAL[Autorizado] ) ) )
+			VAR v6 =
+			    IF ( ISBLANK ( n6 ), BLANK (),
+			        IF ( n6 <= 3,
+			            CONCATENATEX ( VALUES ( LOL_PLANMATERIAL[Autorizado] ), LOL_PLANMATERIAL[Autorizado], ", " ),
+			            FORMAT ( n6, "#,0" ) & " valores" ) )
+			
+			VAR n7 = IF ( ISFILTERED ( LOL_PLANMATERIAL[Bloqueado] ), COUNTROWS ( VALUES ( LOL_PLANMATERIAL[Bloqueado] ) ) )
+			VAR v7 =
+			    IF ( ISBLANK ( n7 ), BLANK (),
+			        IF ( n7 <= 3,
+			            CONCATENATEX ( VALUES ( LOL_PLANMATERIAL[Bloqueado] ), LOL_PLANMATERIAL[Bloqueado], ", " ),
+			            FORMAT ( n7, "#,0" ) & " valores" ) )
+			
+			VAR n8 = IF ( ISFILTERED ( LOL_PBICLIENTES[RazonSocial] ), COUNTROWS ( VALUES ( LOL_PBICLIENTES[RazonSocial] ) ) )
+			VAR v8 =
+			    IF ( ISBLANK ( n8 ), BLANK (),
+			        IF ( n8 <= 3,
+			            CONCATENATEX ( VALUES ( LOL_PBICLIENTES[RazonSocial] ), LOL_PBICLIENTES[RazonSocial], ", " ),
+			            FORMAT ( n8, "#,0" ) & " valores" ) )
+			
+			VAR n9 = IF ( ISFILTERED ( LOL_PBIMODELITEM[Categoria] ), COUNTROWS ( VALUES ( LOL_PBIMODELITEM[Categoria] ) ) )
+			VAR v9 =
+			    IF ( ISBLANK ( n9 ), BLANK (),
+			        IF ( n9 <= 3,
+			            CONCATENATEX ( VALUES ( LOL_PBIMODELITEM[Categoria] ), LOL_PBIMODELITEM[Categoria], ", " ),
+			            FORMAT ( n9, "#,0" ) & " valores" ) )
+			
+			VAR n10 = IF ( ISFILTERED ( LOL_PBIMODELITEM[GrupodeArt] ), COUNTROWS ( VALUES ( LOL_PBIMODELITEM[GrupodeArt] ) ) )
+			VAR v10 =
+			    IF ( ISBLANK ( n10 ), BLANK (),
+			        IF ( n10 <= 3,
+			            CONCATENATEX ( VALUES ( LOL_PBIMODELITEM[GrupodeArt] ), LOL_PBIMODELITEM[GrupodeArt], ", " ),
+			            FORMAT ( n10, "#,0" ) & " valores" ) )
+			
+			VAR n11 = IF ( ISFILTERED ( LOL_PBIMODELITEM[Descripcion_familia_agregada] ), COUNTROWS ( VALUES ( LOL_PBIMODELITEM[Descripcion_familia_agregada] ) ) )
+			VAR v11 =
+			    IF ( ISBLANK ( n11 ), BLANK (),
+			        IF ( n11 <= 3,
+			            CONCATENATEX ( VALUES ( LOL_PBIMODELITEM[Descripcion_familia_agregada] ), LOL_PBIMODELITEM[Descripcion_familia_agregada], ", " ),
+			            FORMAT ( n11, "#,0" ) & " valores" ) )
+			
+			VAR n12 = IF ( ISFILTERED ( LOL_PBIMODELITEM[Subfamilia] ), COUNTROWS ( VALUES ( LOL_PBIMODELITEM[Subfamilia] ) ) )
+			VAR v12 =
+			    IF ( ISBLANK ( n12 ), BLANK (),
+			        IF ( n12 <= 3,
+			            CONCATENATEX ( VALUES ( LOL_PBIMODELITEM[Subfamilia] ), LOL_PBIMODELITEM[Subfamilia], ", " ),
+			            FORMAT ( n12, "#,0" ) & " valores" ) )
+			
+			VAR v13 =
+			    IF ( ISFILTERED ( LOL_PLANMATERIAL[Fecha Fin pedido venta] ),
+			        FORMAT ( MIN ( LOL_PLANMATERIAL[Fecha Fin pedido venta] ), "dd/mm/yyyy" ) & "  a  " & FORMAT ( MAX ( LOL_PLANMATERIAL[Fecha Fin pedido venta] ), "dd/mm/yyyy" ) )
+			
+			VAR v14 =
+			    IF ( ISFILTERED ( LOL_PLANMATERIAL[Fecha disponibilidad (línea del articulo)] ),
+			        FORMAT ( MIN ( LOL_PLANMATERIAL[Fecha disponibilidad (línea del articulo)] ), "dd/mm/yyyy" ) & "  a  " & FORMAT ( MAX ( LOL_PLANMATERIAL[Fecha disponibilidad (línea del articulo)] ), "dd/mm/yyyy" ) )
+			
+			VAR vTecho = FORMAT ( [Fin efectivo cartera], "dd/mm/yyyy" )
+			
+			VAR Aplicados =
+			    FILTER (
+			        {
+			        ( "Agente", v1 ),
+			        ( "Mes de cierre", v2 ),
+			        ( "Temporada", v3 ),
+			        ( "P&H", v4 ),
+			        ( "Total Look", v5 ),
+			        ( "Autorizado", v6 ),
+			        ( "Bloqueado", v7 ),
+			        ( "Cliente", v8 ),
+			        ( "Categoría", v9 ),
+			        ( "Grupo de artículo", v10 ),
+			        ( "Familia", v11 ),
+			        ( "Subfamilia", v12 ),
+			        ( "Fecha fin servicio", v13 ),
+			        ( "Disponibilidad", v14 ),
+			        ( "Techo efectivo cartera", vTecho )
+			        },
+			        NOT ISBLANK ( [Value2] )
+			    )
+			RETURN
+			    IF (
+			        ISEMPTY ( Aplicados ),
+			        "Sin filtros en la página",
+			        CONCATENATEX ( Aplicados, [Value1] & ":  " & [Value2], NL, [Value1] )
+			    )
+			
+			```
+		displayFolder: Diagnostico
+		lineageTag: 56c36c1d-30f0-46cf-a663-b9d555f78edc
+
+	measure 'Check Agente' = ```
+			
+			IF ( ISFILTERED ( LOL_PBIAGENTES[Agente_Cajero] ), UNICHAR ( 10003 ) )
+			
+			```
+		displayFolder: Checks de filtro
+		lineageTag: 934dbc9a-8b4d-4039-a669-20e5e80a3d9a
+
+	measure 'Check Mes de cierre' = ```
+			
+			IF ( ISFILTERED ( MesFacturacion[Mes] ), UNICHAR ( 10003 ) )
+			
+			```
+		displayFolder: Checks de filtro
+		lineageTag: da2eeb5c-697c-4f16-a2f8-f3826f3e1898
+
+	measure 'Check Temporada' = ```
+			
+			IF ( ISFILTERED ( LOL_PBISEASON[Code] ), UNICHAR ( 10003 ) )
+			
+			```
+		displayFolder: Checks de filtro
+		lineageTag: 9586cb29-854a-44f4-a75e-75d99ebba87c
+
+	measure 'Check P&H' = ```
+			
+			IF ( ISFILTERED ( LOL_PLANMATERIAL[P&H] ), UNICHAR ( 10003 ) )
+			
+			```
+		displayFolder: Checks de filtro
+		lineageTag: 757bc81a-caba-4678-8d2b-206223cec828
+
+	measure 'Check Total Look' = ```
+			
+			IF ( ISFILTERED ( LOL_PLANMATERIAL[TotalLook] ), UNICHAR ( 10003 ) )
+			
+			```
+		displayFolder: Checks de filtro
+		lineageTag: 249d1c0c-31c9-4483-95c4-d255ea295687
+
+	measure 'Check Autorizado' = ```
+			
+			IF ( ISFILTERED ( LOL_PLANMATERIAL[Autorizado] ), UNICHAR ( 10003 ) )
+			
+			```
+		displayFolder: Checks de filtro
+		lineageTag: 3f59d8ce-6b1d-4bc9-9165-3cfa410d33d6
+
+	measure 'Check Bloqueado' = ```
+			
+			IF ( ISFILTERED ( LOL_PLANMATERIAL[Bloqueado] ), UNICHAR ( 10003 ) )
+			
+			```
+		displayFolder: Checks de filtro
+		lineageTag: 0c8dae7f-38a1-4f6e-9ed4-ec8b1701e835
+
+	measure 'Check Cliente' = ```
+			
+			IF ( ISFILTERED ( LOL_PBICLIENTES[RazonSocial] ), UNICHAR ( 10003 ) )
+			
+			```
+		displayFolder: Checks de filtro
+		lineageTag: db32f296-6fb1-4e27-a0c3-e7ac15545c65
+
+	measure 'Check Categoría' = ```
+			
+			IF ( ISFILTERED ( LOL_PBIMODELITEM[Categoria] ), UNICHAR ( 10003 ) )
+			
+			```
+		displayFolder: Checks de filtro
+		lineageTag: 482275c7-2378-4945-913e-d34192811ced
+
+	measure 'Check Grupo de artículo' = ```
+			
+			IF ( ISFILTERED ( LOL_PBIMODELITEM[GrupodeArt] ), UNICHAR ( 10003 ) )
+			
+			```
+		displayFolder: Checks de filtro
+		lineageTag: e7d00eb7-dca7-4811-b2a9-1a922edc031d
+
+	measure 'Check Familia' = ```
+			
+			IF ( ISFILTERED ( LOL_PBIMODELITEM[Descripcion_familia_agregada] ), UNICHAR ( 10003 ) )
+			
+			```
+		displayFolder: Checks de filtro
+		lineageTag: 1bbd05c6-70b7-4227-8f96-253948bd50b8
+
+	measure 'Check Subfamilia' = ```
+			
+			IF ( ISFILTERED ( LOL_PBIMODELITEM[Subfamilia] ), UNICHAR ( 10003 ) )
+			
+			```
+		displayFolder: Checks de filtro
+		lineageTag: 0ee15ad8-26d6-4fd8-83dd-a801e9252c5c
+
+	measure 'Check Fecha fin servicio' = ```
+			
+			IF ( ISFILTERED ( LOL_PLANMATERIAL[Fecha Fin pedido venta] ), UNICHAR ( 10003 ) )
+			
+			```
+		displayFolder: Checks de filtro
+		lineageTag: 276dd0ce-2f74-4860-a0b2-bafc345cbfdf
+
+	measure 'Check Disponibilidad' = ```
+			
+			IF ( ISFILTERED ( LOL_PLANMATERIAL[Fecha disponibilidad (línea del articulo)] ), UNICHAR ( 10003 ) )
+			
+			```
+		displayFolder: Checks de filtro
+		lineageTag: c58be2cf-0422-423d-9641-af9d02f52b2c
+
+	measure 'Filtros activos' = ```
+			
+			INT ( ISFILTERED ( LOL_PBIAGENTES[Agente_Cajero] ) ) +
+			INT ( ISFILTERED ( MesFacturacion[Mes] ) ) +
+			INT ( ISFILTERED ( LOL_PBISEASON[Code] ) ) +
+			INT ( ISFILTERED ( LOL_PLANMATERIAL[P&H] ) ) +
+			INT ( ISFILTERED ( LOL_PLANMATERIAL[TotalLook] ) ) +
+			INT ( ISFILTERED ( LOL_PLANMATERIAL[Autorizado] ) ) +
+			INT ( ISFILTERED ( LOL_PLANMATERIAL[Bloqueado] ) ) +
+			INT ( ISFILTERED ( LOL_PBICLIENTES[RazonSocial] ) ) +
+			INT ( ISFILTERED ( LOL_PBIMODELITEM[Categoria] ) ) +
+			INT ( ISFILTERED ( LOL_PBIMODELITEM[GrupodeArt] ) ) +
+			INT ( ISFILTERED ( LOL_PBIMODELITEM[Descripcion_familia_agregada] ) ) +
+			INT ( ISFILTERED ( LOL_PBIMODELITEM[Subfamilia] ) ) +
+			INT ( ISFILTERED ( LOL_PLANMATERIAL[Fecha Fin pedido venta] ) ) +
+			INT ( ISFILTERED ( LOL_PLANMATERIAL[Fecha disponibilidad (línea del articulo)] ) )
+			
+			```
+		formatString: 0
+		displayFolder: Diagnostico
+		lineageTag: f7ec97c5-3aa2-40d2-8370-6178fb93dd0e
+
+	column Value
+		lineageTag: 2848c4c9-fd79-45ec-8f68-88eccb9c7834
+		isNameInferred
+		sourceColumn: [Value]
+
+	partition MedidasCartera = calculated
+		mode: import
+		source = {BLANK()}
+
+	annotation PBI_ResultType = Table
+

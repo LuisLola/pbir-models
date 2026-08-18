@@ -326,10 +326,10 @@
                     "Entity": "LOL_PLANMATERIAL"
                   }
                 },
-                "Property": "Importe retrasado"
+                "Property": "Fecha Servicio 1º Quincena(Importe)"
               }
             },
-            "direction": "Descending"
+            "direction": "Ascending"
           }
         ]
       }
@@ -1383,6 +1383,287 @@
           ]
         },
         "howCreated": "User"
+      },
+      {
+        "name": "1806f1ca45a6ab1bc7e9",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Nº Pedido Ventas"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "9408ab14bd1be872b230",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "TipoPedido"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "dbb5979b9d61b180f3cd",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Código Cliente"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "22e4e32ba52e60b38763",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "CardName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "df0c886954b4e013e329",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Fecha Entrega pedido venta"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "96558971b318d5b51910",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Fecha Fin pedido venta"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "dc40b28db7c462ba224f",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PLANMATERIAL"
+                  }
+                },
+                "Property": "Importe Original"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "62c2786afcb6620837c4",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PLANMATERIAL"
+                  }
+                },
+                "Property": "Importe asignado"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "8d90d90fd0eecd6e6cd8",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PLANMATERIAL"
+                  }
+                },
+                "Property": "AssignTransitLineTotal"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "da192e21a1747533e013",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Importe faltas"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "ef93ea26702a3421ef6a",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "en picking"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f338c3ff298baabf6506",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Valor Servicio 1º Quincena (Importe Real)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "2a28e9167c97925aa795",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Fecha Servicio 1º Quincena(Importe)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a1d01b25062a4b76fad0",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Valor Servicio 2º Quincena (Importe Real)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "ccda93f3c463c3138e2d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Fecha Servicio 2º Quincena(Importe)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "75426c3ebc45b5df111b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Valor Servicio > 30 días (Importe Real)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "b7e055f8a5c1b7a42984",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Fecha Servicio > 30 días (Importe)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "d2665f3aef13178e92c9",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Importe retrasado"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "7593173cb1bfc87caf29",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "ServicioDentroRango"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

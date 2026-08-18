@@ -101,7 +101,7 @@ table LOL_PBISEASON
 		mode: import
 		source =
 				let
-				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin"),
+				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin", [CommandTimeout=#duration(0, 1, 0, 0)]),
 				    dbo_LOL_PBISEASON = Origen{[Schema="dbo",Item="LOL_PBISEASON"]}[Data]
 				in
 				    dbo_LOL_PBISEASON

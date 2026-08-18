@@ -468,7 +468,7 @@ table LOL_PBIMODELITEM
 		mode: import
 		source =
 				let
-				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin"),
+				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin", [CommandTimeout=#duration(0, 1, 0, 0)]),
 				    dbo_LOL_PBIMODELITEM = Origen{[Schema="dbo",Item="LOL_PBIMODELITEM"]}[Data]
 				in
 				    dbo_LOL_PBIMODELITEM
