@@ -1,0 +1,1625 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "Analisis Cerrado",
+  "name": "72794bf14c3012101bb2",
+  "options": {
+    "targetVisualNames": [
+      "de7f1f8ec2536c123bf7",
+      "0a3eb2a15b38d531081c",
+      "19d3be1506c2f9a32683",
+      "939885cd7c437f10dfb8",
+      "432e33ca2bdd4c730331",
+      "761b90bf0b5ee70c2259",
+      "4d0a9778aa6475aafc7e",
+      "0e985fa9840b5f37bc19",
+      "f320530d57e7c484333b",
+      "b7d8973201cbfc07f7d6",
+      "e9c8332007ff5ea81358",
+      "76414738c9856de588af",
+      "6b99af4edac03d9935dc",
+      "ff294e8cfea165ba3f67",
+      "803426c3f20cba1b01bc",
+      "2b0460a596afc88f76bc",
+      "6f4288bdf4bc336cdcf3",
+      "e72034315fcb6c61986e",
+      "18fa35377d6eaed63acb",
+      "2f71627c029953a14622",
+      "7469b5ed5a016e37bd1c",
+      "89fc645c8356e417e33a",
+      "3e8d1fd69ae7f1f98669"
+    ]
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "3d45816997d29d38d94e",
+    "filters": {
+      "byExpr": [
+        {
+          "name": "8e64200378b0c1ca5c17",
+          "type": "Categorical",
+          "filter": {
+            "Version": 2,
+            "From": [
+              {
+                "Name": "l",
+                "Entity": "LOL_PBIB2BSALESORDER",
+                "Type": 0
+              }
+            ],
+            "Where": [
+              {
+                "Condition": {
+                  "Not": {
+                    "Expression": {
+                      "In": {
+                        "Expressions": [
+                          {
+                            "Column": {
+                              "Expression": {
+                                "SourceRef": {
+                                  "Source": "l"
+                                }
+                              },
+                              "Property": "WhsCode"
+                            }
+                          }
+                        ],
+                        "Values": [
+                          [
+                            {
+                              "Literal": {
+                                "Value": "'4-C002L'"
+                              }
+                            }
+                          ]
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Entity": "LOL_PBIB2BSALESORDER"
+                }
+              },
+              "Property": "WhsCode"
+            }
+          },
+          "howCreated": 1
+        },
+        {
+          "name": "ffeda20ee9a50673ee1b",
+          "type": "Categorical",
+          "expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Entity": "LOL_PBICLIENTES"
+                }
+              },
+              "Property": "GroupCode"
+            }
+          },
+          "howCreated": 1
+        },
+        {
+          "name": "f20cd680e48aa715e018",
+          "type": "Categorical",
+          "filter": {
+            "Version": 2,
+            "From": [
+              {
+                "Name": "l",
+                "Entity": "LOL_PBICLIENTES",
+                "Type": 0
+              }
+            ],
+            "Where": [
+              {
+                "Condition": {
+                  "In": {
+                    "Expressions": [
+                      {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "l"
+                            }
+                          },
+                          "Property": "GroupCode"
+                        }
+                      }
+                    ],
+                    "Values": [
+                      [
+                        {
+                          "Literal": {
+                            "Value": "'105'"
+                          }
+                        }
+                      ],
+                      [
+                        {
+                          "Literal": {
+                            "Value": "'108'"
+                          }
+                        }
+                      ]
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          "expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Entity": "LOL_PBICLIENTES"
+                }
+              },
+              "Property": "GroupCode"
+            }
+          },
+          "howCreated": 1
+        }
+      ]
+    },
+    "sections": {
+      "3d45816997d29d38d94e": {
+        "visualContainers": {
+          "0a02dac8918ba17da28e": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "911f67e4eda79f8167da",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DimensionB2B"
+                        }
+                      },
+                      "Property": "Dimension"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "d",
+                                "Entity": "DimensionB2B",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "In": {
+                                    "Expressions": [
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "d"
+                                            }
+                                          },
+                                          "Property": "Dimension"
+                                        }
+                                      }
+                                    ],
+                                    "Values": [
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'Agente'"
+                                          }
+                                        }
+                                      ]
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DimensionB2B"
+                        }
+                      },
+                      "Property": "Dimension"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "364e9dd0a12587d69a26": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "9b9af851040fcc7fa80b",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIAGENTES"
+                        }
+                      },
+                      "Property": "Agente_Cajero"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "083ec5f0e0ed73731392",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBICLIENTES"
+                        }
+                      },
+                      "Property": "RazonSocial"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "4a917b8061fe8779ae07",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIB2BSALESORDER"
+                        }
+                      },
+                      "Property": "DocNum"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "7da2d9bdeea18ed1aa03",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasVentas"
+                        }
+                      },
+                      "Property": "VentasTemporadaSeleccionadaTotal"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "81a2dfc71fad2cefbf83",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasVentas"
+                        }
+                      },
+                      "Property": "VentasTemporadaAnterior"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "7b46a7c9bead811fa991",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasVentas"
+                        }
+                      },
+                      "Property": "EvolTemporadaSeleccionada"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "b85b2ac65085f083de36",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasVentas"
+                        }
+                      },
+                      "Property": "EvolTemporadaSeleccionada_%"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "250b128bb28d3e7d5e9e",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasVentas"
+                        }
+                      },
+                      "Property": "VentasTemporadaAnterior_SoloInicio"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "dc52767d26259e674c1f",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasVentas"
+                        }
+                      },
+                      "Property": "EvolTemporadaSeleccionada_%Completa"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "aca04ff16d00e3b60b60",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasVentas"
+                        }
+                      },
+                      "Property": "VentasTemporadaAnterior_Total"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "e950e4591a6f4822541e",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasVentas"
+                        }
+                      },
+                      "Property": "RealizadoTemporadaAnterior_%"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "441f61ad8ac1d255afc7",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasVentas"
+                        }
+                      },
+                      "Property": "VentasTemporadaPasada_SoloInicio"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "pivotTable",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasVentas"
+                        }
+                      },
+                      "Property": "VentasTemporadaSeleccionadaTotal"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Rows": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIAGENTES"
+                        }
+                      },
+                      "Property": "Agente_Cajero"
+                    }
+                  }
+                ]
+              },
+              "expansionStates": [
+                {
+                  "roles": [
+                    "Rows"
+                  ],
+                  "levels": [
+                    {
+                      "queryRefs": [
+                        "LOL_PBIAGENTES.Agente_Cajero"
+                      ],
+                      "isCollapsed": true,
+                      "isPinned": true
+                    },
+                    {
+                      "queryRefs": [
+                        "LOL_PBICLIENTES.RazonSocial"
+                      ],
+                      "isCollapsed": true,
+                      "identityKeys": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "LOL_PBICLIENTES"
+                              }
+                            },
+                            "Property": "RazonSocial"
+                          }
+                        }
+                      ],
+                      "isPinned": true
+                    },
+                    {
+                      "queryRefs": [
+                        "LOL_PBIB2BSALESORDER.DocNum"
+                      ],
+                      "isCollapsed": true,
+                      "isPinned": true
+                    }
+                  ],
+                  "root": {
+                    "identityValues": []
+                  }
+                }
+              ]
+            }
+          },
+          "38cff7c8050c4c575695": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "42196ac2ed6e3edb0337": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "0c51749cf8fdbf42a54a",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DimensionB2B"
+                        }
+                      },
+                      "Property": "Dimension"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DimensionB2B"
+                        }
+                      },
+                      "Property": "Dimension"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "688eaec836e1178d84e0": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "9ed7b4b5013c3e09c625",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DimensionB2B"
+                        }
+                      },
+                      "Property": "Dimension"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DimensionB2B"
+                        }
+                      },
+                      "Property": "Dimension"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "aa05e5304450c3d066d3": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "cd174743cf2634415fa8",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasVentas"
+                        }
+                      },
+                      "Property": "VentasTemporadaSeleccionada_Bruta"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasVentas"
+                        }
+                      },
+                      "Property": "VentasTemporadaSeleccionada_Bruta"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "b06e5461e155c1b2da61": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "1cd191c2f91b482beb15",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasVentas"
+                        }
+                      },
+                      "Property": "VentasTemporadaAnterior"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasVentas"
+                        }
+                      },
+                      "Property": "VentasTemporadaAnterior"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "b1ab2519de79833d7e23": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "7413594c9bd8edc04f72",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasTemporadas"
+                        }
+                      },
+                      "Property": "TemporadaSeleccionada"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "5f41553bc5b944e75e65",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasTemporadas"
+                        }
+                      },
+                      "Property": "TemporadaAnterior"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "b7f3e5721fd5658eed6d",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasTemporadas"
+                        }
+                      },
+                      "Property": "TemporadaPasada"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "fe2598812887e36999fe",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasTemporadas"
+                        }
+                      },
+                      "Property": "FechaLimiteSeleccionada"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "e664d0f69361374b7002": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "b9499953572fafc2217c": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "397debf0e31ece5d5fa4",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasVentas"
+                        }
+                      },
+                      "Property": "VentasTemporadaPasada_SoloInicio"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasVentas"
+                        }
+                      },
+                      "Property": "VentasTemporadaPasada_SoloInicio"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "939885cd7c437f10dfb8": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "432e33ca2bdd4c730331": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "7ac133e520347860e04e",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Check Bloqueado"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "761b90bf0b5ee70c2259": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "5b641566ee28dae2e4de",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Check Temporada"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "4d0a9778aa6475aafc7e": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "ba94db7fdfe1ed54af3b",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Check Mes de cierre"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "0e985fa9840b5f37bc19": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "ea6a27d205303916109f",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "Autorizado"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "Autorizado"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "f320530d57e7c484333b": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "b9bb8b68afbac255f09f",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "Fecha disponibilidad (línea del articulo)"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "l",
+                                "Entity": "LOL_PLANMATERIAL",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "Comparison": {
+                                    "ComparisonKind": 3,
+                                    "Left": {
+                                      "Column": {
+                                        "Expression": {
+                                          "SourceRef": {
+                                            "Source": "l"
+                                          }
+                                        },
+                                        "Property": "Fecha disponibilidad (línea del articulo)"
+                                      }
+                                    },
+                                    "Right": {
+                                      "Literal": {
+                                        "Value": "datetime'2026-08-29T00:00:00'"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "data": [
+                    {
+                      "properties": {
+                        "endDate": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "datetime'2026-08-28T00:00:00'"
+                            }
+                          }
+                        },
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Before'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "Fecha disponibilidad (línea del articulo)"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "Fecha disponibilidad (línea del articulo)"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "b7d8973201cbfc07f7d6": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "e9bec9e90017f5b1a7cb",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Check Mes de cierre"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "e9c8332007ff5ea81358": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "c9aab6021a13167c13f7",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Check P&H"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "76414738c9856de588af": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "bb74afe4940b12ee4d31",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Check Mes de cierre"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "6b99af4edac03d9935dc": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "b77f15c23ba3d0e40911",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "P&H"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "P&H"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "ff294e8cfea165ba3f67": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "2c6616d3bab7fcdeba75",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBISEASON"
+                        }
+                      },
+                      "Property": "Code"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "l",
+                                "Entity": "LOL_PBISEASON",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "In": {
+                                    "Expressions": [
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "l"
+                                            }
+                                          },
+                                          "Property": "Code"
+                                        }
+                                      }
+                                    ],
+                                    "Values": [
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'F26'"
+                                          }
+                                        }
+                                      ]
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBISEASON"
+                        }
+                      },
+                      "Property": "Code"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "803426c3f20cba1b01bc": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "2b0460a596afc88f76bc": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "295186b9d8534751022b",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "Bloqueado"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "Bloqueado"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "6f4288bdf4bc336cdcf3": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "32c78f97f571cdfde555",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Check Agente"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "e72034315fcb6c61986e": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "18fa35377d6eaed63acb": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "fb724725761963559464",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "TotalLook"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PLANMATERIAL"
+                        }
+                      },
+                      "Property": "TotalLook"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "2f71627c029953a14622": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "7c7b468fef2a0f3d9c6f",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Check Autorizado"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "de7f1f8ec2536c123bf7": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "89fc645c8356e417e33a": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "0e6942228feeb911f910",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCartera"
+                        }
+                      },
+                      "Property": "Check Total Look"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "3e8d1fd69ae7f1f98669": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "841cdf09ab752a7a6740",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIAGENTES"
+                        }
+                      },
+                      "Property": "Agente_Cajero"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIAGENTES"
+                        }
+                      },
+                      "Property": "Agente_Cajero"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "visualContainerGroups": {
+          "0a3eb2a15b38d531081c": {
+            "isHidden": true
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

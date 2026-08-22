@@ -3215,6 +3215,16 @@ cultureInfo es-ES
 			            },
 			            "Weight": 0.714
 			          }
+			        },
+			        {
+			          "Hasta": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ],
 			      "SemanticType": "Time"
@@ -8311,6 +8321,16 @@ cultureInfo es-ES
 			            "State": "Generated",
 			            "Weight": 0.99
 			          }
+			        },
+			        {
+			          "Temporada anterior": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -9151,6 +9171,16 @@ cultureInfo es-ES
 			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "Venta bruta temporada": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -33468,6 +33498,897 @@ cultureInfo es-ES
 			    }
 			  },
 			  "Relationships": {
+			    "lol_pbireturnrequest_doc_date_año_has_lol_pbireturnrequest_doc_date_trimestre": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBIRETURNREQUESTS"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbireturnrequest.doc_date.año": {
+			          "Target": {
+			            "Entity": "lol_pbireturnrequest.doc_date.año"
+			          }
+			        },
+			        "lol_pbireturnrequest.doc_date.trimestre": {
+			          "Target": {
+			            "Entity": "lol_pbireturnrequest.doc_date.trimestre"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbireturnrequest.doc_date.año"
+			            },
+			            "Object": {
+			              "Role": "lol_pbireturnrequest.doc_date.trimestre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "años_have_trimestres"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbireturnrequest.doc_date.trimestre"
+			            },
+			            "Object": {
+			              "Role": "lol_pbireturnrequest.doc_date.año"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "trimestres_have_años"
+			        },
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "lol_pbireturnrequest.doc_date.trimestre"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "lol_pbireturnrequest.doc_date.año"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "trimestres_are_in_años18"
+			        }
+			      ]
+			    },
+			    "lol_pbireturnrequest_doc_date_jerarquía_de_fecha_has_lol_pbireturnrequest_doc_date_día": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBIRETURNREQUESTS"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbireturnrequest.doc_date.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "lol_pbireturnrequest.doc_date.jerarquía_de_fecha"
+			          }
+			        },
+			        "lol_pbireturnrequest.doc_date.día": {
+			          "Target": {
+			            "Entity": "lol_pbireturnrequest.doc_date.día"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbireturnrequest.doc_date.jerarquía_de_fecha"
+			            },
+			            "Object": {
+			              "Role": "lol_pbireturnrequest.doc_date.día"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "jerarquía_de_fechas_have_días"
+			        }
+			      ]
+			    },
+			    "lol_pbireturnrequest_doc_date_jerarquía_de_fecha_has_lol_pbireturnrequest_doc_date_me": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBIRETURNREQUESTS"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbireturnrequest.doc_date.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "lol_pbireturnrequest.doc_date.jerarquía_de_fecha"
+			          }
+			        },
+			        "lol_pbireturnrequest.doc_date.me": {
+			          "Target": {
+			            "Entity": "lol_pbireturnrequest.doc_date.me"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbireturnrequest.doc_date.jerarquía_de_fecha"
+			            },
+			            "Object": {
+			              "Role": "lol_pbireturnrequest.doc_date.me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "jerarquía_de_fechas_have_me"
+			        }
+			      ]
+			    },
+			    "lol_pbireturnrequest_doc_date_jerarquía_de_fecha_has_lol_pbireturnrequest_doc_date_trimestre": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBIRETURNREQUESTS"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbireturnrequest.doc_date.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "lol_pbireturnrequest.doc_date.jerarquía_de_fecha"
+			          }
+			        },
+			        "lol_pbireturnrequest.doc_date.trimestre": {
+			          "Target": {
+			            "Entity": "lol_pbireturnrequest.doc_date.trimestre"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbireturnrequest.doc_date.jerarquía_de_fecha"
+			            },
+			            "Object": {
+			              "Role": "lol_pbireturnrequest.doc_date.trimestre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "jerarquía_de_fechas_have_trimestres"
+			        }
+			      ]
+			    },
+			    "lol_pbireturnrequest_doc_date_jerarquía_de_fecha_has_lol_pbireturnrequest_doc_date_año": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBIRETURNREQUESTS"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbireturnrequest.doc_date.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "lol_pbireturnrequest.doc_date.jerarquía_de_fecha"
+			          }
+			        },
+			        "lol_pbireturnrequest.doc_date.año": {
+			          "Target": {
+			            "Entity": "lol_pbireturnrequest.doc_date.año"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbireturnrequest.doc_date.jerarquía_de_fecha"
+			            },
+			            "Object": {
+			              "Role": "lol_pbireturnrequest.doc_date.año"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "jerarquía_de_fechas_have_años"
+			        }
+			      ]
+			    },
+			    "lol_pbireturnrequest_doc_date_has_jerarquía_de_fecha": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBIRETURNREQUESTS"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbireturnrequest.doc_date": {
+			          "Target": {
+			            "Entity": "lol_pbireturnrequest.doc_date"
+			          }
+			        },
+			        "lol_pbireturnrequest.doc_date.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "lol_pbireturnrequest.doc_date.jerarquía_de_fecha"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbireturnrequest.doc_date"
+			            },
+			            "Object": {
+			              "Role": "lol_pbireturnrequest.doc_date.jerarquía_de_fecha"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "doc_dates_have_jerarquía_de_fechas"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_fecha_vencimiento_me_has_lol_pbisalesdelivery_fecha_vencimiento_día": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery.fecha_vencimiento.me": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.me"
+			          }
+			        },
+			        "lol_pbisalesdelivery.fecha_vencimiento.día": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.día"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.me"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.día"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "me_have_días"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.día"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "días_have_me"
+			        },
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.día"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "días_are_in_me17"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_fecha_vencimiento_trimestre_has_lol_pbisalesdelivery_fecha_vencimiento_me": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery.fecha_vencimiento.trimestre": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.trimestre"
+			          }
+			        },
+			        "lol_pbisalesdelivery.fecha_vencimiento.me": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.me"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.trimestre"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "trimestres_have_me"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.me"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.trimestre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "me_have_trimestres"
+			        },
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.me"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.trimestre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "me_are_in_trimestres17"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_fecha_vencimiento_año_has_lol_pbisalesdelivery_fecha_vencimiento_trimestre": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery.fecha_vencimiento.año": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.año"
+			          }
+			        },
+			        "lol_pbisalesdelivery.fecha_vencimiento.trimestre": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.trimestre"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.año"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.trimestre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "años_have_trimestres1"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.trimestre"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.año"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "trimestres_have_años1"
+			        },
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.trimestre"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.año"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "trimestres_are_in_años17"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_fecha_vencimiento_jerarquía_de_fecha_has_lol_pbisalesdelivery_fecha_vencimiento_día": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha"
+			          }
+			        },
+			        "lol_pbisalesdelivery.fecha_vencimiento.día": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.día"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.día"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "jerarquía_de_fechas_have_días1"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_fecha_vencimiento_jerarquía_de_fecha_has_lol_pbisalesdelivery_fecha_vencimiento_me": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha"
+			          }
+			        },
+			        "lol_pbisalesdelivery.fecha_vencimiento.me": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.me"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "jerarquía_de_fechas_have_me1"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_fecha_vencimiento_jerarquía_de_fecha_has_lol_pbisalesdelivery_fecha_vencimiento_trimestre": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha"
+			          }
+			        },
+			        "lol_pbisalesdelivery.fecha_vencimiento.trimestre": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.trimestre"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.trimestre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "jerarquía_de_fechas_have_trimestres1"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_fecha_vencimiento_jerarquía_de_fecha_has_lol_pbisalesdelivery_fecha_vencimiento_año": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha"
+			          }
+			        },
+			        "lol_pbisalesdelivery.fecha_vencimiento.año": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.año"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.año"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "jerarquía_de_fechas_have_años1"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_fecha_vencimiento_has_jerarquía_de_fecha": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery.fecha_vencimiento": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento"
+			          }
+			        },
+			        "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fecha_vencimientos_have_jerarquía_de_fechas"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_fecha_entrega_linea_me_has_lol_pbisalesdelivery_fecha_entrega_linea_día": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery.fecha_entrega_linea.me": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.me"
+			          }
+			        },
+			        "lol_pbisalesdelivery.fecha_entrega_linea.día": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.día"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.me"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.día"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "me_have_días1"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.día"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "días_have_me1"
+			        },
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.día"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "días_are_in_me16"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_fecha_entrega_linea_trimestre_has_lol_pbisalesdelivery_fecha_entrega_linea_me": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery.fecha_entrega_linea.trimestre": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.trimestre"
+			          }
+			        },
+			        "lol_pbisalesdelivery.fecha_entrega_linea.me": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.me"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.trimestre"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "trimestres_have_me1"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.me"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.trimestre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "me_have_trimestres1"
+			        },
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.me"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.trimestre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "me_are_in_trimestres16"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_fecha_entrega_linea_año_has_lol_pbisalesdelivery_fecha_entrega_linea_trimestre": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery.fecha_entrega_linea.año": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.año"
+			          }
+			        },
+			        "lol_pbisalesdelivery.fecha_entrega_linea.trimestre": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.trimestre"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.año"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.trimestre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "años_have_trimestres2"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.trimestre"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.año"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "trimestres_have_años2"
+			        },
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.trimestre"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.año"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "trimestres_are_in_años16"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_fecha_entrega_linea_jerarquía_de_fecha_has_lol_pbisalesdelivery_fecha_entrega_linea_día": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery.fecha_entrega_linea.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.jerarquía_de_fecha"
+			          }
+			        },
+			        "lol_pbisalesdelivery.fecha_entrega_linea.día": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.día"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.jerarquía_de_fecha"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.día"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "jerarquía_de_fechas_have_días2"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_fecha_entrega_linea_jerarquía_de_fecha_has_lol_pbisalesdelivery_fecha_entrega_linea_me": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery.fecha_entrega_linea.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.jerarquía_de_fecha"
+			          }
+			        },
+			        "lol_pbisalesdelivery.fecha_entrega_linea.me": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.me"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.jerarquía_de_fecha"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "jerarquía_de_fechas_have_me2"
+			        }
+			      ]
+			    },
+			    "lol_pbisalesdelivery_fecha_entrega_linea_jerarquía_de_fecha_has_lol_pbisalesdelivery_fecha_entrega_linea_trimestre": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbisalesdelivery.fecha_entrega_linea.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.jerarquía_de_fecha"
+			          }
+			        },
+			        "lol_pbisalesdelivery.fecha_entrega_linea.trimestre": {
+			          "Target": {
+			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.trimestre"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.jerarquía_de_fecha"
+			            },
+			            "Object": {
+			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.trimestre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "jerarquía_de_fechas_have_trimestres2"
+			        }
+			      ]
+			    },
 			    "lol_pbisalesdelivery_fecha_entrega_linea_jerarquía_de_fecha_has_lol_pbisalesdelivery_fecha_entrega_linea_año": {
 			      "Binding": {
 			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
@@ -33497,7 +34418,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años"
+			          "ID": "jerarquía_de_fechas_have_años2"
 			        }
 			      ]
 			    },
@@ -33563,7 +34484,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días"
+			          "ID": "me_have_días2"
 			        },
 			        {
 			          "Attribute": {
@@ -33576,7 +34497,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me"
+			          "ID": "días_have_me2"
 			        },
 			        {
 			          "Preposition": {
@@ -33629,7 +34550,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me"
+			          "ID": "trimestres_have_me2"
 			        },
 			        {
 			          "Attribute": {
@@ -33642,7 +34563,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres"
+			          "ID": "me_have_trimestres2"
 			        },
 			        {
 			          "Preposition": {
@@ -33695,7 +34616,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "años_have_trimestres"
+			          "ID": "años_have_trimestres3"
 			        },
 			        {
 			          "Attribute": {
@@ -33708,7 +34629,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_años"
+			          "ID": "trimestres_have_años3"
 			        },
 			        {
 			          "Preposition": {
@@ -33761,7 +34682,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días"
+			          "ID": "jerarquía_de_fechas_have_días3"
 			        }
 			      ]
 			    },
@@ -33794,7 +34715,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me"
+			          "ID": "jerarquía_de_fechas_have_me3"
 			        }
 			      ]
 			    },
@@ -33827,7 +34748,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres"
+			          "ID": "jerarquía_de_fechas_have_trimestres3"
 			        }
 			      ]
 			    },
@@ -33860,7 +34781,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años1"
+			          "ID": "jerarquía_de_fechas_have_años3"
 			        }
 			      ]
 			    },
@@ -33926,7 +34847,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días1"
+			          "ID": "me_have_días3"
 			        },
 			        {
 			          "Attribute": {
@@ -33939,7 +34860,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me1"
+			          "ID": "días_have_me3"
 			        },
 			        {
 			          "Preposition": {
@@ -33992,7 +34913,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me1"
+			          "ID": "trimestres_have_me3"
 			        },
 			        {
 			          "Attribute": {
@@ -34005,7 +34926,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres1"
+			          "ID": "me_have_trimestres3"
 			        },
 			        {
 			          "Preposition": {
@@ -34058,7 +34979,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "años_have_trimestres1"
+			          "ID": "años_have_trimestres4"
 			        },
 			        {
 			          "Attribute": {
@@ -34071,7 +34992,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_años1"
+			          "ID": "trimestres_have_años4"
 			        },
 			        {
 			          "Preposition": {
@@ -34124,7 +35045,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días1"
+			          "ID": "jerarquía_de_fechas_have_días4"
 			        }
 			      ]
 			    },
@@ -34157,7 +35078,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me1"
+			          "ID": "jerarquía_de_fechas_have_me4"
 			        }
 			      ]
 			    },
@@ -34190,7 +35111,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres1"
+			          "ID": "jerarquía_de_fechas_have_trimestres4"
 			        }
 			      ]
 			    },
@@ -34223,7 +35144,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años2"
+			          "ID": "jerarquía_de_fechas_have_años4"
 			        }
 			      ]
 			    },
@@ -34289,7 +35210,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días2"
+			          "ID": "me_have_días4"
 			        },
 			        {
 			          "Attribute": {
@@ -34302,7 +35223,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me2"
+			          "ID": "días_have_me4"
 			        },
 			        {
 			          "Preposition": {
@@ -34355,7 +35276,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me2"
+			          "ID": "trimestres_have_me4"
 			        },
 			        {
 			          "Attribute": {
@@ -34368,7 +35289,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres2"
+			          "ID": "me_have_trimestres4"
 			        },
 			        {
 			          "Preposition": {
@@ -34421,7 +35342,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "años_have_trimestres2"
+			          "ID": "años_have_trimestres5"
 			        },
 			        {
 			          "Attribute": {
@@ -34434,7 +35355,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_años2"
+			          "ID": "trimestres_have_años5"
 			        },
 			        {
 			          "Preposition": {
@@ -34487,7 +35408,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días2"
+			          "ID": "jerarquía_de_fechas_have_días5"
 			        }
 			      ]
 			    },
@@ -34520,7 +35441,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me2"
+			          "ID": "jerarquía_de_fechas_have_me5"
 			        }
 			      ]
 			    },
@@ -34553,7 +35474,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres2"
+			          "ID": "jerarquía_de_fechas_have_trimestres5"
 			        }
 			      ]
 			    },
@@ -34586,7 +35507,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años3"
+			          "ID": "jerarquía_de_fechas_have_años5"
 			        }
 			      ]
 			    },
@@ -34652,7 +35573,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días3"
+			          "ID": "me_have_días5"
 			        },
 			        {
 			          "Attribute": {
@@ -34665,7 +35586,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me3"
+			          "ID": "días_have_me5"
 			        },
 			        {
 			          "Preposition": {
@@ -34718,7 +35639,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me3"
+			          "ID": "trimestres_have_me5"
 			        },
 			        {
 			          "Attribute": {
@@ -34731,7 +35652,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres3"
+			          "ID": "me_have_trimestres5"
 			        },
 			        {
 			          "Preposition": {
@@ -34784,7 +35705,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "años_have_trimestres3"
+			          "ID": "años_have_trimestres6"
 			        },
 			        {
 			          "Attribute": {
@@ -34797,7 +35718,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_años3"
+			          "ID": "trimestres_have_años6"
 			        },
 			        {
 			          "Preposition": {
@@ -34850,7 +35771,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días3"
+			          "ID": "jerarquía_de_fechas_have_días6"
 			        }
 			      ]
 			    },
@@ -34883,7 +35804,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me3"
+			          "ID": "jerarquía_de_fechas_have_me6"
 			        }
 			      ]
 			    },
@@ -34916,7 +35837,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres3"
+			          "ID": "jerarquía_de_fechas_have_trimestres6"
 			        }
 			      ]
 			    },
@@ -34949,7 +35870,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años4"
+			          "ID": "jerarquía_de_fechas_have_años6"
 			        }
 			      ]
 			    },
@@ -35015,7 +35936,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días4"
+			          "ID": "me_have_días6"
 			        },
 			        {
 			          "Attribute": {
@@ -35028,7 +35949,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me4"
+			          "ID": "días_have_me6"
 			        },
 			        {
 			          "Preposition": {
@@ -35081,7 +36002,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me4"
+			          "ID": "trimestres_have_me6"
 			        },
 			        {
 			          "Attribute": {
@@ -35094,7 +36015,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres4"
+			          "ID": "me_have_trimestres6"
 			        },
 			        {
 			          "Preposition": {
@@ -35147,7 +36068,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "años_have_trimestres4"
+			          "ID": "años_have_trimestres7"
 			        },
 			        {
 			          "Attribute": {
@@ -35160,7 +36081,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_años4"
+			          "ID": "trimestres_have_años7"
 			        },
 			        {
 			          "Preposition": {
@@ -35213,7 +36134,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días4"
+			          "ID": "jerarquía_de_fechas_have_días7"
 			        }
 			      ]
 			    },
@@ -35246,7 +36167,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me4"
+			          "ID": "jerarquía_de_fechas_have_me7"
 			        }
 			      ]
 			    },
@@ -35279,7 +36200,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres4"
+			          "ID": "jerarquía_de_fechas_have_trimestres7"
 			        }
 			      ]
 			    },
@@ -35312,7 +36233,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años5"
+			          "ID": "jerarquía_de_fechas_have_años7"
 			        }
 			      ]
 			    },
@@ -35378,7 +36299,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días5"
+			          "ID": "me_have_días7"
 			        },
 			        {
 			          "Attribute": {
@@ -35391,7 +36312,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me5"
+			          "ID": "días_have_me7"
 			        },
 			        {
 			          "Preposition": {
@@ -35444,7 +36365,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me5"
+			          "ID": "trimestres_have_me7"
 			        },
 			        {
 			          "Attribute": {
@@ -35457,7 +36378,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres5"
+			          "ID": "me_have_trimestres7"
 			        },
 			        {
 			          "Preposition": {
@@ -35510,7 +36431,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "años_have_trimestres5"
+			          "ID": "años_have_trimestres8"
 			        },
 			        {
 			          "Attribute": {
@@ -35523,7 +36444,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_años5"
+			          "ID": "trimestres_have_años8"
 			        },
 			        {
 			          "Preposition": {
@@ -35576,7 +36497,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días5"
+			          "ID": "jerarquía_de_fechas_have_días8"
 			        }
 			      ]
 			    },
@@ -35609,7 +36530,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me5"
+			          "ID": "jerarquía_de_fechas_have_me8"
 			        }
 			      ]
 			    },
@@ -35642,7 +36563,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres5"
+			          "ID": "jerarquía_de_fechas_have_trimestres8"
 			        }
 			      ]
 			    },
@@ -35675,7 +36596,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años6"
+			          "ID": "jerarquía_de_fechas_have_años8"
 			        }
 			      ]
 			    },
@@ -35741,7 +36662,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días6"
+			          "ID": "me_have_días8"
 			        },
 			        {
 			          "Attribute": {
@@ -35754,7 +36675,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me6"
+			          "ID": "días_have_me8"
 			        },
 			        {
 			          "Preposition": {
@@ -35807,7 +36728,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me6"
+			          "ID": "trimestres_have_me8"
 			        },
 			        {
 			          "Attribute": {
@@ -35820,7 +36741,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres6"
+			          "ID": "me_have_trimestres8"
 			        },
 			        {
 			          "Preposition": {
@@ -35873,7 +36794,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "años_have_trimestres6"
+			          "ID": "años_have_trimestres9"
 			        },
 			        {
 			          "Attribute": {
@@ -35886,7 +36807,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_años6"
+			          "ID": "trimestres_have_años9"
 			        },
 			        {
 			          "Preposition": {
@@ -35939,7 +36860,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días6"
+			          "ID": "jerarquía_de_fechas_have_días9"
 			        }
 			      ]
 			    },
@@ -35972,7 +36893,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me6"
+			          "ID": "jerarquía_de_fechas_have_me9"
 			        }
 			      ]
 			    },
@@ -36005,7 +36926,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres6"
+			          "ID": "jerarquía_de_fechas_have_trimestres9"
 			        }
 			      ]
 			    },
@@ -36038,7 +36959,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años7"
+			          "ID": "jerarquía_de_fechas_have_años9"
 			        }
 			      ]
 			    },
@@ -36104,7 +37025,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días7"
+			          "ID": "me_have_días9"
 			        },
 			        {
 			          "Attribute": {
@@ -36117,7 +37038,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me7"
+			          "ID": "días_have_me9"
 			        },
 			        {
 			          "Preposition": {
@@ -36170,7 +37091,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me7"
+			          "ID": "trimestres_have_me9"
 			        },
 			        {
 			          "Attribute": {
@@ -36183,7 +37104,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres7"
+			          "ID": "me_have_trimestres9"
 			        },
 			        {
 			          "Preposition": {
@@ -36236,7 +37157,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "años_have_trimestres7"
+			          "ID": "años_have_trimestres10"
 			        },
 			        {
 			          "Attribute": {
@@ -36249,7 +37170,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_años7"
+			          "ID": "trimestres_have_años10"
 			        },
 			        {
 			          "Preposition": {
@@ -36302,7 +37223,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días7"
+			          "ID": "jerarquía_de_fechas_have_días10"
 			        }
 			      ]
 			    },
@@ -36335,7 +37256,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me7"
+			          "ID": "jerarquía_de_fechas_have_me10"
 			        }
 			      ]
 			    },
@@ -36368,7 +37289,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres7"
+			          "ID": "jerarquía_de_fechas_have_trimestres10"
 			        }
 			      ]
 			    },
@@ -36401,7 +37322,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años8"
+			          "ID": "jerarquía_de_fechas_have_años10"
 			        }
 			      ]
 			    },
@@ -36467,7 +37388,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días8"
+			          "ID": "me_have_días10"
 			        },
 			        {
 			          "Attribute": {
@@ -36480,7 +37401,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me8"
+			          "ID": "días_have_me10"
 			        },
 			        {
 			          "Preposition": {
@@ -36533,7 +37454,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me8"
+			          "ID": "trimestres_have_me10"
 			        },
 			        {
 			          "Attribute": {
@@ -36546,7 +37467,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres8"
+			          "ID": "me_have_trimestres10"
 			        },
 			        {
 			          "Preposition": {
@@ -36599,7 +37520,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "años_have_trimestres8"
+			          "ID": "años_have_trimestres11"
 			        },
 			        {
 			          "Attribute": {
@@ -36612,7 +37533,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_años8"
+			          "ID": "trimestres_have_años11"
 			        },
 			        {
 			          "Preposition": {
@@ -36665,7 +37586,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días8"
+			          "ID": "jerarquía_de_fechas_have_días11"
 			        }
 			      ]
 			    },
@@ -36698,7 +37619,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me8"
+			          "ID": "jerarquía_de_fechas_have_me11"
 			        }
 			      ]
 			    },
@@ -36731,7 +37652,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres8"
+			          "ID": "jerarquía_de_fechas_have_trimestres11"
 			        }
 			      ]
 			    },
@@ -36764,7 +37685,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años9"
+			          "ID": "jerarquía_de_fechas_have_años11"
 			        }
 			      ]
 			    },
@@ -36830,7 +37751,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días9"
+			          "ID": "me_have_días11"
 			        },
 			        {
 			          "Attribute": {
@@ -36843,7 +37764,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me9"
+			          "ID": "días_have_me11"
 			        },
 			        {
 			          "Preposition": {
@@ -36896,7 +37817,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me9"
+			          "ID": "trimestres_have_me11"
 			        },
 			        {
 			          "Attribute": {
@@ -36909,7 +37830,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres9"
+			          "ID": "me_have_trimestres11"
 			        },
 			        {
 			          "Preposition": {
@@ -36962,7 +37883,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "años_have_trimestres9"
+			          "ID": "años_have_trimestres12"
 			        },
 			        {
 			          "Attribute": {
@@ -36975,7 +37896,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_años9"
+			          "ID": "trimestres_have_años12"
 			        },
 			        {
 			          "Preposition": {
@@ -37028,7 +37949,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días9"
+			          "ID": "jerarquía_de_fechas_have_días12"
 			        }
 			      ]
 			    },
@@ -37061,7 +37982,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me9"
+			          "ID": "jerarquía_de_fechas_have_me12"
 			        }
 			      ]
 			    },
@@ -37094,7 +38015,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres9"
+			          "ID": "jerarquía_de_fechas_have_trimestres12"
 			        }
 			      ]
 			    },
@@ -37127,7 +38048,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años10"
+			          "ID": "jerarquía_de_fechas_have_años12"
 			        }
 			      ]
 			    },
@@ -37193,7 +38114,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días10"
+			          "ID": "me_have_días12"
 			        },
 			        {
 			          "Attribute": {
@@ -37206,7 +38127,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me10"
+			          "ID": "días_have_me12"
 			        },
 			        {
 			          "Preposition": {
@@ -37259,7 +38180,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me10"
+			          "ID": "trimestres_have_me12"
 			        },
 			        {
 			          "Attribute": {
@@ -37272,7 +38193,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres10"
+			          "ID": "me_have_trimestres12"
 			        },
 			        {
 			          "Preposition": {
@@ -37325,7 +38246,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "años_have_trimestres10"
+			          "ID": "años_have_trimestres13"
 			        },
 			        {
 			          "Attribute": {
@@ -37338,7 +38259,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_años10"
+			          "ID": "trimestres_have_años13"
 			        },
 			        {
 			          "Preposition": {
@@ -37391,7 +38312,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días10"
+			          "ID": "jerarquía_de_fechas_have_días13"
 			        }
 			      ]
 			    },
@@ -37424,7 +38345,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me10"
+			          "ID": "jerarquía_de_fechas_have_me13"
 			        }
 			      ]
 			    },
@@ -37457,7 +38378,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres10"
+			          "ID": "jerarquía_de_fechas_have_trimestres13"
 			        }
 			      ]
 			    },
@@ -37490,7 +38411,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años11"
+			          "ID": "jerarquía_de_fechas_have_años13"
 			        }
 			      ]
 			    },
@@ -37556,7 +38477,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días11"
+			          "ID": "me_have_días13"
 			        },
 			        {
 			          "Attribute": {
@@ -37569,7 +38490,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me11"
+			          "ID": "días_have_me13"
 			        },
 			        {
 			          "Preposition": {
@@ -37622,7 +38543,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me11"
+			          "ID": "trimestres_have_me13"
 			        },
 			        {
 			          "Attribute": {
@@ -37635,7 +38556,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres11"
+			          "ID": "me_have_trimestres13"
 			        },
 			        {
 			          "Preposition": {
@@ -37688,7 +38609,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "años_have_trimestres11"
+			          "ID": "años_have_trimestres14"
 			        },
 			        {
 			          "Attribute": {
@@ -37701,7 +38622,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_años11"
+			          "ID": "trimestres_have_años14"
 			        },
 			        {
 			          "Preposition": {
@@ -37754,7 +38675,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días11"
+			          "ID": "jerarquía_de_fechas_have_días14"
 			        }
 			      ]
 			    },
@@ -37787,7 +38708,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me11"
+			          "ID": "jerarquía_de_fechas_have_me14"
 			        }
 			      ]
 			    },
@@ -37820,7 +38741,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres11"
+			          "ID": "jerarquía_de_fechas_have_trimestres14"
 			        }
 			      ]
 			    },
@@ -37853,7 +38774,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años12"
+			          "ID": "jerarquía_de_fechas_have_años14"
 			        }
 			      ]
 			    },
@@ -37919,7 +38840,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días12"
+			          "ID": "me_have_días14"
 			        },
 			        {
 			          "Attribute": {
@@ -37932,7 +38853,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me12"
+			          "ID": "días_have_me14"
 			        },
 			        {
 			          "Preposition": {
@@ -37985,7 +38906,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me12"
+			          "ID": "trimestres_have_me14"
 			        },
 			        {
 			          "Attribute": {
@@ -37998,7 +38919,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres12"
+			          "ID": "me_have_trimestres14"
 			        },
 			        {
 			          "Preposition": {
@@ -38051,7 +38972,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "años_have_trimestres12"
+			          "ID": "años_have_trimestres15"
 			        },
 			        {
 			          "Attribute": {
@@ -38064,7 +38985,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_años12"
+			          "ID": "trimestres_have_años15"
 			        },
 			        {
 			          "Preposition": {
@@ -38117,7 +39038,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días12"
+			          "ID": "jerarquía_de_fechas_have_días15"
 			        }
 			      ]
 			    },
@@ -38150,7 +39071,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me12"
+			          "ID": "jerarquía_de_fechas_have_me15"
 			        }
 			      ]
 			    },
@@ -38183,7 +39104,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres12"
+			          "ID": "jerarquía_de_fechas_have_trimestres15"
 			        }
 			      ]
 			    },
@@ -38216,7 +39137,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años13"
+			          "ID": "jerarquía_de_fechas_have_años15"
 			        }
 			      ]
 			    },
@@ -38282,7 +39203,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días13"
+			          "ID": "me_have_días15"
 			        },
 			        {
 			          "Attribute": {
@@ -38295,7 +39216,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me13"
+			          "ID": "días_have_me15"
 			        },
 			        {
 			          "Preposition": {
@@ -38348,7 +39269,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me13"
+			          "ID": "trimestres_have_me15"
 			        },
 			        {
 			          "Attribute": {
@@ -38361,7 +39282,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres13"
+			          "ID": "me_have_trimestres15"
 			        },
 			        {
 			          "Preposition": {
@@ -38414,7 +39335,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "años_have_trimestres13"
+			          "ID": "años_have_trimestres16"
 			        },
 			        {
 			          "Attribute": {
@@ -38427,7 +39348,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_años13"
+			          "ID": "trimestres_have_años16"
 			        },
 			        {
 			          "Preposition": {
@@ -38480,7 +39401,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días13"
+			          "ID": "jerarquía_de_fechas_have_días16"
 			        }
 			      ]
 			    },
@@ -38513,7 +39434,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me13"
+			          "ID": "jerarquía_de_fechas_have_me16"
 			        }
 			      ]
 			    },
@@ -38546,7 +39467,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres13"
+			          "ID": "jerarquía_de_fechas_have_trimestres16"
 			        }
 			      ]
 			    },
@@ -38579,7 +39500,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años14"
+			          "ID": "jerarquía_de_fechas_have_años16"
 			        }
 			      ]
 			    },
@@ -38645,7 +39566,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días14"
+			          "ID": "me_have_días16"
 			        },
 			        {
 			          "Attribute": {
@@ -38658,7 +39579,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me14"
+			          "ID": "días_have_me16"
 			        },
 			        {
 			          "Preposition": {
@@ -38711,7 +39632,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me14"
+			          "ID": "trimestres_have_me16"
 			        },
 			        {
 			          "Attribute": {
@@ -38724,7 +39645,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres14"
+			          "ID": "me_have_trimestres16"
 			        },
 			        {
 			          "Preposition": {
@@ -38777,7 +39698,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "años_have_trimestres14"
+			          "ID": "años_have_trimestres17"
 			        },
 			        {
 			          "Attribute": {
@@ -38790,7 +39711,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_años14"
+			          "ID": "trimestres_have_años17"
 			        },
 			        {
 			          "Preposition": {
@@ -38843,7 +39764,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días14"
+			          "ID": "jerarquía_de_fechas_have_días17"
 			        }
 			      ]
 			    },
@@ -38876,7 +39797,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me14"
+			          "ID": "jerarquía_de_fechas_have_me17"
 			        }
 			      ]
 			    },
@@ -38909,7 +39830,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres14"
+			          "ID": "jerarquía_de_fechas_have_trimestres17"
 			        }
 			      ]
 			    },
@@ -38942,7 +39863,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años15"
+			          "ID": "jerarquía_de_fechas_have_años17"
 			        }
 			      ]
 			    },
@@ -39008,7 +39929,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días15"
+			          "ID": "me_have_días17"
 			        },
 			        {
 			          "Attribute": {
@@ -39021,7 +39942,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me15"
+			          "ID": "días_have_me17"
 			        },
 			        {
 			          "Preposition": {
@@ -39074,7 +39995,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_me15"
+			          "ID": "trimestres_have_me17"
 			        },
 			        {
 			          "Attribute": {
@@ -39087,7 +40008,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_trimestres15"
+			          "ID": "me_have_trimestres17"
 			        },
 			        {
 			          "Preposition": {
@@ -39140,7 +40061,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "años_have_trimestres15"
+			          "ID": "años_have_trimestres18"
 			        },
 			        {
 			          "Attribute": {
@@ -39153,7 +40074,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_años15"
+			          "ID": "trimestres_have_años18"
 			        },
 			        {
 			          "Preposition": {
@@ -39206,7 +40127,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días15"
+			          "ID": "jerarquía_de_fechas_have_días18"
 			        }
 			      ]
 			    },
@@ -39239,7 +40160,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me15"
+			          "ID": "jerarquía_de_fechas_have_me18"
 			        }
 			      ]
 			    },
@@ -39272,7 +40193,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres15"
+			          "ID": "jerarquía_de_fechas_have_trimestres18"
 			        }
 			      ]
 			    },
@@ -39305,7 +40226,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años16"
+			          "ID": "jerarquía_de_fechas_have_años18"
 			        }
 			      ]
 			    },
@@ -41874,6 +42795,39 @@ cultureInfo es-ES
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "lol_pbiinvoicessales_have__adelanto_sobre_cierre"
+			        }
+			      ]
+			    },
+			    "lol_pbicreditnotessale_has_medidas_cartera_adelanto_sobre_cierre": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBICREDITNOTESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbicreditnotessale": {
+			          "Target": {
+			            "Entity": "lol_pbicreditnotessale"
+			          }
+			        },
+			        "medidas_cartera.adelanto_sobre_cierre": {
+			          "Target": {
+			            "Entity": "medidas_cartera.adelanto_sobre_cierre"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbicreditnotessale"
+			            },
+			            "Object": {
+			              "Role": "medidas_cartera.adelanto_sobre_cierre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbicreditnotessales_have__adelanto_sobre_cierre"
 			        }
 			      ]
 			    },
@@ -50691,6 +51645,39 @@ cultureInfo es-ES
 			        }
 			      ]
 			    },
+			    "lol_pbicreditnotessale_has_medidas_venta_devoluciones": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBICREDITNOTESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbicreditnotessale": {
+			          "Target": {
+			            "Entity": "lol_pbicreditnotessale"
+			          }
+			        },
+			        "medidas_venta.devoluciones": {
+			          "Target": {
+			            "Entity": "medidas_venta.devoluciones"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbicreditnotessale"
+			            },
+			            "Object": {
+			              "Role": "medidas_venta.devoluciones"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbicreditnotessales_have__devoluciones"
+			        }
+			      ]
+			    },
 			    "lol_pbireturnsale_has_medidas_venta_devoluciones_cadena": {
 			      "Binding": {
 			        "ConceptualEntity": "LOL_PBIRETURNSALES"
@@ -50955,6 +51942,39 @@ cultureInfo es-ES
 			        }
 			      ]
 			    },
+			    "lol_pbicreditnotessale_has_medidas_venta_pendiente_facturar": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBICREDITNOTESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbicreditnotessale": {
+			          "Target": {
+			            "Entity": "lol_pbicreditnotessale"
+			          }
+			        },
+			        "medidas_venta.pendiente_facturar": {
+			          "Target": {
+			            "Entity": "medidas_venta.pendiente_facturar"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbicreditnotessale"
+			            },
+			            "Object": {
+			              "Role": "medidas_venta.pendiente_facturar"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbicreditnotessales_have_pendiente_facturar"
+			        }
+			      ]
+			    },
 			    "lol_pbiinvoicessale_has_medidas_venta_facturado": {
 			      "Binding": {
 			        "ConceptualEntity": "LOL_PBIINVOICESSALES"
@@ -50985,6 +52005,39 @@ cultureInfo es-ES
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "lol_pbiinvoicessales_have__facturado"
+			        }
+			      ]
+			    },
+			    "lol_pbicreditnotessale_has_medidas_venta_facturado": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBICREDITNOTESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbicreditnotessale": {
+			          "Target": {
+			            "Entity": "lol_pbicreditnotessale"
+			          }
+			        },
+			        "medidas_venta.facturado": {
+			          "Target": {
+			            "Entity": "medidas_venta.facturado"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbicreditnotessale"
+			            },
+			            "Object": {
+			              "Role": "medidas_venta.facturado"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbicreditnotessales_have__facturado"
 			        }
 			      ]
 			    },
@@ -51051,6 +52104,39 @@ cultureInfo es-ES
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "lol_pbiinvoicessales_have_importe_facturado"
+			        }
+			      ]
+			    },
+			    "lol_pbicreditnotessale_has_medidas_venta_importe_facturado": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBICREDITNOTESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbicreditnotessale": {
+			          "Target": {
+			            "Entity": "lol_pbicreditnotessale"
+			          }
+			        },
+			        "medidas_venta.importe_facturado": {
+			          "Target": {
+			            "Entity": "medidas_venta.importe_facturado"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbicreditnotessale"
+			            },
+			            "Object": {
+			              "Role": "medidas_venta.importe_facturado"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbicreditnotessales_have_importe_facturado"
 			        }
 			      ]
 			    },
@@ -52110,6 +53196,39 @@ cultureInfo es-ES
 			        }
 			      ]
 			    },
+			    "lol_pbicreditnotessale_has_medidas_cartera_avance_del_cierre": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBICREDITNOTESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbicreditnotessale": {
+			          "Target": {
+			            "Entity": "lol_pbicreditnotessale"
+			          }
+			        },
+			        "medidas_cartera.avance_del_cierre": {
+			          "Target": {
+			            "Entity": "medidas_cartera.avance_del_cierre"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbicreditnotessale"
+			            },
+			            "Object": {
+			              "Role": "medidas_cartera.avance_del_cierre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbicreditnotessales_have__avance_del_cierre"
+			        }
+			      ]
+			    },
 			    "lol_planmaterial_has_medidas_cartera_cierre_previsto_del_mes": {
 			      "Binding": {
 			        "ConceptualEntity": "LOL_PLANMATERIAL"
@@ -52206,6 +53325,39 @@ cultureInfo es-ES
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "lol_pbiinvoicessales_have_cierre_previsto_del_mes"
+			        }
+			      ]
+			    },
+			    "lol_pbicreditnotessale_has_medidas_cartera_cierre_previsto_del_mes": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBICREDITNOTESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbicreditnotessale": {
+			          "Target": {
+			            "Entity": "lol_pbicreditnotessale"
+			          }
+			        },
+			        "medidas_cartera.cierre_previsto_del_mes": {
+			          "Target": {
+			            "Entity": "medidas_cartera.cierre_previsto_del_mes"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbicreditnotessale"
+			            },
+			            "Object": {
+			              "Role": "medidas_cartera.cierre_previsto_del_mes"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbicreditnotessales_have_cierre_previsto_del_mes"
 			        }
 			      ]
 			    },
@@ -52308,6 +53460,39 @@ cultureInfo es-ES
 			        }
 			      ]
 			    },
+			    "lol_pbicreditnotessale_has_medidas_cartera_servido_sin_facturar": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBICREDITNOTESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbicreditnotessale": {
+			          "Target": {
+			            "Entity": "lol_pbicreditnotessale"
+			          }
+			        },
+			        "medidas_cartera.servido_sin_facturar": {
+			          "Target": {
+			            "Entity": "medidas_cartera.servido_sin_facturar"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbicreditnotessale"
+			            },
+			            "Object": {
+			              "Role": "medidas_cartera.servido_sin_facturar"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbicreditnotessales_have_servido_sin_facturar"
+			        }
+			      ]
+			    },
 			    "lol_pbiinvoicessale_has_medidas_cartera_facturado_del_mes": {
 			      "Binding": {
 			        "ConceptualEntity": "LOL_PBIINVOICESSALES"
@@ -52341,6 +53526,39 @@ cultureInfo es-ES
 			        }
 			      ]
 			    },
+			    "lol_pbicreditnotessale_has_medidas_cartera_facturado_del_mes": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBICREDITNOTESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbicreditnotessale": {
+			          "Target": {
+			            "Entity": "lol_pbicreditnotessale"
+			          }
+			        },
+			        "medidas_cartera.facturado_del_mes": {
+			          "Target": {
+			            "Entity": "medidas_cartera.facturado_del_mes"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbicreditnotessale"
+			            },
+			            "Object": {
+			              "Role": "medidas_cartera.facturado_del_mes"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbicreditnotessales_have_facturado_del_mes"
+			        }
+			      ]
+			    },
 			    "lol_pbiinvoicessale_has_medidas_venta_facturado_cadena": {
 			      "Binding": {
 			        "ConceptualEntity": "LOL_PBIINVOICESSALES"
@@ -52371,6 +53589,39 @@ cultureInfo es-ES
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "lol_pbiinvoicessales_have_facturado_cadena"
+			        }
+			      ]
+			    },
+			    "lol_pbicreditnotessale_has_medidas_venta_facturado_cadena": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBICREDITNOTESSALES"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbicreditnotessale": {
+			          "Target": {
+			            "Entity": "lol_pbicreditnotessale"
+			          }
+			        },
+			        "medidas_venta.facturado_cadena": {
+			          "Target": {
+			            "Entity": "medidas_venta.facturado_cadena"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbicreditnotessale"
+			            },
+			            "Object": {
+			              "Role": "medidas_venta.facturado_cadena"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "lol_pbicreditnotessales_have_facturado_cadena"
 			        }
 			      ]
 			    },
@@ -63413,897 +64664,6 @@ cultureInfo es-ES
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "lol_pbib_2bsalesorders_are_in_country_codes"
-			        }
-			      ]
-			    },
-			    "lol_pbisalesdelivery_fecha_entrega_linea_jerarquía_de_fecha_has_lol_pbisalesdelivery_fecha_entrega_linea_trimestre": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_pbisalesdelivery.fecha_entrega_linea.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.jerarquía_de_fecha"
-			          }
-			        },
-			        "lol_pbisalesdelivery.fecha_entrega_linea.trimestre": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.trimestre"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.jerarquía_de_fecha"
-			            },
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.trimestre"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres16"
-			        }
-			      ]
-			    },
-			    "lol_pbisalesdelivery_fecha_entrega_linea_jerarquía_de_fecha_has_lol_pbisalesdelivery_fecha_entrega_linea_me": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_pbisalesdelivery.fecha_entrega_linea.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.jerarquía_de_fecha"
-			          }
-			        },
-			        "lol_pbisalesdelivery.fecha_entrega_linea.me": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.me"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.jerarquía_de_fecha"
-			            },
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.me"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me16"
-			        }
-			      ]
-			    },
-			    "lol_pbisalesdelivery_fecha_entrega_linea_jerarquía_de_fecha_has_lol_pbisalesdelivery_fecha_entrega_linea_día": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_pbisalesdelivery.fecha_entrega_linea.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.jerarquía_de_fecha"
-			          }
-			        },
-			        "lol_pbisalesdelivery.fecha_entrega_linea.día": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.día"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.jerarquía_de_fecha"
-			            },
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.día"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días16"
-			        }
-			      ]
-			    },
-			    "lol_pbisalesdelivery_fecha_entrega_linea_año_has_lol_pbisalesdelivery_fecha_entrega_linea_trimestre": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_pbisalesdelivery.fecha_entrega_linea.año": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.año"
-			          }
-			        },
-			        "lol_pbisalesdelivery.fecha_entrega_linea.trimestre": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.trimestre"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.año"
-			            },
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.trimestre"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "años_have_trimestres16"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.trimestre"
-			            },
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.año"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "trimestres_have_años16"
-			        },
-			        {
-			          "Preposition": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.trimestre"
-			            },
-			            "Prepositions": [
-			              {
-			                "in": {
-			                  "State": "Generated"
-			                }
-			              }
-			            ],
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.año"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "trimestres_are_in_años16"
-			        }
-			      ]
-			    },
-			    "lol_pbisalesdelivery_fecha_entrega_linea_trimestre_has_lol_pbisalesdelivery_fecha_entrega_linea_me": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_pbisalesdelivery.fecha_entrega_linea.trimestre": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.trimestre"
-			          }
-			        },
-			        "lol_pbisalesdelivery.fecha_entrega_linea.me": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.me"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.trimestre"
-			            },
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.me"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "trimestres_have_me16"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.me"
-			            },
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.trimestre"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "me_have_trimestres16"
-			        },
-			        {
-			          "Preposition": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.me"
-			            },
-			            "Prepositions": [
-			              {
-			                "in": {
-			                  "State": "Generated"
-			                }
-			              }
-			            ],
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.trimestre"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "me_are_in_trimestres16"
-			        }
-			      ]
-			    },
-			    "lol_pbisalesdelivery_fecha_entrega_linea_me_has_lol_pbisalesdelivery_fecha_entrega_linea_día": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_pbisalesdelivery.fecha_entrega_linea.me": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.me"
-			          }
-			        },
-			        "lol_pbisalesdelivery.fecha_entrega_linea.día": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_entrega_linea.día"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.me"
-			            },
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.día"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "me_have_días16"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.día"
-			            },
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.me"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "días_have_me16"
-			        },
-			        {
-			          "Preposition": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.día"
-			            },
-			            "Prepositions": [
-			              {
-			                "in": {
-			                  "State": "Generated"
-			                }
-			              }
-			            ],
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_entrega_linea.me"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "días_are_in_me16"
-			        }
-			      ]
-			    },
-			    "lol_pbisalesdelivery_fecha_vencimiento_has_jerarquía_de_fecha": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_pbisalesdelivery.fecha_vencimiento": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento"
-			          }
-			        },
-			        "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento"
-			            },
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "fecha_vencimientos_have_jerarquía_de_fechas"
-			        }
-			      ]
-			    },
-			    "lol_pbisalesdelivery_fecha_vencimiento_jerarquía_de_fecha_has_lol_pbisalesdelivery_fecha_vencimiento_año": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha"
-			          }
-			        },
-			        "lol_pbisalesdelivery.fecha_vencimiento.año": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.año"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha"
-			            },
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.año"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años17"
-			        }
-			      ]
-			    },
-			    "lol_pbisalesdelivery_fecha_vencimiento_jerarquía_de_fecha_has_lol_pbisalesdelivery_fecha_vencimiento_trimestre": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha"
-			          }
-			        },
-			        "lol_pbisalesdelivery.fecha_vencimiento.trimestre": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.trimestre"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha"
-			            },
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.trimestre"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres17"
-			        }
-			      ]
-			    },
-			    "lol_pbisalesdelivery_fecha_vencimiento_jerarquía_de_fecha_has_lol_pbisalesdelivery_fecha_vencimiento_me": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha"
-			          }
-			        },
-			        "lol_pbisalesdelivery.fecha_vencimiento.me": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.me"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha"
-			            },
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.me"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me17"
-			        }
-			      ]
-			    },
-			    "lol_pbisalesdelivery_fecha_vencimiento_jerarquía_de_fecha_has_lol_pbisalesdelivery_fecha_vencimiento_día": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha"
-			          }
-			        },
-			        "lol_pbisalesdelivery.fecha_vencimiento.día": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.día"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.jerarquía_de_fecha"
-			            },
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.día"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días17"
-			        }
-			      ]
-			    },
-			    "lol_pbisalesdelivery_fecha_vencimiento_año_has_lol_pbisalesdelivery_fecha_vencimiento_trimestre": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_pbisalesdelivery.fecha_vencimiento.año": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.año"
-			          }
-			        },
-			        "lol_pbisalesdelivery.fecha_vencimiento.trimestre": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.trimestre"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.año"
-			            },
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.trimestre"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "años_have_trimestres17"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.trimestre"
-			            },
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.año"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "trimestres_have_años17"
-			        },
-			        {
-			          "Preposition": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.trimestre"
-			            },
-			            "Prepositions": [
-			              {
-			                "in": {
-			                  "State": "Generated"
-			                }
-			              }
-			            ],
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.año"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "trimestres_are_in_años17"
-			        }
-			      ]
-			    },
-			    "lol_pbisalesdelivery_fecha_vencimiento_trimestre_has_lol_pbisalesdelivery_fecha_vencimiento_me": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_pbisalesdelivery.fecha_vencimiento.trimestre": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.trimestre"
-			          }
-			        },
-			        "lol_pbisalesdelivery.fecha_vencimiento.me": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.me"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.trimestre"
-			            },
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.me"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "trimestres_have_me17"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.me"
-			            },
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.trimestre"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "me_have_trimestres17"
-			        },
-			        {
-			          "Preposition": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.me"
-			            },
-			            "Prepositions": [
-			              {
-			                "in": {
-			                  "State": "Generated"
-			                }
-			              }
-			            ],
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.trimestre"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "me_are_in_trimestres17"
-			        }
-			      ]
-			    },
-			    "lol_pbisalesdelivery_fecha_vencimiento_me_has_lol_pbisalesdelivery_fecha_vencimiento_día": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PBISALESDELIVERY"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_pbisalesdelivery.fecha_vencimiento.me": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.me"
-			          }
-			        },
-			        "lol_pbisalesdelivery.fecha_vencimiento.día": {
-			          "Target": {
-			            "Entity": "lol_pbisalesdelivery.fecha_vencimiento.día"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.me"
-			            },
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.día"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "me_have_días17"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.día"
-			            },
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.me"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "días_have_me17"
-			        },
-			        {
-			          "Preposition": {
-			            "Subject": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.día"
-			            },
-			            "Prepositions": [
-			              {
-			                "in": {
-			                  "State": "Generated"
-			                }
-			              }
-			            ],
-			            "Object": {
-			              "Role": "lol_pbisalesdelivery.fecha_vencimiento.me"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "días_are_in_me17"
-			        }
-			      ]
-			    },
-			    "lol_pbireturnrequest_doc_date_has_jerarquía_de_fecha": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PBIRETURNREQUESTS"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_pbireturnrequest.doc_date": {
-			          "Target": {
-			            "Entity": "lol_pbireturnrequest.doc_date"
-			          }
-			        },
-			        "lol_pbireturnrequest.doc_date.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_pbireturnrequest.doc_date.jerarquía_de_fecha"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbireturnrequest.doc_date"
-			            },
-			            "Object": {
-			              "Role": "lol_pbireturnrequest.doc_date.jerarquía_de_fecha"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "doc_dates_have_jerarquía_de_fechas"
-			        }
-			      ]
-			    },
-			    "lol_pbireturnrequest_doc_date_jerarquía_de_fecha_has_lol_pbireturnrequest_doc_date_año": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PBIRETURNREQUESTS"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_pbireturnrequest.doc_date.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_pbireturnrequest.doc_date.jerarquía_de_fecha"
-			          }
-			        },
-			        "lol_pbireturnrequest.doc_date.año": {
-			          "Target": {
-			            "Entity": "lol_pbireturnrequest.doc_date.año"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbireturnrequest.doc_date.jerarquía_de_fecha"
-			            },
-			            "Object": {
-			              "Role": "lol_pbireturnrequest.doc_date.año"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_años18"
-			        }
-			      ]
-			    },
-			    "lol_pbireturnrequest_doc_date_jerarquía_de_fecha_has_lol_pbireturnrequest_doc_date_trimestre": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PBIRETURNREQUESTS"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_pbireturnrequest.doc_date.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_pbireturnrequest.doc_date.jerarquía_de_fecha"
-			          }
-			        },
-			        "lol_pbireturnrequest.doc_date.trimestre": {
-			          "Target": {
-			            "Entity": "lol_pbireturnrequest.doc_date.trimestre"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbireturnrequest.doc_date.jerarquía_de_fecha"
-			            },
-			            "Object": {
-			              "Role": "lol_pbireturnrequest.doc_date.trimestre"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_trimestres18"
-			        }
-			      ]
-			    },
-			    "lol_pbireturnrequest_doc_date_jerarquía_de_fecha_has_lol_pbireturnrequest_doc_date_me": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PBIRETURNREQUESTS"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_pbireturnrequest.doc_date.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_pbireturnrequest.doc_date.jerarquía_de_fecha"
-			          }
-			        },
-			        "lol_pbireturnrequest.doc_date.me": {
-			          "Target": {
-			            "Entity": "lol_pbireturnrequest.doc_date.me"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbireturnrequest.doc_date.jerarquía_de_fecha"
-			            },
-			            "Object": {
-			              "Role": "lol_pbireturnrequest.doc_date.me"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_me18"
-			        }
-			      ]
-			    },
-			    "lol_pbireturnrequest_doc_date_jerarquía_de_fecha_has_lol_pbireturnrequest_doc_date_día": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PBIRETURNREQUESTS"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_pbireturnrequest.doc_date.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_pbireturnrequest.doc_date.jerarquía_de_fecha"
-			          }
-			        },
-			        "lol_pbireturnrequest.doc_date.día": {
-			          "Target": {
-			            "Entity": "lol_pbireturnrequest.doc_date.día"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbireturnrequest.doc_date.jerarquía_de_fecha"
-			            },
-			            "Object": {
-			              "Role": "lol_pbireturnrequest.doc_date.día"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "jerarquía_de_fechas_have_días18"
-			        }
-			      ]
-			    },
-			    "lol_pbireturnrequest_doc_date_año_has_lol_pbireturnrequest_doc_date_trimestre": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PBIRETURNREQUESTS"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_pbireturnrequest.doc_date.año": {
-			          "Target": {
-			            "Entity": "lol_pbireturnrequest.doc_date.año"
-			          }
-			        },
-			        "lol_pbireturnrequest.doc_date.trimestre": {
-			          "Target": {
-			            "Entity": "lol_pbireturnrequest.doc_date.trimestre"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbireturnrequest.doc_date.año"
-			            },
-			            "Object": {
-			              "Role": "lol_pbireturnrequest.doc_date.trimestre"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "años_have_trimestres18"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbireturnrequest.doc_date.trimestre"
-			            },
-			            "Object": {
-			              "Role": "lol_pbireturnrequest.doc_date.año"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "trimestres_have_años18"
-			        },
-			        {
-			          "Preposition": {
-			            "Subject": {
-			              "Role": "lol_pbireturnrequest.doc_date.trimestre"
-			            },
-			            "Prepositions": [
-			              {
-			                "in": {
-			                  "State": "Generated"
-			                }
-			              }
-			            ],
-			            "Object": {
-			              "Role": "lol_pbireturnrequest.doc_date.año"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "trimestres_are_in_años18"
 			        }
 			      ]
 			    },
