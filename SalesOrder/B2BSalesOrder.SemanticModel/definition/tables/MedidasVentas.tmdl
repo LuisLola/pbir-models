@@ -596,7 +596,7 @@ table MedidasVentas
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importe Facturado' = ```
-			SUM ( 'LOL_PBIINVOICESSALES'[LineTotal_LC] )
+			SUM ('LOL_PBIINVOICESSALES'[LineTotal_LC]) - SUM(LOL_PBICREDITNOTESSALES[LineTotal_LC])
 			
 			```
 		displayFolder: Servicio Temporada
@@ -613,7 +613,7 @@ table MedidasVentas
 		lineageTag: a24c3813-3b1a-46e9-91c6-6da5fbb26f9e
 
 	measure 'Pendiente Facturar' = ```
-			[Servido (cadena)] - [Facturado (cadena)]
+			[Servido (cadena)] - [Importe Facturado]
 			
 			```
 		displayFolder: Servicio Temporada

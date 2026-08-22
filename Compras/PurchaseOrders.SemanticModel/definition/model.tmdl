@@ -8,7 +8,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["LOL_PBIPURCHASEORDERS","LOL_PBIMODELITEM","LOL_PBITIENDAS","LOL_PBIPURCHASEGOODRECEIPT","LOL_PBIPURCHASEINVOICE","LOL_PBISTOCKTRANSFERSTATUS"]
+annotation PBI_QueryOrder = ["LOL_PBIPURCHASEORDERS","LOL_PBIMODELITEM","LOL_PBITIENDAS","LOL_PBIPURCHASEGOODRECEIPT","LOL_PBIPURCHASEINVOICE","LOL_PBISTOCKTRANSFERSTATUS","LOL_PBICLIENTES","LOL_PBIB2BSALESORDER"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
@@ -25,7 +25,6 @@ ref table LOL_PBITIENDAS
 ref table LocalDateTable_e25bc21e-c8e6-4407-8b2c-e35a5a3bb1c7
 ref table LocalDateTable_345be5ab-5f41-4265-89c9-c7ecc6322178
 ref table LocalDateTable_e2fa4627-ec4d-43d5-83ce-844020f1298c
-ref table LocalDateTable_71731e3a-b6dd-4ad5-9f3e-257940355b61
 ref table LOL_PBIPURCHASEGOODRECEIPT
 ref table LocalDateTable_fddec359-7f33-4c71-8e51-3acc7f923100
 ref table LocalDateTable_9fa171a7-c465-4a42-910b-22dbc50f00fb
@@ -36,12 +35,10 @@ ref table LocalDateTable_4f45aa0e-7368-4b91-ba24-f5e6663f7719
 ref table LocalDateTable_c094b347-f4d5-48c2-8866-d427093e0907
 ref table LocalDateTable_6709db80-7a28-4b3a-a5c0-5a8f79309dde
 ref table LOL_PBIPURCHASEINVOICE
-ref table LocalDateTable_a7d16dbe-1231-4ffe-8c2c-7922e7b4f91f
 ref table LocalDateTable_4bd0a01b-ad53-470a-94f3-8984c534a04f
 ref table LocalDateTable_4456c80e-f85a-4041-8f8d-8374b729b6b6
 ref table LocalDateTable_15dee13f-ab75-4334-bc37-02d9198d45f9
 ref table LocalDateTable_90803cb3-dcb8-4ff2-a50f-9ef23ebbb3a1
-ref table LocalDateTable_da39c579-8e32-4e2b-9620-be1e0e40e9f1
 ref table LocalDateTable_86722f70-8be7-44e7-8b16-0c6f00300ad5
 ref table LocalDateTable_ee00c7d9-5303-47b8-a3be-a669a5931f6a
 ref table LocalDateTable_de839597-b9f8-48fe-955b-76dc2d91c921
@@ -55,6 +52,12 @@ ref table LocalDateTable_85639332-2624-45ad-a05e-5ad63797059b
 ref table LocalDateTable_60552a56-7df2-4515-8b1e-4fa559ee4f14
 ref table LocalDateTable_6f230283-ed75-4940-bf44-2be80fe780e2
 ref table LocalDateTable_1b938c48-bf70-470e-8380-1a113f473e27
+ref table LOL_PBICLIENTES
+ref table Calendario
+ref table LocalDateTable_769f19ee-4cc6-479f-ab65-8408955204f0
+ref table LOL_PBIB2BSALESORDER
+ref table LocalDateTable_9fdb5bcc-e9e2-4c27-ac78-b113aa839afb
+ref table LocalDateTable_9127dc12-ccf4-4478-9dc4-dfd5d6929daa
 
 ref cultureInfo es-ES
 

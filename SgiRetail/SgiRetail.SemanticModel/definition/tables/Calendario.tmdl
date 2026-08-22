@@ -14,7 +14,7 @@ table Calendario
 
 	column FechaKey
 		lineageTag: 70f76314-c2f1-4a7c-b1d5-ff3ed0e6a395
-		summarizeBy: count
+		summarizeBy: none
 		isNameInferred
 		sourceColumn: [FechaKey]
 
@@ -25,7 +25,7 @@ table Calendario
 	column AñoMesKey
 		formatString: 0
 		lineageTag: 64e35f80-e0e8-4504-92cd-04c4a704c5a7
-		summarizeBy: count
+		summarizeBy: none
 		isNameInferred
 		sourceColumn: [AñoMesKey]
 
@@ -34,7 +34,7 @@ table Calendario
 	column AñoSemanaKey
 		formatString: 0
 		lineageTag: 8418baa7-6a92-47bd-950a-3d4ebcaf3d81
-		summarizeBy: count
+		summarizeBy: none
 		isNameInferred
 		sourceColumn: [AñoSemanaKey]
 
@@ -43,7 +43,7 @@ table Calendario
 	column Año
 		formatString: 0
 		lineageTag: 22b7fcd1-20eb-47ab-90ed-03cd32e429f2
-		summarizeBy: sum
+		summarizeBy: none
 		isNameInferred
 		sourceColumn: [Año]
 
@@ -60,7 +60,7 @@ table Calendario
 	column Mes
 		formatString: 0
 		lineageTag: 002512ea-90e8-4659-9db0-28a29e7a26c2
-		summarizeBy: sum
+		summarizeBy: none
 		isNameInferred
 		sourceColumn: [Mes]
 
@@ -101,7 +101,7 @@ table Calendario
 	column TrimestreNum
 		formatString: 0
 		lineageTag: c9b40121-249a-43d6-bc51-19bd911ada5c
-		summarizeBy: sum
+		summarizeBy: none
 		isNameInferred
 		sourceColumn: [TrimestreNum]
 
@@ -126,7 +126,7 @@ table Calendario
 	column Semana
 		formatString: 0
 		lineageTag: a1f29b7a-42b0-4e65-a088-8ee0609273e4
-		summarizeBy: sum
+		summarizeBy: none
 		isNameInferred
 		sourceColumn: [Semana]
 
@@ -151,7 +151,7 @@ table Calendario
 	column DíaMes
 		formatString: 0
 		lineageTag: 595c21a3-bd8b-4173-b395-76c811d3f12a
-		summarizeBy: sum
+		summarizeBy: none
 		isNameInferred
 		sourceColumn: [DíaMes]
 
@@ -160,7 +160,7 @@ table Calendario
 	column DíaAño
 		formatString: 0
 		lineageTag: 506514a1-fcef-4577-a39e-78be272a1e11
-		summarizeBy: sum
+		summarizeBy: none
 		isNameInferred
 		sourceColumn: [DíaAño]
 
@@ -185,7 +185,7 @@ table Calendario
 	column DiaSemanaNum
 		formatString: 0
 		lineageTag: 1e5fb96a-deb9-4d6e-a448-93b2092b5664
-		summarizeBy: sum
+		summarizeBy: none
 		isNameInferred
 		sourceColumn: [DiaSemanaNum]
 
@@ -194,7 +194,7 @@ table Calendario
 	column EsFinDeSemana
 		formatString: 0
 		lineageTag: 5c0abf1f-73a7-4ccd-86c4-4f6661d8b174
-		summarizeBy: sum
+		summarizeBy: none
 		isNameInferred
 		sourceColumn: [EsFinDeSemana]
 
@@ -257,7 +257,7 @@ table Calendario
 	column EsHoy
 		formatString: 0
 		lineageTag: 7915fafe-8427-4b2e-b587-bf675187f9a9
-		summarizeBy: sum
+		summarizeBy: none
 		isNameInferred
 		sourceColumn: [EsHoy]
 
@@ -266,7 +266,7 @@ table Calendario
 	column EsPasado
 		formatString: 0
 		lineageTag: 59a8c8fb-eb79-452d-8c3b-89a9b470c9c4
-		summarizeBy: sum
+		summarizeBy: none
 		isNameInferred
 		sourceColumn: [EsPasado]
 
@@ -275,7 +275,7 @@ table Calendario
 	column EsFuturo
 		formatString: 0
 		lineageTag: 640f9775-9a27-46d4-af5b-150fdd4c6d92
-		summarizeBy: sum
+		summarizeBy: none
 		isNameInferred
 		sourceColumn: [EsFuturo]
 
@@ -284,7 +284,7 @@ table Calendario
 	column EsMesActual
 		formatString: 0
 		lineageTag: 56bc2ac8-d1f7-4d76-8d18-1dceaf160f7d
-		summarizeBy: sum
+		summarizeBy: none
 		isNameInferred
 		sourceColumn: [EsMesActual]
 
@@ -293,7 +293,7 @@ table Calendario
 	column EsAñoActual
 		formatString: 0
 		lineageTag: 77d4a6a4-e4e7-4696-aa5c-c9e93d88f772
-		summarizeBy: sum
+		summarizeBy: none
 		isNameInferred
 		sourceColumn: [EsAñoActual]
 

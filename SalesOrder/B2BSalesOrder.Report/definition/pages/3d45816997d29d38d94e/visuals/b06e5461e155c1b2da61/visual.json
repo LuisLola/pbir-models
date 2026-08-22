@@ -5,7 +5,7 @@
     "x": 227.67659574468084,
     "y": 92.59574468085107,
     "z": 0,
-    "height": 93.685106382978717,
+    "height": 93.68510638297872,
     "width": 204.8,
     "tabOrder": 14000
   },
@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "MedidasVentas.VentasTemporadaAnterior",
-              "nativeQueryRef": "VentasTemporadaAnterior"
+              "nativeQueryRef": "VentasTemporadaAnterior",
+              "displayName": "Temporada anterior"
             }
           ]
         }
@@ -59,13 +60,6 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
-                }
-              }
-            },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'VENTA NETA CON IVA'"
                 }
               }
             },
@@ -355,6 +349,17 @@
               "expr": {
                 "Literal": {
                   "Value": "15D"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#A91453'"
+                    }
+                  }
                 }
               }
             }

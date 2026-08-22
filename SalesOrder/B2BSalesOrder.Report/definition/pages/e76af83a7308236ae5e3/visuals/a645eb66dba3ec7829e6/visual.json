@@ -3,7 +3,7 @@
   "name": "a645eb66dba3ec7829e6",
   "position": {
     "x": 479.51367781155017,
-    "y": 93.373860182370819,
+    "y": 93.37386018237082,
     "z": 11000,
     "height": 109.90881458966565,
     "width": 320,
@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "MedidasVentas.EvolTemporadaSeleccionada",
-              "nativeQueryRef": "EvolTemporadaSeleccionada"
+              "nativeQueryRef": "EvolTemporadaSeleccionada",
+              "displayName": "Evolución"
             }
           ]
         }
@@ -59,13 +60,6 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
-                }
-              }
-            },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'VENTA NETA CON IVA'"
                 }
               }
             },

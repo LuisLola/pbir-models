@@ -44,19 +44,12 @@ relationship 20f2216c-18ef-4e41-8d5c-91f307aee313
 	toColumn: LocalDateTable_e2fa4627-ec4d-43d5-83ce-844020f1298c.Date
 
 relationship 73eda533-5d0d-d690-5237-0c60ac11e4d7
-	crossFilteringBehavior: bothDirections
 	fromColumn: LOL_PBIPURCHASEORDERS.ItemCode
 	toColumn: LOL_PBIMODELITEM.ItemCode
 
 relationship a83d295b-ac22-d9d5-91a0-e4e3fcff2621
-	crossFilteringBehavior: bothDirections
 	fromColumn: LOL_PBIPURCHASEORDERS.WarehouseCode
 	toColumn: LOL_PBITIENDAS.TiendaID
-
-relationship b684f6ed-cca0-494a-a763-4b23f6465ef4
-	joinOnDateBehavior: datePartOnly
-	fromColumn: LOL_PBIPURCHASEORDERS.FechaRecepcion
-	toColumn: LocalDateTable_71731e3a-b6dd-4ad5-9f3e-257940355b61.Date
 
 relationship 08127a67-b7ad-46be-b0c7-61db55c6c1fb
 	joinOnDateBehavior: datePartOnly
@@ -98,11 +91,6 @@ relationship a24dffb0-17a9-4cde-82eb-9fe39ac45cb6
 	fromColumn: LOL_PBIPURCHASEGOODRECEIPT.PostingDate
 	toColumn: LocalDateTable_6709db80-7a28-4b3a-a5c0-5a8f79309dde.Date
 
-relationship b2d25961-8a52-451a-9666-2f93b1b1b3db
-	joinOnDateBehavior: datePartOnly
-	fromColumn: LOL_PBIPURCHASEINVOICE.DocumentDate
-	toColumn: LocalDateTable_a7d16dbe-1231-4ffe-8c2c-7922e7b4f91f.Date
-
 relationship 0da9912b-14de-4b3d-b2bf-fefe91edbe4f
 	joinOnDateBehavior: datePartOnly
 	fromColumn: LOL_PBIPURCHASEINVOICE.DueDate
@@ -123,11 +111,6 @@ relationship f6964b8c-1ba4-4e81-9043-5670ad981ed2
 	fromColumn: LOL_PBIPURCHASEINVOICE.FechaEmbarque
 	toColumn: LocalDateTable_90803cb3-dcb8-4ff2-a50f-9ef23ebbb3a1.Date
 
-relationship 38f13ae8-f79c-4448-94da-dfef83812358
-	joinOnDateBehavior: datePartOnly
-	fromColumn: LOL_PBIPURCHASEINVOICE.FechaRecepcion
-	toColumn: LocalDateTable_da39c579-8e32-4e2b-9620-be1e0e40e9f1.Date
-
 relationship 32edd21c-b955-4c5d-bb49-fae9fa163668
 	joinOnDateBehavior: datePartOnly
 	fromColumn: LOL_PBIPURCHASEINVOICE.LineDeliveryDate
@@ -137,11 +120,6 @@ relationship c79c8fe0-9977-4e89-9dd2-e046860b4ec3
 	joinOnDateBehavior: datePartOnly
 	fromColumn: LOL_PBIPURCHASEINVOICE.PostingDate
 	toColumn: LocalDateTable_ee00c7d9-5303-47b8-a3be-a669a5931f6a.Date
-
-relationship AutoDetected_1e15babb-e9b7-423c-978b-b3be82135d98
-	isActive: false
-	fromColumn: LOL_PBIPURCHASEINVOICE.LineUID
-	toColumn: LOL_PBIPURCHASEORDERS.LineUID
 
 relationship 22222222-0001-4001-8001-000000000001
 	fromColumn: LOL_PBIPURCHASEGOODRECEIPT.KBase
@@ -201,11 +179,6 @@ relationship f81a2894-9c1e-4edf-98af-166ae84baac3
 	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.FechaInspeccionReal
 	toColumn: LocalDateTable_1b938c48-bf70-470e-8380-1a113f473e27.Date
 
-relationship AutoDetected_5382f507-2b28-4880-aef9-a32e27c4f250
-	isActive: false
-	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.LineUID
-	toColumn: LOL_PBIPURCHASEGOODRECEIPT.LineUID
-
 relationship d6127b7a-7f1e-f91b-553f-8d5190d2c03b
 	isActive: false
 	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.SKU
@@ -225,4 +198,49 @@ relationship 22222222-0004-4004-8004-000000000004
 	isActive: false
 	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.KPedido
 	toColumn: LOL_PBIPURCHASEORDERS.KLinea
+
+relationship 79c5d889-bab1-8651-27c2-c215f3792565
+	fromColumn: LOL_PBIPURCHASEORDERS.CardCode
+	toColumn: LOL_PBICLIENTES.CodeCliente
+
+relationship da5e5e48-9127-4707-9a26-ac222b139272
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBIPURCHASEINVOICE.DocumentDate
+	toColumn: LocalDateTable_769f19ee-4cc6-479f-ab65-8408955204f0.Date
+
+relationship e650bab5-cc40-c861-5580-2451c555beb2
+	isActive: false
+	fromColumn: LOL_PBIPURCHASEINVOICE.FechaRecepcion
+	toColumn: Calendario.Date
+
+relationship cal-ordenes-fecharecepcion
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBIPURCHASEORDERS.FechaRecepcion
+	toColumn: Calendario.Date
+
+relationship 445dcf3a-e609-4e11-bb5e-a48ce367c52c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBIB2BSALESORDER.DocDate
+	toColumn: LocalDateTable_9fdb5bcc-e9e2-4c27-ac78-b113aa839afb.Date
+
+relationship cbcf95d3-dea6-426b-9127-493191df7fdb
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBIB2BSALESORDER.FechaComunicacion
+	toColumn: LocalDateTable_9127dc12-ccf4-4478-9dc4-dfd5d6929daa.Date
+
+relationship AutoDetected_c19b9646-8c1c-4413-bae7-fdfccc20fa7c
+	fromColumn: LOL_PBIB2BSALESORDER.ItemCode
+	toColumn: LOL_PBIMODELITEM.ItemCode
+
+relationship ventas-tienda
+	fromColumn: LOL_PBIB2BSALESORDER.WhsCode
+	toColumn: LOL_PBITIENDAS.TiendaID
+
+relationship ventas-cliente
+	fromColumn: LOL_PBIB2BSALESORDER.CardCode
+	toColumn: LOL_PBICLIENTES.CodeCliente
+
+relationship 740d1c7a-bdef-7117-a5b8-cfcff6ca0747
+	fromColumn: LOL_PBIB2BSALESORDER.DocDueDate
+	toColumn: Calendario.Date
 

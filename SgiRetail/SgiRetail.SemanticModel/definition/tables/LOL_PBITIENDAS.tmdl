@@ -151,6 +151,25 @@ table LOL_PBITIENDAS
 
 		annotation SummarizationSetBy = Automatic
 
+	column KCuentaPersona =
+			IF (
+			    LEN ( TRIM ( COALESCE ( 'LOL_PBITIENDAS'[IDCuentaPersona], "" ) ) ) > 0,
+			    'LOL_PBITIENDAS'[IDCuentaPersona],
+			    "SIN CUENTA - " & 'LOL_PBITIENDAS'[TiendaID]
+			)
+		dataType: string
+		isHidden
+		lineageTag: 9fa84464-c541-4232-a062-848671c186ed
+		summarizeBy: none
+
+	column OperadorLogistico
+		dataType: string
+		lineageTag: 77df42f1-5c5f-409c-a793-ad8a53c5acc8
+		summarizeBy: none
+		sourceColumn: OperadorLogistico
+
+		annotation SummarizationSetBy = Automatic
+
 	partition LOL_PBITIENDAS = m
 		mode: import
 		source =

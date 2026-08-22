@@ -536,6 +536,56 @@ table LOL_PLANMATERIAL
 		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
 		lineageTag: 7ff80190-bf17-4fbd-9c1d-e9f7cf71c7ba
 
+	measure 'Valor Servicio con retraso' = ```
+			
+			VAR RangoIni = MIN ( 'RangoDisponibilidad'[Fecha] )
+			VAR RangoFin = MAX ( 'RangoDisponibilidad'[Fecha] )
+			RETURN
+			SUMX (
+			        'LOL_PLANMATERIAL',
+			        VAR FechaFin = 'LOL_PLANMATERIAL'[Fecha Fin pedido venta]
+			        VAR FechaDisp = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
+			        VAR EnTransito = 'LOL_PLANMATERIAL'[Unidades asignadas Transito]
+			        RETURN
+			            IF (
+			                NOT ISBLANK ( FechaDisp )
+			                    && FechaDisp >= RangoIni
+			                    && FechaDisp <= RangoFin
+			                    && NOT ISBLANK ( FechaFin )
+			                    && FechaDisp > FechaFin + 11,
+			                EnTransito,
+			                0
+			            )
+			    )
+			
+			```
+		formatString: #,0
+
+	measure 'Valor Servicio con retraso (Importe Real)' = ```
+			
+			VAR RangoIni = MIN ( 'RangoDisponibilidad'[Fecha] )
+			VAR RangoFin = MAX ( 'RangoDisponibilidad'[Fecha] )
+			RETURN
+			SUMX (
+			        'LOL_PLANMATERIAL',
+			        VAR FechaFin = 'LOL_PLANMATERIAL'[Fecha Fin pedido venta]
+			        VAR FechaDisp = 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)]
+			        VAR EnTransito = 'LOL_PLANMATERIAL'[AssignTransitLineTotal]
+			        RETURN
+			            IF (
+			                NOT ISBLANK ( FechaDisp )
+			                    && FechaDisp >= RangoIni
+			                    && FechaDisp <= RangoFin
+			                    && NOT ISBLANK ( FechaFin )
+			                    && FechaDisp > FechaFin + 11,
+			                EnTransito,
+			                0
+			            )
+			    )
+			
+			```
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+
 	column Almacén
 		dataType: string
 		lineageTag: 53e604c5-2638-4059-aa1e-35ce8cc0e982

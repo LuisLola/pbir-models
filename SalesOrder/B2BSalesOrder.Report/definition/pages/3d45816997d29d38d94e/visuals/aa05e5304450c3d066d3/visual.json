@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
   "name": "aa05e5304450c3d066d3",
   "position": {
-    "x": 7.7811550151975686,
-    "y": 92.401215805471125,
+    "x": 7.781155015197569,
+    "y": 92.40121580547113,
     "z": 8000,
-    "height": 93.373860182370819,
+    "height": 93.37386018237082,
     "width": 204.25531914893617,
     "tabOrder": 6000
   },
@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "MedidasVentas.VentasTemporadaSeleccionada_Bruta",
-              "nativeQueryRef": "VentasTemporadaSeleccionada_Bruta"
+              "nativeQueryRef": "VentasTemporadaSeleccionada_Bruta",
+              "displayName": "Venta bruta temporada"
             }
           ]
         }
@@ -59,13 +60,6 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
-                }
-              }
-            },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'VENTA NETA CON IVA'"
                 }
               }
             },
@@ -355,6 +349,17 @@
               "expr": {
                 "Literal": {
                   "Value": "15D"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#A91453'"
+                    }
+                  }
                 }
               }
             }

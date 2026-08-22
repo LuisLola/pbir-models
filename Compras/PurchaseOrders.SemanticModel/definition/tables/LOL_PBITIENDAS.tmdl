@@ -139,6 +139,14 @@ table LOL_PBITIENDAS
 
 		annotation SummarizationSetBy = Automatic
 
+	column OperadorLogistico
+		dataType: string
+		lineageTag: 8e60be24-af85-4251-be84-e701ef9e7f42
+		summarizeBy: none
+		sourceColumn: OperadorLogistico
+
+		annotation SummarizationSetBy = Automatic
+
 	partition LOL_PBITIENDAS = m
 		mode: import
 		source =

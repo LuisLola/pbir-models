@@ -282,36 +282,6 @@
               "queryRef": "LOL_PLANMATERIAL.% Cartera Cubierta > +30 días (Importe)",
               "nativeQueryRef": "% Servicio 3º",
               "displayName": "% Servicio 3º"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "LOL_PLANMATERIAL"
-                    }
-                  },
-                  "Property": "Importe retrasado"
-                }
-              },
-              "queryRef": "LOL_PLANMATERIAL.Importe fuera de quincena",
-              "nativeQueryRef": "Servicio No Disponible",
-              "displayName": "Servicio No Disponible"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "LOL_PLANMATERIAL"
-                    }
-                  },
-                  "Property": "ServicioDentroRango"
-                }
-              },
-              "queryRef": "LOL_PLANMATERIAL.ServicioDentroRango",
-              "nativeQueryRef": "Facturación",
-              "displayName": "Facturación"
             }
           ]
         }
@@ -635,20 +605,6 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "77D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "LOL_PLANMATERIAL.Importe fuera de quincena"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
                   "Value": "79.78947368421052D"
                 }
               }
@@ -656,20 +612,6 @@
           },
           "selector": {
             "metadata": "LOL_PLANMATERIAL.en picking"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "88.15789473684211D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "LOL_PLANMATERIAL.ServicioDentroRango"
           }
         }
       ],
@@ -1385,7 +1327,7 @@
         "howCreated": "User"
       },
       {
-        "name": "1806f1ca45a6ab1bc7e9",
+        "name": "c2b5b7f04e5b1cc8faf7",
         "field": {
           "Column": {
             "Expression": {
@@ -1399,7 +1341,7 @@
         "type": "Advanced"
       },
       {
-        "name": "9408ab14bd1be872b230",
+        "name": "6f0638755962ffa31bce",
         "field": {
           "Column": {
             "Expression": {
@@ -1413,7 +1355,7 @@
         "type": "Categorical"
       },
       {
-        "name": "dbb5979b9d61b180f3cd",
+        "name": "6acebe8405f290745f07",
         "field": {
           "Column": {
             "Expression": {
@@ -1427,7 +1369,7 @@
         "type": "Categorical"
       },
       {
-        "name": "22e4e32ba52e60b38763",
+        "name": "0536b67c88d88506d5c0",
         "field": {
           "Column": {
             "Expression": {
@@ -1441,7 +1383,7 @@
         "type": "Categorical"
       },
       {
-        "name": "df0c886954b4e013e329",
+        "name": "21f329dad3ee3b1be557",
         "field": {
           "Column": {
             "Expression": {
@@ -1455,7 +1397,7 @@
         "type": "Categorical"
       },
       {
-        "name": "96558971b318d5b51910",
+        "name": "205504fa21f310de2d68",
         "field": {
           "Column": {
             "Expression": {
@@ -1469,7 +1411,7 @@
         "type": "Categorical"
       },
       {
-        "name": "dc40b28db7c462ba224f",
+        "name": "40153f45c8cc45d8f135",
         "field": {
           "Aggregation": {
             "Expression": {
@@ -1488,7 +1430,7 @@
         "type": "Advanced"
       },
       {
-        "name": "62c2786afcb6620837c4",
+        "name": "8f0c5966bdbe136b8a55",
         "field": {
           "Aggregation": {
             "Expression": {
@@ -1507,7 +1449,7 @@
         "type": "Advanced"
       },
       {
-        "name": "8d90d90fd0eecd6e6cd8",
+        "name": "150cf2ff798cb8ee3ff1",
         "field": {
           "Aggregation": {
             "Expression": {
@@ -1526,7 +1468,7 @@
         "type": "Advanced"
       },
       {
-        "name": "da192e21a1747533e013",
+        "name": "1ef8e65bb4c2dccb2c0e",
         "field": {
           "Measure": {
             "Expression": {
@@ -1540,7 +1482,7 @@
         "type": "Advanced"
       },
       {
-        "name": "ef93ea26702a3421ef6a",
+        "name": "b46d0612c48c7466c0b7",
         "field": {
           "Measure": {
             "Expression": {
@@ -1554,7 +1496,7 @@
         "type": "Advanced"
       },
       {
-        "name": "f338c3ff298baabf6506",
+        "name": "46d3323cee0aecb319f4",
         "field": {
           "Measure": {
             "Expression": {
@@ -1568,7 +1510,7 @@
         "type": "Advanced"
       },
       {
-        "name": "2a28e9167c97925aa795",
+        "name": "3bd9066c3d1e60fe612b",
         "field": {
           "Measure": {
             "Expression": {
@@ -1582,7 +1524,7 @@
         "type": "Advanced"
       },
       {
-        "name": "a1d01b25062a4b76fad0",
+        "name": "1af7d9184de00529d3fc",
         "field": {
           "Measure": {
             "Expression": {
@@ -1596,7 +1538,7 @@
         "type": "Advanced"
       },
       {
-        "name": "ccda93f3c463c3138e2d",
+        "name": "2ef19ef175616b333719",
         "field": {
           "Measure": {
             "Expression": {
@@ -1610,7 +1552,7 @@
         "type": "Advanced"
       },
       {
-        "name": "75426c3ebc45b5df111b",
+        "name": "8690281fcbbfa2de995a",
         "field": {
           "Measure": {
             "Expression": {
@@ -1624,7 +1566,7 @@
         "type": "Advanced"
       },
       {
-        "name": "b7e055f8a5c1b7a42984",
+        "name": "8076b09534780fb1dd75",
         "field": {
           "Measure": {
             "Expression": {
@@ -1633,34 +1575,6 @@
               }
             },
             "Property": "Fecha Servicio > 30 días (Importe)"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "d2665f3aef13178e92c9",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PLANMATERIAL"
-              }
-            },
-            "Property": "Importe retrasado"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "7593173cb1bfc87caf29",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PLANMATERIAL"
-              }
-            },
-            "Property": "ServicioDentroRango"
           }
         },
         "type": "Advanced"

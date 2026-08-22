@@ -475,11 +475,6 @@ table LOL_PBIPURCHASEORDERS
 		summarizeBy: none
 		sourceColumn: FechaRecepcion
 
-		variation Variación
-			isDefault
-			relationship: b684f6ed-cca0-494a-a763-4b23f6465ef4
-			defaultHierarchy: LocalDateTable_71731e3a-b6dd-4ad5-9f3e-257940355b61.'Jerarquía de fechas'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date

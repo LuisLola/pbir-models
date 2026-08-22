@@ -27,7 +27,7 @@ table MedidasCalculadasRetailOnline
 					"Semana", FechaHasta - WEEKDAY(FechaHasta, 2) + 1,
 					"Mes", DATE(YEAR(FechaHasta), MONTH(FechaHasta), 1),
 					"Trimestre", DATE(YEAR(FechaHasta), (QUARTER(FechaHasta) - 1) * 3 + 1, 1),
-					"Anio", DATE(YEAR(FechaHasta), 1, 1),
+					"Año", DATE(YEAR(FechaHasta), 1, 1),
 					DATE(YEAR(FechaHasta), MONTH(FechaHasta), 1)
 				)
 		formatString: Long Date
