@@ -215,6 +215,25 @@ table MedidasIndicadores
 		formatString: @
 		lineageTag: aabbccdd-aa09-aa09-aa09-aabbccdd0094
 
+	measure 'Marca de actualización' =
+			
+			MAX ( UltimaActualizacion[Fecha] )
+		formatString: dd/MM/yyyy HH:mm
+		displayFolder: Actualización
+		lineageTag: b4f6916b-5b5b-4b3b-97ee-c9a9b871ee49
+
+	measure 'Última actualización' =
+			
+			VAR f = MAX ( UltimaActualizacion[Fecha] )
+			RETURN
+			    IF (
+			        ISBLANK ( f ),
+			        "Sin datos de actualización",
+			        "Actualizado " & FORMAT ( f, "dd/MM/yyyy" ) & " a las " & FORMAT ( f, "HH:mm" )
+			    )
+		displayFolder: Actualización
+		lineageTag: 0d684b2f-4106-4978-92e9-1b46c349864f
+
 	column Column
 		formatString: 0
 		lineageTag: aabbccdd-aa02-ccol-ccol-aabbccddcol2

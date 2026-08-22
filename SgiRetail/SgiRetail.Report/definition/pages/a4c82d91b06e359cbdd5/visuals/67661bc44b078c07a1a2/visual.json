@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "67661bc44b078c07a1a2",
   "position": {
-    "x": 586.38146167557932,
-    "y": 0,
-    "z": 4000,
-    "height": 45.632798573975045,
-    "width": 426.66666666666663,
-    "tabOrder": 14000
+    "x": 782.89244186046494,
+    "y": 21.142857142857142,
+    "z": 1000,
+    "height": 28.190476190476193,
+    "width": 437.10755813953489,
+    "tabOrder": 3000
   },
   "visual": {
     "visualType": "slicer",
@@ -88,7 +88,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'Mes'"
+                                "Value": "'Trimestre'"
                               }
                             }
                           ]
@@ -97,6 +97,18 @@
                     }
                   }
                 ]
+              }
+            },
+            "outlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 3,
+                      "Percent": 0.6
+                    }
+                  }
+                }
               }
             }
           }
@@ -108,7 +120,14 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "textSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
                 }
               }
             }
@@ -152,6 +171,51 @@
             }
           }
         }
+      ],
+      "selection": [
+        {
+          "properties": {
+            "selectAllCheckboxEnabled": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "strictSingleSelect": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "pendingChangesIcon": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 2,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "visualContainerObjects": {
@@ -174,5 +238,6 @@
       "fieldChanges": true,
       "filterChanges": true
     }
-  }
+  },
+  "parentGroupName": "a827a6ae1179ae98858f"
 }

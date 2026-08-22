@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "8d4c65c32d5508a0cee2",
   "position": {
-    "x": 529.45969884853855,
+    "x": 529.4596988485386,
     "y": 346.92648361381754,
     "z": 32000,
     "height": 26.07617360496014,
@@ -75,6 +75,21 @@
         }
       ],
       "accentBar": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
         {
           "properties": {
             "show": {

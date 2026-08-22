@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "kpi002pan",
   "position": {
     "x": 386,
@@ -7,7 +7,7 @@
     "z": 21000,
     "height": 57.333333333333336,
     "width": 90,
-    "tabOrder": 21000
+    "tabOrder": 14000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -56,17 +56,6 @@
               "expr": {
                 "Literal": {
                   "Value": "7D"
-                }
-              }
-            },
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#B0B7CC'"
-                    }
-                  }
                 }
               }
             }

@@ -1,0 +1,460 @@
+{
+  "name": "Lola Casademunt BI",
+  "dataColors": [
+    "#BA1C43",
+    "#DFA0C9",
+    "#6F263D",
+    "#FF5948",
+    "#B4B5DF",
+    "#10069F",
+    "#8C7E82",
+    "#1A1416",
+    "#F3E1EC",
+    "#6F263D",
+    "#E7DACE",
+    "#4A3F42"
+  ],
+  "background": "#FFF6ED",
+  "foreground": "#1A1416",
+  "tableAccent": "#6F263D",
+  "good": "#0F7A63",
+  "neutral": "#8C7E82",
+  "bad": "#BA1C43",
+  "maximum": "#6F263D",
+  "minimum": "#F3E1EC",
+  "textClasses": {
+    "title": {
+      "fontFace": "Montserrat",
+      "fontSize": 13,
+      "color": "#1A1416"
+    },
+    "header": {
+      "fontFace": "Montserrat",
+      "fontSize": 20,
+      "color": "#1A1416"
+    },
+    "callout": {
+      "fontFace": "Montserrat",
+      "fontSize": 34,
+      "color": "#1A1416"
+    },
+    "label": {
+      "fontFace": "Montserrat",
+      "fontSize": 11,
+      "color": "#6B5C60"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "color": {
+              "solid": {
+                "color": "#E7DACE"
+              }
+            },
+            "radius": 8
+          }
+        ],
+        "dropShadow": [
+          {
+            "show": false
+          }
+        ],
+        "visualHeader": [
+          {
+            "show": false
+          }
+        ],
+        "title": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#1A1416"
+              }
+            },
+            "fontSize": 13,
+            "fontFamily": "Montserrat",
+            "bold": true,
+            "alignment": "left"
+          }
+        ],
+        "labels": [
+          {
+            "fontFamily": "Montserrat",
+            "fontSize": 11,
+            "color": {
+              "solid": {
+                "color": "#6B5C60"
+              }
+            }
+          }
+        ],
+        "categoryAxis": [
+          {
+            "showAxisTitle": false,
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "labelColor": {
+              "solid": {
+                "color": "#8C7E82"
+              }
+            },
+            "gridlineShow": false
+          }
+        ],
+        "valueAxis": [
+          {
+            "showAxisTitle": false,
+            "fontFamily": "Montserrat",
+            "fontSize": 9,
+            "labelColor": {
+              "solid": {
+                "color": "#8C7E82"
+              }
+            },
+            "gridlineColor": {
+              "solid": {
+                "color": "#F0E7DC"
+              }
+            },
+            "gridlineThickness": 1
+          }
+        ],
+        "legend": [
+          {
+            "position": "TopRight",
+            "showTitle": false,
+            "fontFamily": "Montserrat",
+            "fontSize": 10,
+            "labelColor": {
+              "solid": {
+                "color": "#6B5C60"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "shape": {
+      "*": {
+        "background": [
+          {
+            "show": false
+          }
+        ],
+        "border": [
+          {
+            "show": false
+          }
+        ]
+      }
+    },
+    "image": {
+      "*": {
+        "background": [
+          {
+            "show": false
+          }
+        ],
+        "border": [
+          {
+            "show": false
+          }
+        ]
+      }
+    },
+    "textbox": {
+      "*": {
+        "background": [
+          {
+            "show": false
+          }
+        ],
+        "border": [
+          {
+            "show": false
+          }
+        ]
+      }
+    },
+    "card": {
+      "*": {
+        "labels": [
+          {
+            "fontFamily": "Montserrat",
+            "bold": true,
+            "color": {
+              "solid": {
+                "color": "#1A1416"
+              }
+            }
+          }
+        ],
+        "categoryLabels": [
+          {
+            "fontFamily": "Montserrat",
+            "color": {
+              "solid": {
+                "color": "#8C7E82"
+              }
+            }
+          }
+        ],
+        "title": [
+          {
+            "show": false
+          }
+        ]
+      }
+    },
+    "cardVisual": {
+      "*": {
+        "value": [
+          {
+            "fontFamily": "Montserrat",
+            "bold": true,
+            "color": {
+              "solid": {
+                "color": "#1A1416"
+              }
+            }
+          }
+        ],
+        "label": [
+          {
+            "fontFamily": "Montserrat",
+            "color": {
+              "solid": {
+                "color": "#8C7E82"
+              }
+            }
+          }
+        ],
+        "title": [
+          {
+            "show": false
+          }
+        ]
+      }
+    },
+    "slicer": {
+      "*": {
+        "items": [
+          {
+            "fontFamily": "Montserrat",
+            "fontColor": {
+              "solid": {
+                "color": "#1A1416"
+              }
+            }
+          }
+        ],
+        "header": [
+          {
+            "fontFamily": "Montserrat",
+            "fontColor": {
+              "solid": {
+                "color": "#9E7A8A"
+              }
+            },
+            "bold": true
+          }
+        ]
+      }
+    },
+    "tableEx": {
+      "*": {
+        "grid": [
+          {
+            "gridVertical": false,
+            "gridHorizontalColor": {
+              "solid": {
+                "color": "#F2E9DE"
+              }
+            },
+            "outlineColor": {
+              "solid": {
+                "color": "#E7DACE"
+              }
+            }
+          }
+        ],
+        "columnHeaders": [
+          {
+            "fontFamily": "Montserrat",
+            "bold": true,
+            "fontColor": {
+              "solid": {
+                "color": "#6F263D"
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "outline": "BottomOnly"
+          }
+        ],
+        "values": [
+          {
+            "fontFamily": "Montserrat",
+            "fontColor": {
+              "solid": {
+                "color": "#4A3F42"
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "backColorSecondary": {
+              "solid": {
+                "color": "#FCF8F3"
+              }
+            }
+          }
+        ],
+        "total": [
+          {
+            "fontFamily": "Montserrat",
+            "bold": true,
+            "fontColor": {
+              "solid": {
+                "color": "#6F263D"
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": "#F6EBF1"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "pivotTable": {
+      "*": {
+        "grid": [
+          {
+            "gridVertical": false,
+            "gridHorizontalColor": {
+              "solid": {
+                "color": "#F2E9DE"
+              }
+            },
+            "outlineColor": {
+              "solid": {
+                "color": "#E7DACE"
+              }
+            }
+          }
+        ],
+        "columnHeaders": [
+          {
+            "fontFamily": "Montserrat",
+            "bold": true,
+            "fontColor": {
+              "solid": {
+                "color": "#6F263D"
+              }
+            },
+            "outline": "BottomOnly",
+            "backColor": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            }
+          }
+        ],
+        "rowHeaders": [
+          {
+            "fontFamily": "Montserrat",
+            "fontColor": {
+              "solid": {
+                "color": "#1A1416"
+              }
+            }
+          }
+        ],
+        "values": [
+          {
+            "fontFamily": "Montserrat",
+            "fontColor": {
+              "solid": {
+                "color": "#4A3F42"
+              }
+            },
+            "backColorSecondary": {
+              "solid": {
+                "color": "#FCF8F3"
+              }
+            }
+          }
+        ],
+        "subTotals": [
+          {
+            "fontFamily": "Montserrat",
+            "bold": true,
+            "fontColor": {
+              "solid": {
+                "color": "#6F263D"
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": "#F6EBF1"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "actionButton": {
+      "*": {
+        "text": [
+          {
+            "fontFamily": "Montserrat",
+            "bold": true
+          }
+        ]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#FFF6ED"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "outspace": [
+          {
+            "color": {
+              "solid": {
+                "color": "#F3ECE4"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

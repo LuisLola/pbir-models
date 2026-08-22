@@ -210,58 +210,58 @@ table MedidasDesempeño
 		formatString: +0%;-0%;0%
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000018
 
-	measure Color_VN_Anio = SWITCH(TRUE(), ISBLANK([VN_Evol_Anio]), "#8089A2", [VN_Evol_Anio] >= 0, "#1F8A5B", [VN_Evol_Anio] >= -0.10, "#B57A0E", "#C73838")
+	measure Color_VN_Anio = SWITCH(TRUE(), ISBLANK([VN_Evol_Anio]), "#8C7E82", [VN_Evol_Anio] >= 0, "#0F7A63", [VN_Evol_Anio] >= -0.10, "#FF5948", "#BA1C43")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000019
 
-	measure Color_VN_Mes = SWITCH(TRUE(), ISBLANK([VN_Evol_Mes]), "#8089A2", [VN_Evol_Mes] >= 0, "#1F8A5B", [VN_Evol_Mes] >= -0.10, "#B57A0E", "#C73838")
+	measure Color_VN_Mes = SWITCH(TRUE(), ISBLANK([VN_Evol_Mes]), "#8C7E82", [VN_Evol_Mes] >= 0, "#0F7A63", [VN_Evol_Mes] >= -0.10, "#FF5948", "#BA1C43")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000020
 
-	measure Color_VN_Sem = SWITCH(TRUE(), ISBLANK([VN_Evol_Sem]), "#8089A2", [VN_Evol_Sem] >= 0, "#1F8A5B", [VN_Evol_Sem] >= -0.10, "#B57A0E", "#C73838")
+	measure Color_VN_Sem = SWITCH(TRUE(), ISBLANK([VN_Evol_Sem]), "#8C7E82", [VN_Evol_Sem] >= 0, "#0F7A63", [VN_Evol_Sem] >= -0.10, "#FF5948", "#BA1C43")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000021
 
-	measure Color_VN_Dia = SWITCH(TRUE(), ISBLANK([VN_Evol_Dia]), "#8089A2", [VN_Evol_Dia] >= 0, "#1F8A5B", [VN_Evol_Dia] >= -0.10, "#B57A0E", "#C73838")
+	measure Color_VN_Dia = SWITCH(TRUE(), ISBLANK([VN_Evol_Dia]), "#8C7E82", [VN_Evol_Dia] >= 0, "#0F7A63", [VN_Evol_Dia] >= -0.10, "#FF5948", "#BA1C43")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000022
 
-	measure Color_TM_Anio = SWITCH(TRUE(), ISBLANK([TM_Evol_Anio]), "#8089A2", [TM_Evol_Anio] >= 0, "#1F8A5B", [TM_Evol_Anio] >= -0.10, "#B57A0E", "#C73838")
+	measure Color_TM_Anio = SWITCH(TRUE(), ISBLANK([TM_Evol_Anio]), "#8C7E82", [TM_Evol_Anio] >= 0, "#0F7A63", [TM_Evol_Anio] >= -0.10, "#FF5948", "#BA1C43")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000023
 
-	measure Color_TM_Mes = SWITCH(TRUE(), ISBLANK([TM_Evol_Mes]), "#8089A2", [TM_Evol_Mes] >= 0, "#1F8A5B", [TM_Evol_Mes] >= -0.10, "#B57A0E", "#C73838")
+	measure Color_TM_Mes = SWITCH(TRUE(), ISBLANK([TM_Evol_Mes]), "#8C7E82", [TM_Evol_Mes] >= 0, "#0F7A63", [TM_Evol_Mes] >= -0.10, "#FF5948", "#BA1C43")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000024
 
-	measure Color_TM_Sem = SWITCH(TRUE(), ISBLANK([TM_Evol_Sem]), "#8089A2", [TM_Evol_Sem] >= 0, "#1F8A5B", [TM_Evol_Sem] >= -0.10, "#B57A0E", "#C73838")
+	measure Color_TM_Sem = SWITCH(TRUE(), ISBLANK([TM_Evol_Sem]), "#8C7E82", [TM_Evol_Sem] >= 0, "#0F7A63", [TM_Evol_Sem] >= -0.10, "#FF5948", "#BA1C43")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000025
 
-	measure Color_TM_Dia = SWITCH(TRUE(), ISBLANK([TM_Evol_Dia]), "#8089A2", [TM_Evol_Dia] >= 0, "#1F8A5B", [TM_Evol_Dia] >= -0.10, "#B57A0E", "#C73838")
+	measure Color_TM_Dia = SWITCH(TRUE(), ISBLANK([TM_Evol_Dia]), "#8C7E82", [TM_Evol_Dia] >= 0, "#0F7A63", [TM_Evol_Dia] >= -0.10, "#FF5948", "#BA1C43")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000026
 
-	measure Color_UPT_Anio = SWITCH(TRUE(), ISBLANK([UPT_Evol_Anio]), "#8089A2", [UPT_Evol_Anio] >= 0, "#1F8A5B", [UPT_Evol_Anio] >= -0.10, "#B57A0E", "#C73838")
+	measure Color_UPT_Anio = SWITCH(TRUE(), ISBLANK([UPT_Evol_Anio]), "#8C7E82", [UPT_Evol_Anio] >= 0, "#0F7A63", [UPT_Evol_Anio] >= -0.10, "#FF5948", "#BA1C43")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000027
 
-	measure Color_UPT_Mes = SWITCH(TRUE(), ISBLANK([UPT_Evol_Mes]), "#8089A2", [UPT_Evol_Mes] >= 0, "#1F8A5B", [UPT_Evol_Mes] >= -0.10, "#B57A0E", "#C73838")
+	measure Color_UPT_Mes = SWITCH(TRUE(), ISBLANK([UPT_Evol_Mes]), "#8C7E82", [UPT_Evol_Mes] >= 0, "#0F7A63", [UPT_Evol_Mes] >= -0.10, "#FF5948", "#BA1C43")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000028
 
-	measure Color_UPT_Sem = SWITCH(TRUE(), ISBLANK([UPT_Evol_Sem]), "#8089A2", [UPT_Evol_Sem] >= 0, "#1F8A5B", [UPT_Evol_Sem] >= -0.10, "#B57A0E", "#C73838")
+	measure Color_UPT_Sem = SWITCH(TRUE(), ISBLANK([UPT_Evol_Sem]), "#8C7E82", [UPT_Evol_Sem] >= 0, "#0F7A63", [UPT_Evol_Sem] >= -0.10, "#FF5948", "#BA1C43")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000029
 
-	measure Color_UPT_Dia = SWITCH(TRUE(), ISBLANK([UPT_Evol_Dia]), "#8089A2", [UPT_Evol_Dia] >= 0, "#1F8A5B", [UPT_Evol_Dia] >= -0.10, "#B57A0E", "#C73838")
+	measure Color_UPT_Dia = SWITCH(TRUE(), ISBLANK([UPT_Evol_Dia]), "#8C7E82", [UPT_Evol_Dia] >= 0, "#0F7A63", [UPT_Evol_Dia] >= -0.10, "#FF5948", "#BA1C43")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000030
 
-	measure Color_Conv_Anio = SWITCH(TRUE(), ISBLANK([Conv_Evol_Anio]), "#8089A2", [Conv_Evol_Anio] >= 0, "#1F8A5B", [Conv_Evol_Anio] >= -0.10, "#B57A0E", "#C73838")
+	measure Color_Conv_Anio = SWITCH(TRUE(), ISBLANK([Conv_Evol_Anio]), "#8C7E82", [Conv_Evol_Anio] >= 0, "#0F7A63", [Conv_Evol_Anio] >= -0.10, "#FF5948", "#BA1C43")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000031
 
-	measure Color_Conv_Mes = SWITCH(TRUE(), ISBLANK([Conv_Evol_Mes]), "#8089A2", [Conv_Evol_Mes] >= 0, "#1F8A5B", [Conv_Evol_Mes] >= -0.10, "#B57A0E", "#C73838")
+	measure Color_Conv_Mes = SWITCH(TRUE(), ISBLANK([Conv_Evol_Mes]), "#8C7E82", [Conv_Evol_Mes] >= 0, "#0F7A63", [Conv_Evol_Mes] >= -0.10, "#FF5948", "#BA1C43")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000032
 
-	measure Color_Conv_Sem = SWITCH(TRUE(), ISBLANK([Conv_Evol_Sem]), "#8089A2", [Conv_Evol_Sem] >= 0, "#1F8A5B", [Conv_Evol_Sem] >= -0.10, "#B57A0E", "#C73838")
+	measure Color_Conv_Sem = SWITCH(TRUE(), ISBLANK([Conv_Evol_Sem]), "#8C7E82", [Conv_Evol_Sem] >= 0, "#0F7A63", [Conv_Evol_Sem] >= -0.10, "#FF5948", "#BA1C43")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000033
 
-	measure Color_Conv_Dia = SWITCH(TRUE(), ISBLANK([Conv_Evol_Dia]), "#8089A2", [Conv_Evol_Dia] >= 0, "#1F8A5B", [Conv_Evol_Dia] >= -0.10, "#B57A0E", "#C73838")
+	measure Color_Conv_Dia = SWITCH(TRUE(), ISBLANK([Conv_Evol_Dia]), "#8C7E82", [Conv_Evol_Dia] >= 0, "#0F7A63", [Conv_Evol_Dia] >= -0.10, "#FF5948", "#BA1C43")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000034
 
-	measure Color_Evol_VN = SWITCH(TRUE(), ISBLANK([Ventas_YTD_Var_%]), "#8089A2", [Ventas_YTD_Var_%] >= 0, "#1F8A5B", [Ventas_YTD_Var_%] >= -0.10, "#B57A0E", "#C73838")
+	measure Color_Evol_VN = SWITCH(TRUE(), ISBLANK([Ventas_YTD_Var_%]), "#8C7E82", [Ventas_YTD_Var_%] >= 0, "#0F7A63", [Ventas_YTD_Var_%] >= -0.10, "#FF5948", "#BA1C43")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000035
 
-	measure Color_Evol_OBJ = SWITCH(TRUE(), ISBLANK([EvolucionObjetivo_%]), "#8089A2", [EvolucionObjetivo_%] >= 0, "#1F8A5B", [EvolucionObjetivo_%] >= -0.10, "#B57A0E", "#C73838")
+	measure Color_Evol_OBJ = SWITCH(TRUE(), ISBLANK([EvolucionObjetivo_%]), "#8C7E82", [EvolucionObjetivo_%] >= 0, "#0F7A63", [EvolucionObjetivo_%] >= -0.10, "#FF5948", "#BA1C43")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000036
 
 	measure Txt_VN_Anio = IF(ISBLANK([VN_Evol_Anio]), "—", FORMAT([VN_Evol_Anio], "+0%;-0%;0%"))
@@ -324,76 +324,76 @@ table MedidasDesempeño
 	measure Lbl_Dia = FORMAT([FechaHastaSeleccionada], "dd/MM")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-010000000056
 
-	measure Bg_VN_Anio = SWITCH(TRUE(), ISBLANK([VN_Evol_Anio]), "#F0F2F8", [VN_Evol_Anio] >= 0, "#EBF5EE", [VN_Evol_Anio] >= -0.10, "#FDF4CF", "#FCEAEA")
+	measure Bg_VN_Anio = SWITCH(TRUE(), ISBLANK([VN_Evol_Anio]), "#F3ECE4", [VN_Evol_Anio] >= 0, "#F1F7F4", [VN_Evol_Anio] >= -0.10, "#FAF4EC", "#FDF1EF")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000001
 
-	measure Bg_VN_Mes = SWITCH(TRUE(), ISBLANK([VN_Evol_Mes]), "#F0F2F8", [VN_Evol_Mes] >= 0, "#EBF5EE", [VN_Evol_Mes] >= -0.10, "#FDF4CF", "#FCEAEA")
+	measure Bg_VN_Mes = SWITCH(TRUE(), ISBLANK([VN_Evol_Mes]), "#F3ECE4", [VN_Evol_Mes] >= 0, "#F1F7F4", [VN_Evol_Mes] >= -0.10, "#FAF4EC", "#FDF1EF")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000002
 
-	measure Bg_VN_Sem = SWITCH(TRUE(), ISBLANK([VN_Evol_Sem]), "#F0F2F8", [VN_Evol_Sem] >= 0, "#EBF5EE", [VN_Evol_Sem] >= -0.10, "#FDF4CF", "#FCEAEA")
+	measure Bg_VN_Sem = SWITCH(TRUE(), ISBLANK([VN_Evol_Sem]), "#F3ECE4", [VN_Evol_Sem] >= 0, "#F1F7F4", [VN_Evol_Sem] >= -0.10, "#FAF4EC", "#FDF1EF")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000003
 
-	measure Bg_VN_Dia = SWITCH(TRUE(), ISBLANK([VN_Evol_Dia]), "#F0F2F8", [VN_Evol_Dia] >= 0, "#EBF5EE", [VN_Evol_Dia] >= -0.10, "#FDF4CF", "#FCEAEA")
+	measure Bg_VN_Dia = SWITCH(TRUE(), ISBLANK([VN_Evol_Dia]), "#F3ECE4", [VN_Evol_Dia] >= 0, "#F1F7F4", [VN_Evol_Dia] >= -0.10, "#FAF4EC", "#FDF1EF")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000004
 
-	measure Bg_TM_Anio = SWITCH(TRUE(), ISBLANK([TM_Evol_Anio]), "#F0F2F8", [TM_Evol_Anio] >= 0, "#EBF5EE", [TM_Evol_Anio] >= -0.10, "#FDF4CF", "#FCEAEA")
+	measure Bg_TM_Anio = SWITCH(TRUE(), ISBLANK([TM_Evol_Anio]), "#F3ECE4", [TM_Evol_Anio] >= 0, "#F1F7F4", [TM_Evol_Anio] >= -0.10, "#FAF4EC", "#FDF1EF")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000005
 
-	measure Bg_TM_Mes = SWITCH(TRUE(), ISBLANK([TM_Evol_Mes]), "#F0F2F8", [TM_Evol_Mes] >= 0, "#EBF5EE", [TM_Evol_Mes] >= -0.10, "#FDF4CF", "#FCEAEA")
+	measure Bg_TM_Mes = SWITCH(TRUE(), ISBLANK([TM_Evol_Mes]), "#F3ECE4", [TM_Evol_Mes] >= 0, "#F1F7F4", [TM_Evol_Mes] >= -0.10, "#FAF4EC", "#FDF1EF")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000006
 
-	measure Bg_TM_Sem = SWITCH(TRUE(), ISBLANK([TM_Evol_Sem]), "#F0F2F8", [TM_Evol_Sem] >= 0, "#EBF5EE", [TM_Evol_Sem] >= -0.10, "#FDF4CF", "#FCEAEA")
+	measure Bg_TM_Sem = SWITCH(TRUE(), ISBLANK([TM_Evol_Sem]), "#F3ECE4", [TM_Evol_Sem] >= 0, "#F1F7F4", [TM_Evol_Sem] >= -0.10, "#FAF4EC", "#FDF1EF")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000007
 
-	measure Bg_TM_Dia = SWITCH(TRUE(), ISBLANK([TM_Evol_Dia]), "#F0F2F8", [TM_Evol_Dia] >= 0, "#EBF5EE", [TM_Evol_Dia] >= -0.10, "#FDF4CF", "#FCEAEA")
+	measure Bg_TM_Dia = SWITCH(TRUE(), ISBLANK([TM_Evol_Dia]), "#F3ECE4", [TM_Evol_Dia] >= 0, "#F1F7F4", [TM_Evol_Dia] >= -0.10, "#FAF4EC", "#FDF1EF")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000008
 
-	measure Bg_UPT_Anio = SWITCH(TRUE(), ISBLANK([UPT_Evol_Anio]), "#F0F2F8", [UPT_Evol_Anio] >= 0, "#EBF5EE", [UPT_Evol_Anio] >= -0.10, "#FDF4CF", "#FCEAEA")
+	measure Bg_UPT_Anio = SWITCH(TRUE(), ISBLANK([UPT_Evol_Anio]), "#F3ECE4", [UPT_Evol_Anio] >= 0, "#F1F7F4", [UPT_Evol_Anio] >= -0.10, "#FAF4EC", "#FDF1EF")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000009
 
-	measure Bg_UPT_Mes = SWITCH(TRUE(), ISBLANK([UPT_Evol_Mes]), "#F0F2F8", [UPT_Evol_Mes] >= 0, "#EBF5EE", [UPT_Evol_Mes] >= -0.10, "#FDF4CF", "#FCEAEA")
+	measure Bg_UPT_Mes = SWITCH(TRUE(), ISBLANK([UPT_Evol_Mes]), "#F3ECE4", [UPT_Evol_Mes] >= 0, "#F1F7F4", [UPT_Evol_Mes] >= -0.10, "#FAF4EC", "#FDF1EF")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000010
 
-	measure Bg_UPT_Sem = SWITCH(TRUE(), ISBLANK([UPT_Evol_Sem]), "#F0F2F8", [UPT_Evol_Sem] >= 0, "#EBF5EE", [UPT_Evol_Sem] >= -0.10, "#FDF4CF", "#FCEAEA")
+	measure Bg_UPT_Sem = SWITCH(TRUE(), ISBLANK([UPT_Evol_Sem]), "#F3ECE4", [UPT_Evol_Sem] >= 0, "#F1F7F4", [UPT_Evol_Sem] >= -0.10, "#FAF4EC", "#FDF1EF")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000011
 
-	measure Bg_UPT_Dia = SWITCH(TRUE(), ISBLANK([UPT_Evol_Dia]), "#F0F2F8", [UPT_Evol_Dia] >= 0, "#EBF5EE", [UPT_Evol_Dia] >= -0.10, "#FDF4CF", "#FCEAEA")
+	measure Bg_UPT_Dia = SWITCH(TRUE(), ISBLANK([UPT_Evol_Dia]), "#F3ECE4", [UPT_Evol_Dia] >= 0, "#F1F7F4", [UPT_Evol_Dia] >= -0.10, "#FAF4EC", "#FDF1EF")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000012
 
-	measure Bg_Conv_Anio = SWITCH(TRUE(), ISBLANK([Conv_Evol_Anio]), "#F0F2F8", [Conv_Evol_Anio] >= 0, "#EBF5EE", [Conv_Evol_Anio] >= -0.10, "#FDF4CF", "#FCEAEA")
+	measure Bg_Conv_Anio = SWITCH(TRUE(), ISBLANK([Conv_Evol_Anio]), "#F3ECE4", [Conv_Evol_Anio] >= 0, "#F1F7F4", [Conv_Evol_Anio] >= -0.10, "#FAF4EC", "#FDF1EF")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000013
 
-	measure Bg_Conv_Mes = SWITCH(TRUE(), ISBLANK([Conv_Evol_Mes]), "#F0F2F8", [Conv_Evol_Mes] >= 0, "#EBF5EE", [Conv_Evol_Mes] >= -0.10, "#FDF4CF", "#FCEAEA")
+	measure Bg_Conv_Mes = SWITCH(TRUE(), ISBLANK([Conv_Evol_Mes]), "#F3ECE4", [Conv_Evol_Mes] >= 0, "#F1F7F4", [Conv_Evol_Mes] >= -0.10, "#FAF4EC", "#FDF1EF")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000014
 
-	measure Bg_Conv_Sem = SWITCH(TRUE(), ISBLANK([Conv_Evol_Sem]), "#F0F2F8", [Conv_Evol_Sem] >= 0, "#EBF5EE", [Conv_Evol_Sem] >= -0.10, "#FDF4CF", "#FCEAEA")
+	measure Bg_Conv_Sem = SWITCH(TRUE(), ISBLANK([Conv_Evol_Sem]), "#F3ECE4", [Conv_Evol_Sem] >= 0, "#F1F7F4", [Conv_Evol_Sem] >= -0.10, "#FAF4EC", "#FDF1EF")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000015
 
-	measure Bg_Conv_Dia = SWITCH(TRUE(), ISBLANK([Conv_Evol_Dia]), "#F0F2F8", [Conv_Evol_Dia] >= 0, "#EBF5EE", [Conv_Evol_Dia] >= -0.10, "#FDF4CF", "#FCEAEA")
+	measure Bg_Conv_Dia = SWITCH(TRUE(), ISBLANK([Conv_Evol_Dia]), "#F3ECE4", [Conv_Evol_Dia] >= 0, "#F1F7F4", [Conv_Evol_Dia] >= -0.10, "#FAF4EC", "#FDF1EF")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000016
 
-	measure Color_Evol_TM = SWITCH(TRUE(), ISBLANK([PromedioVentaTransaccion_Var_%]), "#8089A2", [PromedioVentaTransaccion_Var_%] >= 0, "#1F8A5B", [PromedioVentaTransaccion_Var_%] >= -0.10, "#B57A0E", "#C73838")
+	measure Color_Evol_TM = SWITCH(TRUE(), ISBLANK([PromedioVentaTransaccion_Var_%]), "#8C7E82", [PromedioVentaTransaccion_Var_%] >= 0, "#0F7A63", [PromedioVentaTransaccion_Var_%] >= -0.10, "#FF5948", "#BA1C43")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000017
 
-	measure Bg_Evol_TM = SWITCH(TRUE(), ISBLANK([PromedioVentaTransaccion_Var_%]), "#F0F2F8", [PromedioVentaTransaccion_Var_%] >= 0, "#EBF5EE", [PromedioVentaTransaccion_Var_%] >= -0.10, "#FDF4CF", "#FCEAEA")
+	measure Bg_Evol_TM = SWITCH(TRUE(), ISBLANK([PromedioVentaTransaccion_Var_%]), "#F3ECE4", [PromedioVentaTransaccion_Var_%] >= 0, "#F1F7F4", [PromedioVentaTransaccion_Var_%] >= -0.10, "#FAF4EC", "#FDF1EF")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000018
 
-	measure Color_Evol_UPT = SWITCH(TRUE(), ISBLANK([UPT_Var_%]), "#8089A2", [UPT_Var_%] >= 0, "#1F8A5B", [UPT_Var_%] >= -0.10, "#B57A0E", "#C73838")
+	measure Color_Evol_UPT = SWITCH(TRUE(), ISBLANK([UPT_Var_%]), "#8C7E82", [UPT_Var_%] >= 0, "#0F7A63", [UPT_Var_%] >= -0.10, "#FF5948", "#BA1C43")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000019
 
-	measure Bg_Evol_UPT = SWITCH(TRUE(), ISBLANK([UPT_Var_%]), "#F0F2F8", [UPT_Var_%] >= 0, "#EBF5EE", [UPT_Var_%] >= -0.10, "#FDF4CF", "#FCEAEA")
+	measure Bg_Evol_UPT = SWITCH(TRUE(), ISBLANK([UPT_Var_%]), "#F3ECE4", [UPT_Var_%] >= 0, "#F1F7F4", [UPT_Var_%] >= -0.10, "#FAF4EC", "#FDF1EF")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000020
 
-	measure Color_Evol_Conv = SWITCH(TRUE(), ISBLANK([Tasa_Conversion_YTD_Var]), "#8089A2", [Tasa_Conversion_YTD_Var] >= 0, "#1F8A5B", [Tasa_Conversion_YTD_Var] >= -3, "#B57A0E", "#C73838")
+	measure Color_Evol_Conv = SWITCH(TRUE(), ISBLANK([Tasa_Conversion_YTD_Var]), "#8C7E82", [Tasa_Conversion_YTD_Var] >= 0, "#0F7A63", [Tasa_Conversion_YTD_Var] >= -3, "#FF5948", "#BA1C43")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000021
 
-	measure Bg_Evol_Conv = SWITCH(TRUE(), ISBLANK([Tasa_Conversion_YTD_Var]), "#F0F2F8", [Tasa_Conversion_YTD_Var] >= 0, "#EBF5EE", [Tasa_Conversion_YTD_Var] >= -3, "#FDF4CF", "#FCEAEA")
+	measure Bg_Evol_Conv = SWITCH(TRUE(), ISBLANK([Tasa_Conversion_YTD_Var]), "#F3ECE4", [Tasa_Conversion_YTD_Var] >= 0, "#F1F7F4", [Tasa_Conversion_YTD_Var] >= -3, "#FAF4EC", "#FDF1EF")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000022
 
-	measure Bg_Evol_VN = SWITCH(TRUE(), ISBLANK([Ventas_YTD_Var_%]), "#F0F2F8", [Ventas_YTD_Var_%] >= 0, "#EBF5EE", [Ventas_YTD_Var_%] >= -0.10, "#FDF4CF", "#FCEAEA")
+	measure Bg_Evol_VN = SWITCH(TRUE(), ISBLANK([Ventas_YTD_Var_%]), "#F3ECE4", [Ventas_YTD_Var_%] >= 0, "#F1F7F4", [Ventas_YTD_Var_%] >= -0.10, "#FAF4EC", "#FDF1EF")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000023
 
-	measure Bg_Evol_OBJ = SWITCH(TRUE(), ISBLANK([EvolucionObjetivo_%]), "#F0F2F8", [EvolucionObjetivo_%] >= 0, "#EBF5EE", [EvolucionObjetivo_%] >= -0.10, "#FDF4CF", "#FCEAEA")
+	measure Bg_Evol_OBJ = SWITCH(TRUE(), ISBLANK([EvolucionObjetivo_%]), "#F3ECE4", [EvolucionObjetivo_%] >= 0, "#F1F7F4", [EvolucionObjetivo_%] >= -0.10, "#FAF4EC", "#FDF1EF")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000024
 
 	column Column

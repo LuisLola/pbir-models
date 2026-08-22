@@ -9434,6 +9434,16 @@ cultureInfo es-ES
 			            },
 			            "Weight": 0.714
 			          }
+			        },
+			        {
+			          "Visualizar Datos Hasta:": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ],
 			      "SemanticType": "Time"
@@ -19298,17 +19308,201 @@ cultureInfo es-ES
 			        }
 			      ]
 			    },
-			    "lol_pbiagentes.agente_cajero": {
+			    "medidas_indicadore.marca_de_actualización": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "LOL_PBIAGENTES",
-			          "ConceptualProperty": "Agente_Cajero"
+			          "ConceptualEntity": "MedidasIndicadores",
+			          "ConceptualProperty": "Marca de actualización"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "marca de actualización": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "Última Fecha Actualización": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "medidas_indicadore.última_actualización": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIndicadores",
+			          "ConceptualProperty": "última actualización"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "última actualización": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "ultima_actualizacion": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "UltimaActualizacion"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "ultima actualizacion": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "UltimaActualizacion": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "ultima_actualizacion.fecha": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "UltimaActualizacion",
+			          "ConceptualProperty": "Fecha"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "fecha": {
+			            "State": "Generated"
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
 			    }
 			  },
 			  "Relationships": {
+			    "lol_pbiseason_inicio_has_jerarquía_de_fecha": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISEASON"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbiseason.inicio": {
+			          "Target": {
+			            "Entity": "lol_pbiseason.inicio"
+			          }
+			        },
+			        "lol_pbiseason.inicio.jerarquía_de_fecha": {
+			          "Target": {
+			            "Entity": "lol_pbiseason.inicio.jerarquía_de_fecha"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbiseason.inicio"
+			            },
+			            "Object": {
+			              "Role": "lol_pbiseason.inicio.jerarquía_de_fecha"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "inicios_have_jerarquía_de_fechas"
+			        }
+			      ]
+			    },
+			    "lol_pbiseason_fin_me_has_lol_pbiseason_fin_día": {
+			      "Binding": {
+			        "ConceptualEntity": "LOL_PBISEASON"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "lol_pbiseason.fin.me": {
+			          "Target": {
+			            "Entity": "lol_pbiseason.fin.me"
+			          }
+			        },
+			        "lol_pbiseason.fin.día": {
+			          "Target": {
+			            "Entity": "lol_pbiseason.fin.día"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbiseason.fin.me"
+			            },
+			            "Object": {
+			              "Role": "lol_pbiseason.fin.día"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "me_have_días"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "lol_pbiseason.fin.día"
+			            },
+			            "Object": {
+			              "Role": "lol_pbiseason.fin.me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "días_have_me"
+			        },
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "lol_pbiseason.fin.día"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "lol_pbiseason.fin.me"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "días_are_in_me4"
+			        }
+			      ]
+			    },
 			    "lol_pbiseason_fin_trimestre_has_lol_pbiseason_fin_me": {
 			      "Binding": {
 			        "ConceptualEntity": "LOL_PBISEASON"
@@ -19635,7 +19829,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días"
+			          "ID": "me_have_días1"
 			        },
 			        {
 			          "Attribute": {
@@ -19648,7 +19842,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me"
+			          "ID": "días_have_me1"
 			        },
 			        {
 			          "Preposition": {
@@ -19998,7 +20192,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días1"
+			          "ID": "me_have_días2"
 			        },
 			        {
 			          "Attribute": {
@@ -20011,7 +20205,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me1"
+			          "ID": "días_have_me2"
 			        },
 			        {
 			          "Preposition": {
@@ -20361,7 +20555,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días2"
+			          "ID": "me_have_días3"
 			        },
 			        {
 			          "Attribute": {
@@ -20374,7 +20568,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me2"
+			          "ID": "días_have_me3"
 			        },
 			        {
 			          "Preposition": {
@@ -20724,7 +20918,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "me_have_días3"
+			          "ID": "me_have_días4"
 			        },
 			        {
 			          "Attribute": {
@@ -20737,7 +20931,7 @@ cultureInfo es-ES
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "días_have_me3"
+			          "ID": "días_have_me4"
 			        },
 			        {
 			          "Preposition": {
@@ -21437,6 +21631,42 @@ cultureInfo es-ES
 			          "ID": "calendarios_have_lol_pbisgiretails"
 			        }
 			      ]
+			    },
+			    "ultima_actualizacion_has_medidas_indicadore_última_actualización": {
+			      "Binding": {
+			        "ConceptualEntity": "UltimaActualizacion"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "ultima_actualizacion": {
+			          "Target": {
+			            "Entity": "ultima_actualizacion"
+			          }
+			        },
+			        "medidas_indicadore.última_actualización": {
+			          "Target": {
+			            "Entity": "medidas_indicadore.última_actualización"
+			          }
+			        }
+			      }
+			    },
+			    "ultima_actualizacion_has_medidas_indicadore_marca_de_actualización": {
+			      "Binding": {
+			        "ConceptualEntity": "UltimaActualizacion"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "ultima_actualizacion": {
+			          "Target": {
+			            "Entity": "ultima_actualizacion"
+			          }
+			        },
+			        "medidas_indicadore.marca_de_actualización": {
+			          "Target": {
+			            "Entity": "medidas_indicadore.marca_de_actualización"
+			          }
+			        }
+			      }
 			    },
 			    "lol_pbitienda_has_operador_logistico": {
 			      "Binding": {
@@ -36902,105 +37132,6 @@ cultureInfo es-ES
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "lol_pbitiendas_are_in_area_managers"
-			        }
-			      ]
-			    },
-			    "lol_pbiseason_fin_me_has_lol_pbiseason_fin_día": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PBISEASON"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_pbiseason.fin.me": {
-			          "Target": {
-			            "Entity": "lol_pbiseason.fin.me"
-			          }
-			        },
-			        "lol_pbiseason.fin.día": {
-			          "Target": {
-			            "Entity": "lol_pbiseason.fin.día"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbiseason.fin.me"
-			            },
-			            "Object": {
-			              "Role": "lol_pbiseason.fin.día"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "me_have_días4"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbiseason.fin.día"
-			            },
-			            "Object": {
-			              "Role": "lol_pbiseason.fin.me"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "días_have_me4"
-			        },
-			        {
-			          "Preposition": {
-			            "Subject": {
-			              "Role": "lol_pbiseason.fin.día"
-			            },
-			            "Prepositions": [
-			              {
-			                "in": {
-			                  "State": "Generated"
-			                }
-			              }
-			            ],
-			            "Object": {
-			              "Role": "lol_pbiseason.fin.me"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "días_are_in_me4"
-			        }
-			      ]
-			    },
-			    "lol_pbiseason_inicio_has_jerarquía_de_fecha": {
-			      "Binding": {
-			        "ConceptualEntity": "LOL_PBISEASON"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "lol_pbiseason.inicio": {
-			          "Target": {
-			            "Entity": "lol_pbiseason.inicio"
-			          }
-			        },
-			        "lol_pbiseason.inicio.jerarquía_de_fecha": {
-			          "Target": {
-			            "Entity": "lol_pbiseason.inicio.jerarquía_de_fecha"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "lol_pbiseason.inicio"
-			            },
-			            "Object": {
-			              "Role": "lol_pbiseason.inicio.jerarquía_de_fecha"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "inicios_have_jerarquía_de_fechas"
 			        }
 			      ]
 			    },

@@ -4,10 +4,10 @@
   "position": {
     "x": 14.830659536541889,
     "y": 152.8698752228164,
-    "z": 6000,
+    "z": 4000,
     "height": 54.759358288770052,
     "width": 104.9554367201426,
-    "tabOrder": 4000
+    "tabOrder": -11001
   },
   "visual": {
     "visualType": "slicer",
@@ -76,9 +76,8 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 1,
-                      "Percent": 0
+                    "Literal": {
+                      "Value": "'#DFA0C9'"
                     }
                   }
                 }
@@ -97,25 +96,12 @@
                 }
               }
             },
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 1,
-                      "Percent": 0
-                    }
-                  }
-                }
-              }
-            },
             "background": {
               "solid": {
                 "color": {
                   "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 8,
-                      "Percent": 0.4
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -127,6 +113,17 @@
                   "Value": "0D"
                 }
               }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1A1416'"
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -134,6 +131,13 @@
       "general": [
         {
           "properties": {
+            "orientation": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            },
             "filter": {
               "filter": {
                 "Version": 2,
@@ -173,13 +177,6 @@
                     }
                   }
                 ]
-              }
-            },
-            "orientation": {
-              "expr": {
-                "Literal": {
-                  "Value": "1D"
-                }
               }
             }
           }
@@ -312,5 +309,5 @@
       "filterChanges": true
     }
   },
-  "parentGroupName": "55fa9ae3306e95e63785"
+  "parentGroupName": "ef02805c66292d03c1c7"
 }

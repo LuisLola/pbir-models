@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "crd020outlobj",
   "position": {
-    "x": 677.98051372896361,
-    "y": 562.33835252435779,
+    "x": 677.9805137289636,
+    "y": 562.3383525243578,
     "z": 50000,
     "height": 141.718334809566,
-    "width": 554.40212577502211,
+    "width": 554.4021257750221,
     "tabOrder": 50000
   },
   "visual": {
@@ -100,6 +100,21 @@
         }
       ],
       "accentBar": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
         {
           "properties": {
             "show": {
