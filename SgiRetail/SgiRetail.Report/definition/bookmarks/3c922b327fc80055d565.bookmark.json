@@ -1,0 +1,3316 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "Desempeño Abierto",
+  "name": "3c922b327fc80055d565",
+  "options": {
+    "applyOnlyToTargetVisuals": true,
+    "targetVisualNames": [
+      "0b12de32db47820236fe",
+      "5dcd4b753aa03466c9eb",
+      "c552bb73fa0ab734b2c1",
+      "5cf3579ed2e0de691792",
+      "35a7ce398387092f4d49",
+      "c46d503b7c862092b569",
+      "4065cd9cc00142af933b",
+      "02e4cf77fb897fa6b4a9",
+      "b9026f727ff00f1c9128",
+      "1372a3ac44932a3c604d",
+      "5c17e3013c47028beb3a",
+      "aa6daeb5c7a578867023",
+      "e0f4aa802ad48620bc8e",
+      "2b3e4fd230cbbd4306b6",
+      "026af216c5f71b7edbcd",
+      "dd64e52cc4d83e0dd965",
+      "0ce08d8216ab25df5694",
+      "661a227e75deb131d679",
+      "49ce9ae70ee07d38b4c1",
+      "355ed4862c4e4dcdc4b5",
+      "6d2f525ae62644d7b712",
+      "be4ea90360034e186b7c",
+      "3c927c735f4ede5f7a58",
+      "946fc90f918cfc98e947",
+      "7dc6784860adeadeb258",
+      "db67498b0359735e51bd",
+      "edf3b1443469ddae07b1",
+      "7478ed8495abe742ded8",
+      "5d4b6a1d77420a765896",
+      "47855481b0ae69efc638",
+      "e771fd3de06246cd358b",
+      "a1b217d22d5cc37defba",
+      "df8c967f7a44da3d2dfe",
+      "6247ee22fb82897e504d",
+      "702a9e020d9240964223",
+      "dedff72c63fcfb4fdbd1",
+      "52d9723e63e8a1bcf079",
+      "d953a25c027b580f66b4",
+      "0ec50d8993b1042d0960",
+      "8d05252758a03f06c1a0",
+      "132d06f630618082094b",
+      "7bc72f1f28717d7913a4",
+      "b8ca80ec6d444d568e88",
+      "c778c3e275846f86f63d",
+      "cb8ed380e77b3146ef4e",
+      "4723323edacfa945dee2",
+      "dc4f322aa990bbcb9779",
+      "f8002d0505f94aa759ed",
+      "1182f66552557d6af090",
+      "175cdbdad6edf3032dcb",
+      "24ce60b9e8b9679eb5e4",
+      "54ec70681a8473942c59",
+      "5cdfffe50bda217692ef",
+      "62d01e261e9b4d784a69",
+      "78c00a2293d203b3396d",
+      "8700e9580dfd0cd32c8e",
+      "88ca62a0904f773f77d7",
+      "95aae9e76b7378d2b28f",
+      "b7215fa4305b3f0b2033",
+      "c82f216b93d4c72fac0f",
+      "d23a34587b27f30c7e61",
+      "e5abdaf0e0e20504f02a",
+      "fa824f30b70322df0be4"
+    ],
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.11",
+    "activeSection": "94444b40d96605bad7e4",
+    "filters": {
+      "byExpr": [
+        {
+          "name": "b238e0c247360c34a57b",
+          "type": "Categorical",
+          "filter": {
+            "Version": 2,
+            "From": [
+              {
+                "Name": "l",
+                "Entity": "LOL_PBIMODELITEM",
+                "Type": 0
+              }
+            ],
+            "Where": [
+              {
+                "Condition": {
+                  "Not": {
+                    "Expression": {
+                      "In": {
+                        "Expressions": [
+                          {
+                            "Column": {
+                              "Expression": {
+                                "SourceRef": {
+                                  "Source": "l"
+                                }
+                              },
+                              "Property": "Codigo_de_familia"
+                            }
+                          }
+                        ],
+                        "Values": [
+                          [
+                            {
+                              "Literal": {
+                                "Value": "''"
+                              }
+                            }
+                          ],
+                          [
+                            {
+                              "Literal": {
+                                "Value": "'9801'"
+                              }
+                            }
+                          ],
+                          [
+                            {
+                              "Literal": {
+                                "Value": "'9901'"
+                              }
+                            }
+                          ],
+                          [
+                            {
+                              "Literal": {
+                                "Value": "null"
+                              }
+                            }
+                          ]
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Entity": "LOL_PBIMODELITEM"
+                }
+              },
+              "Property": "Codigo_de_familia"
+            }
+          },
+          "howCreated": 1
+        }
+      ]
+    },
+    "sections": {
+      "94444b40d96605bad7e4": {
+        "visualContainers": {
+          "026af216c5f71b7edbcd": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "2ac98e7ca573370e25fd",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasDesempeño"
+                        }
+                      },
+                      "Property": "Txt_UPT_Dia"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "02e4cf77fb897fa6b4a9": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "e3164d782ab1015d8a63",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DimensionesB2C1"
+                        }
+                      },
+                      "Property": "DimensionesB2C1"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "d",
+                                "Entity": "DimensionesB2C1",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "In": {
+                                    "Expressions": [
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "d"
+                                            }
+                                          },
+                                          "Property": "DimensionesB2C1 Campos"
+                                        }
+                                      }
+                                    ],
+                                    "Values": [
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'''LOL_PBITIENDAS''[TipoTienda]'"
+                                          }
+                                        }
+                                      ]
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DimensionesB2C1"
+                        }
+                      },
+                      "Property": "DimensionesB2C1"
+                    }
+                  }
+                ]
+              },
+              "cachedFilterDisplayItems": [
+                {
+                  "id": {
+                    "scopeId": {
+                      "Comparison": {
+                        "ComparisonKind": 0,
+                        "Left": {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "DimensionesB2C1"
+                              }
+                            },
+                            "Property": "DimensionesB2C1 Campos"
+                          }
+                        },
+                        "Right": {
+                          "Literal": {
+                            "Value": "'''LOL_PBITIENDAS''[TipoTienda]'"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "displayName": "TipoTienda"
+                }
+              ]
+            }
+          },
+          "0ce08d8216ab25df5694": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "c5de31546fdd0dc2c603",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasDesempeño"
+                        }
+                      },
+                      "Property": "Txt_UPT_Mes"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "1182f66552557d6af090": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "132d06f630618082094b": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "64ca9b46222318eb5a09",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "PeriodoSelector"
+                        }
+                      },
+                      "Property": "Periodo"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "p",
+                                "Entity": "PeriodoSelector",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "In": {
+                                    "Expressions": [
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "p"
+                                            }
+                                          },
+                                          "Property": "Periodo"
+                                        }
+                                      }
+                                    ],
+                                    "Values": [
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'Mes'"
+                                          }
+                                        }
+                                      ]
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Basic'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "selection": [
+                    {
+                      "properties": {
+                        "strictSingleSelect": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "true"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "PeriodoSelector"
+                        }
+                      },
+                      "Property": "Periodo"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "1372a3ac44932a3c604d": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "175cdbdad6edf3032dcb": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "24ce60b9e8b9679eb5e4": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "4dd31fb5868d8ee3b9ee",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIMODELITEM"
+                        }
+                      },
+                      "Property": "GrupodeArt"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIMODELITEM"
+                        }
+                      },
+                      "Property": "GrupodeArt"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "2b3e4fd230cbbd4306b6": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "c0aa7555ee24aa707b36",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasDesempeño"
+                        }
+                      },
+                      "Property": "Txt_Conv_Anio"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "355ed4862c4e4dcdc4b5": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "3b9cb9c5595a2187ca5e",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendario"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "051e734d5e9fd3229cb9",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "UPT_YTD"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "lineChart",
+              "objects": {},
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendario"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "35a7ce398387092f4d49": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "dc54256202a9c3f67671",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBITIENDAS"
+                        }
+                      },
+                      "Property": "TipoTienda"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "305cba90c6d1b1cc3a6c",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBITIENDAS"
+                        }
+                      },
+                      "Property": "NombreTienda"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "4e414d91b3a954d2808c",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBITIENDAS"
+                        }
+                      },
+                      "Property": "ResponsableTienda"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "7a5439b6e0b0484dab52",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBITIENDAS"
+                        }
+                      },
+                      "Property": "Territorio"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "87c65036e322b48dff84",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBITIENDAS"
+                        }
+                      },
+                      "Property": "AreaManager"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "46db8f29ac6b99808cec",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIMODELITEM"
+                        }
+                      },
+                      "Property": "Categoria"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "3f54de5cd52e45c61a56",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIMODELITEM"
+                        }
+                      },
+                      "Property": "Descripcion_familia_agregada"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "38020bc5c9c7c25dab3c",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIMODELITEM"
+                        }
+                      },
+                      "Property": "Nombre_familia"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "546fb01075ba6e5e8405",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIMODELITEM"
+                        }
+                      },
+                      "Property": "Subfamilia"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "ca1eb38c49e871b2662c",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendario"
+                        }
+                      },
+                      "Property": "Año"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "1d93d1f00c8ecc8e6cf4",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendario"
+                        }
+                      },
+                      "Property": "MesTexto"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "4a4a65bd2948d8dcc604",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendario"
+                        }
+                      },
+                      "Property": "NombreSemana"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "cdb3b86e56e51fcd2149",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendario"
+                        }
+                      },
+                      "Property": "NombreDíaCorto"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "7c10e6c761de401b5085",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasDesempeño"
+                        }
+                      },
+                      "Property": "Share_Pct"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "21af1affe21370de3fa1",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "Ventas_YTD"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "3818577d3b4d54576921",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasObjetivosRetail"
+                        }
+                      },
+                      "Property": "Objetivos_YTD"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "113b19ec2f384f123cce",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasObjetivosRetail"
+                        }
+                      },
+                      "Property": "EvolucionObjetivo_%"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "9c7c33b5b2be1efcc0d9",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "Ventas_YTD_LY"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "29c39c225e638bd338d6",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "Ventas_YTD_Var_%"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "7632b4fa79388ce5e3d6",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "Tasa_Devolucion_YTD"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "3c8c3843e4d4bc4e09c0",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "Tasa_Devolucion_YTD_Var"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "19b4db7775d2e33cb3d5",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "NumeroTransacciones_YTD"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "91b9c848353c15fe6a47",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "NumeroTransacciones_Var_%"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "a6319af3e2c63ec04823",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "PromedioVentaTransaccion_YTD"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "0d945f76450db0fa666a",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "PromedioVentaTransaccion_Var_%"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "24b25ad0e0f300153f05",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "UPT_YTD"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "2817fb3e47ac28c6c011",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "UPT_Var_%"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "f2f57883beed0d01f98c",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasTrafico"
+                        }
+                      },
+                      "Property": "Entradas_YTD"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "30028c8f4581e2c489d0",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasTrafico"
+                        }
+                      },
+                      "Property": "Tasa_Conversion_YTD"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "b00f570fc3c622d1e61b",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasTrafico"
+                        }
+                      },
+                      "Property": "Tasa_Conversion_YTD_Var"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "pivotTable",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "Ventas_YTD"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Rows": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBITIENDAS"
+                        }
+                      },
+                      "Property": "TipoTienda"
+                    }
+                  }
+                ]
+              },
+              "projections": {
+                "Rows": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBITIENDAS"
+                        }
+                      },
+                      "Property": "TipoTienda"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBITIENDAS"
+                        }
+                      },
+                      "Property": "NombreTienda"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBITIENDAS"
+                        }
+                      },
+                      "Property": "TipoTienda"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBITIENDAS"
+                        }
+                      },
+                      "Property": "NombreTienda"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBITIENDAS"
+                        }
+                      },
+                      "Property": "ResponsableTienda"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBITIENDAS"
+                        }
+                      },
+                      "Property": "Territorio"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBITIENDAS"
+                        }
+                      },
+                      "Property": "AreaManager"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIMODELITEM"
+                        }
+                      },
+                      "Property": "Categoria"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIMODELITEM"
+                        }
+                      },
+                      "Property": "Descripcion_familia_agregada"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIMODELITEM"
+                        }
+                      },
+                      "Property": "Nombre_familia"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIMODELITEM"
+                        }
+                      },
+                      "Property": "Subfamilia"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendario"
+                        }
+                      },
+                      "Property": "Año"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendario"
+                        }
+                      },
+                      "Property": "MesTexto"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendario"
+                        }
+                      },
+                      "Property": "NombreSemana"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendario"
+                        }
+                      },
+                      "Property": "NombreDíaCorto"
+                    }
+                  }
+                ],
+                "Values": [
+                  {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasDesempeño"
+                        }
+                      },
+                      "Property": "Share_Pct"
+                    }
+                  },
+                  {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "Ventas_YTD"
+                    }
+                  },
+                  {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasObjetivosRetail"
+                        }
+                      },
+                      "Property": "Objetivos_YTD"
+                    }
+                  },
+                  {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasObjetivosRetail"
+                        }
+                      },
+                      "Property": "EvolucionObjetivo_%"
+                    }
+                  },
+                  {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "Ventas_YTD_LY"
+                    }
+                  },
+                  {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "Ventas_YTD_Var_%"
+                    }
+                  },
+                  {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "Tasa_Devolucion_YTD"
+                    }
+                  },
+                  {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "Tasa_Devolucion_YTD_Var"
+                    }
+                  },
+                  {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "NumeroTransacciones_YTD"
+                    }
+                  },
+                  {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "NumeroTransacciones_Var_%"
+                    }
+                  },
+                  {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "PromedioVentaTransaccion_YTD"
+                    }
+                  },
+                  {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "PromedioVentaTransaccion_Var_%"
+                    }
+                  },
+                  {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "UPT_YTD"
+                    }
+                  },
+                  {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "UPT_Var_%"
+                    }
+                  },
+                  {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasTrafico"
+                        }
+                      },
+                      "Property": "Entradas_YTD"
+                    }
+                  },
+                  {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasTrafico"
+                        }
+                      },
+                      "Property": "Tasa_Conversion_YTD"
+                    }
+                  },
+                  {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasTrafico"
+                        }
+                      },
+                      "Property": "Tasa_Conversion_YTD_Var"
+                    }
+                  }
+                ]
+              },
+              "parameters": {
+                "Rows": [
+                  {
+                    "expr": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "DimensionesB2C1"
+                          }
+                        },
+                        "Property": "DimensionesB2C1"
+                      }
+                    },
+                    "index": 0,
+                    "length": 1
+                  },
+                  {
+                    "expr": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "DimensionesB2C2"
+                          }
+                        },
+                        "Property": "DimensionesB2C2"
+                      }
+                    },
+                    "index": 1,
+                    "length": 1
+                  },
+                  {
+                    "expr": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "DimensionesB2C3"
+                          }
+                        },
+                        "Property": "DimensionesB2C3"
+                      }
+                    },
+                    "index": 2,
+                    "length": 13
+                  }
+                ]
+              },
+              "expansionStates": [
+                {
+                  "roles": [
+                    "Rows"
+                  ],
+                  "levels": [
+                    {
+                      "queryRefs": [
+                        "LOL_PBITIENDAS.TipoTienda"
+                      ],
+                      "isCollapsed": true,
+                      "identityKeys": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "LOL_PBITIENDAS"
+                              }
+                            },
+                            "Property": "TipoTienda"
+                          }
+                        }
+                      ],
+                      "isPinned": true
+                    },
+                    {
+                      "queryRefs": [
+                        "LOL_PBITIENDAS.NombreTienda"
+                      ],
+                      "isCollapsed": true,
+                      "identityKeys": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "LOL_PBITIENDAS"
+                              }
+                            },
+                            "Property": "NombreTienda"
+                          }
+                        }
+                      ],
+                      "isPinned": true
+                    },
+                    {
+                      "queryRefs": [
+                        "LOL_PBITIENDAS.ResponsableTienda"
+                      ],
+                      "isCollapsed": true
+                    },
+                    {
+                      "queryRefs": [
+                        "LOL_PBITIENDAS.Territorio"
+                      ],
+                      "isCollapsed": true
+                    },
+                    {
+                      "queryRefs": [
+                        "LOL_PBITIENDAS.AreaManager"
+                      ],
+                      "isCollapsed": true
+                    },
+                    {
+                      "queryRefs": [
+                        "LOL_PBIMODELITEM.Categoria"
+                      ],
+                      "isCollapsed": true
+                    },
+                    {
+                      "queryRefs": [
+                        "LOL_PBIMODELITEM.Descripcion_familia_agregada"
+                      ],
+                      "isCollapsed": true
+                    },
+                    {
+                      "queryRefs": [
+                        "LOL_PBIMODELITEM.Nombre_familia"
+                      ],
+                      "isCollapsed": true
+                    },
+                    {
+                      "queryRefs": [
+                        "LOL_PBIMODELITEM.Subfamilia"
+                      ],
+                      "isCollapsed": true
+                    },
+                    {
+                      "queryRefs": [
+                        "Calendario.Año"
+                      ],
+                      "isCollapsed": true
+                    },
+                    {
+                      "queryRefs": [
+                        "Calendario.MesTexto"
+                      ],
+                      "isCollapsed": true
+                    },
+                    {
+                      "queryRefs": [
+                        "Calendario.NombreSemana"
+                      ],
+                      "isCollapsed": true
+                    },
+                    {
+                      "queryRefs": [
+                        "Calendario.NombreDíaCorto"
+                      ],
+                      "isCollapsed": true
+                    }
+                  ],
+                  "root": {
+                    "identityValues": []
+                  }
+                }
+              ]
+            }
+          },
+          "3c927c735f4ede5f7a58": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "7f100b9ff8d257265a6d",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasDesempeño"
+                        }
+                      },
+                      "Property": "Txt_TM_Dia"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "4065cd9cc00142af933b": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "63d71cc17fab920146f2",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DimensionesB2C2"
+                        }
+                      },
+                      "Property": "DimensionesB2C2"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "d",
+                                "Entity": "DimensionesB2C2",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "In": {
+                                    "Expressions": [
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "d"
+                                            }
+                                          },
+                                          "Property": "DimensionesB2C2 Campos"
+                                        }
+                                      }
+                                    ],
+                                    "Values": [
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'''LOL_PBITIENDAS''[NombreTienda]'"
+                                          }
+                                        }
+                                      ]
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DimensionesB2C2"
+                        }
+                      },
+                      "Property": "DimensionesB2C2"
+                    }
+                  }
+                ]
+              },
+              "cachedFilterDisplayItems": [
+                {
+                  "id": {
+                    "scopeId": {
+                      "Comparison": {
+                        "ComparisonKind": 0,
+                        "Left": {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "DimensionesB2C2"
+                              }
+                            },
+                            "Property": "DimensionesB2C2 Campos"
+                          }
+                        },
+                        "Right": {
+                          "Literal": {
+                            "Value": "'''LOL_PBITIENDAS''[NombreTienda]'"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "displayName": "NombreTienda"
+                }
+              ]
+            }
+          },
+          "4723323edacfa945dee2": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "47855481b0ae69efc638": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "2524e343db388b9bb05f",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasDesempeño"
+                        }
+                      },
+                      "Property": "Txt_VN_Sem"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "49ce9ae70ee07d38b4c1": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "d16cf8d9344e85e63643",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendario"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "bc9db5d1cb9e98df6942",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasTrafico"
+                        }
+                      },
+                      "Property": "Tasa_Conversion_YTD"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "lineChart",
+              "objects": {},
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendario"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "52d9723e63e8a1bcf079": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "54ec70681a8473942c59": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "2c2153f0ece29a87c3aa",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DimensionesB2C1"
+                        }
+                      },
+                      "Property": "DimensionesB2C1"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "d",
+                                "Entity": "DimensionesB2C1",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "In": {
+                                    "Expressions": [
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "d"
+                                            }
+                                          },
+                                          "Property": "DimensionesB2C1 Campos"
+                                        }
+                                      }
+                                    ],
+                                    "Values": [
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'''LOL_PBITIENDAS''[TipoTienda]'"
+                                          }
+                                        }
+                                      ]
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DimensionesB2C1"
+                        }
+                      },
+                      "Property": "DimensionesB2C1"
+                    }
+                  }
+                ]
+              },
+              "cachedFilterDisplayItems": [
+                {
+                  "id": {
+                    "scopeId": {
+                      "Comparison": {
+                        "ComparisonKind": 0,
+                        "Left": {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "DimensionesB2C1"
+                              }
+                            },
+                            "Property": "DimensionesB2C1 Campos"
+                          }
+                        },
+                        "Right": {
+                          "Literal": {
+                            "Value": "'''LOL_PBITIENDAS''[TipoTienda]'"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "displayName": "TipoTienda"
+                }
+              ]
+            }
+          },
+          "5c17e3013c47028beb3a": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "dfaf8274f4b883ce59ca",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasDesempeño"
+                        }
+                      },
+                      "Property": "Txt_Conv_Dia"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "5cdfffe50bda217692ef": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "92841e3dc6d55e5aec71",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "OrdenSelector"
+                        }
+                      },
+                      "Property": "Orden"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "o",
+                                "Entity": "OrdenSelector",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "In": {
+                                    "Expressions": [
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "o"
+                                            }
+                                          },
+                                          "Property": "Orden"
+                                        }
+                                      }
+                                    ],
+                                    "Values": [
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'Ventas (€)'"
+                                          }
+                                        }
+                                      ]
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "OrdenSelector"
+                        }
+                      },
+                      "Property": "Orden"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "5d4b6a1d77420a765896": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "3b44448367be8339acce",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasDesempeño"
+                        }
+                      },
+                      "Property": "Txt_VN_Dia"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "6247ee22fb82897e504d": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "17cc4ef75ec2b9533dea",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "Ventas_YTD"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "62d01e261e9b4d784a69": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "c10e498f11262fe03320",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBITIENDAS"
+                        }
+                      },
+                      "Property": "NombreTienda"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "textFilter25A4896A83E0487089E2B90C9AE57C8A",
+              "objects": {}
+            }
+          },
+          "661a227e75deb131d679": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "9e78cb759ced53dbbfd6",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasDesempeño"
+                        }
+                      },
+                      "Property": "Txt_UPT_Anio"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "6d2f525ae62644d7b712": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "ad2769c84a092bfb3580",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasTrafico"
+                        }
+                      },
+                      "Property": "Tasa_Conversion_YTD"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "702a9e020d9240964223": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "7478ed8495abe742ded8": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "290f809cec92e072afa2",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "PromedioVentaTransaccion_YTD"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "78c00a2293d203b3396d": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "c48ece4f84245e0a2ba1",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIMODELITEM"
+                        }
+                      },
+                      "Property": "Subfamilia"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIMODELITEM"
+                        }
+                      },
+                      "Property": "Subfamilia"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "7bc72f1f28717d7913a4": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "7dc6784860adeadeb258": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "184200c5ba8608a960aa",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasDesempeño"
+                        }
+                      },
+                      "Property": "Txt_TM_Mes"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "8700e9580dfd0cd32c8e": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "42eb4247cf798541d20a",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIMODELITEM"
+                        }
+                      },
+                      "Property": "Categoria"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIMODELITEM"
+                        }
+                      },
+                      "Property": "Categoria"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "88ca62a0904f773f77d7": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "3e472c0f5f2f1a85c630",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIMODELITEM"
+                        }
+                      },
+                      "Property": "Descripcion_familia_agregada"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIMODELITEM"
+                        }
+                      },
+                      "Property": "Descripcion_familia_agregada"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "8d05252758a03f06c1a0": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "44d623f9c935734fa0aa",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FechaHastaSelector"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Before'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FechaHastaSelector"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FechaHastaSelector"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "946fc90f918cfc98e947": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "611f9da3d0513308cfd3",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasDesempeño"
+                        }
+                      },
+                      "Property": "Txt_TM_Sem"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "95aae9e76b7378d2b28f": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "d1561d7c1057c2b75287",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "ParamTopN"
+                        }
+                      },
+                      "Property": "Top N"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "p",
+                                "Entity": "ParamTopN",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "In": {
+                                    "Expressions": [
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "p"
+                                            }
+                                          },
+                                          "Property": "Top N"
+                                        }
+                                      }
+                                    ],
+                                    "Values": [
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "50L"
+                                          }
+                                        }
+                                      ]
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "ParamTopN"
+                        }
+                      },
+                      "Property": "Top N"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "a1b217d22d5cc37defba": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "2b2d9d34bcf3bcf940d9",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasDesempeño"
+                        }
+                      },
+                      "Property": "Txt_VN_Anio"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "aa6daeb5c7a578867023": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "1a15f8a62ce8de55f30c",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasDesempeño"
+                        }
+                      },
+                      "Property": "Txt_Conv_Sem"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "b7215fa4305b3f0b2033": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "9ec1221006bc407c2a07",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBISEASON"
+                        }
+                      },
+                      "Property": "Code"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "l",
+                                "Entity": "LOL_PBISEASON",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "In": {
+                                    "Expressions": [
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "l"
+                                            }
+                                          },
+                                          "Property": "Code"
+                                        }
+                                      }
+                                    ],
+                                    "Values": [
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'S26'"
+                                          }
+                                        }
+                                      ]
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBISEASON"
+                        }
+                      },
+                      "Property": "Code"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "b8ca80ec6d444d568e88": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "a48a79ff1223fc06dc7a",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasIndicadores"
+                        }
+                      },
+                      "Property": "Marca de actualización"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasIndicadores"
+                        }
+                      },
+                      "Property": "Marca de actualización"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "b9026f727ff00f1c9128": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "be4ea90360034e186b7c": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "97f8913b66d174b28e42",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "UPT_YTD"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "c46d503b7c862092b569": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "73f09c59449995f9741f",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIMODELITEM"
+                        }
+                      },
+                      "Property": "Categoria"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIMODELITEM"
+                        }
+                      },
+                      "Property": "Categoria"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "c778c3e275846f86f63d": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "c82f216b93d4c72fac0f": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "3c86aece2d5db47ca71e",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBITIENDAS"
+                        }
+                      },
+                      "Property": "TipoTienda"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBITIENDAS"
+                        }
+                      },
+                      "Property": "TipoTienda"
+                    }
+                  }
+                ]
+              },
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "cb8ed380e77b3146ef4e": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "e8c518b2b718b72ff8c5",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCalculadasRetailOnline"
+                        }
+                      },
+                      "Property": "RangoPeriodoSeleccionado"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasCalculadasRetailOnline"
+                        }
+                      },
+                      "Property": "RangoPeriodoSeleccionado"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "d23a34587b27f30c7e61": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "d953a25c027b580f66b4": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "db67498b0359735e51bd": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "c3cc6b1aa26f9705b82a",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasDesempeño"
+                        }
+                      },
+                      "Property": "Txt_TM_Anio"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "dc4f322aa990bbcb9779": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "dd64e52cc4d83e0dd965": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "bbe1ee5e0f6d099d97c2",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasDesempeño"
+                        }
+                      },
+                      "Property": "Txt_UPT_Sem"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "dedff72c63fcfb4fdbd1": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "df8c967f7a44da3d2dfe": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "b0310a46f16789724faf",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendario"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "bfd63bf91a0d652f7d89",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "Ventas"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "lineChart",
+              "objects": {},
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendario"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "e0f4aa802ad48620bc8e": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "d821dcf87ff073a0821c",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasDesempeño"
+                        }
+                      },
+                      "Property": "Txt_Conv_Mes"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "e5abdaf0e0e20504f02a": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "fbce4f1d161b879bf325",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBIMODELITEM"
+                        }
+                      },
+                      "Property": "Modelo-Color"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "textFilter25A4896A83E0487089E2B90C9AE57C8A",
+              "objects": {}
+            }
+          },
+          "e771fd3de06246cd358b": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "2af6a36cfc6dd4092c32",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasDesempeño"
+                        }
+                      },
+                      "Property": "Txt_VN_Mes"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "edf3b1443469ddae07b1": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "7e51d9177fa788772d3b",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendario"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "c507213f3dd890bb061f",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasRetail"
+                        }
+                      },
+                      "Property": "PromedioVentaTransaccion_YTD"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "lineChart",
+              "objects": {},
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendario"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "f8002d0505f94aa759ed": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "fa824f30b70322df0be4": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          }
+        },
+        "visualContainerGroups": {
+          "c552bb73fa0ab734b2c1": {
+            "isHidden": true
+          },
+          "5cf3579ed2e0de691792": {
+            "isHidden": false
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
