@@ -1,9 +1,9 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "fee111cc02c92e91a341",
   "position": {
-    "x": 783,
-    "y": 9,
+    "x": 791.72413793103453,
+    "y": 9.1954022988505759,
     "z": 8000,
     "height": 711,
     "width": 489,
@@ -78,6 +78,21 @@
               "queryRef": "Calendario.NombreSemana",
               "nativeQueryRef": "NombreSemana",
               "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "Referencia-Modelo"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.Referencia-Modelo",
+              "nativeQueryRef": "Referencia-Modelo",
+              "active": false
             }
           ]
         },
@@ -130,6 +145,12 @@
             ],
             "isCollapsed": true,
             "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "LOL_PBIMODELITEM.Referencia-Modelo"
+            ],
+            "isCollapsed": true
           }
         ],
         "root": {}

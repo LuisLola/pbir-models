@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "74eb8537e1ff818cdbe0",
   "position": {
-    "x": 273,
-    "y": 9,
+    "x": 264.82758620689657,
+    "y": 9.1954022988505759,
     "z": 12000,
-    "height": 711,
-    "width": 500,
+    "height": 710.80459770114953,
+    "width": 518.62068965517244,
     "tabOrder": 11000
   },
   "visual": {
@@ -78,6 +78,21 @@
               "queryRef": "Calendario.NombreSemana",
               "nativeQueryRef": "NombreSemana",
               "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "Referencia-Modelo"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.Referencia-Modelo",
+              "nativeQueryRef": "Referencia-Modelo",
+              "active": false
             }
           ]
         },
@@ -116,17 +131,60 @@
             "queryRefs": [
               "Calendario.Año"
             ],
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calendario"
+                    }
+                  },
+                  "Property": "Año"
+                }
+              }
+            ],
             "isPinned": true
           },
           {
             "queryRefs": [
               "Calendario.MesTexto"
             ],
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calendario"
+                    }
+                  },
+                  "Property": "MesTexto"
+                }
+              }
+            ],
             "isPinned": true
           },
           {
             "queryRefs": [
               "Calendario.NombreSemana"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calendario"
+                    }
+                  },
+                  "Property": "NombreSemana"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "LOL_PBIMODELITEM.Referencia-Modelo"
             ],
             "isCollapsed": true,
             "isPinned": true

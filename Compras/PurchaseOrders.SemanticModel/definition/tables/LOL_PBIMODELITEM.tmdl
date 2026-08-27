@@ -457,6 +457,16 @@ table LOL_PBIMODELITEM
 
 		annotation SummarizationSetBy = Automatic
 
+	column Referencia-Modelo =
+			
+			LOL_PBIMODELITEM[Referencia_modelo]
+			    & " - " &
+			LOL_PBIMODELITEM[Descripcion_modelo]
+		lineageTag: 59195d38-109d-4398-ae86-9f93ba924d31
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition LOL_PBIMODELITEM = m
 		mode: import
 		source =
