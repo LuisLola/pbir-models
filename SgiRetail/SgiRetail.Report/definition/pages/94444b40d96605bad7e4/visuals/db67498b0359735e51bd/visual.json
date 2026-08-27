@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "db67498b0359735e51bd",
   "position": {
-    "x": 312,
-    "y": 112,
+    "x": 301,
+    "y": 118,
     "z": 12000,
-    "height": 56,
-    "width": 61,
+    "height": 52,
+    "width": 70,
     "tabOrder": 5013
   },
   "visual": {
@@ -41,21 +41,14 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'AÑO'"
+                  "Value": "false"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "7D"
+                  "Value": "9D"
                 }
               }
             }
@@ -74,6 +67,13 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            },
+            "heading": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Normal'"
                 }
               }
             }
@@ -122,43 +122,34 @@
           }
         }
       ],
-      "fillCustom": [
+      "value": [
         {
           "properties": {
-            "transparency": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "id": "default"
-          }
-        }
-      ],
-      "layout": [
-        {
-          "properties": {
-            "columnCount": {
-              "expr": {
-                "Literal": {
-                  "Value": "7L"
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasDesempeño"
+                        }
+                      },
+                      "Property": "Color_TM_Anio"
+                    }
+                  }
                 }
               }
             },
-            "calloutSize": {
+            "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "42D"
+                  "Value": "9D"
                 }
               }
             }
           }
-        }
-      ],
-      "value": [
+        },
         {
           "properties": {
             "fontSize": {
@@ -174,7 +165,62 @@
           }
         }
       ],
-      "outline": [
+      "layout": [
+        {
+          "properties": {
+            "style": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Cards'"
+                }
+              }
+            },
+            "paddingUniform": {
+              "expr": {
+                "Literal": {
+                  "Value": "2L"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "backgroundShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "paddingUniform": {
+              "expr": {
+                "Literal": {
+                  "Value": "3L"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "fillCustom": [
+        {
+          "properties": {
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        },
         {
           "properties": {
             "show": {
@@ -183,10 +229,30 @@
                   "Value": "true"
                 }
               }
+            },
+            "fillColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MedidasDesempeño"
+                        }
+                      },
+                      "Property": "Bg_TM_Anio"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
             }
-          },
-          "selector": {
-            "id": "default"
           }
         }
       ]
