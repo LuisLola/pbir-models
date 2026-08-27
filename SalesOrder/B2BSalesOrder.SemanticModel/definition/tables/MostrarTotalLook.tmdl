@@ -1,0 +1,28 @@
+/// Interruptor para mostrar u ocultar los Total Look. Usalo con la medida [Filtro Total Look] en el panel de filtros del visual.
+table MostrarTotalLook
+	lineageTag: b4a85543-d41b-4117-aa68-3125a6b033b5
+
+	column Mostrar
+		dataType: string
+		lineageTag: 158e1821-ff60-4706-91ec-a87806d55eb3
+		sourceColumn: [Mostrar]
+		sortByColumn: Orden
+
+	column Orden
+		dataType: int64
+		isHidden
+		lineageTag: 5805da24-d5f1-4850-ad1b-997e434bc960
+		sourceColumn: [Orden]
+
+	partition MostrarTotalLook = calculated
+		source =
+				DATATABLE (
+				    "Mostrar", STRING,
+				    "Orden", INTEGER,
+				    {
+				        { "Todo", 0 },
+				        { "Solo Total Look", 1 },
+				        { "Sin Total Look", 2 }
+				    }
+				)
+

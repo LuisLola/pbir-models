@@ -464,6 +464,26 @@ table LOL_PBIMODELITEM
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Total Look o Prenda suelta. Segmenta por aqui para mostrar u ocultar los looks en TODAS las tablas de hechos.
+	column 'Total Look' =
+			IF (
+			    LEN ( TRIM ( LOL_PBIMODELITEM[U_GSP_LOLTOTALLOOK] ) ) > 0,
+			    "Total Look",
+			    "Prenda suelta"
+			)
+		dataType: string
+		lineageTag: adf08909-f6d9-4f84-960f-29d1c5e3fe10
+
+	/// Codigo del look al que pertenece el articulo. En blanco si no forma parte de ninguno.
+	column 'Código Total Look' =
+			IF (
+			    LEN ( TRIM ( LOL_PBIMODELITEM[U_GSP_LOLTOTALLOOK] ) ) > 0,
+			    TRIM ( LOL_PBIMODELITEM[U_GSP_LOLTOTALLOOK] ),
+			    BLANK ()
+			)
+		dataType: string
+		lineageTag: 2933b164-7151-4673-9a0b-0fcfd718ea60
+
 	partition LOL_PBIMODELITEM = m
 		mode: import
 		source =

@@ -8,7 +8,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["LOL_PBIAGENTES","LOL_PBIMODELITEM","LOL_PBISEASON","LOL_PBICLIENTES","LOL_PBIB2BSALESORDER","LOL_PBIINVOICESSALES","LOL_PBICREDITNOTESSALES","LOL_PBIRETURNSALES","LOL_PBISALESDELIVERY","LOL_PBIRETURNREQUESTS","LOL_PLANMATERIAL"]
+annotation PBI_QueryOrder = ["LOL_PBIAGENTES","LOL_PBIMODELITEM","LOL_PBISEASON","LOL_PBICLIENTES","LOL_PBIB2BSALESORDER","LOL_PBIINVOICESSALES","LOL_PBICREDITNOTESSALES","LOL_PBIRETURNSALES","LOL_PBISALESDELIVERY","LOL_PBIRETURNREQUESTS","LOL_PLANMATERIAL","UltimaActualizacion"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
@@ -57,6 +57,11 @@ ref table LocalDateTable_17cb4af7-d50a-4a5f-85d8-fdd88089d344
 ref table LOL_PLANMATERIAL
 ref table MedidasCartera
 ref table MesFacturacion
+ref table UltimaActualizacion
+ref table DimensionB2B1
+ref table DimensionB2B2
+ref table DimensionB2B3
+ref table MostrarTotalLook
 
 ref cultureInfo es-ES
 

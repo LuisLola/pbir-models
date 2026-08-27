@@ -11,12 +11,40 @@ table MedidasCartera
 		displayFolder: Cartera facturable
 		lineageTag: 33d2cf75-d4be-4f81-8601-7503232d4e16
 
-	measure 'Cartera asignada stock' = SUM ( 'LOL_PLANMATERIAL'[Importe asignado] )
+	measure 'Cartera asignada stock' =
+			
+			VAR Opcion = SELECTEDVALUE ( MostrarTotalLook[Mostrar], "Todo" )
+			VAR Tipo =
+			    SWITCH (
+			        Opcion,
+			        "Solo Total Look", "Total Look",
+			        "Sin Total Look", "Prenda suelta"
+			    )
+			RETURN
+			IF (
+			    ISBLANK ( Tipo ),
+			    SUM ( 'LOL_PLANMATERIAL'[Importe asignado] ),
+			    CALCULATE ( SUM ( 'LOL_PLANMATERIAL'[Importe asignado] ), KEEPFILTERS ( LOL_PBIMODELITEM[Total Look] = Tipo ) )
+			)
 		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
 		displayFolder: Cartera facturable
 		lineageTag: 3dae4ad1-c860-4ad4-8987-b219a54c20e6
 
-	measure 'Cartera en transito' = SUM ( 'LOL_PLANMATERIAL'[AssignTransitLineTotal] )
+	measure 'Cartera en transito' =
+			
+			VAR Opcion = SELECTEDVALUE ( MostrarTotalLook[Mostrar], "Todo" )
+			VAR Tipo =
+			    SWITCH (
+			        Opcion,
+			        "Solo Total Look", "Total Look",
+			        "Sin Total Look", "Prenda suelta"
+			    )
+			RETURN
+			IF (
+			    ISBLANK ( Tipo ),
+			    SUM ( 'LOL_PLANMATERIAL'[AssignTransitLineTotal] ),
+			    CALCULATE ( SUM ( 'LOL_PLANMATERIAL'[AssignTransitLineTotal] ), KEEPFILTERS ( LOL_PBIMODELITEM[Total Look] = Tipo ) )
+			)
 		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
 		displayFolder: Cartera facturable
 		lineageTag: 32283b1b-e829-4a2f-82a5-0a88950168eb
@@ -41,8 +69,9 @@ table MedidasCartera
 		lineageTag: 6b6ff195-3cc2-4a56-8844-2ac148af5738
 
 	measure 'Facturado del mes' =
-			VAR Ini = MIN ( MesFacturacion[Inicio] )
-			VAR Fin = MAX ( MesFacturacion[Fin] )
+			
+			VAR Ini = [Inicio mes de cierre]
+			VAR Fin = [Fin mes de cierre]
 			RETURN
 			CALCULATE (
 			    [Importe Facturado],
@@ -50,6 +79,11 @@ table MedidasCartera
 			        ALL ( LOL_PBIINVOICESSALES[DocDate] ),
 			        LOL_PBIINVOICESSALES[DocDate] >= Ini
 			            && LOL_PBIINVOICESSALES[DocDate] <= Fin
+			    ),
+			    FILTER (
+			        ALL ( LOL_PBICREDITNOTESSALES[DocDate] ),
+			        LOL_PBICREDITNOTESSALES[DocDate] >= Ini
+			            && LOL_PBICREDITNOTESSALES[DocDate] <= Fin
 			    )
 			)
 		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
@@ -104,8 +138,8 @@ table MedidasCartera
 
 	measure 'Tiene movimiento en el mes' =
 			
-			VAR Ini = MIN ( MesFacturacion[Inicio] )
-			VAR FinMes = MAX ( MesFacturacion[Fin] )
+			VAR Ini = [Inicio mes de cierre]
+			VAR FinMes = [Fin mes de cierre]
 			VAR Fin = [Fin efectivo cartera]
 			VAR abierto =
 			    CALCULATE (
@@ -132,7 +166,7 @@ table MedidasCartera
 
 	measure 'Adelanto entrega' =
 			
-			VAR FinMes = MAX ( MesFacturacion[Fin] )
+			VAR FinMes = [Fin mes de cierre]
 			VAR Extra =
 			    CALCULATE (
 			        [Importe facturable],
@@ -158,7 +192,7 @@ table MedidasCartera
 
 	measure 'Fin efectivo cartera' =
 			
-			VAR FinMes = MAX ( MesFacturacion[Fin] )
+			VAR FinMes = [Fin mes de cierre]
 			VAR FinSlicer =
 			    CALCULATE (
 			        MAX ( LOL_PLANMATERIAL[Fecha Fin pedido venta] ),
@@ -181,12 +215,7 @@ table MedidasCartera
 			            CONCATENATEX ( VALUES ( LOL_PBIAGENTES[Agente_Cajero] ), LOL_PBIAGENTES[Agente_Cajero], ", " ),
 			            FORMAT ( n1, "#,0" ) & " valores" ) )
 			
-			VAR n2 = IF ( ISFILTERED ( MesFacturacion[Mes] ), COUNTROWS ( VALUES ( MesFacturacion[Mes] ) ) )
-			VAR v2 =
-			    IF ( ISBLANK ( n2 ), BLANK (),
-			        IF ( n2 <= 3,
-			            CONCATENATEX ( VALUES ( MesFacturacion[Mes] ), MesFacturacion[Mes], ", " ),
-			            FORMAT ( n2, "#,0" ) & " valores" ) )
+			VAR v2 = [Mes de cierre]
 			
 			VAR n3 = IF ( ISFILTERED ( LOL_PBISEASON[Code] ), COUNTROWS ( VALUES ( LOL_PBISEASON[Code] ) ) )
 			VAR v3 =
@@ -308,11 +337,9 @@ table MedidasCartera
 		displayFolder: Checks de filtro
 		lineageTag: 934dbc9a-8b4d-4039-a669-20e5e80a3d9a
 
-	measure 'Check Mes de cierre' = ```
+	measure 'Check Mes de cierre' =
 			
-			IF ( ISFILTERED ( MesFacturacion[Mes] ), UNICHAR ( 10003 ) )
-			
-			```
+			IF ( ISFILTERED ( LOL_PLANMATERIAL[Fecha disponibilidad (línea del articulo)] ), UNICHAR ( 10003 ) )
 		displayFolder: Checks de filtro
 		lineageTag: da2eeb5c-697c-4f16-a2f8-f3826f3e1898
 
@@ -415,7 +442,6 @@ table MedidasCartera
 	measure 'Filtros activos' = ```
 			
 			INT ( ISFILTERED ( LOL_PBIAGENTES[Agente_Cajero] ) ) +
-			INT ( ISFILTERED ( MesFacturacion[Mes] ) ) +
 			INT ( ISFILTERED ( LOL_PBISEASON[Code] ) ) +
 			INT ( ISFILTERED ( LOL_PLANMATERIAL[P&H] ) ) +
 			INT ( ISFILTERED ( LOL_PLANMATERIAL[TotalLook] ) ) +
@@ -433,6 +459,175 @@ table MedidasCartera
 		formatString: 0
 		displayFolder: Diagnostico
 		lineageTag: f7ec97c5-3aa2-40d2-8370-6178fb93dd0e
+
+	/// Peso del Total Look sobre la cartera pendiente.
+	measure '% Cartera Total Look' =
+			
+			DIVIDE ( [Cartera Total Look], [Cartera pendiente] )
+		formatString: 0\ %;-0\ %;0\ %
+		displayFolder: Total Look
+		lineageTag: b6946212-ed6f-48be-a63c-f31dbc788131
+
+	/// Cartera pendiente de entregar de los articulos que forman parte de un Total Look.
+	measure 'Cartera Total Look' =
+			
+			CALCULATE (
+			    [Cartera pendiente],
+			    LOL_PBIMODELITEM[Total Look] = "Total Look"
+			)
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		displayFolder: Total Look
+		lineageTag: 339b3988-9902-4f57-ab7d-44e54ff994e6
+
+	/// Lineas de pedido cuyo articulo pertenece a un Total Look.
+	measure 'Lineas Total Look' =
+			
+			CALCULATE (
+			    COUNTROWS ( LOL_PBIB2BSALESORDER ),
+			    LOL_PBIMODELITEM[Total Look] = "Total Look"
+			)
+		formatString: #,0
+		displayFolder: Total Look
+		lineageTag: e731489f-6d59-45c7-b42c-6326d1b8b2fd
+
+	/// Dia tope del segmentador Hasta Fecha Disponibilidad Stock. Si nadie lo ha tocado, hoy.
+	measure 'Fecha disponibilidad seleccionada' =
+			
+			VAR Tope =
+			    IF (
+			        ISFILTERED ( LOL_PLANMATERIAL[Fecha disponibilidad (línea del articulo)] ),
+			        CALCULATE (
+			            MAX ( LOL_PLANMATERIAL[Fecha disponibilidad (línea del articulo)] ),
+			            ALLSELECTED ( LOL_PLANMATERIAL[Fecha disponibilidad (línea del articulo)] )
+			        )
+			    )
+			RETURN
+			COALESCE ( Tope, TODAY () )
+		formatString: Short Date
+		displayFolder: Cierre del mes
+		lineageTag: 44cd57e9-0b41-4f4f-826d-a3e7bfe883ff
+
+	/// Ultimo dia del mes que contiene la fecha de disponibilidad elegida.
+	measure 'Fin mes de cierre' =
+			
+			EOMONTH ( [Fecha disponibilidad seleccionada], 0 )
+		formatString: Short Date
+		displayFolder: Cierre del mes
+		lineageTag: 2cde1294-8a7f-4996-ad76-5aebb606c9a2
+
+	/// Primer dia del mes que contiene la fecha de disponibilidad elegida.
+	measure 'Inicio mes de cierre' =
+			
+			EOMONTH ( [Fecha disponibilidad seleccionada], -1 ) + 1
+		formatString: Short Date
+		displayFolder: Cierre del mes
+		lineageTag: 02ab5c42-b8c7-45b5-b464-a846c6867d0d
+
+	/// Etiqueta del mes que se esta calculando. Ponla en una tarjeta: al quitar el segmentador de mes es la unica pista visual de que mes se muestra.
+	measure 'Mes de cierre' =
+			
+			FORMAT ( [Fecha disponibilidad seleccionada], "mmm yyyy" )
+		displayFolder: Cierre del mes
+		lineageTag: 7c4418ad-c214-4d1f-b3f4-7a957545a8e4
+
+	/// Cuantos codigos de Total Look distintos hay en el contexto actual.
+	measure 'Looks distintos' =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( LOL_PBIMODELITEM[Código Total Look] ),
+			    LOL_PBIMODELITEM[Total Look] = "Total Look"
+			)
+		formatString: #,0
+		displayFolder: Total Look
+		lineageTag: 2527ba56-cca9-408a-aba2-1d76b7a8d69f
+
+	/// Referencias de modelo que no pertenecen a ningun Total Look.
+	measure 'Referencias sueltas' =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( LOL_PBIMODELITEM[Referencia_modelo] ),
+			    LOL_PBIMODELITEM[Total Look] = "Prenda suelta"
+			)
+		formatString: #,0
+		displayFolder: Total Look
+		lineageTag: 1aa69538-b987-4b0b-a9a7-2f31c457c05b
+
+	/// Referencias de modelo agrupadas bajo algun Total Look. Es el criterio en si: el campo agrupa referencias.
+	measure 'Referencias Total Look' =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( LOL_PBIMODELITEM[Referencia_modelo] ),
+			    LOL_PBIMODELITEM[Total Look] = "Total Look"
+			)
+		formatString: #,0
+		displayFolder: Total Look
+		lineageTag: a51b3872-8d03-467b-a9de-239ac6492fa2
+
+	/// Dice si se estan adelantando entregas y, si sale cero, por que. En blanco si la fecha de servicio es la de hoy.
+	measure 'Aviso adelanto entrega' =
+			
+			VAR Servicio = [Fecha servicio seleccionada]
+			VAR FinCierre = [Fin mes de cierre]
+			VAR Importe = [Adelanto entrega]
+			RETURN
+			IF (
+			    Servicio = TODAY (),
+			    BLANK (),
+			    SWITCH (
+			        TRUE (),
+			        Servicio <= FinCierre,
+			            "Sin adelanto: corte " & FORMAT ( FinCierre, "dd/mm/yyyy" ),
+			        Importe > 0,
+			            "Adelanto de entregas: " & FORMAT ( Importe, "#,0" ) & " €",
+			        "Sin adelanto de entregas"
+			    )
+			)
+		displayFolder: Cierre del mes
+		lineageTag: c2017cbc-f11b-410b-887b-a1685d0694c2
+
+	/// Avisa de si el mes de cierre que se esta calculando es el mes en curso o no. En blanco si la fecha de servicio es la de hoy.
+	measure 'Aviso mes de cierre' =
+			
+			VAR Servicio = [Fecha servicio seleccionada]
+			VAR FinCierre = [Fin mes de cierre]
+			VAR FinHoy = EOMONTH ( TODAY (), 0 )
+			RETURN
+			IF (
+			    Servicio = TODAY (),
+			    BLANK (),
+			    IF (
+			        FinCierre = FinHoy,
+			        "Mes en curso: " & [Mes de cierre],
+			        "Fuera del mes en curso: " & [Mes de cierre]
+			    )
+			)
+		displayFolder: Cierre del mes
+		lineageTag: 74e5bf48-bfe1-4481-9d74-146c7eaadac0
+
+	/// Dia tope del segmentador Hasta Fecha Fin pedido venta. Si nadie lo ha tocado, hoy.
+	measure 'Fecha servicio seleccionada' =
+			
+			VAR Tope =
+			    IF (
+			        ISFILTERED ( LOL_PLANMATERIAL[Fecha Fin pedido venta] ),
+			        CALCULATE (
+			            MAX ( LOL_PLANMATERIAL[Fecha Fin pedido venta] ),
+			            ALLSELECTED ( LOL_PLANMATERIAL[Fecha Fin pedido venta] )
+			        )
+			    )
+			RETURN
+			COALESCE ( Tope, TODAY () )
+		formatString: Short Date
+		displayFolder: Cierre del mes
+		lineageTag: 1062be4c-2648-4f56-8958-3d41d56ba8a2
+
+	/// 1 cuando la fecha de servicio no es la de hoy. Ponla en el panel de filtros de las tarjetas de aviso (es 1) para que solo aparezcan al salirse del dia en curso.
+	measure 'Mostrar avisos' =
+			
+			INT ( [Fecha servicio seleccionada] <> TODAY () )
+		formatString: 0
+		displayFolder: Cierre del mes
+		lineageTag: 110be1a5-64fb-4953-b9ad-cf3d73047dfa
 
 	column Value
 		lineageTag: 2848c4c9-fd79-45ec-8f68-88eccb9c7834

@@ -1,0 +1,57 @@
+table DimensionB2B1
+	lineageTag: b18cc4c5-87f7-49e1-8bcf-532fcdb06e33
+
+	column DimensionB2B1
+		lineageTag: c65b2d4d-12b6-4524-81f2-134e33176707
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'DimensionB2B1 Orden'
+
+		relatedColumnDetails
+			groupByColumn: 'DimensionB2B1 Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DimensionB2B1 Campos'
+		isHidden
+		lineageTag: cf391dad-a2cc-44b9-849e-9698e4d06309
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'DimensionB2B1 Orden'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DimensionB2B1 Orden'
+		isHidden
+		formatString: 0
+		lineageTag: c4e102dd-9484-4bb4-8a8d-b8a1156d93ea
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimensionB2B1 = calculated
+		mode: import
+		source =
+				{
+				    ("Categoría", NAMEOF('LOL_PBIMODELITEM'[Categoria]), 0),
+				    ("Familia agregada", NAMEOF('LOL_PBIMODELITEM'[Descripcion_familia_agregada]), 1),
+				    ("Familia", NAMEOF('LOL_PBIMODELITEM'[Nombre_familia]), 2),
+				    ("Subfamilia", NAMEOF('LOL_PBIMODELITEM'[Subfamilia]), 3),
+				    ("Marca", NAMEOF('LOL_PBIMODELITEM'[GrupodeArt]), 4),
+				    ("Cliente", NAMEOF('LOL_PBICLIENTES'[RazonSocial]), 5),
+				    ("Grupo cliente", NAMEOF('LOL_PBICLIENTES'[GroupName]), 6),
+				    ("País", NAMEOF('LOL_PBICLIENTES'[Pais]), 7),
+				    ("Agente", NAMEOF('LOL_PBIAGENTES'[Agente_Cajero]), 8),
+				    ("Temporada", NAMEOF('LOL_PBISEASON'[Name]), 9),
+				    ("Pedido", NAMEOF('LOL_PBIB2BSALESORDER'[DocNum]), 10)
+				}
+
+	annotation PBI_Id = b18cc4c587f749e18bcf532fcdb06e33
+

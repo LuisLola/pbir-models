@@ -67,7 +67,7 @@ table LOL_PBIB2BSALESORDER
 
 	column DocDate
 		dataType: dateTime
-		formatString: Long Date
+		formatString: Short Date
 		lineageTag: a2024619-e062-4d2a-a666-7111f0712269
 		summarizeBy: none
 		sourceColumn: DocDate
@@ -408,6 +408,21 @@ table LOL_PBIB2BSALESORDER
 		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
+
+	column EsMuestra =
+			VAR Nombre = UPPER ( RELATED ( 'LOL_PBICLIENTES'[RazonSocial] ) )
+			VAR Almacen = 'LOL_PBIB2BSALESORDER'[WhsCode]
+			RETURN
+			    IF (
+			        ( NOT ISBLANK ( Nombre )
+			            && ( SEARCH ( "MUESTR", Nombre, 1, 0 ) > 0 || SEARCH ( "SMS", Nombre, 1, 0 ) > 0 ) )
+			            || Almacen = "4-C002L",
+			        "Y",
+			        "N"
+			    )
+		dataType: string
+		lineageTag: d683ae3b-2292-4992-ad5b-c30057d76481
+		summarizeBy: none
 
 	partition LOL_PBIB2BSALESORDER = m
 		mode: import

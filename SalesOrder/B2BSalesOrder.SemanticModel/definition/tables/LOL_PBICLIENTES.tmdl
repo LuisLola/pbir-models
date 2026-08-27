@@ -195,6 +195,18 @@ table LOL_PBICLIENTES
 
 		annotation SummarizationSetBy = Automatic
 
+	column EsMuestra =
+			VAR Nombre = UPPER ( 'LOL_PBICLIENTES'[RazonSocial] )
+			RETURN
+			    IF (
+			        SEARCH ( "MUESTR", Nombre, 1, 0 ) > 0 || SEARCH ( "SMS", Nombre, 1, 0 ) > 0,
+			        "Y",
+			        "N"
+			    )
+		dataType: string
+		lineageTag: 7639ef07-90e9-4e8a-9f02-6a1ed8d3d13d
+		summarizeBy: none
+
 	partition LOL_PBICLIENTES = m
 		mode: import
 		source =

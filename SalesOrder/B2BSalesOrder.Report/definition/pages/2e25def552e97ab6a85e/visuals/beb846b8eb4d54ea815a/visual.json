@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "beb846b8eb4d54ea815a",
   "position": {
     "x": 14.830659536541889,
@@ -304,7 +304,30 @@
           }
         }
       ]
+    },
+    "syncGroup": {
+      "groupName": "Top N1",
+      "fieldChanges": true,
+      "filterChanges": true
     }
   },
-  "parentGroupName": "836f3ba01d924c3350de"
+  "parentGroupName": "836f3ba01d924c3350de",
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "1f10d7397bf105046df0",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "ParamTopN"
+              }
+            },
+            "Property": "Top N"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
 }

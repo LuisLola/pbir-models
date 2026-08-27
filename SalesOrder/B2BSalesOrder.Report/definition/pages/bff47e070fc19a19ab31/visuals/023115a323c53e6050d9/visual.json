@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "023115a323c53e6050d9",
   "position": {
     "x": 5.5787545787545794,
@@ -326,6 +326,11 @@
           }
         }
       ]
+    },
+    "syncGroup": {
+      "groupName": "Fecha Fin pedido venta",
+      "fieldChanges": true,
+      "filterChanges": true
     },
     "drillFilterOtherVisuals": true
   },

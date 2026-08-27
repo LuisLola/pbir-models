@@ -9,7 +9,7 @@ table MedidasCatalogo
 	/// Catálogo visual de productos B2B (foto, ranking con medallas, badge de marca). Se agrupa por la dimensión elegida en DimensionB2B, se ordena por OrdenSelector y muestra Top N (ParamTopN) por grupo. Ventas = ImporteBruto (excluye anulados/incidencias, hasta fecha de corte, respeta la temporada seleccionada). Devuelve HTML: usar en el visual "HTML Content".
 	measure 'HTML Catálogo B2B' =
 			VAR _TopN = [Catálogo Top N]
-			VAR _ix = SELECTEDVALUE( DimensionB2B[Orden], 0 )
+			VAR _ix = COALESCE( SELECTEDVALUE( DimensionB2B1[DimensionB2B1 Orden] ), SELECTEDVALUE( DimensionB2B[Orden] ), 0 )
 			VAR _ord = SELECTEDVALUE( OrdenSelector[Orden], "Ventas (€)" )
 			VAR _FechaCorte = [FechaLimiteSeleccionada]
 			VAR _temp = [TemporadaSeleccionada]
@@ -50,7 +50,8 @@ table MedidasCatalogo
 			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBIB2BSALESORDER, LOL_PBICLIENTES[GroupName], LOL_PBIMODELITEM[Modelo-Color] ), "ven", CALCULATE( SUM( LOL_PBIB2BSALESORDER[ImporteBruto] ) ), "u", CALCULATE( SUMX( LOL_PBIB2BSALESORDER, IFERROR( VALUE( LOL_PBIB2BSALESORDER[Qty] ), 0 ) ) ) ), "@g", LOL_PBICLIENTES[GroupName] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 6 ),
 			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBIB2BSALESORDER, LOL_PBICLIENTES[Pais], LOL_PBIMODELITEM[Modelo-Color] ), "ven", CALCULATE( SUM( LOL_PBIB2BSALESORDER[ImporteBruto] ) ), "u", CALCULATE( SUMX( LOL_PBIB2BSALESORDER, IFERROR( VALUE( LOL_PBIB2BSALESORDER[Qty] ), 0 ) ) ) ), "@g", LOL_PBICLIENTES[Pais] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 7 ),
 			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBIB2BSALESORDER, LOL_PBIAGENTES[Agente_Cajero], LOL_PBIMODELITEM[Modelo-Color] ), "ven", CALCULATE( SUM( LOL_PBIB2BSALESORDER[ImporteBruto] ) ), "u", CALCULATE( SUMX( LOL_PBIB2BSALESORDER, IFERROR( VALUE( LOL_PBIB2BSALESORDER[Qty] ), 0 ) ) ) ), "@g", LOL_PBIAGENTES[Agente_Cajero] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 8 ),
-			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBIB2BSALESORDER, LOL_PBISEASON[Name], LOL_PBIMODELITEM[Modelo-Color] ), "ven", CALCULATE( SUM( LOL_PBIB2BSALESORDER[ImporteBruto] ) ), "u", CALCULATE( SUMX( LOL_PBIB2BSALESORDER, IFERROR( VALUE( LOL_PBIB2BSALESORDER[Qty] ), 0 ) ) ) ), "@g", LOL_PBISEASON[Name] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 9 )
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBIB2BSALESORDER, LOL_PBISEASON[Name], LOL_PBIMODELITEM[Modelo-Color] ), "ven", CALCULATE( SUM( LOL_PBIB2BSALESORDER[ImporteBruto] ) ), "u", CALCULATE( SUMX( LOL_PBIB2BSALESORDER, IFERROR( VALUE( LOL_PBIB2BSALESORDER[Qty] ), 0 ) ) ) ), "@g", LOL_PBISEASON[Name] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 9 ),
+			            FILTER( SELECTCOLUMNS( ADDCOLUMNS( SUMMARIZE( LOL_PBIB2BSALESORDER, LOL_PBIB2BSALESORDER[DocNum], LOL_PBIMODELITEM[Modelo-Color] ), "ven", CALCULATE( SUM( LOL_PBIB2BSALESORDER[ImporteBruto] ) ), "u", CALCULATE( SUMX( LOL_PBIB2BSALESORDER, IFERROR( VALUE( LOL_PBIB2BSALESORDER[Qty] ), 0 ) ) ) ), "@g", LOL_PBIB2BSALESORDER[DocNum] & "", "@m", LOL_PBIMODELITEM[Modelo-Color], "@ven", [ven], "@u", [u] ), _ix = 10 )
 			        ),
 			        REMOVEFILTERS( 'Calendario' ),
 			        REMOVEFILTERS( LOL_PBIB2BSALESORDER[DocDate] ),

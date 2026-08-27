@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "635a1abd6534ec35fdab",
   "position": {
     "x": 5.7142857142857144,
@@ -326,6 +326,11 @@
           }
         }
       ]
+    },
+    "syncGroup": {
+      "groupName": "Fecha disponibilidad (línea del articulo)",
+      "fieldChanges": true,
+      "filterChanges": true
     },
     "drillFilterOtherVisuals": true
   },

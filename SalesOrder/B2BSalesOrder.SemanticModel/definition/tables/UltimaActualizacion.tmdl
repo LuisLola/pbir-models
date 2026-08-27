@@ -1,0 +1,25 @@
+table UltimaActualizacion
+	isHidden
+	lineageTag: c1b30d1f-0638-4038-ae3b-00f4b911bed2
+
+	column Fecha
+		dataType: dateTime
+		isHidden
+		lineageTag: c2187170-de4a-4cbb-a665-3ea1f13bf667
+		summarizeBy: none
+		sourceColumn: Fecha
+
+	partition UltimaActualizacion = m
+		source =
+				let
+				    Utc = DateTimeZone.RemoveZone(DateTimeZone.UtcNow()),
+				    Anio = Date.Year(Utc),
+				    IniVerano = Date.StartOfWeek(#datetime(Anio, 3, 31, 0, 0, 0), Day.Sunday) + #duration(0, 1, 0, 0),
+				    FinVerano = Date.StartOfWeek(#datetime(Anio, 10, 31, 0, 0, 0), Day.Sunday) + #duration(0, 1, 0, 0),
+				    Desfase = if Utc >= IniVerano and Utc < FinVerano then 2 else 1,
+				    Marca = Utc + #duration(0, Desfase, 0, 0),
+				    Tabla = #table({"Fecha"}, {{Marca}}),
+				    Tipos = Table.TransformColumnTypes(Tabla, {{"Fecha", type datetime}})
+				in
+				    Tipos
+
