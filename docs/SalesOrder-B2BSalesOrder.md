@@ -3,6 +3,8 @@
 > Documentación técnica generada a partir del modelo TMDL ubicado en
 > [`SalesOrder/B2BSalesOrder.SemanticModel/definition/`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/).
 > **Solo lectura**: este documento describe el modelo, no lo modifica.
+>
+> *Ultima revision: 28 de agosto de 2026.*
 
 ---
 
@@ -19,10 +21,10 @@
 | compatibilityLevel | 1600 |
 | Cultura / idioma de origen | es-ES |
 | Time Intelligence automático | Activado (`__PBI_TimeIntelligenceEnabled = 1`) |
-| Tablas "reales" (visibles/funcionales) | 21 |
+| Tablas "reales" (visibles/funcionales) | 29 |
 | Tablas auto-generadas de fechas | 1 plantilla + 20 `LocalDateTable_*` ocultas |
-| Nº de medidas | **96** |
-| Orígenes de datos | SQL Server `192.168.0.232`, base `hana_etl_admin`, esquema `dbo` (10 tablas importadas vía M) + tablas calculadas DAX |
+| Nº de medidas | **174** |
+| Orígenes de datos | SQL Server `192.168.0.232`, base `hana_etl_admin`, esquema `dbo` (10 tablas vía M) **+ HANA `192.168.0.231:30015`** (`LOL_PLANMATERIAL`, vía `Value.NativeQuery`) + tablas calculadas DAX |
 | RLS / Roles | **Ninguno** |
 
 ### Arquitectura
@@ -32,10 +34,18 @@
 - **Hechos derivada:** [`VentasIncidencias`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/VentasIncidencias.tmdl) (subconjunto calculado del pedido, solo incidencias).
 - **Dimensiones de origen SQL:** [`LOL_PBICLIENTES`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/LOL_PBICLIENTES.tmdl), [`LOL_PBIAGENTES`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/LOL_PBIAGENTES.tmdl), [`LOL_PBIMODELITEM`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/LOL_PBIMODELITEM.tmdl), [`LOL_PBISEASON`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/LOL_PBISEASON.tmdl).
 - **Dimensión de fechas calculada:** [`Calendario`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/Calendario.tmdl).
-- **Apoyo / parámetros:** [`TemporadasUsadas`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/TemporadasUsadas.tmdl), [`DimensionB2B`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/DimensionB2B.tmdl), [`OrdenSelector`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/OrdenSelector.tmdl), [`ParamTopN`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/ParamTopN.tmdl).
-- **Contenedores de medidas (sin datos):** `MedidasVentas`, `MedidasTemporadas`, `MedidasIncidencias`, `MedidasFormato`, `MedidasCatalogo`.
+- **Cartera viva:** [`LOL_PLANMATERIAL`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/LOL_PLANMATERIAL.tmdl), importada de HANA. Es la misma tabla que sostiene el modelo *ServicePlan*, traída aquí para poder cerrar el mes y medir el servicio sin salir de este informe.
+- **Apoyo / parámetros:** `TemporadasUsadas`, `DimensionB2B`, `DimensionB2B1/2/3` (*field parameters*), `OrdenSelector`, `ParamTopN`, `MesFacturacion`, `MostrarTotalLook`, `UltimaActualizacion`.
+- **Contenedores de medidas (sin datos):** `MedidasVentas`, `MedidasTemporadas`, `MedidasIncidencias`, `MedidasFormato`, `MedidasCatalogo`, **`MedidasCartera`**.
 
-> **Cambio respecto a versiones anteriores del modelo:** la tabla `B2C1` (*field parameter* de segmentación) **ya no existe**. Y `TemporadasUsadas`, que era una tabla desconectada, ahora **sí tiene relación física** con `LOL_PBISEASON[Code]`.
+> **Qué ha cambiado desde la revisión de agosto.** El modelo ha pasado de 96 a **174 medidas**. Lo nuevo, en orden de peso:
+>
+> - **`MedidasCartera` (47)** — tabla-contenedor nueva. Trae el cierre de mes, los avisos de adelanto de entrega, los *checks* de filtro y el bloque Total Look. Se apoya en `LOL_PLANMATERIAL`, importada de HANA.
+> - **`MedidasVentas` pasa de 55 a 86** — 26 KPI de temporada, 3 de muestras y 2 de última actualización.
+> - **Tres *field parameters*** `DimensionB2B1/2/3`, que sustituyen en el informe a la vieja `DimensionB2B` (tabla `DATATABLE` sin segmentador en ninguna página).
+> - **Columnas calculadas nuevas:** `Total Look` y `Código Total Look` sobre el artículo, `EsMuestra` sobre pedido y cliente.
+>
+> Sigue en pie lo de la revisión anterior: `B2C1` no existe y `TemporadasUsadas` ya tiene relación física con `LOL_PBISEASON[Code]`.
 
 ---
 
@@ -190,7 +200,11 @@ Es la **clave de agrupación de producto** del catálogo HTML. Otras destacadas:
 | `TemporadasUsadas` | Calculada: `DISTINCT(SELECTCOLUMNS('LOL_PBISEASON',"Code",…))` | Selector de temporada. `TemporadaSeleccionada` lee `SELECTEDVALUE` de su `Code`. **Ahora relacionada** con `LOL_PBISEASON[Code]`. |
 | `ParamTopN` | `GENERATESERIES(5, 50, 5)` | Parámetro "Top N" del catálogo. |
 | `OrdenSelector` | `DATATABLE` | Criterio de orden del catálogo: `Ventas (€)` (1), `Unidades` (2), `PVP` (3). |
-| `DimensionB2B` | `DATATABLE` | Dimensión de agrupación del catálogo: Categoría(0), Familia agregada(1), Familia(2), Subfamilia(3), Marca(4), Cliente(5), Grupo cliente(6), País(7), Agente(8), Temporada(9). |
+| `DimensionB2B` | `DATATABLE` | Dimensión de agrupación del catálogo: Categoría(0), Familia agregada(1), Familia(2), Subfamilia(3), Marca(4), Cliente(5), Grupo cliente(6), País(7), Agente(8), Temporada(9). **Ya no tiene segmentador en ninguna página**; se conserva solo como respaldo de `HTML Catálogo B2B`. |
+| `DimensionB2B1` / `2` / `3` | *Field parameters* (`NAMEOF`) | Los tres selectores de desglose del informe. Mismos índices 0–9 que `DimensionB2B` **más `Pedido`(10)**. La columna de orden se llama `DimensionB2B1[DimensionB2B1 Orden]`, no `[Orden]`. |
+| `MesFacturacion` | Calculada sobre `Calendario` | Meses con `Inicio`/`Fin` (`EOMONTH`). **Ya no la lee ninguna medida**: el mes de cierre se deduce de la fecha de disponibilidad (§5.6). |
+| `MostrarTotalLook` | `DATATABLE` | Interruptor Todo / Solo Total Look / Sin Total Look. Ver §5.6. |
+| `UltimaActualizacion` | Calculada | Sello de hora del último refresco. |
 
 ---
 
@@ -281,9 +295,18 @@ Decenas de relaciones M:1 hacia `LocalDateTable_*[Date]` con `joinOnDateBehavior
 
 ---
 
-## 5. Medidas (96)
+## 5. Medidas (174)
 
-Repartidas en 5 tablas-contenedor.
+Repartidas en 6 tablas-contenedor.
+
+| Tabla | Medidas |
+|---|---:|
+| `MedidasVentas` | 86 |
+| `MedidasCartera` | 47 |
+| `MedidasTemporadas` | 23 |
+| `MedidasIncidencias` | 14 |
+| `MedidasCatalogo` | 2 |
+| `MedidasFormato` | 2 |
 
 ### 5.1. `MedidasTemporadas` (23) — control de la temporada seleccionada
 
@@ -310,12 +333,12 @@ Fecha de corte global: el menor entre la fecha máxima visible en el filtro y ho
 #### Carpeta `Validacion` (9)
 Auditan que la ventana de "días equivalentes" cuadra: `ValidacionFechaInicioTemporadaSel` (= `MAX(LOL_PBISEASON[Fin])`, ojo), `ValidacionFechaFinTemporadaSel`, `ValidacionFechaInicioTemporadaAnt`, `ValidacionFechaFinTemporadaAnt`, `ValidacionDiasTemporadaSel`, `ValidacionFechaCorteAnt12M` (`EDATE(FechaCorte,-12)`), `ValidacionFechaFinAntDiasEq`, `ValidacionRangoTemporadaAnt` (volcado de texto), `ValidacionVersionRangos` (= `"Rangos por LOL_PBISEASON[Fin] v3"`).
 
-### 5.2. `MedidasVentas` (55)
+### 5.2. `MedidasVentas` (86)
 
 Patrón común: `SUM` de `ImporteBruto` (o `LineTotal_Num`) con `REMOVEFILTERS('Calendario')` y `REMOVEFILTERS([DocDate])`, tope `DocDate <= FechaCorte`, excluyendo anulados e incidencias.
 
-#### Carpeta `Base` (6)
-`VentaBruta`, `VentaBrutaSalesOrder` (alias), `VentaNeta`, `VentaBrutaTotal`, `VentaNetaTotal`, `VentasTemporadaSeleccionada_Bruta`.
+#### Carpeta `Base` (3)
+`VentaBruta`, `VentaBrutaSalesOrder` (alias), `VentaNeta`. `VentaBrutaTotal` y `VentaNetaTotal` viven en la carpeta `Total`, y `VentasTemporadaSeleccionada_Bruta` en `Temporada`.
 
 ```dax
 VentaBruta =
@@ -330,13 +353,13 @@ RETURN CALCULATE (
 )
 ```
 
-#### Carpeta `Temporada` (13)
+#### Carpeta `Temporada` (8)
 `VentasTemporadaSeleccionada` (+ alias `…SalesOrder`), `VentasTemporadaAnterior` (ventana de **días equivalentes** desde `MAX(Fin)` de la anterior), `VentasTemporadaAnterior_SoloInicio` (sin reposiciones), `VentasTemporadaAnterior_Total`, `VentasTemporadaPasada_SoloInicio`, `RealizadoTemporadaAnterior_%`.
 
 #### Carpeta `Evolucion` (4)
 `EvolTemporadaSeleccionada`, `EvolTemporadaSeleccionada_%`, `EvolTemporadaSeleccionada_Completa` (vs venta inicial de la anterior), `EvolTemporadaSeleccionada_%Completa`.
 
-#### Carpeta `YTD` (6)
+#### Carpeta `YTD` (5)
 `VentasYTD` (`DATESYTD` sobre `LineTotal_Num`), `VentasYTD_SalesOrder` (alias), `VentasYTD_LY` (`SAMEPERIODLASTYEAR`), `EvolVentasYTD`, `EvolVentasYTD_%`.
 
 #### Carpeta `Total` (8)
@@ -373,6 +396,28 @@ Variantes que **no recortan por días equivalentes** y **no excluyen anulados/in
 
 > **`Importe X` vs `X (cadena)`.** Las primeras suman la tabla de destino tal cual (respondiendo al filtro que llegue por las dimensiones compartidas). Las `(cadena)` navegan el enlace documento a documento. Para "de este pedido, ¿cuánto se ha servido?" hay que usar la variante `(cadena)`; las `%` del embudo (`% Servido`, `% Facturado`) usan hoy la variante **directa** (ver §6).
 
+#### Carpeta `Temporada KPI` (26)
+
+Los KPI de cabecera del informe. Cada uno con su gemelo `… anterior` y su `Evol … %`:
+
+| Bloque | Medidas |
+|---|---|
+| Volumen | `Pedidos temporada`, `Clientes temporada`, `Unidades temporada`, `Líneas temporada`, `Modelos temporada` |
+| Medias | `Pedido medio`, `Venta por cliente`, `Unidades por pedido`, `Precio medio unidad`, `Líneas por pedido`, `Venta por modelo`, `Unidades por modelo` |
+| Evolución | `Evol pedidos %`, `Evol clientes %`, `Evol unidades %`, `Evol pedido medio %`, `Evol modelos %`, `Evol venta por cliente %`, `Evol precio medio %` |
+
+`Modelos temporada` cuenta **`Referencia_modelo`**, no `ItemCode`: un modelo, no una talla. Necesita `CROSSFILTER(…, BOTH)` para que el recuento de la dimensión responda al filtro del hecho.
+
+#### Carpeta `Muestras` (3)
+
+`Venta sin muestras`, `Venta de muestras`, `% Muestras sobre total`. Se apoyan en la columna calculada `EsMuestra` (Y/N), que marca la fila cuando la razón social del cliente contiene `MUESTR` o `SMS`, **o** cuando el almacén es `4-C002L`.
+
+> El almacén se identificó empíricamente: el 96,5% de su volumen viene de clientes con `MUESTR` en el nombre. Y `SMS` deja un falso positivo conocido, *Sms SRL*, que es una empresa B2B real (unos 4.052 €).
+
+#### Carpeta `Actualización` (2)
+
+`Última actualización` y `Marca de actualización`, para el sello de hora de la cabecera.
+
 ### 5.3. `MedidasIncidencias` (14)
 Trabajan sobre `VentasIncidencias` replicando la estructura temporal de ventas.
 
@@ -390,9 +435,85 @@ Trabajan sobre `VentasIncidencias` replicando la estructura temporal de ventas.
 
 **`HTML Catálogo B2B`** — medida de texto que genera HTML completo (con `<style>` embebido) para un visual *HTML Content*:
 
-> *Catálogo visual de productos B2B (foto, ranking con medallas, badge de marca). Se agrupa por la dimensión elegida en `DimensionB2B`, se ordena por `OrdenSelector` y muestra Top N (`ParamTopN`) por grupo. Ventas = `ImporteBruto` (excluye anulados/incidencias, hasta fecha de corte, respeta la temporada seleccionada).*
+> *Catálogo visual de productos B2B (foto, ranking con medallas, badge de marca). Se agrupa por la dimensión elegida, se ordena por `OrdenSelector` y muestra Top N (`ParamTopN`) por grupo. Ventas = `ImporteBruto` (excluye anulados/incidencias, hasta fecha de corte, respeta la temporada seleccionada).*
 
-Con un `SWITCH` sobre `DimensionB2B[Orden]` (0–9) construye pares (grupo, modelo-color) con ventas y unidades mediante `SUMMARIZE`/`ADDCOLUMNS`, toma los 12 grupos top y dentro de cada grupo los `Top N` modelos, y dibuja una tarjeta con ranking (medalla), barra de progreso y silueta SVG de respaldo si no hay foto. Paleta de marca (rosa `#DFA0C9`, negro, gris).
+El índice de agrupación sale de **`DimensionB2B1`**, que es el que tiene segmentador en las páginas:
+
+```dax
+VAR _ix = COALESCE ( SELECTEDVALUE ( DimensionB2B1[DimensionB2B1 Orden] ),
+                     SELECTEDVALUE ( DimensionB2B[Orden] ), 0 )
+```
+
+Antes leía solo `DimensionB2B`, que no tiene segmentador en ninguna de las tres páginas donde vive el catálogo: el HTML salía siempre agrupado por Categoría se moviera lo que se moviera. `DimensionB2B` queda como respaldo.
+
+> ⚠️ El `UNION` tiene **una rama por índice**. Si se añade una entrada al *field parameter* sin añadir su rama, esa opción deja el catálogo vacío con *"Sin ventas para los filtros actuales"*. Pasó con `Pedido` (índice 10).
+
+Con un `SWITCH` sobre el índice de dimensión (0–10) construye pares (grupo, modelo-color) con ventas y unidades mediante `SUMMARIZE`/`ADDCOLUMNS`, toma los 12 grupos top y dentro de cada grupo los `Top N` modelos, y dibuja una tarjeta con ranking (medalla), barra de progreso y silueta SVG de respaldo si no hay foto. Paleta de marca (rosa `#DFA0C9`, negro, gris).
+
+---
+
+### 5.6. `MedidasCartera` (47) — cierre de mes y Total Look
+
+Tabla-contenedor nueva, construida sobre `LOL_PLANMATERIAL` (la cartera viva importada de HANA). Cubre lo que antes no tenía sitio: cuánto se va a cerrar este mes, qué se puede servir y qué parte es Total Look.
+
+| Carpeta | Nº | Contenido |
+|---|---:|---|
+| `Cierre del mes` | 18 | El mes de cierre, sus componentes y los avisos. |
+| `Checks de filtro` | 14 | Un check por segmentador activo, para el panel de filtros. |
+| `Cartera facturable` | 7 | `Cartera pendiente`, `en picking`, `asignada stock`, `en transito`, `Importe facturable`, `no facturable`, `% Facturable`. |
+| `Total Look` | 6 | Recuentos del criterio (ver más abajo). |
+| `Diagnostico` | 2 | `Filtros aplicados` (texto multilínea) y `Filtros activos` (recuento). |
+
+#### El mes de cierre es automático
+
+No hay segmentador de mes. El mes se deduce del día elegido en **Hasta Fecha Disponibilidad Stock**:
+
+```dax
+Fecha disponibilidad seleccionada =
+VAR Tope =
+    IF ( ISFILTERED ( LOL_PLANMATERIAL[Fecha disponibilidad (línea del articulo)] ),
+         CALCULATE ( MAX ( LOL_PLANMATERIAL[Fecha disponibilidad (línea del articulo)] ),
+                     ALLSELECTED ( LOL_PLANMATERIAL[Fecha disponibilidad (línea del articulo)] ) ) )
+RETURN COALESCE ( Tope, TODAY () )
+```
+
+`Inicio mes de cierre` / `Fin mes de cierre` son el `EOMONTH` de esa fecha. La red de `TODAY()` importa: sin ella el tope sería el máximo del dato y el panel abriría en septiembre en vez del mes en curso.
+
+> ⚠️ **La columna es muy dispersa**: solo 28 fechas distintas en unas 372.000 líneas, y tres son filas sueltas de una sola línea (11/03/2024, 28/07/2025, 04/03/2026). DAX no puede leer el tope literal de un segmentador, solo el último valor que *existe* por debajo. Del 26/06/2026 en adelante funciona exacto; apuntando entre el 1 y el 25 de junio salta a marzo por esa fila basura. Se arregla limpiando el origen.
+
+`Cierre previsto del mes` = `Facturado del mes` + `Servido sin facturar` + `Cartera que vence en el mes`.
+
+`Adelanto entrega` mide la cartera facturable cuya **fecha fin de servicio va más allá del mes de cierre**. Da 0 cuando el corte de servicio para justo en el fin de mes, que es lo normal; por eso existen `Aviso mes de cierre` y `Aviso adelanto entrega`, que devuelven `BLANK()` si la fecha de servicio es la de hoy y, si no, explican **por qué** sale cero.
+
+> **Corregido:** `Facturado del mes` restaba las notas de crédito de **toda la historia**. `[Importe Facturado]` es `SUM(facturas) − SUM(notas)` y el `CALCULATE` solo acotaba `LOL_PBIINVOICESSALES[DocDate]`. Agosto 2026 daba **−2.602.130,54 €** en vez de 2.801.612,26 €. Ahora se acotan las dos tablas. Es el mismo patrón que ya mordió en `Facturado (cadena)`: **en una medida neta hay que filtrar los dos lados**.
+
+#### Total Look
+
+`U_GSP_LOLTOTALLOOK` agrupa **referencias de modelo**, no tallas: 299 looks sobre 732 referencias, frente a 8.949 sueltas. Cada look reúne de 1 a 5 referencias (media 2,45).
+
+Hay dos fuentes y **no son intercambiables**:
+
+| Fuente | Qué es | Cobertura |
+|---|---|---|
+| `LOL_PBIMODELITEM[U_GSP_LOLTOTALLOOK]` | el **código** del look | todas las tablas de hechos, vía `ItemCode` |
+| `LOL_PLANMATERIAL[TotalLook]` | un **Y/N** ya calculado | solo la cartera viva: ~20% de las líneas de pedido |
+
+Coinciden al 100% donde ambas existen, pero filtrar el histórico por el Y/N del plan tiraría el 79% de los datos. Por eso las columnas calculadas van sobre el artículo:
+
+```dax
+Total Look = IF ( LEN ( TRIM ( LOL_PBIMODELITEM[U_GSP_LOLTOTALLOOK] ) ) > 0, "Total Look", "Prenda suelta" )
+```
+
+El `LEN(TRIM(...))` no es adorno: el campo viene vacío de dos formas, BLANK y cadena vacía.
+
+El interruptor `MostrarTotalLook[Mostrar]` está cableado **solo dentro de `Cartera asignada stock` y `Cartera en transito`** — no toca lo facturado ni lo pendiente de facturar, que son hechos consumados. Efecto lateral a tener presente: `Importe facturable` = picking + asignado + tránsito queda filtrado en 2 de 3 sumandos, y `% Facturable` es numerador filtrado sobre denominador sin filtrar.
+
+Dos trampas que costaron una vuelta cada una:
+
+- Una **medida-puerta 1/0** en el panel de filtros del visual solo esconde **filas**; no recalcula totales. En una tabla donde cada cliente tiene artículos de los dos tipos no esconde ninguna. Para que los importes se muevan, el parámetro tiene que entrar **dentro** de la medida.
+- En la rama **"Todo" no se puede aplicar un filtro permisivo** sobre la columna del artículo: cualquier filtro obliga a pasar por `LOL_PBIMODELITEM` y tira las **7.054 líneas del plan sin línea de pedido (222.615,61 €)**. Esa rama va sin `CALCULATE`. Por eso "Solo" + "Sin" nunca suman "Todo".
+
+> **Ojo con el origen.** La consulta HANA de `LOL_PLANMATERIAL` sí calcula una regla de tallas: los CTE `DESTALLADOS` y `TOTAL_LOOK` derivan `StockTodasTallas` por (`DocEntry`, modelo-color) y por (`DocEntry`, grupo de look), y alimentan la columna `Lanzamiento Picking`. Esa es la servibilidad real, y se decide **en el origen, no en DAX**. La columna `TotalLook` que llega al modelo es solo el Y/N.
 
 ---
 
@@ -426,17 +547,35 @@ Con un `SWITCH` sobre `DimensionB2B[Orden]` (0–9) construye pares (grupo, mode
 
 ## 7. Informe
 
-`B2BSalesOrder.Report`, 7 páginas de 1280×720:
+`B2BSalesOrder.Report`, 8 páginas de 1280x720:
 
-| Página | Contenido |
+| # | Página | Visuales | Contenido |
+|---:|---|---:|---|
+| 1 | Anslisis Temporada | 35 | Comparativa de temporadas: tarjetas de venta actual / anterior / evolución y matriz por dimensión. |
+| 2 | Rankings | 16 | **Catálogo B2B** — visual *HTML Content*. Sin segmentador de dimensión: se queda en Categoría. |
+| 3 | Analisis de Servicio | 13 | Embudo ejecutivo: `Pedido Final`, `Servido (cadena)`, `% Servido`, `Facturado (cadena)`, `Pendiente Facturar`. |
+| 4 | Previsión Mes | 33 | Copia antigua, conserva el segmentador de Mes. Candidata a borrar. |
+| 5 | Análisis Temporada | 37 | Versión vigente de la comparativa, con los tres *field parameters*. |
+| 6 | Análisis Servicio por Temporada | 30 | Servicio por temporada + catálogo. |
+| 7 | **Previsión Mes** *(activa)* | 37 | Cierre de mes: cartera por cliente, tarjetas de cierre y los dos avisos. |
+| 8 | RankingTemporadas | 28 | Catálogo agrupado por `DimensionB2B1`. |
+
+> ⚠️ Hay **dos páginas llamadas "Previsión Mes"** (4 y 7). La 7 es la viva; la 4 es el duplicado del que salió.
+
+### Segmentadores de fecha: no los congeles
+
+Un segmentador de fecha guarda su estado en **dos sitios**, y solo uno filtra:
+
+| Dónde | Qué es |
 |---|---|
-| **Página 1** (20 visuales) | Comparativa de temporadas: tarjetas de venta actual / anterior / evolución, matriz por dimensión y segmentadores. |
-| **Análisis Incidencias** (4) | Incidencias frente a venta: `VentaBrutaIncidencias`, `VentasYTD_Incidencias`. |
-| **Página 2** (16) | **Catálogo B2B** — visual *HTML Content* con `HTML Catálogo B2B` + segmentadores de dimensión, orden y Top N. |
-| **Página 3** (5) | Tablas de detalle (sin medidas: columnas directas). |
-| **Página 4** (2) | Auditoría de rangos: `ValidacionVersionRangos`, `VentasTemporadaSeleccionada` vs `VentasTemporadaAnterior`. |
-| **Duplicado de Página 1** (20) ← *página activa* | Igual que Página 1 pero con el **embudo**: `Pedido Original`, `Pedido Final`, `% Cancelado`, `Servido (cadena)`, `Pendiente Servir`, `Facturado (cadena)`, `Pendiente Facturar`, `Notas + Devol. Abiertas (cadena)`, `Solicitudes Devol. Abiertas`. |
-| **Cumplimiento de Servicio** (7) | Página ejecutiva del embudo: `Pedido Final`, `Servido (cadena)`, `% Servido`, `Pendiente Servir`, `Facturado (cadena)`, `% Facturado`, `Pendiente Facturar`. |
+| `visual.objects.data[].properties.endDate` | el **estado visual** del control |
+| `visual.objects.general[].properties.filter.filter.Where[]` | el **filtro efectivo**: `Comparison` con `ComparisonKind: 3` contra un literal `datetime'...'` |
+
+Borrar solo el `endDate` no descongela nada. Y las dos fechas ni coinciden: *"Before 26/08"* se guarda como `endDate` = 26/08 pero el filtro dice `< 27/08`. `filterConfig` sale `null`: ahí no hay nada.
+
+Quitando `properties.filter` de `objects.general` (y el `endDate`, dejando el `mode`), Power BI recalcula el tope desde el dato al abrir. Sobre `Calendario[Date]` eso aterriza en el día en curso, porque la partición acaba en `MAX(TODAY(), max DocDate)` y avanza sola. Sobre una columna de hechos el tope será el máximo del dato, o sea "sin recorte".
+
+Estado actual: descongelados en todas las páginas **salvo las dos de Previsión Mes**, donde el corte es deliberado y además alimenta el mes de cierre. Los marcadores tienen `suppressData: true`, así que no vuelven a aplicar la fecha vieja.
 
 ---
 

@@ -8,7 +8,7 @@ Todo está en `main`. Cada carpeta es un proyecto independiente que se abre con 
 |---|---|---:|---|
 | [**Finanzas/**](Finanzas/) | Balance, cuenta de P&G y P&G de gestión, con comparativa interanual y desglose por canal/tienda | 118 | [📄 Finanzas](docs/Finanzas-Finanzas.md) |
 | [**Compras/**](Compras/) | Pedidos de compra y su cadena hasta la entrada de mercancía y la factura de proveedor | 0 ⚠️ | [📄 PurchaseOrders](docs/Compras-PurchaseOrders.md) |
-| [**SalesOrder/**](SalesOrder/) | Pedidos B2B: comparativa entre temporadas y embudo de cumplimiento (servido / facturado / devuelto) | 96 | [📄 B2BSalesOrder](docs/SalesOrder-B2BSalesOrder.md) |
+| [**SalesOrder/**](SalesOrder/) | Pedidos B2B: comparativa entre temporadas, embudo de cumplimiento (servido / facturado / devuelto) y cierre de mes sobre la cartera viva | 174 | [📄 B2BSalesOrder](docs/SalesOrder-B2BSalesOrder.md) |
 | [**SgiRetail/**](SgiRetail/) | Retail: ventas de tienda física y online, tráfico, objetivos, conversión y catálogo de producto | 238 | [📄 SgiRetail](docs/SgiRetail-SgiRetail.md) |
 | [**Transport/**](Transport/) | Seguimiento de envíos: estado, tiempos de entrega, cumplimiento de SLA, incidencias y devoluciones | 34 | [📄 TransportsTracking](docs/Transport-TransportsTracking.md) |
 | [**ServicePlan/**](ServicePlan/) | Plan de servicio B2B: cuánto de la cartera abierta se puede servir y cuándo | 23 | [📄 Plan de Servicio B2B](docs/ServicePlan-Plan%20de%20Servicio%20B2B.md) |
