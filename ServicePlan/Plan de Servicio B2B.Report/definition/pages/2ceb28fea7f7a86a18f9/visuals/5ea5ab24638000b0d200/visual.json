@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "5ea5ab24638000b0d200",
   "position": {
-    "x": 307.27272727272725,
-    "y": 68.181818181818173,
-    "z": 32000,
+    "x": 222.69122947537053,
+    "y": 71.56507809371243,
+    "z": 8000,
     "height": 59.999999999999993,
     "width": 145.45454545454544,
-    "tabOrder": 23000
+    "tabOrder": 15000
   },
   "visual": {
     "visualType": "card",
@@ -286,5 +286,23 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "ba1b196dbd5a504bb535",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "ServicioDentroRango"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

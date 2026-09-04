@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "6eb2786c8bb40e556660",
   "position": {
-    "x": 5.337781484570475,
-    "y": 661.884904086739,
-    "z": 18000,
-    "height": 50.175145954962467,
-    "width": 149.45788156797332,
-    "tabOrder": 16000
+    "x": 10,
+    "y": 652,
+    "z": 6000,
+    "height": 44,
+    "width": 226,
+    "tabOrder": 6000
   },
   "visual": {
     "visualType": "actionButton",
@@ -48,6 +48,31 @@
                   "Value": "true"
                 }
               }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#DFA0C9'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
             }
           }
         },
@@ -66,16 +91,52 @@
                   "Value": "'center'"
                 }
               }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#DFA0C9'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
             }
           },
           "selector": {
             "id": "default"
           }
         }
-      ]
-    },
-    "visualContainerObjects": {
-      "visualLink": [
+      ],
+      "fill": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "outline": [
         {
           "properties": {
             "show": {
@@ -85,17 +146,69 @@
                 }
               }
             },
-            "type": {
-              "expr": {
-                "Literal": {
-                  "Value": "'ClearAllSlicers'"
+            "lineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#DFA0C9'"
+                    }
+                  }
                 }
               }
             },
-            "tooltipPlaceholderText": {
+            "weight": {
               "expr": {
                 "Literal": {
-                  "Value": "'Borrar todas las segmentaciones de datos de esta página'"
+                  "Value": "1D"
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "40D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }
@@ -105,5 +218,6 @@
     },
     "drillFilterOtherVisuals": true
   },
+  "parentGroupName": "sp05cajon00000000000",
   "howCreated": "InsertVisualButton"
 }

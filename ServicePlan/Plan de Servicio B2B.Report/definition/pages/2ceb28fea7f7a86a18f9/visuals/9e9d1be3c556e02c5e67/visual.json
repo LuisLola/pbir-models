@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "9e9d1be3c556e02c5e67",
   "position": {
-    "x": 5.1863857374392222,
-    "y": 0,
-    "z": 12000,
-    "height": 68,
-    "width": 144.18152350081036,
+    "x": 2,
+    "y": 4,
+    "z": 1000,
+    "height": 52,
+    "width": 74,
     "tabOrder": 12000
   },
   "visual": {
@@ -20,7 +20,7 @@
                 "ResourcePackageItem": {
                   "PackageName": "RegisteredResources",
                   "PackageType": 1,
-                  "ItemName": "Logo6463967898625945.jpg"
+                  "ItemName": "lc-monograma-blanco3269942838556775.png"
                 }
               }
             }
@@ -39,6 +39,46 @@
             }
           }
         }
+      ],
+      "image": [
+        {
+          "properties": {
+            "sourceFile": {
+              "image": {
+                "name": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'lc-monograma-blanco.png'"
+                    }
+                  }
+                },
+                "url": {
+                  "expr": {
+                    "ResourcePackageItem": {
+                      "PackageName": "RegisteredResources",
+                      "PackageType": 1,
+                      "ItemName": "lc-monograma-blanco2256866775170967.png"
+                    }
+                  }
+                },
+                "scaling": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'Normal'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "visualContainerObjects": {
@@ -48,7 +88,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             }
@@ -90,5 +130,6 @@
     },
     "drillFilterOtherVisuals": true
   },
+  "parentGroupName": "sp03cajon00000000000",
   "howCreated": "InsertVisualButton"
 }

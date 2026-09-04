@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "49c72e0183008bea2002",
   "position": {
-    "x": 159.83623336745137,
-    "y": 0,
-    "z": 28000,
+    "x": 75.254735570094638,
+    "y": 3.3832599118942737,
+    "z": 5000,
     "height": 60.2661207778915,
     "width": 145.42476970317298,
-    "tabOrder": 20000
+    "tabOrder": 12000
   },
   "visual": {
     "visualType": "card",
@@ -59,7 +59,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "13D"
+                  "Value": "11D"
                 }
               }
             },
@@ -286,5 +286,23 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "bb74267a3f811bcf3086",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PLANMATERIAL"
+              }
+            },
+            "Property": "Importe cubierto"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

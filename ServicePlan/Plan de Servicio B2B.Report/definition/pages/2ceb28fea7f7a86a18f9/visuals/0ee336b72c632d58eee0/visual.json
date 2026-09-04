@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "0ee336b72c632d58eee0",
   "position": {
     "x": 0,
     "y": 0,
-    "z": 18000,
-    "height": 582,
-    "width": 1120,
+    "z": 0,
+    "height": 567.60970636335514,
+    "width": 1203.9177679882523,
     "tabOrder": 0
   },
   "visual": {
@@ -381,7 +381,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "64.34328526631397D"
+                  "Value": "78.858530591018D"
                 }
               }
             }
@@ -423,7 +423,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "66.31780606520086D"
+                  "Value": "91.4873812119528D"
                 }
               }
             }
@@ -577,7 +577,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "64.83567269121664D"
+                  "Value": "88.24104404108698D"
                 }
               }
             }
@@ -1177,14 +1177,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "transparency": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
+                  "Value": "false"
                 }
               }
             }
@@ -1325,259 +1318,6 @@
           ]
         },
         "howCreated": "User"
-      },
-      {
-        "name": "c2b5b7f04e5b1cc8faf7",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PLANMATERIAL"
-              }
-            },
-            "Property": "Nº Pedido Ventas"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "6f0638755962ffa31bce",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PLANMATERIAL"
-              }
-            },
-            "Property": "TipoPedido"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "6acebe8405f290745f07",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PLANMATERIAL"
-              }
-            },
-            "Property": "Código Cliente"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "0536b67c88d88506d5c0",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PLANMATERIAL"
-              }
-            },
-            "Property": "CardName"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "21f329dad3ee3b1be557",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PLANMATERIAL"
-              }
-            },
-            "Property": "Fecha Entrega pedido venta"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "205504fa21f310de2d68",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PLANMATERIAL"
-              }
-            },
-            "Property": "Fecha Fin pedido venta"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "40153f45c8cc45d8f135",
-        "field": {
-          "Aggregation": {
-            "Expression": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "LOL_PLANMATERIAL"
-                  }
-                },
-                "Property": "Importe Original"
-              }
-            },
-            "Function": 0
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "8f0c5966bdbe136b8a55",
-        "field": {
-          "Aggregation": {
-            "Expression": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "LOL_PLANMATERIAL"
-                  }
-                },
-                "Property": "Importe asignado"
-              }
-            },
-            "Function": 0
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "150cf2ff798cb8ee3ff1",
-        "field": {
-          "Aggregation": {
-            "Expression": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "LOL_PLANMATERIAL"
-                  }
-                },
-                "Property": "AssignTransitLineTotal"
-              }
-            },
-            "Function": 0
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "1ef8e65bb4c2dccb2c0e",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PLANMATERIAL"
-              }
-            },
-            "Property": "Importe faltas"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "b46d0612c48c7466c0b7",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PLANMATERIAL"
-              }
-            },
-            "Property": "en picking"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "46d3323cee0aecb319f4",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PLANMATERIAL"
-              }
-            },
-            "Property": "Valor Servicio 1º Quincena (Importe Real)"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "3bd9066c3d1e60fe612b",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PLANMATERIAL"
-              }
-            },
-            "Property": "Fecha Servicio 1º Quincena(Importe)"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "1af7d9184de00529d3fc",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PLANMATERIAL"
-              }
-            },
-            "Property": "Valor Servicio 2º Quincena (Importe Real)"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "2ef19ef175616b333719",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PLANMATERIAL"
-              }
-            },
-            "Property": "Fecha Servicio 2º Quincena(Importe)"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "8690281fcbbfa2de995a",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PLANMATERIAL"
-              }
-            },
-            "Property": "Valor Servicio > 30 días (Importe Real)"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "8076b09534780fb1dd75",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "LOL_PLANMATERIAL"
-              }
-            },
-            "Property": "Fecha Servicio > 30 días (Importe)"
-          }
-        },
-        "type": "Advanced"
       }
     ]
   }

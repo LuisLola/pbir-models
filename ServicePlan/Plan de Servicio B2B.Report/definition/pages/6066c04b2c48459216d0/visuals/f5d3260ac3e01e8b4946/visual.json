@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "f5d3260ac3e01e8b4946",
   "position": {
-    "x": 887,
-    "y": 8,
-    "z": 35000,
-    "height": 52,
-    "width": 191,
-    "tabOrder": 25000
+    "x": 10,
+    "y": 206,
+    "z": 15000,
+    "height": 38,
+    "width": 196,
+    "tabOrder": 18000
   },
   "visual": {
     "visualType": "slicer",
@@ -161,7 +161,7 @@
             "textSize": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "9D"
                 }
               }
             },
@@ -176,9 +176,8 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 0,
-                      "Percent": -0.6
+                    "Literal": {
+                      "Value": "'#DFA0C9'"
                     }
                   }
                 }
@@ -193,17 +192,16 @@
             "textSize": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "9D"
                 }
               }
             },
-            "fontColor": {
+            "background": {
               "solid": {
                 "color": {
                   "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 0,
-                      "Percent": -0.6
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -212,7 +210,18 @@
             "padding": {
               "expr": {
                 "Literal": {
-                  "Value": "1D"
+                  "Value": "0D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1A1416'"
+                    }
+                  }
                 }
               }
             }
@@ -282,10 +291,54 @@
                 }
               }
             },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "0D"
+                  "Value": "100D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }
@@ -325,19 +378,6 @@
             }
           }
         }
-      ],
-      "border": [
-        {
-          "properties": {
-            "width": {
-              "expr": {
-                "Literal": {
-                  "Value": "1D"
-                }
-              }
-            }
-          }
-        }
       ]
     },
     "syncGroup": {
@@ -346,5 +386,6 @@
       "filterChanges": true
     },
     "drillFilterOtherVisuals": true
-  }
+  },
+  "parentGroupName": "sp05cajon00000000000"
 }

@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "22679726b39fc8f6b37a",
   "position": {
-    "x": 86,
+    "x": 86.4466615502686,
     "y": 0,
-    "z": 1000,
-    "height": 109,
-    "width": 169,
+    "z": 2000,
+    "height": 124.75825019186492,
+    "width": 135.5640828856485,
     "tabOrder": 1000
   },
   "visual": {
@@ -23,7 +23,7 @@
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontSize": "14pt",
-                      "color": "#0a0f1e"
+                      "color": "#ffffff"
                     }
                   }
                 ]
@@ -34,7 +34,7 @@
                     "value": "Previsión de salidas en base a cartera de pedidos B2B",
                     "textStyle": {
                       "fontSize": "10pt",
-                      "color": "#8089a2"
+                      "color": "#cccccc"
                     }
                   }
                 ]
@@ -44,6 +44,22 @@
         }
       ]
     },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "100D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "drillFilterOtherVisuals": true
-  }
+  },
+  "parentGroupName": "cmpc2cajon000000000"
 }

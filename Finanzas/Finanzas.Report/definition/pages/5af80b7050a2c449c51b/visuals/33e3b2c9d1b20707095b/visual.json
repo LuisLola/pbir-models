@@ -2,12 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
   "name": "33e3b2c9d1b20707095b",
   "position": {
-    "x": 0,
-    "y": 0,
-    "z": 0,
-    "height": 90,
-    "width": 1216.25,
-    "tabOrder": 4000
+    "x": 10,
+    "y": 74,
+    "z": 4000,
+    "width": 196,
+    "height": 46
   },
   "visual": {
     "visualType": "slicer",
@@ -159,21 +158,14 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             },
             "textSize": {
               "expr": {
                 "Literal": {
-                  "Value": "34D"
-                }
-              }
-            },
-            "fontFamily": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Arial'"
+                  "Value": "9D"
                 }
               }
             },
@@ -184,19 +176,12 @@
                 }
               }
             },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Fechas entre:'"
-                }
-              }
-            },
-            "background": {
+            "fontColor": {
               "solid": {
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#EACCCE'"
+                      "Value": "'#DFA0C9'"
                     }
                   }
                 }
@@ -241,18 +226,41 @@
             }
           }
         }
-      ]
-    },
-    "visualContainerObjects": {
-      "background": [
+      ],
+      "items": [
         {
           "properties": {
-            "color": {
+            "textSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "background": {
               "solid": {
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#EACCCE'"
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "padding": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1A1416'"
                     }
                   }
                 }
@@ -260,8 +268,30 @@
             }
           }
         }
-      ],
+      ]
+    },
+    "visualContainerObjects": {
       "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
         {
           "properties": {
             "show": {
@@ -271,17 +301,88 @@
                 }
               }
             },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Pérdida y Ganancias'"
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
                 }
               }
             },
-            "fontSize": {
+            "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "19D"
+                  "Value": "100D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }
@@ -291,7 +392,7 @@
     },
     "drillFilterOtherVisuals": true
   },
-  "parentGroupName": "0d5b191916110b037c74",
+  "parentGroupName": "fi03cajon00000000000",
   "filterConfig": {
     "filters": [
       {
