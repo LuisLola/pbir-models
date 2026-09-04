@@ -359,6 +359,23 @@ table _Medidas
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// Rango de fechas que está mirando la página. Útil con el segmentador
+	/// relativo, donde el control ya no enseña las fechas.
+	measure 'Rango de fechas' = VAR Ini = MIN ( Calendario[Date] ) VAR Fin = MAX ( Calendario[Date] ) RETURN IF ( ISBLANK ( Ini ), "Sin fechas", FORMAT ( Ini, "dd/MM/yyyy" ) & " - " & FORMAT ( Fin, "dd/MM/yyyy" ) )
+		displayFolder: 0 Contexto
+		lineageTag: e562c6e1-cd7f-4f1c-a32a-acccb19710da
+
+	/// Momento del ultimo refresco del modelo, en hora de España.
+	measure 'Última actualización' = VAR f = MAX ( UltimaActualizacion[Fecha] ) RETURN IF ( ISBLANK ( f ), "Sin datos de actualización", "Actualizado " & FORMAT ( f, "dd/MM/yyyy" ) & " a las " & FORMAT ( f, "HH:mm" ) )
+		displayFolder: 0 Contexto
+		lineageTag: 9b100c0b-aafd-471d-8382-eaaf81a13fde
+
+	/// Las dos cosas juntas, para una sola tarjeta: que ventana se está
+	/// mirando y cuando se actualizó el dato.
+	measure 'Rango y actualización' = "   Datos Desde:   " & [Rango de fechas] & "   ·   " & [Última actualización]
+		displayFolder: 0 Contexto
+		lineageTag: 72c13d13-e851-4443-87da-a0481f0d6a35
+
 	column Value
 		lineageTag: d1ed0000-0000-4000-8000-0000000000ff
 		isNameInferred

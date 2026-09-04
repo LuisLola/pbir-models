@@ -88,11 +88,6 @@ table LOL_TRANSPORT_TRACKING
 		summarizeBy: none
 		sourceColumn: fecha_lanzamiento
 
-		variation Variación
-			isDefault
-			relationship: ac5b1dbe-97ef-4438-abed-3e7281a87385
-			defaultHierarchy: LocalDateTable_1d679787-5f05-4e9d-8734-921f96a68a6c.'Jerarquía de fechas'
-
 		annotation SummarizationSetBy = Automatic
 
 	column fecha_etiqueta
@@ -228,11 +223,6 @@ table LOL_TRANSPORT_TRACKING
 		summarizeBy: none
 		sourceColumn: fecha_entregado
 
-		variation Variación
-			isDefault
-			relationship: 6bbf3095-4007-435a-b111-0cdebab589f1
-			defaultHierarchy: LocalDateTable_28c0f053-da3f-49bd-8fae-65fa9f84c195.'Jerarquía de fechas'
-
 		annotation SummarizationSetBy = Automatic
 
 	column fecha_entrega_prevista
@@ -284,7 +274,7 @@ table LOL_TRANSPORT_TRACKING
 		dataType: int64
 		formatString: 0
 		lineageTag: d1c00000-0000-4000-8000-000000000002
-		summarizeBy: none
+		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
 
@@ -293,7 +283,7 @@ table LOL_TRANSPORT_TRACKING
 		dataType: int64
 		formatString: 0
 		lineageTag: d1c00000-0000-4000-8000-000000000003
-		summarizeBy: none
+		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
 
@@ -302,7 +292,7 @@ table LOL_TRANSPORT_TRACKING
 		dataType: int64
 		formatString: 0
 		lineageTag: d1c00000-0000-4000-8000-000000000004
-		summarizeBy: none
+		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
 
@@ -317,6 +307,11 @@ table LOL_TRANSPORT_TRACKING
 		lineageTag: d1c00000-0000-4000-8000-000000000005
 		summarizeBy: none
 
+		variation Variación
+			isDefault
+			relationship: 2efc0b23-8759-44b0-aed7-d272cdc79c75
+			defaultHierarchy: LocalDateTable_7c42d38a-2f0c-46ff-a877-bada124ada60.'Jerarquía de fechas'
+
 		annotation SummarizationSetBy = Automatic
 
 	column dias_entrega_natural =
@@ -327,7 +322,7 @@ table LOL_TRANSPORT_TRACKING
 		dataType: int64
 		formatString: 0
 		lineageTag: d1c00000-0000-4000-8000-000000000006
-		summarizeBy: none
+		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
 
@@ -354,7 +349,7 @@ table LOL_TRANSPORT_TRACKING
 		dataType: int64
 		formatString: 0
 		lineageTag: d1c00000-0000-4000-8000-000000000007
-		summarizeBy: none
+		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
 
@@ -362,7 +357,7 @@ table LOL_TRANSPORT_TRACKING
 		dataType: double
 		formatString: 0.0
 		lineageTag: d1c00000-0000-4000-8000-000000000008
-		summarizeBy: none
+		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
 
@@ -370,7 +365,7 @@ table LOL_TRANSPORT_TRACKING
 		dataType: double
 		formatString: 0.0
 		lineageTag: d1c00000-0000-4000-8000-000000000009
-		summarizeBy: none
+		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
 
@@ -378,7 +373,7 @@ table LOL_TRANSPORT_TRACKING
 		dataType: double
 		formatString: 0.0
 		lineageTag: d1c00000-0000-4000-8000-00000000000a
-		summarizeBy: none
+		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
 
@@ -405,7 +400,7 @@ table LOL_TRANSPORT_TRACKING
 		dataType: int64
 		formatString: 0
 		lineageTag: d1c00000-0000-4000-8000-00000000000c
-		summarizeBy: none
+		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
 
@@ -485,7 +480,7 @@ table LOL_TRANSPORT_TRACKING
 		dataType: int64
 		formatString: 0
 		lineageTag: d1c00000-0000-4000-8000-000000000011
-		summarizeBy: none
+		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
 
@@ -494,7 +489,7 @@ table LOL_TRANSPORT_TRACKING
 		dataType: int64
 		formatString: 0
 		lineageTag: d1c00000-0000-4000-8000-000000000012
-		summarizeBy: none
+		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
 
@@ -504,7 +499,7 @@ table LOL_TRANSPORT_TRACKING
 		dataType: int64
 		formatString: 0
 		lineageTag: d1c00000-0000-4000-8000-000000000013
-		summarizeBy: none
+		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
 

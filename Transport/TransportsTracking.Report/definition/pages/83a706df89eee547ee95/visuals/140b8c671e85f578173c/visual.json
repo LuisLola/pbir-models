@@ -1,70 +1,52 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
-  "name": "467f126342459e008252",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "140b8c671e85f578173c",
   "position": {
-    "x": 7,
-    "y": 88,
+    "x": 0,
+    "y": 0,
     "z": 0,
-    "height": 70,
-    "width": 1261,
-    "tabOrder": 19000
+    "height": 2000,
+    "width": 260,
+    "tabOrder": 0
   },
   "visual": {
     "visualType": "shape",
     "objects": {
-      "fill": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "fillColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#FFFFFF'"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      ],
       "shape": [
         {
           "properties": {
             "tileShape": {
               "expr": {
                 "Literal": {
-                  "Value": "'rectangleRoundedByPixel'"
-                }
-              }
-            },
-            "rectangleRoundedCurve": {
-              "expr": {
-                "Literal": {
-                  "Value": "135L"
+                  "Value": "'rectangle'"
                 }
               }
             }
           }
         }
       ],
-      "outline": [
+      "rotation": [
         {
           "properties": {
-            "lineColor": {
+            "shapeAngle": {
+              "expr": {
+                "Literal": {
+                  "Value": "0L"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "fill": [
+        {
+          "properties": {
+            "fillColor": {
               "solid": {
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#6F263D'"
                     }
                   }
                 }
@@ -75,12 +57,32 @@
             "id": "default"
           }
         }
+      ],
+      "outline": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "visualContainerObjects": {
       "title": [
         {
           "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'PanelFiltros'"
+                }
+              }
+            },
             "show": {
               "expr": {
                 "Literal": {
@@ -120,6 +122,40 @@
               }
             },
             "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "100D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "right": {
               "expr": {
                 "Literal": {
                   "Value": "0D"
@@ -162,6 +198,9 @@
           }
         }
       ]
-    }
-  }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "aa8e2f417cc249b839dd",
+  "howCreated": "InsertVisualButton"
 }

@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "a1000000000000000009",
   "position": {
-    "x": 844,
-    "y": 168,
-    "z": 14000,
+    "x": 902,
+    "y": 83,
+    "z": 5000,
     "height": 78,
-    "width": 203,
-    "tabOrder": 8000
+    "width": 170,
+    "tabOrder": 6000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -133,12 +133,40 @@
             "id": "default"
           }
         }
+      ],
+      "fillCustom": [
+        {
+          "properties": {
+            "fillColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
       ]
     },
     "visualContainerObjects": {
       "title": [
         {
           "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Incidencias'"
+                }
+              }
+            },
             "show": {
               "expr": {
                 "Literal": {
@@ -197,13 +225,6 @@
               "expr": {
                 "Literal": {
                   "Value": "'Montserrat'"
-                }
-              }
-            },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Incidencias'"
                 }
               }
             }

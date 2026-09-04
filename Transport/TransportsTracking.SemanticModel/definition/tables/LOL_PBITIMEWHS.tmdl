@@ -1,0 +1,167 @@
+table LOL_PBITIMEWHS
+	lineageTag: dc2095c8-44be-4ddd-8cc3-82616479f868
+
+	column Cliente
+		dataType: string
+		lineageTag: 404d8e5f-2980-47eb-a1ae-12d74cae1ce3
+		summarizeBy: none
+		sourceColumn: Cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiasHabiles_20_40
+		dataType: string
+		lineageTag: de6b3435-04e8-46af-bf75-1234a5b6f8e8
+		summarizeBy: none
+		sourceColumn: DiasHabiles_20_40
+
+		annotation SummarizationSetBy = Automatic
+
+	column DocumentoOrigen_Picking
+		dataType: string
+		lineageTag: 78b71b67-d52f-41e9-a6ef-76c6998e3aea
+		summarizeBy: none
+		sourceColumn: DocumentoOrigen_Picking
+
+		annotation SummarizationSetBy = Automatic
+
+	column Expedicion_Picking
+		dataType: string
+		lineageTag: 6355281e-21cf-4491-a788-b2b78faa0624
+		summarizeBy: none
+		sourceColumn: Expedicion_Picking
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaComunicacion
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2746841e-7dd6-4862-9526-0ace01953e27
+		summarizeBy: none
+		sourceColumn: FechaComunicacion
+
+		variation Variación
+			isDefault
+			relationship: d17d15fa-88f1-422b-9255-8e41f99df574
+			defaultHierarchy: LocalDateTable_b7bcbcbb-c7f8-4b3b-8e39-2a6b4ad15c00.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FechaLog20
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7e808bd5-aa68-42ef-8532-3b721189494c
+		summarizeBy: none
+		sourceColumn: FechaLog20
+
+		variation Variación
+			isDefault
+			relationship: 66d1397b-8c46-4f05-8c80-013628d6cee2
+			defaultHierarchy: LocalDateTable_e20ba4a6-9ccf-4ee4-8d3b-d68e8a1be716.'Jerarquía de fechas'
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaLog40
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4dd7a6f1-ae8e-45ba-b24b-6c3c2bd6361d
+		summarizeBy: none
+		sourceColumn: FechaLog40
+
+		variation Variación
+			isDefault
+			relationship: dd605820-e8dc-4085-bd04-5b0c3b297375
+			defaultHierarchy: LocalDateTable_f50e1203-a9ae-4d74-ad06-b2eaa783e1f2.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FechaLog60
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 15a67bbf-87fe-44a0-b39e-412c3ceb279c
+		summarizeBy: none
+		sourceColumn: FechaLog60
+
+		variation Variación
+			isDefault
+			relationship: ecec9e53-9719-434d-9e35-f527b6af2ebc
+			defaultHierarchy: LocalDateTable_a6755c96-167d-44ea-8ddb-aa1bba150dde.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column PickDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 982c898c-1916-4c33-b71d-0278af4080d7
+		summarizeBy: none
+		sourceColumn: PickDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Picking
+		dataType: string
+		lineageTag: cf09640f-83d4-4856-b969-d9aa96767b1a
+		summarizeBy: none
+		sourceColumn: Picking
+
+		annotation SummarizationSetBy = Automatic
+
+	column SLA_Objetivo
+		dataType: string
+		lineageTag: 68e75d9f-4185-4aab-b228-9e4b20e83231
+		summarizeBy: none
+		sourceColumn: SLA_Objetivo
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Horas desde la fecha de picking hasta el registro 20.
+	column 'Horas Pick a Log20' = IF ( NOT ISBLANK ( LOL_PBITIMEWHS[PickDate] ) && NOT ISBLANK ( LOL_PBITIMEWHS[FechaLog20] ), DATEDIFF ( LOL_PBITIMEWHS[PickDate], LOL_PBITIMEWHS[FechaLog20], MINUTE ) / 60.0 )
+		formatString: #,0.0
+		lineageTag: a102e3e3-612f-4d33-bfff-6021354c0cc5
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Horas del tramo 20-40, el largo (media 39,8 h).
+	column 'Horas Log20 a Log40' = IF ( NOT ISBLANK ( LOL_PBITIMEWHS[FechaLog20] ) && NOT ISBLANK ( LOL_PBITIMEWHS[FechaLog40] ), DATEDIFF ( LOL_PBITIMEWHS[FechaLog20], LOL_PBITIMEWHS[FechaLog40], MINUTE ) / 60.0 )
+		formatString: #,0.0
+		lineageTag: ddcf7fcc-bc33-488c-bc5c-d0a210455e45
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Horas del tramo 40-60 (media 20,5 h).
+	column 'Horas Log40 a Log60' = IF ( NOT ISBLANK ( LOL_PBITIMEWHS[FechaLog40] ) && NOT ISBLANK ( LOL_PBITIMEWHS[FechaLog60] ), DATEDIFF ( LOL_PBITIMEWHS[FechaLog40], LOL_PBITIMEWHS[FechaLog60], MINUTE ) / 60.0 )
+		formatString: #,0.0
+		lineageTag: 6e2bdb79-cf48-4571-8baa-ed24abf7c954
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	/// El original DiasHabiles_20_40 llega como texto; esta es su version numerica.
+	column 'Dias habiles 20-40' = VAR t = TRIM ( LOL_PBITIMEWHS[DiasHabiles_20_40] ) RETURN IF ( NOT ISBLANK ( t ) && t <> "", VALUE ( t ) )
+		formatString: #,0
+		lineageTag: 280d753b-2f92-423e-acd9-66b86b6da28e
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition LOL_PBITIMEWHS = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin"),
+				    dbo_LOL_PBITIMEWHS = Origen{[Schema="dbo",Item="LOL_PBITIMEWHS"]}[Data]
+				in
+				    dbo_LOL_PBITIMEWHS
+

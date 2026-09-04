@@ -1,0 +1,1700 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "Seguimiento Transportes – menú abierto",
+  "name": "tr02bmabierto000000",
+  "options": {
+    "applyOnlyToTargetVisuals": true,
+    "targetVisualNames": [
+      "tr02cajon00000000000",
+      "0b573674206b0c9a7177",
+      "4e743d0cbc24e0c7ccc9",
+      "115e8a587329073d6b06",
+      "675340c3d019cd705623",
+      "a1000000000000000002",
+      "a1000000000000000003",
+      "a1000000000000000004",
+      "tr02botoncerrar0000",
+      "tr02fondocajon00000"
+    ],
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "7cc1f0f314a55003c8ad",
+    "filters": {
+      "byExpr": [
+        {
+          "name": "b74fb43873c0c308b426",
+          "type": "Categorical",
+          "filter": {
+            "Version": 2,
+            "From": [
+              {
+                "Name": "l",
+                "Entity": "LOL_TRANSPORT_TRACKING",
+                "Type": 0
+              }
+            ],
+            "Where": [
+              {
+                "Condition": {
+                  "Not": {
+                    "Expression": {
+                      "In": {
+                        "Expressions": [
+                          {
+                            "Column": {
+                              "Expression": {
+                                "SourceRef": {
+                                  "Source": "l"
+                                }
+                              },
+                              "Property": "estado"
+                            }
+                          }
+                        ],
+                        "Values": [
+                          [
+                            {
+                              "Literal": {
+                                "Value": "'Error'"
+                              }
+                            }
+                          ]
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Entity": "LOL_TRANSPORT_TRACKING"
+                }
+              },
+              "Property": "estado"
+            }
+          },
+          "howCreated": 1
+        },
+        {
+          "name": "42de64fc56735c80ef17",
+          "type": "Categorical",
+          "filter": {
+            "Version": 2,
+            "From": [
+              {
+                "Name": "l",
+                "Entity": "LOL_TRANSPORT_TRACKING",
+                "Type": 0
+              }
+            ],
+            "Where": [
+              {
+                "Condition": {
+                  "In": {
+                    "Expressions": [
+                      {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "l"
+                            }
+                          },
+                          "Property": "transportista_norm"
+                        }
+                      }
+                    ],
+                    "Values": [
+                      [
+                        {
+                          "Literal": {
+                            "Value": "'TIPSA'"
+                          }
+                        }
+                      ],
+                      [
+                        {
+                          "Literal": {
+                            "Value": "'UPS'"
+                          }
+                        }
+                      ]
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          "expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Entity": "LOL_TRANSPORT_TRACKING"
+                }
+              },
+              "Property": "transportista_norm"
+            }
+          },
+          "howCreated": 1
+        }
+      ]
+    },
+    "sections": {
+      "7cc1f0f314a55003c8ad": {
+        "visualContainers": {
+          "0b573674206b0c9a7177": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "115e8a587329073d6b06": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "34cece3fa82ae1b36f9d",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "pais_destino"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "pais_destino"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "675340c3d019cd705623": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "c52a9a098fcd9ecc7fdd",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "segmento"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "segmento"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "a1000000000000000001": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "a1000000000000000002": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "a952673e6bbb5caca862",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendario"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "c",
+                                "Entity": "Calendario",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "And": {
+                                    "Left": {
+                                      "Comparison": {
+                                        "ComparisonKind": 2,
+                                        "Left": {
+                                          "Column": {
+                                            "Expression": {
+                                              "SourceRef": {
+                                                "Source": "c"
+                                              }
+                                            },
+                                            "Property": "Date"
+                                          }
+                                        },
+                                        "Right": {
+                                          "Literal": {
+                                            "Value": "datetime'2026-07-01T00:00:00'"
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "Right": {
+                                      "Comparison": {
+                                        "ComparisonKind": 3,
+                                        "Left": {
+                                          "Column": {
+                                            "Expression": {
+                                              "SourceRef": {
+                                                "Source": "c"
+                                              }
+                                            },
+                                            "Property": "Date"
+                                          }
+                                        },
+                                        "Right": {
+                                          "Literal": {
+                                            "Value": "datetime'2026-07-15T00:00:00'"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "data": [
+                    {
+                      "properties": {
+                        "startDate": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "datetime'2026-07-01T00:00:00'"
+                            }
+                          }
+                        },
+                        "endDate": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "datetime'2026-07-14T00:00:00'"
+                            }
+                          }
+                        },
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Between'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendario"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendario"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "a1000000000000000003": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "b5f57059d06c153d3e03",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "transportista_norm"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "transportista_norm"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "a1000000000000000004": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "7b3faec00f0a5d370b0c",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "estado"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "estado"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "a1000000000000000005": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "113d24a740b0b67d6c4d",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Envios Totales"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "a1000000000000000006": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "dd63f248d9a845168197",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "% Entregados"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "a1000000000000000007": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "a313689382d3a0c110fc",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "% A Tiempo"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "a1000000000000000008": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "260245688e02719346dd",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Tiempo Entrega Media (Lab)"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Tiempo Entrega Media (Lab)"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "a1000000000000000009": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "9f56e253e79cffc70e4e",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Incidencias Bloqueantes"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "a1000000000000000010": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "51e0a4978c8838889a5f",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "estado_grupo"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "84376f38e161c149c7b0",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Envios Totales"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "donutChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Envios Totales"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "estado_grupo"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "a1000000000000000011": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "203ea5fc7b4c6aa06f2b",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "transportista_norm"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "69940872b53c8de138f1",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "estado"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "8578cb54f8db6995ea20",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "pais_destino"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "71387f902cff79afbaef",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Envios Totales"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "e1bef47ec814c8ea704f",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "% A Tiempo"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "2e8321c3bfabcec358db",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Tiempo Entrega Media (Lab)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "6a6bac8a199fdc4f5ff4",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Incidencias Bloqueantes"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "pivotTable",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Envios Totales"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Rows": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "transportista_norm"
+                    }
+                  }
+                ]
+              },
+              "expansionStates": [
+                {
+                  "roles": [
+                    "Rows"
+                  ],
+                  "levels": [
+                    {
+                      "queryRefs": [
+                        "LOL_TRANSPORT_TRACKING.transportista_norm"
+                      ],
+                      "isCollapsed": true,
+                      "identityKeys": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "LOL_TRANSPORT_TRACKING"
+                              }
+                            },
+                            "Property": "transportista_norm"
+                          }
+                        }
+                      ],
+                      "isPinned": true
+                    },
+                    {
+                      "queryRefs": [
+                        "LOL_TRANSPORT_TRACKING.estado"
+                      ],
+                      "isCollapsed": true,
+                      "identityKeys": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "LOL_TRANSPORT_TRACKING"
+                              }
+                            },
+                            "Property": "estado"
+                          }
+                        }
+                      ],
+                      "isPinned": true
+                    },
+                    {
+                      "queryRefs": [
+                        "LOL_TRANSPORT_TRACKING.pais_destino"
+                      ],
+                      "isCollapsed": true,
+                      "isPinned": true
+                    }
+                  ],
+                  "root": {
+                    "identityValues": []
+                  }
+                }
+              ]
+            }
+          },
+          "a1000000000000000012": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "2506753cccdf3dbdc709",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "Tramo Tiempo"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "a13e80e2fb9fe6a83eae",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Envios Totales"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredColumnChart",
+              "objects": {},
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "Tramo Tiempo"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "a1000000000000000013": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "5fd4339698a6279147f1",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "albaran"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "8c4a51fb45657053f3ad",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "tracking"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "438eaf269b58f140f2bf",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "cliente"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "bb22b10871394da6bd62",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "transportista_norm"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "b8199666c143bb45b50a",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "estado"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "a99e0eff53d5ad14a100",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "ciudad_destino"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "851a4610fe520b91767c",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "f_inicio"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "befaaca80f186706e575",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "fecha_entregado"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "c739f31e7bc988b9627e",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "dias_entrega_laborables"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "998bae8ab44ec621df40",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "sla_objetivo"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "tableEx",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "fecha_entregado"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "a1000000000000000014": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "abf691f06006af9c7272",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Tasa Devoluciones"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "a1000000000000000015": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "aa38aeb5f6b2b51d49a2",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendario"
+                        }
+                      },
+                      "Property": "AñoMes"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "44fa630fccc6a807a06b",
+                  "type": "Advanced",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "c",
+                        "Entity": "Calendario",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "Comparison": {
+                            "ComparisonKind": 2,
+                            "Left": {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": "c"
+                                  }
+                                },
+                                "Property": "Año"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "2026L"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendario"
+                        }
+                      },
+                      "Property": "Año"
+                    }
+                  },
+                  "howCreated": 1
+                },
+                {
+                  "name": "8cc4dcdd46a3b1bfa506",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Entregados"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "f3dfa432214dfb336269",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Envios Totales"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredColumnChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendario"
+                        }
+                      },
+                      "Property": "AñoMes"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendario"
+                        }
+                      },
+                      "Property": "AñoMes"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "a1000000000000000017": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "de5598eda24432b0f751",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "segmento"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "96779cf0373a8d331079",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Envios Totales"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "c493a1e78370eda16542",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "% A Tiempo"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "617ebc13f5d9c270ab9c",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Tasa Incidencias"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "b89bcbf33e2e10a0b769",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Tasa Devoluciones"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "pivotTable",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Envios Totales"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Rows": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "segmento"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "a1000000000000000018": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "8c9915e4cf8ed1d25c0f",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "pais_destino"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "71bd968d0c70bb1988a5",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Envios Totales"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredBarChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Envios Totales"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "pais_destino"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "a1000000000000000019": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "0d0051b747f449ad9350",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "ciudad_destino"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "6b11e179e18d72cf5001",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Envios Totales"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredBarChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Envios Totales"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "ciudad_destino"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "a1000000000000000020": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "43f61048a5eac15acb11",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "ciudad_destino_limpia"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "9b43f270d8036e454112",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Medidas"
+                        }
+                      },
+                      "Property": "Envios Totales"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "azureMap",
+              "objects": {},
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_TRANSPORT_TRACKING"
+                        }
+                      },
+                      "Property": "ciudad_destino_limpia"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "tr02botoncerrar0000": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "tr02botonmenu000000": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "tr02fondocajon00000": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "tr02fondocarril0000": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "tr02logocarril00000": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "4e743d0cbc24e0c7ccc9": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          }
+        },
+        "visualContainerGroups": {
+          "tr02cajon00000000000": {
+            "isHidden": false
+          },
+          "tr02carril0000000000": {
+            "isHidden": false
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

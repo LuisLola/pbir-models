@@ -1,8 +1,3 @@
-relationship ac5b1dbe-97ef-4438-abed-3e7281a87385
-	joinOnDateBehavior: datePartOnly
-	fromColumn: LOL_TRANSPORT_TRACKING.fecha_lanzamiento
-	toColumn: LocalDateTable_1d679787-5f05-4e9d-8734-921f96a68a6c.Date
-
 relationship d9894bf0-3515-4c2b-8b87-f939e29d14f2
 	joinOnDateBehavior: datePartOnly
 	fromColumn: LOL_TRANSPORT_TRACKING.fecha_etiqueta
@@ -48,11 +43,6 @@ relationship a5c2ae86-0e67-4e3b-a302-e4b757c85c5f
 	fromColumn: LOL_TRANSPORT_TRACKING.fecha_devuelto
 	toColumn: LocalDateTable_d25146c2-e15b-4b8d-8538-260459284525.Date
 
-relationship 6bbf3095-4007-435a-b111-0cdebab589f1
-	joinOnDateBehavior: datePartOnly
-	fromColumn: LOL_TRANSPORT_TRACKING.fecha_entregado
-	toColumn: LocalDateTable_28c0f053-da3f-49bd-8fae-65fa9f84c195.Date
-
 relationship 72729d51-da01-4545-90dd-a291efefdd22
 	joinOnDateBehavior: datePartOnly
 	fromColumn: LOL_TRANSPORT_TRACKING.fecha_entrega_prevista
@@ -78,4 +68,48 @@ relationship 3d64c71c-db1f-4e52-a5b3-0eb1c362eeb2
 	joinOnDateBehavior: datePartOnly
 	fromColumn: Festivos.Fecha
 	toColumn: LocalDateTable_7185ac49-e3c7-4dd9-8fde-444fceb76651.Date
+
+relationship 2efc0b23-8759-44b0-aed7-d272cdc79c75
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_TRANSPORT_TRACKING.f_inicio
+	toColumn: LocalDateTable_7c42d38a-2f0c-46ff-a877-bada124ada60.Date
+
+relationship 3146f67d-612b-4cf8-a23b-4a00a5eb2b76
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendario.Date
+	toColumn: LocalDateTable_622461db-0fff-4d69-ac28-7d279baf096b.Date
+
+relationship d17d15fa-88f1-422b-9255-8e41f99df574
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBITIMEWHS.FechaComunicacion
+	toColumn: LocalDateTable_b7bcbcbb-c7f8-4b3b-8e39-2a6b4ad15c00.Date
+
+relationship 66d1397b-8c46-4f05-8c80-013628d6cee2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBITIMEWHS.FechaLog20
+	toColumn: LocalDateTable_e20ba4a6-9ccf-4ee4-8d3b-d68e8a1be716.Date
+
+relationship dd605820-e8dc-4085-bd04-5b0c3b297375
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBITIMEWHS.FechaLog40
+	toColumn: LocalDateTable_f50e1203-a9ae-4d74-ad06-b2eaa783e1f2.Date
+
+relationship ecec9e53-9719-434d-9e35-f527b6af2ebc
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBITIMEWHS.FechaLog60
+	toColumn: LocalDateTable_a6755c96-167d-44ea-8ddb-aa1bba150dde.Date
+
+relationship af84d594-48e4-4891-b0f7-97f3cb49a4d8
+	isActive: false
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBITIMEWHS.PickDate
+	toColumn: Calendario.Date
+
+relationship e43c62e9-92d5-4e69-8254-457861a18d7f
+	fromColumn: LOL_TRANSPORT_TRACKING.picking
+	toColumn: LOL_PBITIMEWHS.Picking
+
+relationship AutoDetected_b6c1d355-4e45-4e15-a8c1-0b7fa4abef45
+	fromColumn: LOL_PBITIMEWHS.Cliente
+	toColumn: LOL_PBICLIENTES.CodeCliente
 
