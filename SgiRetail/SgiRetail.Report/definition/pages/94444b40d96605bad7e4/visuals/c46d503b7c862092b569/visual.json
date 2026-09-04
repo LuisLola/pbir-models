@@ -7,7 +7,7 @@
     "z": 32000,
     "height": 64.285714285714278,
     "width": 240.51724137931035,
-    "tabOrder": 5033
+    "tabOrder": 32000
   },
   "visual": {
     "visualType": "slicer",
@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "LOL_PBIMODELITEM"
+                      "Entity": "DimensionesB2C3"
                     }
                   },
-                  "Property": "Categoria"
+                  "Property": "DimensionesB2C3"
                 }
               },
-              "queryRef": "LOL_PBIMODELITEM.Categoria",
-              "nativeQueryRef": "Categoria",
+              "queryRef": "DimensionesB2C3.DimensionesB2C3",
+              "nativeQueryRef": "DimensionesB2C3",
               "active": true
             }
           ]
@@ -74,23 +74,88 @@
             }
           }
         }
-      ]
-    },
-    "visualContainerObjects": {
-      "title": [
+      ],
+      "selection": [
         {
           "properties": {
-            "show": {
+            "selectAllCheckboxEnabled": {
               "expr": {
                 "Literal": {
                   "Value": "false"
                 }
               }
             },
+            "singleSelect": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "items": [
+        {
+          "properties": {
+            "textSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
             "titleWrap": {
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1A1416'"
+                    }
+                  }
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'left'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "'13'"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Montserrat'"
                 }
               }
             }
@@ -131,10 +196,21 @@
       "border": [
         {
           "properties": {
-            "show": {
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E7DACE'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "8D"
                 }
               }
             },
@@ -149,6 +225,19 @@
         }
       ],
       "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
         {
           "properties": {
             "show": {

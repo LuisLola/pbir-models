@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.3.0/schema.json",
   "themeCollection": {
     "baseTheme": {
-      "name": "CY26SU02",
+      "name": "CY26SU05",
       "reportVersionAtImport": {
-        "visual": "2.6.0",
-        "report": "3.1.0",
-        "page": "2.3.0"
+        "visual": "2.9.0",
+        "report": "3.3.0",
+        "page": "2.3.1"
       },
       "type": "SharedResources"
     },
@@ -35,12 +35,42 @@
           }
         },
         "type": "Categorical",
+        "howCreated": "User",
+        "objects": {
+          "general": [
+            {
+              "properties": {
+                "isInvertedSelectionMode": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "true"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "251940e74fa5640f1938",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBITIENDAS"
+              }
+            },
+            "Property": "TipoTienda"
+          }
+        },
+        "type": "Categorical",
         "filter": {
           "Version": 2,
           "From": [
             {
               "Name": "l",
-              "Entity": "LOL_PBIMODELITEM",
+              "Entity": "LOL_PBITIENDAS",
               "Type": 0
             }
           ],
@@ -58,7 +88,7 @@
                                 "Source": "l"
                               }
                             },
-                            "Property": "Codigo_de_familia"
+                            "Property": "TipoTienda"
                           }
                         }
                       ],
@@ -66,28 +96,14 @@
                         [
                           {
                             "Literal": {
-                              "Value": "''"
-                            }
-                          }
-                        ],
-                        [
-                          {
-                            "Literal": {
-                              "Value": "'9801'"
-                            }
-                          }
-                        ],
-                        [
-                          {
-                            "Literal": {
-                              "Value": "'9901'"
-                            }
-                          }
-                        ],
-                        [
-                          {
-                            "Literal": {
                               "Value": "null"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "''"
                             }
                           }
                         ]
@@ -138,7 +154,7 @@
           "expanded": {
             "expr": {
               "Literal": {
-                "Value": "false"
+                "Value": "true"
               }
             }
           }
@@ -159,8 +175,8 @@
       "type": "SharedResources",
       "items": [
         {
-          "name": "CY26SU02",
-          "path": "BaseThemes/CY26SU02.json",
+          "name": "CY26SU05",
+          "path": "BaseThemes/CY26SU05.json",
           "type": "BaseTheme"
         }
       ]

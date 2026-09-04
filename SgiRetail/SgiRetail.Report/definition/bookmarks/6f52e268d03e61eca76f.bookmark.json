@@ -10,9 +10,7 @@
       "7ee8a26e9cbd3463a4c0",
       "cfa6e73725538534dc86",
       "f534828073df95bc1597",
-      "4a63abc3f54a17f2ddd4",
       "c856bb3d3aed3884a5df",
-      "c5b89cd4c2cbaf683405",
       "4fed1ffb5a0bd193ca78",
       "798ca55e82436b97bd5f",
       "c8af4c7b6fd6bb605d9c",
@@ -21,8 +19,6 @@
       "71ddd031f18c062ab36b",
       "b84862cc93634a83c39f",
       "8d84b0ef53ea8781d219",
-      "1d0dc2b017f59b4af3e3",
-      "db35d777601df6fea432",
       "b81ce3c5a267968ef1f8",
       "74a171f2f8aa047da51c",
       "500462c2f618352fe355",
@@ -365,56 +361,6 @@
                   "displayName": "TipoTienda"
                 }
               ]
-            }
-          },
-          "1d0dc2b017f59b4af3e3": {
-            "filters": {
-              "byExpr": [
-                {
-                  "name": "d5b7984ffe87732e81cd",
-                  "type": "Categorical",
-                  "expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "LOL_PBITIENDAS"
-                        }
-                      },
-                      "Property": "NombreTienda"
-                    }
-                  },
-                  "howCreated": 0
-                }
-              ]
-            },
-            "singleVisual": {
-              "visualType": "textFilter25A4896A83E0487089E2B90C9AE57C8A",
-              "objects": {}
-            }
-          },
-          "db35d777601df6fea432": {
-            "filters": {
-              "byExpr": [
-                {
-                  "name": "83b81021603da88e8c60",
-                  "type": "Categorical",
-                  "expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "LOL_PBIMODELITEM"
-                        }
-                      },
-                      "Property": "Modelo-Color"
-                    }
-                  },
-                  "howCreated": 0
-                }
-              ]
-            },
-            "singleVisual": {
-              "visualType": "textFilter25A4896A83E0487089E2B90C9AE57C8A",
-              "objects": {}
             }
           },
           "b81ce3c5a267968ef1f8": {
@@ -911,56 +857,10 @@
               }
             }
           },
-          "4a63abc3f54a17f2ddd4": {
-            "singleVisual": {
-              "visualType": "textbox",
-              "objects": {}
-            }
-          },
           "c856bb3d3aed3884a5df": {
             "singleVisual": {
               "visualType": "textbox",
               "objects": {}
-            }
-          },
-          "c5b89cd4c2cbaf683405": {
-            "filters": {
-              "byExpr": [
-                {
-                  "name": "451f43c5977b7cbf6ab5",
-                  "type": "Advanced",
-                  "expression": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "MedidasIndicadores"
-                        }
-                      },
-                      "Property": "Marca de actualización"
-                    }
-                  },
-                  "howCreated": 0
-                }
-              ]
-            },
-            "singleVisual": {
-              "visualType": "cardVisual",
-              "objects": {},
-              "orderBy": [
-                {
-                  "Direction": 1,
-                  "Expression": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "MedidasIndicadores"
-                        }
-                      },
-                      "Property": "Marca de actualización"
-                    }
-                  }
-                }
-              ]
             }
           },
           "4fed1ffb5a0bd193ca78": {

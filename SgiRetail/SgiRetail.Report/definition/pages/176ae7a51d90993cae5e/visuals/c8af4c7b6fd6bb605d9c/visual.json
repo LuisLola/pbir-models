@@ -5,8 +5,8 @@
     "x": 0,
     "y": 0,
     "z": 0,
-    "height": 61.330049261083751,
-    "width": 283.32369114446089
+    "height": 58.522167487684733,
+    "width": 405.22167487684732
   },
   "visual": {
     "visualType": "slicer",
@@ -34,21 +34,6 @@
         }
       },
       "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "FechaHastaSelector"
-                  }
-                },
-                "Property": "Date"
-              }
-            },
-            "direction": "Ascending"
-          }
-        ],
         "isDefaultSort": true
       }
     },
@@ -56,6 +41,13 @@
       "data": [
         {
           "properties": {
+            "endDate": {
+              "expr": {
+                "Literal": {
+                  "Value": "datetime'2026-09-02T00:00:00'"
+                }
+              }
+            },
             "mode": {
               "expr": {
                 "Literal": {
@@ -140,6 +132,48 @@
                 "Literal": {
                   "Value": "false"
                 }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "filter": {
+              "filter": {
+                "Version": 2,
+                "From": [
+                  {
+                    "Name": "f",
+                    "Entity": "FechaHastaSelector",
+                    "Type": 0
+                  }
+                ],
+                "Where": [
+                  {
+                    "Condition": {
+                      "Comparison": {
+                        "ComparisonKind": 3,
+                        "Left": {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "f"
+                              }
+                            },
+                            "Property": "Date"
+                          }
+                        },
+                        "Right": {
+                          "Literal": {
+                            "Value": "datetime'2026-09-03T00:00:00'"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
               }
             }
           }

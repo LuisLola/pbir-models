@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "52710344a0c013095c8e",
   "position": {
-    "x": 125.49019607843137,
-    "y": 152.8698752228164,
+    "x": 0.010046349098491185,
+    "y": 68.0295566502463,
     "z": 6000,
-    "height": 54.759358288770052,
-    "width": 120.92691622103386,
+    "height": 46.995073891625616,
+    "width": 240.29556650246306,
     "tabOrder": -8001
   },
   "visual": {
@@ -141,6 +141,26 @@
             }
           }
         }
+      ],
+      "selection": [
+        {
+          "properties": {
+            "singleSelect": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "selectAllCheckboxEnabled": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "visualContainerObjects": {
@@ -262,12 +282,7 @@
           }
         }
       ]
-    },
-    "syncGroup": {
-      "groupName": "Code",
-      "fieldChanges": true,
-      "filterChanges": true
     }
   },
-  "parentGroupName": "ef02805c66292d03c1c7"
+  "parentGroupName": "a827a6ae1179ae98858f"
 }
