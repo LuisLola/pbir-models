@@ -1072,6 +1072,126 @@ table MedidasVentas
 		displayFolder: Temporada KPI
 		lineageTag: 352e4ec8-0f27-4f26-8598-e5da77945c28
 
+	measure 'Chip Agente_Cajero' = VAR n = COUNTROWS ( VALUES ( LOL_PBIAGENTES[Agente_Cajero] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PBIAGENTES[Agente_Cajero] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PBIAGENTES[Agente_Cajero] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: 3438bf26-e1a2-40ad-859e-45d7629019de
+
+	measure 'Chip Agente_Cajero Color' = IF ( ISFILTERED ( LOL_PBIAGENTES[Agente_Cajero] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: d2ce6a05-67d5-4964-b4fe-e0bff78026ad
+
+	measure 'Chip Autorizado' = VAR n = COUNTROWS ( VALUES ( LOL_PLANMATERIAL[Autorizado] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PLANMATERIAL[Autorizado] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PLANMATERIAL[Autorizado] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: 244f2ed4-e999-405c-9e07-21f08936fdc5
+
+	measure 'Chip Autorizado Color' = IF ( ISFILTERED ( LOL_PLANMATERIAL[Autorizado] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: 973852ed-ffdc-4011-9421-885dfea4cf46
+
+	measure 'Chip Bloqueado' = VAR n = COUNTROWS ( VALUES ( LOL_PLANMATERIAL[Bloqueado] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PLANMATERIAL[Bloqueado] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PLANMATERIAL[Bloqueado] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: 1d666d93-b8ba-4da1-a4cc-8c666109362e
+
+	measure 'Chip Bloqueado Color' = IF ( ISFILTERED ( LOL_PLANMATERIAL[Bloqueado] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: f3d9c5dd-4ac2-4293-b4d7-060c16c26155
+
+	measure 'Chip Categoria' = VAR n = COUNTROWS ( VALUES ( LOL_PBIMODELITEM[Categoria] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PBIMODELITEM[Categoria] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PBIMODELITEM[Categoria] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: 9eee23ce-f82d-436a-9126-65cb1bb9bc70
+
+	measure 'Chip Categoria Color' = IF ( ISFILTERED ( LOL_PBIMODELITEM[Categoria] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: 39bf2053-9d34-43f3-b2f1-2c06ba6567a0
+
+	measure 'Chip Code' = VAR n = COUNTROWS ( VALUES ( LOL_PBISEASON[Code] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PBISEASON[Code] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PBISEASON[Code] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: 47126070-2665-4507-95ed-7387a04034f9
+
+	measure 'Chip Code Color' = IF ( ISFILTERED ( LOL_PBISEASON[Code] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: f56f0c00-0f55-494a-b08a-e57d37af26b0
+
+	measure 'Chip Descripcion_familia_agregada' = VAR n = COUNTROWS ( VALUES ( LOL_PBIMODELITEM[Descripcion_familia_agregada] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PBIMODELITEM[Descripcion_familia_agregada] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PBIMODELITEM[Descripcion_familia_agregada] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: ba7242f9-9f65-451a-8dbe-2ae220751790
+
+	measure 'Chip Descripcion_familia_agregada Color' = IF ( ISFILTERED ( LOL_PBIMODELITEM[Descripcion_familia_agregada] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: 59da54df-b519-4cc0-9ee7-6fb415edc7ad
+
+	measure 'Chip EsMuestra' = VAR n = COUNTROWS ( VALUES ( LOL_PBICLIENTES[EsMuestra] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PBICLIENTES[EsMuestra] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PBICLIENTES[EsMuestra] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: d05899ca-6795-451d-9a52-d2d96f1a6c67
+
+	measure 'Chip EsMuestra Color' = IF ( ISFILTERED ( LOL_PBICLIENTES[EsMuestra] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: 92334e51-5ac2-4173-bbbd-3eed3a24009a
+
+	measure 'Chip Fecha Fin pedido venta' = VAR n = COUNTROWS ( VALUES ( LOL_PLANMATERIAL[Fecha Fin pedido venta] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PLANMATERIAL[Fecha Fin pedido venta] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PLANMATERIAL[Fecha Fin pedido venta] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: b3e3e5be-adc9-4b3e-8c35-70da85b49cb3
+
+	measure 'Chip Fecha Fin pedido venta Color' = IF ( ISFILTERED ( LOL_PLANMATERIAL[Fecha Fin pedido venta] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: 7f7773cd-6e16-4c1e-a99f-9aec63a059f5
+
+	measure 'Chip Fecha disponibilidad (línea del articulo)' = VAR n = COUNTROWS ( VALUES ( LOL_PLANMATERIAL[Fecha disponibilidad (línea del articulo)] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PLANMATERIAL[Fecha disponibilidad (línea del articulo)] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PLANMATERIAL[Fecha disponibilidad (línea del articulo)] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: f7ca7ef1-d6b0-476a-b35f-51537d0e12b0
+
+	measure 'Chip Fecha disponibilidad (línea del articulo) Color' = IF ( ISFILTERED ( LOL_PLANMATERIAL[Fecha disponibilidad (línea del articulo)] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: d5b104a0-d7ae-4419-a592-eba3b9a1c133
+
+	measure 'Chip GrupodeArt' = VAR n = COUNTROWS ( VALUES ( LOL_PBIMODELITEM[GrupodeArt] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PBIMODELITEM[GrupodeArt] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PBIMODELITEM[GrupodeArt] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: 11255a45-c62a-4376-a701-4a2c2f716489
+
+	measure 'Chip GrupodeArt Color' = IF ( ISFILTERED ( LOL_PBIMODELITEM[GrupodeArt] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: b81280ea-4791-4b6b-8c9d-f63218ba763b
+
+	measure 'Chip Nombre_familia' = VAR n = COUNTROWS ( VALUES ( LOL_PBIMODELITEM[Nombre_familia] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PBIMODELITEM[Nombre_familia] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PBIMODELITEM[Nombre_familia] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: e28743b9-39fd-4276-bb2a-33d81a42030c
+
+	measure 'Chip Nombre_familia Color' = IF ( ISFILTERED ( LOL_PBIMODELITEM[Nombre_familia] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: 13aa0164-18b3-420b-96ca-60846aa9039e
+
+	measure 'Chip P&H' = VAR n = COUNTROWS ( VALUES ( LOL_PLANMATERIAL[P&H] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PLANMATERIAL[P&H] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PLANMATERIAL[P&H] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: bfe1183d-25af-4588-bf67-c99c2015a8f9
+
+	measure 'Chip P&H Color' = IF ( ISFILTERED ( LOL_PLANMATERIAL[P&H] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: a8fe3c4b-5e2d-415f-880e-9067a7ac6ed2
+
+	measure 'Chip Subfamilia' = VAR n = COUNTROWS ( VALUES ( LOL_PBIMODELITEM[Subfamilia] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PBIMODELITEM[Subfamilia] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PBIMODELITEM[Subfamilia] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: f41c2fa6-56f9-45d7-854e-112e2666c84f
+
+	measure 'Chip Subfamilia Color' = IF ( ISFILTERED ( LOL_PBIMODELITEM[Subfamilia] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: c5a777fd-dff5-431d-abfb-63b34576cfa6
+
+	measure 'Chip TipoTienda' = VAR n = COUNTROWS ( VALUES ( LOL_PBITIENDAS[TipoTienda] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PBITIENDAS[TipoTienda] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PBITIENDAS[TipoTienda] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: 75f5df41-9743-4e50-90ec-e73d29fd9c80
+
+	measure 'Chip TipoTienda Color' = IF ( ISFILTERED ( LOL_PBITIENDAS[TipoTienda] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: 40496f7e-7e68-4d31-a6ba-830f53205f94
+
+	measure 'Chip TotalLook' = VAR n = COUNTROWS ( VALUES ( LOL_PLANMATERIAL[TotalLook] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PLANMATERIAL[TotalLook] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PLANMATERIAL[TotalLook] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: d98943ff-7b33-419c-8203-86a86ab4059b
+
+	measure 'Chip TotalLook Color' = IF ( ISFILTERED ( LOL_PLANMATERIAL[TotalLook] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: 7bc50d9a-704e-43fb-904c-bb70e0766062
+
 	column Value
 		lineageTag: 2ddc9eb7-b8c8-4537-91e0-8de67fa58299
 		isNameInferred

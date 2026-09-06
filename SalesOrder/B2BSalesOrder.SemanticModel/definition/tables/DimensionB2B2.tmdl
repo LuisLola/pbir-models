@@ -50,7 +50,10 @@ table DimensionB2B2
 				    ("País", NAMEOF('LOL_PBICLIENTES'[Pais]), 7),
 				    ("Agente", NAMEOF('LOL_PBIAGENTES'[Agente_Cajero]), 8),
 				    ("Temporada", NAMEOF('LOL_PBISEASON'[Name]), 9),
-				    ("Pedido", NAMEOF('LOL_PBIB2BSALESORDER'[DocNum]), 10)
+				    ("Pedido", NAMEOF('LOL_PBIB2BSALESORDER'[DocNum]), 10),
+				    ("Año", NAMEOF('Calendario'[Año]), 11),
+				    ("Mes", NAMEOF('Calendario'[MesTexto]), 12),
+				    ("Semana", NAMEOF('Calendario'[NombreSemana]), 13)
 				}
 
 	annotation PBI_Id = c90ce9d2f8aa4cde88dfee7a13941ef7
