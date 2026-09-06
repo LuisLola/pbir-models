@@ -1,0 +1,115 @@
+table _Medidas
+	lineageTag: a4372108-500a-4b03-83f2-5f0b3f0497c9
+
+	/// Pedidos de compra distintos.
+	measure 'Pedidos de compra' = DISTINCTCOUNT ( LOL_PBIPURCHASEORDERS[DocumentInternalKey] )
+		formatString: #,0
+		displayFolder: 1 Volumen
+		lineageTag: 97709a3c-1cd5-487a-a722-2b0f7cb06620
+
+	/// Lineas de pedido de compra.
+	measure 'Líneas de compra' = COUNTROWS ( LOL_PBIPURCHASEORDERS )
+		formatString: #,0
+		displayFolder: 1 Volumen
+		lineageTag: 6b538c0c-5b03-4fc0-9827-657f3968fb65
+
+	/// Pedidos con alguna linea abierta.
+	measure 'Pedidos abiertos' = CALCULATE ( [Pedidos de compra], LOL_PBIPURCHASEORDERS[Estado] = "Abierto" )
+		formatString: #,0
+		displayFolder: 1 Volumen
+		lineageTag: 6c7dbcce-f331-4e7a-988b-9d0e34dbb694
+
+	/// Proveedores distintos con pedido.
+	measure 'Proveedores' = DISTINCTCOUNT ( LOL_PBIPURCHASEORDERS[CardCode] )
+		formatString: #,0
+		displayFolder: 1 Volumen
+		lineageTag: f7212986-13e2-48c6-8d89-91524b822ee8
+
+	/// Referencias distintas.
+	measure 'Referencias' = DISTINCTCOUNT ( LOL_PBIMODELITEM[Referencia-Modelo] )
+		formatString: #,0
+		displayFolder: 1 Volumen
+		lineageTag: f21bad0d-e95d-44dd-a069-227813af7f2e
+
+	/// Unidades. Ojo: Qty vive en LOL_PBIB2BSALESORDER, no en compras.
+	measure 'Unidades' = SUM ( LOL_PBIB2BSALESORDER[Qty] )
+		formatString: #,0
+		displayFolder: 1 Volumen
+		lineageTag: 7675c668-0568-4d75-8310-6071eefcece1
+
+	measure 'Chip Categoria' = VAR n = COUNTROWS ( VALUES ( LOL_PBIMODELITEM[Categoria] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PBIMODELITEM[Categoria] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PBIMODELITEM[Categoria] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: 85e07071-c8c8-4dab-8248-8857017e8f4a
+
+	measure 'Chip Categoria Color' = IF ( ISFILTERED ( LOL_PBIMODELITEM[Categoria] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: f4b6c8ce-4c4e-4417-917e-8aa1480313c8
+
+	measure 'Chip MktDoc_Row_GSP_SEASON' = VAR n = COUNTROWS ( VALUES ( LOL_PBIPURCHASEORDERS[MktDoc_Row_GSP_SEASON] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PBIPURCHASEORDERS[MktDoc_Row_GSP_SEASON] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PBIPURCHASEORDERS[MktDoc_Row_GSP_SEASON] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: 401cd480-77ad-4003-b7b7-096a56348f40
+
+	measure 'Chip MktDoc_Row_GSP_SEASON Color' = IF ( ISFILTERED ( LOL_PBIPURCHASEORDERS[MktDoc_Row_GSP_SEASON] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: 3d21fae6-c5bf-45f8-a2a6-5c1d49722dde
+
+	measure 'Chip NombreTienda' = VAR n = COUNTROWS ( VALUES ( LOL_PBITIENDAS[NombreTienda] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PBITIENDAS[NombreTienda] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PBITIENDAS[NombreTienda] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: d2007e64-ea82-4204-8aef-2e6a9e2f008f
+
+	measure 'Chip NombreTienda Color' = IF ( ISFILTERED ( LOL_PBITIENDAS[NombreTienda] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: 0ed9eb1a-c223-49f2-86a6-3978ec329e5b
+
+	measure 'Chip Nombre_de_Proveedor' = VAR n = COUNTROWS ( VALUES ( LOL_PBIMODELITEM[Nombre_de_Proveedor] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PBIMODELITEM[Nombre_de_Proveedor] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PBIMODELITEM[Nombre_de_Proveedor] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: 1c3c1d17-c002-464c-9026-64bc725be92a
+
+	measure 'Chip Nombre_de_Proveedor Color' = IF ( ISFILTERED ( LOL_PBIMODELITEM[Nombre_de_Proveedor] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: 8fb6623e-cb4b-4088-8c9a-d56bfe4af978
+
+	measure 'Chip Nombre_familia' = VAR n = COUNTROWS ( VALUES ( LOL_PBIMODELITEM[Nombre_familia] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PBIMODELITEM[Nombre_familia] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PBIMODELITEM[Nombre_familia] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: 2d3a4771-fa7f-4312-96b1-6cb466a5b938
+
+	measure 'Chip Nombre_familia Color' = IF ( ISFILTERED ( LOL_PBIMODELITEM[Nombre_familia] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: 612f659c-6719-4654-ac78-010908b9faad
+
+	measure 'Chip OperadorLogistico' = VAR n = COUNTROWS ( VALUES ( LOL_PBITIENDAS[OperadorLogistico] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PBITIENDAS[OperadorLogistico] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PBITIENDAS[OperadorLogistico] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: 3aa5fb5a-564a-4976-9fcc-df2c834d9f30
+
+	measure 'Chip OperadorLogistico Color' = IF ( ISFILTERED ( LOL_PBITIENDAS[OperadorLogistico] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: 6140b940-ec98-42d5-a768-c72b13e40c56
+
+	measure 'Chip Plancha_en_RMT' = VAR n = COUNTROWS ( VALUES ( LOL_PBIMODELITEM[Plancha_en_RMT] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PBIMODELITEM[Plancha_en_RMT] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PBIMODELITEM[Plancha_en_RMT] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: c1dc3953-963a-4a53-9614-5f6683ed0b7d
+
+	measure 'Chip Plancha_en_RMT Color' = IF ( ISFILTERED ( LOL_PBIMODELITEM[Plancha_en_RMT] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: a0172f43-dd48-4b77-8b68-cbd6799a6d95
+
+	measure 'Chip Tipo_almacenaje' = VAR n = COUNTROWS ( VALUES ( LOL_PBIMODELITEM[Tipo_almacenaje] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PBIMODELITEM[Tipo_almacenaje] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PBIMODELITEM[Tipo_almacenaje] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: afc266fa-14b1-4ef5-8946-cf10425306b3
+
+	measure 'Chip Tipo_almacenaje Color' = IF ( ISFILTERED ( LOL_PBIMODELITEM[Tipo_almacenaje] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: 6a46f3c4-22df-4b15-af75-a9d8bd7ab233
+
+	column Column
+		formatString: 0
+		lineageTag: fc1c719d-994b-49d4-8aa6-6651182369f3
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+	partition _Medidas = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = d17f7d0fd2db4e6394ffd91aa83853f3

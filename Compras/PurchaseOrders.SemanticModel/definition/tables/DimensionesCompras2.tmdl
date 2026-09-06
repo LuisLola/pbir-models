@@ -1,0 +1,58 @@
+table DimensionesCompras2
+	lineageTag: cb7cdf81-4b33-4cd5-9b3e-dca5b34e8209
+
+	column 'DimensionesCompras2'
+		lineageTag: cad77c15-5dbb-4cd3-8ee1-26a8fc40ae5a
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'DimensionesCompras2 Orden'
+
+		relatedColumnDetails
+			groupByColumn: 'DimensionesCompras2 Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DimensionesCompras2 Campos'
+		isHidden
+		lineageTag: b7e965dc-8a48-4814-9e9f-52ed00b6a339
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'DimensionesCompras2 Orden'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DimensionesCompras2 Orden'
+		isHidden
+		formatString: 0
+		lineageTag: 9005c699-22d9-4f3b-90cb-a470f02fc537
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimensionesCompras2 = calculated
+		mode: import
+		source =
+				{
+				    ("Referencia-Modelo", NAMEOF('LOL_PBIMODELITEM'[Referencia-Modelo]), 0),
+				    ("Categoria", NAMEOF('LOL_PBIMODELITEM'[Categoria]), 1),
+				    ("Nombre_familia", NAMEOF('LOL_PBIMODELITEM'[Nombre_familia]), 2),
+				    ("Tipo_almacenaje", NAMEOF('LOL_PBIMODELITEM'[Tipo_almacenaje]), 3),
+				    ("Plancha_en_RMT", NAMEOF('LOL_PBIMODELITEM'[Plancha_en_RMT]), 4),
+				    ("Nombre_de_Proveedor", NAMEOF('LOL_PBIMODELITEM'[Nombre_de_Proveedor]), 5),
+				    ("NombreTienda", NAMEOF('LOL_PBITIENDAS'[NombreTienda]), 6),
+				    ("OperadorLogistico", NAMEOF('LOL_PBITIENDAS'[OperadorLogistico]), 7),
+				    ("Temporada", NAMEOF('LOL_PBIPURCHASEORDERS'[MktDoc_Row_GSP_SEASON]), 8),
+				    ("Estado", NAMEOF('LOL_PBIPURCHASEORDERS'[Estado]), 9),
+				    ("Año", NAMEOF('Calendario'[Año]), 10),
+				    ("MesTexto", NAMEOF('Calendario'[MesTexto]), 11),
+				    ("NombreSemana", NAMEOF('Calendario'[NombreSemana]), 12)
+				}
+
+	annotation PBI_Id = 650f814fe20a452d89ab23a05d6ed2e0
