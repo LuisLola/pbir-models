@@ -270,7 +270,7 @@ table LOL_TRANSPORT_TRACKING
 
 	/// 1 si el envío está entregado (estado canónico = Entregado). Incluye los entregados
 	/// cuyo texto [estado] no se actualizó y los que además tienen fecha_devuelto posterior.
-	column es_entregado = IF ( LOL_TRANSPORT_TRACKING[estado_norm] = "Entregado", 1, 0 )
+	column es_entregado = IF ( LOL_TRANSPORT_TRACKING[estado_grupo] = "Entregado", 1, 0 )
 		dataType: int64
 		formatString: 0
 		lineageTag: d1c00000-0000-4000-8000-000000000002
@@ -464,7 +464,7 @@ table LOL_TRANSPORT_TRACKING
 			    "Incidencia", "Incidencia",
 			    "En tránsito", "En curso",
 			    "En reparto", "En curso",
-			    "En agencia destino", "En curso",
+			    "En agencia destino", "Entregado",
 			    "Recogido", "En curso",
 			    "Etiqueta creada", "En curso",
 			    "Sin datos"

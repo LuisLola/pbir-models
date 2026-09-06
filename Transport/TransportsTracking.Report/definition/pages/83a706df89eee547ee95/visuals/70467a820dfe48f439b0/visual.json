@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "70467a820dfe48f439b0",
   "position": {
-    "x": 277,
-    "y": 83,
-    "z": 2000,
+    "x": 414,
+    "y": 82,
+    "z": 102,
     "height": 78,
-    "width": 189,
+    "width": 163,
     "tabOrder": 3000
   },
   "visual": {
@@ -23,14 +23,18 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "% Entregados"
+                  "Property": "Pickings en 40"
                 }
               },
-              "queryRef": "_Medidas.% Entregados",
-              "nativeQueryRef": "% Entregados"
+              "queryRef": "_Medidas.Pickings en 40",
+              "nativeQueryRef": "Pickings en 40",
+              "displayName": "Preparados"
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "isDefaultSort": true
       }
     },
     "objects": {
@@ -81,7 +85,14 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "28D"
+                  "Value": "19D"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
                 }
               }
             }
@@ -92,7 +103,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "18D"
+                  "Value": "16D"
                 }
               }
             }
@@ -163,7 +174,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'% Entregados'"
+                  "Value": "'Preparados'"
                 }
               }
             },
@@ -397,5 +408,28 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "c797437d8c05609b8bd8",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PBITIMEWHS"
+                  }
+                },
+                "Property": "FechaLog40"
+              }
+            },
+            "Function": 5
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

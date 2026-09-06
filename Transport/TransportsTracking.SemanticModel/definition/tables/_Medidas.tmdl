@@ -376,6 +376,113 @@ table _Medidas
 		displayFolder: 0 Contexto
 		lineageTag: 72c13d13-e851-4443-87da-a0481f0d6a35
 
+	/// Momento en que el transportista se lleva el picking.
+	/// UPS informa fecha_recogido; TIPSA no la manda nunca (117 filas de
+	/// 68.797), asi que para TIPSA vale fecha_en_transito, que es su primer
+	/// registro con el bulto ya en su poder. Se toma la mas temprana de las
+	/// dos: eso da recogido cuando existe, y no se equivoca en las 35 filas
+	/// donde recogido viene despues de transito.
+	measure 'Fecha entrega al transporte' = MINX ( LOL_TRANSPORT_TRACKING, VAR r = LOL_TRANSPORT_TRACKING[fecha_recogido] VAR t = LOL_TRANSPORT_TRACKING[fecha_en_transito] RETURN IF ( ISBLANK ( r ), t, IF ( ISBLANK ( t ), r, MIN ( r, t ) ) ) )
+		formatString: dd/mm/yyyy hh:nn:ss
+		displayFolder: 3 Tiempo
+		lineageTag: 5a7c1e02-9b4d-4f18-8c33-71ad2e6b9f40
+
+	/// Pickings del periodo, contados por su fecha de picking.
+	measure Pickings = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), USERELATIONSHIP ( LOL_PBITIMEWHS[PickDate], Calendario[Date] ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[fecha_lanzamiento], Calendario[Date], NONE ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[picking], LOL_PBITIMEWHS[Picking], NONE ) )
+		formatString: #,0
+		displayFolder: 4 Almacén
+		lineageTag: 02bd3b89-c1d0-4549-8538-727578b1504d
+
+	/// De los del periodo, los que han alcanzado la etapa 20.
+	measure 'Pickings en 20' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), USERELATIONSHIP ( LOL_PBITIMEWHS[PickDate], Calendario[Date] ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[fecha_lanzamiento], Calendario[Date], NONE ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[picking], LOL_PBITIMEWHS[Picking], NONE ), NOT ISBLANK ( LOL_PBITIMEWHS[FechaLog20] ) )
+		formatString: #,0
+		displayFolder: 4 Almacén
+		lineageTag: 14843283-92c1-488e-aa3d-5d649a835fe2
+
+	/// De los del periodo, los que han alcanzado la etapa 40.
+	measure 'Pickings en 40' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), USERELATIONSHIP ( LOL_PBITIMEWHS[PickDate], Calendario[Date] ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[fecha_lanzamiento], Calendario[Date], NONE ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[picking], LOL_PBITIMEWHS[Picking], NONE ), NOT ISBLANK ( LOL_PBITIMEWHS[FechaLog40] ) )
+		formatString: #,0
+		displayFolder: 4 Almacén
+		lineageTag: 84fccd03-e15c-48c9-ad77-f6cb54ab8986
+
+	/// De los del periodo, los que han alcanzado la etapa 60.
+	measure 'Pickings en 60' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), USERELATIONSHIP ( LOL_PBITIMEWHS[PickDate], Calendario[Date] ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[fecha_lanzamiento], Calendario[Date], NONE ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[picking], LOL_PBITIMEWHS[Picking], NONE ), NOT ISBLANK ( LOL_PBITIMEWHS[FechaLog60] ) )
+		formatString: #,0
+		displayFolder: 4 Almacén
+		lineageTag: 1646b66e-32a4-4372-9762-584a16d2b379
+
+	/// De los del periodo, los que ya estan en manos del transportista.
+	measure 'Pickings a transporte' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), USERELATIONSHIP ( LOL_PBITIMEWHS[PickDate], Calendario[Date] ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[fecha_lanzamiento], Calendario[Date], NONE ), NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_en_transito] ) )
+		formatString: #,0
+		displayFolder: 4 Almacén
+		lineageTag: 7a5ff78c-1cb2-4fd1-b1b5-2d282212db62
+
+	/// De los del periodo, los que acaban entregados.
+	measure 'Pickings entregados' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), USERELATIONSHIP ( LOL_PBITIMEWHS[PickDate], Calendario[Date] ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[fecha_lanzamiento], Calendario[Date], NONE ), LOL_TRANSPORT_TRACKING[es_entregado] = 1 )
+		formatString: #,0
+		displayFolder: 4 Almacén
+		lineageTag: c9b4d09b-024f-4e1f-8137-75b85c9f4aba
+
+	/// Cuanto del lanzado alcanza la etapa 40.
+	measure '% llega a 40' = DIVIDE ( [Pickings en 40], [Pickings] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 4 Almacén
+		lineageTag: c57c1aed-8dc8-4e86-88ce-add6fbe7752a
+
+	/// Cuanto del lanzado llega a salir del almacen.
+	measure '% sale a transporte' = DIVIDE ( [Pickings a transporte], [Pickings] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 4 Almacén
+		lineageTag: 06210626-3ad2-4fab-b706-22b55874c28c
+
+	/// Cuanto del lanzado acaba entregado.
+	measure '% entregado' = DIVIDE ( [Pickings entregados], [Pickings] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 4 Almacén
+		lineageTag: e6a6c70c-820b-4374-84f2-f8469bfcb5d2
+
+	/// Lanzados que todavia no han entrado en el almacen: no tienen etapa 20.
+	measure 'Pickings pendientes de almacén' = [Pickings] - [Pickings en 20]
+		formatString: #,0
+		displayFolder: 4 Almacén
+		lineageTag: 19203818-67a5-42fe-a093-90ef0e0e4866
+
+	/// Pildora de filtro activo: País. BLANK si no hay seleccion.
+	measure 'Chip País' = VAR n = COUNTROWS ( VALUES ( LOL_TRANSPORT_TRACKING[pais_destino] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[pais_destino] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_TRANSPORT_TRACKING[pais_destino] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: 64fc8e80-6375-40f3-a7e8-892d812de0b6
+
+	measure 'Chip País Color' = IF ( ISFILTERED ( LOL_TRANSPORT_TRACKING[pais_destino] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: b2c0dc3f-6da0-43bf-a5c3-0e7bbfa304ce
+
+	/// Pildora de filtro activo: Segmento. BLANK si no hay seleccion.
+	measure 'Chip Segmento' = VAR n = COUNTROWS ( VALUES ( LOL_TRANSPORT_TRACKING[segmento] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[segmento] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_TRANSPORT_TRACKING[segmento] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: 66c8f232-7923-4d59-91c6-ca8bebf49816
+
+	measure 'Chip Segmento Color' = IF ( ISFILTERED ( LOL_TRANSPORT_TRACKING[segmento] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: c34c6936-ab63-46e5-8a4a-d0cd204a60dc
+
+	/// Pildora de filtro activo: Transportista. BLANK si no hay seleccion.
+	measure 'Chip Transportista' = VAR n = COUNTROWS ( VALUES ( LOL_TRANSPORT_TRACKING[transportista_norm] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[transportista_norm] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_TRANSPORT_TRACKING[transportista_norm] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: 90b4b8fe-9b03-4a5f-a17f-7690237b4008
+
+	measure 'Chip Transportista Color' = IF ( ISFILTERED ( LOL_TRANSPORT_TRACKING[transportista_norm] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: 4543d5e5-6676-486f-8739-f6b91ef8c6ff
+
+	/// Pildora de filtro activo: Estado. BLANK si no hay seleccion.
+	measure 'Chip Estado' = VAR n = COUNTROWS ( VALUES ( LOL_TRANSPORT_TRACKING[estado] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[estado] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_TRANSPORT_TRACKING[estado] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: c353e6ca-6736-4525-8358-947916d5453a
+
+	measure 'Chip Estado Color' = IF ( ISFILTERED ( LOL_TRANSPORT_TRACKING[estado] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: 92a2dc19-bdc8-4426-aa89-6cd0349011c4
+
 	column Value
 		lineageTag: d1ed0000-0000-4000-8000-0000000000ff
 		isNameInferred

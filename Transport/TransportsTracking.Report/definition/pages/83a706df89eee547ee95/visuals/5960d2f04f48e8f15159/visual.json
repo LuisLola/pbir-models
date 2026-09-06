@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
-  "name": "e418e2c0477e691f9547",
+  "name": "5960d2f04f48e8f15159",
   "position": {
-    "x": 902,
-    "y": 83,
-    "z": 5000,
+    "x": 933,
+    "y": 82,
+    "z": 105,
     "height": 78,
-    "width": 170,
-    "tabOrder": 6000
+    "width": 163,
+    "tabOrder": 18002
   },
   "visual": {
     "visualType": "cardVisual",
@@ -17,20 +17,48 @@
           "projections": [
             {
               "field": {
-                "Measure": {
+                "Aggregation": {
                   "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Medidas"
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LOL_PBITIMEWHS"
+                        }
+                      },
+                      "Property": "Dias habiles 20-40"
                     }
                   },
-                  "Property": "Incidencias Bloqueantes"
+                  "Function": 1
                 }
               },
-              "queryRef": "_Medidas.Incidencias Bloqueantes",
-              "nativeQueryRef": "Incidencias"
+              "queryRef": "Sum(LOL_PBITIMEWHS.Dias habiles 20-40)",
+              "nativeQueryRef": "Promedio de Dias habiles 20-40"
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "LOL_PBITIMEWHS"
+                      }
+                    },
+                    "Property": "Dias habiles 20-40"
+                  }
+                },
+                "Function": 1
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
       }
     },
     "objects": {
@@ -81,7 +109,14 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "28D"
+                  "Value": "19D"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
                 }
               }
             }
@@ -92,7 +127,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "18D"
+                  "Value": "16D"
                 }
               }
             }
@@ -163,7 +198,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Incidencias'"
+                  "Value": "'Tiempo Medio Entrega'"
                 }
               }
             },
@@ -397,5 +432,28 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "100f31f6ddf5086636dc",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PBITIMEWHS"
+                  }
+                },
+                "Property": "Dias habiles 20-40"
+              }
+            },
+            "Function": 1
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

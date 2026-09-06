@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "859629154c7b751343a3",
   "position": {
-    "x": 479,
-    "y": 83,
-    "z": 3000,
+    "x": 760,
+    "y": 82,
+    "z": 104,
     "height": 78,
-    "width": 205,
+    "width": 163,
     "tabOrder": 4000
   },
   "visual": {
@@ -23,14 +23,18 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "% A Tiempo"
+                  "Property": "Pickings entregados"
                 }
               },
-              "queryRef": "_Medidas.% A Tiempo",
-              "nativeQueryRef": "% A Tiempo"
+              "queryRef": "_Medidas.Pickings entregados",
+              "nativeQueryRef": "Pickings entregados",
+              "displayName": "Entregados"
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "isDefaultSort": true
       }
     },
     "objects": {
@@ -81,7 +85,14 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "28D"
+                  "Value": "19D"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
                 }
               }
             }
@@ -92,7 +103,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "18D"
+                  "Value": "16D"
                 }
               }
             }
@@ -163,7 +174,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'% A Tiempo'"
+                  "Value": "'Entregados'"
                 }
               }
             },
@@ -397,5 +408,43 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "889d26657ad11765c304",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_TRANSPORT_TRACKING"
+                  }
+                },
+                "Property": "dias_entrega_laborables"
+              }
+            },
+            "Function": 5
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User"
+      },
+      {
+        "name": "6b85d7e0845204941e52",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Pickings entregados"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

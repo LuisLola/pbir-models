@@ -1,0 +1,55 @@
+table DimensionesTransport
+	lineageTag: efd1318b-4d9c-4afb-b51b-054bf2ae5fb3
+
+	column 'DimensionesTransport'
+		lineageTag: 24c711c3-3311-4d93-82da-43a204b3ca6f
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'DimensionesTransport Orden'
+
+		relatedColumnDetails
+			groupByColumn: 'DimensionesTransport Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DimensionesTransport Campos'
+		isHidden
+		lineageTag: 3b6f5ad4-3119-4b69-9e99-3338d71194fb
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'DimensionesTransport Orden'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DimensionesTransport Orden'
+		isHidden
+		formatString: 0
+		lineageTag: 9f9b0d69-281e-4409-8608-44e4babc9db9
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimensionesTransport = calculated
+		mode: import
+		source =
+				{
+				    ("Transportista", NAMEOF('LOL_TRANSPORT_TRACKING'[transportista_norm]), 0),
+				    ("Estado", NAMEOF('LOL_TRANSPORT_TRACKING'[estado_norm]), 1),
+				    ("Grupo estado", NAMEOF('LOL_TRANSPORT_TRACKING'[estado_grupo]), 2),
+				    ("País", NAMEOF('LOL_TRANSPORT_TRACKING'[pais_destino]), 3),
+				    ("Segmento", NAMEOF('LOL_TRANSPORT_TRACKING'[segmento]), 4),
+				    ("Cliente", NAMEOF('LOL_TRANSPORT_TRACKING'[cliente]), 5),
+				    ("Ciudad", NAMEOF('LOL_TRANSPORT_TRACKING'[ciudad_destino_limpia]), 6),
+				    ("Grupo cliente", NAMEOF('LOL_PBICLIENTES'[GroupName]), 7),
+				    ("Año", NAMEOF('Calendario'[Año]), 8),
+				    ("MesTexto", NAMEOF('Calendario'[MesNombre]), 9)
+				}
+
+	annotation PBI_Id = 87a9ccfa36f24348bd285d9378866c9f

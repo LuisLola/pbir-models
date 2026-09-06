@@ -3,10 +3,10 @@
   "name": "a1f26304454b76ef3b9b",
   "position": {
     "x": 68,
-    "y": 191,
+    "y": 180,
     "z": 12000,
-    "height": 277,
-    "width": 1153,
+    "height": 220,
+    "width": 1204,
     "tabOrder": 14000
   },
   "visual": {
@@ -43,7 +43,7 @@
               },
               "queryRef": "LOL_PBITIMEWHS.Picking",
               "nativeQueryRef": "Picking",
-              "active": true
+              "active": false
             }
           ]
         },
@@ -124,20 +124,7 @@
             "isPinned": true
           }
         ],
-        "root": {
-          "children": [
-            {
-              "identityValues": [
-                {
-                  "Literal": {
-                    "Value": "'B2B'"
-                  }
-                }
-              ],
-              "isToggled": true
-            }
-          ]
-        }
+        "root": {}
       }
     ],
     "objects": {
@@ -599,5 +586,75 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "8178fe2f216da5c7c1f2",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBICLIENTES"
+              }
+            },
+            "Property": "GroupName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "97462ba34b64c78b6696",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBITIMEWHS"
+              }
+            },
+            "Property": "Picking"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "f45b1a4077bf5b8b2ec2",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PBITIMEWHS"
+                  }
+                },
+                "Property": "Picking"
+              }
+            },
+            "Function": 2
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "181c1659b9e86810220e",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "LOL_PBITIMEWHS"
+                  }
+                },
+                "Property": "Dias habiles 20-40"
+              }
+            },
+            "Function": 6
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

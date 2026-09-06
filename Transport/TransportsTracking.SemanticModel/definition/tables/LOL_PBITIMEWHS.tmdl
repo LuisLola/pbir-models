@@ -150,7 +150,7 @@ table LOL_PBITIMEWHS
 
 	/// El original DiasHabiles_20_40 llega como texto; esta es su version numerica.
 	column 'Dias habiles 20-40' = VAR t = TRIM ( LOL_PBITIMEWHS[DiasHabiles_20_40] ) RETURN IF ( NOT ISBLANK ( t ) && t <> "", VALUE ( t ) )
-		formatString: #,0
+		formatString: #,0.00
 		lineageTag: 280d753b-2f92-423e-acd9-66b86b6da28e
 		summarizeBy: sum
 

@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "9601d601a481c61b8e92",
   "position": {
-    "x": 80,
-    "y": 506,
+    "x": 68,
+    "y": 412,
     "z": 9000,
-    "height": 462,
-    "width": 1200,
+    "height": 576,
+    "width": 1204,
     "tabOrder": 11000
   },
   "visual": {
@@ -41,7 +41,8 @@
                 }
               },
               "queryRef": "LOL_PBICLIENTES.GroupName",
-              "nativeQueryRef": "GroupName"
+              "nativeQueryRef": "Grupo",
+              "displayName": "Grupo"
             },
             {
               "field": {
@@ -130,17 +131,33 @@
             },
             {
               "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Fecha entrega al transporte"
+                }
+              },
+              "queryRef": "_Medidas.Fecha entrega al transporte",
+              "nativeQueryRef": "Entregado al Transporte",
+              "displayName": "Entregado al Transporte"
+            },
+            {
+              "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
                       "Entity": "LOL_TRANSPORT_TRACKING"
                     }
                   },
-                  "Property": "fecha_recogido"
+                  "Property": "transportista_norm"
                 }
               },
-              "queryRef": "LOL_TRANSPORT_TRACKING.fecha_recogido",
-              "nativeQueryRef": "fecha_recogido"
+              "queryRef": "LOL_TRANSPORT_TRACKING.transportista_norm",
+              "nativeQueryRef": "Transportista",
+              "displayName": "Transportista"
             },
             {
               "field": {
@@ -154,8 +171,8 @@
                 }
               },
               "queryRef": "Sum(LOL_TRANSPORT_TRACKING.dias_entrega_natural)",
-              "nativeQueryRef": "dias_entrega_natural",
-              "displayName": "Días Entrrga"
+              "nativeQueryRef": "Días Entrega",
+              "displayName": "Días Entrega"
             },
             {
               "field": {
@@ -169,7 +186,8 @@
                 }
               },
               "queryRef": "LOL_TRANSPORT_TRACKING.fecha_entregado",
-              "nativeQueryRef": "fecha_entregado"
+              "nativeQueryRef": "Entregado",
+              "displayName": "Entregado"
             }
           ]
         }
@@ -286,7 +304,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "152D"
+                  "Value": "117D"
                 }
               }
             }
@@ -300,7 +318,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "87D"
+                  "Value": "89D"
                 }
               }
             }
@@ -314,13 +332,41 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "189D"
+                  "Value": "167D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "LOL_PBICLIENTES.RazonSocial"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "120D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Medidas.Fecha entrega al transporte"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "50D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LOL_PBICLIENTES.GroupName"
           }
         }
       ]
@@ -538,5 +584,215 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "5ded660f2b45e4d164e6",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBITIMEWHS"
+              }
+            },
+            "Property": "Picking"
+          }
+        },
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "l",
+              "Entity": "LOL_PBITIMEWHS",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Not": {
+                  "Expression": {
+                    "Comparison": {
+                      "ComparisonKind": 0,
+                      "Left": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "l"
+                            }
+                          },
+                          "Property": "Picking"
+                        }
+                      },
+                      "Right": {
+                        "Literal": {
+                          "Value": "null"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "f5bfac8cb07199f4ae16",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBICLIENTES"
+              }
+            },
+            "Property": "GroupName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "1634bc440e4e253b8218",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBICLIENTES"
+              }
+            },
+            "Property": "RazonSocial"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "1c5ca512169f4922a7e6",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBITIMEWHS"
+              }
+            },
+            "Property": "PickDate"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "00011c18322a3df0d3ce",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBITIMEWHS"
+              }
+            },
+            "Property": "FechaLog20"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "96ad27f6da3985737b8d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBITIMEWHS"
+              }
+            },
+            "Property": "FechaLog40"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "1721133893c40e7da3e2",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBITIMEWHS"
+              }
+            },
+            "Property": "FechaLog60"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "19177f3952104c10b4e6",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBITIMEWHS"
+              }
+            },
+            "Property": "Dias habiles 20-40"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "1692ce9137827be6c725",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Fecha entrega al transporte"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "562ae2af7645b9d5fdc5",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_TRANSPORT_TRACKING"
+              }
+            },
+            "Property": "dias_entrega_natural"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a12a601c271d2969cb34",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_TRANSPORT_TRACKING"
+              }
+            },
+            "Property": "fecha_entregado"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "38092009e7b5c023f68a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_TRANSPORT_TRACKING"
+              }
+            },
+            "Property": "transportista_norm"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "1b03faa092a3bd850df1",
   "position": {
-    "x": 691,
-    "y": 83,
-    "z": 4000,
+    "x": 1106,
+    "y": 82,
+    "z": 106,
     "height": 78,
-    "width": 202,
+    "width": 163,
     "tabOrder": 5000
   },
   "visual": {
@@ -99,7 +99,14 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "28D"
+                  "Value": "19D"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
                 }
               }
             }
@@ -110,7 +117,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "18D"
+                  "Value": "16D"
                 }
               }
             }
@@ -415,5 +422,23 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "b57540cb53651b31443a",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Tiempo Entrega Media (Lab)"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }
