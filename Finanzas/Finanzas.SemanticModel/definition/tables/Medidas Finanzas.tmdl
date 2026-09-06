@@ -1780,6 +1780,46 @@ table 'Medidas Finanzas'
 		displayFolder: 05 Diagnostico
 		lineageTag: 9da96a05-1160-4023-b29a-d9ef7ac25f57
 
+	measure 'Chip Código 1 de regla de distribución' = VAR n = COUNTROWS ( VALUES ( JournalEntryItem[Código 1 de regla de distribución] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( JournalEntryItem[Código 1 de regla de distribución] ), n & " sel." ) RETURN IF ( ISFILTERED ( JournalEntryItem[Código 1 de regla de distribución] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: b76587a9-92a7-4ec2-8b5b-d0c04e649106
+
+	measure 'Chip Código 1 de regla de distribución Color' = IF ( ISFILTERED ( JournalEntryItem[Código 1 de regla de distribución] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: 6e81d1f1-6b2b-494f-826a-f38d9da5450b
+
+	measure 'Chip Código 2 de regla de distribución' = VAR n = COUNTROWS ( VALUES ( JournalEntryItem[Código 2 de regla de distribución] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( JournalEntryItem[Código 2 de regla de distribución] ), n & " sel." ) RETURN IF ( ISFILTERED ( JournalEntryItem[Código 2 de regla de distribución] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: 4d82f179-9a90-418d-a3ca-37b1296d98a0
+
+	measure 'Chip Código 2 de regla de distribución Color' = IF ( ISFILTERED ( JournalEntryItem[Código 2 de regla de distribución] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: 8ae72dc7-92ad-474e-8c79-8a5ed038004d
+
+	measure 'Chip Dimensión Finanzas' = VAR n = COUNTROWS ( VALUES ( Dimensión Finanzas[Dimensión Finanzas] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( Dimensión Finanzas[Dimensión Finanzas] ), n & " sel." ) RETURN IF ( ISFILTERED ( Dimensión Finanzas[Dimensión Finanzas] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: 777ddec5-f5bf-4f2d-b130-d54210134a7a
+
+	measure 'Chip Dimensión Finanzas Color' = IF ( ISFILTERED ( Dimensión Finanzas[Dimensión Finanzas] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: e8dbb440-c339-4b54-89a6-e242527db624
+
+	measure 'Chip Nombre sucursal' = VAR n = COUNTROWS ( VALUES ( JournalEntryItem[Nombre sucursal] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( JournalEntryItem[Nombre sucursal] ), n & " sel." ) RETURN IF ( ISFILTERED ( JournalEntryItem[Nombre sucursal] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: fa083932-c023-4aa1-b6e0-6950c77d94b0
+
+	measure 'Chip Nombre sucursal Color' = IF ( ISFILTERED ( JournalEntryItem[Nombre sucursal] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: de976dca-7c6b-42f4-9f03-346bca3991da
+
+	measure 'Chip Value' = VAR n = COUNTROWS ( VALUES ( Páginas[Value] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( Páginas[Value] ), n & " sel." ) RETURN IF ( ISFILTERED ( Páginas[Value] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: d7a14556-90a6-4d7f-a6ee-4082c10ec92f
+
+	measure 'Chip Value Color' = IF ( ISFILTERED ( Páginas[Value] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: fa1c0232-adce-4780-9d95-7179a7a3bbbe
+
 	column Value
 		lineageTag: 1b2c3d4e-5f60-7182-93a4-b5c6d7e8f901
 		isNameInferred

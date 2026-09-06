@@ -588,6 +588,54 @@ table LOL_PLANMATERIAL
 		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
 		lineageTag: 3d6b6f61-197f-4748-af6e-cce07e47e58d
 
+	measure 'Chip Autorizado' = VAR n = COUNTROWS ( VALUES ( LOL_PLANMATERIAL[Autorizado] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PLANMATERIAL[Autorizado] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PLANMATERIAL[Autorizado] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: 9f3d91b0-3be6-42f9-a5ef-6c10c56ca9e5
+
+	measure 'Chip Autorizado Color' = IF ( ISFILTERED ( LOL_PLANMATERIAL[Autorizado] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: 450a6d9f-af3c-47fd-8220-03465b457ca0
+
+	measure 'Chip Fecha' = VAR n = COUNTROWS ( VALUES ( Horizonte[Fecha] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( Horizonte[Fecha] ), n & " sel." ) RETURN IF ( ISFILTERED ( Horizonte[Fecha] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: 514f3dfe-284d-4abd-a056-55b6f6a05fc7
+
+	measure 'Chip Fecha Color' = IF ( ISFILTERED ( Horizonte[Fecha] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: b3590fc7-88e2-40b8-a54f-45e21490921f
+
+	measure 'Chip Fecha disponibilidad (línea del articulo)' = VAR n = COUNTROWS ( VALUES ( LOL_PLANMATERIAL[Fecha disponibilidad (línea del articulo)] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PLANMATERIAL[Fecha disponibilidad (línea del articulo)] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PLANMATERIAL[Fecha disponibilidad (línea del articulo)] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: 85af5420-6801-4526-b2a2-bd5528c5bc8d
+
+	measure 'Chip Fecha disponibilidad (línea del articulo) Color' = IF ( ISFILTERED ( LOL_PLANMATERIAL[Fecha disponibilidad (línea del articulo)] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: 13e55700-acbb-4877-a191-8e1898bd3cd6
+
+	measure 'Chip Semana Entrega' = VAR n = COUNTROWS ( VALUES ( LOL_PLANMATERIAL[Semana Entrega] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PLANMATERIAL[Semana Entrega] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PLANMATERIAL[Semana Entrega] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: cfe2f7bd-4b87-4557-b01b-766815bd52c8
+
+	measure 'Chip Semana Entrega Color' = IF ( ISFILTERED ( LOL_PLANMATERIAL[Semana Entrega] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: e0844acc-90c6-4f8c-a316-34c3968fe1ee
+
+	measure 'Chip Servicio con retraso' = VAR n = COUNTROWS ( VALUES ( LOL_PLANMATERIAL[Servicio con retraso] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PLANMATERIAL[Servicio con retraso] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PLANMATERIAL[Servicio con retraso] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: ae77b51a-107f-4699-bfe6-52dca4d852f9
+
+	measure 'Chip Servicio con retraso Color' = IF ( ISFILTERED ( LOL_PLANMATERIAL[Servicio con retraso] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: e0db7c8e-1e19-4fe3-8a52-98a7214bc538
+
+	measure 'Chip Temporada' = VAR n = COUNTROWS ( VALUES ( LOL_PLANMATERIAL[Temporada] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PLANMATERIAL[Temporada] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PLANMATERIAL[Temporada] ), txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: a8b650ff-cc40-4fb9-abfe-2ec3df35f33f
+
+	measure 'Chip Temporada Color' = IF ( ISFILTERED ( LOL_PLANMATERIAL[Temporada] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: 9d7041e0-15b5-48ea-92a9-4b939dc2c9ae
+
 	column Almacén
 		dataType: string
 		lineageTag: 53e604c5-2638-4059-aa1e-35ce8cc0e982
