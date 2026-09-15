@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "9601d601a481c61b8e92",
   "position": {
-    "x": 68,
+    "x": 0,
     "y": 412,
     "z": 9000,
     "height": 576,
@@ -188,6 +188,62 @@
               "queryRef": "LOL_TRANSPORT_TRACKING.fecha_entregado",
               "nativeQueryRef": "Entregado",
               "displayName": "Entregado"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_TRANSPORT_TRACKING"
+                    }
+                  },
+                  "Property": "Días 20 a 40"
+                }
+              },
+              "queryRef": "LOL_TRANSPORT_TRACKING.Días 20 a 40",
+              "nativeQueryRef": "Días 20→40"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_TRANSPORT_TRACKING"
+                    }
+                  },
+                  "Property": "Días 40 a recogida"
+                }
+              },
+              "queryRef": "LOL_TRANSPORT_TRACKING.Días 40 a recogida",
+              "nativeQueryRef": "Días 40→recogida"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_TRANSPORT_TRACKING"
+                    }
+                  },
+                  "Property": "Días recogida a entrega"
+                }
+              },
+              "queryRef": "LOL_TRANSPORT_TRACKING.Días recogida a entrega",
+              "nativeQueryRef": "Días recogida→entrega"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_TRANSPORT_TRACKING"
+                    }
+                  },
+                  "Property": "Días 20 a entrega"
+                }
+              },
+              "queryRef": "LOL_TRANSPORT_TRACKING.Días 20 a entrega",
+              "nativeQueryRef": "TIEMPO TOTAL"
             }
           ]
         }
@@ -460,7 +516,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#E7DCE6'"
+                      "Value": "'#EFD0E4'"
                     }
                   }
                 }
@@ -512,7 +568,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1B141F'"
+                      "Value": "'#000000'"
                     }
                   }
                 }
@@ -555,7 +611,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             }
@@ -794,5 +850,6 @@
         "type": "Categorical"
       }
     ]
-  }
+  },
+  "parentGroupName": "83a706ga"
 }

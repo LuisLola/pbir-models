@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "a1000000000000000013",
   "position": {
-    "x": 68,
+    "x": 0,
     "y": 1538,
     "z": 9000,
     "height": 462,
@@ -478,7 +478,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#E7DCE6'"
+                      "Value": "'#EFD0E4'"
                     }
                   }
                 }
@@ -530,7 +530,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1B141F'"
+                      "Value": "'#000000'"
                     }
                   }
                 }
@@ -573,7 +573,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             }
@@ -602,5 +602,150 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "2d7154e38ec58b9c183a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_TRANSPORT_TRACKING"
+              }
+            },
+            "Property": "albaran"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "fdb244707c3b80aaeed1",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_TRANSPORT_TRACKING"
+              }
+            },
+            "Property": "tracking"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "507067471d209beedc79",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_TRANSPORT_TRACKING"
+              }
+            },
+            "Property": "cliente"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "12d052dfdea40b2d7b50",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_TRANSPORT_TRACKING"
+              }
+            },
+            "Property": "transportista_norm"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2022e7efa67ba07a8564",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_TRANSPORT_TRACKING"
+              }
+            },
+            "Property": "estado"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "8c0316e6c0bba3174cde",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_TRANSPORT_TRACKING"
+              }
+            },
+            "Property": "ciudad_destino"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "6e0d10e8ba8c28c73daa",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_TRANSPORT_TRACKING"
+              }
+            },
+            "Property": "f_inicio"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "8044ec1023537ba4982e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_TRANSPORT_TRACKING"
+              }
+            },
+            "Property": "fecha_entregado"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "fe6057de40abc2349d46",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_TRANSPORT_TRACKING"
+              }
+            },
+            "Property": "dias_entrega_laborables"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "2554a871449409bc60db",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_TRANSPORT_TRACKING"
+              }
+            },
+            "Property": "sla_objetivo"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  },
+  "parentGroupName": "7cc1f0ga"
 }

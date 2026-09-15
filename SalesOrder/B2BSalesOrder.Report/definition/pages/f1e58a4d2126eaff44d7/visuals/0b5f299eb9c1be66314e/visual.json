@@ -2,11 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "0b5f299eb9c1be66314e",
   "position": {
-    "x": 8.011683159684388,
-    "y": 89.435459261519682,
+    "x": 0.10158699059562082,
+    "y": 92.976659139505614,
     "z": 1000,
-    "height": 521.37931034482756,
-    "width": 1181.0837438423646
+    "height": 542.02334086049439,
+    "width": 1194.3373824451414,
+    "tabOrder": 0
   },
   "visual": {
     "visualType": "pivotTable",
@@ -239,13 +240,13 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "101.48024959631016D"
+                  "Value": "117D"
                 }
               }
             }
           },
           "selector": {
-            "metadata": "MedidasVentas.Pedido Original"
+            "metadata": "LOL_PBITIMEWHS.FechaLog60"
           }
         },
         {
@@ -253,13 +254,13 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "118.37429092620654D"
+                  "Value": "89D"
                 }
               }
             }
           },
           "selector": {
-            "metadata": "MedidasVentas.Importe Facturado"
+            "metadata": "Sum(LOL_PBITIMEWHS.Dias habiles 20-40)"
           }
         },
         {
@@ -267,13 +268,13 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "115.50525464834277D"
+                  "Value": "313.3054118706199D"
                 }
               }
             }
           },
           "selector": {
-            "metadata": "MedidasVentas.Importe Notas Credito"
+            "metadata": "LOL_PBICLIENTES.RazonSocial"
           }
         },
         {
@@ -281,13 +282,13 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "95.19467790915839D"
+                  "Value": "120D"
                 }
               }
             }
           },
           "selector": {
-            "metadata": "MedidasVentas.Pedidos Cancelados"
+            "metadata": "_Medidas.Fecha entrega al transporte"
           }
         },
         {
@@ -295,125 +296,13 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "159.1367795238309D"
+                  "Value": "50D"
                 }
               }
             }
           },
           "selector": {
-            "metadata": "MedidasVentas.Notas Credito (cadena)"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "96.55361805459724D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "MedidasVentas.Facturado (cadena)"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "97.4504908394764D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "MedidasVentas.Pendiente Facturar"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "96.54869888167703D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "MedidasVentas.Pendiente Servir"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "97.11897961906304D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "MedidasVentas.Servido (cadena)"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "93.02125919869174D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "MedidasVentas.Pedido Final"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "94.54545308279415D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "MedidasVentas.Notas + Devol. Abiertas (cadena)"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "118.91490226280946D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "MedidasVentas.Solicitudes Devol. Abiertas"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "71.58620742975212D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "MedidasVentas.% Cancelado"
+            "metadata": "LOL_PBICLIENTES.GroupName"
           }
         }
       ],
@@ -423,21 +312,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
-                }
-              }
-            },
-            "alignment": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Left'"
-                }
-              }
-            },
-            "wordWrap": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
+                  "Value": "9D"
                 }
               }
             }
@@ -450,14 +325,14 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "9D"
+                  "Value": "8D"
                 }
               }
             },
-            "wordWrap": {
+            "bandedRowHeaders": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             }
@@ -476,6 +351,11 @@
             }
           }
         }
+      ],
+      "grid": [
+        {
+          "properties": {}
+        }
       ]
     },
     "visualContainerObjects": {
@@ -485,7 +365,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             },
@@ -500,8 +380,9 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "Literal": {
-                      "Value": "'#1A1416'"
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.6
                     }
                   }
                 }
@@ -517,7 +398,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "10D"
                 }
               }
             },
@@ -538,29 +419,13 @@
           }
         }
       ],
-      "spacing": [
-        {
-          "properties": {
-            "verticalSpacing": {
-              "expr": {
-                "Literal": {
-                  "Value": "2D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "id": "default"
-          }
-        }
-      ],
       "background": [
         {
           "properties": {
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             },
@@ -588,12 +453,19 @@
       "border": [
         {
           "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
             "color": {
               "solid": {
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#E7DACE'"
+                      "Value": "'#EFD0E4'"
                     }
                   }
                 }
@@ -602,7 +474,7 @@
             "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "14D"
                 }
               }
             },
@@ -616,26 +488,66 @@
           }
         }
       ],
-      "divider": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
       "dropShadow": [
         {
           "properties": {
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "preset": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Custom'"
+                }
+              }
+            },
+            "position": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Outer'"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#000000'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "90D"
+                }
+              }
+            },
+            "shadowSpread": {
+              "expr": {
+                "Literal": {
+                  "Value": "2D"
+                }
+              }
+            },
+            "shadowBlur": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "angle": {
+              "expr": {
+                "Literal": {
+                  "Value": "90D"
                 }
               }
             }
@@ -649,6 +561,26 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualTooltip": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "section": {
+              "expr": {
+                "Literal": {
+                  "Value": "'53efea0a1394d47aaa31'"
                 }
               }
             }

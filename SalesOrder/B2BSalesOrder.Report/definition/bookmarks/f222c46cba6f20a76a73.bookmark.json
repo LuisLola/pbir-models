@@ -23,7 +23,6 @@
       "0ea2ec9038dd265f99b8",
       "242a1a7d9c4073199523",
       "a08a103d5d6afe260922",
-      "880316c003f39f2a298c",
       "4e09ea6d8e8e8876f68e",
       "431a9dcbb4f7f65078f7",
       "d80cc0889c7053ccb34e",
@@ -32,7 +31,9 @@
       "de08d14a99dcbb0c441c",
       "5980b70f784fbb353c73",
       "76497305c1250d245824",
-      "922208087da49837d175"
+      "922208087da49837d175",
+      "e2e768ga",
+      "e2e768ge"
     ],
     "suppressData": true
   },
@@ -685,45 +686,6 @@
               }
             }
           },
-          "880316c003f39f2a298c": {
-            "singleVisual": {
-              "visualType": "slicer",
-              "objects": {
-                "merge": {
-                  "data": [
-                    {
-                      "properties": {
-                        "mode": {
-                          "expr": {
-                            "Literal": {
-                              "Value": "'Dropdown'"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              },
-              "activeProjections": {
-                "Values": [
-                  {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "LOL_PBITIENDAS"
-                        }
-                      },
-                      "Property": "TipoTienda"
-                    }
-                  }
-                ]
-              },
-              "display": {
-                "mode": "hidden"
-              }
-            }
-          },
           "4e09ea6d8e8e8876f68e": {
             "singleVisual": {
               "visualType": "shape",
@@ -807,46 +769,6 @@
             "singleVisual": {
               "visualType": "textbox",
               "objects": {}
-            }
-          },
-          "5980b70f784fbb353c73": {
-            "filters": {
-              "byExpr": [
-                {
-                  "name": "38763df90ae3b4a54a8a",
-                  "type": "Advanced",
-                  "expression": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "MedidasVentas"
-                        }
-                      },
-                      "Property": "Marca de actualización"
-                    }
-                  },
-                  "howCreated": 0
-                }
-              ]
-            },
-            "singleVisual": {
-              "visualType": "cardVisual",
-              "objects": {},
-              "orderBy": [
-                {
-                  "Direction": 1,
-                  "Expression": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "MedidasVentas"
-                        }
-                      },
-                      "Property": "Marca de actualización"
-                    }
-                  }
-                }
-              ]
             }
           },
           "76497305c1250d245824": {
@@ -1451,6 +1373,12 @@
             "isHidden": false
           },
           "9ea27d847ae6c4f419bf": {
+            "isHidden": false
+          },
+          "e2e768ga": {
+            "isHidden": true
+          },
+          "e2e768ge": {
             "isHidden": false
           }
         }

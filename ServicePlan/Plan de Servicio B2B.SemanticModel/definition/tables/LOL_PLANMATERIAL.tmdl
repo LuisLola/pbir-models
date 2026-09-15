@@ -636,6 +636,21 @@ table LOL_PLANMATERIAL
 		displayFolder: 0 Pildoras
 		lineageTag: 9d7041e0-15b5-48ea-92a9-4b939dc2c9ae
 
+	/// Momento del ultimo refresco del modelo, en hora de España.
+	measure 'Última actualización' = VAR f = MAX ( UltimaActualizacion[Fecha] ) RETURN IF ( ISBLANK ( f ), "Sin datos de actualización", "Actualizado " & FORMAT ( f, "dd/MM/yyyy" ) & " a las " & FORMAT ( f, "HH:mm" ) )
+		displayFolder: 0 Contexto
+		lineageTag: 45691482-b5ba-4a82-8b6e-fb10e7f0d7c1
+
+	/// Rango de fechas que está mirando la página, según los segmentadores.
+	measure 'Rango de fechas' = VAR Ini = MIN ( 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)] ) VAR Fin = MAX ( 'LOL_PLANMATERIAL'[Fecha disponibilidad (línea del articulo)] ) RETURN IF ( ISBLANK ( Ini ), "Sin fechas", FORMAT ( Ini, "dd/MM/yyyy" ) & " - " & FORMAT ( Fin, "dd/MM/yyyy" ) )
+		displayFolder: 0 Contexto
+		lineageTag: 88961233-4157-4f7b-bff4-0d22c0f1f6a6
+
+	/// Las dos juntas, para una sola tarjeta de cabecera.
+	measure 'Rango y actualización' = [Rango de fechas] & "   ·   " & [Última actualización]
+		displayFolder: 0 Contexto
+		lineageTag: 2e9a46d0-1a64-4c91-b206-05cc80a5e505
+
 	column Almacén
 		dataType: string
 		lineageTag: 53e604c5-2638-4059-aa1e-35ce8cc0e982

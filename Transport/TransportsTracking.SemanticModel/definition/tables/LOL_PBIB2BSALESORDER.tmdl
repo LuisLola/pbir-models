@@ -1,0 +1,419 @@
+table LOL_PBIB2BSALESORDER
+	lineageTag: 0965389d-62b1-452b-8df4-37eb5a0d7d52
+
+	column Canceled
+		dataType: string
+		lineageTag: 31da8d84-bc0b-4328-b380-3dcef66c62b8
+		summarizeBy: none
+		sourceColumn: Canceled
+
+		annotation SummarizationSetBy = Automatic
+
+	column CardCode
+		dataType: string
+		lineageTag: 4935f738-59e5-4b89-86bd-c052e06f6d4b
+		summarizeBy: none
+		sourceColumn: CardCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column CountryCode
+		dataType: string
+		lineageTag: 938e1f86-eb9d-43f4-97ed-db215937c90a
+		summarizeBy: none
+		sourceColumn: CountryCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Currency
+		dataType: string
+		lineageTag: 36cbb664-dbca-4744-b62e-7b72870c021f
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiscAmt_Commercial_EUR
+		dataType: string
+		lineageTag: 4d9c0e80-bdf9-4509-ae53-ffd19bb04791
+		summarizeBy: none
+		sourceColumn: DiscAmt_Commercial_EUR
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiscAmt_Financial_EUR
+		dataType: string
+		lineageTag: 6b2af99c-bd3a-4b27-83e8-b7c6696e8ce4
+		summarizeBy: none
+		sourceColumn: DiscAmt_Financial_EUR
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiscPrcnt_Header
+		dataType: string
+		lineageTag: 9dd957b5-c163-45c9-9222-86501ec87c84
+		summarizeBy: none
+		sourceColumn: DiscPrcnt_Header
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiscPrcnt_Line
+		dataType: string
+		lineageTag: 81739d52-2444-46c2-8fcc-4953e7060d51
+		summarizeBy: none
+		sourceColumn: DiscPrcnt_Line
+
+		annotation SummarizationSetBy = Automatic
+
+	column DocDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0e2b1b97-5a51-47d4-82c1-c36e8766222d
+		summarizeBy: none
+		sourceColumn: DocDate
+
+		variation Variación
+			isDefault
+			relationship: 710aaf91-bef4-43e8-9f59-744ad93e54be
+			defaultHierarchy: LocalDateTable_1c3b1118-d7a1-4ec3-858e-7e38c23ba7d9.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DocDueDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6ec5622b-6368-41ed-83a0-ad97e5ecb5d8
+		summarizeBy: none
+		sourceColumn: DocDueDate
+
+		variation Variación
+			isDefault
+			relationship: 80de8e13-fad5-44b1-ad1d-1051f4f95014
+			defaultHierarchy: LocalDateTable_56468d9e-c2e3-484b-975e-a41faf4fce3f.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DocEntry
+		dataType: string
+		lineageTag: dd6277e9-0d0c-4040-a24b-bb5a11b74176
+		summarizeBy: none
+		sourceColumn: DocEntry
+
+		annotation SummarizationSetBy = Automatic
+
+	column DocNum
+		dataType: string
+		lineageTag: 54bd7172-cb8d-4657-9b7d-d817ae2f26fb
+		summarizeBy: none
+		sourceColumn: DocNum
+
+		annotation SummarizationSetBy = Automatic
+
+	column DocStatus
+		dataType: string
+		lineageTag: f1f61a8b-fa0e-4cde-9a71-eeb4e2dcfcd4
+		summarizeBy: none
+		sourceColumn: DocStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column ExpnsAlloc_EUR
+		dataType: string
+		lineageTag: f67e3fcb-ff5e-4897-b238-a2fb1ed4e7c2
+		summarizeBy: none
+		sourceColumn: ExpnsAlloc_EUR
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaComunicacion
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3a2aab3a-47a4-41ef-b3aa-22dd933737ce
+		summarizeBy: none
+		sourceColumn: FechaComunicacion
+
+		variation Variación
+			isDefault
+			relationship: 7317fbfd-edca-4e3e-bd14-7901e38e67ff
+			defaultHierarchy: LocalDateTable_d355b67b-eaa0-4b9f-9e1d-1fb282f3bca8.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column GrossAmt_EUR
+		dataType: string
+		lineageTag: e2761d0b-4bd3-4d47-a04b-5c68a639ab12
+		summarizeBy: none
+		sourceColumn: GrossAmt_EUR
+
+		annotation SummarizationSetBy = Automatic
+
+	column ImporteBruto_LC
+		dataType: string
+		lineageTag: 52b5dc5b-c965-4418-a907-eb62b8b36d4f
+		summarizeBy: none
+		sourceColumn: ImporteBruto_LC
+
+		annotation SummarizationSetBy = Automatic
+
+	column Inadis
+		dataType: string
+		lineageTag: eb679879-c1f2-4a25-b793-37f277c24021
+		summarizeBy: none
+		sourceColumn: Inadis
+
+		annotation SummarizationSetBy = Automatic
+
+	column Inaped
+		dataType: string
+		lineageTag: 1bb06304-ae28-47e9-9155-140af4fbee81
+		summarizeBy: none
+		sourceColumn: Inaped
+
+		annotation SummarizationSetBy = Automatic
+
+	column IncidenceType
+		dataType: string
+		lineageTag: e9100d36-e2e8-4219-babf-28e94a8b0541
+		summarizeBy: none
+		sourceColumn: IncidenceType
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsIncidence
+		dataType: string
+		lineageTag: 078d7b1a-0d74-4718-9634-94dee3756773
+		summarizeBy: none
+		sourceColumn: IsIncidence
+
+		annotation SummarizationSetBy = Automatic
+
+	column ItemCode
+		dataType: string
+		lineageTag: e1e27b23-f075-42a0-9d44-02bea85d7fad
+		summarizeBy: none
+		sourceColumn: ItemCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column LineNum
+		dataType: string
+		lineageTag: 7c2bf815-90c2-460b-840f-9a3738ed68b0
+		summarizeBy: none
+		sourceColumn: LineNum
+
+		annotation SummarizationSetBy = Automatic
+
+	column LineStatus
+		dataType: string
+		lineageTag: 8d841b19-8391-4036-8b85-07afbd18656e
+		summarizeBy: none
+		sourceColumn: LineStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column LineTotal_LC
+		dataType: string
+		lineageTag: 7eddadfb-5daa-4361-8ea9-b22a9c52fa7b
+		summarizeBy: none
+		sourceColumn: LineTotal_LC
+
+		annotation SummarizationSetBy = Automatic
+
+	column LineUID
+		dataType: string
+		lineageTag: 07bf0e1c-a389-49d5-994d-bb8ccf66d046
+		summarizeBy: none
+		sourceColumn: LineUID
+
+		annotation SummarizationSetBy = Automatic
+
+	column NetAmt_EUR
+		dataType: string
+		lineageTag: 6dfaab96-17ae-4f66-a667-d75c2a4615c7
+		summarizeBy: none
+		sourceColumn: NetAmt_EUR
+
+		annotation SummarizationSetBy = Automatic
+
+	column OpenQty
+		dataType: string
+		lineageTag: eae35cb9-2f0b-48f3-b790-9354e76b853b
+		summarizeBy: none
+		sourceColumn: OpenQty
+
+		annotation SummarizationSetBy = Automatic
+
+	column PickIdNo
+		dataType: string
+		lineageTag: 8716b167-1a50-4b2e-8a0c-23f250a445be
+		summarizeBy: none
+		sourceColumn: PickIdNo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Price_EUR
+		dataType: string
+		lineageTag: 3079fb23-b5ff-4ab8-ab83-255dc1074eff
+		summarizeBy: none
+		sourceColumn: Price_EUR
+
+		annotation SummarizationSetBy = Automatic
+
+	column Price_LC
+		dataType: string
+		lineageTag: 6645ce20-4210-4cd1-a20f-d443b35c847c
+		summarizeBy: none
+		sourceColumn: Price_LC
+
+		annotation SummarizationSetBy = Automatic
+
+	column PriceBefDi_EUR
+		dataType: string
+		lineageTag: 6a63fe36-f2d3-492b-9dcd-9cc1483856f8
+		summarizeBy: none
+		sourceColumn: PriceBefDi_EUR
+
+		annotation SummarizationSetBy = Automatic
+
+	column PriceBefDi_LC
+		dataType: string
+		lineageTag: 72bd3ae1-3988-42e6-9506-517a1ad8156b
+		summarizeBy: none
+		sourceColumn: PriceBefDi_LC
+
+		annotation SummarizationSetBy = Automatic
+
+	column Qty
+		dataType: string
+		lineageTag: 4600babf-2156-49d0-9d81-d9cb4dd20c25
+		summarizeBy: none
+		sourceColumn: Qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column Rate
+		dataType: string
+		lineageTag: 2a123a86-06be-4182-9b2c-574c06699ab7
+		summarizeBy: none
+		sourceColumn: Rate
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reposicion
+		dataType: string
+		lineageTag: ec16fcd7-550c-415c-a41b-cd944d82477c
+		summarizeBy: none
+		sourceColumn: Reposicion
+
+		annotation SummarizationSetBy = Automatic
+
+	column RMAMotiveCod
+		dataType: string
+		lineageTag: 51658e2b-40af-4c0e-a9e9-81cc5b83e523
+		summarizeBy: none
+		sourceColumn: RMAMotiveCod
+
+		annotation SummarizationSetBy = Automatic
+
+	column Season
+		dataType: string
+		lineageTag: b4d73efb-b974-4866-9a22-c9333726c28f
+		summarizeBy: none
+		sourceColumn: Season
+
+		annotation SummarizationSetBy = Automatic
+
+	column SlpCode
+		dataType: string
+		lineageTag: 190a68ea-d552-423d-89ca-f6a868e97e89
+		summarizeBy: none
+		sourceColumn: SlpCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source
+		dataType: string
+		lineageTag: e5693b78-e430-4b50-9284-60686d1ca92d
+		summarizeBy: none
+		sourceColumn: Source
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalExpns_EUR
+		dataType: string
+		lineageTag: 1d012ee1-078b-448f-b493-2dd6d7f46cb6
+		summarizeBy: none
+		sourceColumn: TotalExpns_EUR
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalWithExpns_EUR
+		dataType: string
+		lineageTag: 423bb87d-1b89-4d7d-9048-1b2726743b9e
+		summarizeBy: none
+		sourceColumn: TotalWithExpns_EUR
+
+		annotation SummarizationSetBy = Automatic
+
+	column Transporte
+		dataType: string
+		lineageTag: 02485d9a-e060-4788-8a97-a12f67a5bd1d
+		summarizeBy: none
+		sourceColumn: Transporte
+
+		annotation SummarizationSetBy = Automatic
+
+	column UserSign
+		dataType: string
+		lineageTag: a0a9b9b4-d4b5-4c88-9849-12755331cc91
+		summarizeBy: none
+		sourceColumn: UserSign
+
+		annotation SummarizationSetBy = Automatic
+
+	column WhsCode
+		dataType: string
+		lineageTag: 9dfa86bd-5879-408a-98da-808d7e731b0e
+		summarizeBy: none
+		sourceColumn: WhsCode
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Clave de linea de pedido. Las incidencias comparten (DocEntry, LineNum)
+	/// entre ellas, por eso llevan sufijo: sin el, la relacion no se puede crear.
+	column KLinea = LOL_PBIB2BSALESORDER[DocEntry] & "-" & LOL_PBIB2BSALESORDER[LineNum] & IF ( LOL_PBIB2BSALESORDER[IsIncidence] = "Y", "-INC-" & LOL_PBIB2BSALESORDER[ItemCode], "" )
+		lineageTag: fe6225d1-38d3-4623-a451-f8ba396ed57e
+		summarizeBy: none
+
+	/// Picking al que va la linea. En blanco si no tiene o si es incidencia.
+	column Picking = VAR p = TRIM ( LOL_PBIB2BSALESORDER[PickIdNo] ) RETURN IF ( LOL_PBIB2BSALESORDER[IsIncidence] = "N" && LEN ( p ) > 0 && p <> "0", p )
+		lineageTag: ab41d61b-3422-44a0-bbed-eade2122f823
+		summarizeBy: none
+
+	/// Qty llega como texto desde el ETL; esta es su version numerica.
+	column 'Cantidad pedida' = VAR q = TRIM ( LOL_PBIB2BSALESORDER[Qty] ) RETURN IF ( LEN ( q ) > 0, VALUE ( q ) )
+		formatString: #,0
+		lineageTag: 7c99e158-f630-425c-a447-684ea7e2b061
+		summarizeBy: sum
+
+	/// OpenQty llega como texto desde el ETL; esta es su version numerica.
+	column 'Cantidad pendiente' = VAR q = TRIM ( LOL_PBIB2BSALESORDER[OpenQty] ) RETURN IF ( LEN ( q ) > 0, VALUE ( q ) )
+		formatString: #,0
+		lineageTag: 33435a35-cb58-4d06-80d1-38b212c2250d
+		summarizeBy: sum
+
+	partition LOL_PBIB2BSALESORDER = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin"),
+				    dbo_LOL_PBIB2BSALESORDER = Origen{[Schema="dbo",Item="LOL_PBIB2BSALESORDER"]}[Data]
+				in
+				    dbo_LOL_PBIB2BSALESORDER
+

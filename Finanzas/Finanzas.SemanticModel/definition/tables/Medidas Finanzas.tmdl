@@ -1820,6 +1820,21 @@ table 'Medidas Finanzas'
 		displayFolder: 0 Pildoras
 		lineageTag: fa1c0232-adce-4780-9d95-7179a7a3bbbe
 
+	/// Momento del ultimo refresco del modelo, en hora de España.
+	measure 'Última actualización' = VAR f = MAX ( UltimaActualizacion[Fecha] ) RETURN IF ( ISBLANK ( f ), "Sin datos de actualización", "Actualizado " & FORMAT ( f, "dd/MM/yyyy" ) & " a las " & FORMAT ( f, "HH:mm" ) )
+		displayFolder: 0 Contexto
+		lineageTag: deff4ec4-aecc-443f-9617-f26e28fe662b
+
+	/// Rango de fechas que está mirando la página, según los segmentadores.
+	measure 'Rango de fechas' = VAR Ini = MIN ( 'TablaFechasFiltro'[FechaFiltro] ) VAR Fin = MAX ( 'TablaFechasFiltro'[FechaFiltro] ) RETURN IF ( ISBLANK ( Ini ), "Sin fechas", FORMAT ( Ini, "dd/MM/yyyy" ) & " - " & FORMAT ( Fin, "dd/MM/yyyy" ) )
+		displayFolder: 0 Contexto
+		lineageTag: 46b1de95-1fc8-481c-bc25-7e887f671946
+
+	/// Las dos juntas, para una sola tarjeta de cabecera.
+	measure 'Rango y actualización' = [Rango de fechas] & "   ·   " & [Última actualización]
+		displayFolder: 0 Contexto
+		lineageTag: 91ef5a5c-6c4c-4f01-a05c-3d38952308f0
+
 	column Value
 		lineageTag: 1b2c3d4e-5f60-7182-93a4-b5c6d7e8f901
 		isNameInferred

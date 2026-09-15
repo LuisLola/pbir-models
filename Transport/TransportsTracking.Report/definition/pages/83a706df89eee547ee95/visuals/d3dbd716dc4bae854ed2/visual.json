@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "d3dbd716dc4bae854ed2",
   "position": {
-    "x": 241,
+    "x": 173,
     "y": 82,
     "z": 101,
     "height": 78,
@@ -304,7 +304,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#E7DCE6'"
+                      "Value": "'#EFD0E4'"
                     }
                   }
                 }
@@ -356,7 +356,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1B141F'"
+                      "Value": "'#000000'"
                     }
                   }
                 }
@@ -428,7 +428,8 @@
             "Function": 5
           }
         },
-        "type": "Advanced"
+        "type": "Advanced",
+        "howCreated": "User"
       },
       {
         "name": "3e90b7932d8b966862c2",
@@ -482,7 +483,22 @@
           ]
         },
         "howCreated": "User"
+      },
+      {
+        "name": "8ad5fba985da6900d61b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Pickings en 20"
+          }
+        },
+        "type": "Advanced"
       }
     ]
-  }
+  },
+  "parentGroupName": "83a706ga"
 }

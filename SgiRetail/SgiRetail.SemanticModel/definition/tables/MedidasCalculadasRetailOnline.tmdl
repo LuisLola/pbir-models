@@ -5,15 +5,19 @@ table MedidasCalculadasRetailOnline
 		formatString: @
 		lineageTag: 47f52fcb-98d6-4d67-b3f5-3dff87be4fd1
 
-	measure FechaHastaSeleccionada = ```
-			
-			IF(
-			    ISFILTERED( FechaHastaSelector[Date] ),
-			    MAX( FechaHastaSelector[Date] ),
-			    TODAY()
-			)
-			
-			```
+	/// Tope del periodo. Manda lo que elija el segmentador; si no hay nada
+	/// elegido, la ultima fecha CON VENTA (que es el maximo de la tabla
+	/// selectora). Nunca HOY: el modelo se refresca con retraso y comparar
+	/// dias sin dato contra el ano pasado completo hunde todas las evoluciones.
+	measure FechaHastaSeleccionada =
+			VAR Tope =
+				CALCULATE(
+				    MAX( FechaHastaSelector[Date] ),
+				    REMOVEFILTERS( FechaHastaSelector )
+				)
+			VAR Elegida = MAX( FechaHastaSelector[Date] )
+			RETURN
+				COALESCE( Elegida, Tope )
 		formatString: Long Date
 		lineageTag: 2f28bf6e-9c71-43f4-bb13-ff8f8f0a5421
 

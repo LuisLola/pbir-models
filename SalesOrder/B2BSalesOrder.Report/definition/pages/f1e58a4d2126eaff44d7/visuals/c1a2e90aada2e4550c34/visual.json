@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "c1a2e90aada2e4550c34",
   "position": {
-    "x": 941.01461736887359,
+    "x": 940.25193465176267,
     "y": 0,
     "z": 0,
     "height": 63.834909716251076,
     "width": 270.74806534823733,
-    "tabOrder": 9012
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "slicer",
@@ -20,16 +20,15 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "LOL_PLANMATERIAL"
+                      "Entity": "Calendario"
                     }
                   },
-                  "Property": "Fecha disponibilidad (línea del articulo)"
+                  "Property": "Date"
                 }
               },
-              "queryRef": "LOL_PLANMATERIAL.Fecha disponibilidad (línea del articulo)",
-              "nativeQueryRef": "Hasta Fecha Disponibilidad Stock",
-              "active": true,
-              "displayName": "Hasta Fecha Disponibilidad Stock"
+              "queryRef": "Calendario.Date",
+              "nativeQueryRef": "Date",
+              "active": true
             }
           ]
         }
@@ -41,10 +40,10 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "LOL_PLANMATERIAL"
+                    "Entity": "Calendario"
                   }
                 },
-                "Property": "Fecha disponibilidad (línea del articulo)"
+                "Property": "Date"
               }
             },
             "direction": "Ascending"
@@ -57,17 +56,24 @@
       "data": [
         {
           "properties": {
-            "endDate": {
-              "expr": {
-                "Literal": {
-                  "Value": "datetime'2026-08-28T00:00:00'"
-                }
-              }
-            },
             "mode": {
               "expr": {
                 "Literal": {
                   "Value": "'Before'"
+                }
+              }
+            },
+            "relativeRange": {
+              "expr": {
+                "Literal": {
+                  "Value": "'This'"
+                }
+              }
+            },
+            "relativePeriod": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Months'"
                 }
               }
             }
@@ -77,42 +83,6 @@
       "general": [
         {
           "properties": {
-            "filter": {
-              "filter": {
-                "Version": 2,
-                "From": [
-                  {
-                    "Name": "l",
-                    "Entity": "LOL_PLANMATERIAL",
-                    "Type": 0
-                  }
-                ],
-                "Where": [
-                  {
-                    "Condition": {
-                      "Comparison": {
-                        "ComparisonKind": 3,
-                        "Left": {
-                          "Column": {
-                            "Expression": {
-                              "SourceRef": {
-                                "Source": "l"
-                              }
-                            },
-                            "Property": "Fecha disponibilidad (línea del articulo)"
-                          }
-                        },
-                        "Right": {
-                          "Literal": {
-                            "Value": "datetime'2026-08-29T00:00:00'"
-                          }
-                        }
-                      }
-                    }
-                  }
-                ]
-              }
-            },
             "orientation": {
               "expr": {
                 "Literal": {
@@ -152,8 +122,8 @@
                 "color": {
                   "expr": {
                     "ThemeDataColor": {
-                      "ColorId": 1,
-                      "Percent": 0
+                      "ColorId": 0,
+                      "Percent": -0.6
                     }
                   }
                 }

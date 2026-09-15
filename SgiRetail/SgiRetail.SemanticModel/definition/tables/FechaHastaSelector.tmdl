@@ -29,8 +29,10 @@ table FechaHastaSelector
 	partition FechaHastaSelector = calculated
 		mode: import
 		source =
+				VAR UltimaVenta = MAX ( LOL_PBISGIRETAIL[TicketData] )
+				RETURN
 				SELECTCOLUMNS(
-				    Calendario,
+				    FILTER ( Calendario, Calendario[Date] <= UltimaVenta ),
 				    "Date", Calendario[Date],
 				    "FechaKey", Calendario[FechaKey],
 				    "FechaTexto", FORMAT(Calendario[Date], "dd mmmm yyyy")

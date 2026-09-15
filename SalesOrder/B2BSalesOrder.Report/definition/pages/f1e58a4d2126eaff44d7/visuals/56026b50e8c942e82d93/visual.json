@@ -2,11 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "56026b50e8c942e82d93",
   "position": {
-    "x": 55.4817863331748,
-    "y": 12.293994265916142,
+    "x": 7.8923427197059741,
+    "y": 6.3572993298204876,
     "z": 2000,
-    "height": 63.869625000162969,
-    "width": 141.16792675218505
+    "height": 66.398544850579583,
+    "width": 142.7520554756826,
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "slicer",
@@ -192,7 +193,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             },
@@ -207,8 +208,9 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "Literal": {
-                      "Value": "'#1A1416'"
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.6
                     }
                   }
                 }
@@ -224,7 +226,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "10D"
                 }
               }
             },
@@ -251,7 +253,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             },
@@ -279,12 +281,19 @@
       "border": [
         {
           "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
             "color": {
               "solid": {
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#E7DACE'"
+                      "Value": "'#EFD0E4'"
                     }
                   }
                 }
@@ -293,7 +302,7 @@
             "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "14D"
                 }
               }
             },
@@ -313,7 +322,60 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "preset": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Custom'"
+                }
+              }
+            },
+            "position": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Outer'"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#000000'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "90D"
+                }
+              }
+            },
+            "shadowSpread": {
+              "expr": {
+                "Literal": {
+                  "Value": "2D"
+                }
+              }
+            },
+            "shadowBlur": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "angle": {
+              "expr": {
+                "Literal": {
+                  "Value": "90D"
                 }
               }
             }
@@ -333,32 +395,23 @@
           }
         }
       ],
-      "divider": [
+      "visualTooltip": [
         {
           "properties": {
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
-            }
-          }
-        }
-      ],
-      "spacing": [
-        {
-          "properties": {
-            "verticalSpacing": {
+            },
+            "section": {
               "expr": {
                 "Literal": {
-                  "Value": "2D"
+                  "Value": "'53efea0a1394d47aaa31'"
                 }
               }
             }
-          },
-          "selector": {
-            "id": "default"
           }
         }
       ]

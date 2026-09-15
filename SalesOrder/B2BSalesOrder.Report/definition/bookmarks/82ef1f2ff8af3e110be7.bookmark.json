@@ -24,9 +24,10 @@
       "4d34f38b355cefc77c08",
       "56acc7edcee523650bb2",
       "9e604e5342ed7e50f529",
-      "4f798a64592ea9c66b90",
       "fd82b38951cf655ab713",
-      "08d7f7aa33414df9249d"
+      "08d7f7aa33414df9249d",
+      "29e357ga",
+      "29e357ge"
     ],
     "suppressData": true
   },
@@ -628,45 +629,6 @@
               }
             }
           },
-          "4f798a64592ea9c66b90": {
-            "singleVisual": {
-              "visualType": "slicer",
-              "objects": {
-                "merge": {
-                  "data": [
-                    {
-                      "properties": {
-                        "mode": {
-                          "expr": {
-                            "Literal": {
-                              "Value": "'Dropdown'"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              },
-              "activeProjections": {
-                "Values": [
-                  {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "LOL_PBITIENDAS"
-                        }
-                      },
-                      "Property": "TipoTienda"
-                    }
-                  }
-                ]
-              },
-              "display": {
-                "mode": "hidden"
-              }
-            }
-          },
           "fd82b38951cf655ab713": {
             "singleVisual": {
               "visualType": "textbox",
@@ -676,122 +638,6 @@
           "08d7f7aa33414df9249d": {
             "singleVisual": {
               "visualType": "image",
-              "objects": {}
-            }
-          },
-          "3dcda34bc7e1f472f6e8": {
-            "filters": {
-              "byExpr": [
-                {
-                  "name": "d3a163fdbeda16137979",
-                  "type": "Categorical",
-                  "expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "Calendario"
-                        }
-                      },
-                      "Property": "Date"
-                    }
-                  },
-                  "howCreated": 0
-                }
-              ]
-            },
-            "singleVisual": {
-              "visualType": "slicer",
-              "objects": {
-                "merge": {
-                  "data": [
-                    {
-                      "properties": {
-                        "mode": {
-                          "expr": {
-                            "Literal": {
-                              "Value": "'Before'"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              },
-              "orderBy": [
-                {
-                  "Direction": 1,
-                  "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "Calendario"
-                        }
-                      },
-                      "Property": "Date"
-                    }
-                  }
-                }
-              ],
-              "activeProjections": {
-                "Values": [
-                  {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "Calendario"
-                        }
-                      },
-                      "Property": "Date"
-                    }
-                  }
-                ]
-              }
-            }
-          },
-          "3fb5011f2d1f594da353": {
-            "filters": {
-              "byExpr": [
-                {
-                  "name": "d94cef2a8176d0c37c67",
-                  "type": "Advanced",
-                  "expression": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "MedidasVentas"
-                        }
-                      },
-                      "Property": "Marca de actualización"
-                    }
-                  },
-                  "howCreated": 0
-                }
-              ]
-            },
-            "singleVisual": {
-              "visualType": "cardVisual",
-              "objects": {},
-              "orderBy": [
-                {
-                  "Direction": 1,
-                  "Expression": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "MedidasVentas"
-                        }
-                      },
-                      "Property": "Marca de actualización"
-                    }
-                  }
-                }
-              ]
-            }
-          },
-          "05b05d369143c3aed77b": {
-            "singleVisual": {
-              "visualType": "textbox",
               "objects": {}
             }
           },
@@ -1065,6 +911,12 @@
             "isHidden": true
           },
           "75e6d902dfa2623baa5b": {
+            "isHidden": false
+          },
+          "29e357ga": {
+            "isHidden": true
+          },
+          "29e357ge": {
             "isHidden": false
           }
         }

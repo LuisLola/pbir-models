@@ -47,8 +47,6 @@ table LOL_PBITIMEWHS
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation UnderlyingDateTimeDataType = Date
-
 	column FechaLog20
 		dataType: dateTime
 		formatString: General Date
@@ -60,8 +58,6 @@ table LOL_PBITIMEWHS
 			isDefault
 			relationship: 66d1397b-8c46-4f05-8c80-013628d6cee2
 			defaultHierarchy: LocalDateTable_e20ba4a6-9ccf-4ee4-8d3b-d68e8a1be716.'Jerarquía de fechas'
-
-		changedProperty = DataType
 
 		annotation SummarizationSetBy = Automatic
 
@@ -79,8 +75,6 @@ table LOL_PBITIMEWHS
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation UnderlyingDateTimeDataType = Date
-
 	column FechaLog60
 		dataType: dateTime
 		formatString: General Date
@@ -95,11 +89,9 @@ table LOL_PBITIMEWHS
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation UnderlyingDateTimeDataType = Date
-
 	column PickDate
 		dataType: dateTime
-		formatString: General Date
+		formatString: Short Date
 		lineageTag: 982c898c-1916-4c33-b71d-0278af4080d7
 		summarizeBy: none
 		sourceColumn: PickDate
@@ -155,6 +147,66 @@ table LOL_PBITIMEWHS
 		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
+
+	column CantidadEnviada
+		dataType: string
+		lineageTag: 1bcfdc4d-35d5-41f9-93b1-0c28bf819c57
+		summarizeBy: none
+		sourceColumn: CantidadEnviada
+
+		annotation SummarizationSetBy = Automatic
+
+	column CantidadLiberada
+		dataType: string
+		lineageTag: 57bd3010-a0a6-45c9-a817-1cb42c7575e0
+		summarizeBy: none
+		sourceColumn: CantidadLiberada
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaContabilizacion_Origen
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 9f08e68f-03c2-4832-9ef7-49c269773a22
+		summarizeBy: none
+		sourceColumn: FechaContabilizacion_Origen
+
+		variation Variación
+			isDefault
+			relationship: d724a6fc-43b0-4be1-a068-da1e2e732d54
+			defaultHierarchy: LocalDateTable_2f0e6934-33f2-437d-8637-57970b13e4d6.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Comentarios
+		dataType: string
+		lineageTag: 38816523-9044-4683-9c89-6d5cfd8c2f04
+		summarizeBy: none
+		sourceColumn: Comentarios
+
+		annotation SummarizationSetBy = Automatic
+
+	column Estado
+		dataType: string
+		lineageTag: a156c505-becf-473e-90c9-a046c2f633a8
+		summarizeBy: none
+		sourceColumn: Estado
+
+		annotation SummarizationSetBy = Automatic
+
+	/// El interruptor: Si salio del almacen, No se quedo dentro.
+	/// Un picking sin numero de expedicion no se ha expedido.
+	column Expedido = IF ( LEN ( TRIM ( LOL_PBITIMEWHS[Expedicion_Picking] ) ) > 0, "Sí", "No" )
+		lineageTag: b861de74-99c7-43df-bc0d-b4b34d129e1e
+		summarizeBy: none
+
+	/// Por que no salio. En blanco si si salio.
+	/// Anulado = estado R: entro pero nunca se preparo.
+	column 'Motivo sin expedir' = IF ( LEN ( TRIM ( LOL_PBITIMEWHS[Expedicion_Picking] ) ) > 0, BLANK (), IF ( CONTAINSSTRING ( LOL_PBITIMEWHS[Comentarios], "cerrado manualmente" ), "Cerrado manualmente", IF ( LOL_PBITIMEWHS[Estado] = "R", "Anulado", "Sin expedición" ) ) )
+		lineageTag: a65de00b-44a3-4254-8c0c-dca61a19f2c7
+		summarizeBy: none
 
 	partition LOL_PBITIMEWHS = m
 		mode: import

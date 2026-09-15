@@ -254,6 +254,22 @@
               "nativeQueryRef": "NombreDíaCorto",
               "active": false,
               "displayName": "NombreDíaCorto"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "GrupodeArt"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.GrupodeArt",
+              "nativeQueryRef": "GrupodeArt",
+              "active": false,
+              "displayName": "GrupodeArt"
             }
           ],
           "fieldParameters": [
@@ -297,7 +313,7 @@
                 }
               },
               "index": 2,
-              "length": 13
+              "length": 14
             }
           ]
         },
@@ -686,6 +702,12 @@
           {
             "queryRefs": [
               "Calendario.NombreDíaCorto"
+            ],
+            "isCollapsed": true
+          },
+          {
+            "queryRefs": [
+              "LOL_PBIMODELITEM.GrupodeArt"
             ],
             "isCollapsed": true
           }

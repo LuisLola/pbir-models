@@ -1192,6 +1192,16 @@ table MedidasVentas
 		displayFolder: 0 Pildoras
 		lineageTag: 7bc50d9a-704e-43fb-904c-bb70e0766062
 
+	/// Rango de fechas que está mirando la página, según los segmentadores.
+	measure 'Rango de fechas' = VAR Ini = MIN ( 'Calendario'[Date] ) VAR Fin = MAX ( 'Calendario'[Date] ) RETURN IF ( ISBLANK ( Ini ), "Sin fechas", FORMAT ( Ini, "dd/MM/yyyy" ) & " - " & FORMAT ( Fin, "dd/MM/yyyy" ) )
+		displayFolder: 0 Contexto
+		lineageTag: 6349a6b8-b6ab-455a-a09f-6c6ad97e4d1f
+
+	/// Las dos juntas, para una sola tarjeta de cabecera.
+	measure 'Rango y actualización' = [Rango de fechas] & "   ·   " & [Última actualización] & "   ·   " & [Aviso mes de cierre]
+		displayFolder: 0 Contexto
+		lineageTag: 93d96365-54a3-41a7-b017-6b787d9f91a6
+
 	column Value
 		lineageTag: 2ddc9eb7-b8c8-4537-91e0-8de67fa58299
 		isNameInferred

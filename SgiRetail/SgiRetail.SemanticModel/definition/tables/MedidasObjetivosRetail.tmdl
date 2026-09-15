@@ -17,7 +17,7 @@ table MedidasObjetivosRetail
 				USERELATIONSHIP(LOL_PBIOBJETIVOSRETAIL[Fecha], Calendario[Date]),
 				DATESBETWEEN(Calendario[Date], [FechaInicioPeriodoSeleccionado], [FechaHastaSeleccionada])
 			)
-		formatString: \$#,0;(\$#,0);\$#,0
+		formatString: € #,##0;(€ #,##0);€ #,##0
 		lineageTag: 5c3f3215-d6c8-47d9-833c-d2c6e94da448
 
 	measure Objetivos_YTD_LY =

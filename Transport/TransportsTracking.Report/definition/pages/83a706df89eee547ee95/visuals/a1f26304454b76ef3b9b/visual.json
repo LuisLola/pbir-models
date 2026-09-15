@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "a1f26304454b76ef3b9b",
   "position": {
-    "x": 68,
+    "x": 0,
     "y": 180,
     "z": 12000,
     "height": 220,
@@ -51,41 +51,31 @@
           "projections": [
             {
               "field": {
-                "Aggregation": {
+                "Measure": {
                   "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "LOL_PBITIMEWHS"
-                        }
-                      },
-                      "Property": "Picking"
+                    "SourceRef": {
+                      "Entity": "_Medidas"
                     }
                   },
-                  "Function": 2
+                  "Property": "Pickings"
                 }
               },
-              "queryRef": "Min(LOL_PBITIMEWHS.Picking)",
-              "nativeQueryRef": "Recuento de Picking"
+              "queryRef": "_Medidas.Pickings",
+              "nativeQueryRef": "Recuento de picking"
             },
             {
               "field": {
-                "Aggregation": {
+                "Measure": {
                   "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "LOL_PBITIMEWHS"
-                        }
-                      },
-                      "Property": "Dias habiles 20-40"
+                    "SourceRef": {
+                      "Entity": "_Medidas"
                     }
                   },
-                  "Function": 6
+                  "Property": "Mediana días 20-40"
                 }
               },
-              "queryRef": "Sum(LOL_PBITIMEWHS.Dias habiles 20-40)",
-              "nativeQueryRef": "Mediana de Dias habiles 20-40"
+              "queryRef": "_Medidas.Mediana días 20-40",
+              "nativeQueryRef": "Mediana de días hábiles 20-40"
             }
           ]
         }
@@ -462,7 +452,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#E7DCE6'"
+                      "Value": "'#EFD0E4'"
                     }
                   }
                 }
@@ -514,7 +504,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1B141F'"
+                      "Value": "'#000000'"
                     }
                   }
                 }
@@ -557,7 +547,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             }
@@ -656,5 +646,6 @@
         "type": "Advanced"
       }
     ]
-  }
+  },
+  "parentGroupName": "83a706ga"
 }

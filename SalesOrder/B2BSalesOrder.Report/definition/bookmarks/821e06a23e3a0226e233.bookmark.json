@@ -27,12 +27,13 @@
       "757d61e03bb2401886c6",
       "77be9375489662a1466e",
       "7a002886ae7279a64d90",
-      "880316c003f39f2a298c",
       "8f53ad09cbfe165df8b0",
       "a08a103d5d6afe260922",
       "c06e51d83bd8e7422c72",
       "d51142f897f69877aef1",
-      "eda90541a592f440f35d"
+      "eda90541a592f440f35d",
+      "e2e768ga",
+      "e2e768ge"
     ],
     "suppressData": true
   },
@@ -539,46 +540,6 @@
               "objects": {}
             }
           },
-          "5980b70f784fbb353c73": {
-            "filters": {
-              "byExpr": [
-                {
-                  "name": "314f31012658026b3b9a",
-                  "type": "Advanced",
-                  "expression": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "MedidasVentas"
-                        }
-                      },
-                      "Property": "Marca de actualización"
-                    }
-                  },
-                  "howCreated": 0
-                }
-              ]
-            },
-            "singleVisual": {
-              "visualType": "cardVisual",
-              "objects": {},
-              "orderBy": [
-                {
-                  "Direction": 1,
-                  "Expression": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "MedidasVentas"
-                        }
-                      },
-                      "Property": "Marca de actualización"
-                    }
-                  }
-                }
-              ]
-            }
-          },
           "6d0d5d32236d76b7fe74": {
             "filters": {
               "byExpr": [
@@ -913,45 +874,6 @@
                     }
                   }
                 ]
-              }
-            }
-          },
-          "880316c003f39f2a298c": {
-            "singleVisual": {
-              "visualType": "slicer",
-              "objects": {
-                "merge": {
-                  "data": [
-                    {
-                      "properties": {
-                        "mode": {
-                          "expr": {
-                            "Literal": {
-                              "Value": "'Dropdown'"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              },
-              "activeProjections": {
-                "Values": [
-                  {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "LOL_PBITIENDAS"
-                        }
-                      },
-                      "Property": "TipoTienda"
-                    }
-                  }
-                ]
-              },
-              "display": {
-                "mode": "hidden"
               }
             }
           },
@@ -1452,6 +1374,12 @@
           },
           "9ea27d847ae6c4f419bf": {
             "isHidden": false
+          },
+          "e2e768ga": {
+            "isHidden": false
+          },
+          "e2e768ge": {
+            "isHidden": true
           }
         }
       }

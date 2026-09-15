@@ -101,6 +101,21 @@ table _Medidas
 		displayFolder: 0 Pildoras
 		lineageTag: 6a46f3c4-22df-4b15-af75-a9d8bd7ab233
 
+	/// Momento del ultimo refresco del modelo, en hora de España.
+	measure 'Última actualización' = VAR f = MAX ( UltimaActualizacion[Fecha] ) RETURN IF ( ISBLANK ( f ), "Sin datos de actualización", "Actualizado " & FORMAT ( f, "dd/MM/yyyy" ) & " a las " & FORMAT ( f, "HH:mm" ) )
+		displayFolder: 0 Contexto
+		lineageTag: 33dda9e2-1a4b-4877-a999-754e91040865
+
+	/// Rango de fechas que está mirando la página, según los segmentadores.
+	measure 'Rango de fechas' = VAR Ini = MIN ( 'Calendario'[Date] ) VAR Fin = MAX ( 'Calendario'[Date] ) RETURN IF ( ISBLANK ( Ini ), "Sin fechas", FORMAT ( Ini, "dd/MM/yyyy" ) & " - " & FORMAT ( Fin, "dd/MM/yyyy" ) )
+		displayFolder: 0 Contexto
+		lineageTag: 8165e64f-6de5-4368-bc6f-102283814e1b
+
+	/// Las dos juntas, para una sola tarjeta de cabecera.
+	measure 'Rango y actualización' = [Rango de fechas] & "   ·   " & [Última actualización]
+		displayFolder: 0 Contexto
+		lineageTag: 2db7577b-47a1-4479-880e-b1b5f61f2485
+
 	column Column
 		formatString: 0
 		lineageTag: fc1c719d-994b-49d4-8aa6-6651182369f3

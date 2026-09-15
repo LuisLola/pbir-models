@@ -539,6 +539,41 @@ table LOL_TRANSPORT_TRACKING
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Fecha de entrega de verdad. Los envios que acaban "En agencia
+	/// destino" cuentan como entregados pero no traen fecha_entregado:
+	/// para esos vale fecha_agencia_destino. Se mira el grupo, porque
+	/// "En reparto" tambien tiene esa fecha y no esta entregado.
+	column fecha_entrega_real = COALESCE ( LOL_TRANSPORT_TRACKING[fecha_entregado], IF ( LOL_TRANSPORT_TRACKING[estado_grupo] = "Entregado", LOL_TRANSPORT_TRACKING[fecha_agencia_destino] ) )
+		formatString: General Date
+		lineageTag: b970b562-1805-4793-bd9e-d2db4890cecf
+		summarizeBy: none
+
+	/// Preparacion en dias NATURALES. La columna del almacen esta en habiles
+	/// y por eso sale mas baja: 7 habiles son 9,4 naturales.
+	column 'Días 20 a 40' = IF ( NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) && NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog40] ) ), DIVIDE ( DATEDIFF ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ), RELATED ( LOL_PBITIMEWHS[FechaLog40] ), MINUTE ), 1440 ) )
+		formatString: #,0.0;-#,0.0;0
+		lineageTag: b481d6d6-bd51-4f42-bcd8-f7ec3ddde60f
+		summarizeBy: average
+
+	/// Lo que la mercancia espera desde que el almacen termina hasta que el
+	/// transportista la recoge. Es la pata que faltaba.
+	column 'Días 40 a recogida' = IF ( NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog40] ) ) && NOT ISBLANK ( LOL_TRANSPORT_TRACKING[f_inicio] ), DIVIDE ( DATEDIFF ( RELATED ( LOL_PBITIMEWHS[FechaLog40] ), LOL_TRANSPORT_TRACKING[f_inicio], MINUTE ), 1440 ) )
+		formatString: #,0.0;-#,0.0;0
+		lineageTag: f3b23715-cafb-4eb5-a6db-83c4e6171c04
+		summarizeBy: average
+
+	/// Transporte real, sin truncar a entero.
+	column 'Días recogida a entrega' = IF ( NOT ISBLANK ( LOL_TRANSPORT_TRACKING[f_inicio] ) && NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_entrega_real] ), DIVIDE ( DATEDIFF ( LOL_TRANSPORT_TRACKING[f_inicio], LOL_TRANSPORT_TRACKING[fecha_entrega_real], MINUTE ), 1440 ) )
+		formatString: #,0.0;-#,0.0;0
+		lineageTag: 4034792a-6a78-45fe-85eb-0b5c48b5476c
+		summarizeBy: average
+
+	/// El total. Es la suma exacta de los tres anteriores.
+	column 'Días 20 a entrega' = IF ( NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) && NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_entrega_real] ), DIVIDE ( DATEDIFF ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ), LOL_TRANSPORT_TRACKING[fecha_entrega_real], MINUTE ), 1440 ) )
+		formatString: #,0.0;-#,0.0;0
+		lineageTag: cdda6422-af20-4247-a11c-a5b527030c53
+		summarizeBy: average
+
 	partition LOL_TRANSPORT_TRACKING = m
 		mode: import
 		source =

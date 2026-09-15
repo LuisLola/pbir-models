@@ -21,7 +21,7 @@ table MedidasRetail
 					[Ventas],
 					DATESBETWEEN(Calendario[Date], FechaInicio, FechaHasta)
 				)
-		formatString: \$#,0;(\$#,0);\$#,0
+		formatString: € #,##0;(€ #,##0);€ #,##0
 		lineageTag: d40df2eb-853f-45d8-aa6b-f8481968cb29
 
 	measure Ventas_YTD_Var = [Ventas_YTD] - [Ventas_YTD_LY]

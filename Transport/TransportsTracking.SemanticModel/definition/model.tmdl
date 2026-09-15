@@ -8,7 +8,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["LOL_TRANSPORT_TRACKING","Festivos","UltimaActualizacion","LOL_PBITIMEWHS","LOL_PBICLIENTES"]
+annotation PBI_QueryOrder = ["LOL_TRANSPORT_TRACKING","Festivos","UltimaActualizacion","LOL_PBITIMEWHS","LOL_PBICLIENTES","LOL_PBISTOCKTRANSFERSTATUS","LOL_PBIMODELITEM","LOL_PBIB2BSALESORDER","LOL_PBISALESDELIVERY","Tabla"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
@@ -39,10 +39,26 @@ ref table LocalDateTable_e20ba4a6-9ccf-4ee4-8d3b-d68e8a1be716
 ref table LocalDateTable_f50e1203-a9ae-4d74-ad06-b2eaa783e1f2
 ref table LocalDateTable_a6755c96-167d-44ea-8ddb-aa1bba150dde
 ref table LOL_PBICLIENTES
-
 ref table DimensionesTransport
-
 ref table DimensionesTransport2
+ref table LOL_PBISTOCKTRANSFERSTATUS
+ref table LocalDateTable_2bbdc6cb-bd10-451e-88a4-36b5dde709b4
+ref table LocalDateTable_c0cbd5d6-4b6d-4d2d-927c-5d698ffbacda
+ref table LocalDateTable_be0cf1a2-d83e-4303-8f1e-2f8f2e254444
+ref table LocalDateTable_94015646-cf5f-4a9d-9cb1-68e368680b3c
+ref table LOL_PBIMODELITEM
+ref table LOL_PBIB2BSALESORDER
+ref table LocalDateTable_be561ec9-67ca-4c10-b91a-26c43aa3f18e
+ref table LocalDateTable_1c3b1118-d7a1-4ec3-858e-7e38c23ba7d9
+ref table LocalDateTable_56468d9e-c2e3-484b-975e-a41faf4fce3f
+ref table LocalDateTable_d355b67b-eaa0-4b9f-9e1d-1fb282f3bca8
+ref table LOL_PBISALESDELIVERY
+ref table LocalDateTable_7ec2f5bf-a2f9-49a2-85f1-f96bb1735f65
+ref table LocalDateTable_d3daa372-3498-4f21-948f-bc89f588bb2e
+ref table LocalDateTable_8e465d0c-c1ec-465f-a7c5-3828f7fe0e30
+ref table LocalDateTable_3e401d30-705b-41c0-b32d-7c169cbaf9a1
+ref table LocalDateTable_2f0e6934-33f2-437d-8637-57970b13e4d6
+ref table Tabla
 
 ref cultureInfo es-ES
 

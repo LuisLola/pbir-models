@@ -196,6 +196,266 @@ table MedidasIncidencias
 		displayFolder: Validacion
 		lineageTag: a244e33f-f09c-4939-9f4d-0fbf75632a9d
 
+	/// Lineas registradas como incidencia en el periodo.
+	measure 'Líneas de incidencia' = COUNTROWS ( 'VentasIncidencias' )
+		formatString: #,0
+		displayFolder: 7 Análisis
+		lineageTag: 9b67f605-803a-416f-a913-5a1583f8a5b9
+
+	/// Cuantos codigos distintos de incidencia aparecen. Sirve para saber si el
+	/// problema esta concentrado o repartido.
+	measure 'Tipos de incidencia' = DISTINCTCOUNT ( 'VentasIncidencias'[IncidenciaCode] )
+		formatString: #,0
+		displayFolder: 7 Análisis
+		lineageTag: eae3e4bf-4c49-405f-b00b-bd51f9c48843
+
+	/// Clientes distintos afectados.
+	measure 'Clientes con incidencia' = DISTINCTCOUNT ( 'VentasIncidencias'[CodigoCliente] )
+		formatString: #,0
+		displayFolder: 7 Análisis
+		lineageTag: 7f92966a-4d3e-40ce-84eb-957b1200d373
+
+	/// Referencias distintas afectadas.
+	measure 'Referencias con incidencia' = DISTINCTCOUNT ( 'VentasIncidencias'[CodigoArticulo] )
+		formatString: #,0
+		displayFolder: 7 Análisis
+		lineageTag: 20393a70-1430-4482-b2ef-68e9957ac663
+
+	/// Agentes distintos con alguna incidencia.
+	measure 'Agentes con incidencia' = DISTINCTCOUNT ( 'VentasIncidencias'[CodigoVendedor] )
+		formatString: #,0
+		displayFolder: 7 Análisis
+		lineageTag: ad87ade6-abcc-445e-8a52-781c3197a41b
+
+	/// Cuanto pesa de media cada linea de incidencia.
+	measure 'Importe medio por incidencia' = DIVIDE ( [VentaBrutaIncidencias], [Líneas de incidencia] )
+		formatString: #,0.00
+		displayFolder: 7 Análisis
+		lineageTag: 047a348f-3fe1-4dbd-abd3-7d203a26cd5f
+
+	/// Tamano medio de la incidencia en unidades.
+	measure 'Unidades por incidencia' = DIVIDE ( [CantidadIncidencias], [Líneas de incidencia] )
+		formatString: #,0.0
+		displayFolder: 7 Análisis
+		lineageTag: 50d41a3a-8e78-43a6-b992-c27f9b2f064a
+
+	/// Peso de las incidencias sobre la venta bruta del mismo contexto.
+	measure '% incidencia sobre venta' = DIVIDE ( [VentaBrutaIncidencias], [VentaBruta] )
+		formatString: 0.0%
+		displayFolder: 7 Análisis
+		lineageTag: 85541641-8116-4b0f-b25c-e9ee74210ff1
+
+	/// Documentos de solicitud de devolucion.
+	measure 'Solicitudes de devolución' = DISTINCTCOUNT ( LOL_PBIRETURNREQUESTS[DocNum] )
+		formatString: #,0
+		displayFolder: 7 Análisis
+		lineageTag: 9eab8250-d172-4924-8a83-036705573aac
+
+	/// Lineas dentro de esas solicitudes.
+	measure 'Líneas solicitadas' = COUNTROWS ( LOL_PBIRETURNREQUESTS )
+		formatString: #,0
+		displayFolder: 7 Análisis
+		lineageTag: 87a3e296-d7f7-431e-a4ed-841c7bdf9821
+
+	/// Unidades que el cliente pide devolver.
+	measure 'Unidades solicitadas' = SUM ( LOL_PBIRETURNREQUESTS[Qty] )
+		formatString: #,0
+		displayFolder: 7 Análisis
+		lineageTag: 5fe7c418-455b-4100-a98c-2030406b8935
+
+	/// Devoluciones que se han llegado a hacer.
+	measure Devoluciones = DISTINCTCOUNT ( LOL_PBIRETURNSALES[DocNum] )
+		formatString: #,0
+		displayFolder: 7 Análisis
+		lineageTag: 1fb3d92e-643a-4c0a-9b4c-492585644de4
+
+	/// Unidades que han vuelto de verdad.
+	measure 'Unidades devueltas' = SUM ( LOL_PBIRETURNSALES[Qty] )
+		formatString: #,0
+		displayFolder: 7 Análisis
+		lineageTag: 7f776127-7e58-4b2b-865a-55be35c803f0
+
+	/// Importe neto de las devoluciones.
+	measure 'Importe devuelto' = SUM ( LOL_PBIRETURNSALES[NetAmt_EUR] )
+		formatString: #,0.00
+		displayFolder: 7 Análisis
+		lineageTag: ec8e9ff7-ee01-4727-97f6-a80d7a8858d2
+
+	/// Peso de la devolucion sobre la venta bruta.
+	measure '% devuelto sobre venta' = DIVIDE ( [Importe devuelto], [VentaBruta] )
+		formatString: 0.0%
+		displayFolder: 7 Análisis
+		lineageTag: 459dbd87-ff81-44fa-8d32-ab4ea69d201a
+
+	/// Notas de abono emitidas.
+	measure Abonos = DISTINCTCOUNT ( LOL_PBICREDITNOTESSALES[DocNum] )
+		formatString: #,0
+		displayFolder: 7 Análisis
+		lineageTag: 1411be7e-3733-4ed4-9cfc-90d6a389f81a
+
+	/// Importe neto abonado al cliente.
+	measure 'Importe abonado' = SUM ( LOL_PBICREDITNOTESSALES[NetAmt_EUR] )
+		formatString: #,0.00
+		displayFolder: 7 Análisis
+		lineageTag: 87a397c8-8674-4d6b-b4a6-81d615d2e54c
+
+	/// Cuanto de lo que se pide devolver vuelve realmente. Si baja mucho,
+	/// o se rechazan solicitudes o se quedan sin tramitar.
+	measure '% solicitud que acaba en devolución' = DIVIDE ( [Unidades devueltas], [Unidades solicitadas] )
+		formatString: 0.0%
+		displayFolder: 7 Análisis
+		lineageTag: b0db3ec0-fe72-4214-b0a4-4adbed6b4f9f
+
+	/// Lineas de incidencia de la temporada seleccionada, hasta la fecha de corte.
+	measure 'Incidencias temporada' =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR FechaCorte = [FechaLimiteSeleccionada]
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel ),
+			        BLANK (),
+			        CALCULATE (
+			            COUNTROWS ( 'VentasIncidencias' ),
+			            REMOVEFILTERS ( 'Calendario' ),
+			            REMOVEFILTERS ( 'VentasIncidencias'[FechaDocumento] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
+			            'VentasIncidencias'[TemporadaLinea] = TemporadaSel,
+			            'VentasIncidencias'[FechaDocumento] <= FechaCorte
+			        )
+			    )
+		formatString: #,0
+		displayFolder: 8 Temporada
+		lineageTag: 2a1e9796-5c1a-44fa-9148-49648ece8c6e
+
+	/// Las de la temporada anterior, completa.
+	measure 'Incidencias temporada anterior' =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR TemporadaAnt = [TemporadaAnterior]
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaAnt ),
+			        BLANK (),
+			        CALCULATE (
+			            COUNTROWS ( 'VentasIncidencias' ),
+			            REMOVEFILTERS ( 'Calendario' ),
+			            REMOVEFILTERS ( 'VentasIncidencias'[FechaDocumento] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
+			            'VentasIncidencias'[TemporadaLinea] = TemporadaAnt
+			        )
+			    )
+		formatString: #,0
+		displayFolder: 8 Temporada
+		lineageTag: 2919e9eb-70a6-4669-b0c8-497142b78a25
+
+	/// Venta bruta afectada por incidencias en la temporada.
+	measure 'Importe incidencias temporada' =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR FechaCorte = [FechaLimiteSeleccionada]
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel ),
+			        BLANK (),
+			        CALCULATE (
+			            SUM ( 'VentasIncidencias'[VentaBrutaML] ),
+			            REMOVEFILTERS ( 'Calendario' ),
+			            REMOVEFILTERS ( 'VentasIncidencias'[FechaDocumento] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
+			            'VentasIncidencias'[TemporadaLinea] = TemporadaSel,
+			            'VentasIncidencias'[FechaDocumento] <= FechaCorte
+			        )
+			    )
+		formatString: \€#,##0
+		displayFolder: 8 Temporada
+		lineageTag: 85015978-ca74-4952-a2f5-b2933cedb7c1
+
+	/// Lo mismo en la temporada anterior.
+	measure 'Importe incidencias temporada anterior' =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR TemporadaAnt = [TemporadaAnterior]
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaAnt ),
+			        BLANK (),
+			        CALCULATE (
+			            SUM ( 'VentasIncidencias'[VentaBrutaML] ),
+			            REMOVEFILTERS ( 'Calendario' ),
+			            REMOVEFILTERS ( 'VentasIncidencias'[FechaDocumento] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
+			            'VentasIncidencias'[TemporadaLinea] = TemporadaAnt
+			        )
+			    )
+		formatString: \€#,##0
+		displayFolder: 8 Temporada
+		lineageTag: a984f36a-1a51-4409-ab4c-9e9df774893a
+
+	/// Unidades afectadas en la temporada.
+	measure 'Unidades incidencias temporada' =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR FechaCorte = [FechaLimiteSeleccionada]
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel ),
+			        BLANK (),
+			        CALCULATE (
+			            SUM ( 'VentasIncidencias'[Cantidad] ),
+			            REMOVEFILTERS ( 'Calendario' ),
+			            REMOVEFILTERS ( 'VentasIncidencias'[FechaDocumento] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
+			            'VentasIncidencias'[TemporadaLinea] = TemporadaSel,
+			            'VentasIncidencias'[FechaDocumento] <= FechaCorte
+			        )
+			    )
+		formatString: #,0
+		displayFolder: 8 Temporada
+		lineageTag: 8329ddbe-7e68-4b28-bc61-ca87c3b8b056
+
+	/// Unidades afectadas en la anterior.
+	measure 'Unidades incidencias temporada anterior' =
+			VAR TemporadaSel = [TemporadaSeleccionada]
+			VAR TemporadaAnt = [TemporadaAnterior]
+			RETURN
+			    IF (
+			        ISBLANK ( TemporadaSel ) || ISBLANK ( TemporadaAnt ),
+			        BLANK (),
+			        CALCULATE (
+			            SUM ( 'VentasIncidencias'[Cantidad] ),
+			            REMOVEFILTERS ( 'Calendario' ),
+			            REMOVEFILTERS ( 'VentasIncidencias'[FechaDocumento] ),
+			            REMOVEFILTERS ( 'LOL_PBISEASON' ),
+			            'VentasIncidencias'[TemporadaLinea] = TemporadaAnt
+			        )
+			    )
+		formatString: #,0
+		displayFolder: 8 Temporada
+		lineageTag: e23f7f0f-e8d0-4f32-9349-b2c731b68882
+
+	/// Diferencia de importe frente a la temporada anterior.
+	measure 'Evol incidencias €' = [Importe incidencias temporada] - [Importe incidencias temporada anterior]
+		formatString: \€#,##0;-\€#,##0;\€0
+		displayFolder: 8 Temporada
+		lineageTag: cf098ed7-f604-44bb-89f8-4fe736a775f2
+
+	/// La misma diferencia en porcentaje. En blanco si la anterior es cero,
+	/// para no ensenar un infinito.
+	measure 'Evol incidencias %' =
+			VAR Ant = [Importe incidencias temporada anterior]
+			RETURN IF ( NOT ISBLANK ( Ant ) && Ant <> 0, DIVIDE ( [Evol incidencias €], Ant ) )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 8 Temporada
+		lineageTag: 7e87a27d-1a57-48dd-814e-8d13ecf0aee9
+
+	/// Peso de la incidencia sobre la venta de la temporada.
+	measure '% incidencia temporada' = DIVIDE ( [Importe incidencias temporada], [VentasTemporadaSeleccionada] )
+		formatString: 0.0%
+		displayFolder: 8 Temporada
+		lineageTag: e33e135a-707b-48f3-bede-a4bf59e7514e
+
+	/// El mismo peso en la temporada anterior, para ver si mejora o empeora.
+	measure '% incidencia temporada anterior' = DIVIDE ( [Importe incidencias temporada anterior], [VentasTemporadaAnterior_Total] )
+		formatString: 0.0%
+		displayFolder: 8 Temporada
+		lineageTag: 3c4eab93-1189-4615-899f-f6da25c0267d
+
 	column Value
 		lineageTag: 07f7e59a-a986-41c2-b13c-7f6849f2b453
 		isNameInferred

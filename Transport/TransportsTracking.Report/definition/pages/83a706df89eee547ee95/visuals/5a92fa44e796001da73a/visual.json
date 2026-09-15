@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Calendario"
+                      "Entity": "LOL_PBITIMEWHS"
                     }
                   },
-                  "Property": "Date"
+                  "Property": "PickDate"
                 }
               },
-              "queryRef": "Calendario.Date",
-              "nativeQueryRef": "Fecha",
+              "queryRef": "LOL_PBITIMEWHS.PickDate",
+              "nativeQueryRef": "Fecha de picking",
               "active": true
             }
           ]
@@ -40,10 +40,10 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Calendario"
+                    "Entity": "LOL_PBITIMEWHS"
                   }
                 },
-                "Property": "Date"
+                "Property": "PickDate"
               }
             },
             "direction": "Ascending"
@@ -140,7 +140,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1A1416'"
+                      "Value": "'#000000'"
                     }
                   }
                 }
@@ -214,7 +214,7 @@
                 "From": [
                   {
                     "Name": "c",
-                    "Entity": "Calendario",
+                    "Entity": "LOL_PBITIMEWHS",
                     "Type": 0
                   }
                 ],
@@ -229,7 +229,7 @@
                                 "Source": "c"
                               }
                             },
-                            "Property": "Date"
+                            "Property": "PickDate"
                           }
                         },
                         "LowerBound": {
@@ -293,7 +293,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1A1416'"
+                      "Value": "'#000000'"
                     }
                   }
                 }
@@ -376,7 +376,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#E7DACE'"
+                      "Value": "'#EFD0E4'"
                     }
                   }
                 }

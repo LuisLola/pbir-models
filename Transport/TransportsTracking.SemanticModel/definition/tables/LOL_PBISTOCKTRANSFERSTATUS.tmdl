@@ -1,0 +1,358 @@
+table LOL_PBISTOCKTRANSFERSTATUS
+	lineageTag: a0b67b65-2278-49a4-a1f5-d0cabc019506
+
+	column AlbaranEntrada
+		dataType: string
+		lineageTag: a04635a7-6ad8-43b4-9032-a45cde87a41f
+		summarizeBy: none
+		sourceColumn: AlbaranEntrada
+
+		annotation SummarizationSetBy = Automatic
+
+	column BaseEntry
+		dataType: string
+		lineageTag: e641d9a0-2adc-4bd8-abe3-59eb825a12e4
+		summarizeBy: none
+		sourceColumn: BaseEntry
+
+		annotation SummarizationSetBy = Automatic
+
+	column BaseLine
+		dataType: string
+		lineageTag: 908a4fde-4a69-4f74-a550-6e009bfe64f8
+		summarizeBy: none
+		sourceColumn: BaseLine
+
+		annotation SummarizationSetBy = Automatic
+
+	column BaseType
+		dataType: string
+		lineageTag: e00c4e6d-f941-43a3-bed2-793d00c57f68
+		summarizeBy: none
+		sourceColumn: BaseType
+
+		annotation SummarizationSetBy = Automatic
+
+	column CantidadesAdicionalesRecibidas
+		dataType: string
+		lineageTag: 3a55e9be-0f10-4607-b123-aae5999c576d
+		summarizeBy: none
+		sourceColumn: CantidadesAdicionalesRecibidas
+
+		annotation SummarizationSetBy = Automatic
+
+	column CantidadesDevueltas
+		dataType: string
+		lineageTag: 41f3e769-8661-4b7c-802e-e075779da827
+		summarizeBy: none
+		sourceColumn: CantidadesDevueltas
+
+		annotation SummarizationSetBy = Automatic
+
+	column CantidadesEnviadasRMT
+		dataType: string
+		lineageTag: 9529f24a-20a1-47d5-9ea6-c912b664108e
+		summarizeBy: none
+		sourceColumn: CantidadesEnviadasRMT
+
+		annotation SummarizationSetBy = Automatic
+
+	column CantidadesRecibidasRMT
+		dataType: string
+		lineageTag: 920218c3-f5a8-4d78-8a18-5290bbc5d9fc
+		summarizeBy: none
+		sourceColumn: CantidadesRecibidasRMT
+
+		annotation SummarizationSetBy = Automatic
+
+	column Diferencias
+		dataType: string
+		lineageTag: b66d704c-ca76-4eed-a6a8-5dae06a2a7f4
+		summarizeBy: none
+		sourceColumn: Diferencias
+
+		annotation SummarizationSetBy = Automatic
+
+	column DocEntryAE
+		dataType: string
+		lineageTag: 66ec4a24-5872-4dc5-9552-332d2e36a5a7
+		summarizeBy: none
+		sourceColumn: DocEntryAE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DocEntryPC
+		dataType: string
+		lineageTag: 12b8f7ef-ba7f-4206-a494-262d2f06b3a4
+		summarizeBy: none
+		sourceColumn: DocEntryPC
+
+		annotation SummarizationSetBy = Automatic
+
+	column DocEntryST
+		dataType: string
+		lineageTag: 18f1e7d1-3231-4c0e-baf4-00848016ef69
+		summarizeBy: none
+		sourceColumn: DocEntryST
+
+		annotation SummarizationSetBy = Automatic
+
+	column Estadologistico
+		dataType: string
+		lineageTag: 147a8496-fa8a-4d4a-8298-75fd04ffa4ff
+		summarizeBy: none
+		sourceColumn: Estadologistico
+
+		annotation SummarizationSetBy = Automatic
+
+	column EstadologisticoLineas
+		dataType: string
+		lineageTag: 38bbadca-1eca-4280-9cf9-39699762baac
+		summarizeBy: none
+		sourceColumn: EstadologisticoLineas
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaComunicacion
+		dataType: string
+		lineageTag: 28609364-468d-4fd3-bf5d-044ba8a7a207
+		summarizeBy: none
+		sourceColumn: FechaComunicacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaDelivery
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6d504ed8-d2cf-4ae9-b768-b7f5e2beb627
+		summarizeBy: none
+		sourceColumn: FechaDelivery
+
+		variation Variación
+			isDefault
+			relationship: 886cd072-04e5-4372-ae42-721172fdcb39
+			defaultHierarchy: LocalDateTable_2bbdc6cb-bd10-451e-88a4-36b5dde709b4.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FechaDeliveryActualizada
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ef4297d0-3839-4d9a-9bae-42a979413dde
+		summarizeBy: none
+		sourceColumn: FechaDeliveryActualizada
+
+		variation Variación
+			isDefault
+			relationship: 6d9c5fe9-dee4-4ce4-8efc-925763ba4907
+			defaultHierarchy: LocalDateTable_c0cbd5d6-4b6d-4d2d-927c-5d698ffbacda.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FechaDisponibilidad
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 138ec4e0-9734-4e88-8f55-d943edfd1eaf
+		summarizeBy: none
+		sourceColumn: FechaDisponibilidad
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FechaEmbarque
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d5d61401-50fa-4042-954d-e521520eb59a
+		summarizeBy: none
+		sourceColumn: FechaEmbarque
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FechaEntregaST
+		dataType: string
+		lineageTag: 4099bb87-46f2-4214-a870-52d5485961b8
+		summarizeBy: none
+		sourceColumn: FechaEntregaST
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaEstadologistico
+		dataType: string
+		lineageTag: 3c743e12-261d-4c4a-b638-b1b846654ba0
+		summarizeBy: none
+		sourceColumn: FechaEstadologistico
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaInspeccion
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8e5c7656-3844-4fad-aed6-ffa3c98f1b12
+		summarizeBy: none
+		sourceColumn: FechaInspeccion
+
+		variation Variación
+			isDefault
+			relationship: ddfada93-16c0-4e5a-8a2f-566f89fba81f
+			defaultHierarchy: LocalDateTable_be0cf1a2-d83e-4303-8f1e-2f8f2e254444.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FechaInspeccionReal
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a1f6c67e-ba2b-4a6d-9721-b6dc1533e952
+		summarizeBy: none
+		sourceColumn: FechaInspeccionReal
+
+		variation Variación
+			isDefault
+			relationship: 05920d81-300f-4f8c-908d-2ccdd5a96219
+			defaultHierarchy: LocalDateTable_94015646-cf5f-4a9d-9cb1-68e368680b3c.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FechaModificacion
+		dataType: string
+		lineageTag: 81cb5416-7fb1-46c7-807c-ae5b9e94e36e
+		summarizeBy: none
+		sourceColumn: FechaModificacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaRecepcion
+		dataType: string
+		lineageTag: e0b02b2f-81af-4130-9b18-92d440c8c77c
+		summarizeBy: none
+		sourceColumn: FechaRecepcion
+
+		annotation SummarizationSetBy = Automatic
+
+	column InspeccionCalidad
+		dataType: string
+		lineageTag: d64eca34-d124-4caf-a783-480945f88185
+		summarizeBy: none
+		sourceColumn: InspeccionCalidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column LineUID
+		dataType: string
+		lineageTag: 2fdf4fb8-352c-4794-bb7b-69171aa62871
+		summarizeBy: none
+		sourceColumn: LineUID
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumDevolucion
+		dataType: string
+		lineageTag: e76de012-35cf-4889-9de8-ea8ee5f6771a
+		summarizeBy: none
+		sourceColumn: NumDevolucion
+
+		annotation SummarizationSetBy = Automatic
+
+	column PedidoCompra
+		dataType: string
+		lineageTag: 6efc00ed-16bf-439a-8430-d8c3b4655c4e
+		summarizeBy: none
+		sourceColumn: PedidoCompra
+
+		annotation SummarizationSetBy = Automatic
+
+	column Season
+		dataType: string
+		lineageTag: 37052208-7355-4d4d-8f76-f7ea7d761a7e
+		summarizeBy: none
+		sourceColumn: Season
+
+		annotation SummarizationSetBy = Automatic
+
+	column SKU
+		dataType: string
+		lineageTag: 67ef82b7-ee5a-4588-9ff3-0881b826b826
+		summarizeBy: none
+		sourceColumn: SKU
+
+		annotation SummarizationSetBy = Automatic
+
+	column Solicitud_traslado
+		dataType: string
+		lineageTag: b7c2235f-b17c-4603-8b64-cb18d160efc6
+		summarizeBy: none
+		sourceColumn: Solicitud_traslado
+
+		annotation SummarizationSetBy = Automatic
+
+	column WhsCode
+		dataType: string
+		lineageTag: 391976eb-75fd-4b92-8477-a1137e1ef560
+		summarizeBy: none
+		sourceColumn: WhsCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column WhsName
+		dataType: string
+		lineageTag: 0175f201-dcae-414c-b45c-403134c30d49
+		summarizeBy: none
+		sourceColumn: WhsName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// FechaEstadologistico llega como texto ISO; esta es su version fecha.
+	column FechaEstado = VAR x = TRIM ( LOL_PBISTOCKTRANSFERSTATUS[FechaEstadologistico] ) RETURN IF ( LEN ( x ) >= 10, DATE ( VALUE ( MID ( x, 1, 4 ) ), VALUE ( MID ( x, 6, 2 ) ), VALUE ( MID ( x, 9, 2 ) ) ) )
+		formatString: dd/mm/yyyy
+		lineageTag: e64e8a3a-3e96-4e9a-8630-ade8fc7d15df
+		summarizeBy: none
+
+		variation Variación
+			isDefault
+			relationship: 6f90b445-2b00-4eb3-8df5-2daa62a702b4
+			defaultHierarchy: LocalDateTable_be561ec9-67ca-4c10-b91a-26c43aa3f18e.'Jerarquía de fechas'
+
+	/// Dias laborables que lleva la linea en su estado actual.
+	column 'Días en estado' = VAR f = LOL_PBISTOCKTRANSFERSTATUS[FechaEstado] RETURN IF ( NOT ISBLANK ( f ), NETWORKDAYS ( f, TODAY (), 1, VALUES ( Festivos[Fecha] ) ) )
+		formatString: #,0
+		lineageTag: 4dbf7f30-6e42-4caf-b9c2-e1a67166fa0c
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Ciclo real de inbound en dias laborables. Es el unico tramo entre dos
+	/// hitos ocurridos: el resto de fechas de la tabla son previsiones.
+	column 'Días embarque a disponible' = VAR a = LOL_PBISTOCKTRANSFERSTATUS[FechaEmbarque] VAR b = LOL_PBISTOCKTRANSFERSTATUS[FechaDisponibilidad] RETURN IF ( NOT ISBLANK ( a ) && NOT ISBLANK ( b ) && b >= a, NETWORKDAYS ( a, b, 1, VALUES ( Festivos[Fecha] ) ) )
+		formatString: #,0
+		lineageTag: 70d953e6-939b-4883-8ed4-f761815ae17a
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Dias naturales de retraso (+) o adelanto (-) respecto a la delivery prevista.
+	column 'Desvío vs previsto' = VAR p = LOL_PBISTOCKTRANSFERSTATUS[FechaDeliveryActualizada] VAR r = LOL_PBISTOCKTRANSFERSTATUS[FechaDisponibilidad] RETURN IF ( NOT ISBLANK ( p ) && NOT ISBLANK ( r ), DATEDIFF ( p, r, DAY ) )
+		formatString: #,0;-#,0;0
+		lineageTag: a56ad342-6d6b-4f5d-a4f5-c0cc0ef6a900
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition LOL_PBISTOCKTRANSFERSTATUS = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("192.168.0.232", "hana_etl_admin"),
+				    dbo_LOL_PBISTOCKTRANSFERSTATUS = Origen{[Schema="dbo",Item="LOL_PBISTOCKTRANSFERSTATUS"]}[Data]
+				in
+				    dbo_LOL_PBISTOCKTRANSFERSTATUS
+

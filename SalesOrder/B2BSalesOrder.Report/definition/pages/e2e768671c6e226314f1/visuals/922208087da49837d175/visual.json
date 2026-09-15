@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "922208087da49837d175",
   "position": {
-    "x": 941.01461736887359,
+    "x": 940.01461736887359,
     "y": 0,
     "z": 0,
     "height": 63.834909716251076,
@@ -20,16 +20,15 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "LOL_PLANMATERIAL"
+                      "Entity": "Calendario"
                     }
                   },
-                  "Property": "Fecha disponibilidad (línea del articulo)"
+                  "Property": "Date"
                 }
               },
-              "queryRef": "LOL_PLANMATERIAL.Fecha disponibilidad (línea del articulo)",
-              "nativeQueryRef": "Hasta Fecha Disponibilidad Stock",
-              "active": true,
-              "displayName": "Hasta Fecha Disponibilidad Stock"
+              "queryRef": "Calendario.Date",
+              "nativeQueryRef": "Date",
+              "active": true
             }
           ]
         }
@@ -41,10 +40,10 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "LOL_PLANMATERIAL"
+                    "Entity": "Calendario"
                   }
                 },
-                "Property": "Fecha disponibilidad (línea del articulo)"
+                "Property": "Date"
               }
             },
             "direction": "Ascending"
@@ -61,6 +60,20 @@
               "expr": {
                 "Literal": {
                   "Value": "'Before'"
+                }
+              }
+            },
+            "relativeRange": {
+              "expr": {
+                "Literal": {
+                  "Value": "'This'"
+                }
+              }
+            },
+            "relativePeriod": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Months'"
                 }
               }
             }
@@ -161,6 +174,11 @@
               }
             }
           }
+        }
+      ],
+      "dateRange": [
+        {
+          "properties": {}
         }
       ]
     },

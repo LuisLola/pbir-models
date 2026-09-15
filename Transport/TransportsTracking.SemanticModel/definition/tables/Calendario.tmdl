@@ -89,7 +89,7 @@ table Calendario
 		mode: import
 		source =
 				ADDCOLUMNS (
-				    CALENDAR ( MIN ( MIN ( LOL_TRANSPORT_TRACKING[fecha_lanzamiento] ), MIN ( LOL_PBITIMEWHS[PickDate] ) ), MAX ( TODAY (), MAX ( LOL_TRANSPORT_TRACKING[fecha_entregado] ) ) ),
+				    CALENDAR ( MIN ( MIN ( MIN ( LOL_TRANSPORT_TRACKING[fecha_lanzamiento] ), MIN ( LOL_PBITIMEWHS[PickDate] ) ), MIN ( LOL_PBISTOCKTRANSFERSTATUS[FechaDisponibilidad] ) ), MAX ( MAX ( TODAY (), MAX ( LOL_TRANSPORT_TRACKING[fecha_entregado] ) ), MAX ( LOL_PBISTOCKTRANSFERSTATUS[FechaDisponibilidad] ) ) ),
 				    "Año", YEAR ( [Date] ),
 				    "MesNum", MONTH ( [Date] ),
 				    "MesNombre", FORMAT ( [Date], "mmm", "es-ES" ),

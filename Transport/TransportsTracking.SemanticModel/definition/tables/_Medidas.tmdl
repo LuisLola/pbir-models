@@ -203,7 +203,7 @@ table _Medidas
 					"" )
 			VAR vPais = SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[pais_destino] )
 			VAR vEstado = SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[estado_norm] )
-			VAR vDias = MAX ( LOL_TRANSPORT_TRACKING[dias_entrega_laborables] )
+			VAR _ini20 = CALCULATE ( MAX ( LOL_PBITIMEWHS[FechaLog20] ) ) VAR _finEnt = MAX ( LOL_TRANSPORT_TRACKING[fecha_entrega_real] ) VAR vDias = IF ( NOT ISBLANK ( _ini20 ) && NOT ISBLANK ( _finEnt ) && _finEnt >= _ini20, NETWORKDAYS ( _ini20, _finEnt, 1, VALUES ( Festivos[Fecha] ) ), MAX ( LOL_TRANSPORT_TRACKING[dias_entrega_laborables] ) )
 			VAR _ciuRaw = SELECTEDVALUE ( LOL_TRANSPORT_TRACKING[ciudad_destino] )
 			VAR _pBreak = IF ( ISBLANK ( _ciuRaw ), 0, FIND ( UNICHAR ( 10 ), _ciuRaw, 1, 0 ) )
 			VAR _nb = IF ( _pBreak > 0, LEFT ( _ciuRaw, _pBreak - 1 ), _ciuRaw )
@@ -213,7 +213,7 @@ table _Medidas
 			VAR d2 = MAX ( LOL_TRANSPORT_TRACKING[fecha_etiqueta] )
 			VAR d3 = MAX ( LOL_TRANSPORT_TRACKING[fecha_en_transito] )
 			VAR d4 = MAX ( LOL_TRANSPORT_TRACKING[fecha_en_reparto] )
-			VAR d5 = MAX ( LOL_TRANSPORT_TRACKING[fecha_entregado] )
+			VAR d5 = MAX ( LOL_TRANSPORT_TRACKING[fecha_entrega_real] )
 			VAR p1 = NOT ISBLANK ( d1 )
 			VAR p2 = NOT ISBLANK ( d2 )
 			VAR p3 = NOT ISBLANK ( d3 )
@@ -482,6 +482,449 @@ table _Medidas
 	measure 'Chip Estado Color' = IF ( ISFILTERED ( LOL_TRANSPORT_TRACKING[estado] ), "#DFA0C9", "#6F263D" )
 		displayFolder: 0 Pildoras
 		lineageTag: 92a2dc19-bdc8-4426-aa89-6cd0349011c4
+
+	/// Pickings del periodo que existen en tracking, sea cual sea el transportista.
+	measure 'Pickings con envío' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), USERELATIONSHIP ( LOL_PBITIMEWHS[PickDate], Calendario[Date] ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[fecha_lanzamiento], Calendario[Date], NONE ), REMOVEFILTERS ( LOL_TRANSPORT_TRACKING[transportista_norm] ), REMOVEFILTERS ( LOL_TRANSPORT_TRACKING[estado] ), NOT ISBLANK ( LOL_TRANSPORT_TRACKING[picking] ) )
+		formatString: #,0
+		displayFolder: 4 Almacén
+		lineageTag: 0ad36aa1-b71c-4bc3-a906-61a325de2990
+
+	/// Finalizados en almacen que nunca llegan a transporte: ECI, marketplaces,
+	/// reposicion a tienda propia. Salen por logistica ajena.
+	measure 'Pickings finalizados sin envío' = VAR En60Completo = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), USERELATIONSHIP ( LOL_PBITIMEWHS[PickDate], Calendario[Date] ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[fecha_lanzamiento], Calendario[Date], NONE ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[picking], LOL_PBITIMEWHS[Picking], NONE ), NOT ISBLANK ( LOL_PBITIMEWHS[FechaLog60] ) ) RETURN En60Completo - [Pickings con envío]
+		formatString: #,0
+		displayFolder: 4 Almacén
+		lineageTag: 59562a6a-e58e-46a5-b04e-e4cb19318aba
+
+	/// Entrega medida solo sobre lo que de verdad se expidio por transporte.
+	measure '% entregado sobre expedido' = DIVIDE ( [Pickings entregados], [Pickings con envío] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 4 Almacén
+		lineageTag: ab7faa0c-a985-4d86-ba6f-005ecfbf2b0a
+
+	/// Lineas de transferencia en el contexto actual.
+	measure 'Líneas inbound' = COUNTROWS ( LOL_PBISTOCKTRANSFERSTATUS )
+		formatString: #,0
+		displayFolder: 5 Inbound
+		lineageTag: 28f618d7-7fa1-4990-ba7f-c3db7b2837de
+
+	/// Referencias distintas en movimiento.
+	measure 'SKU inbound' = DISTINCTCOUNT ( LOL_PBISTOCKTRANSFERSTATUS[SKU] )
+		formatString: #,0
+		displayFolder: 5 Inbound
+		lineageTag: 198be2f6-8b27-433a-b32c-484cf0515ef2
+
+	/// Estado 20.
+	measure 'Líneas en tránsito' = CALCULATE ( [Líneas inbound], LOL_PBISTOCKTRANSFERSTATUS[Estadologistico] = "20" )
+		formatString: #,0
+		displayFolder: 5 Inbound
+		lineageTag: f4dc55a2-fe08-4e01-90e5-39fbc26575fd
+
+	/// Estado 30.
+	measure 'Líneas en RMT' = CALCULATE ( [Líneas inbound], LOL_PBISTOCKTRANSFERSTATUS[Estadologistico] = "30" )
+		formatString: #,0
+		displayFolder: 5 Inbound
+		lineageTag: 0eb9ceed-a526-446a-af02-6b9b8aea95ff
+
+	/// Estado 50.
+	measure 'Líneas disponibles' = CALCULATE ( [Líneas inbound], LOL_PBISTOCKTRANSFERSTATUS[Estadologistico] = "50" )
+		formatString: #,0
+		displayFolder: 5 Inbound
+		lineageTag: 4adf304a-4e76-4ab8-a627-6fc03da382e4
+
+	/// Cuanto llevan paradas las lineas en su estado actual.
+	measure 'Días en estado (mediana)' = MEDIAN ( LOL_PBISTOCKTRANSFERSTATUS[Días en estado] )
+		formatString: #,0.0
+		displayFolder: 5 Inbound
+		lineageTag: 2c56939c-5e74-4591-aefb-e4f0e2f4c711
+
+	/// La linea mas antigua sin moverse.
+	measure 'Días en estado (máximo)' = MAX ( LOL_PBISTOCKTRANSFERSTATUS[Días en estado] )
+		formatString: #,0
+		displayFolder: 5 Inbound
+		lineageTag: 6bd7513b-a037-48de-b8e4-eac386b434c3
+
+	/// Dias laborables de embarque a disponible.
+	measure 'Ciclo inbound (mediana)' = MEDIAN ( LOL_PBISTOCKTRANSFERSTATUS[Días embarque a disponible] )
+		formatString: #,0.0
+		displayFolder: 5 Inbound
+		lineageTag: 423d9616-15fe-4c3f-a910-ad0062f64c31
+
+	/// Retraso (+) o adelanto (-) frente a la delivery prevista.
+	measure 'Desvío medio vs previsto' = AVERAGE ( LOL_PBISTOCKTRANSFERSTATUS[Desvío vs previsto] )
+		formatString: #,0.0;-#,0.0;0
+		displayFolder: 5 Inbound
+		lineageTag: f584094d-cfd5-40bf-ae19-e6e8449444fa
+
+	/// Lineas sin cerrar que llevan mas de 30 dias laborables en el mismo estado.
+	measure 'Líneas paradas +30 días' = CALCULATE ( [Líneas inbound], LOL_PBISTOCKTRANSFERSTATUS[Días en estado] > 30, LOL_PBISTOCKTRANSFERSTATUS[Estadologistico] <> "50" )
+		formatString: #,0
+		displayFolder: 5 Inbound
+		lineageTag: a5e7985f-4ba3-4970-ae7d-c29356ae6ee1
+
+	/// Unidades de pedido, sin contar incidencias.
+	measure 'Unidades pedidas' = CALCULATE ( SUM ( LOL_PBIB2BSALESORDER[Cantidad pedida] ), LOL_PBIB2BSALESORDER[IsIncidence] = "N" )
+		formatString: #,0
+		displayFolder: 6 Pedido y entrega
+		lineageTag: c7b67608-69be-4baf-b430-89ad1428f85e
+
+	/// Unidades servidas en albaran. En un albaran, Cantidad ya es lo entregado:
+	/// la columna CantidadEntregada llega a cero en las 2,9 M de filas.
+	measure 'Unidades entregadas' = SUM ( LOL_PBISALESDELIVERY[Cantidad] )
+		formatString: #,0
+		displayFolder: 6 Pedido y entrega
+		lineageTag: dc900cdf-f38e-4a68-8b2f-69481c09636d
+
+	/// Diferencia entre lo pedido y lo servido en el contexto actual.
+	measure 'Unidades por servir' = [Unidades pedidas] - [Unidades entregadas]
+		formatString: #,0
+		displayFolder: 6 Pedido y entrega
+		lineageTag: 965b1f8d-c57e-408f-8581-87671a7eb790
+
+	/// Cuanto se ha servido de lo pedido.
+	measure '% servido' = DIVIDE ( [Unidades entregadas], [Unidades pedidas] )
+		formatString: 0.0%
+		displayFolder: 6 Pedido y entrega
+		lineageTag: 8fa4d10a-0d55-429f-af02-4a059bc723d7
+
+	/// Lineas de pedido, sin incidencias.
+	measure 'Líneas de pedido' = CALCULATE ( COUNTROWS ( LOL_PBIB2BSALESORDER ), LOL_PBIB2BSALESORDER[IsIncidence] = "N" )
+		formatString: #,0
+		displayFolder: 6 Pedido y entrega
+		lineageTag: fed7cd47-e595-4753-ac74-0b2a0f6ec133
+
+	/// Lineas servidas.
+	measure 'Líneas de albarán' = COUNTROWS ( LOL_PBISALESDELIVERY )
+		formatString: #,0
+		displayFolder: 6 Pedido y entrega
+		lineageTag: a23346ea-876b-44eb-b4c5-1a2a1b30296c
+
+	/// Documentos de pedido distintos.
+	measure Pedidos = DISTINCTCOUNT ( LOL_PBIB2BSALESORDER[DocNum] )
+		formatString: #,0
+		displayFolder: 6 Pedido y entrega
+		lineageTag: f6080b37-a1f4-4817-9340-e20f2a7abedf
+
+	/// Documentos de albaran distintos.
+	measure Albaranes = DISTINCTCOUNT ( LOL_PBISALESDELIVERY[DocNum] )
+		formatString: #,0
+		displayFolder: 6 Pedido y entrega
+		lineageTag: a782cace-63cd-4900-9593-fdbfba030c39
+
+	/// Referencias distintas en los pedidos del contexto.
+	measure 'Referencias pedidas' = DISTINCTCOUNT ( LOL_PBIB2BSALESORDER[ItemCode] )
+		formatString: #,0
+		displayFolder: 6 Pedido y entrega
+		lineageTag: f402fd33-7a42-498a-b981-478106d62f17
+
+	/// Las incidencias no llevan picking: no cuelgan del almacen y solo se ven
+	/// sin filtro de picking.
+	measure 'Unidades en incidencia' = CALCULATE ( SUM ( LOL_PBIB2BSALESORDER[Cantidad pedida] ), LOL_PBIB2BSALESORDER[IsIncidence] = "Y" )
+		formatString: #,0
+		displayFolder: 6 Pedido y entrega
+		lineageTag: 506e9111-f195-404e-b40e-624eb34a8e16
+
+	/// Desde que el picking entra en estado 20 hasta que el transporte lo
+	/// entrega. Diferencia de fechas real, con hora: no es la suma de los
+	/// tramos de almacen y transporte.
+	measure 'Días de 20 a entrega (mediana)' = VAR Base = FILTER ( LOL_TRANSPORT_TRACKING, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_entrega_real] ) && NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) && LOL_TRANSPORT_TRACKING[fecha_entrega_real] >= RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) RETURN MEDIANX ( Base, DIVIDE ( DATEDIFF ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ), LOL_TRANSPORT_TRACKING[fecha_entrega_real], HOUR ), 24 ) )
+		formatString: #,0.0
+		displayFolder: 3 Tiempo\20 a entrega
+		lineageTag: 21fbf191-b385-4fbd-87a2-cc48583aa8b3
+
+	/// La media sube sobre la mediana por la cola larga: el maximo son 59 dias.
+	measure 'Días de 20 a entrega (media)' = VAR Base = FILTER ( LOL_TRANSPORT_TRACKING, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_entrega_real] ) && NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) && LOL_TRANSPORT_TRACKING[fecha_entrega_real] >= RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) RETURN AVERAGEX ( Base, DIVIDE ( DATEDIFF ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ), LOL_TRANSPORT_TRACKING[fecha_entrega_real], HOUR ), 24 ) )
+		formatString: #,0
+		displayFolder: 3 Tiempo\20 a entrega
+		lineageTag: b3901580-fea5-40de-be32-3a3995e691d4
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	/// Nueve de cada diez envios estan por debajo de esto.
+	measure 'Días de 20 a entrega (P90)' = VAR Base = FILTER ( LOL_TRANSPORT_TRACKING, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_entrega_real] ) && NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) && LOL_TRANSPORT_TRACKING[fecha_entrega_real] >= RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) RETURN PERCENTILEX.INC ( Base, DIVIDE ( DATEDIFF ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ), LOL_TRANSPORT_TRACKING[fecha_entrega_real], HOUR ), 24 ), 0.9 )
+		formatString: #,0.0
+		displayFolder: 3 Tiempo\20 a entrega
+		lineageTag: cd218e38-f329-4520-b861-b67cf6dc1931
+
+	/// Lo mismo en horas. Las dos fechas traen hora, asi que el dato es real.
+	measure 'Horas de 20 a entrega (mediana)' = VAR Base = FILTER ( LOL_TRANSPORT_TRACKING, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_entrega_real] ) && NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) && LOL_TRANSPORT_TRACKING[fecha_entrega_real] >= RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) RETURN MEDIANX ( Base, DATEDIFF ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ), LOL_TRANSPORT_TRACKING[fecha_entrega_real], HOUR ) )
+		formatString: #,0
+		displayFolder: 3 Tiempo\20 a entrega
+		lineageTag: f33c8710-358d-4cb2-890d-e4205944632c
+
+	/// La misma ventana contando solo laborables. Festivos solo tiene 4 dias
+	/// cargados, asi que sale algo optimista.
+	measure 'Días laborables de 20 a entrega (mediana)' = VAR Base = FILTER ( LOL_TRANSPORT_TRACKING, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_entrega_real] ) && NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) && LOL_TRANSPORT_TRACKING[fecha_entrega_real] >= RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) RETURN MEDIANX ( Base, NETWORKDAYS ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ), LOL_TRANSPORT_TRACKING[fecha_entrega_real], 1, VALUES ( Festivos[Fecha] ) ) )
+		formatString: #,0.0
+		displayFolder: 3 Tiempo\20 a entrega
+		lineageTag: 65babd53-21ab-4d38-b566-a6420ed24161
+
+	/// Primera mitad: lo que tarda el almacen. Sobre la misma poblacion que el
+	/// total, pero ojo: las medianas de las dos mitades no suman la del total.
+	measure 'Horas de 20 a 40 (mediana)' = VAR Base = FILTER ( LOL_TRANSPORT_TRACKING, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_entrega_real] ) && NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) && LOL_TRANSPORT_TRACKING[fecha_entrega_real] >= RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) RETURN MEDIANX ( FILTER ( Base, NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog40] ) ) ), DATEDIFF ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ), RELATED ( LOL_PBITIMEWHS[FechaLog40] ), HOUR ) )
+		formatString: #,0
+		displayFolder: 3 Tiempo\20 a entrega
+		lineageTag: b09c1fe0-b7d9-4436-8c84-0e976dbc3384
+
+	/// Segunda mitad: desde que sale del almacen hasta la entrega.
+	measure 'Horas de 40 a entrega (mediana)' = VAR Base = FILTER ( LOL_TRANSPORT_TRACKING, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_entrega_real] ) && NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) && LOL_TRANSPORT_TRACKING[fecha_entrega_real] >= RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) RETURN MEDIANX ( FILTER ( Base, NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog40] ) ) ), DATEDIFF ( RELATED ( LOL_PBITIMEWHS[FechaLog40] ), LOL_TRANSPORT_TRACKING[fecha_entrega_real], HOUR ) )
+		formatString: #,0
+		displayFolder: 3 Tiempo\20 a entrega
+		lineageTag: f0479a3a-8741-4abc-88e0-61aa7d810dee
+
+	/// Envios que tienen fecha de estado 20 y fecha de entrega coherentes.
+	/// Es la base de todas las medidas de esta carpeta.
+	measure 'Envíos con ciclo 20 a entrega' = VAR Base = FILTER ( LOL_TRANSPORT_TRACKING, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_entrega_real] ) && NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) && LOL_TRANSPORT_TRACKING[fecha_entrega_real] >= RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) RETURN COUNTROWS ( Base )
+		formatString: #,0
+		displayFolder: 3 Tiempo\20 a entrega
+		lineageTag: 4c1a1f18-c310-4d98-8169-53ea9c32ea95
+
+	/// Imposibles: entregado antes de entrar en el almacen. Quedan fuera del
+	/// ciclo y se cuentan aqui para que se vean.
+	measure 'Envíos con entrega anterior al 20' = COUNTROWS ( FILTER ( LOL_TRANSPORT_TRACKING, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_entrega_real] ) && NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) && LOL_TRANSPORT_TRACKING[fecha_entrega_real] < RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) )
+		formatString: #,0
+		displayFolder: 3 Tiempo\20 a entrega
+		lineageTag: e1a811e4-99a5-474e-b3a2-62587e9cfd83
+
+	/// Preparacion en dias NATURALES. Ojo: la columna Dias Preparacion del
+	/// almacen esta en habiles y por eso sale mas baja.
+	measure 'Tramo 20 a 40 (días)' = VAR Base = FILTER ( LOL_TRANSPORT_TRACKING, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_entrega_real] ) && NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) && NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog40] ) ) && NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog60] ) ) && NOT ISBLANK ( LOL_TRANSPORT_TRACKING[f_inicio] ) && LOL_TRANSPORT_TRACKING[fecha_entrega_real] >= RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) RETURN AVERAGEX ( Base, DIVIDE ( DATEDIFF ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ), RELATED ( LOL_PBITIMEWHS[FechaLog40] ), HOUR ), 24 ) )
+		formatString: #,0.0;-#,0.0;0
+		displayFolder: 3 Tiempo\20 a entrega
+		lineageTag: 64b46863-b906-45a1-9de2-6e622ec02cf0
+
+	/// Del fin de preparacion al cierre 60. No lo mide ninguna otra columna.
+	measure 'Tramo 40 a 60 (días)' = VAR Base = FILTER ( LOL_TRANSPORT_TRACKING, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_entrega_real] ) && NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) && NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog40] ) ) && NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog60] ) ) && NOT ISBLANK ( LOL_TRANSPORT_TRACKING[f_inicio] ) && LOL_TRANSPORT_TRACKING[fecha_entrega_real] >= RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) RETURN AVERAGEX ( Base, DIVIDE ( DATEDIFF ( RELATED ( LOL_PBITIMEWHS[FechaLog40] ), RELATED ( LOL_PBITIMEWHS[FechaLog60] ), HOUR ), 24 ) )
+		formatString: #,0.0;-#,0.0;0
+		displayFolder: 3 Tiempo\20 a entrega
+		lineageTag: 4fe9acdf-cb8b-4f09-bbda-83cc56d176e0
+
+	/// Sale NEGATIVO y esta bien: el 91,7% de los envios los recoge el
+	/// transportista antes de que se selle el 60. El 60 es un cierre
+	/// administrativo posterior, no la salida de la mercancia.
+	measure 'Tramo 60 a recogida (días)' = VAR Base = FILTER ( LOL_TRANSPORT_TRACKING, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_entrega_real] ) && NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) && NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog40] ) ) && NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog60] ) ) && NOT ISBLANK ( LOL_TRANSPORT_TRACKING[f_inicio] ) && LOL_TRANSPORT_TRACKING[fecha_entrega_real] >= RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) RETURN AVERAGEX ( Base, DIVIDE ( DATEDIFF ( RELATED ( LOL_PBITIMEWHS[FechaLog60] ), LOL_TRANSPORT_TRACKING[f_inicio], HOUR ), 24 ) )
+		formatString: #,0.0;-#,0.0;0
+		displayFolder: 3 Tiempo\20 a entrega
+		lineageTag: 794ae1b8-1f2d-4348-a1cb-05b234f842a6
+
+	/// Transporte real, de la recogida a la entrega. Es mayor que la columna
+	/// dias_entrega_natural, que viene truncada a dias enteros.
+	measure 'Tramo recogida a entrega (días)' = VAR Base = FILTER ( LOL_TRANSPORT_TRACKING, NOT ISBLANK ( LOL_TRANSPORT_TRACKING[fecha_entrega_real] ) && NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) && NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog40] ) ) && NOT ISBLANK ( RELATED ( LOL_PBITIMEWHS[FechaLog60] ) ) && NOT ISBLANK ( LOL_TRANSPORT_TRACKING[f_inicio] ) && LOL_TRANSPORT_TRACKING[fecha_entrega_real] >= RELATED ( LOL_PBITIMEWHS[FechaLog20] ) ) RETURN AVERAGEX ( Base, DIVIDE ( DATEDIFF ( LOL_TRANSPORT_TRACKING[f_inicio], LOL_TRANSPORT_TRACKING[fecha_entrega_real], HOUR ), 24 ) )
+		formatString: #,0.0;-#,0.0;0
+		displayFolder: 3 Tiempo\20 a entrega
+		lineageTag: eefc900a-4f7b-4909-923c-6c2687fbc063
+
+	/// Debe dar exactamente lo mismo que Dias de 20 a entrega (media).
+	/// Si algun dia deja de cuadrar, es que falta una fecha en alguna pata.
+	measure 'Suma de tramos (control)' = [Tramo 20 a 40 (días)] + [Tramo 40 a 60 (días)] + [Tramo 60 a recogida (días)] + [Tramo recogida a entrega (días)]
+		formatString: #,0.0
+		displayFolder: 3 Tiempo\20 a entrega
+		lineageTag: a429d4bc-58dd-42ff-a5c6-6205bfa35182
+
+	/// La ventana que hay puesta sobre la fecha de picking. El "Rango de fechas"
+	/// de siempre lee Calendario y en estas paginas ya no manda.
+	measure 'Rango de picking' = VAR Ini = MIN ( LOL_PBITIMEWHS[PickDate] ) VAR Fin = MAX ( LOL_PBITIMEWHS[PickDate] ) RETURN IF ( ISBLANK ( Ini ), "Sin fechas", FORMAT ( Ini, "dd/MM/yyyy" ) & " - " & FORMAT ( Fin, "dd/MM/yyyy" ) )
+		displayFolder: 0 Cabecera
+		lineageTag: 9fa1d70c-6c78-4835-b458-692eb66c90dd
+
+	/// Igual que la de siempre pero con el rango de fecha de picking.
+	measure 'Rango y actualización (picking)' = "   Datos Desde:   " & [Rango de picking] & "   ·   " & [Última actualización]
+		displayFolder: 0 Cabecera
+		lineageTag: 90a5bf48-30cd-43eb-ae17-78719a6725ae
+
+	/// TODOS los picking de la ventana, tenga o no envio y mire lo que mire el
+	/// filtro de transportista. Es el total del que cuelga el resto.
+	measure 'Pickings lanzados' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[picking], LOL_PBITIMEWHS[Picking], NONE ) )
+		formatString: #,0
+		displayFolder: 4 Almacén\Embudo
+		lineageTag: ddda4b70-06de-4562-9302-d13276d27adb
+
+	/// Salen del almacen y nunca entran en transporte: ECI, marketplaces,
+	/// reposicion a tienda propia. Van por logistica ajena.
+	measure 'Pickings sin envío' = [Pickings lanzados] - [Pickings con envío]
+		formatString: #,0
+		displayFolder: 4 Almacén\Embudo
+		lineageTag: a98899bb-3513-4c39-817f-d3ca02ab4fcd
+
+	/// Tienen envio pero se los come el filtro de transportista o de estado.
+	/// Es lo que separa el universo del almacen de lo que ve la tabla.
+	measure 'Pickings fuera de filtro' = VAR ConEnvio = [Pickings con envío] VAR EnFiltro = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), NOT ISBLANK ( LOL_TRANSPORT_TRACKING[picking] ) ) RETURN ConEnvio - EnFiltro
+		formatString: #,0
+		displayFolder: 4 Almacén\Embudo
+		lineageTag: 681cd28c-942e-46a3-b0b9-cd34b7416145
+
+	/// En manos del transporte y todavia sin entregar.
+	measure 'Pickings en curso' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), LOL_TRANSPORT_TRACKING[estado_grupo] = "En curso" )
+		formatString: #,0
+		displayFolder: 4 Almacén\Embudo
+		lineageTag: ca3dd395-92ba-4968-8f98-f63c6bea842c
+
+	/// Parados por incidencia del transportista.
+	measure 'Pickings con incidencia' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), LOL_TRANSPORT_TRACKING[estado_grupo] = "Incidencia" )
+		formatString: #,0
+		displayFolder: 4 Almacén\Embudo
+		lineageTag: 625df55a-f0cb-45c9-b99b-829314a79f06
+
+	/// Vueltos al origen.
+	measure 'Pickings devueltos' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), LOL_TRANSPORT_TRACKING[estado_grupo] = "Devuelto" )
+		formatString: #,0
+		displayFolder: 4 Almacén\Embudo
+		lineageTag: c673d59a-12d1-4a63-9ca3-07202666a2f6
+
+	/// Tiene que dar CERO. Si algun dia no lo da, es que ha aparecido un
+	/// estado nuevo en tracking que no esta contemplado arriba.
+	measure 'Cuadre del embudo' = [Pickings lanzados] - [Pickings sin envío] - [Pickings fuera de filtro] - [Pickings entregados] - [Pickings en curso] - [Pickings con incidencia] - [Pickings devueltos] - [Pickings sin datos de transporte]
+		formatString: #,0;-#,0;0
+		displayFolder: 4 Almacén\Embudo
+		lineageTag: 259c8f61-e5d6-4357-a61d-a9b867d6522e
+
+	/// El transportista tiene el envio pero no devuelve ningun estado.
+	/// Es casi todo SEUR: 5.733 picking en el modelo, 453 en un mes tipo.
+	measure 'Pickings sin datos de transporte' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), LOL_TRANSPORT_TRACKING[estado_grupo] = "Sin datos" )
+		formatString: #,0
+		displayFolder: 4 Almacén\Embudo
+		lineageTag: 47493828-12aa-404f-9f92-54a350213ddc
+
+	/// Mediana de dias habiles del 20 al 40, en la base del almacen: no la
+	/// recorta el filtro de transportista, igual que el recuento de picking.
+	measure 'Mediana días 20-40' = CALCULATE ( MEDIAN ( LOL_PBITIMEWHS[Dias habiles 20-40] ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[picking], LOL_PBITIMEWHS[Picking], NONE ) )
+		formatString: #,0.0
+		displayFolder: 4 Almacén
+		lineageTag: d254cdab-cca0-466a-ab20-c2a62f54c9ec
+
+	/// Todo el picking con fecha en la ventana, tenga transporte o no.
+	/// Es el total del que cuelga todo lo demas.
+	measure 'Picking del periodo' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[picking], LOL_PBITIMEWHS[Picking], NONE ) )
+		formatString: #,0
+		displayFolder: 1 Embudo operativo
+		lineageTag: c0797fd8-78ab-4f61-82e7-aeb6c177a428
+
+	/// Han llegado al estado 20.
+	measure 'Informados a almacén' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[picking], LOL_PBITIMEWHS[Picking], NONE ), NOT ISBLANK ( LOL_PBITIMEWHS[FechaLog20] ) )
+		formatString: #,0
+		displayFolder: 1 Embudo operativo
+		lineageTag: 4189d1f1-786a-4bdb-b17c-76927a34a806
+
+	/// Han llegado al estado 40.
+	measure Preparados = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[picking], LOL_PBITIMEWHS[Picking], NONE ), NOT ISBLANK ( LOL_PBITIMEWHS[FechaLog40] ) )
+		formatString: #,0
+		displayFolder: 1 Embudo operativo
+		lineageTag: bbad672a-2e4f-4c7f-90bc-c9a4669786f8
+
+	/// Han llegado al estado 60. El almacen ya no tiene nada que hacer.
+	measure 'Cerrados en almacén' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[picking], LOL_PBITIMEWHS[Picking], NONE ), NOT ISBLANK ( LOL_PBITIMEWHS[FechaLog60] ) )
+		formatString: #,0
+		displayFolder: 1 Embudo operativo
+		lineageTag: 70d144dc-fce0-4feb-bba6-aff7a8c03d6d
+
+	/// Entraron y todavia no han cerrado. Es la carga viva del almacen.
+	measure 'Pendientes en almacén' = [Picking del periodo] - [Cerrados en almacén]
+		formatString: #,0
+		displayFolder: 1 Embudo operativo
+		lineageTag: 46eeb2d7-a484-469b-9750-7805f893bd7a
+
+	/// Tienen envio con transportista. De aqui salen los cinco estados.
+	measure 'Salen por transporte' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), ALLEXCEPT ( LOL_TRANSPORT_TRACKING, LOL_PBITIMEWHS ), NOT ISBLANK ( LOL_TRANSPORT_TRACKING[picking] ) ) + 0
+		formatString: #,0
+		displayFolder: 1 Embudo operativo
+		lineageTag: 312510aa-4948-4d7c-a517-71674af7f766
+
+	/// Nunca entran en transporte: El Corte Ingles recoge, marketplaces y
+	/// reposicion a tienda propia. No es un fallo, es otra via.
+	measure 'Salen sin transporte' = [Picking del periodo] - [Salen por transporte]
+		formatString: #,0
+		displayFolder: 1 Embudo operativo
+		lineageTag: 5eb80a62-6794-45b7-8b3d-f2edfe3b2580
+
+	/// Entregados al destinatario.
+	measure 'Entregados por el transportista' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), ALLEXCEPT ( LOL_TRANSPORT_TRACKING, LOL_PBITIMEWHS ), LOL_TRANSPORT_TRACKING[estado_grupo] = "Entregado" ) + 0
+		formatString: #,0
+		displayFolder: 1 Embudo operativo
+		lineageTag: a76b1e30-b7ee-444a-95d2-5e75831f89aa
+
+	/// En manos del transportista y todavia sin entregar.
+	measure 'Picking en reparto' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), ALLEXCEPT ( LOL_TRANSPORT_TRACKING, LOL_PBITIMEWHS ), LOL_TRANSPORT_TRACKING[estado_grupo] = "En curso" ) + 0
+		formatString: #,0
+		displayFolder: 1 Embudo operativo
+		lineageTag: 4f770d4a-2d11-4c0a-a0ef-221d8096c02b
+
+	/// El transportista tiene el envio y no devuelve ningun estado.
+	/// Es casi todo SEUR. Esto si es un agujero de informacion.
+	measure 'Sin seguimiento del transportista' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), ALLEXCEPT ( LOL_TRANSPORT_TRACKING, LOL_PBITIMEWHS ), LOL_TRANSPORT_TRACKING[estado_grupo] = "Sin datos" ) + 0
+		formatString: #,0
+		displayFolder: 1 Embudo operativo
+		lineageTag: 2b476eb8-30c2-46ed-8fb6-c61d9d42f8fc
+
+	/// Parados por incidencia del transportista.
+	measure 'Con incidencia' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), ALLEXCEPT ( LOL_TRANSPORT_TRACKING, LOL_PBITIMEWHS ), LOL_TRANSPORT_TRACKING[estado_grupo] = "Incidencia" ) + 0
+		formatString: #,0
+		displayFolder: 1 Embudo operativo
+		lineageTag: 0fc4b10a-478b-4a24-9291-d9e0b5f9ae0f
+
+	/// Vueltos al origen.
+	measure 'Devueltos al origen' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), ALLEXCEPT ( LOL_TRANSPORT_TRACKING, LOL_PBITIMEWHS ), LOL_TRANSPORT_TRACKING[estado_grupo] = "Devuelto" ) + 0
+		formatString: #,0
+		displayFolder: 1 Embudo operativo
+		lineageTag: 87de350c-72e6-443f-8d7e-3f7d522d59f5
+
+	/// CERO siempre. Si no, es que falta una via de salida por contemplar.
+	measure 'Cuadre salida' = [Picking del periodo] - [Salen por transporte] - [Salen sin transporte]
+		formatString: #,0;-#,0;0
+		displayFolder: 1 Embudo operativo
+		lineageTag: 1810794f-645a-40c8-8e64-98e0ead824bc
+
+	/// CERO siempre. Si no, es que tracking tiene un estado nuevo.
+	measure 'Cuadre seguimiento' = [Salen por transporte] - [Entregados por el transportista] - [Picking en reparto] - [Sin seguimiento del transportista] - [Incidencias y devueltos]
+		formatString: #,0;-#,0;0
+		displayFolder: 1 Embudo operativo
+		lineageTag: 2ef8b8d7-624a-4913-8727-f124cbfc98e2
+
+	/// Las dos colas del transporte juntas, para que la fila de tarjetas
+	/// sume exacto sin gastar dos huecos en un dato de una unidad.
+	measure 'Incidencias y devueltos' = [Con incidencia] + [Devueltos al origen]
+		formatString: #,0
+		displayFolder: 1 Embudo operativo
+		lineageTag: 3eab1062-afff-452c-9cea-656db7548a17
+
+	/// Salio del almacen con numero de expedicion.
+	measure 'Picking expedido' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[picking], LOL_PBITIMEWHS[Picking], NONE ), LOL_PBITIMEWHS[Expedido] = "Sí" )
+		formatString: #,0
+		displayFolder: 1 Embudo operativo
+		lineageTag: bb1a18f6-a11b-4d5d-acca-e76cafdc08d0
+
+	/// Nunca salio. Es lo que hay que dejar fuera para medir servicio.
+	measure 'Picking sin expedir' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[picking], LOL_PBITIMEWHS[Picking], NONE ), LOL_PBITIMEWHS[Expedido] = "No" ) + 0
+		formatString: #,0
+		displayFolder: 1 Embudo operativo
+		lineageTag: 545a7b30-1710-4433-85f4-86ff212f625a
+
+	/// Cerrados a mano segun el comentario del picking.
+	measure 'Picking cerrado manualmente' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[picking], LOL_PBITIMEWHS[Picking], NONE ), LOL_PBITIMEWHS[Motivo sin expedir] = "Cerrado manualmente" ) + 0
+		formatString: #,0
+		displayFolder: 1 Embudo operativo
+		lineageTag: 125d9bb4-f1ed-4159-9021-851881913c32
+
+	/// Estado R: entraron al almacen y nunca se prepararon.
+	measure 'Picking anulado' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[picking], LOL_PBITIMEWHS[Picking], NONE ), LOL_PBITIMEWHS[Motivo sin expedir] = "Anulado" ) + 0
+		formatString: #,0
+		displayFolder: 1 Embudo operativo
+		lineageTag: a13b6b56-8b82-4148-a2e0-f8ee8f4e03ab
+
+	/// Cuanto del periodo no llego a salir.
+	measure '% sin expedir' = DIVIDE ( [Picking sin expedir], [Picking del periodo] )
+		formatString: 0.0%
+		displayFolder: 1 Embudo operativo
+		lineageTag: ce3393c5-9aa0-4bf5-96b3-2c1b94d5330c
+
+	/// Pildora de filtro activo: Expedido. BLANK si no hay seleccion.
+	measure 'Chip Expedido' = VAR n = COUNTROWS ( VALUES ( LOL_PBITIMEWHS[Expedido] ) ) VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PBITIMEWHS[Expedido] ), n & " sel." ) RETURN IF ( ISFILTERED ( LOL_PBITIMEWHS[Expedido] ), "Expedido: " & txt & "  ✕" )
+		displayFolder: 0 Pildoras
+		lineageTag: 8fd25487-03dd-440b-940a-0866c003f727
+
+	/// Rosa cuando el filtro esta puesto, burdeos cuando no.
+	measure 'Chip Expedido Color' = IF ( ISFILTERED ( LOL_PBITIMEWHS[Expedido] ), "#DFA0C9", "#6F263D" )
+		displayFolder: 0 Pildoras
+		lineageTag: b6be357c-9e95-4456-92d1-147944a7f083
 
 	column Value
 		lineageTag: d1ed0000-0000-4000-8000-0000000000ff
