@@ -206,3 +206,8 @@ relationship d724a6fc-43b0-4be1-a068-da1e2e732d54
 	fromColumn: LOL_PBITIMEWHS.FechaContabilizacion_Origen
 	toColumn: LocalDateTable_2f0e6934-33f2-437d-8637-57970b13e4d6.Date
 
+relationship 42c4ef01-959b-4dae-a608-ec77a6fd3d94
+	crossFilteringBehavior: bothDirections
+	fromColumn: FaseDelPicking.Picking
+	toColumn: LOL_PBITIMEWHS.Picking
+

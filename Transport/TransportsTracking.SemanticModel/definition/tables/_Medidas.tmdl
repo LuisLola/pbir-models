@@ -926,6 +926,47 @@ table _Medidas
 		displayFolder: 0 Pildoras
 		lineageTag: b6be357c-9e95-4456-92d1-147944a7f083
 
+	/// Pickings que el transportista esta siguiendo. Es el mismo universo que
+	/// la pestana de transporte, pero contado en pickings y no en envios.
+	measure 'Picking con seguimiento' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[picking], LOL_PBITIMEWHS[Picking], NONE ), LOL_PBITIMEWHS[Seguimiento] = "Con seguimiento" ) + 0
+		formatString: #,0
+		displayFolder: 1 Embudo operativo
+		lineageTag: 80a80807-a4b6-446f-b7f3-7f079c708be2
+
+	/// El resto. Mirar [Motivo sin seguimiento] antes de alarmarse: casi todo
+	/// es anterior al 04/09/2025, cuando arranco el seguimiento.
+	measure 'Picking sin seguimiento' = CALCULATE ( DISTINCTCOUNTNOBLANK ( LOL_PBITIMEWHS[Picking] ), CROSSFILTER ( LOL_TRANSPORT_TRACKING[picking], LOL_PBITIMEWHS[Picking], NONE ), LOL_PBITIMEWHS[Seguimiento] = "Sin seguimiento" ) + 0
+		formatString: #,0
+		displayFolder: 1 Embudo operativo
+		lineageTag: 3a242784-602b-4914-835c-f0e606856a2f
+
+	/// Cuanto del picking del periodo llega a tener seguimiento.
+	measure '% con seguimiento' = DIVIDE ( [Picking con seguimiento], [Picking del periodo] )
+		formatString: 0.0%
+		displayFolder: 1 Embudo operativo
+		lineageTag: 3345c40e-4408-46a9-8d10-0d3d587f779c
+
+	/// De los envios que cuenta la pestana de transporte, los que se pueden
+	/// atar a un picking.
+	measure 'Envios con picking' = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), LEN ( TRIM ( LOL_TRANSPORT_TRACKING[picking] ) ) > 0 ) + 0
+		formatString: #,0
+		displayFolder: 1 Embudo operativo
+		lineageTag: 72684b3b-4e87-4b0d-a71d-94fd68d41bdc
+
+	/// Envios que llegan sin picking informado y por eso nunca cuadraran con
+	/// almacen. 11.481 son de TIPSA entre enero y junio de 2026.
+	measure 'Envios sin picking' = CALCULATE ( COUNTROWS ( LOL_TRANSPORT_TRACKING ), LEN ( TRIM ( LOL_TRANSPORT_TRACKING[picking] ) ) = 0 ) + 0
+		formatString: #,0
+		displayFolder: 1 Embudo operativo
+		lineageTag: 326c9723-9a8f-42e3-af5b-158d53c0ba32
+
+	/// El puente entre las dos pestanas: cuantos envios salen de cada picking.
+	/// Por eso transporte ensena mas filas que pickings tiene almacen.
+	measure 'Envios por picking' = DIVIDE ( [Envios con picking], [Picking con seguimiento] )
+		formatString: #,0.00
+		displayFolder: 1 Embudo operativo
+		lineageTag: b9da04ae-bbdb-4d54-a9d7-a42692725ff6
+
 	column Value
 		lineageTag: d1ed0000-0000-4000-8000-0000000000ff
 		isNameInferred

@@ -1,0 +1,74 @@
+table FaseDelPicking
+	lineageTag: d3e307e8-a786-4f26-bcc7-2bc7cb9b2ef8
+
+	/// La tarjeta a la que pertenece el picking. Un picking sale en varias.
+	column Fase
+		lineageTag: dc9df9c2-3978-42ee-a9c1-00d37f7102c9
+		summarizeBy: none
+		sourceColumn: [Fase]
+		sortByColumn: Orden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// El picking. Es la clave contra LOL_PBITIMEWHS.
+	column Picking
+		lineageTag: 091ce9f9-5f6d-4d32-b8b3-d3c8121de628
+		summarizeBy: none
+		sourceColumn: [Picking]
+
+		annotation SummarizationSetBy = Automatic
+
+	/// El orden en que estan puestas las tarjetas en la pagina.
+	column Orden
+		isHidden
+		formatString: 0
+		lineageTag: 44ffa493-587c-4e8c-9241-0a0d079bf41d
+		summarizeBy: none
+		sourceColumn: [Orden]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FaseDelPicking = calculated
+		mode: import
+		source =
+				VAR Base =
+				    ADDCOLUMNS (
+				        LOL_PBITIMEWHS,
+				        "@est",
+				            "|" &
+				            CONCATENATEX (
+				                DISTINCT ( SELECTCOLUMNS ( RELATEDTABLE ( LOL_TRANSPORT_TRACKING ),
+				                    "e", LOL_TRANSPORT_TRACKING[estado_grupo] ) ),
+				                [e], "|"
+				            ) & "|"
+				    )
+				RETURN
+				UNION (
+				    SELECTCOLUMNS ( Base,
+				        "Orden", 1, "Fase", "Picking del periodo", "Picking", LOL_PBITIMEWHS[Picking] ),
+				    SELECTCOLUMNS ( FILTER ( Base, NOT ISBLANK ( LOL_PBITIMEWHS[FechaLog20] ) ),
+				        "Orden", 2, "Fase", "Informados a almacén — 20", "Picking", LOL_PBITIMEWHS[Picking] ),
+				    SELECTCOLUMNS ( FILTER ( Base, NOT ISBLANK ( LOL_PBITIMEWHS[FechaLog40] ) ),
+				        "Orden", 3, "Fase", "Preparados — 40", "Picking", LOL_PBITIMEWHS[Picking] ),
+				    SELECTCOLUMNS ( FILTER ( Base, NOT ISBLANK ( LOL_PBITIMEWHS[FechaLog60] ) ),
+				        "Orden", 4, "Fase", "Cerrados en almacén — 60", "Picking", LOL_PBITIMEWHS[Picking] ),
+				    SELECTCOLUMNS ( FILTER ( Base, ISBLANK ( LOL_PBITIMEWHS[FechaLog60] ) ),
+				        "Orden", 5, "Fase", "Pendientes en almacén", "Picking", LOL_PBITIMEWHS[Picking] ),
+				    SELECTCOLUMNS ( FILTER ( Base, LOL_PBITIMEWHS[Expedido] = "No" ),
+				        "Orden", 6, "Fase", "Sin expedir", "Picking", LOL_PBITIMEWHS[Picking] ),
+				    SELECTCOLUMNS ( FILTER ( Base, [@est] <> "||" ),
+				        "Orden", 7, "Fase", "Salen por transporte", "Picking", LOL_PBITIMEWHS[Picking] ),
+				    SELECTCOLUMNS ( FILTER ( Base, [@est] = "||" ),
+				        "Orden", 8, "Fase", "Salen sin transporte", "Picking", LOL_PBITIMEWHS[Picking] ),
+				    SELECTCOLUMNS ( FILTER ( Base, CONTAINSSTRING ( [@est], "|Entregado|" ) ),
+				        "Orden", 9, "Fase", "Entregados", "Picking", LOL_PBITIMEWHS[Picking] ),
+				    SELECTCOLUMNS ( FILTER ( Base, CONTAINSSTRING ( [@est], "|En curso|" ) ),
+				        "Orden", 10, "Fase", "En reparto", "Picking", LOL_PBITIMEWHS[Picking] ),
+				    SELECTCOLUMNS ( FILTER ( Base, CONTAINSSTRING ( [@est], "|Sin datos|" ) ),
+				        "Orden", 11, "Fase", "Sin seguimiento", "Picking", LOL_PBITIMEWHS[Picking] ),
+				    SELECTCOLUMNS ( FILTER ( Base, CONTAINSSTRING ( [@est], "|Incidencia|" ) || CONTAINSSTRING ( [@est], "|Devuelto|" ) ),
+				        "Orden", 12, "Fase", "Incidencias y devueltos", "Picking", LOL_PBITIMEWHS[Picking] )
+				)
+
+	annotation PBI_Id = 62be00c9949640fba2f09ccc268cf195
+
