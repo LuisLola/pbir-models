@@ -8,7 +8,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["LOL_PBIPURCHASEORDERS","LOL_PBIMODELITEM","LOL_PBITIENDAS","LOL_PBIPURCHASEGOODRECEIPT","LOL_PBIPURCHASEINVOICE","LOL_PBISTOCKTRANSFERSTATUS","LOL_PBICLIENTES","LOL_PBIB2BSALESORDER"]
+annotation PBI_QueryOrder = ["LOL_PBIPURCHASEORDERS","LOL_PBIMODELITEM","LOL_PBITIENDAS","LOL_PBIPURCHASEGOODRECEIPT","LOL_PBIPURCHASEINVOICE","LOL_PBISTOCKTRANSFERSTATUS","LOL_PBICLIENTES","LOL_PBIB2BSALESORDER","UltimaActualizacion","LOL_PBISTOCKTRANSFERREAL","LOL_PBIPACKAGES","LOL_PBIPURCHASEHEADER"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
@@ -58,14 +58,13 @@ ref table LocalDateTable_769f19ee-4cc6-479f-ab65-8408955204f0
 ref table LOL_PBIB2BSALESORDER
 ref table LocalDateTable_9fdb5bcc-e9e2-4c27-ac78-b113aa839afb
 ref table LocalDateTable_9127dc12-ccf4-4478-9dc4-dfd5d6929daa
-
 ref table _Medidas
-
 ref table DimensionesCompras
-
 ref table DimensionesCompras2
-
 ref table UltimaActualizacion
+ref table LOL_PBISTOCKTRANSFERREAL
+ref table LOL_PBIPACKAGES
+ref table LOL_PBIPURCHASEHEADER
 
 ref cultureInfo es-ES
 

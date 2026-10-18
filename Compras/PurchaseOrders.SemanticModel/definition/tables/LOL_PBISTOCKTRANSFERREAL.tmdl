@@ -1,0 +1,161 @@
+table LOL_PBISTOCKTRANSFERREAL
+	lineageTag: dfbf1609-9269-41f1-8eb5-e34f737bd904
+
+	/// El TRASLADO REAL: lo unico que confirma la llegada fisica al almacen.
+	/// Una solicitud de traslado solo significa stock EN TRANSITO.
+	/// PROVISIONAL: lee directo de HANA, como LOL_PLANMATERIAL en ServicePlan.
+	/// Cuando la vista este en el ETL, cambiar solo el bloque source.
+	/// Entrada de mercancia a la que pertenece esta linea de ST.
+	column DocEntryAE
+		dataType: int64
+		lineageTag: 72830353-79a7-4a76-a324-1489f4c81265
+		summarizeBy: none
+		sourceColumn: DocEntryAE
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Linea de esa entrada. Con DocEntryAE forma la clave del modelo.
+	column LineaAE
+		dataType: int64
+		lineageTag: 6f478c96-1757-433c-bbcb-21afa6217d1a
+		summarizeBy: none
+		sourceColumn: LineaAE
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Solicitud de traslado (OWTQ).
+	column DocEntryST
+		dataType: int64
+		lineageTag: 3e8f6cc5-eacb-4618-b68d-ba4b268eb8a9
+		summarizeBy: none
+		sourceColumn: DocEntryST
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Numero de la solicitud de traslado.
+	column Solicitud_traslado
+		dataType: int64
+		lineageTag: 0ba89e2f-30ea-4deb-bd81-644f932b0323
+		summarizeBy: none
+		sourceColumn: Solicitud_traslado
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Linea de la solicitud.
+	column LineaST
+		dataType: int64
+		lineageTag: b003d828-c020-4f93-9b36-9e7a40683600
+		summarizeBy: none
+		sourceColumn: LineaST
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Lo que la ST pidio mover. Es el denominador de la llegada parcial.
+	column CantidadSolicitada
+		dataType: double
+		lineageTag: e57f7fe3-6004-4526-94d8-175ab539fbc5
+		summarizeBy: sum
+		sourceColumn: CantidadSolicitada
+
+		annotation SummarizationSetBy = Automatic
+
+	/// DocStatus de la OWTQ.
+	column EstadoST
+		dataType: string
+		lineageTag: 53f378cf-df8c-4b00-a0d5-dab94a9fdde7
+		summarizeBy: none
+		sourceColumn: EstadoST
+
+		annotation SummarizationSetBy = Automatic
+
+	/// CANCELED de la OWTQ.
+	column STAnulada
+		dataType: string
+		lineageTag: 417f9aa3-b2d0-46c0-8c62-80745896b34b
+		summarizeBy: none
+		sourceColumn: STAnulada
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Traslado real (OWTR). Vacio = aun en transito.
+	column DocEntryTraslado
+		dataType: int64
+		lineageTag: 9d58c514-eaa2-4a6a-a9a0-a8f73ecfaba3
+		summarizeBy: none
+		sourceColumn: DocEntryTraslado
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Numero del traslado real.
+	column Traslado
+		dataType: int64
+		lineageTag: 95e7af43-72b8-4f29-a54d-71329ee210ee
+		summarizeBy: none
+		sourceColumn: Traslado
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Fecha del ULTIMO traslado de esta linea.
+	column FechaTraslado
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 18fdc9b1-b9f2-48f2-bc0d-ebd229e58d67
+		summarizeBy: none
+		sourceColumn: FechaTraslado
+
+		annotation SummarizationSetBy = Automatic
+
+	/// OWTR.Filler.
+	column AlmacenOrigen
+		dataType: string
+		lineageTag: 4a439eea-c2fd-4840-b2b4-a461a4297452
+		summarizeBy: none
+		sourceColumn: AlmacenOrigen
+
+		annotation SummarizationSetBy = Automatic
+
+	/// OWTR.ToWhsCode.
+	column AlmacenDestino
+		dataType: string
+		lineageTag: f2b910e1-dc37-44ba-8f1c-17df26ff7f09
+		summarizeBy: none
+		sourceColumn: AlmacenDestino
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Cuantos traslados han intervenido. >1 = llego en varias veces.
+	column DocumentosTraslado
+		dataType: int64
+		lineageTag: e38107af-6fad-4874-9c34-f06fadd0bf20
+		summarizeBy: none
+		sourceColumn: DocumentosTraslado
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Lo que realmente entro en el almacen: SUM(WTR1.Quantity). Esto, y no
+	/// los campos ...RMT, es lo que da los 30.017 de control. Los RMT son
+	/// lo que declara el operador logistico y se quedan en 29.278.
+	column CantidadTrasladada
+		dataType: double
+		lineageTag: dffb1890-24a3-45ba-ab2d-37abb89f1be3
+		summarizeBy: sum
+		sourceColumn: CantidadTrasladada
+
+		annotation SummarizationSetBy = Automatic
+
+	/// La clave con la que engancha a la entrada de mercancia.
+	/// FORMAT para que no se cuelen separadores de miles.
+	column KEntrada = FORMAT ( LOL_PBISTOCKTRANSFERREAL[DocEntryAE], "0" ) & "-" & FORMAT ( LOL_PBISTOCKTRANSFERREAL[LineaAE], "0" )
+		dataType: string
+		isHidden
+		lineageTag: 1c49d784-b3d6-485d-8b30-9d6875fb6e4f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition LOL_PBISTOCKTRANSFERREAL = m
+		mode: import
+		source = Value.NativeQuery(SapHana.Database("192.168.0.231:30015", [Implementation="2.0"]), "SELECT#(lf)        Q1.""BaseEntry""                      AS ""DocEntryAE"",#(lf)        Q1.""BaseLine""                       AS ""LineaAE"",#(lf)        Q.""DocEntry""                        AS ""DocEntryST"",#(lf)        Q.""DocNum""                          AS ""Solicitud_traslado"",#(lf)        Q1.""LineNum""                        AS ""LineaST"",#(lf)        Q1.""Quantity""                       AS ""CantidadSolicitada"",#(lf)        Q.""DocStatus""                       AS ""EstadoST"",#(lf)        Q.""CANCELED""                        AS ""STAnulada"",#(lf)        MAX(R.""DocEntry"")                   AS ""DocEntryTraslado"",#(lf)        MAX(R.""DocNum"")                     AS ""Traslado"",#(lf)        MAX(R.""DocDate"")                    AS ""FechaTraslado"",#(lf)        MAX(R.""Filler"")                     AS ""AlmacenOrigen"",#(lf)        MAX(R.""ToWhsCode"")                  AS ""AlmacenDestino"",#(lf)        COUNT(DISTINCT R.""DocEntry"")        AS ""DocumentosTraslado"",#(lf)        COALESCE(SUM(R1.""Quantity""), 0)     AS ""CantidadTrasladada""#(lf)FROM            ""SBO_LOLA_SUCURSAL"".""OWTQ"" Q#(lf)INNER JOIN      ""SBO_LOLA_SUCURSAL"".""WTQ1"" Q1#(lf)                ON  Q1.""DocEntry"" = Q.""DocEntry""#(lf)                AND Q1.""BaseType"" = 20          -- la ST viene de la entrada#(lf)LEFT  JOIN      ""SBO_LOLA_SUCURSAL"".""WTR1"" R1#(lf)                ON  R1.""BaseType""  = 1250000001 -- y el traslado, de la ST#(lf)                AND R1.""BaseEntry"" = Q.""DocEntry""#(lf)                AND R1.""BaseLine""  = Q1.""LineNum""#(lf)LEFT  JOIN      ""SBO_LOLA_SUCURSAL"".""OWTR"" R#(lf)                ON  R.""DocEntry"" = R1.""DocEntry""#(lf)GROUP BY#(lf)        Q1.""BaseEntry"", Q1.""BaseLine"",#(lf)        Q.""DocEntry"", Q.""DocNum"", Q1.""LineNum"", Q1.""Quantity"",#(lf)        Q.""DocStatus"", Q.""CANCELED""#(lf)")
+
+	annotation PBI_ResultType = Table
+

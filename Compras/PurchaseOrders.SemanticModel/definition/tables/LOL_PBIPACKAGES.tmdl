@@ -1,0 +1,329 @@
+table LOL_PBIPACKAGES
+	lineageTag: 541e8d00-7678-45de-8004-2075ac2abc94
+
+	/// Los embalajes del flujo de COMPRAS: una fila por caja x articulo,
+	/// con la cadena documental pivotada (entrada, solicitud de traslado,
+	/// traslado) y el pedido de compra resuelto por SKU dentro de la entrada.
+	/// Acotado a Flujo = Compras en el SQL: la vista completa son 3,3 M de
+	/// filas y el flujo de compras son 730.
+	/// PROVISIONAL: lee directo de HANA. Cuando la vista este en el ETL,
+	/// cambiar solo el bloque source.
+	/// La caja. DISTINCTCOUNT sobre esto cuenta bultos sin duplicar.
+	column PackCode
+		dataType: string
+		lineageTag: 3f46bb05-424f-4b5a-a8e4-80d8cd0fb15e
+		summarizeBy: none
+		sourceColumn: PackCode
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Codigo SSCC de la etiqueta.
+	column SSCC
+		dataType: string
+		lineageTag: d5653d4f-34bb-4a9d-8026-a8cc53aa21cf
+		summarizeBy: none
+		sourceColumn: SSCC
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Numero de caja dentro del envio.
+	column NumCaja
+		dataType: int64
+		lineageTag: 2175f75c-0765-49d0-a91b-263d713eeb13
+		summarizeBy: none
+		sourceColumn: NumCaja
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Tipo de embalaje.
+	column TipoEmbalaje
+		dataType: string
+		lineageTag: ddbc43ab-2fb6-46a6-bb76-955738886dec
+		summarizeBy: none
+		sourceColumn: TipoEmbalaje
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Peso de la caja. OJO: se repite en cada linea de contenido.
+	column PesoCaja
+		dataType: double
+		lineageTag: c244cd37-b050-4288-8a94-8fe6bbd12b90
+		summarizeBy: sum
+		sourceColumn: PesoCaja
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Nivel en el arbol de embalaje.
+	column NivelEmbalaje
+		dataType: int64
+		lineageTag: 6c4b9a56-0476-49a8-a052-2c622bc9a3ef
+		summarizeBy: none
+		sourceColumn: NivelEmbalaje
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Si es una caja dentro de otra.
+	column EsSubCaja
+		dataType: string
+		lineageTag: b1909e3f-08e4-48f1-a209-5eaee713aefb
+		summarizeBy: none
+		sourceColumn: EsSubCaja
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Proveedor.
+	column CardCode
+		dataType: string
+		lineageTag: 7a51b706-aa8e-4fb6-8bd0-8ee67c9fb6f6
+		summarizeBy: none
+		sourceColumn: CardCode
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Nombre del proveedor. Es el unico sitio del modelo donde esta.
+	column CardName
+		dataType: string
+		lineageTag: a3d4e2fe-ee56-4bec-a870-44a54c46caf8
+		summarizeBy: none
+		sourceColumn: CardName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Almacen donde esta la caja ahora.
+	column AlmacenActual
+		dataType: string
+		lineageTag: 5d19482a-be59-43d9-9181-b6ba87c2ec12
+		summarizeBy: none
+		sourceColumn: AlmacenActual
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Cuando se creo la caja.
+	column FechaCreacion
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7af5c0e6-caf8-4fdb-b1f3-ccf7033fd299
+		summarizeBy: none
+		sourceColumn: FechaCreacion
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Articulo dentro de la caja.
+	column SKU
+		dataType: string
+		lineageTag: bb7ea22f-a2e4-41ba-86e9-4face278a3be
+		summarizeBy: none
+		sourceColumn: SKU
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Descripcion del articulo.
+	column DescripcionSKU
+		dataType: string
+		lineageTag: 714e460f-3036-4bd2-9b75-a3340cb5e571
+		summarizeBy: none
+		sourceColumn: DescripcionSKU
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Unidades de ese articulo en la caja.
+	column Cantidad
+		dataType: double
+		lineageTag: 2e91f746-467d-4bb9-9236-859c4c3e3967
+		summarizeBy: sum
+		sourceColumn: Cantidad
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Lote.
+	column Lote
+		dataType: string
+		lineageTag: 2b4b4e0d-50d8-4491-9233-9162ea45dffa
+		summarizeBy: none
+		sourceColumn: Lote
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Entrada de mercancia por la que paso la caja.
+	column AlbaranEntradaEntry
+		dataType: int64
+		lineageTag: fbe3e751-4e7b-4b90-9611-044d41042fc3
+		summarizeBy: none
+		sourceColumn: AlbaranEntradaEntry
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Numero de esa entrada.
+	column AlbaranEntrada
+		dataType: int64
+		lineageTag: 1302255d-aefc-43b7-92be-452e52726ea8
+		summarizeBy: none
+		sourceColumn: AlbaranEntrada
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Cuando se asocio a la entrada.
+	column FechaEntrada
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7d4c4b1a-6252-4c1c-9079-bcae74ae30ce
+		summarizeBy: none
+		sourceColumn: FechaEntrada
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Solicitud de traslado. VACIO = la caja aun no se ha copiado a su ST.
+	column SolicitudTrasladoEntry
+		dataType: int64
+		lineageTag: 4e38242a-8a1e-4b61-bc49-8ab568d6d8e0
+		summarizeBy: none
+		sourceColumn: SolicitudTrasladoEntry
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Numero de la solicitud de traslado.
+	column SolicitudTraslado
+		dataType: int64
+		lineageTag: f57184d9-d2ee-467c-bf2d-9e93b3375fe3
+		summarizeBy: none
+		sourceColumn: SolicitudTraslado
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Cuando se copio a la ST.
+	column FechaSolicitudTraslado
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: fe99af74-c79c-41ae-9e8e-42b762144fa5
+		summarizeBy: none
+		sourceColumn: FechaSolicitudTraslado
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Traslado real por el que paso la caja.
+	column TrasladoEntry
+		dataType: int64
+		lineageTag: b844a369-ee13-40b6-a0bd-3721c49d90b6
+		summarizeBy: none
+		sourceColumn: TrasladoEntry
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Numero del traslado.
+	column Traslado
+		dataType: int64
+		lineageTag: 93173ebe-858c-46fa-b97a-17efb6fd4fd0
+		summarizeBy: none
+		sourceColumn: Traslado
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Cuando se traslado.
+	column FechaTraslado
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c37f86b9-2efb-450d-bffc-5d205e916c90
+		summarizeBy: none
+		sourceColumn: FechaTraslado
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Pedido de compra del SKU dentro de esa entrada. El contenido de la caja
+	/// no trae DocEntry, asi que el pedido se resuelve por SKU.
+	column PedidoCompraEntry
+		dataType: int64
+		lineageTag: 466dd928-49ae-49d4-aba3-a2b68813cc06
+		summarizeBy: none
+		sourceColumn: PedidoCompraEntry
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Numero del pedido de compra.
+	column PedidoCompra
+		dataType: int64
+		lineageTag: ad404507-fb87-41b3-84fe-a3e091409c62
+		summarizeBy: none
+		sourceColumn: PedidoCompra
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Temporada del pedido.
+	column Temporada
+		dataType: string
+		lineageTag: 0423ad0f-666e-4c1c-92ec-b301bc47fbb9
+		summarizeBy: none
+		sourceColumn: Temporada
+
+		annotation SummarizationSetBy = Automatic
+
+	/// 1 marca una sola linea por caja, para no duplicar pesos.
+	column NumLineaEnCaja
+		dataType: int64
+		lineageTag: c85d9521-dd4d-4414-935b-1b452c518e46
+		summarizeBy: none
+		sourceColumn: NumLineaEnCaja
+
+		annotation SummarizationSetBy = Automatic
+
+	/// El peso, solo en la primera linea de cada caja.
+	column PesoCajaUnaVez
+		dataType: double
+		lineageTag: 257dbe6f-4827-4464-aea2-5ec055aa43be
+		summarizeBy: sum
+		sourceColumn: PesoCajaUnaVez
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Clave de texto para cruzar con los pedidos por TREATAS.
+	column KPedido = FORMAT ( LOL_PBIPACKAGES[PedidoCompraEntry], "0" )
+		dataType: string
+		isHidden
+		lineageTag: 6d8af46e-ccde-49bf-9270-4f6d82629bf4
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Si la caja ya figura en su solicitud de traslado.
+	column CopiadaAST = IF ( ISBLANK ( LOL_PBIPACKAGES[SolicitudTrasladoEntry] ), "No", "Sí" )
+		dataType: string
+		lineageTag: ccf62c7e-915a-48f3-905d-4c4b049c8a37
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// El documento mas avanzado por el que ha pasado la caja.
+	column ApuntaA =
+			SWITCH ( TRUE (),
+			    NOT ISBLANK ( LOL_PBIPACKAGES[TrasladoEntry] ),
+			        "traslado " & FORMAT ( LOL_PBIPACKAGES[Traslado], "0" ),
+			    NOT ISBLANK ( LOL_PBIPACKAGES[SolicitudTrasladoEntry] ),
+			        "ST " & FORMAT ( LOL_PBIPACKAGES[SolicitudTraslado], "0" ),
+			    "entrada " & FORMAT ( LOL_PBIPACKAGES[AlbaranEntrada], "0" ) )
+		dataType: string
+		lineageTag: 1391699f-f8b8-4099-a838-e971d81ea027
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// El numero de entrada en texto, para el buscador.
+	column EntradaTexto = FORMAT ( LOL_PBIPACKAGES[AlbaranEntrada], "0" )
+		dataType: string
+		lineageTag: 5b63948b-1efd-409b-9fe1-f575ad601c84
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// El numero de solicitud de traslado en texto.
+	column STTexto = FORMAT ( LOL_PBIPACKAGES[SolicitudTraslado], "0" )
+		dataType: string
+		lineageTag: 4e87f611-3585-44a7-8c36-3419a270f7e4
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition LOL_PBIPACKAGES = m
+		mode: import
+		source = Value.NativeQuery(SapHana.Database("192.168.0.231:30015", [Implementation="2.0"]), "SELECT V.""PackCode"", V.""SSCC"", V.""NumCaja"", V.""TipoEmbalaje"", V.""PesoCaja"", V.""NivelEmbalaje"", V.""EsSubCaja"", V.""CardCode"", V.""CardName"", V.""AlmacenActual"", V.""FechaCreacion"", V.""SKU"", V.""DescripcionSKU"", V.""Cantidad"", V.""Lote"", V.""AlbaranEntradaEntry"", V.""AlbaranEntrada"", V.""FechaEntrada"", V.""SolicitudTrasladoEntry"", V.""SolicitudTraslado"", V.""FechaSolicitudTraslado"", V.""TrasladoEntry"", V.""Traslado"", V.""FechaTraslado"", V.""PedidoCompraEntry"", V.""PedidoCompra"", V.""Temporada"", V.""NumLineaEnCaja"", V.""PesoCajaUnaVez"" FROM (SELECT P.""Code"" AS ""PackCode"", P.""U_GSP_SSCC"" AS ""SSCC"", P.""U_GSP_PACKAGENUM"" AS ""NumCaja"", P.""U_GSP_PACKAGETYP"" AS ""TipoEmbalaje"", P.""U_GSP_WEIGHT"" AS ""PesoCaja"", P.""U_GSP_WEIGHTUNIT"" AS ""UnidadPeso"", P.""U_GSP_NIVEL"" AS ""NivelEmbalaje"", P.""U_GSP_ESSUBCAJA"" AS ""EsSubCaja"", P.""U_GSP_PARENT"" AS ""EmbalajeSuperior"", P.""U_GSP_ROOTPACKAGE"" AS ""EmbalajeRaiz"", P.""U_GSP_STATUS"" AS ""StatusExpedicion"", P.""U_GSP_LOCATION"" AS ""Ubicacion"", P.""U_GSP_REFEXTERN"" AS ""ReferenciaExterna"", P.""U_U_GSP_LOLATRACKNUM"" AS ""NumTracking"", P.""U_GSP_CREATEDBY"" AS ""CreadoPor"", P.""U_GSP_CREATEDON"" AS ""FechaCreacion"", P.""U_GSP_CANCELED"" AS ""Cancelada"", COALESCE(NULLIF(P.""U_GSP_CARDCODE"", ''), X.""CardCode"") AS ""CardCode"", COALESCE(NULLIF(P.""U_GSP_CARDNAME"", ''), X.""CardName"") AS ""CardName"", P.""U_GSP_MAINSUPPLIER"" AS ""ProveedorEmbalaje"", COALESCE(NULLIF(P.""U_GSP_WHSCODE"", ''), X.""WhsCode"") AS ""AlmacenActual"", COALESCE(NULLIF(P.""U_GSP_FILLER"", ''), X.""Filler"") AS ""AlmacenOrigen"", P.""U_GSP_ORIGINOBJTYPE"" AS ""TipoDocOrigenCode"", CASE P.""U_GSP_ORIGINOBJTYPE"" WHEN 20 THEN 'Entrada de mercancia' WHEN 15 THEN 'Albaran de venta' WHEN 17 THEN 'Pedido de venta' WHEN 67 THEN 'Traslado' WHEN 156 THEN 'Picking' WHEN 1250000001 THEN 'Solicitud de traslado' ELSE 'Otro' END AS ""TipoDocOrigen"", P.""U_GSP_ORIGINDOCENTRY"" AS ""DocOrigenEntry"", P.""U_GSP_ORIGINDOCNUM"" AS ""DocOrigenNum"", P.""U_GSP_OBJTYPE"" AS ""TipoDocActualCode"", CASE P.""U_GSP_OBJTYPE"" WHEN 20 THEN 'Entrada de mercancia' WHEN 15 THEN 'Albaran de venta' WHEN 17 THEN 'Pedido de venta' WHEN 67 THEN 'Traslado' WHEN 156 THEN 'Picking' WHEN 1250000001 THEN 'Solicitud de traslado' ELSE 'Otro' END AS ""TipoDocActual"", P.""U_GSP_DOCENTRY"" AS ""DocActualEntry"", P.""U_GSP_DOCNUM"" AS ""DocActualNum"", CASE WHEN P.""U_GSP_ORIGINOBJTYPE"" = 20 THEN 'Compras' ELSE 'Ventas' END AS ""Flujo"", L.""Code"" AS ""PackLineCode"", L.""U_GSP_ITEMCODE"" AS ""SKU"", L.""U_GSP_ITEMNAME"" AS ""DescripcionSKU"", L.""U_GSP_QUANTITY"" AS ""Cantidad"", L.""U_GSP_WEIGHT"" AS ""PesoLinea"", L.""U_GSP_BATCH"" AS ""Lote"", L.""U_GSP_INTRSERIAL"" AS ""NumSerie"", L.""U_GSP_UBIC"" AS ""UbicacionLinea"", X.""EntradaEntry"" AS ""AlbaranEntradaEntry"", X.""EntradaNum"" AS ""AlbaranEntrada"", X.""EntradaFecha"" AS ""FechaEntrada"", X.""STEntry"" AS ""SolicitudTrasladoEntry"", X.""STNum"" AS ""SolicitudTraslado"", X.""STFecha"" AS ""FechaSolicitudTraslado"", X.""TrasladoEntry"" AS ""TrasladoEntry"", X.""TrasladoNum"" AS ""Traslado"", X.""TrasladoFecha"" AS ""FechaTraslado"", X.""VentaEntry"" AS ""AlbaranVentaEntry"", X.""VentaNum"" AS ""AlbaranVenta"", X.""PickingEntry"" AS ""PickingEntry"", X.""NumDocumentos"" AS ""NumDocumentos"", PO.""PedidoEntry"" AS ""PedidoCompraEntry"", PO.""PedidoNum"" AS ""PedidoCompra"", PO.""Season"" AS ""Temporada"", PO.""NumPedidos"" AS ""PedidosPosibles"", ROW_NUMBER() OVER (PARTITION BY P.""Code"" ORDER BY L.""Code"") AS ""NumLineaEnCaja"", CASE WHEN ROW_NUMBER() OVER (PARTITION BY P.""Code"" ORDER BY L.""Code"") = 1 THEN P.""U_GSP_WEIGHT"" END AS ""PesoCajaUnaVez"" FROM ""SBO_LOLA_SUCURSAL"".""@GSP_MWPACKAGES"" P INNER JOIN ""SBO_LOLA_SUCURSAL"".""@GSP_MWPACK_LIN"" L ON L.""U_GSP_PACKCODE"" = P.""Code"" LEFT JOIN ( SELECT D.""U_GSP_PACKCODE"" AS ""PackCode"", MAX(CASE WHEN D.""U_GSP_OBJTYPE"" = 20 THEN D.""U_GSP_DOCENTRY"" END) AS ""EntradaEntry"", MAX(CASE WHEN D.""U_GSP_OBJTYPE"" = 20 THEN D.""U_GSP_DOCNUM"" END) AS ""EntradaNum"", MAX(CASE WHEN D.""U_GSP_OBJTYPE"" = 20 THEN D.""U_GSP_ADDDATE"" END) AS ""EntradaFecha"", MAX(CASE WHEN D.""U_GSP_OBJTYPE"" = 1250000001 THEN D.""U_GSP_DOCENTRY"" END) AS ""STEntry"", MAX(CASE WHEN D.""U_GSP_OBJTYPE"" = 1250000001 THEN D.""U_GSP_DOCNUM"" END) AS ""STNum"", MAX(CASE WHEN D.""U_GSP_OBJTYPE"" = 1250000001 THEN D.""U_GSP_ADDDATE"" END) AS ""STFecha"", MAX(CASE WHEN D.""U_GSP_OBJTYPE"" = 67 THEN D.""U_GSP_DOCENTRY"" END) AS ""TrasladoEntry"", MAX(CASE WHEN D.""U_GSP_OBJTYPE"" = 67 THEN D.""U_GSP_DOCNUM"" END) AS ""TrasladoNum"", MAX(CASE WHEN D.""U_GSP_OBJTYPE"" = 67 THEN D.""U_GSP_ADDDATE"" END) AS ""TrasladoFecha"", MAX(CASE WHEN D.""U_GSP_OBJTYPE"" = 15 THEN D.""U_GSP_DOCENTRY"" END) AS ""VentaEntry"", MAX(CASE WHEN D.""U_GSP_OBJTYPE"" = 15 THEN D.""U_GSP_DOCNUM"" END) AS ""VentaNum"", MAX(CASE WHEN D.""U_GSP_OBJTYPE"" = 156 THEN D.""U_GSP_DOCENTRY"" END) AS ""PickingEntry"", MAX(D.""U_GSP_CARDCODE"") AS ""CardCode"", MAX(D.""U_GSP_CARDNAME"") AS ""CardName"", MAX(D.""U_GSP_WHSCODE"") AS ""WhsCode"", MAX(D.""U_GSP_FILLER"") AS ""Filler"", COUNT(*) AS ""NumDocumentos"" FROM ""SBO_LOLA_SUCURSAL"".""@GSP_MWPACK_DOCS"" D GROUP BY D.""U_GSP_PACKCODE"" ) X ON X.""PackCode"" = P.""Code"" LEFT JOIN ( SELECT R.""DocEntry"" AS ""ACEntry"", R.""ItemCode"" AS ""ItemCode"", MIN(R.""BaseEntry"") AS ""PedidoEntry"", MIN(O.""DocNum"") AS ""PedidoNum"", MIN(O.""U_GSP_SEASON"") AS ""Season"", COUNT(DISTINCT R.""BaseEntry"") AS ""NumPedidos"" FROM ""SBO_LOLA_SUCURSAL"".""PDN1"" R JOIN ""SBO_LOLA_SUCURSAL"".""OPOR"" O ON O.""DocEntry"" = R.""BaseEntry"" WHERE R.""BaseType"" = 22 GROUP BY R.""DocEntry"", R.""ItemCode"" ) PO ON PO.""ACEntry"" = X.""EntradaEntry"" AND PO.""ItemCode"" = L.""U_GSP_ITEMCODE"" WHERE P.""U_GSP_CANCELED"" = 'N') V WHERE V.""Flujo"" = 'Compras'")
+
+	annotation PBI_ResultType = Table
+

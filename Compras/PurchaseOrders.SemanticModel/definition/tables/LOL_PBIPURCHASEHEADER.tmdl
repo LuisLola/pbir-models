@@ -1,0 +1,289 @@
+table LOL_PBIPURCHASEHEADER
+	lineageTag: 63c31715-3afd-4039-985a-d4ef0fd5c062
+
+	/// La cabecera del pedido de compra, a grano de PEDIDO.
+	/// Es la dimension por la que se agrupa y se segmenta: el estado de la
+	/// mercancia vive aqui como COLUMNA, porque por una medida no se puede
+	/// agrupar.
+	/// PROVISIONAL: lee directo de HANA. Cuando CardName, DocStatus y
+	/// U_LOL_YOOZNUMBER esten en la vista del ETL, cambiar solo el source.
+	/// DocEntry de OPOR.
+	column DocEntryPedido
+		dataType: int64
+		lineageTag: 48a8702d-e9f6-4667-8bb1-d8fd0cad4412
+		summarizeBy: none
+		sourceColumn: DocEntryPedido
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Numero de pedido que ve el usuario.
+	column Pedido
+		dataType: int64
+		lineageTag: b0bafd0c-65cc-45c1-92ce-87f51e5a363c
+		summarizeBy: none
+		sourceColumn: Pedido
+
+		annotation SummarizationSetBy = Automatic
+
+	/// OPOR.DocDate. El alcance se mide POR FECHA DE PEDIDO.
+	column FechaPedido
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 1126f4ac-fb1d-4ee7-b06c-1e061c4d16d4
+		summarizeBy: none
+		sourceColumn: FechaPedido
+
+		annotation SummarizationSetBy = Automatic
+
+	/// OPOR.U_GSP_SEASON, la de CABECERA: es la que cuadra con las cifras de control.
+	column Temporada
+		dataType: string
+		lineageTag: 99105f81-345c-4fd6-a321-093e0018f40d
+		summarizeBy: none
+		sourceColumn: Temporada
+
+		annotation SummarizationSetBy = Automatic
+
+	/// OPOR.CardCode.
+	column CodProveedor
+		dataType: string
+		lineageTag: f1e92d63-26e5-49f9-9df5-967477ca2664
+		summarizeBy: none
+		sourceColumn: CodProveedor
+
+		annotation SummarizationSetBy = Automatic
+
+	/// OCRD.CardName. No estaba en ninguna vista de compras.
+	column Proveedor
+		dataType: string
+		lineageTag: 8d37e3b8-dbf2-41b7-8366-00c2f739dde8
+		summarizeBy: none
+		sourceColumn: Proveedor
+
+		annotation SummarizationSetBy = Automatic
+
+	/// OPOR.DocStatus: O abierto, C cerrado.
+	column EstadoPedido
+		dataType: string
+		lineageTag: de4cd5ac-51f0-491f-b2a3-1340031e1c6a
+		summarizeBy: none
+		sourceColumn: EstadoPedido
+
+		annotation SummarizationSetBy = Automatic
+
+	/// OPOR.CANCELED. La cabecera trae TODOS los pedidos para que la relacion no tenga miembro en blanco; los anulados se apartan con el estado.
+	column Anulado
+		dataType: string
+		lineageTag: 15b49767-f6f2-4d83-9b93-17b0f2e68dde
+		summarizeBy: none
+		sourceColumn: Anulado
+
+		annotation SummarizationSetBy = Automatic
+
+	/// U_LOL_YOOZNUMBER, el id de respuesta de la API de SAUCO.
+	column IdSauco
+		dataType: string
+		lineageTag: 23dd3ca7-8065-4aef-a3ee-5d6ec30f00ba
+		summarizeBy: none
+		sourceColumn: IdSauco
+
+		annotation SummarizationSetBy = Automatic
+
+	/// U_GSP_LOL_TOTBOX: lo que el proveedor DICE que manda.
+	column CajasDeclaradas
+		dataType: string
+		lineageTag: 0f8e2906-bdff-431c-8927-85d184addd91
+		summarizeBy: none
+		sourceColumn: CajasDeclaradas
+
+		annotation SummarizationSetBy = Automatic
+
+	/// U_GSP_LOL_TOTPALLET.
+	column PalesDeclarados
+		dataType: string
+		lineageTag: 9fcf8f04-6b7d-4ebe-94ba-7c761c002c84
+		summarizeBy: none
+		sourceColumn: PalesDeclarados
+
+		annotation SummarizationSetBy = Automatic
+
+	/// U_GSP_LOLSTATUSRMT de la cabecera.
+	column EstadoRMT
+		dataType: string
+		lineageTag: 6f8e4326-87f4-4c98-a155-845e55082260
+		summarizeBy: none
+		sourceColumn: EstadoRMT
+
+		annotation SummarizationSetBy = Automatic
+
+	/// La clave con la que enganchan los pedidos. DocumentInternalKey viene
+	/// como texto sin relleno -"999", "9994"-, asi que FORMAT casa.
+	column KPedido = FORMAT ( LOL_PBIPURCHASEHEADER[DocEntryPedido], "0" )
+		dataType: string
+		isHidden
+		lineageTag: 98211a85-3c87-44f5-bb95-2dc38e1a95b8
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Unidades del pedido, sobre TODOS los datos. Sirve para clasificar, no
+	/// para pintar: lo que se pinta son las medidas, que si filtran.
+	column UdsPedidasTot =
+			CALCULATE ( SUM ( LOL_PBIPURCHASEORDERS[Quantity] ) )
+		dataType: double
+		lineageTag: 6bb4d1db-6c84-4c18-a859-28be6fe78879
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Lo que entro, excluyendo entradas anuladas.
+	column UdsRecibidasTot =
+			CALCULATE ( SUM ( LOL_PBIPURCHASEGOODRECEIPT[Quantity] ), LOL_PBIPURCHASEGOODRECEIPT[CANCELED] = "N" )
+		dataType: double
+		lineageTag: 6e63dce2-d08b-492f-81a1-d9706671d18e
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Lo que se pidio mover: stock en transito.
+	column UdsEnSTTot =
+			CALCULATE ( SUM ( LOL_PBISTOCKTRANSFERREAL[CantidadSolicitada] ) )
+		dataType: double
+		lineageTag: cb416f4c-bf7a-41a7-98d1-6f955d3f92b0
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Lo que realmente entro en el almacen, via WTR1.
+	column UdsEnAlmacenTot =
+			CALCULATE ( SUM ( LOL_PBISTOCKTRANSFERREAL[CantidadTrasladada] ) )
+		dataType: double
+		lineageTag: ee1978ef-4a9f-4787-9b8e-5cae7a530a32
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Bultos del pedido. El packing no tiene relacion: se cruza por la clave.
+	column CajasTot =
+			VAR K = LOL_PBIPURCHASEHEADER[KPedido]
+			RETURN CALCULATE ( DISTINCTCOUNT ( LOL_PBIPACKAGES[PackCode] ), LOL_PBIPACKAGES[KPedido] = K ) + 0
+		dataType: int64
+		lineageTag: b936eb6a-1f41-477a-8d09-2628cf43b533
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Bultos que ya figuran en su solicitud de traslado.
+	column CajasEnSTTot =
+			VAR K = LOL_PBIPURCHASEHEADER[KPedido]
+			RETURN CALCULATE ( DISTINCTCOUNT ( LOL_PBIPACKAGES[PackCode] ), LOL_PBIPACKAGES[KPedido] = K, LOL_PBIPACKAGES[CopiadaAST] = "Sí" ) + 0
+		dataType: int64
+		lineageTag: 0d08760d-9c51-407b-8b29-7c76c45de5c7
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// El almacen con MAS unidades del pedido, para agrupar. 170 de 428
+	/// pedidos reparten lineas entre varios almacenes, asi que agrupar por la
+	/// columna de linea partiria el pedido en dos.
+	column AlmacenPrincipal =
+			CALCULATE (
+			    MAXX (
+			        TOPN ( 1,
+			            ADDCOLUMNS ( VALUES ( LOL_PBIPURCHASEORDERS[WarehouseCode] ),
+			                "@u", CALCULATE ( SUM ( LOL_PBIPURCHASEORDERS[Quantity] ) ) ),
+			            [@u], DESC ),
+			        LOL_PBIPURCHASEORDERS[WarehouseCode] )
+			)
+		dataType: string
+		lineageTag: 010c3d54-e17a-46ed-8598-ac913879110d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// El peldano en numero, para ordenar. Tener ST no es estar recibido.
+	column OrdenEstado =
+			VAR Rec = COALESCE ( LOL_PBIPURCHASEHEADER[UdsRecibidasTot], 0 )
+			VAR EnST = COALESCE ( LOL_PBIPURCHASEHEADER[UdsEnSTTot], 0 )
+			VAR EnAlm = COALESCE ( LOL_PBIPURCHASEHEADER[UdsEnAlmacenTot], 0 )
+			RETURN
+			    SWITCH ( TRUE (),
+			        LOL_PBIPURCHASEHEADER[Anulado] = "Y", 0,
+			        Rec = 0, 1,
+			        EnST = 0, 2,
+			        EnAlm = 0, 3,
+			        EnAlm < EnST, 4,
+			        5 )
+		dataType: int64
+		lineageTag: 52a30d5a-045a-44e8-bb0b-79a55d44a89a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Los cinco peldanos, en orden. Es COLUMNA, no medida, para poder
+	/// agrupar y segmentar por ella.
+	column Estado =
+			SWITCH ( LOL_PBIPURCHASEHEADER[OrdenEstado],
+			    0, "anulado",
+			    1, "pendiente",
+			    2, "sin traslado",
+			    3, "en tránsito",
+			    4, "llegada parcial",
+			    "en el almacén" )
+		dataType: string
+		lineageTag: 6332328b-5d23-4ad0-b622-ab0b210b96c0
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Si el pedido tiene alguna entrada de mercancia.
+	column ConEntrada =
+			IF ( COALESCE ( LOL_PBIPURCHASEHEADER[UdsRecibidasTot], 0 ) > 0, "Sí", "No" )
+		dataType: string
+		lineageTag: 2e08352b-10dc-4905-b18a-1d09612c58de
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// BANDERA, no estado: hay entrada y ni un bulto. Un pedido puede estar ya
+	/// en el almacen y seguir sin cajas.
+	column SinCajas =
+			IF ( COALESCE ( LOL_PBIPURCHASEHEADER[UdsRecibidasTot], 0 ) > 0 && LOL_PBIPURCHASEHEADER[CajasTot] = 0, "Sí", "No" )
+		dataType: string
+		lineageTag: 153f547b-34ee-4056-841e-75f5cd4d13fe
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// BANDERA: hay bultos en la entrada que no estan en su ST.
+	column PendienteDeCopiar =
+			IF ( LOL_PBIPURCHASEHEADER[CajasTot] > LOL_PBIPURCHASEHEADER[CajasEnSTTot], "Sí", "No" )
+		dataType: string
+		lineageTag: 86106b49-686c-4d8a-853b-50b7fc8f6eaa
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Si el pedido tiene id de la API de SAUCO.
+	column ConSauco =
+			IF ( NOT ISBLANK ( LOL_PBIPURCHASEHEADER[IdSauco] ) && LOL_PBIPURCHASEHEADER[IdSauco] <> "", "Sí", "No" )
+		dataType: string
+		lineageTag: c03ff275-19dc-4b01-a66f-a5cd1f976304
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// El numero de pedido en TEXTO. El buscador no trabaja sobre numeros.
+	column PedidoTexto = FORMAT ( LOL_PBIPURCHASEHEADER[Pedido], "0" )
+		dataType: string
+		lineageTag: c0bdd1fd-ff78-46e4-9743-7276058cf119
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition LOL_PBIPURCHASEHEADER = m
+		mode: import
+		source = Value.NativeQuery(SapHana.Database("192.168.0.231:30015", [Implementation="2.0"]), "SELECT P.""DocEntry"" AS ""DocEntryPedido"", P.""DocNum"" AS ""Pedido"", P.""DocDate"" AS ""FechaPedido"", P.""U_GSP_SEASON"" AS ""Temporada"", P.""CardCode"" AS ""CodProveedor"", P.""CardName"" AS ""Proveedor"", P.""DocStatus"" AS ""EstadoPedido"", P.""CANCELED"" AS ""Anulado"", P.""U_LOL_YOOZNUMBER"" AS ""IdSauco"", P.""U_GSP_LOL_TOTBOX"" AS ""CajasDeclaradas"", P.""U_GSP_LOL_TOTPALLET"" AS ""PalesDeclarados"", P.""U_GSP_LOLSTATUSRMT"" AS ""EstadoRMT"" FROM SBO_LOLA_SUCURSAL.""OPOR"" P")
+
+	annotation PBI_ResultType = Table
+

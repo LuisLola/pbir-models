@@ -244,3 +244,12 @@ relationship 740d1c7a-bdef-7117-a5b8-cfcff6ca0747
 	fromColumn: LOL_PBIB2BSALESORDER.DocDueDate
 	toColumn: Calendario.Date
 
+relationship b8121c9a-6b4a-4c96-9ac1-761ba3b75b53
+	fromColumn: LOL_PBISTOCKTRANSFERREAL.KEntrada
+	toColumn: LOL_PBIPURCHASEGOODRECEIPT.KLinea
+
+relationship 9366c401-d9c7-4de7-b6af-8f99c7178520
+	fromColumn: LOL_PBIPURCHASEORDERS.DocumentInternalKey
+	toColumn: LOL_PBIPURCHASEHEADER.KPedido
+	crossFilteringBehavior: bothDirections
+
