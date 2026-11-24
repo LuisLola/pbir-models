@@ -84,6 +84,22 @@ table LOL_PBITRAFICOTIENDAS
 
 		annotation SummarizationSetBy = Automatic
 
+	column DV_Id
+		dataType: string
+		lineageTag: 83b88f6d-c942-40cd-8709-b77e461965a0
+		summarizeBy: none
+		sourceColumn: DV_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column DV_Nombre
+		dataType: string
+		lineageTag: a30615ae-e24e-4a81-882e-e0c47c885038
+		summarizeBy: none
+		sourceColumn: DV_Nombre
+
+		annotation SummarizationSetBy = Automatic
+
 	partition LOL_PBITRAFICOTIENDAS = m
 		mode: import
 		source =

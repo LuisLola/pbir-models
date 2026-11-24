@@ -170,6 +170,22 @@ table LOL_PBITIENDAS
 
 		annotation SummarizationSetBy = Automatic
 
+	column DV_Id
+		dataType: string
+		lineageTag: 1376826a-e5c6-48f7-a8dd-235dcbed38a9
+		summarizeBy: none
+		sourceColumn: DV_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column DV_Nombre
+		dataType: string
+		lineageTag: ff74c3d4-7740-489a-85e3-938c0a1547ae
+		summarizeBy: none
+		sourceColumn: DV_Nombre
+
+		annotation SummarizationSetBy = Automatic
+
 	partition LOL_PBITIENDAS = m
 		mode: import
 		source =

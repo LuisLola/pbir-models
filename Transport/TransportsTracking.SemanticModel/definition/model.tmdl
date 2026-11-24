@@ -8,7 +8,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["LOL_TRANSPORT_TRACKING","Festivos","UltimaActualizacion","LOL_PBITIMEWHS","LOL_PBICLIENTES","LOL_PBISTOCKTRANSFERSTATUS","LOL_PBIMODELITEM","LOL_PBIB2BSALESORDER","LOL_PBISALESDELIVERY","Tabla"]
+annotation PBI_QueryOrder = ["LOL_TRANSPORT_TRACKING","Festivos","UltimaActualizacion","LOL_PBITIMEWHS","LOL_PBICLIENTES","LOL_PBISTOCKTRANSFERSTATUS","LOL_PBIMODELITEM","LOL_PBIB2BSALESORDER","LOL_PBISALESDELIVERY","Tabla","LOL_PBIPICKINGORIGEN"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
@@ -60,6 +60,7 @@ ref table LocalDateTable_3e401d30-705b-41c0-b32d-7c169cbaf9a1
 ref table LocalDateTable_2f0e6934-33f2-437d-8637-57970b13e4d6
 ref table Tabla
 ref table FaseDelPicking
+ref table LOL_PBIPICKINGORIGEN
 
 ref cultureInfo es-ES
 

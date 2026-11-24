@@ -1,0 +1,39 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "56dd21f17aa963ab0684",
+  "position": {
+    "x": 1.25288809451153,
+    "y": 154.01970443349754,
+    "z": 0,
+    "height": 543,
+    "width": 1219.5870206489676,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6855",
+    "query": {
+      "queryState": {
+        "content": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasCatalogo"
+                    }
+                  },
+                  "Property": "HTML Catálogo B2B"
+                }
+              },
+              "queryRef": "MedidasCatalogo.HTML Catálogo B2B",
+              "nativeQueryRef": "HTML Catálogo B2B"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "e2e768ga"
+}

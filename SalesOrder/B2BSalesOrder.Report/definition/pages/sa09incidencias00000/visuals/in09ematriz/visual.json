@@ -1,11 +1,11 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "in09ematriz",
   "position": {
     "x": 0,
-    "y": 382,
+    "y": 184,
     "z": 10000,
-    "height": 316,
+    "height": 500,
     "width": 993,
     "tabOrder": 10000
   },
@@ -20,16 +20,92 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "VentasIncidencias"
+                      "Entity": "LOL_PBIAGENTES"
                     }
                   },
-                  "Property": "IncidenciaDesc"
+                  "Property": "Agente_Cajero"
                 }
               },
-              "queryRef": "VentasIncidencias.IncidenciaDesc",
-              "nativeQueryRef": "Tipo de incidencia",
+              "queryRef": "LOL_PBIAGENTES.Agente_Cajero",
+              "nativeQueryRef": "Agente",
               "active": true,
-              "displayName": "Tipo de incidencia"
+              "displayName": "Agente"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBICLIENTES"
+                    }
+                  },
+                  "Property": "RazonSocial"
+                }
+              },
+              "queryRef": "LOL_PBICLIENTES.RazonSocial",
+              "nativeQueryRef": "Cliente",
+              "active": false,
+              "displayName": "Cliente"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "GrupodeArt"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.GrupodeArt",
+              "nativeQueryRef": "Marca",
+              "active": false,
+              "displayName": "Marca"
+            }
+          ],
+          "fieldParameters": [
+            {
+              "parameterExpr": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimensionB2B1"
+                    }
+                  },
+                  "Property": "DimensionB2B1"
+                }
+              },
+              "index": 0,
+              "length": 1
+            },
+            {
+              "parameterExpr": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimensionB2B2"
+                    }
+                  },
+                  "Property": "DimensionB2B2"
+                }
+              },
+              "index": 1,
+              "length": 1
+            },
+            {
+              "parameterExpr": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimensionB2B3"
+                    }
+                  },
+                  "Property": "DimensionB2B3"
+                }
+              },
+              "index": 2,
+              "length": 1
             }
           ]
         },
@@ -43,27 +119,12 @@
                       "Entity": "MedidasIncidencias"
                     }
                   },
-                  "Property": "Incidencias temporada"
+                  "Property": "Pedido bruto temporada"
                 }
               },
-              "queryRef": "MedidasIncidencias.Incidencias temporada",
-              "nativeQueryRef": "Líneas",
-              "displayName": "Líneas"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "MedidasIncidencias"
-                    }
-                  },
-                  "Property": "Unidades incidencias temporada"
-                }
-              },
-              "queryRef": "MedidasIncidencias.Unidades incidencias temporada",
-              "nativeQueryRef": "Unidades",
-              "displayName": "Unidades"
+              "queryRef": "MedidasIncidencias.Pedido bruto temporada",
+              "nativeQueryRef": "Pedido bruto temporada",
+              "displayName": "Importe Pedidos"
             },
             {
               "field": {
@@ -77,8 +138,8 @@
                 }
               },
               "queryRef": "MedidasIncidencias.Importe incidencias temporada",
-              "nativeQueryRef": "Importe",
-              "displayName": "Importe"
+              "nativeQueryRef": "Importe incidencias temporada",
+              "displayName": "Pedidos Cancelados"
             },
             {
               "field": {
@@ -88,12 +149,12 @@
                       "Entity": "MedidasIncidencias"
                     }
                   },
-                  "Property": "Importe incidencias temporada anterior"
+                  "Property": "% cancelado temporada"
                 }
               },
-              "queryRef": "MedidasIncidencias.Importe incidencias temporada anterior",
-              "nativeQueryRef": "Anterior",
-              "displayName": "Anterior"
+              "queryRef": "MedidasIncidencias.% cancelado temporada",
+              "nativeQueryRef": "% cancelado temporada",
+              "displayName": "% Cancelado"
             },
             {
               "field": {
@@ -103,12 +164,12 @@
                       "Entity": "MedidasIncidencias"
                     }
                   },
-                  "Property": "Evol incidencias €"
+                  "Property": "Mot. Anulación cliente"
                 }
               },
-              "queryRef": "MedidasIncidencias.Evol incidencias €",
-              "nativeQueryRef": "Dif. €",
-              "displayName": "Dif. €"
+              "queryRef": "MedidasIncidencias.Mot. Anulación cliente",
+              "nativeQueryRef": "Mot. Anulación cliente",
+              "displayName": "Anulación cliente"
             },
             {
               "field": {
@@ -118,21 +179,192 @@
                       "Entity": "MedidasIncidencias"
                     }
                   },
-                  "Property": "Evol incidencias %"
+                  "Property": "Mot. Cierre tienda"
                 }
               },
-              "queryRef": "MedidasIncidencias.Evol incidencias %",
-              "nativeQueryRef": "Dif. %",
-              "displayName": "Dif. %"
+              "queryRef": "MedidasIncidencias.Mot. Cierre tienda",
+              "nativeQueryRef": "Mot. Cierre tienda",
+              "displayName": "Cierre tienda"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasIncidencias"
+                    }
+                  },
+                  "Property": "Mot. Crédito insuficiente"
+                }
+              },
+              "queryRef": "MedidasIncidencias.Mot. Crédito insuficiente",
+              "nativeQueryRef": "Mot. Crédito insuficiente",
+              "displayName": "Crédito insuf."
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasIncidencias"
+                    }
+                  },
+                  "Property": "Mot. No llega a mínimos de producción"
+                }
+              },
+              "queryRef": "MedidasIncidencias.Mot. No llega a mínimos de producción",
+              "nativeQueryRef": "Mot. No llega a mínimos de producción",
+              "displayName": "Mínimos producción"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasIncidencias"
+                    }
+                  },
+                  "Property": "Mot. Fuera de plazo de entrega"
+                }
+              },
+              "queryRef": "MedidasIncidencias.Mot. Fuera de plazo de entrega",
+              "nativeQueryRef": "Mot. Fuera de plazo de entrega",
+              "displayName": "Fuera de plazo"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasIncidencias"
+                    }
+                  },
+                  "Property": "Mot. Rotura stock"
+                }
+              },
+              "queryRef": "MedidasIncidencias.Mot. Rotura stock",
+              "nativeQueryRef": "Mot. Rotura stock",
+              "displayName": "Rotura stock"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasIncidencias"
+                    }
+                  },
+                  "Property": "Mot. Calidad"
+                }
+              },
+              "queryRef": "MedidasIncidencias.Mot. Calidad",
+              "nativeQueryRef": "Mot. Calidad",
+              "displayName": "Calidad"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasIncidencias"
+                    }
+                  },
+                  "Property": "Mot. Motivo comercial"
+                }
+              },
+              "queryRef": "MedidasIncidencias.Mot. Motivo comercial",
+              "nativeQueryRef": "Mot. Motivo comercial",
+              "displayName": "Motivo comercial"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasIncidencias"
+                    }
+                  },
+                  "Property": "Mot. No conforme con política de imagen"
+                }
+              },
+              "queryRef": "MedidasIncidencias.Mot. No conforme con política de imagen",
+              "nativeQueryRef": "Mot. No conforme con política de imagen",
+              "displayName": "No conforme imagen"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasIncidencias"
+                    }
+                  },
+                  "Property": "Mot. Mínimos de compras no alcanzados"
+                }
+              },
+              "queryRef": "MedidasIncidencias.Mot. Mínimos de compras no alcanzados",
+              "nativeQueryRef": "Mot. Mínimos de compras no alcanzados",
+              "displayName": "Mínimos compras"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasIncidencias"
+                    }
+                  },
+                  "Property": "Mot. Sin motivo"
+                }
+              },
+              "queryRef": "MedidasIncidencias.Mot. Sin motivo",
+              "nativeQueryRef": "Mot. Sin motivo",
+              "displayName": "Sin motivo"
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MedidasIncidencias"
+                  }
+                },
+                "Property": "Importe incidencias temporada"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
       }
     },
     "objects": {
       "columnHeaders": [
         {
           "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#55595F'"
+                    }
+                  }
+                }
+              }
+            },
             "backColor": {
               "solid": {
                 "color": {
@@ -144,35 +376,24 @@
                 }
               }
             },
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#6F263D'"
-                    }
-                  }
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "9D"
-                }
-              }
-            },
             "bold": {
               "expr": {
                 "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "wordWrap": {
+              "expr": {
+                "Literal": {
                   "Value": "true"
                 }
               }
             },
-            "autoSizeColumnWidth": {
+            "alignment": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "'Center'"
                 }
               }
             }
@@ -182,7 +403,25 @@
       "values": [
         {
           "properties": {
-            "backColor": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1A1A1A'"
+                    }
+                  }
+                }
+              }
+            },
+            "backColorPrimary": {
               "solid": {
                 "color": {
                   "expr": {
@@ -204,45 +443,339 @@
                 }
               }
             },
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#000000'"
-                    }
-                  }
-                }
-              }
-            },
-            "fontSize": {
+            "bandedRowHeaders": {
               "expr": {
                 "Literal": {
-                  "Value": "10D"
+                  "Value": "false"
                 }
               }
             }
           }
-        }
-      ],
-      "rowHeaders": [
+        },
         {
           "properties": {
             "fontColor": {
               "solid": {
                 "color": {
                   "expr": {
+                    "Conditional": {
+                      "Cases": [
+                        {
+                          "Condition": {
+                            "Comparison": {
+                              "ComparisonKind": 3,
+                              "Left": {
+                                "Measure": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Entity": "MedidasIncidencias"
+                                    }
+                                  },
+                                  "Property": "Evol incidencias %"
+                                }
+                              },
+                              "Right": {
+                                "Literal": {
+                                  "Value": "0D"
+                                }
+                              }
+                            }
+                          },
+                          "Value": {
+                            "Literal": {
+                              "Value": "'#1E7A45'"
+                            }
+                          }
+                        },
+                        {
+                          "Condition": {
+                            "Comparison": {
+                              "ComparisonKind": 2,
+                              "Left": {
+                                "Measure": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Entity": "MedidasIncidencias"
+                                    }
+                                  },
+                                  "Property": "Evol incidencias %"
+                                }
+                              },
+                              "Right": {
+                                "Literal": {
+                                  "Value": "0D"
+                                }
+                              }
+                            }
+                          },
+                          "Value": {
+                            "Literal": {
+                              "Value": "'#B0243F'"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "MedidasIncidencias.Evol incidencias %"
+          }
+        },
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Conditional": {
+                      "Cases": [
+                        {
+                          "Condition": {
+                            "Comparison": {
+                              "ComparisonKind": 3,
+                              "Left": {
+                                "Measure": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Entity": "MedidasIncidencias"
+                                    }
+                                  },
+                                  "Property": "Evol incidencias €"
+                                }
+                              },
+                              "Right": {
+                                "Literal": {
+                                  "Value": "0D"
+                                }
+                              }
+                            }
+                          },
+                          "Value": {
+                            "Literal": {
+                              "Value": "'#1E7A45'"
+                            }
+                          }
+                        },
+                        {
+                          "Condition": {
+                            "Comparison": {
+                              "ComparisonKind": 2,
+                              "Left": {
+                                "Measure": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Entity": "MedidasIncidencias"
+                                    }
+                                  },
+                                  "Property": "Evol incidencias €"
+                                }
+                              },
+                              "Right": {
+                                "Literal": {
+                                  "Value": "0D"
+                                }
+                              }
+                            }
+                          },
+                          "Value": {
+                            "Literal": {
+                              "Value": "'#B0243F'"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "MedidasIncidencias.Evol incidencias €"
+          }
+        },
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Conditional": {
+                      "Cases": [
+                        {
+                          "Condition": {
+                            "Comparison": {
+                              "ComparisonKind": 3,
+                              "Left": {
+                                "Measure": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Entity": "MedidasIncidencias"
+                                    }
+                                  },
+                                  "Property": "% cancelado temporada"
+                                }
+                              },
+                              "Right": {
+                                "Literal": {
+                                  "Value": "0.05D"
+                                }
+                              }
+                            }
+                          },
+                          "Value": {
+                            "Literal": {
+                              "Value": "'#FFFFFF'"
+                            }
+                          }
+                        },
+                        {
+                          "Condition": {
+                            "Comparison": {
+                              "ComparisonKind": 3,
+                              "Left": {
+                                "Measure": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Entity": "MedidasIncidencias"
+                                    }
+                                  },
+                                  "Property": "% cancelado temporada"
+                                }
+                              },
+                              "Right": {
+                                "Literal": {
+                                  "Value": "0.15D"
+                                }
+                              }
+                            }
+                          },
+                          "Value": {
+                            "Literal": {
+                              "Value": "'#FDF2F5'"
+                            }
+                          }
+                        },
+                        {
+                          "Condition": {
+                            "Comparison": {
+                              "ComparisonKind": 3,
+                              "Left": {
+                                "Measure": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Entity": "MedidasIncidencias"
+                                    }
+                                  },
+                                  "Property": "% cancelado temporada"
+                                }
+                              },
+                              "Right": {
+                                "Literal": {
+                                  "Value": "0.30D"
+                                }
+                              }
+                            }
+                          },
+                          "Value": {
+                            "Literal": {
+                              "Value": "'#F6DCE4'"
+                            }
+                          }
+                        },
+                        {
+                          "Condition": {
+                            "Comparison": {
+                              "ComparisonKind": 2,
+                              "Left": {
+                                "Measure": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Entity": "MedidasIncidencias"
+                                    }
+                                  },
+                                  "Property": "% cancelado temporada"
+                                }
+                              },
+                              "Right": {
+                                "Literal": {
+                                  "Value": "0.30D"
+                                }
+                              }
+                            }
+                          },
+                          "Value": {
+                            "Literal": {
+                              "Value": "'#EBB9CB'"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "MedidasIncidencias.% cancelado temporada"
+          }
+        }
+      ],
+      "rowHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
                     "Literal": {
-                      "Value": "'#000000'"
+                      "Value": "'#1A1A1A'"
                     }
                   }
                 }
               }
             },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "10D"
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
                 }
               }
             }
@@ -252,14 +785,24 @@
       "grid": [
         {
           "properties": {
-            "gridHorizontalColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#F9ECF4'"
-                    }
-                  }
+            "gridVertical": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "gridHorizontal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "rowPadding": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
                 }
               }
             },
@@ -268,16 +811,16 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#EFD0E4'"
+                      "Value": "'#E6E8EB'"
                     }
                   }
                 }
               }
             },
-            "rowPadding": {
+            "outlineWeight": {
               "expr": {
                 "Literal": {
-                  "Value": "3D"
+                  "Value": "1D"
                 }
               }
             }
@@ -292,7 +835,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#F9ECF4'"
+                      "Value": "'#FBE9EC'"
                     }
                   }
                 }
@@ -303,7 +846,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#6F263D'"
+                      "Value": "'#1A1A1A'"
                     }
                   }
                 }
@@ -313,6 +856,26 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "layout": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Compact'"
                 }
               }
             }
@@ -341,6 +904,13 @@
                   }
                 }
               }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
             }
           }
         }
@@ -360,7 +930,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#EFD0E4'"
+                      "Value": "'#E6E8EB'"
                     }
                   }
                 }
@@ -369,7 +939,7 @@
             "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "4D"
                 }
               }
             }
@@ -389,7 +959,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Detalle por tipo'"
+                  "Value": "'Desglose del importe cancelado'"
                 }
               }
             },
@@ -398,7 +968,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#000000'"
+                      "Value": "'#1A1A1A'"
                     }
                   }
                 }
@@ -407,7 +977,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "11D"
+                  "Value": "13D"
                 }
               }
             },
@@ -418,6 +988,35 @@
                 }
               }
             }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "spacing": [
+        {
+          "properties": {
+            "verticalSpacing": {
+              "expr": {
+                "Literal": {
+                  "Value": "2D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
           }
         }
       ]

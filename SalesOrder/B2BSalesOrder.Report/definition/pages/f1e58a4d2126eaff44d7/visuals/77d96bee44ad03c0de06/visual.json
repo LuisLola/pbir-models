@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "77d96bee44ad03c0de06",
   "position": {
-    "x": 0.23731728288908016,
-    "y": 0,
+    "x": 10,
+    "y": 8,
     "z": 3000,
-    "height": 36.506238859180037,
-    "width": 376.47058823529409,
+    "height": 32,
+    "width": 480,
     "tabOrder": 0
   },
   "visual": {
@@ -22,7 +22,8 @@
                     "value": "Previsión Mes",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "14pt"
+                      "fontSize": "19pt",
+                      "color": "#1A1A1A"
                     }
                   },
                   {
@@ -31,6 +32,34 @@
                 ]
               }
             ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
           }
         }
       ]

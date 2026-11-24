@@ -9170,6 +9170,16 @@ cultureInfo es-ES
 			            },
 			            "Weight": 0.727
 			          }
+			        },
+			        {
+			          "ALBARÁN": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -28625,19 +28635,7 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Pedidos de compra"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "Pedidos": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "table_medidas.pedidos_abiertos": {
 			      "Definition": {
@@ -28646,19 +28644,7 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Pedidos abiertos"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "Abiertos": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "table_medidas.líneas_de_compra": {
 			      "Definition": {
@@ -28670,7 +28656,7 @@ cultureInfo es-ES
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "Líneas": {
+			          "LÍNEAS": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -28688,19 +28674,7 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Proveedores"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "Proveedores": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "table_medidas.del_total_pedido": {
 			      "Definition": {
@@ -28775,7 +28749,7 @@ cultureInfo es-ES
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "RECIBIDAS": {
+			          "EN TRÁNSITO": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -28796,7 +28770,7 @@ cultureInfo es-ES
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "% RECIB": {
+			          "% EN TRÁNSITO": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -28817,7 +28791,7 @@ cultureInfo es-ES
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "EN ALMACÉN": {
+			          "RECIBIDAS": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -28838,7 +28812,7 @@ cultureInfo es-ES
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "% LLEGADO": {
+			          "% RECIBIDO": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -28898,19 +28872,7 @@ cultureInfo es-ES
 			          "ConceptualProperty": "SSCC"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "SSCC": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "lol_pbipackages.albaranentrada": {
 			      "Definition": {
@@ -28919,19 +28881,7 @@ cultureInfo es-ES
 			          "ConceptualProperty": "AlbaranEntrada"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "ENTRADA": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "lol_pbipackages.pedidocompra": {
 			      "Definition": {
@@ -28940,19 +28890,7 @@ cultureInfo es-ES
 			          "ConceptualProperty": "PedidoCompra"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "PEDIDO": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "lol_pbipackages.cardname": {
 			      "Definition": {
@@ -28961,19 +28899,7 @@ cultureInfo es-ES
 			          "ConceptualProperty": "CardName"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "PROVEEDOR": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "lol_pbipackages.apuntaa": {
 			      "Definition": {
@@ -28982,19 +28908,7 @@ cultureInfo es-ES
 			          "ConceptualProperty": "ApuntaA"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "APUNTA A": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "lol_pbipurchaseheader.estado": {
 			      "Definition": {
@@ -29070,6 +28984,111 @@ cultureInfo es-ES
 			      "Terms": [
 			        {
 			          "PEDIDO": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_medidas.estado_rmt": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Medidas",
+			          "ConceptualProperty": "Estado RMT"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ESTADO RMT": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_medidas.fecha_estado_rmt": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Medidas",
+			          "ConceptualProperty": "Fecha estado RMT"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "FECHA RMT": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "lol_pbipurchaseheader.rmtestadopedido": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "LOL_PBIPURCHASEHEADER",
+			          "ConceptualProperty": "RMTEstadoPedido"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ESTADO RMT": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_medidas.albarán_de_entrada": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Medidas",
+			          "ConceptualProperty": "Albarán de entrada"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ALBARANES": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_medidas.solicitud_de_traslado": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Medidas",
+			          "ConceptualProperty": "Solicitud de traslado"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ST": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",

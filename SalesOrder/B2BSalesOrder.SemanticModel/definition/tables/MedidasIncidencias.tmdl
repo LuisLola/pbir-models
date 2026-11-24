@@ -456,6 +456,290 @@ table MedidasIncidencias
 		displayFolder: 8 Temporada
 		lineageTag: 3c4eab93-1189-4615-899f-f6da25c0267d
 
+	/// Cuantos motivos distintos aparecen. Sirve para ver si el problema esta
+	/// concentrado en uno o repartido entre muchos.
+	measure 'Motivos con incidencia' = DISTINCTCOUNT ( VentasIncidencias[IncidenciaMotivo] )
+		formatString: #,0
+		displayFolder: 7 Análisis
+		lineageTag: 11f60787-f16e-4c8c-ac9e-a89f70a52e14
+
+	/// Lineas cuyo codigo de incidencia no esta en el catalogo.
+	/// Si esto no es cero, al catalogo le faltan motivos: hoy son los codigos
+	/// 20, 16, 28, 15, 18 y 17.
+	measure 'Incidencias sin catalogar' =
+			CALCULATE ( COUNTROWS ( VentasIncidencias ),
+			    CONTAINSSTRING ( VentasIncidencias[IncidenciaMotivo], "Sin catalogar" ) ) + 0
+		formatString: #,0
+		displayFolder: 7 Análisis
+		lineageTag: cfed6b2a-9a4a-4b72-9fa0-4a16681d5c9e
+
+	/// El pedido ANTES de cancelar: lo que sigue vivo mas lo que se cancelo.
+	/// VentasTemporadaSeleccionada deja fuera las lineas de incidencia, asi
+	/// que por si sola no sirve de denominador.
+	measure 'Pedido bruto temporada' = [VentasTemporadaSeleccionada] + [Importe incidencias temporada]
+		formatString: \€#,##0
+		displayFolder: 9 Motivos
+		lineageTag: b7fe66a0-542c-4360-80b6-ad7b171cc896
+
+	/// Que parte del pedido se cayo. Sobre el bruto, no sobre lo vivo: contra
+	/// lo vivo un pedido anulado entero daba 21.685%.
+	measure '% cancelado temporada' = DIVIDE ( [Importe incidencias temporada], [Pedido bruto temporada] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 9 Motivos
+		lineageTag: 2241694b-85e1-49cc-a9fb-48eec62f8135
+
+	/// Importe cancelado por este motivo. Una medida por motivo porque la
+	/// matriz necesita los motivos como COLUMNAS junto a las fijas.
+	measure 'Mot. Anulación cliente' =
+			CALCULATE ( [Importe incidencias temporada],
+			    VentasIncidencias[IncidenciaMotivo] = "ANULACIÓN CLIENTE" )
+		formatString: \€#,##0
+		displayFolder: 9 Motivos
+		lineageTag: 934b0b62-9a50-447d-8d09-b088920d8025
+
+	/// Importe cancelado por este motivo. Una medida por motivo porque la
+	/// matriz necesita los motivos como COLUMNAS junto a las fijas.
+	measure 'Mot. Cierre tienda' =
+			CALCULATE ( [Importe incidencias temporada],
+			    VentasIncidencias[IncidenciaMotivo] = "CIERRE TIENDA" )
+		formatString: \€#,##0
+		displayFolder: 9 Motivos
+		lineageTag: 7962a1af-f0c5-4ffb-b9d9-e3a85763c350
+
+	/// Importe cancelado por este motivo. Una medida por motivo porque la
+	/// matriz necesita los motivos como COLUMNAS junto a las fijas.
+	measure 'Mot. Crédito insuficiente' =
+			CALCULATE ( [Importe incidencias temporada],
+			    VentasIncidencias[IncidenciaMotivo] = "CRÉDITO INSUFICIENTE" )
+		formatString: \€#,##0
+		displayFolder: 9 Motivos
+		lineageTag: 5344ec3d-250c-44eb-b8a3-dbccc7645522
+
+	/// Importe cancelado por este motivo. Una medida por motivo porque la
+	/// matriz necesita los motivos como COLUMNAS junto a las fijas.
+	measure 'Mot. No llega a mínimos de producción' =
+			CALCULATE ( [Importe incidencias temporada],
+			    VentasIncidencias[IncidenciaMotivo] = "NO LLEGA A MINIMOS DE PRODUCCIÓN" )
+		formatString: \€#,##0
+		displayFolder: 9 Motivos
+		lineageTag: 4b4f0cea-88d9-4fda-b89d-5963cb97a9a4
+
+	/// Importe cancelado por este motivo. Una medida por motivo porque la
+	/// matriz necesita los motivos como COLUMNAS junto a las fijas.
+	measure 'Mot. Fuera de plazo de entrega' =
+			CALCULATE ( [Importe incidencias temporada],
+			    VentasIncidencias[IncidenciaMotivo] = "FUERA DE PLAZO DE ENTREGA" )
+		formatString: \€#,##0
+		displayFolder: 9 Motivos
+		lineageTag: 08a11225-29c0-47f7-8c6e-2d147832fe76
+
+	/// Importe cancelado por este motivo. Una medida por motivo porque la
+	/// matriz necesita los motivos como COLUMNAS junto a las fijas.
+	measure 'Mot. Rotura stock' =
+			CALCULATE ( [Importe incidencias temporada],
+			    VentasIncidencias[IncidenciaMotivo] = "ROTURA STOCK" )
+		formatString: \€#,##0
+		displayFolder: 9 Motivos
+		lineageTag: 5fc30e87-c514-49f0-b780-a833d146ba59
+
+	/// Importe cancelado por este motivo. Una medida por motivo porque la
+	/// matriz necesita los motivos como COLUMNAS junto a las fijas.
+	measure 'Mot. Calidad' =
+			CALCULATE ( [Importe incidencias temporada],
+			    VentasIncidencias[IncidenciaMotivo] = "CALIDAD" )
+		formatString: \€#,##0
+		displayFolder: 9 Motivos
+		lineageTag: 5a39490f-b056-4a00-89fc-83b1b68b02fc
+
+	/// Importe cancelado por este motivo. Una medida por motivo porque la
+	/// matriz necesita los motivos como COLUMNAS junto a las fijas.
+	measure 'Mot. Motivo comercial' =
+			CALCULATE ( [Importe incidencias temporada],
+			    VentasIncidencias[IncidenciaMotivo] = "MOTIVO COMERCIAL" )
+		formatString: \€#,##0
+		displayFolder: 9 Motivos
+		lineageTag: 87b2a76e-7310-403b-95e9-2d5f7ca0bae8
+
+	/// Importe cancelado por este motivo. Una medida por motivo porque la
+	/// matriz necesita los motivos como COLUMNAS junto a las fijas.
+	measure 'Mot. No conforme con política de imagen' =
+			CALCULATE ( [Importe incidencias temporada],
+			    VentasIncidencias[IncidenciaMotivo] = "NO CONFORME CON POLÍTICA DE IMAGEN" )
+		formatString: \€#,##0
+		displayFolder: 9 Motivos
+		lineageTag: 93439f68-e076-4f4b-80a7-5a7302797e74
+
+	/// Importe cancelado por este motivo. Una medida por motivo porque la
+	/// matriz necesita los motivos como COLUMNAS junto a las fijas.
+	measure 'Mot. Mínimos de compras no alcanzados' =
+			CALCULATE ( [Importe incidencias temporada],
+			    VentasIncidencias[IncidenciaMotivo] = "MÍNIMOS DE COMPRAS NO ALCANZADOS (DE PARTE DEL CLIENTE)" )
+		formatString: \€#,##0
+		displayFolder: 9 Motivos
+		lineageTag: ab1afdc0-3281-43f2-b9f5-606374d4106b
+
+	/// Importe cancelado por este motivo. Una medida por motivo porque la
+	/// matriz necesita los motivos como COLUMNAS junto a las fijas.
+	measure 'Mot. Sin motivo' =
+			CALCULATE ( [Importe incidencias temporada],
+			    VentasIncidencias[IncidenciaMotivo] = "Sin motivo" )
+		formatString: \€#,##0
+		displayFolder: 9 Motivos
+		lineageTag: 76dedda6-1590-497d-b7d0-d3ac230256d0
+
+	/// Los cuatro indicadores y el reparto de motivos, EN LINEA, en un solo
+	/// HTML de unos 60 px. Antes eran cuatro tarjetas apiladas de 150 px y se
+	/// comian el alto de la tabla. La pildora de evolucion va al REVES que en
+	/// ventas: que las incidencias bajen es bueno, asi que sale en verde.
+	measure 'HTML Tarjetas Incidencias' =
+			VAR Celda = "flex:1;min-width:0;padding:5px 12px;display:flex;align-items:baseline;gap:7px;white-space:nowrap;overflow:hidden"
+			VAR Filete = ";border-right:1px solid #E6E8EB"
+			VAR Etq = "font-size:9px;font-weight:600;color:#6B6F76"
+			VAR Val = "font-size:15px;font-weight:600;color:#1A1A1A"
+			VAR Pill = "display:inline-block;height:15px;line-height:15px;padding:0 5px;border-radius:3px;font-size:8px;font-weight:600;"
+			VAR Imp = [Importe incidencias temporada]
+			VAR Lin = [Incidencias temporada]
+			VAR Uds = [Unidades incidencias temporada]
+			VAR Pct = [% cancelado temporada]
+			VAR Ev = [Evol incidencias %]
+			VAR Medio = DIVIDE ( Imp, Lin )
+			VAR tImp =
+			    SWITCH ( TRUE (),
+			        ISBLANK ( Imp ), UNICHAR ( 8212 ),
+			        ABS ( Imp ) >= 1000000, "€ " & FORMAT ( Imp / 1000000, "#,0.0" ) & " M",
+			        ABS ( Imp ) >= 1000, "€ " & FORMAT ( Imp / 1000, "#,0" ) & " mil",
+			        "€ " & FORMAT ( Imp, "#,0" ) )
+			VAR tLin = IF ( ISBLANK ( Lin ), UNICHAR ( 8212 ), FORMAT ( Lin, "#,0" ) )
+			VAR tUds = IF ( ISBLANK ( Uds ), UNICHAR ( 8212 ), FORMAT ( Uds, "#,0" ) )
+			VAR tPct = IF ( ISBLANK ( Pct ), UNICHAR ( 8212 ), FORMAT ( Pct, "0.0%" ) )
+			VAR tMedio = IF ( ISBLANK ( Medio ), UNICHAR ( 8212 ), "€ " & FORMAT ( Medio, "#,0" ) )
+			VAR pEv =
+			    IF ( ISBLANK ( Ev ), "",
+			        "<span style='" & Pill & "background:"
+			            & IF ( Ev > 0, "#F7D7DD", "#D7EFE0" ) & ";color:"
+			            & IF ( Ev > 0, "#B0243F", "#1E7A45" ) & "'>"
+			            & IF ( Ev > 0, UNICHAR ( 9652 ), UNICHAR ( 9662 ) )
+			            & FORMAT ( ABS ( Ev ), "0%" ) & "</span>" )
+			VAR Franja =
+			    "<div style='display:flex;background:#FFFFFF;border:1px solid #E6E8EB;border-radius:4px;overflow:hidden'>"
+			    & "<div style='" & Celda & Filete & "'>"
+			    & "<span style='" & Etq & "'>Importe cancelado</span>"
+			    & "<span style='" & Val & "'>" & tImp & "</span>"
+			    & pEv
+			    & "</div>"
+			    & "<div style='" & Celda & Filete & "'>"
+			    & "<span style='" & Etq & "'>Líneas</span>"
+			    & "<span style='" & Val & "'>" & tLin & "</span>"
+			    & "</div>"
+			    & "<div style='" & Celda & Filete & "'>"
+			    & "<span style='" & Etq & "'>% cancelado</span>"
+			    & "<span style='" & Val & "'>" & tPct & "</span>"
+			    & "</div>"
+			    & "<div style='" & Celda & "'>"
+			    & "<span style='" & Etq & "'>Medio por línea</span>"
+			    & "<span style='" & Val & "'>" & tMedio & "</span>"
+			    & "</div>"
+			    & "</div>"
+			VAR m1 = COALESCE ( [Mot. Anulación cliente], 0 )
+			VAR f1 = FORMAT ( ROUND ( DIVIDE ( m1, Imp ) * 1000, 0 ), "0" )
+			VAR q1 = ROUND ( DIVIDE ( m1, Imp ) * 100, 0 )
+			VAR m2 = COALESCE ( [Mot. Cierre tienda], 0 )
+			VAR f2 = FORMAT ( ROUND ( DIVIDE ( m2, Imp ) * 1000, 0 ), "0" )
+			VAR q2 = ROUND ( DIVIDE ( m2, Imp ) * 100, 0 )
+			VAR m3 = COALESCE ( [Mot. Crédito insuficiente], 0 )
+			VAR f3 = FORMAT ( ROUND ( DIVIDE ( m3, Imp ) * 1000, 0 ), "0" )
+			VAR q3 = ROUND ( DIVIDE ( m3, Imp ) * 100, 0 )
+			VAR m4 = COALESCE ( [Mot. No llega a mínimos de producción], 0 )
+			VAR f4 = FORMAT ( ROUND ( DIVIDE ( m4, Imp ) * 1000, 0 ), "0" )
+			VAR q4 = ROUND ( DIVIDE ( m4, Imp ) * 100, 0 )
+			VAR m5 = COALESCE ( [Mot. Fuera de plazo de entrega], 0 )
+			VAR f5 = FORMAT ( ROUND ( DIVIDE ( m5, Imp ) * 1000, 0 ), "0" )
+			VAR q5 = ROUND ( DIVIDE ( m5, Imp ) * 100, 0 )
+			VAR m6 = COALESCE ( [Mot. Rotura stock], 0 )
+			VAR f6 = FORMAT ( ROUND ( DIVIDE ( m6, Imp ) * 1000, 0 ), "0" )
+			VAR q6 = ROUND ( DIVIDE ( m6, Imp ) * 100, 0 )
+			VAR m7 = COALESCE ( [Mot. Calidad], 0 )
+			VAR f7 = FORMAT ( ROUND ( DIVIDE ( m7, Imp ) * 1000, 0 ), "0" )
+			VAR q7 = ROUND ( DIVIDE ( m7, Imp ) * 100, 0 )
+			VAR m8 = COALESCE ( [Mot. Motivo comercial], 0 )
+			VAR f8 = FORMAT ( ROUND ( DIVIDE ( m8, Imp ) * 1000, 0 ), "0" )
+			VAR q8 = ROUND ( DIVIDE ( m8, Imp ) * 100, 0 )
+			VAR m9 = COALESCE ( [Mot. No conforme con política de imagen], 0 )
+			VAR f9 = FORMAT ( ROUND ( DIVIDE ( m9, Imp ) * 1000, 0 ), "0" )
+			VAR q9 = ROUND ( DIVIDE ( m9, Imp ) * 100, 0 )
+			VAR m10 = COALESCE ( [Mot. Mínimos de compras no alcanzados], 0 )
+			VAR f10 = FORMAT ( ROUND ( DIVIDE ( m10, Imp ) * 1000, 0 ), "0" )
+			VAR q10 = ROUND ( DIVIDE ( m10, Imp ) * 100, 0 )
+			VAR m11 = COALESCE ( [Mot. Sin motivo], 0 )
+			VAR f11 = FORMAT ( ROUND ( DIVIDE ( m11, Imp ) * 1000, 0 ), "0" )
+			VAR q11 = ROUND ( DIVIDE ( m11, Imp ) * 100, 0 )
+			VAR Barras =
+			    IF ( m1 > 0, "<div style='flex:" & f1 & ";background:#6F263D'></div>", "" ) &
+			    IF ( m2 > 0, "<div style='flex:" & f2 & ";background:#8A3B57'></div>", "" ) &
+			    IF ( m3 > 0, "<div style='flex:" & f3 & ";background:#A55271'></div>", "" ) &
+			    IF ( m4 > 0, "<div style='flex:" & f4 & ";background:#BF6B8A'></div>", "" ) &
+			    IF ( m5 > 0, "<div style='flex:" & f5 & ";background:#D186A3'></div>", "" ) &
+			    IF ( m6 > 0, "<div style='flex:" & f6 & ";background:#DFA0C9'></div>", "" ) &
+			    IF ( m7 > 0, "<div style='flex:" & f7 & ";background:#E8BBD5'></div>", "" ) &
+			    IF ( m8 > 0, "<div style='flex:" & f8 & ";background:#B9A6AE'></div>", "" ) &
+			    IF ( m9 > 0, "<div style='flex:" & f9 & ";background:#CBBDC3'></div>", "" ) &
+			    IF ( m10 > 0, "<div style='flex:" & f10 & ";background:#DDD4D8'></div>", "" ) &
+			    IF ( m11 > 0, "<div style='flex:" & f11 & ";background:#E6E8EB'></div>", "" )
+			VAR Leyenda =
+			    IF ( q1 >= 5,
+			        "<span style='margin-left:9px;font-size:8px;color:#55595F'>"
+			        & "<span style='display:inline-block;width:6px;height:6px;border-radius:2px;background:#6F263D;margin-right:3px'></span>"
+			        & "ANULACIÓN " & FORMAT ( q1, "0" ) & "%</span>", "" ) &
+			    IF ( q2 >= 5,
+			        "<span style='margin-left:9px;font-size:8px;color:#55595F'>"
+			        & "<span style='display:inline-block;width:6px;height:6px;border-radius:2px;background:#8A3B57;margin-right:3px'></span>"
+			        & "CIERRE " & FORMAT ( q2, "0" ) & "%</span>", "" ) &
+			    IF ( q3 >= 5,
+			        "<span style='margin-left:9px;font-size:8px;color:#55595F'>"
+			        & "<span style='display:inline-block;width:6px;height:6px;border-radius:2px;background:#A55271;margin-right:3px'></span>"
+			        & "CRÉDITO " & FORMAT ( q3, "0" ) & "%</span>", "" ) &
+			    IF ( q4 >= 5,
+			        "<span style='margin-left:9px;font-size:8px;color:#55595F'>"
+			        & "<span style='display:inline-block;width:6px;height:6px;border-radius:2px;background:#BF6B8A;margin-right:3px'></span>"
+			        & "MÍNIMOS " & FORMAT ( q4, "0" ) & "%</span>", "" ) &
+			    IF ( q5 >= 5,
+			        "<span style='margin-left:9px;font-size:8px;color:#55595F'>"
+			        & "<span style='display:inline-block;width:6px;height:6px;border-radius:2px;background:#D186A3;margin-right:3px'></span>"
+			        & "PLAZO " & FORMAT ( q5, "0" ) & "%</span>", "" ) &
+			    IF ( q6 >= 5,
+			        "<span style='margin-left:9px;font-size:8px;color:#55595F'>"
+			        & "<span style='display:inline-block;width:6px;height:6px;border-radius:2px;background:#DFA0C9;margin-right:3px'></span>"
+			        & "STOCK " & FORMAT ( q6, "0" ) & "%</span>", "" ) &
+			    IF ( q7 >= 5,
+			        "<span style='margin-left:9px;font-size:8px;color:#55595F'>"
+			        & "<span style='display:inline-block;width:6px;height:6px;border-radius:2px;background:#E8BBD5;margin-right:3px'></span>"
+			        & "CALIDAD " & FORMAT ( q7, "0" ) & "%</span>", "" ) &
+			    IF ( q8 >= 5,
+			        "<span style='margin-left:9px;font-size:8px;color:#55595F'>"
+			        & "<span style='display:inline-block;width:6px;height:6px;border-radius:2px;background:#B9A6AE;margin-right:3px'></span>"
+			        & "COMERCIAL " & FORMAT ( q8, "0" ) & "%</span>", "" ) &
+			    IF ( q9 >= 5,
+			        "<span style='margin-left:9px;font-size:8px;color:#55595F'>"
+			        & "<span style='display:inline-block;width:6px;height:6px;border-radius:2px;background:#CBBDC3;margin-right:3px'></span>"
+			        & "IMAGEN " & FORMAT ( q9, "0" ) & "%</span>", "" ) &
+			    IF ( q10 >= 5,
+			        "<span style='margin-left:9px;font-size:8px;color:#55595F'>"
+			        & "<span style='display:inline-block;width:6px;height:6px;border-radius:2px;background:#DDD4D8;margin-right:3px'></span>"
+			        & "COMPRAS " & FORMAT ( q10, "0" ) & "%</span>", "" ) &
+			    IF ( q11 >= 5,
+			        "<span style='margin-left:9px;font-size:8px;color:#55595F'>"
+			        & "<span style='display:inline-block;width:6px;height:6px;border-radius:2px;background:#E6E8EB;margin-right:3px'></span>"
+			        & "SIN MOTIVO " & FORMAT ( q11, "0" ) & "%</span>", "" )
+			VAR Banda =
+			    "<div style='display:flex;align-items:center;gap:10px;background:#FFFFFF;border:1px solid #E6E8EB;border-radius:4px;padding:5px 12px;margin-top:6px'>"
+			    & "<span style='font-size:9px;font-weight:600;color:#1A1A1A;white-space:nowrap'>Motivos</span>"
+			    & "<div style='display:flex;flex:1;height:8px;border-radius:2px;overflow:hidden'>" & Barras & "</div>"
+			    & "<div style='white-space:nowrap'>" & Leyenda & "</div></div>"
+			RETURN
+			    "<div style='font-family:Manrope,system-ui,-apple-system,sans-serif;background:#F2F3F5'>" & Franja & Banda & "</div>"
+		displayFolder: 9 Motivos
+		lineageTag: d4e55da4-0d10-4f0e-975f-448617bc0a29
+
 	column Value
 		lineageTag: 07f7e59a-a986-41c2-b13c-7f6849f2b453
 		isNameInferred

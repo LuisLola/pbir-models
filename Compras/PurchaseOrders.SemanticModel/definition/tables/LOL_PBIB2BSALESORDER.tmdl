@@ -143,8 +143,6 @@ table LOL_PBIB2BSALESORDER
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation UnderlyingDateTimeDataType = Date
-
 	column GrossAmt_EUR
 		dataType: double
 		formatString: #,0.00
@@ -395,6 +393,44 @@ table LOL_PBIB2BSALESORDER
 		lineageTag: 3744bd4a-b7c4-4e38-965c-101834cb6761
 		summarizeBy: none
 		sourceColumn: WhsCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column IncidenceCode
+		dataType: string
+		lineageTag: 4cd757ca-7615-4241-8fb8-a8c1a163c6f0
+		summarizeBy: none
+		sourceColumn: IncidenceCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column DV_Id
+		dataType: string
+		lineageTag: cb9ecb91-03b7-4984-8648-672044fe34dd
+		summarizeBy: none
+		sourceColumn: DV_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column DV_Nombre
+		dataType: string
+		lineageTag: 8bc89b0f-d56c-411e-9e9d-34c379040b2c
+		summarizeBy: none
+		sourceColumn: DV_Nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column DV_FechaComunicacion
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: fd93cece-bb41-48d4-811f-5bcee331dfc4
+		summarizeBy: none
+		sourceColumn: DV_FechaComunicacion
+
+		variation Variation
+			isDefault
+			relationship: 93ce53f7-6b6c-4a63-b853-5796e0aa825f
+			defaultHierarchy: LocalDateTable_cdaa0dc5-ba31-46c3-ba71-266997ed4ea4.'Jerarquía de fechas'
 
 		annotation SummarizationSetBy = Automatic
 

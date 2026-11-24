@@ -1,0 +1,107 @@
+table LOL_INCIDENCIAS
+	lineageTag: f8584d78-048c-42ad-ae64-674eff984075
+
+	column cod_incidencia
+		formatString: 0
+		lineageTag: 6bcddf37-a64c-43c9-9b04-9221b3e41880
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [cod_incidencia]
+
+		annotation SummarizationSetBy = Automatic
+
+	column motivo
+		lineageTag: 733213ab-548e-4fd0-9f76-df64e930b6ee
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [motivo]
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo_objeto_sap
+		formatString: 0
+		lineageTag: 38955d6c-f859-40a4-968a-1ad369cb567e
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [tipo_objeto_sap]
+
+		annotation SummarizationSetBy = Automatic
+
+	column descripcion_motivo
+		lineageTag: b447ba34-fe91-4a2f-b9e8-8822a1fc8544
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [descripcion_motivo]
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo_incidencia
+		lineageTag: e249d189-4796-41a0-b986-aaa997781e61
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [tipo_incidencia]
+
+		annotation SummarizationSetBy = Automatic
+
+	column visible_bi2go
+		lineageTag: 40ea7282-3659-4cea-bc84-5318e6fec271
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [visible_bi2go]
+
+		annotation SummarizationSetBy = Automatic
+
+	/// El mismo codigo en TEXTO. Hace falta porque IncidenceCode
+	/// llega como texto en los pedidos y una relacion exige el mismo
+	/// tipo en los dos lados. Se pone aqui, en 17 filas, y no en la
+	/// tabla de hechos, que tiene 1,9 millones.
+	column cod_texto = FORMAT ( LOL_INCIDENCIAS[cod_incidencia], "0" )
+		lineageTag: 964ec851-27ba-43ff-aaad-59fc64875680
+		summarizeBy: none
+
+	partition LOL_INCIDENCIAS = calculated
+		mode: import
+		source =
+				
+				VAR _src =
+				    DATATABLE (
+				        "cod_incidencia", INTEGER,
+				        "motivo", STRING,
+				        "tipo_objeto_sap", INTEGER,
+				        "descripcion_motivo", STRING,
+				        "tipo_incidencia", STRING,
+				        "visible_bi2go", STRING,
+				        {
+				            { 1,  "ANULACIÓN CLIENTE", 17, "Cliente anula pedido o alguna referencia de su pedido (cualquier otro motivo que no sea por cierre de negocio)", "CANCELACION", "Y" },
+				            { 2,  "ROTURA STOCK", 17, "Sin stock disponible para servir", "CANCELACION", "Y" },
+				            { 3,  "FUERA DE PLAZO DE ENTREGA", 17, "Entrega tardía", "CANCELACION", "Y" },
+				            { 4,  "MÍNIMOS DE COMPRAS NO ALCANZADOS (DE PARTE DEL CLIENTE)", 17, "Cliente no llega al mínimo de pedido inicial", "CANCELACION", "Y" },
+				            { 5,  "ERROR INTRODUCCIÓN", 17, "Error introducción", "CANCELACION", "N" },
+				            { 7,  "CIERRE TIENDA", 17, "Cese de actividad comercial", "CANCELACION", "Y" },
+				            { 8,  "NO CONFORME CON POLÍTICA DE IMAGEN", 17, "No acorde con el posicionamiento de Lola Casademunt", "CANCELACION", "Y" },
+				            { 9,  "CRÉDITO INSUFICIENTE", 17, "Cliente no dispuesto a realizar tr antic", "CANCELACION", "Y" },
+				            { 10, "CAMBIO FECHA DE SERVICIO", 17, "Cambio fecha de servicio", "MODIFICACION", "N" },
+				            { 11, "CAMBIOS SOLICITADOS POR EL CLIENTE", 17, "Modificaciones del pedido solicitadas por el cliente", "MODIFICACION", "N" },
+				            { 21, "CALIDAD", 17, "Articulo cancelado por motivos de calidad, no se puede servir", "CANCELACION", "Y" },
+				            { 22, "CAMBIO CONDICIONES DE PAGO", 17, "", "MODIFICACION", "N" },
+				            { 23, "NO LLEGA A MINIMOS DE PRODUCCIÓN", 17, "Articulo no se produce por no llegar al mínimo de compra", "CANCELACION", "Y" },
+				            { 24, "PRECIO COSTE", 17, "Cambio condición de pago|Cambio vía de pago|Aplicar/quitar 3% dto pp", "MODIFICACION", "N" },
+				            { 25, "MOTIVO COMERCIAL", 17, "Cambio de representante|Aplicar/quitar descuento comercial|Promociones", "MODIFICACION", "Y" },
+				            { 26, "CAMBIO DE ALMACÉN", 17, "", "MODIFICACION", "N" },
+				            { 27, "CAMBIO INFORMACIÓN LOGÍSTICA", 17, "Cambio dirección de entrega|Cambio de incoterm|Cambio de transporte", "MODIFICACION", "N" }
+				        }
+				    )
+				RETURN
+				    SELECTCOLUMNS (
+				        _src,
+				        "cod_incidencia", [cod_incidencia],
+				        "motivo", [motivo],
+				        "tipo_objeto_sap", [tipo_objeto_sap],
+				        "descripcion_motivo",
+				            IF ( [descripcion_motivo] = "", BLANK (), SUBSTITUTE ( [descripcion_motivo], "|", UNICHAR ( 10 ) ) ),
+				        "tipo_incidencia", [tipo_incidencia],
+				        "visible_bi2go", [visible_bi2go]
+				    )
+
+	annotation PBI_Id = e7576d8a2e544ad7a0fc343b6ec947f5
+

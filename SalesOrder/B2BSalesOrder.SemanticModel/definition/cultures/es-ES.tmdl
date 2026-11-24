@@ -1371,6 +1371,16 @@ cultureInfo es-ES
 			            },
 			            "Weight": 0.475
 			          }
+			        },
+			        {
+			          "Marca": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -2328,6 +2338,16 @@ cultureInfo es-ES
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "Modelo": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -7138,26 +7158,6 @@ cultureInfo es-ES
 			            },
 			            "Weight": 0.75
 			          }
-			        },
-			        {
-			          "Tipo": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        },
-			        {
-			          "Tipo de incidencia": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ]
 			    },
@@ -11835,6 +11835,16 @@ cultureInfo es-ES
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.582
+			          }
+			        },
+			        {
+			          "Talla": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -37189,17 +37199,7 @@ cultureInfo es-ES
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "Temporada": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        },
-			        {
-			          "Importe": {
+			          "Pedidos Cancelados": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -37217,19 +37217,7 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Importe incidencias temporada anterior"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "Anterior": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "medidasincidencias.líneas_de_incidencia": {
 			      "Definition": {
@@ -37238,19 +37226,7 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Líneas de incidencia"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "Líneas": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "medidasincidencias.evol_incidencias_": {
 			      "Definition": {
@@ -37259,29 +37235,7 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Evol incidencias %"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "vs anterior": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        },
-			        {
-			          "Dif. %": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "medidasincidencias.incidencia_temporada": {
 			      "Definition": {
@@ -37290,19 +37244,7 @@ cultureInfo es-ES
 			          "ConceptualProperty": "% incidencia temporada"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "% sobre venta": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "medidasincidencias.unidades_incidencias_temporada": {
 			      "Definition": {
@@ -37311,29 +37253,7 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Unidades incidencias temporada"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "Unidades (impacto)": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        },
-			        {
-			          "Unidades": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "medidasincidencias.clientes_con_incidencia": {
 			      "Definition": {
@@ -37342,19 +37262,7 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Clientes con incidencia"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "Clientes": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "medidasincidencias.incidencias_temporada": {
 			      "Definition": {
@@ -37363,10 +37271,37 @@ cultureInfo es-ES
 			          "ConceptualProperty": "Incidencias temporada"
 			        }
 			      },
+			      "State": "Generated"
+			    },
+			    "medidasincidencias.evol_incidencias_1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIncidencias",
+			          "ConceptualProperty": "Evol incidencias €"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasventas.pedido_cabecera": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasVentas",
+			          "ConceptualProperty": "Pedido Cabecera"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasventas.pedido_importe": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasVentas",
+			          "ConceptualProperty": "Pedido Importe"
+			        }
+			      },
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "Líneas": {
+			          "Importe": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -37377,17 +37312,434 @@ cultureInfo es-ES
 			        }
 			      ]
 			    },
-			    "medidasincidencias.evol_incidencias_1": {
+			    "medidasventas.pedido_unidades": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MedidasIncidencias",
-			          "ConceptualProperty": "Evol incidencias €"
+			          "ConceptualEntity": "MedidasVentas",
+			          "ConceptualProperty": "Pedido Unidades"
 			        }
 			      },
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "Dif. €": {
+			          "Pedidas": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasventas.pedido_servido": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasVentas",
+			          "ConceptualProperty": "Pedido Servido"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Servidas": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasventas.pedido_pendiente": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasVentas",
+			          "ConceptualProperty": "Pedido Pendiente"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Pendientes": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasventas.pedido__servido": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasVentas",
+			          "ConceptualProperty": "Pedido % servido"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "% servido": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasventas.pedido_precio_medio": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasVentas",
+			          "ConceptualProperty": "Pedido Precio medio"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Precio medio": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasventas.pedido_descripción": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasVentas",
+			          "ConceptualProperty": "Pedido Descripción"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Producto": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ventasincidencias.incidenciamotivo": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "VentasIncidencias",
+			          "ConceptualProperty": "IncidenciaMotivo"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasincidencias.motivos_con_incidencia": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIncidencias",
+			          "ConceptualProperty": "Motivos con incidencia"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "medidasincidencias.pedido_bruto_temporada": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIncidencias",
+			          "ConceptualProperty": "Pedido bruto temporada"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Importe Pedidos": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasincidencias.cancelado_temporada": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIncidencias",
+			          "ConceptualProperty": "% cancelado temporada"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "% Cancelado": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasincidencias.mot__anulación_cliente": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIncidencias",
+			          "ConceptualProperty": "Mot. Anulación cliente"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Anulación cliente": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasincidencias.mot__cierre_tienda": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIncidencias",
+			          "ConceptualProperty": "Mot. Cierre tienda"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Cierre tienda": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasincidencias.mot__crédito_insuficiente": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIncidencias",
+			          "ConceptualProperty": "Mot. Crédito insuficiente"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Crédito insuf.": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasincidencias.mot__no_llega_a_mínimos_de_producción": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIncidencias",
+			          "ConceptualProperty": "Mot. No llega a mínimos de producción"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Mínimos producción": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasincidencias.mot__fuera_de_plazo_de_entrega": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIncidencias",
+			          "ConceptualProperty": "Mot. Fuera de plazo de entrega"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Fuera de plazo": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasincidencias.mot__rotura_stock": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIncidencias",
+			          "ConceptualProperty": "Mot. Rotura stock"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Rotura stock": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasincidencias.mot__calidad": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIncidencias",
+			          "ConceptualProperty": "Mot. Calidad"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Calidad": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasincidencias.mot__motivo_comercial": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIncidencias",
+			          "ConceptualProperty": "Mot. Motivo comercial"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Motivo comercial": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasincidencias.mot__no_conforme_con_política_de_imagen": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIncidencias",
+			          "ConceptualProperty": "Mot. No conforme con política de imagen"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "No conforme imagen": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasincidencias.mot__mínimos_de_compras_no_alcanzados": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIncidencias",
+			          "ConceptualProperty": "Mot. Mínimos de compras no alcanzados"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Mínimos compras": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidasincidencias.mot__sin_motivo": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MedidasIncidencias",
+			          "ConceptualProperty": "Mot. Sin motivo"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Sin motivo": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "pedidosb2b.numeropedido": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PedidosB2B",
+			          "ConceptualProperty": "NumeroPedido"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Pedido": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",

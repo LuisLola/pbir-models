@@ -1202,6 +1202,150 @@ table MedidasVentas
 		displayFolder: 0 Contexto
 		lineageTag: 93d96365-54a3-41a7-b017-6b787d9f91a6
 
+	/// Lineas del pedido en el contexto actual.
+	measure 'Pedido Líneas' = COUNTROWS ( LOL_PBIB2BSALESORDER )
+		formatString: #,0
+		displayFolder: 9 Detalle pedido
+		lineageTag: a97199f6-ea64-40fb-b044-e004d74c623f
+
+	/// Referencias distintas dentro del pedido.
+	measure 'Pedido Referencias' = DISTINCTCOUNT ( LOL_PBIB2BSALESORDER[ItemCode] )
+		formatString: #,0
+		displayFolder: 9 Detalle pedido
+		lineageTag: 754aa892-15c4-4cd0-9d60-80e7d98af673
+
+	/// Unidades pedidas. Qty es TEXTO en esta tabla; se convierte con VALUE.
+	/// Comprobado que no hay ni una sola con decimales, asi que es seguro.
+	measure 'Pedido Unidades' = SUMX ( LOL_PBIB2BSALESORDER, IFERROR ( VALUE ( LOL_PBIB2BSALESORDER[Qty] ), 0 ) )
+		formatString: #,0
+		displayFolder: 9 Detalle pedido
+		lineageTag: 5dc8b996-f5f2-47cd-96ff-c6b83ea5b75f
+
+	/// Unidades que siguen sin servir.
+	measure 'Pedido Pendiente' = SUMX ( LOL_PBIB2BSALESORDER, IFERROR ( VALUE ( LOL_PBIB2BSALESORDER[OpenQty] ), 0 ) )
+		formatString: #,0
+		displayFolder: 9 Detalle pedido
+		lineageTag: 470a4e9b-5211-4b3d-8b39-b74d55a305fe
+
+	/// Lo ya servido, por diferencia.
+	measure 'Pedido Servido' = [Pedido Unidades] - [Pedido Pendiente]
+		formatString: #,0
+		displayFolder: 9 Detalle pedido
+		lineageTag: bab9bdac-11a4-4c64-93ff-8f0fa3d578cc
+
+	/// Cuanto del pedido ha salido ya.
+	measure 'Pedido % servido' = DIVIDE ( [Pedido Servido], [Pedido Unidades] )
+		formatString: 0.0%
+		displayFolder: 9 Detalle pedido
+		lineageTag: 5f999a3b-5711-4866-8518-42aca5f718b0
+
+	/// Importe de linea. Se usa LineTotal_Num porque es la unica columna de
+	/// importe que llega numerica: NetAmt_EUR viene como texto con punto
+	/// decimal y con locale es-ES VALUE lo leeria como millares.
+	measure 'Pedido Importe' = SUM ( LOL_PBIB2BSALESORDER[LineTotal_Num] )
+		formatString: \€#,##0.00
+		displayFolder: 9 Detalle pedido
+		lineageTag: c35be2b4-306b-451e-a3f9-60b0883508a5
+
+	/// Importe entre unidades pedidas.
+	measure 'Pedido Precio medio' = DIVIDE ( [Pedido Importe], [Pedido Unidades] )
+		formatString: \€#,##0.00
+		displayFolder: 9 Detalle pedido
+		lineageTag: 28a95778-a8a0-48f2-9b5a-f04f150fc319
+
+	/// La linea de cabecera de la pagina: pedido, cliente y fecha.
+	/// Si no hay un pedido concreto lo dice, en vez de salir en blanco.
+	measure 'Pedido Cabecera' =
+			VAR Doc = SELECTEDVALUE ( LOL_PBIB2BSALESORDER[DocNum] )
+			VAR Cli = COALESCE (
+			    SELECTEDVALUE ( LOL_PBICLIENTES[RazonSocial] ),
+			    SELECTEDVALUE ( LOL_PBIB2BSALESORDER[CardCode] )
+			)
+			VAR Fec = SELECTEDVALUE ( LOL_PBIB2BSALESORDER[DocDate] )
+			RETURN
+			    IF ( ISBLANK ( Doc ), "Selecciona un pedido",
+			        "Pedido " & Doc
+			        & IF ( ISBLANK ( Cli ), "", "  ·  " & Cli )
+			        & IF ( ISBLANK ( Fec ), "", "  ·  " & FORMAT ( Fec, "dd/MM/yyyy" ) ) )
+		formatString: @
+		displayFolder: 9 Detalle pedido
+		lineageTag: 24dda54e-059f-4320-9ddf-15791d47c8a3
+
+	/// Estado del documento, traducido. O = abierto, C = cerrado.
+	measure 'Pedido Estado' =
+			VAR N = DISTINCTCOUNT ( LOL_PBIB2BSALESORDER[DocStatus] )
+			RETURN
+			    SWITCH ( TRUE (),
+			        N > 1, "Varios",
+			        SELECTEDVALUE ( LOL_PBIB2BSALESORDER[DocStatus] ) = "O", "Abierto",
+			        SELECTEDVALUE ( LOL_PBIB2BSALESORDER[DocStatus] ) = "C", "Cerrado",
+			        SELECTEDVALUE ( LOL_PBIB2BSALESORDER[DocStatus] ) )
+		formatString: @
+		displayFolder: 9 Detalle pedido
+		lineageTag: adb3f0fc-ddb7-40b9-9e79-ec9cca5952b9
+
+	/// La cabecera de la pagina de detalle: pedido, cliente, fecha, estado
+	/// y los cinco indicadores. En HTML porque con seis tarjetas nativas la
+	/// de texto salia vacia y a las de valor se les cortaba la cifra.
+	measure 'HTML Cabecera Pedido' =
+			VAR Doc = SELECTEDVALUE ( LOL_PBIB2BSALESORDER[DocNum] )
+			VAR Cli = COALESCE (
+			    SELECTEDVALUE ( LOL_PBICLIENTES[RazonSocial] ),
+			    SELECTEDVALUE ( LOL_PBIB2BSALESORDER[CardCode] ) )
+			VAR Fec = SELECTEDVALUE ( LOL_PBIB2BSALESORDER[DocDate] )
+			VAR Est = [Pedido Estado]
+			VAR Uds = [Pedido Unidades]
+			VAR Ser = [Pedido Servido]
+			VAR Pen = [Pedido Pendiente]
+			VAR Pct = [Pedido % servido]
+			VAR Imp = [Pedido Importe]
+			VAR Ref = [Pedido Referencias]
+			VAR ChipCol = IF ( Est = "Cerrado", "#1E7A45", "#9A6700" )
+			VAR ChipBg  = IF ( Est = "Cerrado", "#D7EFE0", "#FFF3D6" )
+			RETURN
+			IF ( ISBLANK ( Doc ),
+			    "<style>.pd{font-family:Manrope,system-ui,-apple-system,sans-serif;color:#1A1A1A;background:#F2F3F5}.pd .hd{background:#FFFFFF;border:1px solid #E6E8EB;border-radius:4px;padding:16px 18px;margin-bottom:12px}.pd .num{font-size:26px;font-weight:700;letter-spacing:-.01em}.pd .sub{font-size:12.5px;color:#6B6F76;margin-top:5px}.pd .chip{display:inline-block;font-size:11px;font-weight:700;border-radius:3px;padding:2px 9px;margin-left:10px;vertical-align:2px}.pd .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.pd .k{background:#FFFFFF;border:1px solid #E6E8EB;border-radius:4px;padding:12px 14px}.pd .k .v{font-size:22px;font-weight:600;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pd .k .l{font-size:11.5px;font-weight:600;color:#6B6F76;margin-top:5px}.pd .k .b{height:4px;background:#EEF0F2;border-radius:2px;margin-top:9px;overflow:hidden}.pd .k .b i{display:block;height:4px;background:#1E7A45;border-radius:2px}</style>"
+			    & "<div class='pd'><div class='hd'><div class='num'>Sin pedido</div>"
+			    & "<div class='sub'>Pulsa con el botón derecho en una fila de cualquier "
+			    & "tabla y elige Obtener detalles.</div></div></div>",
+			    "<style>.pd{font-family:Manrope,system-ui,-apple-system,sans-serif;color:#1A1A1A;background:#F2F3F5}.pd .hd{background:#FFFFFF;border:1px solid #E6E8EB;border-radius:4px;padding:16px 18px;margin-bottom:12px}.pd .num{font-size:26px;font-weight:700;letter-spacing:-.01em}.pd .sub{font-size:12.5px;color:#6B6F76;margin-top:5px}.pd .chip{display:inline-block;font-size:11px;font-weight:700;border-radius:3px;padding:2px 9px;margin-left:10px;vertical-align:2px}.pd .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.pd .k{background:#FFFFFF;border:1px solid #E6E8EB;border-radius:4px;padding:12px 14px}.pd .k .v{font-size:22px;font-weight:600;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pd .k .l{font-size:11.5px;font-weight:600;color:#6B6F76;margin-top:5px}.pd .k .b{height:4px;background:#EEF0F2;border-radius:2px;margin-top:9px;overflow:hidden}.pd .k .b i{display:block;height:4px;background:#1E7A45;border-radius:2px}</style>"
+			    & "<div class='pd'>"
+			    & "<div class='hd'><div class='num'>Pedido " & Doc
+			    & "<span class='chip' style='background:" & ChipBg & ";color:" & ChipCol
+			    & "'>" & Est & "</span></div>"
+			    & "<div class='sub'>" & COALESCE ( Cli, "—" )
+			    & IF ( ISBLANK ( Fec ), "", "  ·  " & FORMAT ( Fec, "dd/MM/yyyy" ) )
+			    & "  ·  " & FORMAT ( Ref, "#,0" ) & " referencias"
+			    & "  ·  " & FORMAT ( [Pedido Líneas], "#,0" ) & " líneas</div></div>"
+			    & "<div class='kpis'>"
+			    & "<div class='k'><div class='v' style='color:#8A2944'>"
+			        & FORMAT ( Imp, "€ #,##0.00" ) & "</div>"
+			        & "<div class='l'>Importe del pedido</div></div>"
+			    & "<div class='k'><div class='v'>" & FORMAT ( Uds, "#,0" ) & "</div>"
+			        & "<div class='l'>Unidades pedidas</div></div>"
+			    & "<div class='k'><div class='v'>" & FORMAT ( Ser, "#,0" ) & "</div>"
+			        & "<div class='l'>Servidas</div></div>"
+			    & "<div class='k'><div class='v'>" & FORMAT ( Pen, "#,0" ) & "</div>"
+			        & "<div class='l'>Pendientes</div></div>"
+			    & "<div class='k'><div class='v'>" & FORMAT ( Pct, "0.0%" ) & "</div>"
+			        & "<div class='l'>Servido</div>"
+			        & "<div class='b'><i style='width:"
+			        & FORMAT ( ROUND ( COALESCE ( Pct, 0 ) * 100, 0 ), "0" ) & "%'></i></div></div>"
+			    & "</div></div>" )
+		displayFolder: 9 Detalle pedido
+		lineageTag: c87a031e-5187-4bda-afc4-459114206091
+
+	/// El nombre del producto, para que la tabla no sea solo codigos.
+	/// Si la fila agrupa varios modelos lo dice, en vez de elegir uno.
+	measure 'Pedido Descripción' =
+			VAR N = DISTINCTCOUNT ( LOL_PBIMODELITEM[Descripcion_modelo] )
+			RETURN
+			    IF ( N > 1, FORMAT ( N, "#,0" ) & " modelos",
+			        SELECTEDVALUE ( LOL_PBIMODELITEM[Descripcion_modelo] ) )
+		formatString: @
+		displayFolder: 9 Detalle pedido
+		lineageTag: 91414a06-016d-4a03-a0bf-99fc28812868
+
 	column Value
 		lineageTag: 2ddc9eb7-b8c8-4537-91e0-8de67fa58299
 		isNameInferred

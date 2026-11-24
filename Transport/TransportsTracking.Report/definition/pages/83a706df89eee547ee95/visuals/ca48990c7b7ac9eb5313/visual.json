@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "LOL_TRANSPORT_TRACKING"
+                      "Entity": "LOL_PBICLIENTES"
                     }
                   },
-                  "Property": "segmento"
+                  "Property": "GroupName"
                 }
               },
-              "queryRef": "LOL_TRANSPORT_TRACKING.segmento",
-              "nativeQueryRef": "Grupo Clientes",
+              "queryRef": "LOL_PBICLIENTES.GroupName",
+              "nativeQueryRef": "GroupName",
               "active": true,
               "displayName": "Grupo Clientes"
             }

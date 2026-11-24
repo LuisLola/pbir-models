@@ -20,10 +20,13 @@ table _Medidas
 	/// Medido en vivo contra SBO_LOLA_SUCURSAL el 2026-10-18, temporada de
 	/// cabecera S27+F27 y DocDate 2026-01-01..10-18: sin este filtro salen
 	/// 511 pedidos y 990.752 uds; con el, los 428 y 893.988 de control.
+	/// Con el albaran en la fila (matriz de Analisis de entradas) la relacion
+	/// entrada->pedido se abre en los dos sentidos: si no, cada pedido se cruza
+	/// con TODOS los albaranes. Fuera de esa fila no cambia nada.
 	measure 'Líneas de compra' =
-			CALCULATE (
-			    COUNTROWS ( LOL_PBIPURCHASEORDERS ),
-			    LOL_PBIPURCHASEORDERS[CANCELED] = "N"
+			IF ( ISINSCOPE ( LOL_PBIPURCHASEGOODRECEIPT[DocumentNumber] ),
+			    CALCULATE ( COUNTROWS ( LOL_PBIPURCHASEORDERS ), LOL_PBIPURCHASEORDERS[CANCELED] = "N", CROSSFILTER ( LOL_PBIPURCHASEGOODRECEIPT[KBase], LOL_PBIPURCHASEORDERS[KLinea], BOTH ) ),
+			    CALCULATE ( COUNTROWS ( LOL_PBIPURCHASEORDERS ), LOL_PBIPURCHASEORDERS[CANCELED] = "N" )
 			)
 		formatString: #,0
 		displayFolder: 1 Volumen
@@ -64,10 +67,13 @@ table _Medidas
 	/// Medido en vivo contra SBO_LOLA_SUCURSAL el 2026-10-18, temporada de
 	/// cabecera S27+F27 y DocDate 2026-01-01..10-18: sin este filtro salen
 	/// 511 pedidos y 990.752 uds; con el, los 428 y 893.988 de control.
+	/// Con el albaran en la fila (matriz de Analisis de entradas) la relacion
+	/// entrada->pedido se abre en los dos sentidos: si no, cada pedido se cruza
+	/// con TODOS los albaranes. Fuera de esa fila no cambia nada.
 	measure Unidades =
-			CALCULATE (
-			    SUM ( LOL_PBIPURCHASEORDERS[Quantity] ),
-			    LOL_PBIPURCHASEORDERS[CANCELED] = "N"
+			IF ( ISINSCOPE ( LOL_PBIPURCHASEGOODRECEIPT[DocumentNumber] ),
+			    CALCULATE ( SUM ( LOL_PBIPURCHASEORDERS[Quantity] ), LOL_PBIPURCHASEORDERS[CANCELED] = "N", CROSSFILTER ( LOL_PBIPURCHASEGOODRECEIPT[KBase], LOL_PBIPURCHASEORDERS[KLinea], BOTH ) ),
+			    CALCULATE ( SUM ( LOL_PBIPURCHASEORDERS[Quantity] ), LOL_PBIPURCHASEORDERS[CANCELED] = "N" )
 			)
 		formatString: #,0
 		displayFolder: 1 Volumen
@@ -237,14 +243,21 @@ table _Medidas
 
 	/// Bultos del pedido. El cruce va por TREATAS: pedidos y entradas son
 	/// tablas de linea, su DocEntry se repite y no vale como lado "uno".
+	/// Con el albaran en la fila (matriz de Analisis de entradas) la relacion
+	/// entrada->pedido se abre en los dos sentidos: si no, cada pedido se cruza
+	/// con TODOS los albaranes. Fuera de esa fila no cambia nada.
 	measure Cajas =
-			CALCULATE (
-			    DISTINCTCOUNT ( LOL_PBIPACKAGES[PackCode] ),
-			    TREATAS (
-			        VALUES ( LOL_PBIPURCHASEORDERS[DocumentInternalKey] ),
-			        LOL_PBIPACKAGES[KPedido]
-			    )
-			) + 0
+			IF ( ISINSCOPE ( LOL_PBIPURCHASEGOODRECEIPT[DocumentNumber] ),
+			    VAR k = SELECTCOLUMNS ( VALUES ( LOL_PBIPURCHASEGOODRECEIPT[DocumentInternalKey] ), "k", VALUE ( LOL_PBIPURCHASEGOODRECEIPT[DocumentInternalKey] ) )
+			    RETURN IF ( NOT ISEMPTY ( k ), CALCULATE ( DISTINCTCOUNT ( LOL_PBIPACKAGES[PackCode] ), TREATAS ( k, LOL_PBIPACKAGES[AlbaranEntradaEntry] ) ) + 0 ),
+			    CALCULATE (
+			        DISTINCTCOUNT ( LOL_PBIPACKAGES[PackCode] ),
+			        TREATAS (
+			            VALUES ( LOL_PBIPURCHASEORDERS[DocumentInternalKey] ),
+			            LOL_PBIPACKAGES[KPedido]
+			        )
+			    ) + 0
+			)
 		formatString: #,0
 		displayFolder: 3 Embalaje
 		lineageTag: 45f00d6f-19fc-4a5c-ae45-940385135e81
@@ -323,11 +336,14 @@ table _Medidas
 	/// Pedidos NO anulados. La cabecera trae TODOS los pedidos para que la
 	/// relacion no tenga miembro en blanco -ese renglon vacio de la matriz-,
 	/// asi que los anulados se excluyen aqui.
+	/// Con el albaran en la fila (matriz de Analisis de entradas) la relacion
+	/// entrada->pedido se abre en los dos sentidos: si no, cada pedido se cruza
+	/// con TODOS los albaranes. Fuera de esa fila no cambia nada.
 	measure Pedidos =
-			CALCULATE (
-			    COUNTROWS ( LOL_PBIPURCHASEHEADER ),
-			    LOL_PBIPURCHASEHEADER[Anulado] = "N"
-			) + 0
+			IF ( ISINSCOPE ( LOL_PBIPURCHASEGOODRECEIPT[DocumentNumber] ),
+			    CALCULATE ( COUNTROWS ( LOL_PBIPURCHASEHEADER ), LOL_PBIPURCHASEHEADER[Anulado] = "N", CROSSFILTER ( LOL_PBIPURCHASEGOODRECEIPT[KBase], LOL_PBIPURCHASEORDERS[KLinea], BOTH ) ),
+			    CALCULATE ( COUNTROWS ( LOL_PBIPURCHASEHEADER ), LOL_PBIPURCHASEHEADER[Anulado] = "N" ) + 0
+			)
 		formatString: #,0
 		displayFolder: 4 Resumen
 		lineageTag: c862ac55-9b9f-43f0-af41-fa79795c46f2
@@ -426,7 +442,7 @@ table _Medidas
 			VAR c4 =
 			    "<div style='" & Caja & "'>"
 			    & "<div style='" & Val & "'>" & FORMAT ( uRec, f ) & "</div>"
-			    & "<div style='" & Etq & "'>Unidades recibidas</div>"
+			    & "<div style='" & Etq & "'>Unidades en tránsito</div>"
 			    & "<div style='margin-top:10px;white-space:nowrap'>" & "<span style='" & Pill & Gris & "'>" & FORMAT ( DIVIDE ( uRec, uPed ), "0.0%" ) & " de lo pedido" & "</span>" & "</div></div>"
 			VAR c5 =
 			    "<div style='" & Caja & "'>"
@@ -436,12 +452,23 @@ table _Medidas
 			VAR c6 =
 			    "<div style='" & Caja & "'>"
 			    & "<div style='" & Val & "'>" & FORMAT ( uAlm, f ) & "</div>"
-			    & "<div style='" & Etq & "'>Unidades en el almacén</div>"
+			    & "<div style='" & Etq & "'>Unidades recibidas</div>"
 			    & "<div style='margin-top:10px;white-space:nowrap'>" & "<span style='" & Pill & Gris & "'>" & FORMAT ( nComp + nParc, f ) & " pedidos" & "</span>" & IF ( nTran > 0, "<span style='" & Pill & Ambar & "'>" & FORMAT ( nTran, f ) & " en tránsito" & "</span>", "" ) & "</div></div>"
+			VAR nEntC = [Entradas con cajas]
+			VAR nEntS = [Entradas sin cajas]
+			VAR c7 =
+			    "<div style='" & Caja & "'>"
+			    & "<div style='" & Val & "'>" & FORMAT ( nEntC, f ) & "</div>"
+			    & "<div style='" & Etq & "'>Entradas con cajas</div>"
+			    & "<div style='margin-top:10px;white-space:nowrap'>"
+			    & IF ( nEntS > 0, "<span style='" & Pill & Rosa & "'>" & FORMAT ( nEntS, f )
+			        & " sin cajas</span>", "<span style='" & Pill & Verde & "'>todas</span>" )
+			    & "<span style='" & Pill & Gris & "'>" & FORMAT ( [Entradas], f )
+			        & " entradas</span></div></div>"
 			RETURN
 			    "<div style='font-family:Manrope,system-ui,-apple-system,sans-serif;background:#F2F3F5'>"
 			    & "<div style='display:flex;gap:9px;align-items:stretch'>"
-			    & c1 & c2 & c3 & c4 & c5 & c6 & "</div></div>"
+			    & c1 & c2 & c3 & c4 & c5 & c6 & c7 & "</div></div>"
 		displayFolder: 4 Resumen
 		lineageTag: f9954ef4-95fd-4a96-9c67-da9cba485015
 
@@ -508,8 +535,36 @@ table _Medidas
 			VAR fTra = CALCULATE ( MAX ( LOL_PBISTOCKTRANSFERREAL[FechaTraslado] ) )
 			VAR Sau = SELECTEDVALUE ( LOL_PBIPURCHASEHEADER[IdSauco] )
 			VAR Temp = SELECTEDVALUE ( LOL_PBIPURCHASEHEADER[Temporada] )
+			VAR rCod = CALCULATE ( MIN ( LOL_PBISTOCKTRANSFERSTATUS[RMTCodigo] ) )
+			VAR rEst = [Estado RMT]
+			VAR rFec = [Fecha estado RMT]
+			VAR rDis = [Estados RMT distintos]
+			VAR rLin = [Líneas en RMT]
 			VAR f0 = "#,0"
 			VAR fd = "dd/mm/yyyy"
+						VAR nLinCaja = COUNTROWS ( LOL_PBIPACKAGES )
+			VAR uCaja = SUM ( LOL_PBIPACKAGES[Cantidad] )
+			VAR nRef = DISTINCTCOUNT ( LOL_PBIPACKAGES[SKU] )
+			VAR FilasCaja =
+			    CONCATENATEX (
+			        TOPN ( 7, LOL_PBIPACKAGES, LOL_PBIPACKAGES[SSCC], ASC, LOL_PBIPACKAGES[SKU], ASC ),
+			        "<tr>"
+			        & "<td style='padding:2px 10px 2px 0;color:#1A1A1A;white-space:nowrap'>" & LOL_PBIPACKAGES[SSCC] & "</td>"
+			        & "<td style='padding:2px 10px 2px 0;color:#6B6F76'>" & LOL_PBIPACKAGES[SKU] & "</td>"
+			        & "<td style='padding:2px 10px 2px 0;text-align:right;color:#1A1A1A'>" & FORMAT ( LOL_PBIPACKAGES[Cantidad], "#,0" ) & "</td>"
+			        & "<td style='padding:2px 0;color:#6B6F76;white-space:nowrap'>" & LOL_PBIPACKAGES[ApuntaA] & "</td></tr>", "" )
+			VAR BloqueCajas =
+			    IF ( COALESCE ( nLinCaja, 0 ) = 0, "",
+			        "<div style='" & Fila & "'><div style='flex:1 1 100%'>"
+			        & "<div style='" & Etq & "'>Contenido de las cajas</div>"
+			        & "<div style='" & Sub & ";margin:3px 0 6px'>"
+			        & FORMAT ( nCaj, f0 ) & " cajas · " & FORMAT ( uCaja, f0 )
+			        & " uds embaladas · " & FORMAT ( nRef, f0 ) & " referencias</div>"
+			        & "<table style='width:100%;border-collapse:collapse;font-size:10px'>"
+			        & FilasCaja & "</table>"
+			        & IF ( nLinCaja > 7, "<div style='" & Sub & ";margin-top:4px'>+"
+			            & FORMAT ( nLinCaja - 7, "#,0" ) & " líneas más</div>", "" )
+			        & "</div></div>" )
 			VAR Vacio =
 			    "<div style='" & Caja & "'>"
 			    & "<div style='font-size:19px;font-weight:600;color:#1A1A1A'>"
@@ -520,11 +575,23 @@ table _Medidas
 			    & "<div style='flex:1 1 98px'><div style='font-size:19px;font-weight:600;color:#1A1A1A'>"
 			    & FORMAT ( uPed, f0 ) & "</div><div style='" & Etq & "'>Unidades pedidas</div></div>"
 			    & "<div style='flex:1 1 98px'><div style='font-size:19px;font-weight:600;color:#1A1A1A'>"
-			    & FORMAT ( uRec, f0 ) & "</div><div style='" & Etq & "'>Recibidas</div></div>"
+			    & FORMAT ( uRec, f0 ) & "</div><div style='" & Etq & "'>En tránsito</div></div>"
 			    & "<div style='flex:1 1 98px'><div style='font-size:19px;font-weight:600;color:#1A1A1A'>"
-			    & FORMAT ( uAlm, f0 ) & "</div><div style='" & Etq & "'>En el almacén</div></div>"
+			    & FORMAT ( uAlm, f0 ) & "</div><div style='" & Etq & "'>Recibidas</div></div>"
 			    & "<div style='flex:1 1 98px'><div style='font-size:19px;font-weight:600;color:#1A1A1A'>"
 			    & FORMAT ( nCaj, f0 ) & "</div><div style='" & Etq & "'>Cajas</div></div>"
+			    & "<div style='" & Fila & "'>"
+			    & "<div style='flex:1 1 98px;min-width:98px'>"
+			    & "<div style='" & Etq & "'>Estado RMT</div>"
+			    & "<div style='" & Dato & "'>" & COALESCE ( rEst, Raya ) & "</div>"
+			    & "<div style='" & Sub & "'>" & IF ( ISBLANK ( rCod ), "sin estado", "código " & FORMAT ( rCod, "0" ) ) & "</div></div>"
+			    & "<div style='flex:1 1 98px;min-width:98px'>"
+			    & "<div style='" & Etq & "'>Fecha del estado</div>"
+			    & "<div style='" & Dato & "'>" & IF ( ISBLANK ( rFec ), Raya, FORMAT ( rFec, fd ) ) & "</div></div>"
+			    & "<div style='flex:1 1 98px;min-width:98px'>"
+			    & "<div style='" & Etq & "'>Líneas en RMT</div>"
+			    & "<div style='" & Dato & "'>" & FORMAT ( rLin, f0 ) & "</div>"
+			    & "<div style='" & Sub & "'>" & IF ( rDis > 1, FORMAT ( rDis, "0" ) & " estados distintos", "un solo estado" ) & "</div></div>"
 			    & "</div></div>"
 			VAR Ficha =
 			    "<div style='" & Caja & "'>"
@@ -542,13 +609,13 @@ table _Medidas
 			    & "</div>"
 			    & "<div style='flex:1;min-width:0'>"
 			    & "<div style='font-size:21px;font-weight:600;color:#1A1A1A;line-height:1.15'>" & FORMAT ( uRec, f0 ) & "</div>"
-			    & "<div style='" & Etq & ";margin-top:2px'>Recibidas</div>"
+			    & "<div style='" & Etq & ";margin-top:2px'>En tránsito</div>"
 			    & "<div style='" & Sub & "'>" & FORMAT ( DIVIDE ( uRec, uPed ), "0.0%" ) & " de lo pedido" & "</div>"
 			    & "</div>"
 			    & "<div style='flex:1;min-width:0'>"
 			    & "<div style='font-size:21px;font-weight:600;color:#1A1A1A;line-height:1.15'>" & FORMAT ( uAlm, f0 ) & "</div>"
-			    & "<div style='" & Etq & ";margin-top:2px'>En el almacén</div>"
-			    & "<div style='" & Sub & "'>" & FORMAT ( DIVIDE ( uAlm, uPed ), "0.0%" ) & " llegado" & "</div>"
+			    & "<div style='" & Etq & ";margin-top:2px'>Recibidas</div>"
+			    & "<div style='" & Sub & "'>" & FORMAT ( DIVIDE ( uAlm, uPed ), "0.0%" ) & " recibido" & "</div>"
 			    & "</div>"
 			    & "<div style='flex:1;min-width:0'>"
 			    & "<div style='font-size:21px;font-weight:600;color:#1A1A1A;line-height:1.15'>" & FORMAT ( nCaj, f0 ) & "</div>"
@@ -631,11 +698,100 @@ table _Medidas
 			    & "<div style='" & Dato & "'>" & IF ( ISBLANK ( Sau ) || Sau = "", Raya, Sau ) & "</div>"
 			    & "<div style='" & Sub & "'>" & IF ( ISBLANK ( Sau ) || Sau = "", "no conciliado", "conciliado" ) & "</div>"
 			    & "</div>"
-			    & "</div></div>"
+			    & BloqueCajas
+			    & "</div>"
 			RETURN
 			    IF ( ISBLANK ( nPed ), Vacio, Ficha )
 		displayFolder: 4 Resumen
 		lineageTag: 5de9ddbe-400c-4a71-b9b9-22536e87e529
+
+	/// El estado de RMT mas atrasado de lo que haya en contexto.
+	measure 'Estado RMT' =
+			VAR c = MIN ( LOL_PBISTOCKTRANSFERSTATUS[RMTCodigo] )
+			RETURN
+			    SWITCH ( c,
+			        20, "documento recibido",
+			        25, "en plancha",
+			        28, "control de calidad",
+			        30, "mercancía llegada",
+			        50, "recepción recibida",
+			        100, "recepción finalizada",
+			        200, "varios",
+			        BLANK () )
+		displayFolder: 5 RMT
+		lineageTag: 5360f4f2-44c5-4982-8b1b-6f2b2fa7585c
+
+	/// La ultima fecha de estado logistico.
+	measure 'Fecha estado RMT' = MAX ( LOL_PBISTOCKTRANSFERSTATUS[RMTFecha] )
+		formatString: Short Date
+		displayFolder: 5 RMT
+		lineageTag: de118ce3-0d8a-4d78-b7e2-0cfa3483a9a4
+
+	/// Cuantos estados distintos conviven. Mayor que 1 = el pedido va a
+	/// distintas velocidades segun la linea.
+	measure 'Estados RMT distintos' = DISTINCTCOUNT ( LOL_PBISTOCKTRANSFERSTATUS[RMTCodigo] ) + 0
+		formatString: #,0
+		displayFolder: 5 RMT
+		lineageTag: 0d2059f0-b18f-4efd-b091-764432b9e1a0
+
+	/// Lineas de solicitud de traslado del pedido.
+	measure 'Líneas en RMT' = COUNTROWS ( LOL_PBISTOCKTRANSFERSTATUS ) + 0
+		formatString: #,0
+		displayFolder: 5 RMT
+		lineageTag: a602a7eb-a036-4902-a034-db551f3079f5
+
+	/// Albaranes de entrada distintos, sin contar los anulados.
+	measure Entradas = CALCULATE ( DISTINCTCOUNT ( LOL_PBIPURCHASEGOODRECEIPT[DocumentInternalKey] ), LOL_PBIPURCHASEGOODRECEIPT[CANCELED] = "N" ) + 0
+		formatString: #,0
+		displayFolder: 4 Resumen
+		lineageTag: a055a744-311f-4358-8bad-6cf9b88bc6eb
+
+	/// Entradas que ya tienen bultos cargados desde el packing del proveedor.
+	measure 'Entradas con cajas' = DISTINCTCOUNT ( LOL_PBIPACKAGES[AlbaranEntradaEntry] ) + 0
+		formatString: #,0
+		displayFolder: 4 Resumen
+		lineageTag: 8dde3ba4-7ac5-4fd2-8a64-69b8cabbc957
+
+	/// Lo que falta por completar: entrada registrada y ni un bulto.
+	measure 'Entradas sin cajas' = [Entradas] - [Entradas con cajas]
+		formatString: #,0
+		displayFolder: 4 Resumen
+		lineageTag: de337e32-5323-4800-aa19-ac7cf85be5d2
+
+	/// Parte de las entradas que ya tienen packing.
+	measure '% entradas con cajas' = DIVIDE ( [Entradas con cajas], [Entradas] )
+		formatString: 0%
+		displayFolder: 4 Resumen
+		lineageTag: b20c4cea-c9ca-4f84-925b-b9b2f1199609
+
+	/// El albaran de entrada que corresponde a la fila: el numero si hay uno,
+	/// el recuento si hay varios (un pedido llega a tener 50). En la fila del
+	/// propio albaran va en blanco, porque ya lo dice la cabecera de fila.
+	/// Fuente: LOL_PBIPURCHASEGOODRECEIPT, sin anulados. NO usar
+	/// LOL_PBISTOCKTRANSFERSTATUS[AlbaranEntrada]: solo trae los que ya tienen
+	/// ST y se deja fuera los 2.281 albaranes sin traslado.
+	measure 'Albarán de entrada' =
+			VAR t = CALCULATETABLE ( VALUES ( LOL_PBIPURCHASEGOODRECEIPT[DocumentNumber] ), LOL_PBIPURCHASEGOODRECEIPT[CANCELED] = "N" )
+			VAR n = COUNTROWS ( t )
+			RETURN
+			    IF ( NOT ISINSCOPE ( LOL_PBIPURCHASEGOODRECEIPT[DocumentNumber] ),
+			        SWITCH ( TRUE (),
+			            n = 1, MAXX ( t, LOL_PBIPURCHASEGOODRECEIPT[DocumentNumber] ),
+			            n > 1, FORMAT ( n, "#,0" ) & " albaranes" ) )
+		displayFolder: 6 Documentos
+		lineageTag: f696c47f-6ce7-4c74-b23c-4fc22cc3e583
+
+	/// La solicitud de traslado de la fila: el numero si hay una, el recuento
+	/// si hay varias. Cada albaran tiene como mucho una ST (medido 2026-11-18).
+	measure 'Solicitud de traslado' =
+			VAR t = FILTER ( VALUES ( LOL_PBISTOCKTRANSFERREAL[Solicitud_traslado] ), NOT ISBLANK ( LOL_PBISTOCKTRANSFERREAL[Solicitud_traslado] ) )
+			VAR n = COUNTROWS ( t )
+			RETURN
+			    SWITCH ( TRUE (),
+			        n = 1, FORMAT ( MAXX ( t, LOL_PBISTOCKTRANSFERREAL[Solicitud_traslado] ), "0" ),
+			        n > 1, FORMAT ( n, "#,0" ) & " ST" )
+		displayFolder: 6 Documentos
+		lineageTag: 05392f79-8623-4c04-9c44-fc3f0545a8ce
 
 	column Column
 		formatString: 0

@@ -5,7 +5,7 @@ table LOL_PLANMATERIAL
 		dataType: int64
 		isHidden
 		lineageTag: e91877e0-0271-4857-8365-f2030499d02e
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: DocEntry
 
 		annotation SummarizationSetBy = Automatic
@@ -14,7 +14,7 @@ table LOL_PLANMATERIAL
 		dataType: int64
 		isHidden
 		lineageTag: 51181269-32ed-485e-8834-9a3cd6bdce98
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: LineNum
 
 		annotation SummarizationSetBy = Automatic
@@ -134,6 +134,11 @@ table LOL_PLANMATERIAL
 		summarizeBy: none
 		sourceColumn: Fecha disponibilidad (línea del articulo)
 
+		variation Variación
+			isDefault
+			relationship: 162bbafc-3a7c-4001-9ca6-88c41fc88204
+			defaultHierarchy: LocalDateTable_9d97399f-7ac1-4bf9-a3b1-cc8063375cce.'Jerarquía de fechas'
+
 		annotation SummarizationSetBy = Automatic
 
 	column 'Fecha Fin pedido venta'
@@ -142,6 +147,11 @@ table LOL_PLANMATERIAL
 		lineageTag: e083252c-308e-415f-806c-a86d07a9fd4a
 		summarizeBy: none
 		sourceColumn: Fecha Fin pedido venta
+
+		variation Variación
+			isDefault
+			relationship: 1893752c-d302-4fae-9cde-25e4d861e4f1
+			defaultHierarchy: LocalDateTable_720da10e-692a-4682-bcfe-c190ef3448ac.'Jerarquía de fechas'
 
 		annotation SummarizationSetBy = Automatic
 

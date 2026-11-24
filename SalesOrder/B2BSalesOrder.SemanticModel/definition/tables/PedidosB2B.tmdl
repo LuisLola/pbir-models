@@ -1,0 +1,26 @@
+table PedidosB2B
+	lineageTag: 74062dce-f2f8-4941-9cf2-a72b99650aa8
+
+	/// Los numeros de pedido distintos. Es una DIMENSION: cuelga de
+	/// LOL_PBIB2BSALESORDER y de VentasIncidencias, y por eso un filtro
+	/// de pedido llega a las dos. Filtrar el hecho directamente no lo
+	/// conseguia.
+	column NumeroPedido
+		lineageTag: 8bbd24ab-4738-4071-99b1-92fce1351098
+		summarizeBy: none
+		sourceColumn: [NumeroPedido]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition PedidosB2B = calculated
+		mode: import
+		source =
+				DISTINCT (
+				    SELECTCOLUMNS (
+				        'LOL_PBIB2BSALESORDER',
+				        "NumeroPedido", 'LOL_PBIB2BSALESORDER'[DocNum]
+				    )
+				)
+
+	annotation PBI_Id = 74062dcef2f849419cf2a72b99650aa8
+

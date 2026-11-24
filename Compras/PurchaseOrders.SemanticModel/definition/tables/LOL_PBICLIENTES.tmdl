@@ -195,6 +195,46 @@ table LOL_PBICLIENTES
 
 		annotation SummarizationSetBy = Automatic
 
+	column Activo
+		dataType: string
+		lineageTag: 911561c5-2c74-4cad-81d9-83cb3281d5a3
+		summarizeBy: none
+		sourceColumn: Activo
+
+		annotation SummarizationSetBy = Automatic
+
+	column TipoIC
+		dataType: string
+		lineageTag: 8685fe89-edd6-4a21-8a64-939170bfd6e4
+		summarizeBy: none
+		sourceColumn: TipoIC
+
+		annotation SummarizationSetBy = Automatic
+
+	column ViaPago
+		dataType: string
+		lineageTag: 49af73b4-a928-4a7f-ac9f-6d7f61dc63d2
+		summarizeBy: none
+		sourceColumn: ViaPago
+
+		annotation SummarizationSetBy = Automatic
+
+	column DV_Id
+		dataType: string
+		lineageTag: f57a368a-7cd6-462f-92d4-479447d25d56
+		summarizeBy: none
+		sourceColumn: DV_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column DV_Nombre
+		dataType: string
+		lineageTag: 8a6d99ab-3df2-48c1-a840-f6d2e25352ab
+		summarizeBy: none
+		sourceColumn: DV_Nombre
+
+		annotation SummarizationSetBy = Automatic
+
 	partition LOL_PBICLIENTES = m
 		mode: import
 		source =

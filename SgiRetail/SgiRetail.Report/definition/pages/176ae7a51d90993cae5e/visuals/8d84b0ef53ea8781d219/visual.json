@@ -1,9 +1,9 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "8d84b0ef53ea8781d219",
   "position": {
-    "x": 249.16256176392633,
-    "y": 68.355540010091545,
+    "x": 249.16256178764326,
+    "y": 68.365710198267223,
     "z": 17000,
     "height": 46.995073891625616,
     "width": 241.18226600985221,
@@ -166,14 +166,14 @@
             "textSize": {
               "expr": {
                 "Literal": {
-                  "Value": "9D"
+                  "Value": "8D"
                 }
               }
             },
             "bold": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -182,7 +182,18 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DFA0C9'"
+                      "Value": "'#1A1A1A'"
+                    }
+                  }
+                }
+              }
+            },
+            "background": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#F2F3F5'"
                     }
                   }
                 }
@@ -224,7 +235,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1A1416'"
+                      "Value": "'#1A1A1A'"
                     }
                   }
                 }
@@ -304,7 +315,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#F2F3F5'"
                     }
                   }
                 }
@@ -313,7 +324,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "100D"
+                  "Value": "0D"
                 }
               }
             }
@@ -346,7 +357,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             },
@@ -354,6 +365,24 @@
               "expr": {
                 "Literal": {
                   "Value": "1D"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E6E8EB'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "6D"
                 }
               }
             }

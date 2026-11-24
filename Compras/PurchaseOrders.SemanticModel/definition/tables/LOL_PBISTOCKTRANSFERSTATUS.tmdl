@@ -325,16 +325,235 @@ table LOL_PBISTOCKTRANSFERSTATUS
 		dataType: string
 		isHidden
 		lineageTag: 0d09155f-8da1-4891-af3d-f28bdc937763
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
 
 	column KPedido = RELATED ( LOL_PBIPURCHASEGOODRECEIPT[KBase] )
 		dataType: string
 		isHidden
 		lineageTag: 81929682-e3bf-4df6-85fe-c6ca51b76a67
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
 
 	column CantidadPedida = LOOKUPVALUE ( LOL_PBIPURCHASEORDERS[Quantity], LOL_PBIPURCHASEORDERS[KLinea], LOL_PBISTOCKTRANSFERSTATUS[KPedido] )
 		dataType: double
 		lineageTag: c4db07d0-0c31-4158-9fd6-e2d0e8327458
 		summarizeBy: sum
+
+	/// El estado de RMT en numero. La columna de LINEA viene vacia en el 39%
+	/// de las filas, asi que cae a la de CABECERA; si no, cuatro de cada diez
+	/// pedidos se quedarian sin estado.
+	column RMTCodigo =
+			VAR Linea = LOL_PBISTOCKTRANSFERSTATUS[EstadologisticoLineas]
+			VAR Cab = LOL_PBISTOCKTRANSFERSTATUS[Estadologistico]
+			VAR t = IF ( ISBLANK ( Linea ) || Linea = "", Cab, Linea )
+			RETURN IF ( ISBLANK ( t ) || t = "", BLANK (), VALUE ( t ) )
+		dataType: int64
+		formatString: 0
+		lineageTag: a6f0e0b8-f947-4617-957a-dcddc28e979d
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	/// La etiqueta del estado. Codigos del catalogo: 20, 25, 28, 30, 50, 100
+	/// y 200; en los datos de hoy solo salen 20, 30, 50 y 100.
+	column RMTEstado =
+			SWITCH ( LOL_PBISTOCKTRANSFERSTATUS[RMTCodigo],
+			    20, "documento recibido",
+			    25, "en plancha",
+			    28, "control de calidad",
+			    30, "mercancía llegada",
+			    50, "recepción recibida",
+			    100, "recepción finalizada",
+			    200, "varios",
+			    BLANK () )
+		dataType: string
+		lineageTag: 25595f86-c7b9-432b-bd25-837c6af2965e
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// La fecha del estado. Llega como texto ISO -"2026-10-13 00:00:00.0000000"-
+	/// asi que se corta a diez y se convierte.
+	column RMTFecha =
+			VAR t = LOL_PBISTOCKTRANSFERSTATUS[FechaEstadologistico]
+			RETURN IF ( ISBLANK ( t ) || LEN ( t ) < 10, BLANK (), DATEVALUE ( LEFT ( t, 10 ) ) )
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: a87b5d05-28ed-4f09-bc0c-1359ed72cb93
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaST
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: fa15e784-b108-4fca-91e6-a97c4a576af0
+		summarizeBy: none
+		sourceColumn: FechaST
+
+		variation Variation
+			isDefault
+			relationship: 33f08a48-4781-4576-b248-e890abdcd9cb
+			defaultHierarchy: LocalDateTable_15051e1a-45fd-4d5f-b71f-75c4508998be.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DateStatus
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d2e70e6d-b3a7-49f2-80e7-a6380a938581
+		summarizeBy: none
+		sourceColumn: DateStatus
+
+		variation Variation
+			isDefault
+			relationship: 372a4884-cad5-4b8c-a69b-d0d78880164b
+			defaultHierarchy: LocalDateTable_70f606a3-8725-4119-994e-e13aba70b960.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column EstadosRecorridos
+		dataType: string
+		lineageTag: eb1572e4-d553-42f5-aab5-ade1db7657b9
+		summarizeBy: none
+		sourceColumn: EstadosRecorridos
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fecha100RecepcionFinalizada
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5cd9ee0e-39b3-45f6-a56c-280985a85f7b
+		summarizeBy: none
+		sourceColumn: Fecha100RecepcionFinalizada
+
+		variation Variation
+			isDefault
+			relationship: fe9aa2ff-4c9e-442a-abbd-101808aa561e
+			defaultHierarchy: LocalDateTable_8bf86f5c-e179-45f4-951b-339915b1698d.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Fecha200Varios
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 98fb646c-dd9b-46aa-9e4a-bdd87d8d144f
+		summarizeBy: none
+		sourceColumn: Fecha200Varios
+
+		variation Variation
+			isDefault
+			relationship: ce840b20-da76-4494-aeef-5bf2acb92e63
+			defaultHierarchy: LocalDateTable_1f438227-8568-4562-86de-64752b4d1056.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Fecha20DocRecibido
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 88c915dd-f121-4d2e-b979-3557ed7ce87c
+		summarizeBy: none
+		sourceColumn: Fecha20DocRecibido
+
+		variation Variation
+			isDefault
+			relationship: 5adf51ec-2c59-46d0-bee5-e6b2f369062e
+			defaultHierarchy: LocalDateTable_f52482c5-ea3c-4ed6-be45-da9db191c362.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Fecha25EnPlancha
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ff4b78fb-4368-457d-afe7-adcae34ad9a0
+		summarizeBy: none
+		sourceColumn: Fecha25EnPlancha
+
+		variation Variation
+			isDefault
+			relationship: 6b4b7d50-aff5-4843-82ca-da3461cdd2b9
+			defaultHierarchy: LocalDateTable_94ea6a46-20d1-4439-9c36-29b014c91c0b.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Fecha28ControlCalidad
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0743a7e2-be3c-4942-bf51-6431f9295163
+		summarizeBy: none
+		sourceColumn: Fecha28ControlCalidad
+
+		variation Variation
+			isDefault
+			relationship: 4dc5a586-03c6-4ad1-a66f-b5641ec37f0e
+			defaultHierarchy: LocalDateTable_a9c86545-915f-46d0-a001-663a49005a0e.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Fecha30MercanciaLlegada
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 68c8fd15-0f47-4d13-86f5-c5cd489f9aa2
+		summarizeBy: none
+		sourceColumn: Fecha30MercanciaLlegada
+
+		variation Variation
+			isDefault
+			relationship: d37d2dfa-5850-4995-baed-9dcc1e8bdaf9
+			defaultHierarchy: LocalDateTable_b9206db6-f96b-4fb4-8903-18abae4415a5.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Fecha50RecepcionRecibida
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2be936bb-7a36-48a4-9879-7a52bb2958d2
+		summarizeBy: none
+		sourceColumn: Fecha50RecepcionRecibida
+
+		variation Variation
+			isDefault
+			relationship: 1adf3f2b-25dd-4cb1-8313-db2bdd3a1455
+			defaultHierarchy: LocalDateTable_b3c804d4-4d85-4feb-9df1-582c23bb3174.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column LineKey
+		dataType: string
+		lineageTag: 2369faf9-fbbc-49ca-aac7-4056416fd06d
+		summarizeBy: none
+		sourceColumn: LineKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column StatusWhs
+		dataType: string
+		lineageTag: 84ce6370-b8b0-4180-a7cb-b9e3cd732bfe
+		summarizeBy: none
+		sourceColumn: StatusWhs
+
+		annotation SummarizationSetBy = Automatic
 
 	partition LOL_PBISTOCKTRANSFERSTATUS = m
 		mode: import

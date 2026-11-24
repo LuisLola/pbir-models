@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "5d1a3940f17406ecfa73",
   "position": {
     "x": 0,
-    "y": 90.876847290640413,
-    "z": 3000,
-    "height": 534.67980295566508,
-    "width": 1197.9310344827586,
-    "tabOrder": 0
+    "y": 84.562754225387764,
+    "z": 2000,
+    "height": 525.43724577461228,
+    "width": 1198.2261640798226,
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "pivotTable",
@@ -52,13 +52,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "LOL_PBIB2BSALESORDER"
+                      "Entity": "PedidosB2B"
                     }
                   },
-                  "Property": "DocNum"
+                  "Property": "NumeroPedido"
                 }
               },
-              "queryRef": "LOL_PBIB2BSALESORDER.DocNum",
+              "queryRef": "PedidosB2B.NumeroPedido",
               "nativeQueryRef": "Pedido",
               "active": false,
               "displayName": "Pedido"
@@ -259,7 +259,7 @@
                     "Entity": "MedidasVentas"
                   }
                 },
-                "Property": "RealizadoTemporadaAnterior_%"
+                "Property": "VentasTemporadaSeleccionadaTotal"
               }
             },
             "direction": "Descending"
@@ -313,7 +313,7 @@
           },
           {
             "queryRefs": [
-              "LOL_PBIB2BSALESORDER.DocNum"
+              "PedidosB2B.NumeroPedido"
             ],
             "isCollapsed": true
           }
@@ -325,7 +325,305 @@
       "columnHeaders": [
         {
           "properties": {
-            "autoSizeColumnWidth": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#55595F'"
+                    }
+                  }
+                }
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Left'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1A1A1A'"
+                    }
+                  }
+                }
+              }
+            },
+            "backColorPrimary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "backColorSecondary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "bandedRowHeaders": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Conditional": {
+                      "Cases": [
+                        {
+                          "Condition": {
+                            "Comparison": {
+                              "ComparisonKind": 3,
+                              "Left": {
+                                "Measure": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Entity": "MedidasTemporadas"
+                                    }
+                                  },
+                                  "Property": "EvolTemporadaSeleccionada"
+                                }
+                              },
+                              "Right": {
+                                "Literal": {
+                                  "Value": "0D"
+                                }
+                              }
+                            }
+                          },
+                          "Value": {
+                            "Literal": {
+                              "Value": "'#B0243F'"
+                            }
+                          }
+                        },
+                        {
+                          "Condition": {
+                            "Comparison": {
+                              "ComparisonKind": 2,
+                              "Left": {
+                                "Measure": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Entity": "MedidasTemporadas"
+                                    }
+                                  },
+                                  "Property": "EvolTemporadaSeleccionada"
+                                }
+                              },
+                              "Right": {
+                                "Literal": {
+                                  "Value": "0D"
+                                }
+                              }
+                            }
+                          },
+                          "Value": {
+                            "Literal": {
+                              "Value": "'#1E7A45'"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "MedidasTemporadas.EvolTemporadaSeleccionada"
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "rowPadding": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "outlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E6E8EB'"
+                    }
+                  }
+                }
+              }
+            },
+            "outlineWeight": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            },
+            "gridVertical": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "gridHorizontal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "rowHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1A1A1A'"
+                    }
+                  }
+                }
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FBE9EC'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1A1A1A'"
+                    }
+                  }
+                }
+              }
+            },
+            "bold": {
               "expr": {
                 "Literal": {
                   "Value": "true"
@@ -342,27 +640,7 @@
           }
         }
       ],
-      "values": [
-        {
-          "properties": {
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "8D"
-                }
-              }
-            },
-            "bandedRowHeaders": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "grid": [
+      "general": [
         {
           "properties": {}
         }
@@ -373,133 +651,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "117D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "LOL_PBITIMEWHS.FechaLog60"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "89D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Sum(LOL_PBITIMEWHS.Dias habiles 20-40)"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "313.3054118706199D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "LOL_PBICLIENTES.RazonSocial"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "120D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_Medidas.Fecha entrega al transporte"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "50D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "LOL_PBICLIENTES.GroupName"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "88.60191178819164D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "MedidasVentas.EvolTemporadaSeleccionada_%Completa"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "113.30541706520226D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "MedidasVentas.VentasTemporadaAnterior_SoloInicio"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "75.39859135990308D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "MedidasVentas.EvolTemporadaSeleccionada_%"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "89.79215486950844D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "MedidasVentas.RealizadoTemporadaAnterior_%"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "92.62561773771021D"
+                  "Value": "120.63636415372041D"
                 }
               }
             }
@@ -513,68 +665,55 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "99.64532726978976D"
+                  "Value": "110.36364154798079D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasVentas.RealizadoTemporadaAnterior_%"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "91.18181416054537D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasVentas.EvolTemporadaSeleccionada_%Completa"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "103.5454460537309D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasVentas.VentasTemporadaAnterior_SoloInicio"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "106.36363636363637D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "MedidasVentas.VentasTemporadaAnterior"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "76.24630569151942D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "MedidasVentas.EvolTemporadaSeleccionada"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "79.06355586020076D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "MedidasVentas.VentasTemporadaAnterior_Total"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "90.43840671118873D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "MedidasVentas.VentasTemporadaPasada_SoloInicio"
-          }
-        }
-      ],
-      "rowHeaders": [
-        {
-          "properties": {
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "10D"
-                }
-              }
-            }
           }
         }
       ]
@@ -586,7 +725,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -677,7 +816,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -715,7 +854,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             }

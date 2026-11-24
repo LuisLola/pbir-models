@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "e1f5db5844196b4cb9c7",
   "position": {
     "x": 10,
@@ -90,6 +90,13 @@
                             {
                               "Literal": {
                                 "Value": "'S27'"
+                              }
+                            }
+                          ],
+                          [
+                            {
+                              "Literal": {
+                                "Value": "'F27'"
                               }
                             }
                           ]
@@ -184,12 +191,6 @@
         }
       ]
     },
-    "syncGroup": {
-      "groupName": "MktDoc_Row_GSP_SEASON",
-      "fieldChanges": true,
-      "filterChanges": true
-    },
-    "drillFilterOtherVisuals": true,
     "visualContainerObjects": {
       "title": [
         {
@@ -309,7 +310,13 @@
           }
         }
       ]
-    }
+    },
+    "syncGroup": {
+      "groupName": "MktDoc_Row_GSP_SEASON",
+      "fieldChanges": true,
+      "filterChanges": true
+    },
+    "drillFilterOtherVisuals": true
   },
   "parentGroupName": "e1cmpc1cajon00000000"
 }

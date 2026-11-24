@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "4ac90554f32906468dc0",
   "position": {
     "x": 0,
-    "y": 32,
-    "z": 2000,
-    "height": 38,
-    "width": 630,
-    "tabOrder": 2000
+    "y": 54.91054452309902,
+    "z": 1000,
+    "height": 27.27272727272727,
+    "width": 533.63636363636363,
+    "tabOrder": 0
   },
   "visual": {
     "visualType": "cardVisual",
@@ -104,6 +104,13 @@
                   "Value": "0L"
                 }
               }
+            },
+            "backgroundShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
             }
           },
           "selector": {
@@ -175,6 +182,19 @@
     },
     "visualContainerObjects": {
       "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
         {
           "properties": {
             "show": {

@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "6c9c261629ac58da572f",
   "position": {
-    "x": 432,
-    "y": 6.4433497536945907,
-    "z": 6000,
-    "height": 65,
-    "width": 207,
-    "tabOrder": 4000
+    "x": 432.10643015521072,
+    "y": 4.2093573499115031,
+    "z": 5000,
+    "height": 63.8764000183896,
+    "width": 207.05099778270517,
+    "tabOrder": 2000
   },
   "visual": {
     "visualType": "slicer",
@@ -54,7 +54,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Selector 3'"
+                  "Value": "'Y después, por'"
                 }
               }
             },
@@ -68,7 +68,37 @@
             "textSize": {
               "expr": {
                 "Literal": {
-                  "Value": "9D"
+                  "Value": "8D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1A1A1A'"
+                    }
+                  }
+                }
+              }
+            },
+            "background": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
                 }
               }
             }
@@ -108,7 +138,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'''LOL_PBIB2BSALESORDER''[DocNum]'"
+                                "Value": "'''PedidosB2B''[NumeroPedido]'"
                               }
                             }
                           ]
@@ -136,7 +166,7 @@
                                 "0": [
                                   {
                                     "Literal": {
-                                      "Value": "'''LOL_PBIB2BSALESORDER''[DocNum]'"
+                                      "Value": "'''PedidosB2B''[NumeroPedido]'"
                                     }
                                   }
                                 ]
@@ -168,6 +198,18 @@
                   }
                 ]
               }
+            },
+            "outlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -179,6 +221,28 @@
               "expr": {
                 "Literal": {
                   "Value": "9D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1A1A1A'"
+                    }
+                  }
+                }
+              }
+            },
+            "background": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
                 }
               }
             }
@@ -253,7 +317,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -262,7 +326,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#F2F3F5'"
                     }
                   }
                 }
@@ -284,7 +348,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -293,7 +357,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#EFD0E4'"
+                      "Value": "'#E6E8EB'"
                     }
                   }
                 }
@@ -302,7 +366,7 @@
             "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "14D"
+                  "Value": "6D"
                 }
               }
             },
@@ -335,7 +399,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "e2e768c007",
   "position": {
     "x": 246.01,
@@ -165,14 +165,14 @@
             "textSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "8D"
                 }
               }
             },
             "bold": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -181,7 +181,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#000000'"
+                      "Value": "'#1A1A1A'"
                     }
                   }
                 }
@@ -192,9 +192,16 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DFA0C9'"
+                      "Value": "'#F2F3F5'"
                     }
                   }
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Agrupar por'"
                 }
               }
             }
@@ -207,7 +214,7 @@
             "textSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "9D"
                 }
               }
             },
@@ -216,7 +223,18 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#000000'"
+                      "Value": "'#1A1A1A'"
+                    }
+                  }
+                }
+              }
+            },
+            "background": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -242,7 +260,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#F2F3F5'"
                     }
                   }
                 }
@@ -273,7 +291,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DFA0C9'"
+                      "Value": "'#E6E8EB'"
                     }
                   }
                 }
@@ -282,7 +300,7 @@
             "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "10D"
+                  "Value": "6D"
                 }
               }
             },

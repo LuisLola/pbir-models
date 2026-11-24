@@ -130,6 +130,27 @@ table VentasIncidencias
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// El motivo en texto, buscado en el catalogo. Si el codigo no
+	/// esta catalogado lo dice, en vez de salir en blanco.
+	column IncidenciaMotivo
+		lineageTag: d7bc35e3-f16b-4506-875e-e8a2639f9315
+		summarizeBy: none
+		sourceColumn: [IncidenciaMotivo]
+
+	/// El tipo segun el catalogo (CANCELACION / MODIFICACION).
+	column IncidenciaTipoCat
+		lineageTag: 0573ec09-c5af-44ca-a978-53fc271e1616
+		summarizeBy: none
+		sourceColumn: [IncidenciaTipoCat]
+
+	/// El numero de pedido, el que ve el usuario. Hace de enlace con
+	/// PedidosB2B para que un filtro de pedido alcance tambien a las
+	/// incidencias.
+	column NumeroPedido
+		lineageTag: 9c625ff6-8fc5-4415-8a9d-f8d7b9bf5861
+		summarizeBy: none
+		sourceColumn: [NumeroPedido]
+
 	partition VentasIncidencias = calculated
 		mode: import
 		source =
@@ -138,8 +159,22 @@ table VentasIncidencias
 				    "TipoRegistro", "Incidencia",
 				    "LineID", 'LOL_PBIB2BSALESORDER'[DocEntry] & "-" & 'LOL_PBIB2BSALESORDER'[ItemCode],
 				    "DocEntry", 'LOL_PBIB2BSALESORDER'[DocEntry],
+				    "NumeroPedido", 'LOL_PBIB2BSALESORDER'[DocNum],
 				    "LineNum", 'LOL_PBIB2BSALESORDER'[LineNum],
-				    "IncidenciaCode", 'LOL_PBIB2BSALESORDER'[RMAMotiveCod],
+				    "IncidenciaCode", 'LOL_PBIB2BSALESORDER'[IncidenceCode],
+				    "IncidenciaMotivo", COALESCE (
+				        LOOKUPVALUE ( LOL_INCIDENCIAS[motivo],
+				            LOL_INCIDENCIAS[cod_texto],
+				            'LOL_PBIB2BSALESORDER'[IncidenceCode] ),
+				        COALESCE (
+				            LOOKUPVALUE ( LOL_INCIDENCIAS[tipo_incidencia],
+				                LOL_INCIDENCIAS[cod_texto],
+				                'LOL_PBIB2BSALESORDER'[IncidenceCode] ),
+				            'LOL_PBIB2BSALESORDER'[IncidenceType],
+				            "Sin motivo" ) ),
+				    "IncidenciaTipoCat", LOOKUPVALUE ( LOL_INCIDENCIAS[tipo_incidencia],
+				        LOL_INCIDENCIAS[cod_texto],
+				        'LOL_PBIB2BSALESORDER'[IncidenceCode] ),
 				    "IncidenciaDesc", 'LOL_PBIB2BSALESORDER'[IncidenceType],
 				    "FechaDocumento", 'LOL_PBIB2BSALESORDER'[DocDate],
 				    "CodigoCliente", 'LOL_PBIB2BSALESORDER'[CardCode],

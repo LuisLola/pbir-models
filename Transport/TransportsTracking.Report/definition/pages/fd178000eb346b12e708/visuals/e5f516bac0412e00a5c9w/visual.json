@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "e5f516bac0412e00a5c9w",
   "position": {
     "x": 0,
@@ -20,6 +20,22 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
+                      "Entity": "LOL_PBIPICKINGORIGEN"
+                    }
+                  },
+                  "Property": "TipoOrigen"
+                }
+              },
+              "queryRef": "LOL_PBIPICKINGORIGEN.TipoOrigen",
+              "nativeQueryRef": "TipoOrigen",
+              "active": true,
+              "displayName": "ORIGEN"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
                       "Entity": "LOL_PBICLIENTES"
                     }
                   },
@@ -28,7 +44,7 @@
               },
               "queryRef": "LOL_PBICLIENTES.GroupName",
               "nativeQueryRef": "GroupName",
-              "active": true
+              "active": false
             },
             {
               "field": {
@@ -577,5 +593,79 @@
     },
     "drillFilterOtherVisuals": true
   },
-  "parentGroupName": "whgancho"
+  "parentGroupName": "whgancho",
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "9c3d99ace39b105e92f6",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIPICKINGORIGEN"
+              }
+            },
+            "Property": "TipoOrigen"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "8f016a45d5c1764ae2ea",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBICLIENTES"
+              }
+            },
+            "Property": "GroupName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "9f291fd80453b6acffc1",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBITIMEWHS"
+              }
+            },
+            "Property": "Picking"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "54972b2a6eb9aa289cae",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Pickings"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "207722839e8926d839e0",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Mediana días 20-40"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
 }

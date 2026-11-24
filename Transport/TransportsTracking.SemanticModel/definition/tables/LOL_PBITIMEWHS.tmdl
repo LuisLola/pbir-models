@@ -216,8 +216,9 @@ table LOL_PBITIMEWHS
 
 	/// Por que no hay seguimiento. En blanco si lo hay.
 	/// Sin esto el si/no engana: el grueso del "no" es historia anterior a que
-	/// existiera el seguimiento, no un fallo de hoy.
-	column 'Motivo sin seguimiento' = VAR Inicio = MINX ( ALL ( LOL_TRANSPORT_TRACKING ), LOL_TRANSPORT_TRACKING[fecha_lanzamiento] ) RETURN IF ( NOT ISBLANK ( COUNTROWS ( RELATEDTABLE ( LOL_TRANSPORT_TRACKING ) ) ), BLANK (), IF ( LOL_PBITIMEWHS[PickDate] < Inicio, "Anterior al seguimiento", IF ( LOL_PBITIMEWHS[Expedido] = "No", "Sin expedir", "Transportista sin seguimiento" ) ) )
+	/// existiera el seguimiento, no un fallo de hoy. Y la reposicion a tienda
+	/// va aparte: no hay transportista que falle porque nunca lo hubo.
+	column 'Motivo sin seguimiento' = VAR Inicio = MINX ( ALL ( LOL_TRANSPORT_TRACKING ), LOL_TRANSPORT_TRACKING[fecha_lanzamiento] ) RETURN IF ( NOT ISBLANK ( COUNTROWS ( RELATEDTABLE ( LOL_TRANSPORT_TRACKING ) ) ), BLANK (), IF ( LOL_PBITIMEWHS[PickDate] < Inicio, "Anterior al seguimiento", IF ( LOL_PBITIMEWHS[Expedido] = "No", "Sin expedir", IF ( RELATED ( LOL_PBIPICKINGORIGEN[TipoOrigen] ) = "Reposicion", "Reposición a tienda", "Transportista sin seguimiento" ) ) ) )
 		lineageTag: c057aee1-fbd3-4d06-8901-a05f804cb07e
 		summarizeBy: none
 

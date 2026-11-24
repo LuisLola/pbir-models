@@ -143,8 +143,6 @@ table LOL_PBIB2BSALESORDER
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation UnderlyingDateTimeDataType = Date
-
 	column GrossAmt_EUR
 		dataType: string
 		lineageTag: e2761d0b-4bd3-4d47-a04b-5c68a639ab12
@@ -407,6 +405,14 @@ table LOL_PBIB2BSALESORDER
 		formatString: #,0
 		lineageTag: 33435a35-cb58-4d06-80d1-38b212c2250d
 		summarizeBy: sum
+
+	column IncidenceCode
+		dataType: string
+		lineageTag: dbf20d4a-50cf-4ef5-9776-cc56eebd15fd
+		summarizeBy: none
+		sourceColumn: IncidenceCode
+
+		annotation SummarizationSetBy = Automatic
 
 	partition LOL_PBIB2BSALESORDER = m
 		mode: import

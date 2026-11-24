@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "e2e768c005",
   "position": {
-    "x": 0.83,
-    "y": 0,
+    "x": 3.5,
+    "y": 8,
     "z": 3000,
-    "height": 36.506238859180037,
-    "width": 311.22,
+    "height": 32,
+    "width": 480,
     "tabOrder": 1000
   },
   "visual": {
@@ -22,7 +22,8 @@
                     "value": "Ranking Temporadas",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "14pt"
+                      "fontSize": "19pt",
+                      "color": "#1A1A1A"
                     }
                   },
                   {
@@ -31,6 +32,34 @@
                 ]
               }
             ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
           }
         }
       ]

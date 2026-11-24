@@ -829,9 +829,11 @@ table _Medidas
 		displayFolder: 1 Embudo operativo
 		lineageTag: 312510aa-4948-4d7c-a517-71674af7f766
 
-	/// Nunca entran en transporte: El Corte Ingles recoge, marketplaces y
-	/// reposicion a tienda propia. No es un fallo, es otra via.
-	measure 'Salen sin transporte' = [Picking del periodo] - [Salen por transporte]
+	/// Pedido de cliente que sale por logistica ajena: El Corte Ingles
+	/// recoge, marketplaces. La reposicion a tienda YA NO cuenta aqui,
+	/// tiene tarjeta propia; si no, al entrar las solicitudes de traslado
+	/// en la vista esta cifra se hinchaba y dejaba de medir servicio.
+	measure 'Salen sin transporte' = [Picking del periodo] - [Salen por transporte] - [Reposición a tienda]
 		formatString: #,0
 		displayFolder: 1 Embudo operativo
 		lineageTag: 5eb80a62-6794-45b7-8b3d-f2edfe3b2580
@@ -966,6 +968,117 @@ table _Medidas
 		formatString: #,0.00
 		displayFolder: 1 Embudo operativo
 		lineageTag: b9da04ae-bbdb-4d54-a9d7-a42692725ff6
+
+	/// Envios con seguimiento.
+	measure Envíos = COUNTROWS ( LOL_TRANSPORT_TRACKING ) + 0
+		formatString: #,0
+		displayFolder: 9 Origen
+		lineageTag: c47feebd-8e97-4814-b029-f58371647f8f
+
+	/// Los que nacen de una solicitud de traslado: reposicion a tienda.
+	measure 'Envíos de reposición' = CALCULATE ( [Envíos], LOL_PBIPICKINGORIGEN[TipoOrigen] = "Reposicion" )
+		formatString: #,0
+		displayFolder: 9 Origen
+		lineageTag: 72345fbe-4de9-4855-8bb5-dbf45c0742df
+
+	/// Los que nacen de un pedido de cliente.
+	measure 'Envíos de pedido' = CALCULATE ( [Envíos], LOL_PBIPICKINGORIGEN[TipoOrigen] = "Pedido de cliente" )
+		formatString: #,0
+		displayFolder: 9 Origen
+		lineageTag: 09573684-820c-4bb8-a952-a06054b30fd0
+
+	/// Peso de la reposicion sobre el total de envios.
+	measure '% reposición' = DIVIDE ( [Envíos de reposición], [Envíos] )
+		formatString: 0.0%
+		displayFolder: 9 Origen
+		lineageTag: 43944d4f-190a-4d15-9ae3-7c94a654200d
+
+	/// Picking del periodo que nace de una solicitud de traslado: mercancia
+	/// que repone tienda propia. Nunca entra en transporte -va con logistica
+	/// propia- asi que no debe contaminar el "sin transporte".
+	/// KEEPFILTERS para que respete el segmentador de origen.
+	measure 'Reposición a tienda' =
+			CALCULATE ( [Picking del periodo],
+			    KEEPFILTERS ( LOL_PBIPICKINGORIGEN[TipoOrigen] = "Reposicion" ) )
+		formatString: #,0
+		displayFolder: 1 Embudo operativo
+		lineageTag: fbd3bff6-0e8d-4027-88dc-ab9ccf881ce1
+
+	/// De lo que es pedido de cliente, cuanto sale por transportista.
+	/// La reposicion se descuenta de la base: no es candidata a salir por ahi.
+	measure '% a transporte' =
+			VAR Base = [Picking del periodo] - [Reposición a tienda]
+			RETURN
+			    DIVIDE ( [Salen por transporte], Base )
+		formatString: 0.0%
+		displayFolder: 1 Embudo operativo
+		lineageTag: 00bc7a54-c847-4b50-bb25-b14bc5f91ce4
+
+	/// El transportista, como MEDIDA y no como columna de agrupacion.
+	/// Agrupar por la columna cruda expulsa de la tabla a todo picking sin
+	/// seguimiento -las reposiciones a tienda, entre otros-, porque el lado
+	/// "muchos" de la relacion no tiene miembro en blanco al que colgarlos.
+	/// Si un picking llevara dos transportistas los une con " / ".
+	measure 'Transportista del envío' = CONCATENATEX ( VALUES ( LOL_TRANSPORT_TRACKING[transportista_norm] ), LOL_TRANSPORT_TRACKING[transportista_norm], " / " )
+		displayFolder: 9 Detalle de envío
+		lineageTag: ec5316f9-2500-4ac5-9efc-ef7854c90231
+
+	/// Cuando se entrego. En blanco si el envio no ha llegado o si el
+	/// picking nunca entro en transporte.
+	measure 'Entrega al cliente' = MAX ( LOL_TRANSPORT_TRACKING[fecha_entregado] )
+		formatString: General Date
+		displayFolder: 9 Detalle de envío
+		lineageTag: 3e443d70-ebf4-4756-a044-57e287083e62
+
+	/// Tramo de almacen medido desde la ficha del envio.
+	measure 'Días envío 20 a 40' = AVERAGE ( LOL_TRANSPORT_TRACKING[Días 20 a 40] )
+		formatString: #,0.0;-#,0.0;0
+		displayFolder: 9 Detalle de envío
+		lineageTag: 290ecd6d-07e1-4fcf-aeb2-4e0eb137f01a
+
+	/// Lo que tarda el transportista en venir a por ello.
+	measure 'Días envío 40 a recogida' = AVERAGE ( LOL_TRANSPORT_TRACKING[Días 40 a recogida] )
+		formatString: #,0.0;-#,0.0;0
+		displayFolder: 9 Detalle de envío
+		lineageTag: f0172219-ee5e-45a7-937f-368597a15507
+
+	/// Lo que tarda en llegar, ya en manos del transportista.
+	measure 'Días envío recogida a entrega' = AVERAGE ( LOL_TRANSPORT_TRACKING[Días recogida a entrega] )
+		formatString: #,0.0;-#,0.0;0
+		displayFolder: 9 Detalle de envío
+		lineageTag: a987e9b8-e902-472e-b007-6e4c13d825ba
+
+	/// Puerta a puerta: del aviso al almacen hasta la entrega.
+	measure 'Días envío 20 a entrega' = AVERAGE ( LOL_TRANSPORT_TRACKING[Días 20 a entrega] )
+		formatString: #,0.0;-#,0.0;0
+		displayFolder: 9 Detalle de envío
+		lineageTag: 4ef5b2e6-ce40-48b2-8772-6fe8d5f99a17
+
+	/// Dias naturales de puerta a puerta del envio. Como MEDIDA, para que
+	/// la fila del detalle la marque el picking y no el envio: agrupando
+	/// por la columna cruda desaparecen los pickings sin seguimiento.
+	/// Media y no suma, porque la fila es el picking.
+	measure 'Días de entrega naturales' = AVERAGE ( LOL_TRANSPORT_TRACKING[dias_entrega_natural] )
+		formatString: #,0.0;-#,0.0;0
+		displayFolder: 9 Detalle de envío
+		lineageTag: ac5338cc-01ce-4814-a445-e172d31d63be
+
+	/// Dias comprometidos para ese destino y transportista.
+	measure 'SLA de entrega' = AVERAGE ( LOL_TRANSPORT_TRACKING[sla_objetivo] )
+		formatString: 0
+		displayFolder: 9 Detalle de envío
+		lineageTag: 6bae4d9a-2bfe-4057-8d97-e085371562ea
+
+	/// Dias habiles entre el aviso al almacen (20) y el preparado (40).
+	/// Es ademas el ANCLA de la tabla de detalle: SUMMARIZECOLUMNS tira la
+	/// fila cuando todas las medidas salen en blanco, y en una reposicion
+	/// todas las de seguimiento lo estan. Esta no se queda en blanco nunca
+	/// -comprobado sobre las 329.925 filas-, asi que sostiene la fila.
+	/// Media y no suma: la fila de la tabla es el picking.
+	measure 'Días de preparación' = AVERAGE ( LOL_PBITIMEWHS[Dias habiles 20-40] )
+		formatString: #,0.0;-#,0.0;0
+		displayFolder: 9 Detalle de envío
+		lineageTag: 41b2904b-0b6f-46d7-9259-9cd90a3fedc3
 
 	column Value
 		lineageTag: d1ed0000-0000-4000-8000-0000000000ff

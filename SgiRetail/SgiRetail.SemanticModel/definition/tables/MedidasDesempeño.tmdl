@@ -396,6 +396,653 @@ table MedidasDesempeño
 	measure Bg_Evol_OBJ = SWITCH(TRUE(), ISBLANK([EvolucionObjetivo_%]), "#F3ECE4", [EvolucionObjetivo_%] >= 0, "#F1F7F4", [EvolucionObjetivo_%] >= -0.10, "#FAF4EC", "#FDF1EF")
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-020000000024
 
+	/// La linea de la primera tarjeta, como SVG. Va aparte para poder vaciarla
+	/// sin tocar la tarjeta si el visual no la pinta.
+	/// Coordenadas enteras a proposito: con es-ES, FORMAT con decimales mete
+	/// coma y la lista de puntos del polyline deja de ser valida.
+	measure 'HTML Spark Ventas' =
+			VAR FIni = [FechaInicioPeriodoSeleccionado]
+			VAR FFin = [FechaHastaSeleccionada]
+			VAR Serie =
+			    ADDCOLUMNS (
+			        CALCULATETABLE ( VALUES ( Calendario[Date] ),
+			            DATESBETWEEN ( Calendario[Date], FIni, FFin ) ),
+			        "@v", CALCULATE ( [Ventas] ) + 0
+			    )
+			VAR N = COUNTROWS ( Serie )
+			VAR Vmin = MINX ( Serie, [@v] )
+			VAR Vmax = MAXX ( Serie, [@v] )
+			VAR Rango = MAX ( Vmax - Vmin, 1 )
+			VAR Ancho = MAX ( INT ( FFin ) - INT ( FIni ), 1 )
+			VAR Pts =
+			    CONCATENATEX (
+			        Serie,
+			        FORMAT ( ROUND ( DIVIDE ( INT ( Calendario[Date] ) - INT ( FIni ), Ancho ) * 96, 0 ), "0" )
+			            & "," &
+			        FORMAT ( ROUND ( 30 - DIVIDE ( [@v] - Vmin, Rango ) * 26, 0 ), "0" ),
+			        " ", Calendario[Date], ASC
+			    )
+			RETURN
+			    IF ( N >= 2,
+			        "<svg viewBox='0 0 96 32' width='84' height='26' preserveAspectRatio='none'>"
+			        & "<polyline points='" & Pts & "' fill='none' stroke='#C98496' stroke-width='1.1'"
+			        & " stroke-linejoin='round' stroke-linecap='round'/></svg>"
+			    )
+		displayFolder: 9 HTML
+		lineageTag: 1275e8ff-59d8-4b62-af4c-a68c4dadbec3
+
+	/// Las cuatro tarjetas KPI del diseno, en una sola medida.
+	/// Sustituye a 28 visuales por juego (56 contando los dos anchos del menu).
+	/// Las pildoras son Ano / Mes / Semana / Dia; la etiqueta del periodo va en
+	/// el title, que el diseno no deja sitio para escribirla.
+	measure 'HTML Tarjetas Desempeño' =
+			VAR EstiloPill = "display:inline-block;height:24px;line-height:24px;padding:0 8px;border-radius:3px;font-size:13px;font-weight:600;margin-right:6px;"
+			VAR v1 = [Ventas_YTD]
+			VAR t1 =
+			    SWITCH ( TRUE (),
+			        ISBLANK ( v1 ), "—",
+			        ABS ( v1 ) >= 1000000, "€ " & FORMAT ( v1 / 1000000, "#,0.0" ) & " M",
+			        ABS ( v1 ) >= 1000, "€ " & FORMAT ( v1 / 1000, "#,0" ) & " mil",
+			        "€ " & FORMAT ( v1, "#,0" ) )
+			VAR d11 = [VN_Evol_Anio]
+			VAR p11 =
+			    IF ( ISBLANK ( d11 ),
+			        "<span style='" & EstiloPill & "background:#F0F1F3;color:#6B6F76'>—</span>",
+			        "<span title='" & [Lbl_Anio] & "' style='" & EstiloPill & "background:"
+			            & IF ( d11 < 0, "#F7D7DD", "#D7EFE0" ) & ";color:"
+			            & IF ( d11 < 0, "#B0243F", "#1E7A45" ) & "'>"
+			            & IF ( d11 < 0, UNICHAR ( 9662 ), UNICHAR ( 9652 ) ) & " "
+			            & FORMAT ( ABS ( d11 ), "0%" ) & "</span>" )
+			VAR d12 = [VN_Evol_Mes]
+			VAR p12 =
+			    IF ( ISBLANK ( d12 ),
+			        "<span style='" & EstiloPill & "background:#F0F1F3;color:#6B6F76'>—</span>",
+			        "<span title='" & [Lbl_Mes] & "' style='" & EstiloPill & "background:"
+			            & IF ( d12 < 0, "#F7D7DD", "#D7EFE0" ) & ";color:"
+			            & IF ( d12 < 0, "#B0243F", "#1E7A45" ) & "'>"
+			            & IF ( d12 < 0, UNICHAR ( 9662 ), UNICHAR ( 9652 ) ) & " "
+			            & FORMAT ( ABS ( d12 ), "0%" ) & "</span>" )
+			VAR d13 = [VN_Evol_Sem]
+			VAR p13 =
+			    IF ( ISBLANK ( d13 ),
+			        "<span style='" & EstiloPill & "background:#F0F1F3;color:#6B6F76'>—</span>",
+			        "<span title='" & [Lbl_Sem] & "' style='" & EstiloPill & "background:"
+			            & IF ( d13 < 0, "#F7D7DD", "#D7EFE0" ) & ";color:"
+			            & IF ( d13 < 0, "#B0243F", "#1E7A45" ) & "'>"
+			            & IF ( d13 < 0, UNICHAR ( 9662 ), UNICHAR ( 9652 ) ) & " "
+			            & FORMAT ( ABS ( d13 ), "0%" ) & "</span>" )
+			VAR d14 = [VN_Evol_Dia]
+			VAR p14 =
+			    IF ( ISBLANK ( d14 ),
+			        "<span style='" & EstiloPill & "background:#F0F1F3;color:#6B6F76'>—</span>",
+			        "<span title='" & [Lbl_Dia] & "' style='" & EstiloPill & "background:"
+			            & IF ( d14 < 0, "#F7D7DD", "#D7EFE0" ) & ";color:"
+			            & IF ( d14 < 0, "#B0243F", "#1E7A45" ) & "'>"
+			            & IF ( d14 < 0, UNICHAR ( 9662 ), UNICHAR ( 9652 ) ) & " "
+			            & FORMAT ( ABS ( d14 ), "0%" ) & "</span>" )
+			VAR tarjeta1 =
+			    "<div style='background:#FFFFFF;border:1px solid #E6E8EB;border-radius:4px;padding:18px 20px;box-sizing:border-box'>"
+			    & "<div style='display:flex;align-items:flex-start;justify-content:space-between;gap:8px'>"
+			    & "<div><div style='font-size:26px;font-weight:600;color:#1A1A1A;line-height:1.1'>"
+			    & t1 & "</div>"
+			    & "<div style='font-size:13px;font-weight:600;color:#6B6F76;margin-top:6px'>Venta neta con IVA</div></div>"
+			    & "<div>" & [HTML Spark Ventas] & "</div></div>"
+			    & "<div style='margin-top:14px;white-space:nowrap'>" & p11 & p12 & p13 & p14 & "</div></div>"
+			VAR v2 = [PromedioVentaTransaccion_YTD]
+			VAR t2 = IF ( ISBLANK ( v2 ), "—", "€ " & FORMAT ( v2, "#,##0.00" ) )
+			VAR d21 = [TM_Evol_Anio]
+			VAR p21 =
+			    IF ( ISBLANK ( d21 ),
+			        "<span style='" & EstiloPill & "background:#F0F1F3;color:#6B6F76'>—</span>",
+			        "<span title='" & [Lbl_Anio] & "' style='" & EstiloPill & "background:"
+			            & IF ( d21 < 0, "#F7D7DD", "#D7EFE0" ) & ";color:"
+			            & IF ( d21 < 0, "#B0243F", "#1E7A45" ) & "'>"
+			            & IF ( d21 < 0, UNICHAR ( 9662 ), UNICHAR ( 9652 ) ) & " "
+			            & FORMAT ( ABS ( d21 ), "0%" ) & "</span>" )
+			VAR d22 = [TM_Evol_Mes]
+			VAR p22 =
+			    IF ( ISBLANK ( d22 ),
+			        "<span style='" & EstiloPill & "background:#F0F1F3;color:#6B6F76'>—</span>",
+			        "<span title='" & [Lbl_Mes] & "' style='" & EstiloPill & "background:"
+			            & IF ( d22 < 0, "#F7D7DD", "#D7EFE0" ) & ";color:"
+			            & IF ( d22 < 0, "#B0243F", "#1E7A45" ) & "'>"
+			            & IF ( d22 < 0, UNICHAR ( 9662 ), UNICHAR ( 9652 ) ) & " "
+			            & FORMAT ( ABS ( d22 ), "0%" ) & "</span>" )
+			VAR d23 = [TM_Evol_Sem]
+			VAR p23 =
+			    IF ( ISBLANK ( d23 ),
+			        "<span style='" & EstiloPill & "background:#F0F1F3;color:#6B6F76'>—</span>",
+			        "<span title='" & [Lbl_Sem] & "' style='" & EstiloPill & "background:"
+			            & IF ( d23 < 0, "#F7D7DD", "#D7EFE0" ) & ";color:"
+			            & IF ( d23 < 0, "#B0243F", "#1E7A45" ) & "'>"
+			            & IF ( d23 < 0, UNICHAR ( 9662 ), UNICHAR ( 9652 ) ) & " "
+			            & FORMAT ( ABS ( d23 ), "0%" ) & "</span>" )
+			VAR d24 = [TM_Evol_Dia]
+			VAR p24 =
+			    IF ( ISBLANK ( d24 ),
+			        "<span style='" & EstiloPill & "background:#F0F1F3;color:#6B6F76'>—</span>",
+			        "<span title='" & [Lbl_Dia] & "' style='" & EstiloPill & "background:"
+			            & IF ( d24 < 0, "#F7D7DD", "#D7EFE0" ) & ";color:"
+			            & IF ( d24 < 0, "#B0243F", "#1E7A45" ) & "'>"
+			            & IF ( d24 < 0, UNICHAR ( 9662 ), UNICHAR ( 9652 ) ) & " "
+			            & FORMAT ( ABS ( d24 ), "0%" ) & "</span>" )
+			VAR tarjeta2 =
+			    "<div style='background:#FFFFFF;border:1px solid #E6E8EB;border-radius:4px;padding:18px 20px;box-sizing:border-box'>"
+			    & "<div style='display:flex;align-items:flex-start;justify-content:space-between;gap:8px'>"
+			    & "<div><div style='font-size:26px;font-weight:600;color:#1A1A1A;line-height:1.1'>"
+			    & t2 & "</div>"
+			    & "<div style='font-size:13px;font-weight:600;color:#6B6F76;margin-top:6px'>Ticket medio</div></div>"
+			    & "<div>" & "</div></div>"
+			    & "<div style='margin-top:14px;white-space:nowrap'>" & p21 & p22 & p23 & p24 & "</div></div>"
+			VAR v3 = [UPT_YTD]
+			VAR t3 = IF ( ISBLANK ( v3 ), "—", FORMAT ( v3, "#,##0.0" ) )
+			VAR d31 = [UPT_Evol_Anio]
+			VAR p31 =
+			    IF ( ISBLANK ( d31 ),
+			        "<span style='" & EstiloPill & "background:#F0F1F3;color:#6B6F76'>—</span>",
+			        "<span title='" & [Lbl_Anio] & "' style='" & EstiloPill & "background:"
+			            & IF ( d31 < 0, "#F7D7DD", "#D7EFE0" ) & ";color:"
+			            & IF ( d31 < 0, "#B0243F", "#1E7A45" ) & "'>"
+			            & IF ( d31 < 0, UNICHAR ( 9662 ), UNICHAR ( 9652 ) ) & " "
+			            & FORMAT ( ABS ( d31 ), "0%" ) & "</span>" )
+			VAR d32 = [UPT_Evol_Mes]
+			VAR p32 =
+			    IF ( ISBLANK ( d32 ),
+			        "<span style='" & EstiloPill & "background:#F0F1F3;color:#6B6F76'>—</span>",
+			        "<span title='" & [Lbl_Mes] & "' style='" & EstiloPill & "background:"
+			            & IF ( d32 < 0, "#F7D7DD", "#D7EFE0" ) & ";color:"
+			            & IF ( d32 < 0, "#B0243F", "#1E7A45" ) & "'>"
+			            & IF ( d32 < 0, UNICHAR ( 9662 ), UNICHAR ( 9652 ) ) & " "
+			            & FORMAT ( ABS ( d32 ), "0%" ) & "</span>" )
+			VAR d33 = [UPT_Evol_Sem]
+			VAR p33 =
+			    IF ( ISBLANK ( d33 ),
+			        "<span style='" & EstiloPill & "background:#F0F1F3;color:#6B6F76'>—</span>",
+			        "<span title='" & [Lbl_Sem] & "' style='" & EstiloPill & "background:"
+			            & IF ( d33 < 0, "#F7D7DD", "#D7EFE0" ) & ";color:"
+			            & IF ( d33 < 0, "#B0243F", "#1E7A45" ) & "'>"
+			            & IF ( d33 < 0, UNICHAR ( 9662 ), UNICHAR ( 9652 ) ) & " "
+			            & FORMAT ( ABS ( d33 ), "0%" ) & "</span>" )
+			VAR d34 = [UPT_Evol_Dia]
+			VAR p34 =
+			    IF ( ISBLANK ( d34 ),
+			        "<span style='" & EstiloPill & "background:#F0F1F3;color:#6B6F76'>—</span>",
+			        "<span title='" & [Lbl_Dia] & "' style='" & EstiloPill & "background:"
+			            & IF ( d34 < 0, "#F7D7DD", "#D7EFE0" ) & ";color:"
+			            & IF ( d34 < 0, "#B0243F", "#1E7A45" ) & "'>"
+			            & IF ( d34 < 0, UNICHAR ( 9662 ), UNICHAR ( 9652 ) ) & " "
+			            & FORMAT ( ABS ( d34 ), "0%" ) & "</span>" )
+			VAR tarjeta3 =
+			    "<div style='background:#FFFFFF;border:1px solid #E6E8EB;border-radius:4px;padding:18px 20px;box-sizing:border-box'>"
+			    & "<div style='display:flex;align-items:flex-start;justify-content:space-between;gap:8px'>"
+			    & "<div><div style='font-size:26px;font-weight:600;color:#1A1A1A;line-height:1.1'>"
+			    & t3 & "</div>"
+			    & "<div style='font-size:13px;font-weight:600;color:#6B6F76;margin-top:6px'>UPT</div></div>"
+			    & "<div>" & "</div></div>"
+			    & "<div style='margin-top:14px;white-space:nowrap'>" & p31 & p32 & p33 & p34 & "</div></div>"
+			VAR v4 = [Tasa_Conversion_YTD]
+			VAR t4 = IF ( ISBLANK ( v4 ), "—", FORMAT ( v4, "0.0%" ) )
+			VAR d41 = [Conv_Evol_Anio]
+			VAR p41 =
+			    IF ( ISBLANK ( d41 ),
+			        "<span style='" & EstiloPill & "background:#F0F1F3;color:#6B6F76'>—</span>",
+			        "<span title='" & [Lbl_Anio] & "' style='" & EstiloPill & "background:"
+			            & IF ( d41 < 0, "#F7D7DD", "#D7EFE0" ) & ";color:"
+			            & IF ( d41 < 0, "#B0243F", "#1E7A45" ) & "'>"
+			            & IF ( d41 < 0, UNICHAR ( 9662 ), UNICHAR ( 9652 ) ) & " "
+			            & FORMAT ( ABS ( d41 ), "0%" ) & "</span>" )
+			VAR d42 = [Conv_Evol_Mes]
+			VAR p42 =
+			    IF ( ISBLANK ( d42 ),
+			        "<span style='" & EstiloPill & "background:#F0F1F3;color:#6B6F76'>—</span>",
+			        "<span title='" & [Lbl_Mes] & "' style='" & EstiloPill & "background:"
+			            & IF ( d42 < 0, "#F7D7DD", "#D7EFE0" ) & ";color:"
+			            & IF ( d42 < 0, "#B0243F", "#1E7A45" ) & "'>"
+			            & IF ( d42 < 0, UNICHAR ( 9662 ), UNICHAR ( 9652 ) ) & " "
+			            & FORMAT ( ABS ( d42 ), "0%" ) & "</span>" )
+			VAR d43 = [Conv_Evol_Sem]
+			VAR p43 =
+			    IF ( ISBLANK ( d43 ),
+			        "<span style='" & EstiloPill & "background:#F0F1F3;color:#6B6F76'>—</span>",
+			        "<span title='" & [Lbl_Sem] & "' style='" & EstiloPill & "background:"
+			            & IF ( d43 < 0, "#F7D7DD", "#D7EFE0" ) & ";color:"
+			            & IF ( d43 < 0, "#B0243F", "#1E7A45" ) & "'>"
+			            & IF ( d43 < 0, UNICHAR ( 9662 ), UNICHAR ( 9652 ) ) & " "
+			            & FORMAT ( ABS ( d43 ), "0%" ) & "</span>" )
+			VAR d44 = [Conv_Evol_Dia]
+			VAR p44 =
+			    IF ( ISBLANK ( d44 ),
+			        "<span style='" & EstiloPill & "background:#F0F1F3;color:#6B6F76'>—</span>",
+			        "<span title='" & [Lbl_Dia] & "' style='" & EstiloPill & "background:"
+			            & IF ( d44 < 0, "#F7D7DD", "#D7EFE0" ) & ";color:"
+			            & IF ( d44 < 0, "#B0243F", "#1E7A45" ) & "'>"
+			            & IF ( d44 < 0, UNICHAR ( 9662 ), UNICHAR ( 9652 ) ) & " "
+			            & FORMAT ( ABS ( d44 ), "0%" ) & "</span>" )
+			VAR tarjeta4 =
+			    "<div style='background:#FFFFFF;border:1px solid #E6E8EB;border-radius:4px;padding:18px 20px;box-sizing:border-box'>"
+			    & "<div style='display:flex;align-items:flex-start;justify-content:space-between;gap:8px'>"
+			    & "<div><div style='font-size:26px;font-weight:600;color:#1A1A1A;line-height:1.1'>"
+			    & t4 & "</div>"
+			    & "<div style='font-size:13px;font-weight:600;color:#6B6F76;margin-top:6px'>% conversión</div></div>"
+			    & "<div>" & "</div></div>"
+			    & "<div style='margin-top:14px;white-space:nowrap'>" & p41 & p42 & p43 & p44 & "</div></div>"
+			RETURN
+			    "<div style='font-family:Manrope,system-ui,-apple-system,sans-serif;background:#F2F3F5;padding:2px 0'>"
+			    & "<div style='font-size:19px;font-weight:600;color:#1A1A1A;margin:0 0 12px 0'>Resumen del periodo</div>"
+			    & "<div style='display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px'>"
+			    & tarjeta1 & tarjeta2 & tarjeta3 & tarjeta4
+			    & "</div></div>"
+		displayFolder: 9 HTML
+		lineageTag: d38071d2-a0e0-46e4-b2e7-4ade7f4e8243
+
+	/// El panel del menu. Solo el fondo, la regla y el pie: las etiquetas
+	/// ya las pone la cabecera de cada segmentador, y repintarlas aqui
+	/// seria duplicarlas y jugarsela al encaje.
+	measure 'HTML Menu Lateral' =
+			"<style>.mn{height:100%;min-height:720px;background:#6E2439;font-family:Manrope,system-ui,-apple-system,sans-serif;position:relative;box-sizing:border-box}.mn .rl{position:absolute;top:0;right:0;width:1px;height:100%;background:rgba(255,255,255,.14)}.mn .sp{position:absolute;left:14px;right:14px;top:70px;height:1px;background:rgba(255,255,255,.18)}.mn .ft{position:absolute;left:14px;right:14px;bottom:14px;color:#DFA0C9;font-size:10px;letter-spacing:.08em;text-transform:uppercase;opacity:.75}</style>"
+			    & "<div class='mn'><div class='rl'></div><div class='sp'></div>"
+			    & "<div class='ft'>" & [Rango y actualización] & "</div></div>"
+		displayFolder: 9 HTML
+		lineageTag: 23f64986-785b-4cbe-8fad-b3b8ed58ff12
+
+	/// La pagina entera: menu, cabecera, filtros, tarjetas y tabla.
+	/// Los desplegables NO filtran: el visual HTML no puede devolver una
+	/// seleccion al modelo. Ensenan la seleccion vigente.
+	/// Abrir y cerrar el menu si funciona, con un checkbox y CSS.
+	measure 'HTML Página Desempeño' =
+			VAR Css = "<style>*{margin:0;padding:0;box-sizing:border-box}.tg{display:none}.pg{position:relative;width:1280px;height:720px;background:#F2F3F5;font-family:Manrope,system-ui,-apple-system,sans-serif;color:#1A1A1A;overflow:hidden}.mn{position:absolute;left:0;top:0;bottom:0;width:62px;background:#6E2439;transition:width .18s ease;overflow:hidden;z-index:3}.tg:checked + .pg .mn{width:260px}.mn .lg{position:absolute;left:14px;top:14px;width:34px;height:34px;border-radius:50%;border:1.5px solid #fff;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;letter-spacing:.02em}.mn .wm{position:absolute;left:60px;top:22px;color:#fff;font-size:15px;letter-spacing:.06em;white-space:nowrap;opacity:0;transition:opacity .18s}.tg:checked + .pg .mn .wm{opacity:1}.mn .wm b{font-weight:800}.mn .wm i{font-style:normal;font-weight:300}.bt{position:absolute;left:14px;top:62px;width:34px;height:30px;color:#fff;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center}.tg:checked + .pg .bt{left:auto;right:14px;top:18px}.fls{position:absolute;left:14px;right:14px;top:104px;opacity:0;pointer-events:none;transition:opacity .18s}.tg:checked + .pg .fls{opacity:1}.fl{margin-bottom:11px}.fl .lb{color:#DFA0C9;font-size:10.5px;font-weight:600;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.fl .dd{height:30px;line-height:30px;background:#fff;border-radius:6px;padding:0 26px 0 10px;font-size:12px;color:#1A1A1A;position:relative;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.fl .dd:after{content:'\25BE';position:absolute;right:9px;top:0;color:#6B6F76;font-size:10px}.ct{position:absolute;top:0;bottom:0;left:78px;right:0;padding:18px 22px;transition:left .18s ease;overflow:hidden}.tg:checked + .pg .ct{left:276px}.h1{font-size:26px;font-weight:700;letter-spacing:-.01em}.sub{font-size:11.5px;color:#6B6F76;margin-top:5px}.hd{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.ctl{display:flex;align-items:center;gap:10px;padding-top:4px}.ctl .lbl{font-size:11.5px;font-weight:600;color:#1A1A1A;white-space:nowrap}.db{height:30px;line-height:30px;background:#fff;border:1px solid #E6E8EB;border-radius:5px;padding:0 24px 0 10px;font-size:12px;position:relative;white-space:nowrap}.db:after{content:'\1F4C5';position:absolute;right:7px;top:0;font-size:11px;opacity:.6}.seg{display:flex;border:1px solid #E6E8EB;border-radius:5px;overflow:hidden;background:#fff}.seg span{padding:0 13px;height:28px;line-height:28px;font-size:12px;color:#1A1A1A;border-right:1px solid #E6E8EB}.seg span:last-child{border-right:0}.seg span.on{background:#1F1F1F;color:#fff;font-weight:600}.h2{font-size:19px;font-weight:600;margin:16px 0 11px}.pnl{background:#fff;border:1px solid #E6E8EB;border-radius:4px;padding:16px 18px}.dg{display:flex;gap:14px;margin:12px 0 14px}.dg .fl{margin:0}.dg .fl .lb{color:#1A1A1A}.dg .fl .dd{border:1px solid #E6E8EB;min-width:190px}</style>"
+			VAR Menu =
+			    "<div class='mn'><div class='lg'>LC</div>"
+			    & "<div class='wm'><b>LOLA</b><i>casademunt</i></div>"
+			    & "<label for='mt' class='bt'>" & UNICHAR ( 9776 ) & "</label>"
+			    & "<div class='fls'>" & "<div class='fl'><div class='lb'>Temporada</div><div class='dd'>" & SELECTEDVALUE ( LOL_PBISEASON[Code], "Todas" ) & "</div></div>" &
+			    "<div class='fl'><div class='lb'>Desglose</div><div class='dd'>" & CONCATENATEX ( DimensionesB2C1, DimensionesB2C1[DimensionesB2C1], ", " ) & "</div></div>" &
+			    "<div class='fl'><div class='lb'>Top N</div><div class='dd'>" & FORMAT ( MAXX ( ParamTopN, ParamTopN[Top N] ), "#,0" ) & "</div></div>" &
+			    "<div class='fl'><div class='lb'>Orden</div><div class='dd'>" & CONCATENATEX ( OrdenSelector, OrdenSelector[Orden], ", " ) & "</div></div>" &
+			    "<div class='fl'><div class='lb'>Categoria</div><div class='dd'>" & SELECTEDVALUE ( LOL_PBIMODELITEM[Categoria], "Todas" ) & "</div></div>" &
+			    "<div class='fl'><div class='lb'>GrupodeArt</div><div class='dd'>" & SELECTEDVALUE ( LOL_PBIMODELITEM[GrupodeArt], "Todas" ) & "</div></div>" &
+			    "<div class='fl'><div class='lb'>Familia agr.</div><div class='dd'>" & SELECTEDVALUE ( LOL_PBIMODELITEM[Descripcion_familia_agregada], "Todas" ) & "</div></div>" &
+			    "<div class='fl'><div class='lb'>Subfamilia</div><div class='dd'>" & SELECTEDVALUE ( LOL_PBIMODELITEM[Subfamilia], "Todas" ) & "</div></div>" &
+			    "<div class='fl'><div class='lb'>TipoTienda</div><div class='dd'>" & SELECTEDVALUE ( LOL_PBITIENDAS[TipoTienda], "Todas" ) & "</div></div>" &
+			    "<div class='fl'><div class='lb'>Tienda</div><div class='dd'>" & SELECTEDVALUE ( LOL_PBITIENDAS[NombreTienda], "Todas" ) & "</div></div>" & "</div></div>"
+			VAR Cabecera =
+			    "<div class='hd'><div><div class='h1'>Desempeño de ventas</div>"
+			    & "<div class='sub'>" & [Rango y actualización] & "</div></div>"
+			    & "<div class='ctl'><span class='lbl'>Visualizar datos hasta:</span>"
+			    & "<span class='db'>" & FORMAT ( [FechaInicioPeriodoSeleccionado], "dd/MM/yyyy" ) & "</span>"
+			    & "<span class='db'>" & FORMAT ( [FechaHastaSeleccionada], "dd/MM/yyyy" ) & "</span>"
+			    & "<div class='seg'>" & "<span class='" & IF ( [PeriodoSeleccionado] = "Año", "on", "" ) & "'>Año</span>" & "<span class='" & IF ( [PeriodoSeleccionado] = "Trimestre", "on", "" ) & "'>Trimestre</span>" & "<span class='" & IF ( [PeriodoSeleccionado] = "Mes", "on", "" ) & "'>Mes</span>" & "<span class='" & IF ( [PeriodoSeleccionado] = "Semana", "on", "" ) & "'>Semana</span>" & "<span class='" & IF ( [PeriodoSeleccionado] = "Día", "on", "" ) & "'>Día</span>" & "</div></div></div>"
+			VAR Desgloses =
+			    "<div class='dg'>" & "<div class='fl'><div class='lb'>Desglose principal</div><div class='dd'>" & CONCATENATEX ( DimensionesB2C1, DimensionesB2C1[DimensionesB2C1], ", " ) & "</div></div>" &
+			    "<div class='fl'><div class='lb'>Desglose secundario</div><div class='dd'>" & CONCATENATEX ( DimensionesB2C2, DimensionesB2C2[DimensionesB2C2], ", " ) & "</div></div>" &
+			    "<div class='fl'><div class='lb'>Categoría</div><div class='dd'>" & SELECTEDVALUE ( LOL_PBIMODELITEM[Categoria], "Todas" ) & "</div></div>" & "</div>"
+			VAR Cuerpo =
+			    & [HTML Tarjetas Desempeño]
+			    & "<div class='pnl'><div class='h2' style='margin-top:0'>Desempeño por</div>"
+			    & Desgloses & [HTML Tabla Desempeño] & "</div>"
+			RETURN
+			    Css & "<input type='checkbox' id='mt' class='tg'>"
+			    & "<div class='pg'>" & Menu
+			    & "<div class='ct'>" & Cabecera & Cuerpo & "</div></div>"
+		displayFolder: 9 HTML
+		lineageTag: 7ed6d878-bf86-48c3-b4d1-c7ebb2544aea
+
+	/// Lo mismo para el catalogo, reutilizando [HTML Catalogo].
+	measure 'HTML Página Catálogo' =
+			VAR Css = "<style>*{margin:0;padding:0;box-sizing:border-box}.tg{display:none}.pg{position:relative;width:1280px;height:720px;background:#F2F3F5;font-family:Manrope,system-ui,-apple-system,sans-serif;color:#1A1A1A;overflow:hidden}.mn{position:absolute;left:0;top:0;bottom:0;width:62px;background:#6E2439;transition:width .18s ease;overflow:hidden;z-index:3}.tg:checked + .pg .mn{width:260px}.mn .lg{position:absolute;left:14px;top:14px;width:34px;height:34px;border-radius:50%;border:1.5px solid #fff;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;letter-spacing:.02em}.mn .wm{position:absolute;left:60px;top:22px;color:#fff;font-size:15px;letter-spacing:.06em;white-space:nowrap;opacity:0;transition:opacity .18s}.tg:checked + .pg .mn .wm{opacity:1}.mn .wm b{font-weight:800}.mn .wm i{font-style:normal;font-weight:300}.bt{position:absolute;left:14px;top:62px;width:34px;height:30px;color:#fff;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center}.tg:checked + .pg .bt{left:auto;right:14px;top:18px}.fls{position:absolute;left:14px;right:14px;top:104px;opacity:0;pointer-events:none;transition:opacity .18s}.tg:checked + .pg .fls{opacity:1}.fl{margin-bottom:11px}.fl .lb{color:#DFA0C9;font-size:10.5px;font-weight:600;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.fl .dd{height:30px;line-height:30px;background:#fff;border-radius:6px;padding:0 26px 0 10px;font-size:12px;color:#1A1A1A;position:relative;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.fl .dd:after{content:'\25BE';position:absolute;right:9px;top:0;color:#6B6F76;font-size:10px}.ct{position:absolute;top:0;bottom:0;left:78px;right:0;padding:18px 22px;transition:left .18s ease;overflow:hidden}.tg:checked + .pg .ct{left:276px}.h1{font-size:26px;font-weight:700;letter-spacing:-.01em}.sub{font-size:11.5px;color:#6B6F76;margin-top:5px}.hd{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.ctl{display:flex;align-items:center;gap:10px;padding-top:4px}.ctl .lbl{font-size:11.5px;font-weight:600;color:#1A1A1A;white-space:nowrap}.db{height:30px;line-height:30px;background:#fff;border:1px solid #E6E8EB;border-radius:5px;padding:0 24px 0 10px;font-size:12px;position:relative;white-space:nowrap}.db:after{content:'\1F4C5';position:absolute;right:7px;top:0;font-size:11px;opacity:.6}.seg{display:flex;border:1px solid #E6E8EB;border-radius:5px;overflow:hidden;background:#fff}.seg span{padding:0 13px;height:28px;line-height:28px;font-size:12px;color:#1A1A1A;border-right:1px solid #E6E8EB}.seg span:last-child{border-right:0}.seg span.on{background:#1F1F1F;color:#fff;font-weight:600}.h2{font-size:19px;font-weight:600;margin:16px 0 11px}.pnl{background:#fff;border:1px solid #E6E8EB;border-radius:4px;padding:16px 18px}.dg{display:flex;gap:14px;margin:12px 0 14px}.dg .fl{margin:0}.dg .fl .lb{color:#1A1A1A}.dg .fl .dd{border:1px solid #E6E8EB;min-width:190px}</style>"
+			VAR Menu =
+			    "<div class='mn'><div class='lg'>LC</div>"
+			    & "<div class='wm'><b>LOLA</b><i>casademunt</i></div>"
+			    & "<label for='mt' class='bt'>" & UNICHAR ( 9776 ) & "</label>"
+			    & "<div class='fls'>" & "<div class='fl'><div class='lb'>Temporada</div><div class='dd'>" & SELECTEDVALUE ( LOL_PBISEASON[Code], "Todas" ) & "</div></div>" &
+			    "<div class='fl'><div class='lb'>Desglose</div><div class='dd'>" & CONCATENATEX ( DimensionesB2C1, DimensionesB2C1[DimensionesB2C1], ", " ) & "</div></div>" &
+			    "<div class='fl'><div class='lb'>Top N</div><div class='dd'>" & FORMAT ( MAXX ( ParamTopN, ParamTopN[Top N] ), "#,0" ) & "</div></div>" &
+			    "<div class='fl'><div class='lb'>Orden</div><div class='dd'>" & CONCATENATEX ( OrdenSelector, OrdenSelector[Orden], ", " ) & "</div></div>" &
+			    "<div class='fl'><div class='lb'>Categoria</div><div class='dd'>" & SELECTEDVALUE ( LOL_PBIMODELITEM[Categoria], "Todas" ) & "</div></div>" &
+			    "<div class='fl'><div class='lb'>GrupodeArt</div><div class='dd'>" & SELECTEDVALUE ( LOL_PBIMODELITEM[GrupodeArt], "Todas" ) & "</div></div>" &
+			    "<div class='fl'><div class='lb'>Familia agr.</div><div class='dd'>" & SELECTEDVALUE ( LOL_PBIMODELITEM[Descripcion_familia_agregada], "Todas" ) & "</div></div>" &
+			    "<div class='fl'><div class='lb'>Subfamilia</div><div class='dd'>" & SELECTEDVALUE ( LOL_PBIMODELITEM[Subfamilia], "Todas" ) & "</div></div>" &
+			    "<div class='fl'><div class='lb'>TipoTienda</div><div class='dd'>" & SELECTEDVALUE ( LOL_PBITIENDAS[TipoTienda], "Todas" ) & "</div></div>" &
+			    "<div class='fl'><div class='lb'>Tienda</div><div class='dd'>" & SELECTEDVALUE ( LOL_PBITIENDAS[NombreTienda], "Todas" ) & "</div></div>" & "</div></div>"
+			VAR Cabecera =
+			    "<div class='hd'><div><div class='h1'>Ranking de productos</div>"
+			    & "<div class='sub'>" & [Rango y actualización] & "</div></div>"
+			    & "<div class='ctl'><span class='lbl'>Visualizar datos hasta:</span>"
+			    & "<span class='db'>" & FORMAT ( [FechaInicioPeriodoSeleccionado], "dd/MM/yyyy" ) & "</span>"
+			    & "<span class='db'>" & FORMAT ( [FechaHastaSeleccionada], "dd/MM/yyyy" ) & "</span>"
+			    & "<div class='seg'>" & "<span class='" & IF ( [PeriodoSeleccionado] = "Año", "on", "" ) & "'>Año</span>" & "<span class='" & IF ( [PeriodoSeleccionado] = "Trimestre", "on", "" ) & "'>Trimestre</span>" & "<span class='" & IF ( [PeriodoSeleccionado] = "Mes", "on", "" ) & "'>Mes</span>" & "<span class='" & IF ( [PeriodoSeleccionado] = "Semana", "on", "" ) & "'>Semana</span>" & "<span class='" & IF ( [PeriodoSeleccionado] = "Día", "on", "" ) & "'>Día</span>" & "</div></div></div>"
+			VAR Desgloses =
+			    "<div class='dg'>" & "<div class='fl'><div class='lb'>Desglose principal</div><div class='dd'>" & CONCATENATEX ( DimensionesB2C1, DimensionesB2C1[DimensionesB2C1], ", " ) & "</div></div>" &
+			    "<div class='fl'><div class='lb'>Desglose secundario</div><div class='dd'>" & CONCATENATEX ( DimensionesB2C2, DimensionesB2C2[DimensionesB2C2], ", " ) & "</div></div>" &
+			    "<div class='fl'><div class='lb'>Categoría</div><div class='dd'>" & SELECTEDVALUE ( LOL_PBIMODELITEM[Categoria], "Todas" ) & "</div></div>" & "</div>"
+			VAR Cuerpo =
+			    "<div class='h2'>Catálogo</div>"
+			    & "<div class='pnl'>" & Desgloses & [HTML Catálogo] & "</div>"
+			RETURN
+			    Css & "<input type='checkbox' id='mt' class='tg'>"
+			    & "<div class='pg'>" & Menu
+			    & "<div class='ct'>" & Cabecera & Cuerpo & "</div></div>"
+		displayFolder: 9 HTML
+		lineageTag: bb3e6b0a-de03-4b3f-b0ea-91711bf64d21
+
+	/// El panel del menu con sus 10 etiquetas, colocadas sobre la
+	/// geometria real de cada segmentador. Los segmentadores llevan la
+	/// cabecera apagada: es lo unico que deja redondear su contenedor.
+	measure 'HTML Menu Desempeño' =
+			"<style>.mn{position:relative;width:100%;height:720px;background:#6E2439;font-family:Manrope,system-ui,-apple-system,sans-serif}.mn .lb{position:absolute;color:#DFA0C9;font-size:10.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mn .rl{position:absolute;top:0;right:0;width:1px;height:100%;background:rgba(255,255,255,.14)}</style>"
+			    & "<div class='mn'><div class='rl'></div><div class='lb' style='left:131.8px;top:270.6px;width:114px'>GrupodeArt</div><div class='lb' style='left:13.8px;top:78.6px;width:232px'>Ventas por</div><div class='lb' style='left:13.8px;top:206.6px;width:232px'>Orden</div><div class='lb' style='left:13.8px;top:526.6px;width:232px'>Tienda</div><div class='lb' style='left:131.8px;top:334.6px;width:114px'>Subfamilia</div><div class='lb' style='left:13.8px;top:270.6px;width:112px'>Categoria</div><div class='lb' style='left:13.8px;top:334.6px;width:112px'>Familia agr.</div><div class='lb' style='left:13.8px;top:142.6px;width:232px'>Top N</div><div class='lb' style='left:13.8px;top:462.6px;width:232px'>TipoTienda</div><div class='lb' style='left:13.8px;top:398.6px;width:232px'>Modelo-Color</div></div>"
+		displayFolder: 9 HTML
+		lineageTag: f90a572a-7644-423e-9f84-599363854cf6
+
+	/// El panel del menu con sus 9 etiquetas, colocadas sobre la
+	/// geometria real de cada segmentador. Los segmentadores llevan la
+	/// cabecera apagada: es lo unico que deja redondear su contenedor.
+	measure 'HTML Menu Catálogo' =
+			"<style>.mn{position:relative;width:100%;height:720px;background:#6E2439;font-family:Manrope,system-ui,-apple-system,sans-serif}.mn .lb{position:absolute;color:#DFA0C9;font-size:10.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mn .rl{position:absolute;top:0;right:0;width:1px;height:100%;background:rgba(255,255,255,.14)}</style>"
+			    & "<div class='mn'><div class='rl'></div><div class='lb' style='left:13.8px;top:270.6px;width:112px'>Familia agr.</div><div class='lb' style='left:13.8px;top:462.6px;width:232px'>Tienda</div><div class='lb' style='left:13.8px;top:142.6px;width:232px'>Orden</div><div class='lb' style='left:131.8px;top:270.6px;width:114px'>Subfamilia</div><div class='lb' style='left:13.8px;top:398.6px;width:232px'>TipoTienda</div><div class='lb' style='left:131.8px;top:206.6px;width:114px'>GrupodeArt</div><div class='lb' style='left:13.8px;top:206.6px;width:112px'>Categoria</div><div class='lb' style='left:13.8px;top:78.6px;width:232px'>Top N</div><div class='lb' style='left:13.8px;top:334.6px;width:232px'>Modelo-Color</div></div>"
+		displayFolder: 9 HTML
+		lineageTag: e63ac57a-ed2a-4a46-ad8a-36616b62a8e4
+
+	/// Las 17 celdas de valores de una fila, en el contexto que toque.
+	measure 'HTML Fila Desempeño' =
+			VAR x1 = [Share_Pct]
+			VAR c1 = IF ( ISBLANK ( x1 ),
+			    "<span class='c x1 z'>—</span>",
+			    "<span class='c x1 g'>" & FORMAT ( x1, "0%" ) & "</span>" )
+			VAR x2 = [Ventas_YTD]
+			VAR c2 = IF ( ISBLANK ( x2 ),
+			    "<span class='c x2 z'>—</span>",
+			    "<span class='c x2 b vn'>" & FORMAT ( x2, "€ #,0" ) & "</span>" )
+			VAR x3 = [Objetivos_YTD]
+			VAR c3 = IF ( ISBLANK ( x3 ),
+			    "<span class='c x3 z'>—</span>",
+			    "<span class='c x3 g'>" & FORMAT ( x3, "€ #,0" ) & "</span>" )
+			VAR x4 = [EvolucionObjetivo_%]
+			VAR c4 = IF ( ISBLANK ( x4 ),
+			    "<span class='c x4 z'>—</span>",
+			    "<span class='c x4 " & IF ( x4 < 0, "m", "p" ) & "'>" & FORMAT ( x4, "+0.00%;-0.00%;0.00%" ) & "</span>" )
+			VAR x5 = [Ventas_YTD_LY]
+			VAR c5 = IF ( ISBLANK ( x5 ),
+			    "<span class='c x5 z'>—</span>",
+			    "<span class='c x5 g'>" & FORMAT ( x5, "€ #,0" ) & "</span>" )
+			VAR x6 = [Ventas_YTD_Var_%]
+			VAR c6 = IF ( ISBLANK ( x6 ),
+			    "<span class='c x6 z'>—</span>",
+			    "<span class='c x6 " & IF ( x6 < 0, "m", "p" ) & "'>" & FORMAT ( x6, "+0.00%;-0.00%;0.00%" ) & "</span>" )
+			VAR x7 = [Tasa_Devolucion_YTD]
+			VAR c7 = IF ( ISBLANK ( x7 ),
+			    "<span class='c x7 z'>—</span>",
+			    "<span class='c x7 g'>" & FORMAT ( x7, "0.0%" ) & "</span>" )
+			VAR x8 = [Tasa_Devolucion_YTD_Var]
+			VAR c8 = IF ( ISBLANK ( x8 ),
+			    "<span class='c x8 z'>—</span>",
+			    "<span class='c x8 " & IF ( x8 < 0, "m", "p" ) & "'>" & FORMAT ( x8, "+0.0""p"";-0.0""p"";0.0""p""" ) & "</span>" )
+			VAR x9 = [NumeroTransacciones_YTD]
+			VAR c9 = IF ( ISBLANK ( x9 ),
+			    "<span class='c x9 z'>—</span>",
+			    "<span class='c x9 '>" & FORMAT ( x9, "#,0" ) & "</span>" )
+			VAR x10 = [NumeroTransacciones_Var_%]
+			VAR c10 = IF ( ISBLANK ( x10 ),
+			    "<span class='c x10 z'>—</span>",
+			    "<span class='c x10 " & IF ( x10 < 0, "m", "p" ) & "'>" & FORMAT ( x10, "+0.00%;-0.00%;0.00%" ) & "</span>" )
+			VAR x11 = [PromedioVentaTransaccion_YTD]
+			VAR c11 = IF ( ISBLANK ( x11 ),
+			    "<span class='c x11 z'>—</span>",
+			    "<span class='c x11 '>" & FORMAT ( x11, "€ #,##0.00" ) & "</span>" )
+			VAR x12 = [PromedioVentaTransaccion_Var_%]
+			VAR c12 = IF ( ISBLANK ( x12 ),
+			    "<span class='c x12 z'>—</span>",
+			    "<span class='c x12 " & IF ( x12 < 0, "m", "p" ) & "'>" & FORMAT ( x12, "+0.00%;-0.00%;0.00%" ) & "</span>" )
+			VAR x13 = [UPT_YTD]
+			VAR c13 = IF ( ISBLANK ( x13 ),
+			    "<span class='c x13 z'>—</span>",
+			    "<span class='c x13 '>" & FORMAT ( x13, "#,##0.0" ) & "</span>" )
+			VAR x14 = [UPT_Var_%]
+			VAR c14 = IF ( ISBLANK ( x14 ),
+			    "<span class='c x14 z'>—</span>",
+			    "<span class='c x14 " & IF ( x14 < 0, "m", "p" ) & "'>" & FORMAT ( x14, "+0.00%;-0.00%;0.00%" ) & "</span>" )
+			VAR x15 = [Entradas_YTD]
+			VAR c15 = IF ( ISBLANK ( x15 ),
+			    "<span class='c x15 z'>—</span>",
+			    "<span class='c x15 '>" & FORMAT ( x15, "#,0" ) & "</span>" )
+			VAR x16 = [Tasa_Conversion_YTD]
+			VAR c16 = IF ( ISBLANK ( x16 ),
+			    "<span class='c x16 z'>—</span>",
+			    "<span class='c x16 g'>" & FORMAT ( x16, "0.0%" ) & "</span>" )
+			VAR x17 = [Tasa_Conversion_YTD_Var]
+			VAR c17 = IF ( ISBLANK ( x17 ),
+			    "<span class='c x17 z'>—</span>",
+			    "<span class='c x17 " & IF ( x17 < 0, "m", "p" ) & "'>" & FORMAT ( x17, "+0.0""p"";-0.0""p"";0.0""p""" ) & "</span>" )
+			RETURN c1 & c2 & c3 & c4 & c5 & c6 & c7 & c8 & c9 & c10 & c11 & c12 & c13 & c14 & c15 & c16 & c17
+		displayFolder: 9 HTML
+		lineageTag: ebd245c9-e8ea-4500-bce0-7230bac022e2
+
+	/// La tabla "Desempeno por".
+	/// El nivel 1 lo manda el selector Desglose principal: una rama por cada
+	/// una de las 14 opciones del parametro de campo. En DAX SWITCH no
+	/// devuelve tablas, asi que se ramifica sobre el TEXTO generado.
+	/// Cuesta 4,9 s frente a 253 ms con jerarquia fija: DAX materializa las 14
+	/// ramas aunque solo use una. Hacer dinamico tambien el nivel 2 serian
+	/// 196 ramas y 27,6 s, por eso el 2 se queda en NombreTienda.
+	/// Cabecera fija arriba y Total fijo abajo, con scroll dentro.
+	/// Los nombres llegan a 45 caracteres: columna de 260 px y title con el
+	/// nombre completo.
+	measure 'HTML Tabla Desempeño' =
+			VAR S1 =
+			    MINX (
+			        TOPN ( 1, DimensionesB2C1, DimensionesB2C1[DimensionesB2C1 Orden], ASC ),
+			        DimensionesB2C1[DimensionesB2C1]
+			    )
+			VAR Filas =
+			    SWITCH ( S1,
+			        "TipoTienda",
+			        CONCATENATEX (
+			            FILTER ( VALUES ( LOL_PBITIENDAS[TipoTienda] ),
+			                S1 = "TipoTienda" && NOT ISBLANK ( [Ventas_YTD] ) ),
+			            VAR h = CONCATENATEX ( FILTER ( VALUES ( LOL_PBITIENDAS[NombreTienda] ), NOT ISBLANK ( [Ventas_YTD] ) ), "<div class='s2'><span class='c n n2' title='" & LOL_PBITIENDAS[NombreTienda] & "'>" & LOL_PBITIENDAS[NombreTienda] & "</span>" & [HTML Fila Desempeño] & "</div>", "", [Ventas_YTD], DESC )
+			            RETURN
+			                IF ( h = "",
+			                    "<div><span class='c n' title='" & LOL_PBITIENDAS[TipoTienda] & "'>" & LOL_PBITIENDAS[TipoTienda]
+			                        & "</span>" & [HTML Fila Desempeño] & "</div>",
+			                    "<details><summary><span class='c n gr' title='" & LOL_PBITIENDAS[TipoTienda]
+			                        & "'>" & LOL_PBITIENDAS[TipoTienda] & "</span>" & [HTML Fila Desempeño]
+			                        & "</summary>" & h & "</details>" ),
+			            "", [Ventas_YTD], DESC
+			        ),
+			        "NombreTienda",
+			        CONCATENATEX (
+			            FILTER ( VALUES ( LOL_PBITIENDAS[NombreTienda] ),
+			                S1 = "NombreTienda" && NOT ISBLANK ( [Ventas_YTD] ) ),
+			            VAR h = ""
+			            RETURN
+			                IF ( h = "",
+			                    "<div><span class='c n' title='" & LOL_PBITIENDAS[NombreTienda] & "'>" & LOL_PBITIENDAS[NombreTienda]
+			                        & "</span>" & [HTML Fila Desempeño] & "</div>",
+			                    "<details><summary><span class='c n gr' title='" & LOL_PBITIENDAS[NombreTienda]
+			                        & "'>" & LOL_PBITIENDAS[NombreTienda] & "</span>" & [HTML Fila Desempeño]
+			                        & "</summary>" & h & "</details>" ),
+			            "", [Ventas_YTD], DESC
+			        ),
+			        "ResponsableTienda",
+			        CONCATENATEX (
+			            FILTER ( VALUES ( LOL_PBITIENDAS[ResponsableTienda] ),
+			                S1 = "ResponsableTienda" && NOT ISBLANK ( [Ventas_YTD] ) ),
+			            VAR h = CONCATENATEX ( FILTER ( VALUES ( LOL_PBITIENDAS[NombreTienda] ), NOT ISBLANK ( [Ventas_YTD] ) ), "<div class='s2'><span class='c n n2' title='" & LOL_PBITIENDAS[NombreTienda] & "'>" & LOL_PBITIENDAS[NombreTienda] & "</span>" & [HTML Fila Desempeño] & "</div>", "", [Ventas_YTD], DESC )
+			            RETURN
+			                IF ( h = "",
+			                    "<div><span class='c n' title='" & LOL_PBITIENDAS[ResponsableTienda] & "'>" & LOL_PBITIENDAS[ResponsableTienda]
+			                        & "</span>" & [HTML Fila Desempeño] & "</div>",
+			                    "<details><summary><span class='c n gr' title='" & LOL_PBITIENDAS[ResponsableTienda]
+			                        & "'>" & LOL_PBITIENDAS[ResponsableTienda] & "</span>" & [HTML Fila Desempeño]
+			                        & "</summary>" & h & "</details>" ),
+			            "", [Ventas_YTD], DESC
+			        ),
+			        "Territorio",
+			        CONCATENATEX (
+			            FILTER ( VALUES ( LOL_PBITIENDAS[Territorio] ),
+			                S1 = "Territorio" && NOT ISBLANK ( [Ventas_YTD] ) ),
+			            VAR h = CONCATENATEX ( FILTER ( VALUES ( LOL_PBITIENDAS[NombreTienda] ), NOT ISBLANK ( [Ventas_YTD] ) ), "<div class='s2'><span class='c n n2' title='" & LOL_PBITIENDAS[NombreTienda] & "'>" & LOL_PBITIENDAS[NombreTienda] & "</span>" & [HTML Fila Desempeño] & "</div>", "", [Ventas_YTD], DESC )
+			            RETURN
+			                IF ( h = "",
+			                    "<div><span class='c n' title='" & LOL_PBITIENDAS[Territorio] & "'>" & LOL_PBITIENDAS[Territorio]
+			                        & "</span>" & [HTML Fila Desempeño] & "</div>",
+			                    "<details><summary><span class='c n gr' title='" & LOL_PBITIENDAS[Territorio]
+			                        & "'>" & LOL_PBITIENDAS[Territorio] & "</span>" & [HTML Fila Desempeño]
+			                        & "</summary>" & h & "</details>" ),
+			            "", [Ventas_YTD], DESC
+			        ),
+			        "AreaManager",
+			        CONCATENATEX (
+			            FILTER ( VALUES ( LOL_PBITIENDAS[AreaManager] ),
+			                S1 = "AreaManager" && NOT ISBLANK ( [Ventas_YTD] ) ),
+			            VAR h = CONCATENATEX ( FILTER ( VALUES ( LOL_PBITIENDAS[NombreTienda] ), NOT ISBLANK ( [Ventas_YTD] ) ), "<div class='s2'><span class='c n n2' title='" & LOL_PBITIENDAS[NombreTienda] & "'>" & LOL_PBITIENDAS[NombreTienda] & "</span>" & [HTML Fila Desempeño] & "</div>", "", [Ventas_YTD], DESC )
+			            RETURN
+			                IF ( h = "",
+			                    "<div><span class='c n' title='" & LOL_PBITIENDAS[AreaManager] & "'>" & LOL_PBITIENDAS[AreaManager]
+			                        & "</span>" & [HTML Fila Desempeño] & "</div>",
+			                    "<details><summary><span class='c n gr' title='" & LOL_PBITIENDAS[AreaManager]
+			                        & "'>" & LOL_PBITIENDAS[AreaManager] & "</span>" & [HTML Fila Desempeño]
+			                        & "</summary>" & h & "</details>" ),
+			            "", [Ventas_YTD], DESC
+			        ),
+			        "Categoria",
+			        CONCATENATEX (
+			            FILTER ( VALUES ( LOL_PBIMODELITEM[Categoria] ),
+			                S1 = "Categoria" && NOT ISBLANK ( [Ventas_YTD] ) ),
+			            VAR h = CONCATENATEX ( FILTER ( VALUES ( LOL_PBITIENDAS[NombreTienda] ), NOT ISBLANK ( [Ventas_YTD] ) ), "<div class='s2'><span class='c n n2' title='" & LOL_PBITIENDAS[NombreTienda] & "'>" & LOL_PBITIENDAS[NombreTienda] & "</span>" & [HTML Fila Desempeño] & "</div>", "", [Ventas_YTD], DESC )
+			            RETURN
+			                IF ( h = "",
+			                    "<div><span class='c n' title='" & LOL_PBIMODELITEM[Categoria] & "'>" & LOL_PBIMODELITEM[Categoria]
+			                        & "</span>" & [HTML Fila Desempeño] & "</div>",
+			                    "<details><summary><span class='c n gr' title='" & LOL_PBIMODELITEM[Categoria]
+			                        & "'>" & LOL_PBIMODELITEM[Categoria] & "</span>" & [HTML Fila Desempeño]
+			                        & "</summary>" & h & "</details>" ),
+			            "", [Ventas_YTD], DESC
+			        ),
+			        "Descripcion_familia_agregada",
+			        CONCATENATEX (
+			            FILTER ( VALUES ( LOL_PBIMODELITEM[Descripcion_familia_agregada] ),
+			                S1 = "Descripcion_familia_agregada" && NOT ISBLANK ( [Ventas_YTD] ) ),
+			            VAR h = CONCATENATEX ( FILTER ( VALUES ( LOL_PBITIENDAS[NombreTienda] ), NOT ISBLANK ( [Ventas_YTD] ) ), "<div class='s2'><span class='c n n2' title='" & LOL_PBITIENDAS[NombreTienda] & "'>" & LOL_PBITIENDAS[NombreTienda] & "</span>" & [HTML Fila Desempeño] & "</div>", "", [Ventas_YTD], DESC )
+			            RETURN
+			                IF ( h = "",
+			                    "<div><span class='c n' title='" & LOL_PBIMODELITEM[Descripcion_familia_agregada] & "'>" & LOL_PBIMODELITEM[Descripcion_familia_agregada]
+			                        & "</span>" & [HTML Fila Desempeño] & "</div>",
+			                    "<details><summary><span class='c n gr' title='" & LOL_PBIMODELITEM[Descripcion_familia_agregada]
+			                        & "'>" & LOL_PBIMODELITEM[Descripcion_familia_agregada] & "</span>" & [HTML Fila Desempeño]
+			                        & "</summary>" & h & "</details>" ),
+			            "", [Ventas_YTD], DESC
+			        ),
+			        "Nombre_familia",
+			        CONCATENATEX (
+			            FILTER ( VALUES ( LOL_PBIMODELITEM[Nombre_familia] ),
+			                S1 = "Nombre_familia" && NOT ISBLANK ( [Ventas_YTD] ) ),
+			            VAR h = CONCATENATEX ( FILTER ( VALUES ( LOL_PBITIENDAS[NombreTienda] ), NOT ISBLANK ( [Ventas_YTD] ) ), "<div class='s2'><span class='c n n2' title='" & LOL_PBITIENDAS[NombreTienda] & "'>" & LOL_PBITIENDAS[NombreTienda] & "</span>" & [HTML Fila Desempeño] & "</div>", "", [Ventas_YTD], DESC )
+			            RETURN
+			                IF ( h = "",
+			                    "<div><span class='c n' title='" & LOL_PBIMODELITEM[Nombre_familia] & "'>" & LOL_PBIMODELITEM[Nombre_familia]
+			                        & "</span>" & [HTML Fila Desempeño] & "</div>",
+			                    "<details><summary><span class='c n gr' title='" & LOL_PBIMODELITEM[Nombre_familia]
+			                        & "'>" & LOL_PBIMODELITEM[Nombre_familia] & "</span>" & [HTML Fila Desempeño]
+			                        & "</summary>" & h & "</details>" ),
+			            "", [Ventas_YTD], DESC
+			        ),
+			        "Subfamilia",
+			        CONCATENATEX (
+			            FILTER ( VALUES ( LOL_PBIMODELITEM[Subfamilia] ),
+			                S1 = "Subfamilia" && NOT ISBLANK ( [Ventas_YTD] ) ),
+			            VAR h = CONCATENATEX ( FILTER ( VALUES ( LOL_PBITIENDAS[NombreTienda] ), NOT ISBLANK ( [Ventas_YTD] ) ), "<div class='s2'><span class='c n n2' title='" & LOL_PBITIENDAS[NombreTienda] & "'>" & LOL_PBITIENDAS[NombreTienda] & "</span>" & [HTML Fila Desempeño] & "</div>", "", [Ventas_YTD], DESC )
+			            RETURN
+			                IF ( h = "",
+			                    "<div><span class='c n' title='" & LOL_PBIMODELITEM[Subfamilia] & "'>" & LOL_PBIMODELITEM[Subfamilia]
+			                        & "</span>" & [HTML Fila Desempeño] & "</div>",
+			                    "<details><summary><span class='c n gr' title='" & LOL_PBIMODELITEM[Subfamilia]
+			                        & "'>" & LOL_PBIMODELITEM[Subfamilia] & "</span>" & [HTML Fila Desempeño]
+			                        & "</summary>" & h & "</details>" ),
+			            "", [Ventas_YTD], DESC
+			        ),
+			        "Año",
+			        CONCATENATEX (
+			            FILTER ( VALUES ( Calendario[Año] ),
+			                S1 = "Año" && NOT ISBLANK ( [Ventas_YTD] ) ),
+			            VAR h = CONCATENATEX ( FILTER ( VALUES ( LOL_PBITIENDAS[NombreTienda] ), NOT ISBLANK ( [Ventas_YTD] ) ), "<div class='s2'><span class='c n n2' title='" & LOL_PBITIENDAS[NombreTienda] & "'>" & LOL_PBITIENDAS[NombreTienda] & "</span>" & [HTML Fila Desempeño] & "</div>", "", [Ventas_YTD], DESC )
+			            RETURN
+			                IF ( h = "",
+			                    "<div><span class='c n' title='" & Calendario[Año] & "'>" & Calendario[Año]
+			                        & "</span>" & [HTML Fila Desempeño] & "</div>",
+			                    "<details><summary><span class='c n gr' title='" & Calendario[Año]
+			                        & "'>" & Calendario[Año] & "</span>" & [HTML Fila Desempeño]
+			                        & "</summary>" & h & "</details>" ),
+			            "", [Ventas_YTD], DESC
+			        ),
+			        "MesTexto",
+			        CONCATENATEX (
+			            FILTER ( VALUES ( Calendario[MesTexto] ),
+			                S1 = "MesTexto" && NOT ISBLANK ( [Ventas_YTD] ) ),
+			            VAR h = CONCATENATEX ( FILTER ( VALUES ( LOL_PBITIENDAS[NombreTienda] ), NOT ISBLANK ( [Ventas_YTD] ) ), "<div class='s2'><span class='c n n2' title='" & LOL_PBITIENDAS[NombreTienda] & "'>" & LOL_PBITIENDAS[NombreTienda] & "</span>" & [HTML Fila Desempeño] & "</div>", "", [Ventas_YTD], DESC )
+			            RETURN
+			                IF ( h = "",
+			                    "<div><span class='c n' title='" & Calendario[MesTexto] & "'>" & Calendario[MesTexto]
+			                        & "</span>" & [HTML Fila Desempeño] & "</div>",
+			                    "<details><summary><span class='c n gr' title='" & Calendario[MesTexto]
+			                        & "'>" & Calendario[MesTexto] & "</span>" & [HTML Fila Desempeño]
+			                        & "</summary>" & h & "</details>" ),
+			            "", [Ventas_YTD], DESC
+			        ),
+			        "NombreSemana",
+			        CONCATENATEX (
+			            FILTER ( VALUES ( Calendario[NombreSemana] ),
+			                S1 = "NombreSemana" && NOT ISBLANK ( [Ventas_YTD] ) ),
+			            VAR h = CONCATENATEX ( FILTER ( VALUES ( LOL_PBITIENDAS[NombreTienda] ), NOT ISBLANK ( [Ventas_YTD] ) ), "<div class='s2'><span class='c n n2' title='" & LOL_PBITIENDAS[NombreTienda] & "'>" & LOL_PBITIENDAS[NombreTienda] & "</span>" & [HTML Fila Desempeño] & "</div>", "", [Ventas_YTD], DESC )
+			            RETURN
+			                IF ( h = "",
+			                    "<div><span class='c n' title='" & Calendario[NombreSemana] & "'>" & Calendario[NombreSemana]
+			                        & "</span>" & [HTML Fila Desempeño] & "</div>",
+			                    "<details><summary><span class='c n gr' title='" & Calendario[NombreSemana]
+			                        & "'>" & Calendario[NombreSemana] & "</span>" & [HTML Fila Desempeño]
+			                        & "</summary>" & h & "</details>" ),
+			            "", [Ventas_YTD], DESC
+			        ),
+			        "NombreDíaCorto",
+			        CONCATENATEX (
+			            FILTER ( VALUES ( Calendario[NombreDíaCorto] ),
+			                S1 = "NombreDíaCorto" && NOT ISBLANK ( [Ventas_YTD] ) ),
+			            VAR h = CONCATENATEX ( FILTER ( VALUES ( LOL_PBITIENDAS[NombreTienda] ), NOT ISBLANK ( [Ventas_YTD] ) ), "<div class='s2'><span class='c n n2' title='" & LOL_PBITIENDAS[NombreTienda] & "'>" & LOL_PBITIENDAS[NombreTienda] & "</span>" & [HTML Fila Desempeño] & "</div>", "", [Ventas_YTD], DESC )
+			            RETURN
+			                IF ( h = "",
+			                    "<div><span class='c n' title='" & Calendario[NombreDíaCorto] & "'>" & Calendario[NombreDíaCorto]
+			                        & "</span>" & [HTML Fila Desempeño] & "</div>",
+			                    "<details><summary><span class='c n gr' title='" & Calendario[NombreDíaCorto]
+			                        & "'>" & Calendario[NombreDíaCorto] & "</span>" & [HTML Fila Desempeño]
+			                        & "</summary>" & h & "</details>" ),
+			            "", [Ventas_YTD], DESC
+			        ),
+			        "GrupodeArt",
+			        CONCATENATEX (
+			            FILTER ( VALUES ( LOL_PBIMODELITEM[GrupodeArt] ),
+			                S1 = "GrupodeArt" && NOT ISBLANK ( [Ventas_YTD] ) ),
+			            VAR h = CONCATENATEX ( FILTER ( VALUES ( LOL_PBITIENDAS[NombreTienda] ), NOT ISBLANK ( [Ventas_YTD] ) ), "<div class='s2'><span class='c n n2' title='" & LOL_PBITIENDAS[NombreTienda] & "'>" & LOL_PBITIENDAS[NombreTienda] & "</span>" & [HTML Fila Desempeño] & "</div>", "", [Ventas_YTD], DESC )
+			            RETURN
+			                IF ( h = "",
+			                    "<div><span class='c n' title='" & LOL_PBIMODELITEM[GrupodeArt] & "'>" & LOL_PBIMODELITEM[GrupodeArt]
+			                        & "</span>" & [HTML Fila Desempeño] & "</div>",
+			                    "<details><summary><span class='c n gr' title='" & LOL_PBIMODELITEM[GrupodeArt]
+			                        & "'>" & LOL_PBIMODELITEM[GrupodeArt] & "</span>" & [HTML Fila Desempeño]
+			                        & "</summary>" & h & "</details>" ),
+			            "", [Ventas_YTD], DESC
+			        ),
+			        "" )
+			RETURN
+			    "<style>.dv{font-family:Manrope,system-ui,-apple-system,sans-serif;background:#FFFFFF;color:#1A1A1A;max-height:338px;overflow:auto}.dv .w{min-width:1650px}.dv .c,.dv .h{display:inline-block;box-sizing:border-box;padding:0 10px;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;vertical-align:top}.dv .c{height:44px;line-height:44px;font-size:13px}.dv .h{height:34px;line-height:34px;font-size:11.5px;font-weight:500;color:#55595F}.dv .n{text-align:left;width:260px}.dv .g{color:#6B6F76}.dv .b{font-weight:700}.dv .p{color:#1E7A45;font-weight:700}.dv .m{color:#B0243F;font-weight:700}.dv .z{color:#6B6F76}.dv .hd{position:sticky;top:0;z-index:5;background:#FFFFFF;border-bottom:1px solid #E6E8EB}.dv details{border-bottom:1px solid #E6E8EB}.dv summary{list-style:none;cursor:pointer;display:block}.dv summary::-webkit-details-marker{display:none}.dv summary:hover{background:#F7F8F9}.dv .gr:before{content:'\25B8';display:inline-block;width:14px;color:#6B6F76}.dv details[open]>summary .gr:before{content:'\25BE'}.dv .n2{padding-left:30px}.dv .s2{background:#FAFBFC;border-top:1px solid #E6E8EB}.dv .tot{position:sticky;bottom:0;background:#FBE9EC;z-index:4;border-top:1px solid #E6E8EB}.dv .tot .c{font-weight:700;color:#1A1A1A}.dv .tot .vn{color:#8A2944}.dv .x1{width:60px}.dv .x2{width:104px}.dv .x3{width:98px}.dv .x4{width:82px}.dv .x5{width:98px}.dv .x6{width:80px}.dv .x7{width:66px}.dv .x8{width:78px}.dv .x9{width:64px}.dv .x10{width:102px}.dv .x11{width:94px}.dv .x12{width:78px}.dv .x13{width:50px}.dv .x14{width:76px}.dv .x15{width:78px}.dv .x16{width:96px}.dv .x17{width:86px}</style>"
+			    & "<div class='dv'><div class='w'>"
+			    & "<div class='hd'><span class='h n'>" & S1 & "</span><span class='h x1'>%</span><span class='h x2'>Venta neta</span><span class='h x3'>Objetivo</span><span class='h x4'>vs Obj %</span><span class='h x5'>Venta AA</span><span class='h x6'>Evol % AA</span><span class='h x7'>% Dev</span><span class='h x8'>Dev vs AA</span><span class='h x9'>Tickets</span><span class='h x10'>Tickets Evol %</span><span class='h x11'>Ticket medio</span><span class='h x12'>TM Evol %</span><span class='h x13'>UPT</span><span class='h x14'>UPT Evol %</span><span class='h x15'>Entradas</span><span class='h x16'>% Conversión</span><span class='h x17'>Conv vs AA</span></div>"
+			    & Filas
+			    & "<div class='tot'><span class='c n b' style='color:#8A2944'>Total</span>"
+			    & [HTML Fila Desempeño] & "</div>"
+			    & "</div></div>"
+		displayFolder: 9 HTML
+		lineageTag: 29bc98b0-abf4-4220-a579-097cca3e48c3
+
 	column Column
 		formatString: 0
 		lineageTag: c1d2e3f4-a5b6-7890-cdef-012345678902

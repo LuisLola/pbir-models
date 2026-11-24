@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "facffa4662c8114823e5",
   "position": {
     "x": 0,
@@ -15,6 +15,21 @@
       "queryState": {
         "Values": {
           "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIPICKINGORIGEN"
+                    }
+                  },
+                  "Property": "TipoOrigen"
+                }
+              },
+              "queryRef": "LOL_PBIPICKINGORIGEN.TipoOrigen",
+              "nativeQueryRef": "TipoOrigen",
+              "displayName": "ORIGEN"
+            },
             {
               "field": {
                 "Column": {
@@ -164,17 +179,17 @@
             },
             {
               "field": {
-                "Column": {
+                "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "LOL_PBITIMEWHS"
+                      "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Dias habiles 20-40"
+                  "Property": "Días de preparación"
                 }
               },
-              "queryRef": "Sum(LOL_PBITIMEWHS.Dias habiles 20-40)",
-              "nativeQueryRef": "Días Preparación",
+              "queryRef": "_Medidas.Días de preparación",
+              "nativeQueryRef": "Días de preparación",
               "displayName": "Días Preparación"
             },
             {
@@ -209,119 +224,123 @@
             },
             {
               "field": {
-                "Column": {
+                "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "LOL_TRANSPORT_TRACKING"
+                      "Entity": "_Medidas"
                     }
                   },
-                  "Property": "transportista_norm"
+                  "Property": "Transportista del envío"
                 }
               },
-              "queryRef": "LOL_TRANSPORT_TRACKING.transportista_norm",
-              "nativeQueryRef": "Transportista",
+              "queryRef": "_Medidas.Transportista del envío",
+              "nativeQueryRef": "Transportista del envío",
               "displayName": "Transportista"
             },
             {
               "field": {
-                "Column": {
+                "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "LOL_TRANSPORT_TRACKING"
+                      "Entity": "_Medidas"
                     }
                   },
-                  "Property": "dias_entrega_natural"
+                  "Property": "Días de entrega naturales"
                 }
               },
-              "queryRef": "Sum(LOL_TRANSPORT_TRACKING.dias_entrega_natural)",
-              "nativeQueryRef": "Días Entrega",
+              "queryRef": "_Medidas.Días de entrega naturales",
+              "nativeQueryRef": "Días de entrega naturales",
               "displayName": "Días Entrega"
             },
             {
               "field": {
-                "Column": {
+                "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "LOL_TRANSPORT_TRACKING"
+                      "Entity": "_Medidas"
                     }
                   },
-                  "Property": "sla_objetivo"
+                  "Property": "SLA de entrega"
                 }
               },
-              "queryRef": "Sum(LOL_TRANSPORT_TRACKING.sla_objetivo)",
-              "nativeQueryRef": "SLA Entrega",
+              "queryRef": "_Medidas.SLA de entrega",
+              "nativeQueryRef": "SLA de entrega",
               "displayName": "SLA Entrega"
             },
             {
               "field": {
-                "Column": {
+                "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "LOL_TRANSPORT_TRACKING"
+                      "Entity": "_Medidas"
                     }
                   },
-                  "Property": "fecha_entregado"
+                  "Property": "Entrega al cliente"
                 }
               },
-              "queryRef": "LOL_TRANSPORT_TRACKING.fecha_entregado",
-              "nativeQueryRef": "Entregado",
+              "queryRef": "_Medidas.Entrega al cliente",
+              "nativeQueryRef": "Entrega al cliente",
               "displayName": "Entregado"
             },
             {
               "field": {
-                "Column": {
+                "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "LOL_TRANSPORT_TRACKING"
+                      "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Días 20 a 40"
+                  "Property": "Días envío 20 a 40"
                 }
               },
-              "queryRef": "LOL_TRANSPORT_TRACKING.Días 20 a 40",
-              "nativeQueryRef": "Días 20→40"
+              "queryRef": "_Medidas.Días envío 20 a 40",
+              "nativeQueryRef": "Días envío 20 a 40",
+              "displayName": "Días 20→40"
             },
             {
               "field": {
-                "Column": {
+                "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "LOL_TRANSPORT_TRACKING"
+                      "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Días 40 a recogida"
+                  "Property": "Días envío 40 a recogida"
                 }
               },
-              "queryRef": "LOL_TRANSPORT_TRACKING.Días 40 a recogida",
-              "nativeQueryRef": "Días 40→recogida"
+              "queryRef": "_Medidas.Días envío 40 a recogida",
+              "nativeQueryRef": "Días envío 40 a recogida",
+              "displayName": "Días 40→recogida"
             },
             {
               "field": {
-                "Column": {
+                "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "LOL_TRANSPORT_TRACKING"
+                      "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Días recogida a entrega"
+                  "Property": "Días envío recogida a entrega"
                 }
               },
-              "queryRef": "LOL_TRANSPORT_TRACKING.Días recogida a entrega",
-              "nativeQueryRef": "Días recogida→entrega"
+              "queryRef": "_Medidas.Días envío recogida a entrega",
+              "nativeQueryRef": "Días envío recogida a entrega",
+              "displayName": "Días recogida→entrega"
             },
             {
               "field": {
-                "Column": {
+                "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "LOL_TRANSPORT_TRACKING"
+                      "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Días 20 a entrega"
+                  "Property": "Días envío 20 a entrega"
                 }
               },
-              "queryRef": "LOL_TRANSPORT_TRACKING.Días 20 a entrega",
-              "nativeQueryRef": "TIEMPO TOTAL"
+              "queryRef": "_Medidas.Días envío 20 a entrega",
+              "nativeQueryRef": "Días envío 20 a entrega",
+              "displayName": "TIEMPO TOTAL"
             }
           ]
         }
@@ -333,10 +352,10 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "LOL_TRANSPORT_TRACKING"
+                    "Entity": "LOL_PBITIMEWHS"
                   }
                 },
-                "Property": "Días 20 a entrega"
+                "Property": "PickDate"
               }
             },
             "direction": "Descending"
@@ -817,6 +836,7 @@
     },
     "drillFilterOtherVisuals": true
   },
+  "parentGroupName": "whgestrecho",
   "filterConfig": {
     "filters": [
       {
@@ -1129,6 +1149,5 @@
       }
     ],
     "filterSortOrder": "Custom"
-  },
-  "parentGroupName": "whgestrecho"
+  }
 }

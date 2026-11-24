@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "e1compra6a204crangoa",
   "position": {
     "x": 800,
     "y": 8,
     "z": 4800,
-    "width": 470,
     "height": 38,
+    "width": 470,
     "tabOrder": 90
   },
   "visual": {
@@ -102,6 +102,13 @@
               "expr": {
                 "Literal": {
                   "Value": "0L"
+                }
+              }
+            },
+            "backgroundShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }

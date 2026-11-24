@@ -195,6 +195,22 @@ table LOL_PBICLIENTES
 
 		annotation SummarizationSetBy = Automatic
 
+	column TipoIC
+		dataType: string
+		lineageTag: d05d7d73-bd4b-4e35-86f4-88c8b7b3a970
+		summarizeBy: none
+		sourceColumn: TipoIC
+
+		annotation SummarizationSetBy = Automatic
+
+	column ViaPago
+		dataType: string
+		lineageTag: 4efd5d3f-6c97-4a81-bcfc-8ca52880a9d2
+		summarizeBy: none
+		sourceColumn: ViaPago
+
+		annotation SummarizationSetBy = Automatic
+
 	partition LOL_PBICLIENTES = m
 		mode: import
 		source =
@@ -203,4 +219,6 @@ table LOL_PBICLIENTES
 				    dbo_LOL_PBICLIENTES = Origen{[Schema="dbo",Item="LOL_PBICLIENTES"]}[Data]
 				in
 				    dbo_LOL_PBICLIENTES
+
+	annotation PBI_ResultType = Table
 

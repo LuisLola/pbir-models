@@ -222,20 +222,20 @@ table MedidasCatalogo
 				VAR _ini = [FechaInicioPeriodoSeleccionado]
 				VAR _hasta = [FechaHastaSeleccionada]
 				VAR _Css =
-				    "<style>@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');" &
-				    ".wrap{font-family:Montserrat,'Segoe UI',Arial,sans-serif;background:transparent;color:#000000;padding:8px}" &
+				    "<style>" &
+				    ".wrap{font-family:Manrope,system-ui,-apple-system,sans-serif;background:#F2F3F5;color:#1A1A1A;padding:0}" &
 				    ".sec{margin:0 0 12px}" &
-				    ".sh{display:flex;align-items:center;justify-content:space-between;border-bottom:none;padding-bottom:3px;margin:0 0 9px;background:#DFA0C9;border-radius:9px;padding:7px 12px}" &
-				    ".sh .t{font-size:15px;font-weight:800;color:#000000;text-transform:uppercase;letter-spacing:.8px}" &
-				    ".sh .n{font-size:9px;color:#000000;margin-left:7px;font-weight:600}" &
-				    ".sh .e{font-size:16px;font-weight:800;color:#000000;background:#FFFFFF;padding:4px 14px;border-radius:10px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.16)}" &
-				    ".sub{display:flex;align-items:center;justify-content:space-between;margin:10px 0 6px;border-left:4px solid #DFA0C9;padding-left:6px;background:#F2F2F2;border-radius:0 8px 8px 0;padding:5px 10px}" &
-				    ".sub .st{font-size:12px;font-weight:800;color:#000000;text-transform:uppercase;letter-spacing:.3px}" &
-				    ".sub .se{font-size:13px;font-weight:800;color:#000000;background:#FFFFFF;padding:3px 11px;border-radius:9px;white-space:nowrap;box-shadow:0 1px 2px rgba(0,0,0,.10)}" &
-				    "details.sec>summary,details.sb>summary{cursor:pointer;list-style:none;user-select:none;position:sticky;top:41px;z-index:6;background:#F2F2F2}" &
+				    ".sh{display:flex;align-items:center;justify-content:space-between;height:36px;margin:0 0 9px;background:#FFFFFF;border-bottom:1px solid #E6E8EB}" &
+				    ".sh .t{font-size:19px;font-weight:600;color:#1A1A1A}" &
+				    ".sh .n{font-size:9px;color:#1A1A1A;margin-left:7px;font-weight:600}" &
+				    ".sh .e{font-size:13px;font-weight:700;color:#1A1A1A;white-space:nowrap}" &
+				    ".sub{display:flex;align-items:center;justify-content:space-between;height:28px;margin:8px 0 4px;background:#FFFFFF;border-bottom:1px solid #E6E8EB}" &
+				    ".sub .st{font-size:12px;font-weight:800;color:#1A1A1A;text-transform:uppercase;letter-spacing:.3px}" &
+				    ".sub .se{font-size:13px;font-weight:800;color:#1A1A1A;background:#FFFFFF;padding:3px 11px;border-radius:4px;white-space:nowrap;box-shadow:none}" &
+				    "details.sec>summary,details.sb>summary{cursor:pointer;list-style:none;user-select:none;position:sticky;top:36px;z-index:6;background:#FFFFFF}" &
 				    "details.sec>summary::-webkit-details-marker,details.sb>summary::-webkit-details-marker{display:none}" &
-				    "details.sec>summary{cursor:pointer;list-style:none;user-select:none;position:sticky;top:0;z-index:7;background:#DFA0C9}" &
-				    "details.sb>summary{cursor:pointer;list-style:none;user-select:none;position:sticky;top:41px;z-index:6;background:#F2F2F2}" &
+				    "details.sec>summary{cursor:pointer;list-style:none;user-select:none;position:sticky;top:0;z-index:7;background:#FFFFFF}" &
+				    "details.sb>summary{cursor:pointer;list-style:none;user-select:none;position:sticky;top:36px;z-index:6;background:#FFFFFF}" &
 				    "details.sec>summary::before{content:'\25BC';display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;min-width:20px;margin-right:9px;border-radius:6px;background:#000000;color:#FFFFFF;font-size:10px;font-weight:800}" &
 				    "details.sec:not([open])>summary::before{content:'\25B6';background:#000000;color:#FFFFFF}" &
 				    "details.sec>summary:hover::before{outline:2px solid #000000;outline-offset:1px}" &
@@ -243,19 +243,19 @@ table MedidasCatalogo
 				    "details.sb:not([open])>summary::before{content:'\25B6';background:#808080;color:#FFFFFF}" &
 				    "details.sb>summary:hover::before{outline:2px solid #808080;outline-offset:1px}" &
 				    ".grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:7px}" &
-				    ".card{position:relative;background:#fff;border:1px solid #E6E6E6;border-radius:9px;padding:6px;box-shadow:0 1px 2px rgba(0,0,0,.08)}" &
+				    ".card{position:relative;background:#fff;border:1px solid #E6E8EB;border-radius:4px;padding:6px;box-shadow:none}" &
 				    ".rank{position:absolute;top:8px;left:8px;width:18px;height:18px;border-radius:5px;color:#fff;font-weight:800;font-size:9px;display:flex;align-items:center;justify-content:center;z-index:2}" &
 				    ".brand{position:absolute;top:8px;right:8px;color:#fff;font-size:7px;font-weight:700;padding:1px 4px;border-radius:7px;z-index:2}" &
-				    ".ib{position:relative;aspect-ratio:3/4;border-radius:6px;border:1px solid #E6E6E6;background:#F2F2F2;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:4px}" &
+				    ".ib{position:relative;aspect-ratio:3/4;border-radius:6px;border:1px solid #E6E8EB;background:#F2F3F5;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:4px}" &
 				    ".ib img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}" &
 				    ".sil{width:28px;height:28px}" &
-				    ".cap{position:absolute;bottom:5px;left:0;right:0;text-align:center;font-size:7px;letter-spacing:.8px;color:#808080;text-transform:uppercase}" &
-				    ".sku{font-family:Consolas,monospace;font-size:8px;color:#808080}" &
+				    ".cap{position:absolute;bottom:5px;left:0;right:0;text-align:center;font-size:7px;letter-spacing:.8px;color:#6B6F76;text-transform:uppercase}" &
+				    ".sku{font-family:Consolas,monospace;font-size:8px;color:#6B6F76}" &
 				    ".nm{font-size:11px;font-weight:700;line-height:1.15;margin:2px 0 1px}" &
-				    ".al{font-size:8px;color:#808080;font-style:italic;margin:0 0 2px;min-height:10px}" &
-				    ".mt{font-size:9px;color:#808080;margin-bottom:5px}" &
-				    ".sl{font-size:16px;font-weight:800;color:#000000}" &
-				    ".bt{height:4px;background:#E6E6E6;border-radius:3px;margin:3px 0;overflow:hidden}" &
+				    ".al{font-size:8px;color:#6B6F76;font-style:italic;margin:0 0 2px;min-height:10px}" &
+				    ".mt{font-size:9px;color:#6B6F76;margin-bottom:5px}" &
+				    ".sl{font-size:16px;font-weight:800;color:#1A1A1A}" &
+				    ".bt{height:4px;background:#E6E8EB;border-radius:3px;margin:3px 0;overflow:hidden}" &
 				    ".bf{height:4px;background:#DFA0C9;border-radius:3px}" &
 				    ".kp{display:flex;justify-content:space-between;font-size:9px}" &
 				    "</style>"
@@ -576,43 +576,44 @@ table MedidasCatalogo
 						VAR _A = SELECTEDVALUE( LOL_PBISEASON[Code] )
 						VAR _B = SELECTEDVALUE( LOL_PBISEASON[CompareSeason] )
 						VAR _Css =
-						    "<style>" &
-						    ".wrap{font-family:Manrope,'Segoe UI',Arial,sans-serif;background:transparent;color:#000000;padding:8px}" &
-						    ".cmp{display:flex;gap:16px;align-items:flex-start}" &
-						    ".col{flex:1;min-width:0}" &
-						    ".ch{display:flex;align-items:baseline;justify-content:space-between;border-bottom:3px solid #DFA0C9;padding-bottom:5px;margin:0 0 12px;position:sticky;top:0;z-index:9;background:#FFFFFF}" &
-						    ".ch .t{font-size:15px;font-weight:800;color:#000000;text-transform:uppercase;letter-spacing:.8px}" &
-						    ".ch .e{font-size:15px;font-weight:800;color:#000000;padding:3px 12px;border-radius:9px;background:#FFFFFF}" &
-						    ".sec{margin:0 0 12px}" &
-						    ".sh{display:flex;align-items:center;justify-content:space-between;border-bottom:none;padding-bottom:3px;margin:0 0 9px;background:#DFA0C9;border-radius:9px;padding:7px 12px}" &
-						    "details.sec>summary{cursor:pointer;list-style:none;user-select:none;position:sticky;top:34px;z-index:8;background:#DFA0C9}" &
-						    "details.sec>summary::-webkit-details-marker{display:none}" &
-						    "details.sec>summary::before{content:'\25BC';display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;min-width:16px;margin-right:7px;border-radius:5px;background:#000000;color:#FFFFFF;font-size:8px;font-weight:800}" &
-						    "details.sec:not([open])>summary::before{content:'\25B6';background:#000000;color:#FFFFFF}" &
-						    "details.sec>summary:hover::before{outline:2px solid #000000;outline-offset:1px}" &
-						    ".sh .t{font-size:15px;font-weight:800;color:#000000;text-transform:uppercase;letter-spacing:.8px}" &
-						    ".sh .e{font-size:16px;font-weight:800;color:#000000;background:#FFFFFF;padding:4px 14px;border-radius:10px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.16)}" &
-						    ".sub{display:flex;align-items:center;justify-content:space-between;margin:10px 0 6px;border-left:4px solid #DFA0C9;padding-left:6px;background:#F2F2F2;border-radius:0 8px 8px 0;padding:5px 10px}" &
-						    ".sub .st{font-size:12px;font-weight:800;color:#000000;text-transform:uppercase;letter-spacing:.3px}" &
-						    ".sub .se{font-size:13px;font-weight:800;color:#000000;background:#FFFFFF;padding:3px 11px;border-radius:9px;white-space:nowrap;box-shadow:0 1px 2px rgba(0,0,0,.10)}" &
-						    "details.sb>summary{cursor:pointer;list-style:none;user-select:none;position:sticky;top:75px;z-index:7;background:#F2F2F2}" &
-						    "details.sb>summary::-webkit-details-marker{display:none}" &
-						    "details.sb>summary::before{content:'\25BC';display:inline-flex;align-items:center;justify-content:center;width:13px;height:13px;min-width:13px;margin-right:5px;border-radius:4px;background:#8A8A8A;color:#FFFFFF;font-size:7px;font-weight:800}" &
-						    "details.sb:not([open])>summary::before{content:'\25B6';background:#8A8A8A;color:#FFFFFF}" &
-						    ".grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:7px}" &
-						    ".card{position:relative;background:#fff;border:1px solid #E9E9E9;border-radius:9px;padding:6px;box-shadow:0 1px 2px rgba(0,0,0,.08)}" &
-						    ".rank{position:absolute;top:8px;left:8px;width:18px;height:18px;border-radius:5px;color:#fff;font-weight:800;font-size:9px;display:flex;align-items:center;justify-content:center;z-index:2}" &
-						    ".brand{position:absolute;top:8px;right:8px;color:#fff;font-size:7px;font-weight:700;padding:1px 4px;border-radius:7px;z-index:2}" &
-						    ".ib{position:relative;aspect-ratio:3/4;border-radius:6px;border:1px solid #E9E9E9;background:#F2F2F2;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:4px}" &
-						    ".ib img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}" &
-						    ".sil{width:28px;height:28px}" &
-						    ".sku{font-family:Consolas,monospace;font-size:8px;color:#8A8A8A}" &
-						    ".sl{font-size:16px;font-weight:800;color:#000000}" &
-						    ".bt{height:4px;background:#E9E9E9;border-radius:3px;margin:3px 0;overflow:hidden}" &
-						    ".bf{height:4px;background:#DFA0C9;border-radius:3px}" &
-						    ".kp{font-size:8px;color:#8A8A8A}" &
-						    ".empty{font-size:11px;color:#8A8A8A;padding:8px}" &
-						    "</style>"
+				    "<style>" &
+				    ".wrap{font-family:Manrope,system-ui,-apple-system,sans-serif;background:#F2F3F5;color:#1A1A1A;padding:0}" &
+				    ".cmp{display:flex;gap:16px;align-items:flex-start}" &
+				    ".col{flex:1;min-width:0;background:#FFFFFF;border:1px solid #E6E8EB;border-radius:4px;padding:0 16px 14px;overflow:hidden}" &
+				    ".ch{display:flex;align-items:center;justify-content:space-between;background:#F0F1F3;height:36px;padding:0 16px;margin:0 -16px 10px;position:sticky;top:0;z-index:9;border-bottom:1px solid #E6E8EB}" &
+				    ".cmp .col:first-child .ch{background:#FBE9EC}" &
+				    ".ch .t{font-size:13px;font-weight:700;color:#6B6F76}" &
+				    ".cmp .col:first-child .ch .t{color:#8A2944}" &
+				    ".ch .e{font-size:13px;font-weight:700;color:#1A1A1A}" &
+				    ".sec{margin:0 0 10px}" &
+				    ".sh{display:flex;align-items:center;justify-content:space-between;height:36px;border-bottom:1px solid #E6E8EB;margin:0 0 6px}" &
+				    "details.sec>summary{cursor:pointer;list-style:none;position:sticky;top:36px;z-index:8;background:#FFFFFF;margin:0 -16px;padding:0 16px}" &
+				    "details.sec>summary::-webkit-details-marker{display:none}" &
+				    "details.sec>summary::before{content:'\25BE';display:inline-block;width:14px;color:#6B6F76;font-size:10px}" &
+				    "details.sec:not([open])>summary::before{content:'\25B8'}" &
+				    ".sh .t{font-size:19px;font-weight:600;color:#1A1A1A}" &
+				    ".sh .e{font-size:13px;font-weight:700;color:#1A1A1A}" &
+				    ".sub{display:flex;align-items:center;justify-content:space-between;height:28px;margin:8px 0 4px;border-bottom:1px solid #E6E8EB}" &
+				    "details.sb>summary{cursor:pointer;list-style:none;position:sticky;top:72px;z-index:7;background:#FFFFFF;margin:0 -16px;padding:0 16px}" &
+				    "details.sb>summary::-webkit-details-marker{display:none}" &
+				    "details.sb>summary::before{content:'\25BE';display:inline-block;width:12px;color:#6B6F76;font-size:9px}" &
+				    "details.sb:not([open])>summary::before{content:'\25B8'}" &
+				    ".sub .st{font-size:12px;font-weight:600;color:#6B6F76;text-transform:uppercase;letter-spacing:.04em}" &
+				    ".sub .se{font-size:12px;font-weight:700;color:#1A1A1A}" &
+				    ".hdr{display:flex;align-items:center;gap:10px;padding:4px 2px 6px;border-bottom:1px solid #E6E8EB;font-size:11.5px;font-weight:500;color:#55595F}" &
+				    ".row{display:flex;align-items:center;gap:10px;padding:8px 2px;border-bottom:1px solid #E6E8EB}" &
+				    ".row .rk{width:18px;text-align:center;font-size:12px;color:#6B6F76;flex:none}" &
+				    ".row .th{width:56px;height:56px;border-radius:4px;background:#F2F3F5;flex:none;overflow:hidden;display:flex;align-items:center;justify-content:center}" &
+				    ".row .th img{width:100%;height:100%;object-fit:cover}" &
+				    ".row .nm{flex:1;min-width:0}" &
+				    ".row .nm .t1{font-size:13px;font-weight:600;color:#1A1A1A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}" &
+				    ".row .nm .t2{font-size:10.5px;color:#6B6F76;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}" &
+				    ".row .nm .bg{display:inline-block;font-size:9px;font-weight:700;color:#FFFFFF;border-radius:3px;padding:1px 5px;margin-left:5px}" &
+				    ".row .im{width:76px;text-align:right;font-size:13px;font-weight:700;color:#1A1A1A;flex:none}" &
+				    ".row .ud{width:40px;text-align:right;font-size:12px;color:#6B6F76;flex:none}" &
+				    ".sil{width:26px;height:26px}" &
+				    ".empty{font-size:12px;color:#6B6F76;padding:8px}" &
+				    "</style>"
 						VAR _silP = "<svg class='sil' viewBox='0 0 48 48' fill='none' stroke='#C9C9C9' stroke-width='2' stroke-linejoin='round'><path d='M19 7 L11 13 L14 20 L19 17 L19 41 L29 41 L29 17 L34 20 L37 13 L29 7 Q24 11 19 7 Z'/></svg>"
 						VAR _silA = "<svg class='sil' viewBox='0 0 48 48' fill='none' stroke='#C9C9C9' stroke-width='2' stroke-linejoin='round'><path d='M14 19 L34 19 L36 41 L12 41 Z'/><path d='M20 19 Q20 11 24 11 Q28 11 28 19'/></svg>"
 						VAR _ix2 = SELECTEDVALUE( DimensionesB2C2[DimensionesB2C2 Orden] )
@@ -876,23 +877,23 @@ table MedidasCatalogo
 						                                VAR _img = [@img]
 						                                VAR _imgT = IF( NOT ISBLANK( _img ) && LEN( _img ) > 5, "<img src='" & _img & "' onerror=""this.style.display='none'"" />", "" )
 						                                VAR _bp = INT( DIVIDE( _v, _max ) * 100 )
+												VAR _nom = CALCULATE( MAX( LOL_PBIMODELITEM[Descripcion_modelo] ), LOL_PBIMODELITEM[Modelo-Color] = _m )
 			
 						                        RETURN
-						                            "<div class='card'>" &
-						                            "<div class='rank' style='background:" & _medal & "'>" & _r & "</div>" &
-						                            "<div class='brand' style='background:" & _bcol & "'>" & COALESCE( _marca, "" ) & "</div>" &
-						                            "<div class='ib'>" & IF( LEN( _imgT ) > 0, _imgT, _sil ) & "</div>" &
-						                            "<div class='sku'>" & _m & "</div>" &
-						                            "<div class='sl'>" & FORMAT( _ven, "#,##0", "es-ES" ) & " €</div>" &
-						                            "<div class='bt'><div class='bf' style='width:" & _bp & "%'></div></div>" &
-						                            "<div class='kp'>" & FORMAT( _u, "#,##0", "es-ES" ) & " uds</div>" &
-						                            "</div>",
+						                            "<div class='row'>" &
+											"<div class='rk'>" & _r & "</div>" &
+											"<div class='th'>" & IF( LEN( _imgT ) > 0, _imgT, _sil ) & "</div>" &
+											"<div class='nm'><div class='t1'>" & COALESCE( _nom, _m ) & "</div>" &
+											"<div class='t2'>" & _m & "<span class='bg' style='background:" & _bcol & "'>" & COALESCE( _marca, "" ) & "</span></div></div>" &
+											"<div class='im'>" & FORMAT( _ven, "#,##0", "es-ES" ) & " €</div>" &
+											"<div class='ud'>" & FORMAT( _u, "#,##0", "es-ES" ) & "</div>" &
+											"</div>",
 			                                "", [@v2], DESC
 						                            )
 						                        RETURN
 						                            IF( LEN( _sv ) > 0,
-						                                "<details class='sb' open><summary class='sub'><span class='st'>" & _sv & "</span><span class='se'>" & FORMAT( _stS, "#,##0", "es-ES" ) & " €</span></summary><div class='grid'>" & _cards & "</div></details>",
-						                                "<div class='grid'>" & _cards & "</div>" ),
+						                                "<details class='sb' open><summary class='sub'><span class='st'>" & _sv & "</span><span class='se'>" & FORMAT( _stS, "#,##0", "es-ES" ) & " €</span></summary>" & "<div class='hdr'><span style='width:18px;text-align:center'>#</span><span style='width:56px'></span><span style='flex:1'>Producto</span><span style='width:76px;text-align:right'>Importe</span><span style='width:40px;text-align:right'>Uds</span></div>" & _cards & "</details>",
+						                                "<div class='hdr'><span style='width:18px;text-align:center'>#</span><span style='width:56px'></span><span style='flex:1'>Producto</span><span style='width:76px;text-align:right'>Importe</span><span style='width:40px;text-align:right'>Uds</span></div>" & _cards ),
 						                        "", [@st], DESC
 						                    )
 						                RETURN

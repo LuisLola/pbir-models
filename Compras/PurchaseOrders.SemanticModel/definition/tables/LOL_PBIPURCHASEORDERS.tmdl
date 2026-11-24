@@ -573,6 +573,38 @@ table LOL_PBIPURCHASEORDERS
 
 		annotation SummarizationSetBy = Automatic
 
+	column IdSauco
+		dataType: string
+		lineageTag: d4c6870a-f24a-4f43-a5b5-f83315f4d87e
+		summarizeBy: none
+		sourceColumn: IdSauco
+
+		annotation SummarizationSetBy = Automatic
+
+	column InvntItem
+		dataType: string
+		lineageTag: ad65ddf2-8ae2-44e8-824c-4661282a19e2
+		summarizeBy: none
+		sourceColumn: InvntItem
+
+		annotation SummarizationSetBy = Automatic
+
+	column DV_Id
+		dataType: string
+		lineageTag: 031bf29c-f916-42b4-8a74-9c94a6e43943
+		summarizeBy: none
+		sourceColumn: DV_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column DV_Nombre
+		dataType: string
+		lineageTag: dfc4a371-89f1-4a26-9cef-2867c5b035c7
+		summarizeBy: none
+		sourceColumn: DV_Nombre
+
+		annotation SummarizationSetBy = Automatic
+
 	partition LOL_PBIPURCHASEORDERS = m
 		mode: import
 		source =

@@ -248,3 +248,35 @@ relationship 55555555-0002-4002-8002-000000000002
 	fromColumn: LOL_PBIB2BSALESORDER.KPedidoLinea
 	toColumn: LOL_PLANMATERIAL.KLinea
 
+relationship 162bbafc-3a7c-4001-9ca6-88c41fc88204
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PLANMATERIAL.'Fecha disponibilidad (línea del articulo)'
+	toColumn: LocalDateTable_9d97399f-7ac1-4bf9-a3b1-cc8063375cce.Date
+
+relationship 1893752c-d302-4fae-9cde-25e4d861e4f1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PLANMATERIAL.'Fecha Fin pedido venta'
+	toColumn: LocalDateTable_720da10e-692a-4682-bcfe-c190ef3448ac.Date
+
+relationship 0a66f502-d84a-452f-a9a8-1796b5901a65
+	joinOnDateBehavior: datePartOnly
+	fromColumn: MesFacturacion.Inicio
+	toColumn: LocalDateTable_c8861e64-e853-46f1-aefb-565055436c8b.Date
+
+relationship cbdd4126-66b9-40b9-8ad2-613a3f798af8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: MesFacturacion.Fin
+	toColumn: LocalDateTable_3a70f61a-1efd-4a73-83f9-bd30a17c8203.Date
+
+relationship 4529ae69-4fbf-4aad-aa71-3707ed619904
+	fromColumn: LOL_PBIB2BSALESORDER.IncidenceCode
+	toColumn: LOL_INCIDENCIAS.cod_texto
+
+relationship 19c4c4f1-7c88-4d36-9efd-48c6070e4cb8
+	fromColumn: LOL_PBIB2BSALESORDER.DocNum
+	toColumn: PedidosB2B.NumeroPedido
+
+relationship 8c2f9418-cc5b-4bcf-b8c8-ff901ca16113
+	fromColumn: VentasIncidencias.NumeroPedido
+	toColumn: PedidosB2B.NumeroPedido
+

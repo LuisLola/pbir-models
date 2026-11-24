@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "in09etitulo",
   "position": {
-    "x": 0,
-    "y": 0,
+    "x": 10,
+    "y": 2,
     "z": 0,
-    "height": 54,
-    "width": 496.5,
+    "height": 40,
+    "width": 480,
     "tabOrder": 0
   },
   "visual": {
@@ -22,9 +22,8 @@
                     "value": "Análisis de incidencias",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "14pt",
-                      "fontFamily": "Montserrat",
-                      "color": "#000000"
+                      "fontSize": "19pt",
+                      "color": "#1A1A1A"
                     }
                   }
                 ]
@@ -36,12 +35,40 @@
                     "textStyle": {
                       "fontFamily": "Montserrat",
                       "fontSize": "9pt",
-                      "color": "#666666"
+                      "color": "#6B6F76"
                     }
                   }
                 ]
               }
             ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
           }
         }
       ]

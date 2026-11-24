@@ -3,8 +3,49 @@
   "name": "cp01analisisentrada",
   "displayName": "Análisis de entradas",
   "displayOption": "FitToPage",
-  "height": 1600.0,
+  "height": 1600,
   "width": 1280,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "165f3f8ab6c89619b0e7",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIPURCHASEHEADER"
+              }
+            },
+            "Property": "Pedido"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "a940ecca590035ff5f74",
+    "type": "Drillthrough",
+    "parameters": [
+      {
+        "name": "77ee5aaac856e749354d",
+        "boundFilter": "165f3f8ab6c89619b0e7",
+        "asAggregation": false,
+        "qnaSingleSelectRequired": false,
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIPURCHASEHEADER"
+              }
+            },
+            "Property": "Pedido"
+          }
+        }
+      }
+    ]
+  },
   "objects": {
     "background": [
       {

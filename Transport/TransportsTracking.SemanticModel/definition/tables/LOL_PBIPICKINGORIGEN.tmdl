@@ -1,0 +1,63 @@
+table LOL_PBIPICKINGORIGEN
+	lineageTag: 502f6606-7a0e-4dd0-81ad-eefafdef2671
+
+	/// De donde nace cada picking: de un PEDIDO DE CLIENTE o de una
+	/// SOLICITUD DE TRASLADO (reposicion a tienda). Una fila por picking.
+	/// El view LOL_PBITIMEWHS ya trae los dos tipos mezclados -329.925
+	/// pickings, que son los 329.902 de SAP- pero sin la columna que los
+	/// separa, y por eso las reposiciones no se podian filtrar.
+	/// PROVISIONAL: lee directo de HANA. Lo definitivo es anadir
+	/// PKL1."BaseObject" a la vista del ETL.
+	/// OPKL.AbsEntry en texto. Es la clave con la que engancha LOL_PBITIMEWHS.
+	column Picking
+		dataType: string
+		lineageTag: 825104a6-4e86-4641-b767-258f10302ed9
+		summarizeBy: none
+		sourceColumn: Picking
+
+		annotation SummarizationSetBy = Automatic
+
+	/// 1 pedido de cliente, 2 reposicion, 3 mixto. Para ordenar.
+	column TipoOrigenCode
+		dataType: int64
+		lineageTag: 4b11e966-cbf9-4ac4-ac93-e0803fb1cda3
+		summarizeBy: none
+		sourceColumn: TipoOrigenCode
+
+		annotation SummarizationSetBy = Automatic
+
+	/// De donde sale el picking. Lo dice PKL1.BaseObject: 17 es pedido de
+	/// cliente y 1250000001 es solicitud de traslado. Ningun picking mezcla
+	/// los dos, asi que la clasificacion no tiene zona gris.
+	column TipoOrigen
+		dataType: string
+		lineageTag: c190ce0d-12f9-4870-abb2-71405b071f93
+		summarizeBy: none
+		sourceColumn: TipoOrigen
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Cuantos documentos distintos alimentan el picking.
+	column DocumentosOrigen
+		dataType: int64
+		lineageTag: 422759cf-30be-4ee4-b1d8-57ed331b729f
+		summarizeBy: none
+		sourceColumn: DocumentosOrigen
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Lineas del picking.
+	column LineasPicking
+		dataType: int64
+		lineageTag: 7bc596aa-00fd-4853-b2bc-0e4351986788
+		summarizeBy: none
+		sourceColumn: LineasPicking
+
+		annotation SummarizationSetBy = Automatic
+
+	partition LOL_PBIPICKINGORIGEN = m
+		mode: import
+		source = Value.NativeQuery(SapHana.Database("192.168.0.231:30015", [Implementation="2.0"]), "SELECT TO_VARCHAR(T1.""AbsEntry"") AS ""Picking"", CASE WHEN COUNT(DISTINCT T1.""BaseObject"") > 1 THEN 3 WHEN MIN(T1.""BaseObject"") = 1250000001 THEN 2 ELSE 1 END AS ""TipoOrigenCode"", CASE WHEN COUNT(DISTINCT T1.""BaseObject"") > 1 THEN 'Mixto' WHEN MIN(T1.""BaseObject"") = 1250000001 THEN 'Reposicion' ELSE 'Pedido de cliente' END AS ""TipoOrigen"", COUNT(DISTINCT T1.""OrderEntry"") AS ""DocumentosOrigen"", COUNT(*) AS ""LineasPicking"" FROM SBO_LOLA_SUCURSAL.""PKL1"" T1 GROUP BY T1.""AbsEntry""")
+
+	annotation PBI_ResultType = Table
+

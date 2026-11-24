@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "9e604e5342ed7e50f529",
   "position": {
-    "x": 12.770529547198771,
-    "y": 78.587874136607823,
-    "z": 15000,
-    "height": 55.011511895625475,
-    "width": 233.79892555640828,
-    "tabOrder": -5001
+    "x": 783,
+    "y": 7,
+    "z": 5000,
+    "height": 54,
+    "width": 200,
+    "tabOrder": 2000
   },
   "visual": {
     "visualType": "slicer",
@@ -52,13 +52,6 @@
       "general": [
         {
           "properties": {
-            "orientation": {
-              "expr": {
-                "Literal": {
-                  "Value": "1D"
-                }
-              }
-            },
             "filter": {
               "filter": {
                 "Version": 2,
@@ -89,7 +82,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'F26'"
+                                "Value": "'S27'"
                               }
                             }
                           ]
@@ -99,6 +92,13 @@
                   }
                 ]
               }
+            },
+            "orientation": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
             }
           }
         }
@@ -106,6 +106,13 @@
       "header": [
         {
           "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Temporada'"
+                }
+              }
+            },
             "show": {
               "expr": {
                 "Literal": {
@@ -116,14 +123,14 @@
             "textSize": {
               "expr": {
                 "Literal": {
-                  "Value": "9D"
+                  "Value": "8D"
                 }
               }
             },
             "bold": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -132,7 +139,18 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DFA0C9'"
+                      "Value": "'#1A1A1A'"
+                    }
+                  }
+                }
+              }
+            },
+            "background": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#F2F3F5'"
                     }
                   }
                 }
@@ -148,6 +166,17 @@
               "expr": {
                 "Literal": {
                   "Value": "9D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1A1A1A'"
+                    }
+                  }
                 }
               }
             },
@@ -168,6 +197,21 @@
                   "Value": "0D"
                 }
               }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
             },
             "fontColor": {
               "solid": {
@@ -179,26 +223,32 @@
                   }
                 }
               }
-            }
-          }
-        }
-      ]
-    },
-    "visualContainerObjects": {
-      "title": [
-        {
-          "properties": {
-            "show": {
+            },
+            "alignment": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "'left'"
                 }
               }
             },
-            "titleWrap": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "'13'"
+                }
+              }
+            },
+            "bold": {
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Montserrat'"
                 }
               }
             }
@@ -220,7 +270,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#F2F3F5'"
                     }
                   }
                 }
@@ -229,7 +279,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "100D"
+                  "Value": "0D"
                 }
               }
             }
@@ -242,7 +292,25 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E6E8EB'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "6D"
                 }
               }
             },
@@ -269,34 +337,13 @@
           }
         }
       ],
-      "padding": [
+      "dropShadow": [
         {
           "properties": {
-            "top": {
+            "show": {
               "expr": {
                 "Literal": {
-                  "Value": "0D"
-                }
-              }
-            },
-            "bottom": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
-                }
-              }
-            },
-            "left": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
-                }
-              }
-            },
-            "right": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
+                  "Value": "false"
                 }
               }
             }
@@ -309,6 +356,5 @@
       "fieldChanges": true,
       "filterChanges": true
     }
-  },
-  "parentGroupName": "75e6d902dfa2623baa5b"
+  }
 }

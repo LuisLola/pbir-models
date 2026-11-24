@@ -249,7 +249,61 @@ relationship b8121c9a-6b4a-4c96-9ac1-761ba3b75b53
 	toColumn: LOL_PBIPURCHASEGOODRECEIPT.KLinea
 
 relationship 9366c401-d9c7-4de7-b6af-8f99c7178520
+	crossFilteringBehavior: bothDirections
 	fromColumn: LOL_PBIPURCHASEORDERS.DocumentInternalKey
 	toColumn: LOL_PBIPURCHASEHEADER.KPedido
-	crossFilteringBehavior: bothDirections
+
+relationship 676894a3-09af-4457-9174-474ae7d999c8
+	fromColumn: LOL_PBIPACKAGES.KPedido
+	toColumn: LOL_PBIPURCHASEHEADER.KPedido
+
+relationship 33f08a48-4781-4576-b248-e890abdcd9cb
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.FechaST
+	toColumn: LocalDateTable_15051e1a-45fd-4d5f-b71f-75c4508998be.Date
+
+relationship 372a4884-cad5-4b8c-a69b-d0d78880164b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.DateStatus
+	toColumn: LocalDateTable_70f606a3-8725-4119-994e-e13aba70b960.Date
+
+relationship fe9aa2ff-4c9e-442a-abbd-101808aa561e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.Fecha100RecepcionFinalizada
+	toColumn: LocalDateTable_8bf86f5c-e179-45f4-951b-339915b1698d.Date
+
+relationship ce840b20-da76-4494-aeef-5bf2acb92e63
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.Fecha200Varios
+	toColumn: LocalDateTable_1f438227-8568-4562-86de-64752b4d1056.Date
+
+relationship 5adf51ec-2c59-46d0-bee5-e6b2f369062e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.Fecha20DocRecibido
+	toColumn: LocalDateTable_f52482c5-ea3c-4ed6-be45-da9db191c362.Date
+
+relationship 6b4b7d50-aff5-4843-82ca-da3461cdd2b9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.Fecha25EnPlancha
+	toColumn: LocalDateTable_94ea6a46-20d1-4439-9c36-29b014c91c0b.Date
+
+relationship 4dc5a586-03c6-4ad1-a66f-b5641ec37f0e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.Fecha28ControlCalidad
+	toColumn: LocalDateTable_a9c86545-915f-46d0-a001-663a49005a0e.Date
+
+relationship d37d2dfa-5850-4995-baed-9dcc1e8bdaf9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.Fecha30MercanciaLlegada
+	toColumn: LocalDateTable_b9206db6-f96b-4fb4-8903-18abae4415a5.Date
+
+relationship 1adf3f2b-25dd-4cb1-8313-db2bdd3a1455
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBISTOCKTRANSFERSTATUS.Fecha50RecepcionRecibida
+	toColumn: LocalDateTable_b3c804d4-4d85-4feb-9df1-582c23bb3174.Date
+
+relationship 93ce53f7-6b6c-4a63-b853-5796e0aa825f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: LOL_PBIB2BSALESORDER.DV_FechaComunicacion
+	toColumn: LocalDateTable_cdaa0dc5-ba31-46c3-ba71-266997ed4ea4.Date
 

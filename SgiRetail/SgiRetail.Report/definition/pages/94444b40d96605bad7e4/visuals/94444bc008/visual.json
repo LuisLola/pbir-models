@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "94444bc008",
   "position": {
     "x": 0,
     "y": 268,
-    "z": 33000,
+    "z": 0,
     "height": 356,
-    "width": 994.82,
-    "tabOrder": 33000
+    "width": 994.8,
+    "tabOrder": 200
   },
   "visual": {
     "visualType": "pivotTable",
@@ -254,6 +254,22 @@
               "nativeQueryRef": "NombreDíaCorto",
               "active": false,
               "displayName": "NombreDíaCorto"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIMODELITEM"
+                    }
+                  },
+                  "Property": "GrupodeArt"
+                }
+              },
+              "queryRef": "LOL_PBIMODELITEM.GrupodeArt",
+              "nativeQueryRef": "GrupodeArt",
+              "active": false,
+              "displayName": "GrupodeArt"
             }
           ],
           "fieldParameters": [
@@ -297,7 +313,7 @@
                 }
               },
               "index": 2,
-              "length": 13
+              "length": 14
             }
           ]
         },
@@ -688,6 +704,12 @@
               "Calendario.NombreDíaCorto"
             ],
             "isCollapsed": true
+          },
+          {
+            "queryRefs": [
+              "LOL_PBIMODELITEM.GrupodeArt"
+            ],
+            "isCollapsed": true
           }
         ],
         "root": {}
@@ -727,7 +749,7 @@
             "rowPadding": {
               "expr": {
                 "Literal": {
-                  "Value": "4D"
+                  "Value": "14D"
                 }
               }
             },
@@ -736,7 +758,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#E7DACE'"
+                      "Value": "'#E6E8EB'"
                     }
                   }
                 }
@@ -762,15 +784,32 @@
                 }
               }
             },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#55595F'"
+                    }
+                  }
+                }
+              }
+            },
             "backColor": {
               "solid": {
                 "color": {
                   "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 0,
-                      "Percent": 0
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
                     }
                   }
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }
@@ -809,7 +848,7 @@
                           },
                           "Value": {
                             "Literal": {
-                              "Value": "'#BA1C43'"
+                              "Value": "'#B0243F'"
                             }
                           }
                         },
@@ -836,7 +875,7 @@
                           },
                           "Value": {
                             "Literal": {
-                              "Value": "'#0F7A63'"
+                              "Value": "'#1E7A45'"
                             }
                           }
                         }
@@ -889,7 +928,7 @@
                           },
                           "Value": {
                             "Literal": {
-                              "Value": "'#BA1C43'"
+                              "Value": "'#B0243F'"
                             }
                           }
                         },
@@ -916,7 +955,7 @@
                           },
                           "Value": {
                             "Literal": {
-                              "Value": "'#0F7A63'"
+                              "Value": "'#1E7A45'"
                             }
                           }
                         }
@@ -969,7 +1008,7 @@
                           },
                           "Value": {
                             "Literal": {
-                              "Value": "'#BA1C43'"
+                              "Value": "'#B0243F'"
                             }
                           }
                         },
@@ -996,7 +1035,7 @@
                           },
                           "Value": {
                             "Literal": {
-                              "Value": "'#0F7A63'"
+                              "Value": "'#1E7A45'"
                             }
                           }
                         }
@@ -1049,7 +1088,7 @@
                           },
                           "Value": {
                             "Literal": {
-                              "Value": "'#BA1C43'"
+                              "Value": "'#B0243F'"
                             }
                           }
                         },
@@ -1076,7 +1115,7 @@
                           },
                           "Value": {
                             "Literal": {
-                              "Value": "'#0F7A63'"
+                              "Value": "'#1E7A45'"
                             }
                           }
                         }
@@ -1129,7 +1168,7 @@
                           },
                           "Value": {
                             "Literal": {
-                              "Value": "'#BA1C43'"
+                              "Value": "'#B0243F'"
                             }
                           }
                         },
@@ -1156,7 +1195,7 @@
                           },
                           "Value": {
                             "Literal": {
-                              "Value": "'#0F7A63'"
+                              "Value": "'#1E7A45'"
                             }
                           }
                         }
@@ -1209,7 +1248,7 @@
                           },
                           "Value": {
                             "Literal": {
-                              "Value": "'#0F7A63'"
+                              "Value": "'#1E7A45'"
                             }
                           }
                         },
@@ -1236,7 +1275,7 @@
                           },
                           "Value": {
                             "Literal": {
-                              "Value": "'#BA1C43'"
+                              "Value": "'#B0243F'"
                             }
                           }
                         }
@@ -1289,7 +1328,7 @@
                           },
                           "Value": {
                             "Literal": {
-                              "Value": "'#BA1C43'"
+                              "Value": "'#B0243F'"
                             }
                           }
                         },
@@ -1316,7 +1355,7 @@
                           },
                           "Value": {
                             "Literal": {
-                              "Value": "'#0F7A63'"
+                              "Value": "'#1E7A45'"
                             }
                           }
                         }
@@ -1343,7 +1382,18 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "9D"
+                  "Value": "10D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1A1A1A'"
+                    }
+                  }
                 }
               }
             },
@@ -1351,9 +1401,8 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 0,
-                      "Percent": 0
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -1363,9 +1412,8 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 0,
-                      "Percent": 0
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -1379,6 +1427,152 @@
               }
             }
           }
+        },
+        {
+          "properties": {
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "MedidasRetail.Ventas_YTD"
+          }
+        },
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#6B6F76'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "MedidasDesempeño.Share_Pct"
+          }
+        },
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#6B6F76'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "MedidasObjetivosRetail.Objetivos_YTD"
+          }
+        },
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#6B6F76'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "MedidasRetail.Ventas_YTD_LY"
+          }
+        },
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#6B6F76'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "MedidasRetail.Tasa_Devolucion_YTD"
+          }
+        },
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#6B6F76'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "MedidasTrafico.Tasa_Conversion_YTD"
+          }
         }
       ],
       "rowHeaders": [
@@ -1391,18 +1585,303 @@
                 }
               }
             },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1A1A1A'"
+                    }
+                  }
+                }
+              }
+            },
             "backColor": {
               "solid": {
                 "color": {
                   "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 0,
-                      "Percent": 0
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
               }
             }
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FBE9EC'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1A1A1A'"
+                    }
+                  }
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "60D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasDesempeño.Share_Pct"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "82D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasObjetivosRetail.EvolucionObjetivo_%"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "98D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasObjetivosRetail.Objetivos_YTD"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "102D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasRetail.NumeroTransacciones_Var_%"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "64D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasRetail.NumeroTransacciones_YTD"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "78D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasRetail.PromedioVentaTransaccion_Var_%"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "94D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasRetail.PromedioVentaTransaccion_YTD"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "66D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasRetail.Tasa_Devolucion_YTD"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "78D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasRetail.Tasa_Devolucion_YTD_Var"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "76D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasRetail.UPT_Var_%"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "50D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasRetail.UPT_YTD"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "104D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasRetail.Ventas_YTD"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "98D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasRetail.Ventas_YTD_LY"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "80D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasRetail.Ventas_YTD_Var_%"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "78D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasTrafico.Entradas_YTD"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "96D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasTrafico.Tasa_Conversion_YTD"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "86D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedidasTrafico.Tasa_Conversion_YTD_Var"
           }
         }
       ]
@@ -1415,13 +1894,6 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
-                }
-              }
-            },
-            "titleWrap": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
                 }
               }
             }
@@ -1497,13 +1969,6 @@
                   "Value": "false"
                 }
               }
-            },
-            "width": {
-              "expr": {
-                "Literal": {
-                  "Value": "1D"
-                }
-              }
             }
           }
         }
@@ -1514,7 +1979,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             }

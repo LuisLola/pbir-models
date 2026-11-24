@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "whkpi07w",
   "position": {
-    "x": 254.67,
+    "x": 218.29,
     "y": 152,
-    "z": 207,
-    "width": 246.66666666666666,
+    "z": 208,
     "height": 72,
-    "tabOrder": 107
+    "width": 210.29,
+    "tabOrder": 108
   },
   "visual": {
     "visualType": "cardVisual",
@@ -211,7 +211,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Salen sin transporte'"
+                  "Value": "'Sin transporte (vía ajena)'"
                 }
               }
             },
@@ -408,5 +408,23 @@
     },
     "drillFilterOtherVisuals": true
   },
-  "parentGroupName": "whgancho"
+  "parentGroupName": "whgancho",
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "3fe87ef4528aeeb83a19",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Salen sin transporte"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
 }

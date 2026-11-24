@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "e1matriz",
   "position": {
-    "x": 68,
-    "y": 190.0,
+    "x": 72.115384615384613,
+    "y": 263.46153846153845,
     "z": 300,
-    "height": 762.0,
-    "width": 1204,
+    "height": 1324,
+    "width": 1204.4444444444443,
     "tabOrder": 300
   },
   "visual": {
@@ -28,8 +28,8 @@
               },
               "queryRef": "LOL_PBIPURCHASEHEADER.Estado",
               "nativeQueryRef": "Estado",
-              "displayName": "ESTADO DE LA MERCANCÍA",
-              "active": true
+              "active": true,
+              "displayName": "ESTADO DE LA MERCANCÍA"
             },
             {
               "field": {
@@ -44,8 +44,40 @@
               },
               "queryRef": "LOL_PBIPURCHASEHEADER.Pedido",
               "nativeQueryRef": "Pedido",
-              "displayName": "PEDIDO",
-              "active": false
+              "active": false,
+              "displayName": "PEDIDO"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIPURCHASEGOODRECEIPT"
+                    }
+                  },
+                  "Property": "DocumentNumber"
+                }
+              },
+              "queryRef": "LOL_PBIPURCHASEGOODRECEIPT.DocumentNumber",
+              "nativeQueryRef": "DocumentNumber",
+              "active": false,
+              "displayName": "ALBARÁN"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIPURCHASEHEADER"
+                    }
+                  },
+                  "Property": "RMTEstadoPedido"
+                }
+              },
+              "queryRef": "LOL_PBIPURCHASEHEADER.RMTEstadoPedido",
+              "nativeQueryRef": "RMTEstadoPedido",
+              "active": false,
+              "displayName": "ESTADO RMT"
             },
             {
               "field": {
@@ -60,8 +92,8 @@
               },
               "queryRef": "LOL_PBIPURCHASEHEADER.Proveedor",
               "nativeQueryRef": "Proveedor",
-              "displayName": "PROVEEDOR",
-              "active": false
+              "active": false,
+              "displayName": "PROVEEDOR"
             },
             {
               "field": {
@@ -76,8 +108,8 @@
               },
               "queryRef": "LOL_PBIPURCHASEHEADER.AlmacenPrincipal",
               "nativeQueryRef": "AlmacenPrincipal",
-              "displayName": "ALMACÉN",
-              "active": false
+              "active": false,
+              "displayName": "ALMACÉN"
             }
           ]
         },
@@ -136,6 +168,36 @@
                       "Entity": "_Medidas"
                     }
                   },
+                  "Property": "Albarán de entrada"
+                }
+              },
+              "queryRef": "_Medidas.Albarán de entrada",
+              "nativeQueryRef": "Albarán de entrada",
+              "displayName": "ALBARANES"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Solicitud de traslado"
+                }
+              },
+              "queryRef": "_Medidas.Solicitud de traslado",
+              "nativeQueryRef": "Solicitud de traslado",
+              "displayName": "ST"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
                   "Property": "Unidades"
                 }
               },
@@ -156,7 +218,7 @@
               },
               "queryRef": "_Medidas.Unidades recibidas",
               "nativeQueryRef": "Unidades recibidas",
-              "displayName": "RECIBIDAS"
+              "displayName": "EN TRÁNSITO"
             },
             {
               "field": {
@@ -171,7 +233,7 @@
               },
               "queryRef": "_Medidas.% recibido",
               "nativeQueryRef": "% recibido",
-              "displayName": "% RECIB"
+              "displayName": "% EN TRÁNSITO"
             },
             {
               "field": {
@@ -186,7 +248,7 @@
               },
               "queryRef": "_Medidas.Unidades en el almacen",
               "nativeQueryRef": "Unidades en el almacen",
-              "displayName": "EN ALMACÉN"
+              "displayName": "RECIBIDAS"
             },
             {
               "field": {
@@ -201,7 +263,7 @@
               },
               "queryRef": "_Medidas.% en el almacen",
               "nativeQueryRef": "% en el almacen",
-              "displayName": "% LLEGADO"
+              "displayName": "% RECIBIDO"
             },
             {
               "field": {
@@ -232,6 +294,36 @@
               "queryRef": "_Medidas.Pedidos sin cajas",
               "nativeQueryRef": "Pedidos sin cajas",
               "displayName": "SIN CAJAS"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Estado RMT"
+                }
+              },
+              "queryRef": "_Medidas.Estado RMT",
+              "nativeQueryRef": "Estado RMT",
+              "displayName": "ESTADO RMT"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Fecha estado RMT"
+                }
+              },
+              "queryRef": "_Medidas.Fecha estado RMT",
+              "nativeQueryRef": "Fecha estado RMT",
+              "displayName": "FECHA RMT"
             }
           ]
         }
@@ -255,20 +347,100 @@
         "isDefaultSort": true
       }
     },
-    "objects": {
-      "general": [
-        {
-          "properties": {
-            "layout": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Compact'"
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "LOL_PBIPURCHASEHEADER.Estado"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIPURCHASEHEADER"
+                    }
+                  },
+                  "Property": "Estado"
                 }
               }
-            }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "LOL_PBIPURCHASEHEADER.Pedido"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIPURCHASEHEADER"
+                    }
+                  },
+                  "Property": "Pedido"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "LOL_PBIPURCHASEGOODRECEIPT.DocumentNumber"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIPURCHASEGOODRECEIPT"
+                    }
+                  },
+                  "Property": "DocumentNumber"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "LOL_PBIPURCHASEHEADER.Proveedor"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LOL_PBIPURCHASEHEADER"
+                    }
+                  },
+                  "Property": "RMTEstadoPedido"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "LOL_PBIPURCHASEHEADER.AlmacenPrincipal"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
           }
-        }
-      ],
+        ],
+        "root": {}
+      }
+    ],
+    "objects": {
       "grid": [
         {
           "properties": {
@@ -452,6 +624,19 @@
             }
           }
         }
+      ],
+      "general": [
+        {
+          "properties": {
+            "layout": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Tabular'"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "visualContainerObjects": {
@@ -561,8 +746,29 @@
             }
           }
         }
+      ],
+      "visualTooltip": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "section": {
+              "expr": {
+                "Literal": {
+                  "Value": "'cp02fichapedido0000'"
+                }
+              }
+            }
+          }
+        }
       ]
-    }
+    },
+    "drillFilterOtherVisuals": true
   },
   "parentGroupName": "e1cmpc1carril0000000",
   "filterConfig": {
@@ -580,7 +786,6 @@
           }
         },
         "type": "Categorical",
-        "howCreated": "User",
         "filter": {
           "Version": 2,
           "From": [
@@ -619,7 +824,328 @@
               }
             }
           ]
-        }
+        },
+        "howCreated": "User"
+      },
+      {
+        "name": "ce029cdf54caf5c12471",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIPURCHASEHEADER"
+              }
+            },
+            "Property": "Estado"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "4af4e24a22c4b9dbb0f6",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIPURCHASEHEADER"
+              }
+            },
+            "Property": "Pedido"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "427b51a622374b7d01ac",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIPURCHASEHEADER"
+              }
+            },
+            "Property": "RMTEstadoPedido"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "b987f3fa442d89f1cfea",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIPURCHASEHEADER"
+              }
+            },
+            "Property": "Proveedor"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "02a12eb929594d224c11",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIPURCHASEHEADER"
+              }
+            },
+            "Property": "AlmacenPrincipal"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "09ee068c766b23272f48",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "% del total pedido"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "615c8520b86c20c57e39",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Pedidos"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "5edd6e22c3f4b45d2814",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Líneas de compra"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "4f034e002fcf9a850790",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Unidades"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "58dc11405bce0d15997b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Unidades recibidas"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "28682c6b709992161f92",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "% recibido"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "0d1326c058e6b479a3ff",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Unidades en el almacen"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "94b443f96abeb22baccf",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "% en el almacen"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "b1cb0f9313c521a9dca4",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Cajas"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "1b19a44f4bdf00c29562",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Pedidos sin cajas"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "aa04ebad9447ce226478",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Estado RMT"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "45488ac26b00b5458f25",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Fecha estado RMT"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "e1matrizalbvivo00000",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "LOL_PBIPURCHASEGOODRECEIPT"
+              }
+            },
+            "Property": "CANCELED"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "g",
+              "Entity": "LOL_PBIPURCHASEGOODRECEIPT",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "g"
+                          }
+                        },
+                        "Property": "CANCELED"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'N'"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      },
+      {
+        "name": "e1matrizalbaran00000",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Albarán de entrada"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "e1matrizst0000000000",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Solicitud de traslado"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

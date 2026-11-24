@@ -1,12 +1,11 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "e1resumen",
-  "parentGroupName": "e1cmpc1carril0000000",
   "position": {
     "x": 68,
-    "y": 56.0,
+    "y": 56,
     "z": 200,
-    "height": 122.0,
+    "height": 122,
     "width": 1204,
     "tabOrder": 200
   },
@@ -33,6 +32,21 @@
           ]
         }
       }
+    },
+    "objects": {
+      "compatibility": [
+        {
+          "properties": {
+            "legacyRendering": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
     },
     "visualContainerObjects": {
       "background": [
@@ -75,5 +89,6 @@
         }
       ]
     }
-  }
+  },
+  "parentGroupName": "e1cmpc1carril0000000"
 }

@@ -1,15 +1,10 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.2.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
   "name": "cp02fichapedido0000",
   "displayName": "Ficha de pedido",
   "displayOption": "ActualSize",
-  "height": 460,
+  "height": 620,
   "width": 620,
-  "visibility": "HiddenInViewMode",
-  "pageBinding": {
-    "name": "a874514caaa04612b7d6",
-    "type": "Tooltip"
-  },
   "objects": {
     "background": [
       {
@@ -59,5 +54,7 @@
         }
       }
     ]
-  }
+  },
+  "visibility": "HiddenInViewMode",
+  "type": "Tooltip"
 }

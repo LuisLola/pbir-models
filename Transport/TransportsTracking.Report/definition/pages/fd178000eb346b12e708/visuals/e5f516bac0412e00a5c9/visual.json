@@ -20,6 +20,22 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
+                      "Entity": "LOL_PBIPICKINGORIGEN"
+                    }
+                  },
+                  "Property": "TipoOrigen"
+                }
+              },
+              "queryRef": "LOL_PBIPICKINGORIGEN.TipoOrigen",
+              "nativeQueryRef": "TipoOrigen",
+              "displayName": "ORIGEN",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
                       "Entity": "LOL_PBICLIENTES"
                     }
                   },
@@ -28,7 +44,7 @@
               },
               "queryRef": "LOL_PBICLIENTES.GroupName",
               "nativeQueryRef": "GroupName",
-              "active": true
+              "active": false
             },
             {
               "field": {

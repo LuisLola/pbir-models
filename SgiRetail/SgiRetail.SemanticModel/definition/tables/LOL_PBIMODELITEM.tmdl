@@ -469,6 +469,54 @@ table LOL_PBIMODELITEM
 
 		annotation SummarizationSetBy = Automatic
 
+	column QualityAgency
+		dataType: string
+		lineageTag: a0f88e6c-8c68-473b-828b-d9ada9ee7aa7
+		summarizeBy: none
+		sourceColumn: QualityAgency
+
+		annotation SummarizationSetBy = Automatic
+
+	column InspectionType
+		dataType: string
+		lineageTag: 0208c45d-f439-41e4-8dbe-a5a27f1660c6
+		summarizeBy: none
+		sourceColumn: InspectionType
+
+		annotation SummarizationSetBy = Automatic
+
+	column QualityAgencyName
+		dataType: string
+		lineageTag: 684867a3-9f56-490a-b99a-fef9e9afd660
+		summarizeBy: none
+		sourceColumn: QualityAgencyName
+
+		annotation SummarizationSetBy = Automatic
+
+	column DV_Id
+		dataType: string
+		lineageTag: 5bfd5b9c-a08b-433c-ab8c-932b4f682307
+		summarizeBy: none
+		sourceColumn: DV_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column DV_Nombre
+		dataType: string
+		lineageTag: 0b20f626-7828-4356-888e-4a12ddf7d070
+		summarizeBy: none
+		sourceColumn: DV_Nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column PrecioCompra
+		dataType: string
+		lineageTag: 58b622db-0327-423a-9959-a12837a55f78
+		summarizeBy: none
+		sourceColumn: PrecioCompra
+
+		annotation SummarizationSetBy = Automatic
+
 	partition LOL_PBIMODELITEM = m
 		mode: import
 		source =

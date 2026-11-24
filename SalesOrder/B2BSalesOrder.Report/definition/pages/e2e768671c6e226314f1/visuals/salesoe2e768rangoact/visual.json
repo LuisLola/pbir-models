@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "salesoe2e768rangoact",
   "position": {
-    "x": 6.7274074719909329,
-    "y": 29.261083743842367,
+    "x": 0,
+    "y": 34.598752699652991,
     "z": 4000,
-    "height": 38,
-    "width": 470,
+    "height": 27.487684729064039,
+    "width": 670.34482758620686,
     "tabOrder": 1000
   },
   "visual": {
@@ -104,6 +104,13 @@
                   "Value": "0L"
                 }
               }
+            },
+            "backgroundShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
             }
           },
           "selector": {
@@ -159,6 +166,19 @@
     },
     "visualContainerObjects": {
       "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
         {
           "properties": {
             "show": {

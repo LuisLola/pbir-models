@@ -3,29 +3,51 @@ table MesFacturacion
 
 	column Mes
 		lineageTag: 5e64905b-1e8e-42d4-898d-a1eb15c808ea
+		summarizeBy: none
 		isNameInferred
 		sourceColumn: [Mes]
 		sortByColumn: Orden
 
+		annotation SummarizationSetBy = Automatic
+
 	column Orden
 		isHidden
 		lineageTag: bdd888d4-e605-412e-b9e3-2e9b0c64659b
+		summarizeBy: none
 		isNameInferred
 		sourceColumn: [Orden]
+
+		annotation SummarizationSetBy = Automatic
 
 	column Inicio
 		isHidden
 		formatString: Short Date
 		lineageTag: 8176a2fc-8c16-4bff-b5fa-f864edf2c84d
+		summarizeBy: none
 		isNameInferred
 		sourceColumn: [Inicio]
+
+		variation Variación
+			isDefault
+			relationship: 0a66f502-d84a-452f-a9a8-1796b5901a65
+			defaultHierarchy: LocalDateTable_c8861e64-e853-46f1-aefb-565055436c8b.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
 
 	column Fin
 		isHidden
 		formatString: Short Date
 		lineageTag: e7268e95-9bf1-4804-ae9d-b0d35d4f9a25
+		summarizeBy: none
 		isNameInferred
 		sourceColumn: [Fin]
+
+		variation Variación
+			isDefault
+			relationship: cbdd4126-66b9-40b9-8ad2-613a3f798af8
+			defaultHierarchy: LocalDateTable_3a70f61a-1efd-4a73-83f9-bd30a17c8203.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
 
 	partition MesFacturacion = calculated
 		mode: import
