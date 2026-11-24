@@ -4,27 +4,29 @@ Documentación de los modelos semánticos (Power BI / PBIP-TMDL) de Lola Casadem
 
 ← [README del repositorio](../README.md)
 
-*Última revisión: 28 de agosto de 2026.*
+*Última revisión: 24 de noviembre de 2026.*
+
+📈 **Estado de la migración Bi2Go → Power BI**: [Migracion-PowerBI.md](Migracion-PowerBI.md).
 
 ## Los seis modelos
 
 | Modelo | Carpeta | Hechos principales | Medidas | Documentación |
 |---|---|---|---:|---|
-| **Finanzas** | [Finanzas/](../Finanzas/) | `LOL_PBIFINANCIALENTRIES` (apuntes de diario) | 118 + 19 aux. | [Finanzas-Finanzas.md](Finanzas-Finanzas.md) |
-| **PurchaseOrders (Compras)** | [Compras/](../Compras/) | Pedido, entrada de mercancía, factura de proveedor | 0 | [Compras-PurchaseOrders.md](Compras-PurchaseOrders.md) |
-| **B2BSalesOrder** | [SalesOrder/](../SalesOrder/) | Pedido, albarán, factura, nota de crédito, devolución, **cartera viva** | 174 | [SalesOrder-B2BSalesOrder.md](SalesOrder-B2BSalesOrder.md) |
-| **SgiRetail** | [SgiRetail/](../SgiRetail/) | `LOL_PBISGIRETAIL` (líneas de ticket), tráfico, objetivos | 238 | [SgiRetail-SgiRetail.md](SgiRetail-SgiRetail.md) |
-| **TransportsTracking** | [Transport/](../Transport/) | `LOL_TRANSPORT_TRACKING` (un envío por fila) | 34 | [Transport-TransportsTracking.md](Transport-TransportsTracking.md) |
-| **Plan de Servicio B2B** | [ServicePlan/](../ServicePlan/) | `LOL_PLANMATERIAL` (cartera abierta) | 23 | [ServicePlan-Plan de Servicio B2B.md](ServicePlan-Plan%20de%20Servicio%20B2B.md) |
+| **Finanzas** | [Finanzas/](../Finanzas/) | `LOL_PBIFINANCIALENTRIES` (apuntes de diario) | 131 + 19 aux. | [Finanzas-Finanzas.md](Finanzas-Finanzas.md) |
+| **PurchaseOrders (Compras)** | [Compras/](../Compras/) | Pedido, entrada de mercancía, solicitud de traslado y traslado real, packing, factura de proveedor | 63 | [Compras-PurchaseOrders.md](Compras-PurchaseOrders.md) |
+| **B2BSalesOrder** | [SalesOrder/](../SalesOrder/) | Pedido, albarán, factura, nota de crédito, devolución, **cartera viva**, incidencias | 262 | [SalesOrder-B2BSalesOrder.md](SalesOrder-B2BSalesOrder.md) |
+| **SgiRetail** | [SgiRetail/](../SgiRetail/) | `LOL_PBISGIRETAIL` (líneas de ticket), tráfico, objetivos | 278 | [SgiRetail-SgiRetail.md](SgiRetail-SgiRetail.md) |
+| **TransportsTracking** | [Transport/](../Transport/) | `LOL_TRANSPORT_TRACKING` (un envío por fila), picking y tiempos de almacén, inbound | 147 | [Transport-TransportsTracking.md](Transport-TransportsTracking.md) |
+| **Plan de Servicio B2B** | [ServicePlan/](../ServicePlan/) | `LOL_PLANMATERIAL` (cartera abierta) | 51 | [ServicePlan-Plan de Servicio B2B.md](ServicePlan-Plan%20de%20Servicio%20B2B.md) |
 
 ## Orígenes de datos
 
 | Origen | Uso |
 |---|---|
 | `Sql.Database("192.168.0.232", "hana_etl_admin")` → `dbo.*` | Origen principal de **todos** los modelos (tablas `LOL_PBI*` / `LOL_*` pobladas por ETL). |
-| `SapHana.Database("192.168.0.231:30015")` | **ServicePlan** y **SalesOrder** (`LOL_PLANMATERIAL`, vía `Value.NativeQuery` — la misma consulta en los dos modelos) y **Finanzas** (`JournalEntryItem` — legado en retirada — y los dos `CostCenter`). |
+| `SapHana.Database("192.168.0.231:30015")` | **ServicePlan** y **SalesOrder** (`LOL_PLANMATERIAL`, vía `Value.NativeQuery`, la misma consulta en los dos modelos), **Finanzas** (`JournalEntryItem`, legado en retirada, y los dos `CostCenter`), **Compras** (`LOL_PBIPURCHASEHEADER`, `LOL_PBIPACKAGES`, `LOL_PBISTOCKTRANSFERREAL`, desde oct.–nov.) y **Transport** (`LOL_PBIPICKINGORIGEN`, desde sept.). 9 de 42 tablas de origen. |
 
-La dirección general es sacar las lecturas de HANA y servirlas desde el SQL de staging; Finanzas está a medio camino (ver su documentación).
+La dirección general es sacar las lecturas de HANA y servirlas desde el SQL de staging. Desde agosto se ha retrocedido (4 lecturas nuevas a HANA); el estado y los hitos están en [Migracion-PowerBI.md](Migracion-PowerBI.md).
 
 ## Patrones comunes
 
@@ -59,13 +61,12 @@ A partir de ahí, los dos modelos divergen y **no por capricho**:
 
 | Problema | Alcance | Nota |
 |---|---|---|
-| **Fecha/hora automática activada** | Los 6 modelos | Decenas de `LocalDateTable_*` ocultas, una por columna de fecha. Todos salvo Compras tienen ya un `Calendario` propio, así que son redundantes: desactivarla aligera modelo y refresco. |
-| **Sin `Calendario` propio** | Compras | El caso peor: sus tres tablas de documento se filtran por fechas independientes, sin eje temporal común. |
-| **Sin ninguna medida** | Compras | El informe va con agregaciones implícitas y solo mide unidades; los importes están sin usar. |
+| **Fecha/hora automática activada** | Los 6 modelos | Decenas de `LocalDateTable_*` ocultas, una por columna de fecha. Todos tienen ya un `Calendario` propio, así que son redundantes: desactivarla aligera modelo y refresco. |
 | **Importes que llegan como texto** | SalesOrder | Se convierten con `VALUE`/`INT`/`Number.From` al calcular, y los fallos de parseo quedan en 0 o blank en silencio. |
 | **Sin RLS** | Los 6 modelos | Quien accede al informe ve todos los datos. |
 | **`cultures/es-ES.tmdl`** | Los 6 modelos | Solo metadatos lingüísticos de Q&A auto-generados; no aporta documentación funcional. |
-| **Migración HANA → SQL a medias** | Finanzas | Las medidas ya leen la tabla nueva, pero cinco piezas siguen apuntando a `JournalEntryItem`, así que el refresco aún necesita HANA. |
+| **Migración HANA → SQL a medias** | Finanzas, Compras, Transport, SalesOrder, ServicePlan | 9 tablas leen todavía de HANA, así que el refresco necesita HANA. Detalle en [Migracion-PowerBI.md](Migracion-PowerBI.md). |
+| **Fecha del último dato frente a refresco** | Finanzas, ServicePlan, Compras | El sello `UltimaActualizacion` marca el refresco, no la fecha del último dato cargado. |
 
 ---
 

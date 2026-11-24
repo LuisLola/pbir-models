@@ -1,5 +1,7 @@
 # Finanzas — Documentación del modelo
 
+Última revisión: 24 de noviembre de 2026
+
 Panel **financiero** de Lola Casademunt: **Balance**, **Cuenta de Pérdidas y Ganancias** (oficial) y **P&G de Gestión**, con comparativa contra el año anterior y desglose por dimensión analítica (canal, tienda, sucursal, trimestre, mes, año).
 
 - **Proyecto:** [Finanzas](../Finanzas/) · `Finanzas.pbip`
@@ -7,7 +9,7 @@ Panel **financiero** de Lola Casademunt: **Balance**, **Cuenta de Pérdidas y Ga
 - **compatibilityLevel:** 1606 · **Cultura:** es-ES · **Modo:** Import
 - **RLS:** ninguno
 
-> **Modelo en migración.** Los apuntes contables se están moviendo de la vista HANA `JournalEntryItem` a la tabla de staging SQL `LOL_PBIFINANCIALENTRIES`. Todas las medidas ya leen la tabla nueva; quedan piezas apuntando a la vieja (ver §7).
+> **Modelo en migración.** Los apuntes contables se están moviendo de la vista HANA `JournalEntryItem` a la tabla de staging SQL `LOL_PBIFINANCIALENTRIES`. Las medidas de cálculo (carpetas `01`–`05`) ya leen la tabla nueva; quedan piezas apuntando a la vieja — y las píldoras de filtro y los segmentadores del menú añadidos después también filtran columnas de `JournalEntryItem` (ver §7). `JournalEntryItem`, `CostCenter` y `CostCenter_Dim2` siguen leyendo de HANA (`SapHana.Database`).
 
 ---
 
@@ -25,7 +27,8 @@ Panel **financiero** de Lola Casademunt: **Balance**, **Cuenta de Pérdidas y Ga
 | `Dimensión Finanzas` | Tabla calculada — *field parameter* | Selector de la dimensión de desglose |
 | `KPI Export (Dim)` | Tabla calculada `UNION(SELECTCOLUMNS(SUMMARIZE(ALL(…))))` | Puente de valores para el desglose por dimensión |
 | `Páginas` | `GENERATESERIES(1,4,1)` | Paginación del listado por tienda |
-| `Medidas Finanzas` | `{BLANK()}` | Tabla-contenedor de las 118 medidas |
+| `UltimaActualizacion` | M: `DateTimeZone.UtcNow()` convertido a hora de España (oculta, sin relaciones) | **Sello de refresco** — una fila con el momento de la última actualización (ver §6, `0 Contexto`) |
+| `Medidas Finanzas` | `{BLANK()}` | Tabla-contenedor de 131 medidas |
 
 Más 1 plantilla y 7 tablas `LocalDateTable_*` de la fecha/hora automática.
 
@@ -49,6 +52,8 @@ Más 1 plantilla y 7 tablas `LocalDateTable_*` de la fecha/hora automática.
 | `Clave interna de operación de diario` | `JournalTransactionInternalKey` |
 
 La tabla nueva añade además `LineUID`, `JournalTransactionLineInternalKey`, `FinancialPeriodInternalKey`, `Series`/`SeriesNumber`, `ProjectCode`, `IndicatorCode`, `ControlAccountCode`, `RemarkInRow`, `Remarks`, `Reference1…3` y `FechaComunicacion` (marca de refresco del ETL).
+
+**Estado a noviembre de 2026.** Sin avances en la migración desde agosto: tres tablas siguen leyendo de HANA (`SapHana.Database("192.168.0.231:30015")`) — `JournalEntryItem`, `CostCenter` y `CostCenter_Dim2` — y solo `LOL_PBIFINANCIALENTRIES` y `LOL_PBIFINANCIALMODEL` vienen de SQL. Lo añadido desde entonces ha **aumentado** la dependencia del legado: las 8 medidas de píldora sobre canal, tienda y sucursal y los segmentadores del menú filtran columnas de `JournalEntryItem` (ver §7.1).
 
 ---
 
@@ -212,9 +217,35 @@ Este bloque de ~20 líneas está **repetido tal cual en unas 25 medidas** (`CN`,
 
 ---
 
-## 6. Medidas (118 en `Medidas Finanzas` + 19 auxiliares)
+## 6. Medidas (150: 131 en `Medidas Finanzas` + 19 auxiliares)
+
+Las 19 auxiliares viven en sus tablas: 8 en `TablaFechasFiltro` (títulos, §4), 4 en `Dimensión Finanzas` y 1 en `KPI Export (Dim)` (§5), 3 en `LOL_PBIFINANCIALMODEL` (profundidad de jerarquía, §2) y 3 en `Páginas` (§5). Las 131 de `Medidas Finanzas` son las 118 de cálculo más 13 de interfaz (`0 Contexto` y `0 Pildoras`) añadidas con el menú.
 
 Organizadas en carpetas:
+
+### `0 Contexto` (3)
+Rótulo de cabecera de cada página (tarjeta `rangoact`):
+
+| Medida | Qué devuelve |
+|---|---|
+| `Rango de fechas` | `MIN`–`MAX` de `TablaFechasFiltro[FechaFiltro]` en `dd/MM/yyyy`, o `"Sin fechas"` |
+| `Última actualización` | `"Actualizado dd/MM/yyyy a las HH:mm"` a partir de `MAX(UltimaActualizacion[Fecha])` |
+| `Rango y actualización` | Las dos anteriores unidas con `"   ·   "` — la que usan los visuales |
+
+`UltimaActualizacion` se calcula en Power Query con `DateTimeZone.UtcNow()` y un desfase de +1/+2 h según el horario de verano europeo (último domingo de marzo / de octubre). Marca **cuándo se refrescó el modelo**, no la fecha del último apunte.
+
+### `0 Pildoras` (10)
+Cinco pares texto + color, uno por cada segmentador que admite píldora de "filtro activo":
+
+| Píldora | Columna que vigila |
+|---|---|
+| `Chip Código 1 de regla de distribución` (+ `Color`) | `JournalEntryItem[Código 1 de regla de distribución]` (canal) |
+| `Chip Código 2 de regla de distribución` (+ `Color`) | `JournalEntryItem[Código 2 de regla de distribución]` (tienda) |
+| `Chip Nombre sucursal` (+ `Color`) | `JournalEntryItem[Nombre sucursal]` |
+| `Chip Dimensión Finanzas` (+ `Color`) | `'Dimensión Finanzas'[Dimensión Finanzas]` |
+| `Chip Value` (+ `Color`) | `Páginas[Value]` |
+
+El texto devuelve el valor seleccionado (o `"n sel."`) seguido de `"  ✕"` solo si la columna está filtrada (`ISFILTERED`); si no, `BLANK()` y la píldora desaparece. El `Color` alterna `#DFA0C9` (filtro activo) / `#6F263D` (reposo). Ver §8.
 
 ### `01 Base` (8)
 El núcleo de balance. `Sum Amount`, `Importe Neto` (ambos `CreditLC − DebitLC`), `Ventas_YTD` y `VENTAS_YTD_LY` (con `CORRECION` y ventana del slicer), `Total Base YTD` / `Total Base YTD_LY` (los anteriores con el filtro de profundidad de jerarquía), `Balance Evol.` y `Balance Porc Evol`.
@@ -267,8 +298,11 @@ Medidas de trabajo, no de producción: `AñoPrevio_test`, `DBG Filas año previo
    - `Título Descripción (vis)` y `Filtro Dimensión (TREATAS)` hacen `TREATAS` contra columnas de `JournalEntryItem`.
    - `DBG Filas año previo` cuenta filas de `JournalEntryItem`.
    - `Media_Saldo_MesFin_Últimos12_PorCuenta` mezcla las dos: filtra importes de `LOL_PBIFINANCIALENTRIES` pero usa `FILTER ( ALL ( JournalEntryItem ), … )` como envoltorio.
+   - **Nuevo desde agosto:** las 6 medidas `Chip` de canal, tienda y sucursal (+ sus `Color`) vigilan columnas de `JournalEntryItem`.
+   - **En el informe:** 17 segmentadores del cajón (canal, tienda, sucursal), 4 tablas de detalle de apuntes y 2 tarjetas referencian columnas de `JournalEntryItem`. Al retirar la tabla, esos visuales y las píldoras se rompen; hay que repuntarlos a `DistributionRuleCode1/2` y `BranchCode` de `LOL_PBIFINANCIALENTRIES`.
+   - Además, `CostCenter` y `CostCenter_Dim2` (nombres de canal y tienda) también leen de HANA, aunque ya se relacionan con la tabla SQL; necesitan su propio origen SQL.
 
-   Mientras `JournalEntryItem` siga en el modelo, el refresco necesita conexión a HANA. Para completar la migración hay que reescribir esas cinco piezas contra la tabla SQL. **Ojo:** `Dimensión Finanzas` y `KPI Export (Dim)` son quienes alimentan todo el desglose por dimensión, así que el cambio afecta a las ~25 medidas `(vis)`/`DIM`.
+   Mientras `JournalEntryItem` siga en el modelo, el refresco necesita conexión a HANA. Para completar la migración hay que reescribir esas piezas (modelo e informe) contra la tabla SQL. **Ojo:** `Dimensión Finanzas` y `KPI Export (Dim)` son quienes alimentan todo el desglose por dimensión, así que el cambio afecta a las ~25 medidas `(vis)`/`DIM`.
 
 2. **Dos relaciones a `LOL_PBIFINANCIALMODEL`.** Existe la del modelo nuevo (`LOL_PBIFINANCIALENTRIES[AccountCode]`, **bidireccional**) y la del legado (`JournalEntryItem[Código de cuenta]`). Al retirar HANA hay que quitar la segunda. La bidireccionalidad de la primera es necesaria para que el filtro de plan de cuentas llegue a los apuntes, pero conviene revisarla si se añaden más tablas de hechos.
 
@@ -296,6 +330,10 @@ Medidas de trabajo, no de producción: `AñoPrevio_test`, `DBG Filas año previo
 
 12. **`cultures/es-ES.tmdl`** (19.691 líneas) solo contiene metadatos lingüísticos de Q&A auto-generados.
 
+13. **El sello de actualización no es la fecha del dato.** `Última actualización` muestra cuándo se refrescó el modelo (`UtcNow()` en el refresco), no hasta cuándo llegan los apuntes. Si el ETL de `LOL_PBIFINANCIALENTRIES` va con retraso, la cabecera dirá "Actualizado hoy" con datos de días atrás. `FechaComunicacion` ya trae la marca del ETL y serviría para un segundo rótulo ("datos hasta …").
+
+14. **Menú duplicado por página.** El menú adaptable (§8) duplica el contenido de cada página en dos juegos de visuales (`…ga` / `…ge`) que se alternan por marcador. Cualquier cambio en un visual hay que hacerlo **en los dos juegos**; si no, la página se ve distinta según el menú esté abierto o cerrado. Los marcadores de menú y de píldora usan `applyOnlyToTargetVisuals`: al añadir un grupo nuevo a la página hay que incluirlo en su lista de destino.
+
 ---
 
 ## 8. Informe
@@ -304,7 +342,7 @@ Medidas de trabajo, no de producción: `AñoPrevio_test`, `DBG Filas año previo
 
 | # | Página | Contenido |
 |---:|---|---|
-| 1 | **Balance** | Matriz del balance por plan de cuentas + tarjetas de total y evolución (`Total Base YTD`, `Total Base YTD_LY`, `Balance Evol.`, `Balance Porc Evol`). |
+| 1 | **Balance** | Matriz del balance por plan de cuentas (`Total Base YTD`, `Total Base YTD_LY`, `Balance Evol.`, `Balance Porc Evol`), tarjetas de título del periodo y tabla de detalle de apuntes (sobre columnas de `JournalEntryItem`). |
 | 2 | **Balance Operativo** | Misma estructura, acotada a las cuentas operativas. |
 | 3 | **Pérdida y Ganancias** | Matriz del P&G oficial con las columnas año / año anterior / evolución / %CN, rotuladas con las medidas de título. |
 | 4 | **PyG Tarjetas** | Panel de KPIs `(vis)`: cifra de negocio, márgenes bruto/operativo/neto y sus deltas, todo reagrupable por la dimensión seleccionada. Incluye un **visual de Python**. |
@@ -313,7 +351,34 @@ Medidas de trabajo, no de producción: `AñoPrevio_test`, `DBG Filas año previo
 | 7 | **PyG Gestión Listado Agrupado** | La de gestión desglosada por dimensión, con los ratios de alquiler, personas y EBITDA sobre ventas. |
 | 8 | **Página 1** | Página de trabajo: solo la tarjeta de `Media_Saldo_MesFin_Últimos12_PorCuenta` y un segmentador. |
 
-> La **página 4 depende de un visual de Python**, lo que exige runtime de Python (en el servicio, una puerta de enlace personal configurada). Tenerlo en cuenta al publicar.
+> La **página 4 depende de un visual de Python** (presente en los dos juegos de visuales del menú adaptable), lo que exige runtime de Python (en el servicio, una puerta de enlace personal configurada). Tenerlo en cuenta al publicar.
+
+Todas las páginas son visibles, con lienzo de 1280×720.
+
+### Tema y tipografía
+
+Tema personalizado `LolaCasademunt.json` (recurso registrado) sobre la base `CY26SU05`; sustituye al antiguo `AccessibleCityPark`. Fuente Montserrat y escala tipográfica común a los paneles: {8, 9, 10, 11, 12, 16, 19} pt (los segmentadores de fecha, que estaban a 13 pt, se ajustaron a ella). Logotipo: monograma LC en blanco (`lc-monograma-blanco….png`).
+
+### Menú adaptable (carril + cajón)
+
+Cada página lleva el mismo menú lateral, construido con dos grupos (prefijo `fi01`…`fi08`, uno por página):
+
+| Grupo | Contenido | Visible |
+|---|---|---|
+| **Carril** (`fiNNcarril…`) | Fondo, monograma, botón ☰ (abre el menú) y botón *Atrás* | Siempre |
+| **Cajón** (`fiNNcajon…`) | Fondo, monograma, botón ✕ (cierra), los **segmentadores** de la página (fechas sobre `TablaFechasFiltro`, sucursal, canal, tienda, dimensión, página) y sus píldoras | Solo con el menú abierto |
+
+Dos marcadores por página (`fiNNbmabierto…` / `fiNNbmcerrado…`, 16 en total) alternan el estado. Además, el contenido de la página existe **dos veces**: el grupo `…ga` (ancho, visible con el menú cerrado) y el grupo `…ge` (desplazado a la derecha, visible con el menú abierto). Los marcadores muestran uno y ocultan el otro, de modo que el contenido aprovecha todo el ancho con el menú cerrado.
+
+El menú no lleva navegador de páginas: la navegación sigue haciéndose con los botones de navegación de página que ya tenían las cuatro páginas de P&G (3–6), duplicados en los dos juegos de visuales, y con el botón *Atrás* del carril.
+
+### Píldoras de filtro
+
+21 píldoras repartidas por las páginas (Balance 1, Balance Operativo 1, Pérdida y Ganancias 3, PyG Tarjetas 5, PyG Listado Agrupado 4, PyG Gestión 3, PyG Gestión Listado Agrupado 4; la página 8 no tiene). Cada una es un botón cuyo texto y color salen de las medidas `0 Pildoras` (§6): aparece solo cuando su segmentador tiene filtro, y al pulsarla aplica un marcador (`fiXXXXbm…`, 21 en total) acotado a **ese único segmentador** que lo limpia ("Limpiar Nombre sucursal", etc.).
+
+### Cabecera de periodo
+
+Cada página tiene una tarjeta (`finanz…rangoact`) con `[Rango y actualización]`: el rango de fechas seleccionado y el momento del último refresco.
 
 ---
 

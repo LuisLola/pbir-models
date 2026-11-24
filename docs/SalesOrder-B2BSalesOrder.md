@@ -4,7 +4,7 @@
 > [`SalesOrder/B2BSalesOrder.SemanticModel/definition/`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/).
 > **Solo lectura**: este documento describe el modelo, no lo modifica.
 >
-> *Ultima revision: 28 de agosto de 2026.*
+> *Última revisión: 24 de noviembre de 2026.*
 
 ---
 
@@ -21,9 +21,9 @@
 | compatibilityLevel | 1600 |
 | Cultura / idioma de origen | es-ES |
 | Time Intelligence automático | Activado (`__PBI_TimeIntelligenceEnabled = 1`) |
-| Tablas "reales" (visibles/funcionales) | 29 |
-| Tablas auto-generadas de fechas | 1 plantilla + 20 `LocalDateTable_*` ocultas |
-| Nº de medidas | **174** |
+| Tablas "reales" (visibles/funcionales) | 31 |
+| Tablas auto-generadas de fechas | 1 plantilla + 24 `LocalDateTable_*` ocultas |
+| Nº de medidas | **262** |
 | Orígenes de datos | SQL Server `192.168.0.232`, base `hana_etl_admin`, esquema `dbo` (10 tablas vía M) **+ HANA `192.168.0.231:30015`** (`LOL_PLANMATERIAL`, vía `Value.NativeQuery`) + tablas calculadas DAX |
 | RLS / Roles | **Ninguno** |
 
@@ -33,19 +33,23 @@
 - **Hechos — cadena de documentos:** [`LOL_PBISALESDELIVERY`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/LOL_PBISALESDELIVERY.tmdl) (albaranes), [`LOL_PBIINVOICESSALES`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/LOL_PBIINVOICESSALES.tmdl) (facturas), [`LOL_PBICREDITNOTESSALES`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/LOL_PBICREDITNOTESSALES.tmdl) (notas de crédito), [`LOL_PBIRETURNSALES`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/LOL_PBIRETURNSALES.tmdl) (devoluciones), [`LOL_PBIRETURNREQUESTS`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/LOL_PBIRETURNREQUESTS.tmdl) (solicitudes de devolución).
 - **Hechos derivada:** [`VentasIncidencias`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/VentasIncidencias.tmdl) (subconjunto calculado del pedido, solo incidencias).
 - **Dimensiones de origen SQL:** [`LOL_PBICLIENTES`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/LOL_PBICLIENTES.tmdl), [`LOL_PBIAGENTES`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/LOL_PBIAGENTES.tmdl), [`LOL_PBIMODELITEM`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/LOL_PBIMODELITEM.tmdl), [`LOL_PBISEASON`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/LOL_PBISEASON.tmdl).
+- **Dimensiones calculadas nuevas:** [`LOL_INCIDENCIAS`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/LOL_INCIDENCIAS.tmdl) (catálogo de motivos de incidencia, `DATATABLE`) y [`PedidosB2B`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/PedidosB2B.tmdl) (números de pedido distintos). Ver §2.4.
 - **Dimensión de fechas calculada:** [`Calendario`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/Calendario.tmdl).
 - **Cartera viva:** [`LOL_PLANMATERIAL`](../SalesOrder/B2BSalesOrder.SemanticModel/definition/tables/LOL_PLANMATERIAL.tmdl), importada de HANA. Es la misma tabla que sostiene el modelo *ServicePlan*, traída aquí para poder cerrar el mes y medir el servicio sin salir de este informe.
 - **Apoyo / parámetros:** `TemporadasUsadas`, `DimensionB2B`, `DimensionB2B1/2/3` (*field parameters*), `OrdenSelector`, `ParamTopN`, `MesFacturacion`, `MostrarTotalLook`, `UltimaActualizacion`.
 - **Contenedores de medidas (sin datos):** `MedidasVentas`, `MedidasTemporadas`, `MedidasIncidencias`, `MedidasFormato`, `MedidasCatalogo`, **`MedidasCartera`**.
 
-> **Qué ha cambiado desde la revisión de agosto.** El modelo ha pasado de 96 a **174 medidas**. Lo nuevo, en orden de peso:
+> **Qué ha cambiado desde la revisión del 28 de agosto.** El modelo pasa de 174 a **262 medidas** (+88). Lo nuevo:
 >
-> - **`MedidasCartera` (47)** — tabla-contenedor nueva. Trae el cierre de mes, los avisos de adelanto de entrega, los *checks* de filtro y el bloque Total Look. Se apoya en `LOL_PLANMATERIAL`, importada de HANA.
-> - **`MedidasVentas` pasa de 55 a 86** — 26 KPI de temporada, 3 de muestras y 2 de última actualización.
-> - **Tres *field parameters*** `DimensionB2B1/2/3`, que sustituyen en el informe a la vieja `DimensionB2B` (tabla `DATATABLE` sin segmentador en ninguna página).
-> - **Columnas calculadas nuevas:** `Total Look` y `Código Total Look` sobre el artículo, `EsMuestra` sobre pedido y cliente.
+> - **`MedidasIncidencias` pasa de 14 a 58** — carpetas `7 Análisis` (20), `8 Temporada` (10) y `9 Motivos` (14), que sostienen la página nueva **Incidencias** (§5.3).
+> - **`MedidasVentas` pasa de 86 a 130** — 30 píldoras de filtro (`0 Pildoras`), 2 de contexto de cabecera (`0 Contexto`) y 12 de la página de obtención de detalles (*drillthrough*) **Detalle de pedido** (`9 Detalle pedido`) (§5.2).
+> - **Dos tablas nuevas:** `LOL_INCIDENCIAS` (catálogo de 17 motivos, enlazado por `IncidenceCode`) y `PedidosB2B` (dimensión de pedido que filtra a la vez pedido e incidencias).
+> - **`VentasIncidencias`** gana `NumeroPedido`, `IncidenciaMotivo` e `IncidenciaTipoCat`; el código de incidencia sale ahora de `IncidenceCode`, no de `RMAMotiveCod`.
+> - **`DimensionB2B1/2/3`** añaden `Año`(11), `Mes`(12) y `Semana`(13); `Pedido`(10) apunta ya a `PedidosB2B[NumeroPedido]`.
+> - **Catálogo HTML por dos dimensiones**: sección (`DimensionB2B1`) y subnivel (`DimensionB2B2`), con cabeceras fijas (§5.5).
+> - **Informe:** 10 páginas (antes 8), menú adaptable con dos juegos de visuales por página, tema `CY26SU05`.
 >
-> Sigue en pie lo de la revisión anterior: `B2C1` no existe y `TemporadasUsadas` ya tiene relación física con `LOL_PBISEASON[Code]`.
+> Revisión anterior (96 → 174): `MedidasCartera` (cierre de mes y Total Look sobre `LOL_PLANMATERIAL`), 31 medidas de `MedidasVentas`, los *field parameters* y las columnas `Total Look`, `Código Total Look` y `EsMuestra`.
 
 ---
 
@@ -91,6 +95,8 @@ in
 | `IsIncidence` | Marca de incidencia (`"Y"`). |
 | `Reposicion` | Marca de reposición (`"Y"`); distingue pedido inicial de reposición. |
 | `RMAMotiveCod`, `IncidenceType` | Motivo / tipo de incidencia. |
+| `IncidenceCode` | Código de motivo de incidencia (texto) → `LOL_INCIDENCIAS[cod_texto]`. Nuevo. |
+| `DocNum` | Número de pedido visible → `PedidosB2B[NumeroPedido]`. |
 | `Qty` | Cantidad (texto; se convierte con `VALUE`/`INT`). |
 
 **Columna calculada:**
@@ -152,8 +158,16 @@ SELECTCOLUMNS (
     "TipoRegistro", "Incidencia",
     "LineID", 'LOL_PBIB2BSALESORDER'[DocEntry] & "-" & 'LOL_PBIB2BSALESORDER'[ItemCode],
     "DocEntry", 'LOL_PBIB2BSALESORDER'[DocEntry],
+    "NumeroPedido", 'LOL_PBIB2BSALESORDER'[DocNum],
     "LineNum", 'LOL_PBIB2BSALESORDER'[LineNum],
-    "IncidenciaCode", 'LOL_PBIB2BSALESORDER'[RMAMotiveCod],
+    "IncidenciaCode", 'LOL_PBIB2BSALESORDER'[IncidenceCode],
+    "IncidenciaMotivo", COALESCE (
+        LOOKUPVALUE ( LOL_INCIDENCIAS[motivo], LOL_INCIDENCIAS[cod_texto], 'LOL_PBIB2BSALESORDER'[IncidenceCode] ),
+        COALESCE (
+            LOOKUPVALUE ( LOL_INCIDENCIAS[tipo_incidencia], LOL_INCIDENCIAS[cod_texto], 'LOL_PBIB2BSALESORDER'[IncidenceCode] ),
+            'LOL_PBIB2BSALESORDER'[IncidenceType],
+            "Sin motivo" ) ),
+    "IncidenciaTipoCat", LOOKUPVALUE ( LOL_INCIDENCIAS[tipo_incidencia], LOL_INCIDENCIAS[cod_texto], 'LOL_PBIB2BSALESORDER'[IncidenceCode] ),
     "IncidenciaDesc", 'LOL_PBIB2BSALESORDER'[IncidenceType],
     "FechaDocumento", 'LOL_PBIB2BSALESORDER'[DocDate],
     "CodigoCliente", 'LOL_PBIB2BSALESORDER'[CardCode],
@@ -166,6 +180,10 @@ SELECTCOLUMNS (
     "ImporteNetoML", 'LOL_PBIB2BSALESORDER'[LineTotal_Num]
 )
 ```
+
+`IncidenciaMotivo` es el texto del motivo según `LOL_INCIDENCIAS`; si el código no está catalogado cae al tipo, luego a `IncidenceType` y por último a `"Sin motivo"`, en vez de salir en blanco. `NumeroPedido` es el enlace con `PedidosB2B`.
+
+> Es una **tabla calculada**: la relación con `PedidosB2B` le llega por su propia columna `NumeroPedido`, no a través de `LOL_PBIB2BSALESORDER`.
 
 ---
 
@@ -191,7 +209,16 @@ Es la **clave de agrupación de producto** del catálogo HTML. Otras destacadas:
 | `Inicio`, `Fin`, `FechaInicioB2B` | Fechas de la temporada. La comparación por días equivalentes usa **`Fin`** como ancla, no `Inicio` (ver §6). |
 | `AlmacenB2B`, `PptoB2B` | Almacén y presupuesto B2B. |
 
-**`Calendario`** — Tabla calculada `CALENDAR` desde `2022-01-01` hasta el `31/12` de (año actual + 2), enriquecida con `FechaKey`, `AñoMesKey`, `Año`, `Mes`, `MesTexto`, `Trimestre`, `Semana`, `InicioMes`/`FinMes`, `InicioTrimestre`/`FinTrimestre`, `InicioAño`/`FinAño` y flags `EsHoy`, `EsPasado`, `EsFuturo`, `EsMesActual`, `EsAñoActual`. Marcada como dimensión de fecha.
+**`Calendario`** — Tabla calculada `CALENDAR` desde `2022-01-01` hasta el `31/12` de (año actual + 2), enriquecida con `FechaKey`, `AñoMesKey`, `Año`, `Mes`, `MesTexto`, `Trimestre`, `Semana`, `InicioMes`/`FinMes`, `InicioTrimestre`/`FinTrimestre`, `InicioAño`/`FinAño` y flags `EsHoy`, `EsPasado`, `EsFuturo`, `EsMesActual`, `EsAñoActual`. Marcada como dimensión de fecha. `NombreSemana` (`"Semana " & FORMAT(WEEKNUM([Date],2),"00")`) es la que usan los *field parameters* para la opción `Semana`.
+
+**`LOL_INCIDENCIAS`** — *Nueva.* Catálogo de motivos de incidencia: tabla calculada `DATATABLE` con 17 códigos (1–5, 7–11, 21–27), cada uno con `motivo`, `descripcion_motivo`, `tipo_incidencia` (`CANCELACION` / `MODIFICACION`), `tipo_objeto_sap` (17 = pedido) y `visible_bi2go` (Y/N). Las `|` de la descripción se convierten en saltos de línea.
+
+| Columna | Nota |
+|---|---|
+| `cod_incidencia` | Entero. |
+| `cod_texto` | `FORMAT(cod_incidencia, "0")`. Existe porque `IncidenceCode` llega como **texto** en el pedido y una relación exige el mismo tipo en los dos lados. Se convierte aquí (17 filas) y no en el hecho (~1,9 M filas). |
+
+**`PedidosB2B`** — *Nueva.* `DISTINCT(SELECTCOLUMNS(LOL_PBIB2BSALESORDER, "NumeroPedido", [DocNum]))`. Es una **dimensión de pedido**: cuelga de `LOL_PBIB2BSALESORDER[DocNum]` y de `VentasIncidencias[NumeroPedido]`, de modo que un filtro de pedido alcanza a las dos tablas. Filtrar el hecho directamente no llegaba a las incidencias.
 
 ### 2.5. Tablas de apoyo y parámetros
 
@@ -201,8 +228,8 @@ Es la **clave de agrupación de producto** del catálogo HTML. Otras destacadas:
 | `ParamTopN` | `GENERATESERIES(5, 50, 5)` | Parámetro "Top N" del catálogo. |
 | `OrdenSelector` | `DATATABLE` | Criterio de orden del catálogo: `Ventas (€)` (1), `Unidades` (2), `PVP` (3). |
 | `DimensionB2B` | `DATATABLE` | Dimensión de agrupación del catálogo: Categoría(0), Familia agregada(1), Familia(2), Subfamilia(3), Marca(4), Cliente(5), Grupo cliente(6), País(7), Agente(8), Temporada(9). **Ya no tiene segmentador en ninguna página**; se conserva solo como respaldo de `HTML Catálogo B2B`. |
-| `DimensionB2B1` / `2` / `3` | *Field parameters* (`NAMEOF`) | Los tres selectores de desglose del informe. Mismos índices 0–9 que `DimensionB2B` **más `Pedido`(10)**. La columna de orden se llama `DimensionB2B1[DimensionB2B1 Orden]`, no `[Orden]`. |
-| `MesFacturacion` | Calculada sobre `Calendario` | Meses con `Inicio`/`Fin` (`EOMONTH`). **Ya no la lee ninguna medida**: el mes de cierre se deduce de la fecha de disponibilidad (§5.6). |
+| `DimensionB2B1` / `2` / `3` | *Field parameters* (`NAMEOF`) | Los tres selectores de desglose del informe. Mismos índices 0–9 que `DimensionB2B`, **más `Pedido`(10) → `PedidosB2B[NumeroPedido]`, `Año`(11) → `Calendario[Año]`, `Mes`(12) → `Calendario[MesTexto]` y `Semana`(13) → `Calendario[NombreSemana]`**. La columna de orden se llama `DimensionB2B1[DimensionB2B1 Orden]`, no `[Orden]`. En el catálogo HTML, `DimensionB2B1` fija la sección y `DimensionB2B2` el subnivel (§5.5). |
+| `MesFacturacion` | Calculada sobre `Calendario` | Meses con `Inicio`/`Fin` (`EOMONTH`). **Ya no la lee ninguna medida**: el mes de cierre se deduce de la fecha de disponibilidad (§5.6). Solo la usa un visual de la página oculta *Previsión Mes* (copia antigua). `Inicio`/`Fin` tienen ahora su propia `LocalDateTable_*`. |
 | `MostrarTotalLook` | `DATATABLE` | Interruptor Todo / Solo Total Look / Sin Total Look. Ver §5.6. |
 | `UltimaActualizacion` | Calculada | Sello de hora del último refresco. |
 
@@ -257,13 +284,7 @@ El `REMOVEFILTERS` de la tabla destino es imprescindible: sin él, el filtro que
 
 ### Relaciones inactivas heredadas
 
-Quedan tres relaciones desactivadas, residuos de los intentos anteriores. Candidatas a borrar:
-
-| Desde | Hacia | Nota |
-|---|---|---|
-| `LOL_PBICREDITNOTESSALES[LineUID]` | `LOL_PBIB2BSALESORDER[LineUID]` | 1:1, bidireccional, inactiva |
-| `LOL_PBIRETURNREQUESTS[LineUID]` | `LOL_PBIB2BSALESORDER[LineUID]` | inactiva |
-| `LOL_PBIRETURNREQUESTS[LineUID]` | `LOL_PBIRETURNSALES[LineUID]` | inactiva |
+**Ya no existen.** Las tres relaciones inactivas por `LineUID` (notas de crédito, solicitudes y devoluciones contra el pedido) se borraron: `LineUID` = `DocEntry & LineNum` sin separador colisiona y sus duplicados rompían la actualización. Hoy `relationships.tmdl` no tiene ninguna relación con `isActive: false`.
 
 ---
 
@@ -285,7 +306,15 @@ Las seis tablas de hechos cuelgan de las mismas cuatro dimensiones más el calen
 | `LOL_PBIRETURNSALES` | `CardCode` | `SlpCode` | `ItemCode` | `Season` | `DocDate` |
 | `LOL_PBIRETURNREQUESTS` | `CardCode` | `SlpCode` | `ItemCode` | **`SeasonResuelta`** | *(solo LocalDateTable)* |
 
-Y `TemporadasUsadas[Code]` → `LOL_PBISEASON[Code]`.
+Y además:
+
+| Desde | Hacia | Nota |
+|---|---|---|
+| `TemporadasUsadas[Code]` | `LOL_PBISEASON[Code]` | — |
+| `LOL_PBIB2BSALESORDER[KPedidoLinea]` | `LOL_PLANMATERIAL[KLinea]` | **Bidireccional**. Enlaza la cartera viva con la línea de pedido. |
+| `LOL_PBIB2BSALESORDER[IncidenceCode]` | `LOL_INCIDENCIAS[cod_texto]` | *Nueva.* Texto contra texto (§2.4). |
+| `LOL_PBIB2BSALESORDER[DocNum]` | `PedidosB2B[NumeroPedido]` | *Nueva.* |
+| `VentasIncidencias[NumeroPedido]` | `PedidosB2B[NumeroPedido]` | *Nueva.* Hace que el filtro de pedido llegue a las incidencias. |
 
 ### 4.2. Relaciones con tablas de fecha auto-generadas
 
@@ -295,16 +324,16 @@ Decenas de relaciones M:1 hacia `LocalDateTable_*[Date]` con `joinOnDateBehavior
 
 ---
 
-## 5. Medidas (174)
+## 5. Medidas (262)
 
 Repartidas en 6 tablas-contenedor.
 
 | Tabla | Medidas |
 |---|---:|
-| `MedidasVentas` | 86 |
+| `MedidasVentas` | 130 |
+| `MedidasIncidencias` | 58 |
 | `MedidasCartera` | 47 |
 | `MedidasTemporadas` | 23 |
-| `MedidasIncidencias` | 14 |
 | `MedidasCatalogo` | 2 |
 | `MedidasFormato` | 2 |
 
@@ -333,7 +362,7 @@ Fecha de corte global: el menor entre la fecha máxima visible en el filtro y ho
 #### Carpeta `Validacion` (9)
 Auditan que la ventana de "días equivalentes" cuadra: `ValidacionFechaInicioTemporadaSel` (= `MAX(LOL_PBISEASON[Fin])`, ojo), `ValidacionFechaFinTemporadaSel`, `ValidacionFechaInicioTemporadaAnt`, `ValidacionFechaFinTemporadaAnt`, `ValidacionDiasTemporadaSel`, `ValidacionFechaCorteAnt12M` (`EDATE(FechaCorte,-12)`), `ValidacionFechaFinAntDiasEq`, `ValidacionRangoTemporadaAnt` (volcado de texto), `ValidacionVersionRangos` (= `"Rangos por LOL_PBISEASON[Fin] v3"`).
 
-### 5.2. `MedidasVentas` (86)
+### 5.2. `MedidasVentas` (130)
 
 Patrón común: `SUM` de `ImporteBruto` (o `LineTotal_Num`) con `REMOVEFILTERS('Calendario')` y `REMOVEFILTERS([DocDate])`, tope `DocDate <= FechaCorte`, excluyendo anulados e incidencias.
 
@@ -418,7 +447,26 @@ Los KPI de cabecera del informe. Cada uno con su gemelo `… anterior` y su `Evo
 
 `Última actualización` y `Marca de actualización`, para el sello de hora de la cabecera.
 
-### 5.3. `MedidasIncidencias` (14)
+#### Carpeta `0 Pildoras` (30) — *nueva*
+
+Píldoras de filtro activo: 15 parejas `Chip <campo>` / `Chip <campo> Color`. La primera devuelve el valor elegido (o `"n sel."`) seguido de `✕`, y blank si el campo no está filtrado; la segunda, el color de fondo (rosa `#DFA0C9` si filtra). Campos: `Agente_Cajero`, `Autorizado`, `Bloqueado`, `Categoria`, `Code`, `Descripcion_familia_agregada`, `EsMuestra`, `Fecha Fin pedido venta`, `Fecha disponibilidad (línea del articulo)`, `GrupodeArt`, `Nombre_familia`, `P&H`, `Subfamilia`, `TipoTienda`, `TotalLook`.
+
+```dax
+Chip Categoria =
+VAR n = COUNTROWS ( VALUES ( LOL_PBIMODELITEM[Categoria] ) )
+VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PBIMODELITEM[Categoria] ), n & " sel." )
+RETURN IF ( ISFILTERED ( LOL_PBIMODELITEM[Categoria] ), txt & "  ✕" )
+```
+
+#### Carpeta `0 Contexto` (2) — *nueva*
+
+`Rango de fechas` (`MIN`–`MAX` de `Calendario[Date]` en `dd/MM/yyyy`, o `"Sin fechas"`) y `Rango y actualización` (= rango · `[Última actualización]` · `[Aviso mes de cierre]`), que alimenta la tarjeta de cabecera de cada página.
+
+#### Carpeta `9 Detalle pedido` (12) — *nueva*
+
+Para la página de *drillthrough* **Detalle de pedido** (§7): `Pedido Líneas`, `Pedido Referencias`, `Pedido Unidades`, `Pedido Servido`, `Pedido Pendiente` (`SUMX` de `OpenQty`), `Pedido % servido` (= servido / unidades), `Pedido Importe`, `Pedido Precio medio`, `Pedido Descripción`, `Pedido Estado` (`DocStatus` traducido: `O` → Abierto, `C` → Cerrado, varios → "Varios"), `Pedido Cabecera` (texto "Pedido N · cliente · fecha", o "Selecciona un pedido") y **`HTML Cabecera Pedido`**, la ficha HTML de cabecera con chip de estado (verde si cerrado, ámbar si abierto). Todas leen `LOL_PBIB2BSALESORDER[DocNum]` con `SELECTEDVALUE`.
+
+### 5.3. `MedidasIncidencias` (58)
 Trabajan sobre `VentasIncidencias` replicando la estructura temporal de ventas.
 
 - **`Base`**: `VentaBrutaIncidencias`, `ImporteNetoIncidencias`, `CantidadIncidencias`.
@@ -426,6 +474,27 @@ Trabajan sobre `VentasIncidencias` replicando la estructura temporal de ventas.
 - **`Temporada`**: `VentasTemporadaSeleccionadaIncidencias`, `VentasTemporadaAnteriorIncidencias`, `…SoloInicio…`, `…Total…`, `VentasTemporadaPasadaSoloInicioIncidencias`.
 - **`YTD`**: `VentasYTD_Incidencias`.
 - **`Validacion`**: 4 medidas espejo de las de ventas.
+
+Nuevas, para la página **Incidencias**:
+
+| Carpeta | Nº | Medidas |
+|---|---:|---|
+| `7 Análisis` | 20 | Recuentos sobre `VentasIncidencias`: `Líneas de incidencia`, `Tipos de incidencia`, `Motivos con incidencia`, `Clientes / Referencias / Agentes con incidencia`, `Importe medio por incidencia`, `Unidades por incidencia`, `% incidencia sobre venta` (= `VentaBrutaIncidencias` / `VentaBruta`), `Incidencias sin catalogar`. Y la parte posventa: `Solicitudes de devolución`, `Líneas solicitadas`, `Unidades solicitadas` (`LOL_PBIRETURNREQUESTS`), `Devoluciones`, `Unidades devueltas`, `Importe devuelto`, `% devuelto sobre venta` (`LOL_PBIRETURNSALES`), `Abonos`, `Importe abonado` (`SUM(LOL_PBICREDITNOTESSALES[NetAmt_EUR])`), `% solicitud que acaba en devolución` (unidades devueltas / solicitadas). |
+| `8 Temporada` | 10 | `Incidencias temporada` / `… anterior` (líneas), `Importe incidencias temporada` / `… anterior`, `Unidades incidencias temporada` / `… anterior`, `Evol incidencias €`, `Evol incidencias %` (blank si la anterior es 0, para no enseñar un infinito), `% incidencia temporada` / `… anterior`. Mismo patrón que ventas: `REMOVEFILTERS('Calendario')`, `TemporadaLinea = [TemporadaSeleccionada]`, `FechaDocumento <= [FechaLimiteSeleccionada]`. |
+| `9 Motivos` | 14 | `Pedido bruto temporada`, `% cancelado temporada`, 11 medidas `Mot. <motivo>` y `HTML Tarjetas Incidencias`. |
+
+**`% cancelado temporada`** se calcula sobre el pedido **bruto**, no sobre lo vivo:
+
+```dax
+Pedido bruto temporada = [VentasTemporadaSeleccionada] + [Importe incidencias temporada]
+% cancelado temporada  = DIVIDE ( [Importe incidencias temporada], [Pedido bruto temporada] )
+```
+
+`VentasTemporadaSeleccionada` excluye las líneas de incidencia, así que sola no sirve de denominador: contra lo vivo, un pedido anulado entero daba 21.685%.
+
+**`Mot. <motivo>`** = `CALCULATE([Importe incidencias temporada], VentasIncidencias[IncidenciaMotivo] = "<MOTIVO>")`. Hay una por motivo (Anulación cliente, Cierre tienda, Crédito insuficiente, No llega a mínimos de producción, Fuera de plazo de entrega, Rotura stock, Calidad, Motivo comercial, No conforme con política de imagen, Mínimos de compras no alcanzados, Sin motivo) porque la matriz necesita los motivos como **columnas** junto a las columnas fijas, cosa que no permite un campo en *Columnas*.
+
+**`HTML Tarjetas Incidencias`** — franja de tarjetas en HTML (importe, líneas, unidades, % cancelado, evolución, importe medio). La evolución usa la lógica inversa a ventas: que las incidencias bajen es bueno y sale en verde.
 
 ### 5.4. `MedidasFormato` (2)
 `ColorEvol` y `ColorEvolPct` — hex de formato condicional: verde `#00703C` si ≥ 0, rojo `#C00000` si negativo, gris `#595959` si blank.
@@ -446,9 +515,22 @@ VAR _ix = COALESCE ( SELECTEDVALUE ( DimensionB2B1[DimensionB2B1 Orden] ),
 
 Antes leía solo `DimensionB2B`, que no tiene segmentador en ninguna de las tres páginas donde vive el catálogo: el HTML salía siempre agrupado por Categoría se moviera lo que se moviera. `DimensionB2B` queda como respaldo.
 
-> ⚠️ El `UNION` tiene **una rama por índice**. Si se añade una entrada al *field parameter* sin añadir su rama, esa opción deja el catálogo vacío con *"Sin ventas para los filtros actuales"*. Pasó con `Pedido` (índice 10).
+#### Dos niveles: sección y subnivel
 
-Con un `SWITCH` sobre el índice de dimensión (0–10) construye pares (grupo, modelo-color) con ventas y unidades mediante `SUMMARIZE`/`ADDCOLUMNS`, toma los 12 grupos top y dentro de cada grupo los `Top N` modelos, y dibuja una tarjeta con ranking (medalla), barra de progreso y silueta SVG de respaldo si no hay foto. Paleta de marca (rosa `#DFA0C9`, negro, gris).
+Desde a8bd3f0 el catálogo admite **dos dimensiones**: `DimensionB2B1` elige la **sección** y `DimensionB2B2` el **subnivel**.
+
+```dax
+VAR _ix2     = SELECTEDVALUE ( DimensionB2B2[DimensionB2B2 Orden] )
+VAR _unNivel = ISBLANK ( _ix2 ) || _ix2 = _ix      -- colapsa a un solo nivel
+```
+
+Si la segunda está vacía o repite la primera, el catálogo vuelve a un nivel (`@g2 = ""`). El `UNION` tiene ahora **121 ramas**: 11 de un nivel (`_ix = k && _unNivel`) y 110 de pares (`_ix = i && _ix2 = j`, i ≠ j, 0–10).
+
+> ⚠️ El `UNION` tiene **una rama por índice (y por pareja)**. Si se añade una entrada al *field parameter* sin añadir sus ramas, esa opción deja el catálogo vacío con *"Sin ventas para los filtros actuales"*. Pasó con `Pedido` (índice 10) y **vuelve a pasar con `Año`(11), `Mes`(12) y `Semana`(13)**: están en los tres *field parameters* pero el catálogo no tiene ramas para ellos.
+
+Para no recorrer dos veces la tabla cara, el cálculo va en dos pasadas: `GROUPBY` por (sección, subnivel) para totales y recuento de referencias; se quedan las **12 secciones** con más venta y, dentro de cada una, los **8 subniveles** mayores; solo para esas celdas se agrupa el detalle por modelo-color y se cruza (una sola vez) con la ficha del artículo (`NATURALLEFTOUTERJOIN`). En cada celda se pintan los `Top N` modelos con ranking (medalla), barra de progreso y silueta SVG de respaldo si no hay foto. Paleta de marca (rosa `#DFA0C9`, negro, gris).
+
+**Presentación** (alineada con el catálogo de SgiRetail, 16cc8d2): fondo `#F2F3F5`, tipografía Manrope, secciones y subniveles plegables (`<details>`), cabecera de nivel 1 con el **recuento de referencias** (`n ref.`) e importe en píldora blanca, y **cabeceras fijas** al hacer scroll (`position: sticky`, la sección en `top: 0`, el subnivel en `top: 36px`, cada una con su `z-index`).
 
 ---
 
@@ -531,7 +613,7 @@ Dos trampas que costaron una vuelta cada una:
 
 6. **Lógica de comparación anclada en `LOL_PBISEASON[Fin]`.** El "inicio" de la ventana de días equivalentes usa `MAX(Fin)`, no `Inicio` (sello `ValidacionVersionRangos = "Rangos por LOL_PBISEASON[Fin] v3"`). Es deliberado —hay todo un bloque de validación para auditarlo— pero contraintuitivo. Y hay **dos** definiciones de "anterior": `CompareSeason` (comparación) y `TemporadaAnterior` (pasada); no confundirlas.
 
-7. **Tres relaciones inactivas** entre documentos (§3). Residuos del enfoque por relaciones físicas; conviene borrarlas para que no confundan.
+7. ~~Tres relaciones inactivas entre documentos.~~ **Resuelto**: ya no hay relaciones inactivas (§3).
 
 8. **`LOL_PBIRETURNREQUESTS` no está en el `Calendario`.** Sus fechas (`DocDate`, `DocDueDate`) solo cuelgan de `LocalDateTable_*`. Cualquier medida de solicitudes de devolución **ignora el filtro de fecha del informe**. Si se quiere analizarlas por periodo, falta la relación con `Calendario[Date]`.
 
@@ -539,28 +621,42 @@ Dos trampas que costaron una vuelta cada una:
 
 10. **Dependencia fuerte de `FechaLimiteSeleccionada`.** Casi todas las medidas de venta dependen de ella (incluye `TODAY()`), así que los resultados **cambian con la fecha de ejecución** y no son reproducibles históricamente sin fijar el calendario.
 
-11. **Página "Duplicado de Página 1" es la activa.** El informe abre por una página cuyo nombre delata que nació como copia. Conviene renombrarla (es la que lleva el embudo completo) y decidir qué pasa con la original.
+11. **Páginas duplicadas ocultas.** El informe abre ya por **Análisis Temporada** (`activePageName`). Las copias antiguas (*Anslisis Temporada*, *Rankings*, *Analisis de Servicio* y la primera *Previsión Mes*) siguen en el informe con `HiddenInViewMode`; son candidatas a borrar.
 
 12. **`cultures/es-ES.tmdl`** solo contiene metadatos lingüísticos de Q&A auto-generados.
+
+13. **`Incidencias sin catalogar` siempre da 0.** Cuenta las filas cuyo `IncidenciaMotivo` contiene `"Sin catalogar"`, pero la columna nunca produce ese texto: si el código no está en `LOL_INCIDENCIAS` cae al tipo, a `IncidenceType` o a `"Sin motivo"` (§2.3). Su comentario dice que hoy faltan los códigos 20, 16, 28, 15, 18 y 17; la medida no lo detectará hasta que la columna y la medida usen el mismo literal. Mientras, `Mot. Sin motivo` es la mejor pista.
+
+14. **El catálogo no cubre `Año`, `Mes` ni `Semana`** (índices 11–13 de `DimensionB2B1/2`): elegirlos deja el HTML vacío (§5.5).
+
+15. **El *drillthrough* de Detalle de pedido está ligado a `LOL_PBIB2BSALESORDER[DocNum]`**, mientras que la opción `Pedido` de los *field parameters* apunta ya a `PedidosB2B[NumeroPedido]`. Desde un visual que use la columna de `PedidosB2B` el botón de obtener detalles puede no ofrecerse; conviene comprobarlo o enlazar la página a `PedidosB2B[NumeroPedido]`.
+
+16. **Carpeta duplicada `pages/pages/` en el informe.** Desde b363202 hay en `B2BSalesOrder.Report/definition/pages/pages/` una copia anidada de las 10 páginas (374 ficheros) que **ya no coincide** con las reales. No forma parte del informe vivo; conviene borrarla para que nadie edite la copia equivocada.
 
 ---
 
 ## 7. Informe
 
-`B2BSalesOrder.Report`, 8 páginas de 1280x720:
+`B2BSalesOrder.Report`, 10 páginas de 1280x720 (tema base `CY26SU05` + tema propio `LolaCasademunt.json`):
 
-| # | Página | Visuales | Contenido |
-|---:|---|---:|---|
-| 1 | Anslisis Temporada | 35 | Comparativa de temporadas: tarjetas de venta actual / anterior / evolución y matriz por dimensión. |
-| 2 | Rankings | 16 | **Catálogo B2B** — visual *HTML Content*. Sin segmentador de dimensión: se queda en Categoría. |
-| 3 | Analisis de Servicio | 13 | Embudo ejecutivo: `Pedido Final`, `Servido (cadena)`, `% Servido`, `Facturado (cadena)`, `Pendiente Facturar`. |
-| 4 | Previsión Mes | 33 | Copia antigua, conserva el segmentador de Mes. Candidata a borrar. |
-| 5 | Análisis Temporada | 37 | Versión vigente de la comparativa, con los tres *field parameters*. |
-| 6 | Análisis Servicio por Temporada | 30 | Servicio por temporada + catálogo. |
-| 7 | **Previsión Mes** *(activa)* | 37 | Cierre de mes: cartera por cliente, tarjetas de cierre y los dos avisos. |
-| 8 | RankingTemporadas | 28 | Catálogo agrupado por `DimensionB2B1`. |
+| # | Página | Visible | Visuales | Contenido |
+|---:|---|:---:|---:|---|
+| 1 | Anslisis Temporada | oculta | 35 | Copia antigua de la comparativa. |
+| 2 | Rankings | oculta | 23 | Catálogo B2B antiguo. |
+| 3 | Analisis de Servicio | oculta | 13 | Embudo ejecutivo: `Pedido Final`, `Servido (cadena)`, `% Servido`, `Facturado (cadena)`, `Pendiente Facturar`. |
+| 4 | Previsión Mes | oculta | 34 | Copia antigua, conserva el segmentador de Mes (`MesFacturacion`). Candidata a borrar. |
+| 5 | **Análisis Temporada** *(activa)* | sí | 54 | Comparativa de temporadas con los tres *field parameters*. Es la página por la que abre el informe. |
+| 6 | Análisis Servicio por Temporada | sí | 52 | Servicio por temporada + catálogo. |
+| 7 | Previsión Mes | sí | 62 | Cierre de mes: cartera por cliente, tarjetas de cierre y los dos avisos. |
+| 8 | RankingTemporadas | sí | 47 | Catálogo HTML por dos niveles (`DimensionB2B1` sección, `DimensionB2B2` subnivel), con `Top N`, `Orden` y `MostrarTotalLook`. |
+| 9 | **Incidencias** *(nueva)* | sí | 40 | Franja `HTML Tarjetas Incidencias` + matriz de cancelado por motivo (`Pedido bruto temporada`, `Importe incidencias temporada`, `% cancelado temporada` y las `Mot. …` como columnas), desglosable por agente, cliente o marca. |
+| 10 | **Detalle de pedido** *(nueva)* | *drillthrough* | 3 | Página de obtención de detalles sobre `LOL_PBIB2BSALESORDER[DocNum]`: `HTML Cabecera Pedido`, matriz por modelo-color / artículo (unidades, servido, pendiente…) y botón Volver. |
 
-> ⚠️ Hay **dos páginas llamadas "Previsión Mes"** (4 y 7). La 7 es la viva; la 4 es el duplicado del que salió.
+Las páginas visibles llevan en la cabecera la tarjeta `Rango y actualización` y la fila de píldoras de filtro (`0 Pildoras`).
+
+> **Menú adaptable (1da2362).** Cada página visible tiene **dos juegos de visuales** —menú abierto y menú cerrado— que se alternan por marcador; por eso el número de visuales casi se duplica respecto a la revisión anterior. Al tocar un visual hay que tocar su gemelo.
+
+> ⚠️ Siguen existiendo **dos páginas llamadas "Previsión Mes"** (4 y 7). La 7 es la viva; la 4 es el duplicado del que salió y está oculta.
 
 ### Segmentadores de fecha: no los congeles
 
@@ -575,7 +671,7 @@ Borrar solo el `endDate` no descongela nada. Y las dos fechas ni coinciden: *"Be
 
 Quitando `properties.filter` de `objects.general` (y el `endDate`, dejando el `mode`), Power BI recalcula el tope desde el dato al abrir. Sobre `Calendario[Date]` eso aterriza en el día en curso, porque la partición acaba en `MAX(TODAY(), max DocDate)` y avanza sola. Sobre una columna de hechos el tope será el máximo del dato, o sea "sin recorte".
 
-Estado actual: descongelados en todas las páginas **salvo las dos de Previsión Mes**, donde el corte es deliberado y además alimenta el mes de cierre. Los marcadores tienen `suppressData: true`, así que no vuelven a aplicar la fecha vieja.
+Estado actual: descongelados en **todas las páginas visibles**, incluida la *Previsión Mes* viva, que ya no guarda una fecha literal: el mes de cierre se toma del día en curso y cierra en su último día (`EOMONTH`, §5.6). Los marcadores tienen `suppressData: true`, así que no vuelven a aplicar la fecha vieja.
 
 ---
 

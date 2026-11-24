@@ -1,5 +1,7 @@
 # Modelo semántico **SgiRetail** — Documentación técnica
 
+Última revisión: 24 de noviembre de 2026
+
 > Panel de **Retail** de Lola Casademunt: análisis de ventas de tiendas físicas y online, tráfico/afluencia, objetivos comerciales, conversión, comparativa de temporadas y catálogo visual de producto.
 
 ## Resumen del modelo
@@ -12,12 +14,27 @@
 | Formato | TMDL (Power BI Desktop, DevMode/TMDLView) |
 | Modo de almacenamiento | Import |
 | Time Intelligence automático | **Activado** (`__PBI_TimeIntelligenceEnabled = 1`) |
-| Nº de tablas (total) | **31** |
+| Nº de tablas (total) | **32** |
 | — Tablas de datos (origen SQL) | 6 (`LOL_PBISGIRETAIL`, `LOL_PBITIENDAS`, `LOL_PBIMODELITEM`, `LOL_PBISEASON`, `LOL_PBIOBJETIVOSRETAIL`, `LOL_PBITRAFICOTIENDAS`) |
+| — Tabla M sin origen externo | 1 (`UltimaActualizacion`: sello de refresco con `DateTimeZone.UtcNow()`) |
 | — Tablas calculadas / técnicas | 25 (calendario, selectores, parámetros, dimensiones de campo, tablas-contenedor de medidas, auto date/time ocultas) |
-| Nº de medidas documentadas | **238** |
+| Nº de medidas | **278** (ver reparto por tabla abajo) |
 | Columnas calculadas DAX | 2 (`LOL_PBIMODELITEM[Modelo-Color]`, `Calendario[Temporada]`) + columnas de las auto date/time |
-| Orígenes de datos | **SQL Server** `Sql.Database("192.168.0.232", "hana_etl_admin")`, esquema `dbo` (réplica del ERP/SAP-HANA). El resto de tablas son **calculadas DAX** (`CALENDAR`, `GENERATESERIES`, `DATATABLE`, literales `{ }`) |
+| Orígenes de datos | **SQL Server** `Sql.Database("192.168.0.232", "hana_etl_admin")`, esquema `dbo` (réplica que el ETL hace del ERP). **Ninguna tabla lee de SAP HANA directamente**: no hay ningún conector `SapHana.Database`; `hana_etl_admin` es solo el nombre de la base de datos SQL. El resto de tablas son **calculadas DAX** (`CALENDAR`, `GENERATESERIES`, `DATATABLE`, literales `{ }`) o la tabla M local `UltimaActualizacion` |
+
+#### Reparto de medidas por tabla
+
+| Tabla contenedora | Medidas | Cambio desde la revisión anterior (ago-2026) |
+|---|---|---|
+| `MedidasCalculadasRetailOnline` | 10 | `FechaHastaSeleccionada` reescrita (tope = última fecha con venta) |
+| `MedidasRetail` | 40 | Formato de `Ventas_YTD_LY` en euros |
+| `MedidasTrafico` | 16 | — |
+| `MedidasObjetivosRetail` | 9 | Formato de `Objetivos_YTD` en euros |
+| `MedidasCanales` | 60 | 19 medidas de importe pasan de formato `$` a `€` |
+| `MedidasIndicadores` | 47 | **+29**: 28 `Chip *` (carpeta `0 Pildoras`) y `Rango y actualización` |
+| `MedidasDesempeño` | 89 | **+9**: medidas `HTML *` (carpeta `9 HTML`) |
+| `MedidasCatalogo` | 7 | `HTML Catálogo` y `HTML Comparador Temporadas` reescritas (dos niveles, cabeceras fijas, paleta 45 Years) |
+| **Total** | **278** | +38 sobre 240 (la revisión anterior indicaba 238) |
 
 ### Arquitectura (esquema en estrella)
 
@@ -25,7 +42,7 @@ La tabla de hechos central es **`LOL_PBISGIRETAIL`** (líneas de ticket de venta
 
 - **Dimensiones**: `LOL_PBITIENDAS` (tiendas), `LOL_PBIMODELITEM` (artículos/producto), `LOL_PBISEASON` (temporadas), `Calendario` (fecha, marcada como tabla de tiempo).
 - **Hechos secundarios**: `LOL_PBITRAFICOTIENDAS` (afluencia por tienda) y `LOL_PBIOBJETIVOSRETAIL` (presupuesto/objetivos por tienda y fecha).
-- **Tablas auxiliares de UI**: selectores (`PeriodoSelector`, `FechaHastaSelector`, `OrdenSelector`), parámetros (`ParamTopN`), parámetros de campo (`DimensionesB2C1/2/3`, `MedidasSelector`, `MedidasB2C1`).
+- **Tablas auxiliares de UI**: selectores (`PeriodoSelector`, `FechaHastaSelector`, `OrdenSelector`), parámetros (`ParamTopN`), parámetros de campo (`DimensionesB2C1/2/3`, `MedidasSelector`, `MedidasB2C1`) y el sello de refresco `UltimaActualizacion`.
 - **Contenedores de medidas** (tablas calculadas de una fila `Row("Column", BLANK())` que solo alojan medidas): `MedidasRetail`, `MedidasTrafico`, `MedidasObjetivosRetail`, `MedidasCanales`, `MedidasCalculadasRetailOnline`, `MedidasDesempeño`, `MedidasIndicadores`, `MedidasCatalogo`.
 
 El motor de cálculo de "periodo" no usa Time Intelligence nativo (YTD real) sino un **periodo dinámico** controlado por dos selectores (`PeriodoSelector` + `FechaHastaSelector`) y la medida raíz [`FechaInicioPeriodoSeleccionado`](#medidascalculadasretailonline-motor-de-periodo). El año anterior se calcula siempre con **desplazamiento fijo de −364 días** (comparación por día de la semana equivalente).
@@ -57,6 +74,7 @@ Maestro de tiendas / puntos de venta.
 - **Atributos de jerarquía organizativa**: `TipoTienda` (ordenada por `OrdenTipoTienda`), `NombreTienda`, `ResponsableTienda`, `Territorio`, `AreaManager`.
 - **Fechas con auto date/time**: `FechaApertura`, `FechaCierre`, `FechaComunicacion` (cada una genera una `LocalDateTable_*` oculta).
 - Otros: `Int`, `UltimaSincronizacionServer`, `VersionBD`, `VersionTpv`.
+- **Nuevas (nov-2026)**: `DV_Id`, `DV_Nombre` (texto, columnas de origen).
 
 #### `LOL_PBIMODELITEM` — Dimensión: artículos / catálogo de producto
 [Archivo TMDL](../SgiRetail/SgiRetail.SemanticModel/definition/tables/LOL_PBIMODELITEM.tmdl)
@@ -67,9 +85,10 @@ Maestro de artículos (muy ancho, ~50 columnas de atributos de producto).
 - **Clave**: `ItemCode` (relación con ventas).
 - **Atributos de clasificación**: `Categoria`, `Nombre_familia`, `Descripcion_familia_agregada`, `Subfamilia`, `GrupodeArt` (= marca, p. ej. LOLA / MAITE), `Capsula`, `TIPO`.
 - **Identificación de modelo**: `Referencia_modelo`, `ID_Modelo`, `Descripcion_modelo`, `Alias`, `Codigo_de_color`, `Descripcion_color`, `Codigo_de_talla`.
-- **Imagen**: `URL_imagen_producto` (`dataCategory: ImageUrl`) — usada por las medidas de catálogo HTML.
+- **Imagen**: `URL_imagen_producto` (`dataCategory: ImageUrl`) — se ve como foto en la **tabla nativa** de la página *Catálogo HTML*; las medidas de catálogo HTML la leen, pero el visual HTML Content no puede cargarla (ver [Estado de las imágenes](#estado-de-las-imágenes-en-los-rankings)).
 - **Precios (texto)**: `PVP_ESPANA_Y_PORTUGAL`, `PVP_EUROPA`, `PVP_GRECIA`, `PVP_POLONIA`, `PVP_SUECIA`, `PVP_SUIZA` — almacenados como **string** (requieren conversión `VALUE`/`SUBSTITUTE` en DAX).
 - Otros muchos atributos logísticos (composición, peso, partida arancelaria, proveedor, sostenibilidad, etc.).
+- **Nuevas (nov-2026)**: `QualityAgency`, `QualityAgencyName`, `InspectionType` (calidad/inspección), `DV_Id`, `DV_Nombre` y `PrecioCompra` — todas **string**; `PrecioCompra` también es texto y, como los PVP, necesitaría conversión para usarse en cálculos. Ninguna medida las usa todavía.
 
 **Columna calculada DAX:**
 
@@ -108,7 +127,7 @@ Objetivos de venta por tienda y fecha.
 Conteo de visitantes (contadores de personas) por tienda, fecha y hora.
 
 - **Origen**: `dbo.LOL_PBITRAFICOTIENDAS`.
-- **Columnas**: `Entradas` (entradas a la tienda), `Exterior` (paso por delante), `Salidas`, `Aforo`, `RatioConversion`, `TiempoMedio`, `count`, `Fecha`, `Hora`, `TiendaID`.
+- **Columnas**: `Entradas` (entradas a la tienda), `Exterior` (paso por delante), `Salidas`, `Aforo`, `RatioConversion`, `TiempoMedio`, `count`, `Fecha`, `Hora`, `TiendaID`, y desde nov-2026 `DV_Id`, `DV_Nombre`.
 - **Observación crítica**: TODAS las métricas (`Entradas`, `Exterior`, etc.) están almacenadas como **`string`**, por lo que las medidas deben convertirlas con `SUMX(... IFERROR(VALUE(...), BLANK()))`.
 - **Relación**: `TiendaID`→`LOL_PBITIENDAS[IDCuentaPersona]` (¡no a `TiendaID`!) y `Fecha`→`Calendario`.
 
@@ -142,10 +161,17 @@ Temporada = VAR d = Calendario[Date] RETURN CALCULATE(MAX(LOL_PBISEASON[Name]), 
 
 Tabla **desconectada** (sin relación) derivada de `Calendario` con `SELECTCOLUMNS`. Columnas: `Date`, `FechaKey`, `FechaTexto` (formato `dd mmmm yyyy`, ordenada por `FechaKey`). El usuario elige aquí la fecha de corte; la lee la medida `FechaHastaSeleccionada`.
 
+Desde sep-2026 la partición **se corta en la última fecha con venta**:
+```dax
+VAR UltimaVenta = MAX ( LOL_PBISGIRETAIL[TicketData] )
+RETURN SELECTCOLUMNS ( FILTER ( Calendario, Calendario[Date] <= UltimaVenta ), ... )
+```
+Así el máximo de la tabla es el último día con dato y sirve de tope por defecto del periodo (ver `FechaHastaSeleccionada`).
+
 #### `PeriodoSelector` — Selector de granularidad de periodo
 [Archivo TMDL](../SgiRetail/SgiRetail.SemanticModel/definition/tables/PeriodoSelector.tmdl)
 
-Tabla desconectada literal con valores `Año, Trimestre, Mes, Semana, Dia` (columna `Periodo`, ordenada por `Orden`). La lee `PeriodoSeleccionado`. ⚠️ Define el valor **"Dia"** (no "Día") y **no incluye "Anio"** (el `SWITCH` de `FechaInicioPeriodoSeleccionado` espera `"Anio"`, ver Notas).
+Tabla desconectada literal con valores `Año, Trimestre, Mes, Semana, Dia` (columna `Periodo`, ordenada por `Orden`). La lee `PeriodoSeleccionado`. Define el valor **"Dia"** (sin tilde) y **"Año"**; ambos coinciden con las ramas del `SWITCH` de `FechaInicioPeriodoSeleccionado`.
 
 #### `OrdenSelector` — Selector de criterio de orden del catálogo
 [Archivo TMDL](../SgiRetail/SgiRetail.SemanticModel/definition/tables/OrdenSelector.tmdl)
@@ -160,7 +186,13 @@ Parámetro `GENERATESERIES(1, 50, 1)`, columna `'Top N'`. Controla cuántos prod
 #### `DimensionesB2C1` / `DimensionesB2C2` / `DimensionesB2C3` — Parámetros de campo
 [B2C1](../SgiRetail/SgiRetail.SemanticModel/definition/tables/DimensionesB2C1.tmdl) · [B2C2](../SgiRetail/SgiRetail.SemanticModel/definition/tables/DimensionesB2C2.tmdl) · [B2C3](../SgiRetail/SgiRetail.SemanticModel/definition/tables/DimensionesB2C3.tmdl)
 
-Tres **parámetros de campo** (field parameters) idénticos. Cada uno expone la misma lista de 13 dimensiones (`NAMEOF`) para que el usuario elija la dimensión de desglose en distintos visuales: `TipoTienda`, `NombreTienda`, `ResponsableTienda`, `Territorio`, `AreaManager` (de tiendas); `Categoria`, `Descripcion_familia_agregada`, `Nombre_familia`, `Subfamilia` (de producto); `Año`, `MesTexto`, `NombreSemana`, `NombreDíaCorto` (de calendario). El índice de orden (`DimensionesB2C1 Orden` 0–12) lo leen las medidas de catálogo (`HTML Catálogo`, `HTML Comparador Temporadas`) con `SELECTEDVALUE` para conmutar la dimensión de agrupación.
+Tres **parámetros de campo** (field parameters) idénticos. Cada uno expone la misma lista de **14 dimensiones** (`NAMEOF`) para que el usuario elija la dimensión de desglose en distintos visuales: `TipoTienda`, `NombreTienda`, `ResponsableTienda`, `Territorio`, `AreaManager` (de tiendas, índices 0–4); `Categoria`, `Descripcion_familia_agregada`, `Nombre_familia`, `Subfamilia` (de producto, 5–8); `Año`, `MesTexto`, `NombreSemana`, `NombreDíaCorto` (de calendario, 9–12) y, desde sep-2026, `GrupodeArt` (marca, índice 13).
+
+Las medidas de catálogo leen dos índices con `SELECTEDVALUE`:
+- `DimensionesB2C1 Orden` → **nivel 1** de agrupación (sección).
+- `DimensionesB2C2 Orden` → **nivel 2** (subsección). Si está vacío o coincide con el nivel 1, el catálogo se pinta a un solo nivel.
+
+⚠️ El índice 13 (`GrupodeArt`) existe en los parámetros pero **no tiene rama** en el `UNION` de `HTML Catálogo` / `HTML Comparador Temporadas` (solo cubren 0–12) → elegir "GrupodeArt" como desglose deja el catálogo vacío (ver Notas).
 
 #### `MedidasSelector` — Parámetro de campo de medidas
 [Archivo TMDL](../SgiRetail/SgiRetail.SemanticModel/definition/tables/MedidasSelector.tmdl)
@@ -171,6 +203,11 @@ Parámetro de campo (oculto) que agrupa 53 medidas en tres grupos (`Retail`, `Ob
 [Archivo TMDL](../SgiRetail/SgiRetail.SemanticModel/definition/tables/MedidasB2C1.tmdl)
 
 Parámetro de campo (oculto) que expone 4 columnas numéricas crudas: `Quantity`, `LineTotal`, `LineTotalWithoutTax` (de ventas) e `Importe` (de objetivos).
+
+#### `UltimaActualizacion` — Sello de refresco
+[Archivo TMDL](../SgiRetail/SgiRetail.SemanticModel/definition/tables/UltimaActualizacion.tmdl)
+
+Tabla oculta de una fila y una columna (`Fecha`, dateTime) generada en **Power Query sin origen externo**: toma `DateTimeZone.UtcNow()` en el momento del refresco y le suma 1 h (invierno) o 2 h (verano; cambio el último domingo de marzo/octubre) para dejarla en hora peninsular. La lee la medida `Última actualización` (`MedidasIndicadores`), que alimenta la tarjeta `Rango y actualización` de la cabecera de todas las páginas salvo *DetalleTienda*.
 
 #### `DateTableTemplate_*` y `LocalDateTable_*` — Auto date/time (Time Intelligence automático)
 [Plantilla](../SgiRetail/SgiRetail.SemanticModel/definition/tables/DateTableTemplate_ad24ab92-1f21-4e82-b3c6-ce1f9e3f6ad1.tmdl)
@@ -235,13 +272,12 @@ Lee la granularidad elegida en el segmentador `PeriodoSelector`. Por defecto "Me
 #### `FechaHastaSeleccionada`
 ```dax
 FechaHastaSeleccionada =
-IF(
-    ISFILTERED( FechaHastaSelector[Date] ),
-    MAX( FechaHastaSelector[Date] ),
-    TODAY()
-)
+VAR Tope =
+    CALCULATE( MAX( FechaHastaSelector[Date] ), REMOVEFILTERS( FechaHastaSelector ) )
+VAR Elegida = MAX( FechaHastaSelector[Date] )
+RETURN COALESCE( Elegida, Tope )
 ```
-Fecha de corte (límite superior) del periodo. Si el usuario no ha filtrado el selector, usa **`TODAY()`** (depende de la fecha actual).
+Fecha de corte (límite superior) del periodo. Manda la fecha elegida en el segmentador; si no hay ninguna, usa la **última fecha con venta** (el máximo de `FechaHastaSelector`, que ya está cortada en ese día). **Ya no usa `TODAY()`** (cambio de sep-2026): el modelo se refresca con retraso y comparar días sin dato contra el año anterior completo hundía todas las evoluciones (con el refresco del 03/09 y el tope en 15/09 la evolución salía −82,1 % cuando la comparable era −8,8 %).
 
 #### `FechaInicioPeriodoSeleccionado`
 ```dax
@@ -255,11 +291,11 @@ RETURN
         "Semana", FechaHasta - WEEKDAY(FechaHasta, 2) + 1,
         "Mes", DATE(YEAR(FechaHasta), MONTH(FechaHasta), 1),
         "Trimestre", DATE(YEAR(FechaHasta), (QUARTER(FechaHasta) - 1) * 3 + 1, 1),
-        "Anio", DATE(YEAR(FechaHasta), 1, 1),
+        "Año", DATE(YEAR(FechaHasta), 1, 1),
         DATE(YEAR(FechaHasta), MONTH(FechaHasta), 1)
     )
 ```
-Calcula la fecha de **inicio** del periodo según la granularidad. ⚠️ Espera el valor `"Anio"`, pero `PeriodoSelector` ofrece `"Año"` → la rama de año no se activa y cae al *default* (mes). Ver Notas.
+Calcula la fecha de **inicio** del periodo según la granularidad. Las etiquetas coinciden con las de `PeriodoSelector` (`"Año"`, `"Dia"`); el *default* es el mes.
 
 #### `RangoPeriodoSeleccionado`
 ```dax
@@ -440,6 +476,8 @@ CumplimientoObjetivo_%_ECI = DIVIDE([Ventas_YTD_ECI], [Objetivos_YTD_ECI])
 ```
 Lo mismo para `_Online` (="ONLINE"), `_Marketplace` (="MARKETPLACE"), `_Outlet` (="OUTLET"), `_Tienda` (="TIENDA").
 
+> Formato: desde sep-2026 todas las medidas de importe de canal (`Ventas_YTD_*`, `Ventas_YTD_LY_*`, `Objetivos_YTD_*`, `PromedioVentaTransaccion_YTD_*`) usan `€ #,##0;(€ #,##0);€ #,##0`; antes 19 de ellas estaban en dólares (`\$#,0`). Lo mismo se corrigió en `Ventas_YTD_LY` y `Objetivos_YTD` (21 en total).
+
 > ⚠️ **Inconsistencia de código de canal**: las medidas de ventas/objetivos del canal "ECI" filtran por `"CORNER"`, pero las medidas de detalle `PromedioVentaTransaccion_YTD_ECI`, `UPT_YTD_ECI` y `Conversion_YTD_ECI` filtran por `"ECI"` (que no existe como `TipoTienda`) → devolverán BLANK. Ver Notas.
 
 #### Share (cuota sobre total)
@@ -516,12 +554,38 @@ Otras:
 - `Texto_Progreso_Total`: "X% del objetivo · OBJ N" del total.
 - `NombreTienda_Selected = SELECTEDVALUE(LOL_PBITIENDAS[NombreTienda], "— Selecciona tienda —")`: nombre de tienda seleccionada o texto guía.
 
+#### Carpeta `Actualización`
+```dax
+Última actualización =
+VAR f = MAX ( UltimaActualizacion[Fecha] )
+RETURN IF ( ISBLANK ( f ), "Sin datos de actualización",
+    "Actualizado " & FORMAT ( f, "dd/MM/yyyy" ) & " a las " & FORMAT ( f, "HH:mm" ) )
+
+Rango y actualización = [RangoPeriodoSeleccionado] & "   ·   " & [Última actualización]
+```
+`Rango y actualización` (nueva, sep-2026) junta en una sola tarjeta de cabecera el rango que se está viendo y el sello de refresco. Está en la cabecera de todas las páginas salvo *DetalleTienda*.
+
+#### Carpeta `0 Pildoras` — píldoras de filtro (28 medidas, sep-2026)
+Una pareja por cada uno de los 14 campos de `DimensionesB2C1` (13 originales + `GrupodeArt`):
+```dax
+Chip Categoria =
+VAR n = COUNTROWS ( VALUES ( LOL_PBIMODELITEM[Categoria] ) )
+VAR txt = IF ( n = 1, SELECTEDVALUE ( LOL_PBIMODELITEM[Categoria] ), n & " sel." )
+RETURN IF ( ISFILTERED ( LOL_PBIMODELITEM[Categoria] ), txt & "  ✕" )
+
+Chip Categoria Color = IF ( ISFILTERED ( LOL_PBIMODELITEM[Categoria] ), "#DFA0C9", "#6F263D" )
+```
+- `Chip <campo>`: texto del botón — el valor elegido (o "N sel.") con una ✕; BLANK si el campo no está filtrado.
+- `Chip <campo> Color`: relleno del botón — rosa de marca si hay filtro.
+
+En el informe se usan 6 por página (Categoría, Familia agregada, Marca, Nombre de tienda, Subfamilia, Tipo de tienda) en *Desempeño de ventas*, *Compare Season* y *Catálogo HTML*. Cada botón ejecuta un marcador "Limpiar <campo>" con `applyOnlyToTargetVisuals`, de modo que la ✕ solo limpia su segmentador y no repone el resto de filtros de la página. Los marcadores de abrir/cerrar menú tampoco guardan ya el estado de los datos (desde ago-2026), así que abrir o cerrar el menú no restaura los segmentadores.
+
 ---
 
 ### MedidasDesempeño — Evolución multi-periodo y colores condicionales
 [Archivo TMDL](../SgiRetail/SgiRetail.SemanticModel/definition/tables/MedidasDesempeño.tmdl)
 
-80 medidas para un panel de "desempeño" con micro-tarjetas Año/Mes/Semana/Día y formato condicional.
+89 medidas para un panel de "desempeño" con micro-tarjetas Año/Mes/Semana/Día y formato condicional (80 originales + 9 medidas `HTML *` añadidas en nov-2026, ver [Carpeta `9 HTML`](#carpeta-9-html--maquetación-html-nov-2026)).
 
 #### Share dentro del visual
 ```dax
@@ -582,12 +646,27 @@ Etiquetas dinámicas de cada micro-tarjeta de periodo.
 
 Colores/fondos sobre KPIs ya existentes: `Color_Evol_VN`, `Color_Evol_OBJ`, `Color_Evol_TM`, `Color_Evol_UPT`, `Color_Evol_Conv` y sus `Bg_Evol_*` — pintan tarjetas según `Ventas_YTD_Var_%`, `EvolucionObjetivo_%`, `PromedioVentaTransaccion_Var_%`, `UPT_Var_%`, `Tasa_Conversion_YTD_Var` (este último con umbral en puntos: ≥0 / ≥−3).
 
+#### Carpeta `9 HTML` — maquetación HTML (nov-2026)
+Nueve medidas que devuelven HTML para el visual **HTML Content**. Solo dos están hoy en el informe; el resto son piezas de una maqueta de página entera en HTML que no se ha llevado a producción.
+
+| Medida | Qué devuelve | En el informe |
+|---|---|---|
+| `HTML Tarjetas Desempeño` | Las cuatro tarjetas KPI (VN, TM, UPT, Conversión) en una sola medida, con píldoras Año / Mes / Semana / Día (▲/▼ y % sobre `*_Evol_*`; la etiqueta del periodo va en el `title`). Sustituye a 28 visuales por juego de tarjetas. | ✅ *Desempeño de ventas* (2 visuales: menú abierto/cerrado) |
+| `HTML Menu Catálogo` | Panel del menú lateral con sus 9 etiquetas colocadas sobre la geometría real de cada segmentador (los segmentadores llevan la cabecera apagada). | ✅ *Catálogo HTML* |
+| `HTML Menu Desempeño` | Igual, con 10 etiquetas, para *Desempeño de ventas*. | — |
+| `HTML Menu Lateral` | Solo fondo, regla y pie del menú. | — |
+| `HTML Spark Ventas` | Línea (SVG `polyline`) de la primera tarjeta; coordenadas enteras a propósito, porque con `es-ES` `FORMAT` mete coma decimal y rompe la lista de puntos. | — |
+| `HTML Fila Desempeño` | Las 17 celdas de valores de una fila de la tabla de desempeño. | — |
+| `HTML Tabla Desempeño` | Tabla "Desempeño por" con cabecera y Total fijos y scroll interno. Nivel 1 dinámico (una rama por cada una de las 14 opciones del parámetro de campo, ramificando sobre el **texto** porque `SWITCH` no devuelve tablas); nivel 2 fijo en `NombreTienda`. Coste medido: 4,9 s frente a 253 ms con jerarquía fija (DAX materializa las 14 ramas). | — |
+| `HTML Página Desempeño` | Página completa (menú, cabecera, filtros, tarjetas y tabla). Los desplegables son solo informativos: el visual HTML no puede devolver una selección al modelo. | — |
+| `HTML Página Catálogo` | Lo mismo para el catálogo, reutilizando `[HTML Catálogo]`. | — |
+
 ---
 
 ### MedidasCatalogo — Catálogo visual de producto (HTML)
 [Archivo TMDL](../SgiRetail/SgiRetail.SemanticModel/definition/tables/MedidasCatalogo.tmdl)
 
-7 medidas que generan **HTML** para el visual "HTML Content" (catálogo con fotos, rankings y barras). Todas respetan los filtros del informe y el periodo activo.
+7 medidas que generan **HTML** para el visual "HTML Content" (catálogo de producto, rankings y barras). Todas respetan los filtros del informe y el periodo activo. Hoy solo dos están en el informe: `HTML Catálogo` (página *Catálogo HTML*) y `HTML Comparador Temporadas` (página *Compare Season*); `Catálogo HTML Productos`, `Catálogo HTML Tabla`, `Catálogo Imagen HTML` y `TEST FOTO PUBLICA` no los usa ningún visual.
 
 #### `Catálogo Top N`
 ```dax
@@ -605,13 +684,31 @@ Colores/fondos sobre KPIs ya existentes: `Color_Evol_VN`, `Color_Evol_OBJ`, `Col
 *displayFolder: `Catálogo Fotos`* — Versión tabla HTML compacta (miniatura + modelo, marca, categoría/familia, tienda, PVP, uds, importe) por `TipoTienda`, ordenada por importe. Misma lógica de datos que `Catálogo HTML Productos` pero renderiza `<table>`.
 
 #### `HTML Catálogo`
-*displayFolder: `Catálogo Fotos\2. Auxiliares`* — La medida de catálogo **más completa**. Lee `[Catálogo Top N]`, el índice de dimensión (`DimensionesB2C1[... Orden]`, 0–12) y el criterio de orden (`OrdenSelector[Orden]`). Construye con un gran `UNION` de 13 ramas (`SUMMARIZE` por cada dimensión posible × `Modelo-Color`) la tabla de pares grupo/modelo, la filtra al periodo con `DATESBETWEEN`, calcula el valor según `Ventas (€)` / `Unidades` / `PVP` (parseando el PVP texto con `SUBSTITUTE`+`VALUE`/`1.000.000`), toma `TOPN(12)` grupos y Top N productos por grupo, y emite tarjetas con ranking (medallas), color de marca (MAITE rosa #E11A6F / LOLA azul #10182F), silueta SVG según categoría, barra de progreso e imagen. Identidad de marca **45 Years** (rosa #E11A6F, navy #10182F).
+*displayFolder: `Catálogo Fotos\2. Auxiliares`* — El ranking de la página *Catálogo HTML* (antes página "Ranking"). Desde sep-2026 agrupa a **dos niveles**:
+- Lee `[Catálogo Top N]`, el nivel 1 (`DimensionesB2C1 Orden`, 0–12), el nivel 2 (`DimensionesB2C2 Orden`) y el criterio de orden (`OrdenSelector[Orden]`).
+- Un `UNION` de **169 ramas** (13 de un nivel + 13 × 12 combinaciones de dos niveles; `SUMMARIZE` de cada dimensión × `Modelo-Color`), cada una activada por su `FILTER(..., _ix = n && ...)`, filtrado al periodo con `DATESBETWEEN`. Si el nivel 2 está vacío o es igual al 1 se usa la rama de un nivel.
+- Valor según `Ventas (€)` / `Unidades` / `PVP` (PVP texto con `SUBSTITUTE`+`VALUE`/`1.000.000`).
+- Optimizado: dos únicas pasadas sobre la tabla cara (`GROUPBY`), Top 12 secciones de nivel 1, Top 8 subsecciones por sección, Top N productos por subsección, y la ficha del modelo (imagen, nombre, alias, categoría, familia, marca, PVP) resuelta **una sola vez** por `Modelo-Color` y unida con `NATURALLEFTOUTERJOIN`.
+- Render: secciones plegables `<details>` — nivel 1 y nivel 2 con cabeceras **fijas** al hacer scroll (`position:sticky`, cada nivel con su `top` y `z-index` para no taparse), importe de cada sección y nº de referencias. Tarjeta: medalla de ranking (1 rosa `#DFA0C9`, 2 negro, 3 gris), insignia de marca (MAITE rosa `#DFA0C9`, LOLA negro `#000000`, resto gris), recuadro de foto, SKU, nombre, alias, categoría · familia, importe, barra de progreso rosa y "uds / PVP".
+- Paleta **45 Years** estricta (rosa `#DFA0C9`, negro, blanco, grises neutros, fondo `#F2F3F5`); ya no usa el fucsia `#E11A6F` ni el navy `#10182F`.
 
 #### `HTML Comparador Temporadas`
-*displayFolder: `Catálogo Fotos\2. Auxiliares`* — Catálogo a **dos columnas** que compara la temporada seleccionada (`LOL_PBISEASON[Code]`) contra su `CompareSeason`. Usa `REMOVEFILTERS(LOL_PBISEASON)` + `LOL_PBISGIRETAIL[Temporada] IN {_A,_B}` para traer ambas temporadas, y replica la lógica de grupos/Top N de `HTML Catálogo` por columna. Si no hay temporada elegida muestra "Elige UNA temporada".
+*displayFolder: `Catálogo Fotos\2. Auxiliares`* — Catálogo a **dos columnas** que compara la temporada seleccionada (`LOL_PBISEASON[Code]`) contra su `CompareSeason`. Usa `REMOVEFILTERS(LOL_PBISEASON)` + `LOL_PBISGIRETAIL[Temporada] IN {_A,_B}` para traer ambas temporadas. Comparte hoja de estilo, paleta, plegado y cabeceras fijas con `HTML Catálogo` y, como él, admite **dos niveles** (169 ramas, mismos índices). Desde sep-2026 respeta la ventana de fecha y periodo: filtra el calendario a la ventana actual **unida** a la misma ventana desplazada −364 días, para que la temporada anterior no salga a cero. Secciones **compartidas** entre las dos columnas (Top 6 de nivel 1 y Top 4 de nivel 2 sobre las dos temporadas juntas) para poder comparar de un vistazo. Si no hay temporada elegida muestra "Elige UNA temporada en el segmentador.".
 
 #### `TEST FOTO PUBLICA`
-*displayFolder: `Catálogo Fotos\2. Auxiliares`* — Medida de **prueba**: HTML con una imagen pública de Wikimedia para verificar que el visual "HTML Content" puede cargar imágenes externas. No es de producción (ver Notas).
+*displayFolder: `Catálogo Fotos\2. Auxiliares`* — Medida de **prueba**: HTML con una imagen pública de Wikimedia para comprobar si el visual "HTML Content" carga imágenes externas. **Resultado: no las carga** (ni siquiera una imagen pública). No está en el informe; puede retirarse.
+
+#### Estado de las imágenes en los rankings
+El visual **HTML Content corre en un iframe aislado que no carga imágenes externas**: falla tanto con `URL_imagen_producto` (URLs https del catálogo web de la marca) como con una imagen pública. Por eso los rankings HTML **van sin fotos**:
+
+| Dónde | Qué se ve |
+|---|---|
+| `HTML Catálogo` / `HTML Comparador Temporadas` (HTML Content) | Silueta SVG gris según categoría (prenda o bolso para `Categoria = "Accesorio"`) cuando el artículo **no** tiene URL. Si la tiene, se emite `<img ... onerror="this.style.display='none'">` **en lugar** de la silueta; como la imagen no carga, se oculta y el recuadro queda **vacío** (ver Notas). |
+| Tabla nativa **"Foto / Modelo / Venta neta"** (`tableEx` con `URL_imagen_producto` como `ImageUrl`, `Modelo-Color` y `Ventas_YTD`) | **Fotos reales**: los visuales nativos sí cargan `ImageUrl`. Está en la página *Catálogo HTML*, en el juego de visuales "Contenido estrecho" (el que se muestra con el menú abierto), bajo el ranking HTML. |
+
+#### Páginas de catálogo en el informe
+- ***Catálogo HTML*** (antes "Ranking"; página activa por defecto): menú lateral con segmentadores (fecha, periodo, temporada, desglose principal y secundario, orden, Top N, tipo de tienda, marca, categoría, familia agregada, subfamilia, buscador de tienda y de `Modelo-Color`), panel de menú `HTML Menu Catálogo`, tarjeta `Rango y actualización`, 6 píldoras de filtro y el ranking `HTML Catálogo`. Dos juegos de visuales alternados por marcador: "Contenido ancho" (menú cerrado, ranking a toda la altura) y "Contenido estrecho" (menú abierto, ranking + tabla nativa con fotos).
+- ***Compare Season***: `HTML Comparador Temporadas` en dos visuales (menú abierto/cerrado), con las mismas píldoras y cabecera.
 
 ---
 
@@ -625,15 +722,15 @@ Colores/fondos sobre KPIs ya existentes: `Color_Evol_VN`, `Color_Evol_OBJ`, `Col
 
 1. **"YTD" es un nombre engañoso.** Ningún `_YTD` usa `TOTALYTD`/`DATESYTD` reales: significan "periodo seleccionado" (rango dinámico `FechaInicioPeriodoSeleccionado…FechaHastaSeleccionada`). Y "LY" no es `SAMEPERIODLASTYEAR` sino un **desplazamiento fijo de −364 días** (alinea día de semana, pero descuadra en años bisiestos y desplaza la fecha de fin de mes). Documentar/renombrar conviene para evitar malentendidos.
 
-2. **Bug latente en el selector de periodo "Año".** `FechaInicioPeriodoSeleccionado` hace `SWITCH` sobre el valor `"Anio"`, pero `PeriodoSelector` ofrece la etiqueta **`"Año"`**. Al no coincidir, seleccionar "Año" cae al *default* (= comportamiento de "Mes"). Habría que unificar a `"Año"` o `"Anio"` en ambos sitios. (Igualmente "Dia" vs "Día": aquí sí coinciden ambos como "Dia".)
+2. **~~Bug del selector de periodo "Año"~~ — resuelto.** `FechaInicioPeriodoSeleccionado` y `PeriodoSelector` usan ya la misma etiqueta `"Año"` (y `"Dia"` en ambos sitios). Se conserva la nota solo como histórico.
 
 3. **Inconsistencia del código de canal ECI/CORNER.** En `MedidasCanales`, las medidas de ventas/objetivos del Corner filtran `TipoTienda = "CORNER"`, pero `PromedioVentaTransaccion_YTD_ECI`, `UPT_YTD_ECI` y `Conversion_YTD_ECI` filtran `TipoTienda = "ECI"`, valor que **no existe** en los datos → devuelven BLANK. Además, `Texto_Objetivo_Outlet`/`Texto_LY_Outlet` existen en `MedidasIndicadores` pero `MedidasSelector` no incluye los KPIs de Outlet ni Marketplace en su lista (solo Retail/Objetivos/Trafico).
 
 4. **Medidas duplicadas / alias.** `DesviacionObjetivo` y `EvolucionObjetivo` tienen DAX idéntico (`[Ventas_YTD] - [Objetivos_YTD]`). `Ventas_PeriodoSeleccionado`, `Cantidad_PeriodoSeleccionado`, `Entradas_PeriodoSeleccionado` y `Exterior_PeriodoSeleccionado` (en `MedidasCalculadasRetailOnline`) son funcionalmente equivalentes a las `*_YTD` de `MedidasRetail`/`MedidasTrafico`. Conviene consolidar para reducir mantenimiento.
 
-5. **Dependencia de `TODAY()`.** `FechaHastaSeleccionada` (sin filtro) y las banderas `EsHoy/EsPasado/EsMesActual/EsAñoActual` de `Calendario` dependen de la fecha de ejecución/refresco. Los resultados "por defecto" cambian cada día; las pruebas deben fijar una fecha en el selector para ser reproducibles.
+5. **Dependencia de `TODAY()`.** Desde sep-2026 `FechaHastaSeleccionada` **ya no** depende de `TODAY()`: sin selección usa la última fecha con venta, así que la comparativa contra el año anterior no se estira con días sin dato cuando el refresco va con retraso. Siguen dependiendo de la fecha de refresco el rango de `Calendario` (`MAX(TODAY(), última venta)`) y sus banderas `EsHoy/EsPasado/EsMesActual/EsAñoActual`. Regla para medidas nuevas: el tope del periodo sigue al dato, nunca a `TODAY()`.
 
-6. **Numéricos almacenados como texto.** Todo `LOL_PBITRAFICOTIENDAS` (Entradas, Exterior, Salidas, Aforo…) y los PVP de `LOL_PBIMODELITEM` son `string`. Obliga a `SUMX(... VALUE())` en tráfico y a `SUBSTITUTE`+`VALUE` (con división por 1.000.000 para corregir el formato de miles) en los PVP del catálogo — frágil ante cambios de formato regional. Lo ideal sería tipar estas columnas en el ETL/M.
+6. **Numéricos almacenados como texto.** Todo `LOL_PBITRAFICOTIENDAS` (Entradas, Exterior, Salidas, Aforo…) y los PVP de `LOL_PBIMODELITEM` (y la nueva `PrecioCompra`) son `string`. Obliga a `SUMX(... VALUE())` en tráfico y a `SUBSTITUTE`+`VALUE` (con división por 1.000.000 para corregir el formato de miles) en los PVP del catálogo — frágil ante cambios de formato regional. Lo ideal sería tipar estas columnas en el ETL/M.
 
 7. **Time Intelligence automático activado** (`__PBI_TimeIntelligenceEnabled = 1`) genera 7 tablas ocultas (`DateTableTemplate_*` + 6 `LocalDateTable_*`) que inflan el modelo y no se usan (el modelo ya tiene `Calendario`). Recomendable **desactivarlo** y eliminar las auto date/time.
 
@@ -645,4 +742,12 @@ Colores/fondos sobre KPIs ya existentes: `Color_Evol_VN`, `Color_Evol_OBJ`, `Col
 
 11. **GUIDs/lineageTags "de juguete".** Muchas medidas creadas por código tienen `lineageTag` con patrones artificiales (`12345678-…`, `aabbccdd-…`, `0a1b2c3d-…`). No afecta al funcionamiento, pero delata generación programática y dificulta el rastreo de linaje.
 
-12. **Marca "45 Years".** Las medidas HTML de catálogo usan la paleta corporativa (rosa `#E11A6F`, navy `#10182F`) y distinguen sub-marcas MAITE (rosa) y LOLA (navy) por `GrupodeArt`. `TEST FOTO PUBLICA` es una medida de diagnóstico que debería retirarse antes de producción.
+12. **Marca "45 Years".** Las medidas HTML de catálogo usan la paleta oficial estricta (rosa `#DFA0C9`, negro `#000000`, blanco, con grises neutros de apoyo) y distinguen sub-marcas MAITE (rosa) y LOLA (negro) por `GrupodeArt`. El fucsia `#E11A6F` y el navy `#10182F` de la revisión anterior ya no aparecen en el modelo. `TEST FOTO PUBLICA` es una medida de diagnóstico (ya cumplió: confirmó que HTML Content no carga imágenes externas) que debería retirarse.
+
+13. **Recuadro de foto vacío en los rankings HTML.** En `HTML Catálogo` y `HTML Comparador Temporadas` la silueta SVG solo se pinta si el artículo **no** tiene `URL_imagen_producto`; si la tiene, se sustituye por un `<img>` que HTML Content no puede cargar y que `onerror` oculta → las tarjetas de artículos con URL muestran el recuadro gris **vacío**. Antes de sep-2026 la silueta (con el rótulo "Foto por SKU") se pintaba siempre debajo de la imagen. Si se quiere la silueta como respaldo, hay que volver a pintarla siempre o no emitir el `<img>` dentro de HTML Content. Las fotos reales solo se ven en la tabla nativa de la página *Catálogo HTML*.
+
+14. **`GrupodeArt` en los parámetros pero no en los catálogos.** Se añadió `GrupodeArt` (índice 13) a `DimensionesB2C1/2/3`, pero las 169 ramas de `HTML Catálogo` y `HTML Comparador Temporadas` solo cubren los índices 0–12: elegir "GrupodeArt" como desglose principal deja el catálogo vacío (y como desglose secundario no tiene efecto). Hace falta añadir sus ramas (cada nivel nuevo multiplica las ramas; ver coste en `HTML Tabla Desempeño`).
+
+15. **Medidas HTML sin uso.** `HTML Spark Ventas`, `HTML Menu Lateral`, `HTML Menu Desempeño`, `HTML Fila Desempeño`, `HTML Tabla Desempeño`, `HTML Página Desempeño`, `HTML Página Catálogo` (carpeta `9 HTML`) y `Catálogo HTML Productos`, `Catálogo HTML Tabla`, `Catálogo Imagen HTML`, `TEST FOTO PUBLICA` (catálogo) no las usa ningún visual. `HTML Tabla Desempeño` es además cara (≈4,9 s). Conviene retirarlas o moverlas a una carpeta de "borrador" para no confundirlas con las de producción.
+
+16. **Columnas nuevas sin uso.** `DV_Id`/`DV_Nombre` (en tiendas, artículos y tráfico), `QualityAgency`, `QualityAgencyName`, `InspectionType` y `PrecioCompra` llegan del ETL pero ninguna medida ni visual las usa todavía.
